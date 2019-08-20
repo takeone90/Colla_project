@@ -35,7 +35,14 @@ public class MemberService {
 	}
 	
 	public List<String> getMemberAuthorities(int num){
+<<<<<<< Upstream, based on origin/master
 		return memberDao.selectAuthoritiesByNum(num);
+=======
+		System.out.println("memberService");
+		List<String> result = memberDao.selectAuthoritiesByNum(num);
+		System.out.println(result.get(0));
+		return result;
+>>>>>>> 8252064 alrud~
 	}
 	
 
