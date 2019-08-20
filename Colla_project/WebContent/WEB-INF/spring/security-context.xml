@@ -11,12 +11,22 @@
 	<context:component-scan base-package="service"></context:component-scan>
 	<security:http use-expressions="true" auto-config="true">
 		<security:form-login 
-			username-parameter="mId" password-parameter="mPassword"
+			username-parameter="mId" 
+			password-parameter="mPassword"
 			authentication-failure-url="/loginForm?login=fail"
 			default-target-url="/board/boardList"
-			
-			/>
-		
+			login-processing-url="/member/login"
+			login-page="/member/loginForm"/>
+		<security:logout
+			invalidate-session="true"
+			logout-url="/member/logout"
+			logout-success-url="/loginForm"
+			delete-cookies="JSESSIONID"/>	
 	</security:http>
+	<security:authentication-manager>
+		<security:authentication-provider user-service-ref="memberDetailsService">
+		</security:authentication-provider>
+	
+	</security:authentication-manager>
 	
 </beans>
