@@ -16,6 +16,7 @@ import model.Member;
 import service.MemberService;
 
 @Controller
+@RequestMapping("/member")
 public class MemberController {
 
 	@Autowired

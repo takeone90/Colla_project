@@ -32,6 +32,13 @@
 			</table>
 		</form>
 		<h3>
+			<c:if test='${param.login eq "false"}'>
+				로그인 후 이용하세요
+			</c:if>
+			<c:if test='${param.login eq "fail"}'>
+				로그인에 실패했습니다
+			</c:if>
+		</h3>
 		</h3>
 	</div>
 </body>
