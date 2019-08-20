@@ -27,8 +27,8 @@
 	</bean>
 	<context:component-scan base-package="service"></context:component-scan>
 	
-	<security:authentication-manager>
+<!-- 	<security:authentication-manager>
 		<security:authentication-provider ref="authProvider">
 		</security:authentication-provider>
-	</security:authentication-manager>
+	</security:authentication-manager> -->
 </beans>
