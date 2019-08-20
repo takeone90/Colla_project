@@ -13,7 +13,8 @@
 		<security:form-login 
 			username-parameter="mId" password-parameter="mPassword"
 			authentication-failure-url="/loginForm?login=fail"
-			default-target-url=""
+			default-target-url="/board/boardList"
+			
 			/>
 		
 	</security:http>
