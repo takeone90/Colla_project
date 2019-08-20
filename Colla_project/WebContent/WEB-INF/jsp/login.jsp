@@ -4,15 +4,19 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>kk</title>
+<title>LOGIN</title>
 </head>
 <body>
+<<<<<<< HEAD
 <<<<<<< HEAD
 	<form action="">
 		<label>어려워..</label>
 	</form>
 =======
 		배고프네요^&^ 
+>>>>>>> branch 'master' of https://github.com/benefitallhumankind/Colla_project.git
+=======
+	Written By TKLee
 >>>>>>> branch 'master' of https://github.com/benefitallhumankind/Colla_project.git
 </body>
 </html>
