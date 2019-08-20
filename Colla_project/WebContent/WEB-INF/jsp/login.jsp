@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,6 +31,15 @@
 				</tr>
 			</table>
 		</form>
+		<h3>
+			<c:if test='${param.login eq "false"}'>
+				로그인 후 이용하세요
+			</c:if>
+			<c:if test='${param.login eq "fail"}'>
+				로그인에 실패했습니다
+			</c:if>
+		</h3>
+		</h3>
 	</div>
 </body>
 </html>
