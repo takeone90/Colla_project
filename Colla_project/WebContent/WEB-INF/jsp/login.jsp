@@ -16,11 +16,11 @@
 			<table class="table table-hover">
 				<tr>
 					<th>아이디 : </th>
-					<td><input type="text" name="id" placeholder="아이디를 입력하세요"></td>
+					<td><input type="text" name="mId" placeholder="아이디를 입력하세요"></td>
 				</tr>
 				<tr>
 					<th>비밀번호 : </th>
-					<td><input type="password" name="password" placeholder="비밀번호를 입력하세요"></td>
+					<td><input type="password" name="mPassword" placeholder="비밀번호를 입력하세요"></td>
 				</tr>
 				<tr>
 					<td colspan="2" align="center">

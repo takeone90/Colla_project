@@ -21,18 +21,18 @@
 			</tr>
 			<tr>
 				<th>비밀번호</th>
-				<td><input type="text" name="mPassword"></td>
+				<td><input type="password" name="mPassword"></td>
 			</tr>
 			<tr>
 				<th>이름</th>
-				<td></td>
+				<td><input type="text" name="mName"></td>
 			</tr>
 			<tr>
 				<th>이메일</th>
-				<td></td>
+				<td><input type="text" name="mEmail"></td>
 			</tr>
 			<tr>
-				<td colspan="2"></td>
+				<td colspan="2"><input type="submit" value="회원가입"></td>
 			</tr>
 		</table>
 		

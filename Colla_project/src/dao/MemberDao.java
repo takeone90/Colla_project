@@ -9,5 +9,6 @@ public interface MemberDao {
 	public int updateMember(Member member);
 	public int deleteMember(int mNum);
 	public Member selectMemberByNum(int mNum);
+	public Member selectMemberById(String mId);
 	public List<Member> selectAllMember();
 }
