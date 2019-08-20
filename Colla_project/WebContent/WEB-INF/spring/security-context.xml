@@ -9,5 +9,11 @@
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
 	<context:component-scan base-package="service"></context:component-scan>
+	<security:http use-expressions="true" auto-config="true">
+		<security:form-login 
+			username-parameter="mId" password-parameter="mPassword"
+			/>
+		
+	</security:http>
 	
 </beans>
