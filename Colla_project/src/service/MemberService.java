@@ -35,7 +35,8 @@ public class MemberService {
 	}
 	
 	public List<String> getMemberAuthorities(int num){
-		return memberDao.selectAuthoritesByNum(num);
+		System.out.println("getMemberAuthorities!");
+		return memberDao.selectAuthoritiesByNum(num);
 	}
 	
 

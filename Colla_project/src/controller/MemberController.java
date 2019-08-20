@@ -43,9 +43,8 @@ public class MemberController {
 	}
 
 	// 로그인 페이지
-
-	@RequestMapping(value = "loginForm", method = RequestMethod.GET) public
-	String loginForm() { 
+	@RequestMapping(value = "loginForm", method = RequestMethod.GET) 
+	public String loginForm() { 
 		return "login"; 
 	}
 	 
