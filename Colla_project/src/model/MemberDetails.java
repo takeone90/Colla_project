@@ -10,7 +10,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import commons.Role;
 
 public class MemberDetails implements UserDetails {
-	private String userid;
+	private String userid; 
 	private String password;
 	private List<Role> authorities;
 	private boolean isAccountNonExpired;
