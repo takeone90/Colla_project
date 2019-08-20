@@ -14,7 +14,7 @@
 		<security:form-login 
 			username-parameter="mId" 
 			password-parameter="mPassword"
-			authentication-failure-url="/loginForm?login=fail"
+			authentication-failure-url="member/loginForm?login=fail"
 			default-target-url="/board/boardList"
 			login-processing-url="/member/login"
 			login-page="/member/loginForm"/>
