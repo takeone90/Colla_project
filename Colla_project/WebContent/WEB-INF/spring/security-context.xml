@@ -21,7 +21,7 @@
 		<security:logout
 			invalidate-session="true"
 			logout-url="/member/logout"
-			logout-success-url="/loginForm"
+			logout-success-url="/member/loginForm"
 			delete-cookies="JSESSIONID"/>	
 	</security:http>
 	
