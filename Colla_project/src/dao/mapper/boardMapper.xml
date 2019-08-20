@@ -20,17 +20,26 @@
 		b_content = #{content}
 		where b_num = #{num}
 	</update>
-	<select id="selectOneBoard" parameterType="int">
+	<select id="selectOneBoard" parameterType="int" resultMap="boardMap">
 		select b_num, b_title, b_content, m_num, b_reg_date, read_count
 		from test_board
 		where b_num = #{num}
 	</select>
 	
-	<select id="selectAllBoard" >
+	<select id="selectAllBoard" resultMap="boardMap">
 		select * from test_board
 	</select>
 	<delete id="deleteBoard" parameterType="int">
 		delete from test_board where b_num = #{num}
 	</delete>
+	
+	<resultMap type="board" id="boardMap">
+		<result column="b_num" property="num"/>
+		<result column="b_title" property="title"/>
+		<result column="b_content" property="content"/>
+		<result column="m_num" property="mNum"/>
+		<result column="b_reg_date" property="regDate"/>
+		<result column="read_count" property="readCount"/>
+	</resultMap>
 	
 </mapper>
