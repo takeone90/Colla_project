@@ -7,6 +7,6 @@
 <title>LOGIN</title>
 </head>
 <body>
-written by hyeseon
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~로그인
 </body>
 </html>
