@@ -16,18 +16,18 @@
 		where m_num = #{mNum}
 	</delete>
 	<select id="selectMemberByNum" resultMap="memberMap">
-		select
+		select *
 		from test_member
 		where m_num = #{mNum}
 	</select>
 	<select id="selectMemberById" resultMap="memberMap">
-		select
+		select *
 		from test_member
 		where m_id = #{mId}
 	</select>
 	<select id="selectAllMember" resultMap="memberMap">
-		select
-		from test_memeber
+		select *
+		from test_member
 	</select>
 	<resultMap type="member" id="memberMap">
 		<result property="mNum" column="m_num"/>
