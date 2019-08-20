@@ -10,6 +10,7 @@
 		<config>WebContent/WEB-INF/spring/root-context.xml</config>
 		<config>WebContent/WEB-INF/spring/appServlet/app-context.xml</config>
 		<config>WebContent/WEB-INF/spring/security-context.xml</config>
+		<config>src/dao/mapper/memberMapper.xml</config>
 	</configs>
 	<autoconfigs>
 	</autoconfigs>
