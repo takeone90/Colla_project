@@ -17,6 +17,10 @@
 	</bean>
 	<bean id="boardDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
 		<property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+		<property name="mapperInterface" value="dao.BoardDao"/>
+	</bean>
+	<bean id="memberDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory"/>
 		<property name="mapperInterface" value="dao.MemberDao"/>
 	</bean>
 	<context:component-scan base-package="service"></context:component-scan>
