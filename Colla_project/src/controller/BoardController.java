@@ -9,8 +9,8 @@ import service.BoardService;
 @Controller
 public class BoardController {
 	private BoardService service;
-	@RequestMapping("/main")
+	@RequestMapping("/boardList")
 	public String main(Model model) {
-		return "main";
+		return "boardList";
 	}
 }
