@@ -7,8 +7,6 @@
 <title>LOGIN</title>
 </head>
 <body>
-	
 	Written By TKLee
-	
 </body>
 </html>
