@@ -11,5 +11,5 @@
 		<property name="suffix" value=".jsp"/>
 	</bean>
 	<context:component-scan base-package="controller"></context:component-scan>
-	 
+	 <mvc:annotation-driven></mvc:annotation-driven>
 </beans>
