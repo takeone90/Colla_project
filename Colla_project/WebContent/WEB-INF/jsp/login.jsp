@@ -6,6 +6,7 @@
 <meta charset="UTF-8">
 <title>Join</title>
 		join
+		수빈이씀2
 		수빈이씀
 		미경씀
 		혜선이씀
