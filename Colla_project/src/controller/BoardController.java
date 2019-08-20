@@ -29,7 +29,7 @@ public class BoardController {
 		model.addAttribute("board", board);
 		Member m = mService.selectMemberByNum( board.getmNum() );
 		model.addAttribute("writer", m.getmName());
-		return "boardView";
+		return "boardView"; 
 	}
 	@RequestMapping("/boardWriteForm")
 	public String showBoardWriteForm() {
