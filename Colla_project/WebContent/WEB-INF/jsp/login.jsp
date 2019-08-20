@@ -7,16 +7,6 @@
 <title>LOGIN</title>
 </head>
 <body>
-<<<<<<< HEAD
-<<<<<<< HEAD
-	<form action="">
-		<label>어려워..</label>
-	</form>
-=======
-		배고프네요^&^ 
->>>>>>> branch 'master' of https://github.com/benefitallhumankind/Colla_project.git
-=======
-	Written By TKLee
->>>>>>> branch 'master' of https://github.com/benefitallhumankind/Colla_project.git
+written by hyeseon
 </body>
 </html>
