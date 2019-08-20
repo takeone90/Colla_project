@@ -15,6 +15,7 @@
 	<div class="container">
 		<form action="login" method="post">
 			<table class="table table-hover">
+				<tr><td><input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"></td></tr>
 				<tr>
 					<th>아이디 : </th>
 					<td><input type="text" name="mId" placeholder="아이디를 입력하세요"></td>
