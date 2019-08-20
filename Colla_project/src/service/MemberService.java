@@ -12,6 +12,7 @@ import model.Member;
 
 @Service
 public class MemberService {
+	//login
 	//addMember
 	//modifyMember
 	//deleteMember
@@ -21,6 +22,18 @@ public class MemberService {
 	
 	@Autowired
 	MemberDao memberDao;
+	
+	public boolean login(String mId, String mPass) {
+		Member originMember = memberDao.selectMemberById(mId);
+		if(originMember != null) {
+			String originPw = originMember.getmPassword();
+			if(mPass.equals(originPw)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
 
 	public boolean addMember(Member member) {
 		if(memberDao.insertMember(member)>0) {
@@ -47,6 +60,9 @@ public class MemberService {
 	}
 	public Member selectMemberByNum(int mNum) {
 		return memberDao.selectMemberByNum(mNum);
+	}
+	public Member selectMemberById(String mId) {
+		return memberDao.selectMemberById(mId);
 	} 
 	
 	public List<Member> selectMemberList(){

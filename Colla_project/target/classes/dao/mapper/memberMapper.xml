@@ -20,6 +20,11 @@
 		from test_memeber
 		where m_num = #{mNum}
 	</select>
+	<select id="selectMemberById" resultMap="memberMap">
+		select
+		from test_memeber
+		where m_id = #{mId}
+	</select>
 	<select id="selectAllMember" resultMap="memberMap">
 		select
 		from test_memeber
