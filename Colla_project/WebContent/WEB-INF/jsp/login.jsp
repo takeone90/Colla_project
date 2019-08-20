@@ -7,6 +7,7 @@
 <title>Join</title>
 		join
 		수빈이씀
+		혜선이씀
 </head>
 <body>
 
