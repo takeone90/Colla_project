@@ -34,6 +34,10 @@ public class MemberService {
 		return false;
 	}
 	
+	public List<String> getMemberAuthorities(int num){
+		return memberDao.selectAuthoritesByNum(num);
+	}
+	
 
 	public boolean addMember(Member member) {
 		if(memberDao.insertMember(member)>0) {

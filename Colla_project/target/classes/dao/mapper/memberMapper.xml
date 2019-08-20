@@ -29,6 +29,12 @@
 		select *
 		from test_member
 	</select>
+	<select id="selectAuthoritiesByNum" parameterType="int" resultType="String">
+		select authority
+		from authority
+		where m_num = #{mNum}
+	</select>
+	
 	<resultMap type="member" id="memberMap">
 		<result property="mNum" column="m_num"/>
 		<result property="mId" column="m_id"/>
