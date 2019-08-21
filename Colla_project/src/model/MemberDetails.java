@@ -10,8 +10,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import commons.Role;
 
 public class MemberDetails implements UserDetails{
-	private String userid;
-	private String password;
+	private String email;
+	private String pw;
 	private List<Role> authorities;
 	private boolean isAccountNonExpired;
 	private boolean isAccountNonLocked;
@@ -31,17 +31,6 @@ public class MemberDetails implements UserDetails{
 		authorities.add(role);
 	}
 	
-	public String getUserid() {
-		return userid;
-	}
-
-	public void setUserid(String userid) {
-		this.userid = userid;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
 
 	public void setAuthorities(List<Role> authorities) {
 		this.authorities = authorities;
@@ -66,43 +55,59 @@ public class MemberDetails implements UserDetails{
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		// TODO Auto-generated method stub
-		return null;
+		return authorities;
 	}
 
 	@Override
 	public String getPassword() {
 		// TODO Auto-generated method stub
-		return null;
+		return pw;
 	}
 
 	@Override
 	public String getUsername() {
 		// TODO Auto-generated method stub
-		return null;
+		return email;
 	}
 
 	@Override
 	public boolean isAccountNonExpired() {
 		// TODO Auto-generated method stub
-		return false;
+		return isAccountNonExpired;
 	}
 
 	@Override
 	public boolean isAccountNonLocked() {
 		// TODO Auto-generated method stub
-		return false;
+		return isAccountNonLocked;
 	}
 
 	@Override
 	public boolean isCredentialsNonExpired() {
 		// TODO Auto-generated method stub
-		return false;
+		return isCredentialsNonExpired;
 	}
 
 	@Override
 	public boolean isEnabled() {
 		// TODO Auto-generated method stub
-		return false;
+		return isEnabled;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getPw() {
+		return pw;
+	}
+
+	public void setPw(String pw) {
+		this.pw = pw;
 	}
 
 }
