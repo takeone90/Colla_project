@@ -11,5 +11,5 @@ public interface MemberDao {
 	public Member selectMemberByNum(int mNum);
 	public Member selectMemberById(String mId);
 	public List<Member> selectAllMember();
-	public List<String> selectAuthoritesByNum(int num);
+	public List<String> selectAuthoritiesByNum(int num);
 }

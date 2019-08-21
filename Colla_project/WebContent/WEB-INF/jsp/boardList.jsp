@@ -27,8 +27,8 @@
 				<tr>
 					<td>${b.num}</td>
 					<td><a href="boardView?num=${b.num}">${b.title}</a></td>
-					<td>${b.content}</td>
 					<td>${b.mNum}</td>
+					<td>${b.regDate}</td>
 					<td>${b.readCount}</td>
 				</tr>
 			</c:forEach>

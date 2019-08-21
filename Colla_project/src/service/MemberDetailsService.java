@@ -20,14 +20,19 @@ public class MemberDetailsService implements UserDetailsService{
 	
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+//		System.out.println("username : "+username);
 		Member originMember = memberService.selectMemberById(username);
-		String userid = originMember.getmId(); 
-		String password = originMember.getmPassword();
-		int num = originMember.getmNum();
-		List<String> authStrList = memberService.getMemberAuthorities(num);
+		String mId = originMember.getmId(); 
+		String mPassword = originMember.getmPassword();
+//		int num = originMember.getmNum();
+//		System.out.println("password : "+password);
+//		System.out.println("num : "+num);
+		List<String> authStrList = memberService.getMemberAuthorities(originMember.getmNum());
+		
+		System.out.println("authStrList : ");
 		MemberDetails member = new MemberDetails();
-		member.setUserid(userid);
-		member.setPassword(password);
+		member.setUserid(mId);
+		member.setPassword(mPassword);
 		for(String auth:authStrList) {
 			member.addAuth(auth);
 		}	
