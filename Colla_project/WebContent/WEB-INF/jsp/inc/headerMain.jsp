@@ -36,10 +36,10 @@
 	<div id="member-nav">
 		<ul>
 			<li>
-				<a href="#" class="member-btn">LOGIN</a>
+				<a href="loginForm" class="member-btn">LOGIN</a>
 			</li>
 			<li>
-				<a href="#" class="member-btn">JOIN</a>
+				<a href="joinStep1" class="member-btn">JOIN</a>
 			</li>
 			<li>
 				<a href="#" class="member-btn">Workspace로 이동</a>

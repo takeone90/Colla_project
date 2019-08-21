@@ -7,6 +7,7 @@
 <title>joinStep3</title>
 </head>
 <body>
+<%@ include file="/WEB-INF/jsp/inc/headerMain.jsp" %>
 	<form action="" method="post">
 		회원가입
 		EMAIL

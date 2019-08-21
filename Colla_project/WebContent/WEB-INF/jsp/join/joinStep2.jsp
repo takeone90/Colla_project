@@ -8,12 +8,13 @@
 <title>joinStep2</title>
 </head>
 <body>
+<%@ include file="/WEB-INF/jsp/inc/headerMain.jsp" %>
 	<form action="" method="post">
 		회원가입
 		인증 코드 입력
 		<input type="text" name="code??" placeholder="인증 코드를 입력해주세요.">
 		<input type="submit" value="재발송">
-		<button onclick="">다음 단계</button>	
+		<input type="button" onclick="location.href='joinStep3'" value="다음단계">
 	</form>
 	<h3>
 		<c:if test='${param.joinStep2 eq "false"}'>
