@@ -14,9 +14,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<delete id="deleteMember" parameterType="int">
 		delete member where m_num=#{num}
 	</delete>
-	<select id="selectMember" parameterType="int" resultMap="memberMap">
-		select * from member where m_num=#{num}
-	</select>
 	<select id="selectMemberByEmail" parameterType="string" resultMap="memberMap">
 		select * from member where m_email=#{email}
 	</select>
