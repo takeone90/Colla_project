@@ -1,5 +1,5 @@
 package model;
 
-public class Board {
+public class Reply {
 
 }
