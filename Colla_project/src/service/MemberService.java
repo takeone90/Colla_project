@@ -48,4 +48,7 @@ public class MemberService {
 	public List<Member> getAllMember(){
 		return dao.selectAll();
 	}
+	public List<String> getMemberAuthorities(int num){
+		return dao.selectAuthoritesByNum(num);
+	}
 }

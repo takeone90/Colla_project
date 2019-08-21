@@ -10,15 +10,15 @@
 <body>
 	<form>	
 		<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token}">
-		<input type="text" name="userid" placeholder="아이디를 입력해주세요">
-		<input type="password" name="password" placeholder="비밀번호를 입력해주세요">
+		<input type="text" name="m_email" placeholder="아이디를 입력해주세요">
+		<input type="password" name="m_pw" placeholder="비밀번호를 입력해주세요">
 		<input type="submit" value="로그인">
 	</form>
 	<button onclick="">구글 계정 연동</button>
 	<button onclick="">네이버 계정 연동</button>
 	
 	<h3>
-		<c:if test='${pram.login eq "false"}'>
+		<c:if test='${param.login eq "false"}'>
 			로그인 후 이용하세요.
 		</c:if>
 		<c:if test='${param.login eq "fail"}'>
