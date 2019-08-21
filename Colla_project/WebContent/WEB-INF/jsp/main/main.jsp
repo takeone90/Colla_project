@@ -8,7 +8,7 @@
 </head>
 <body>
 	<div id="wrap">
-		<%@ include file="WEB-INF/jsp/inc/headerMain.jsp" %>
+		<%@ include file="/WEB-INF/jsp/inc/headerMain.jsp" %>
 		<section id="main-cover">
 			<div id="container">
 				<h1>커버 이미지, 슬라이드?</h1>
