@@ -1,3 +1,4 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <div id="footer">
 	<div id="f1">
 		<p>© 2019 Osiris systems inc. All rights reserved.</p>
