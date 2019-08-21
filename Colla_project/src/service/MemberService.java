@@ -13,6 +13,7 @@ import model.Member;
 public class MemberService {
 	@Autowired
 	private MemberDao dao;
+	
 	public boolean addMember(String email,String name,String pw) {
 		boolean result = false;
 		Member member = new Member();
