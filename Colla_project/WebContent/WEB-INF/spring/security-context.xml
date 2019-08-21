@@ -40,11 +40,7 @@
 			login-page="/member/loginForm"/>
 		<security:logout
 			invalidate-session="true"
-<<<<<<< Upstream, based on origin/master
-			logout-url="/logout"
-=======
 			logout-url="/member/logout"
->>>>>>> 8252064 alrud~
 			logout-success-url="/member/loginForm"
 			delete-cookies="JSESSIONID"/>	
 	</security:http>
