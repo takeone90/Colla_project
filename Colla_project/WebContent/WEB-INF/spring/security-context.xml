@@ -40,7 +40,7 @@
 			login-page="/member/loginForm"/>
 		<security:logout
 			invalidate-session="true"
-			logout-url="/member/logout"
+			logout-url="/logout"
 			logout-success-url="/member/loginForm"
 			delete-cookies="JSESSIONID"/>	
 	</security:http>

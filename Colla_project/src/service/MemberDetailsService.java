@@ -16,26 +16,23 @@ import model.MemberDetails;
 public class MemberDetailsService implements UserDetailsService{
 
 	@Autowired
-	private MemberService memberService;
+	private MemberService service;
 	
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-//		System.out.println("username : "+username);
-		Member originMember = memberService.selectMemberById(username);
-		String mId = originMember.getmId(); 
-		String mPassword = originMember.getmPassword();
+		Member originMember = service.selectMemberById(username);
+		MemberDetails member = new MemberDetails();
+		member.setUserid(originMember.getmId());
+		member.setPassword(originMember.getmPassword());
+		System.out.println("아이디 : "+member.getUserid()+", 비밀번호 : "+member.getPassword());
 //		int num = originMember.getmNum();
 //		System.out.println("password : "+password);
 //		System.out.println("num : "+num);
-		List<String> authStrList = memberService.getMemberAuthorities(originMember.getmNum());
-		
-		System.out.println("authStrList : ");
-		MemberDetails member = new MemberDetails();
-		member.setUserid(mId);
-		member.setPassword(mPassword);
+		List<String> authStrList = service.getMemberAuthorities(originMember.getmNum());
 		for(String auth:authStrList) {
 			member.addAuth(auth);
-		}	
+		}
+		System.out.println("권한 : "+member.getAuthorities());
 		return member;
 	}
 

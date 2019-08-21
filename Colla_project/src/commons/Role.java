@@ -13,5 +13,9 @@ public class Role implements GrantedAuthority{
 		// TODO Auto-generated method stub
 		return authority;
 	}
-
+	@Override
+	public String toString() {
+		return "[" + authority + "]";
+	}
+	
 }

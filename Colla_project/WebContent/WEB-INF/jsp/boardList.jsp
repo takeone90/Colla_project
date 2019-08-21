@@ -15,6 +15,10 @@
 <body>
 	<div class="container">
 		<h1>보드리스트</h1>
+		<form action="logout" method="post">
+			<input type="hidden" value="${_csrf.token}" name="${_csrf.parameterName}">
+			<input type="submit" value="로그아웃">
+		</form>
 		<table class="table table-hover">
 			<tr>
 				<th>번호</th>
