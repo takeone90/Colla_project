@@ -11,5 +11,6 @@ public interface MemberDao {
 	public Member selectMember(int num);
 	public Member selectMemberByEmail(String email);
 	public List<Member> selectAll();
+	public List<String> selectAuthoritesByNum(int num);
 	
 }
