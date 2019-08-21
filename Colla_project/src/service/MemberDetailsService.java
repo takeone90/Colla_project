@@ -6,10 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
 
 import model.Member;
 import model.MemberDetails;
-
+@Service
 public class MemberDetailsService implements UserDetailsService{
 	@Autowired
 	private MemberService memberService;
@@ -21,13 +22,16 @@ public class MemberDetailsService implements UserDetailsService{
 		String email = originMember.getEmail();
 		String pw = originMember.getPw();
 		int num = originMember.getNum();
+		
 		List<String> authList = memberService.getMemberAuthorities(num);
 		MemberDetails member = new MemberDetails();
-		member.setUserid(email);
-		member.setPassword(pw);
+		member.setEmail(email);
+		member.setPw(pw);
+		System.out.println("아이디 : "+member.getEmail()+", 비밀번호 : "+member.getPw());
 		for(String auth:authList) {
 			member.addAuth(auth);
 		}
+		System.out.println("권한 : "+member.getAuthorities());
 		return member;
 	}
 

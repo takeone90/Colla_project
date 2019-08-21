@@ -15,21 +15,21 @@ public class MemberController {
 	
 	@RequestMapping(value="/joinStep1", method = RequestMethod.GET)
 	public String showJoinStep1() {
-		return "joinStep1";
+		return "/join/joinStep1";
 	}
 	
 	@RequestMapping(value="/joinStep2", method = RequestMethod.GET)
 	public String showJoinStep2() {
-		return "joinStep2";
+		return "/join/joinStep2";
 	}
 	
 	@RequestMapping(value="/joinStep3", method = RequestMethod.GET)
 	public String showJoinStep3() {
-		return "joinStep3";
+		return "/join/joinStep3";
 	}
 	
 	@RequestMapping(value="/loginForm", method = RequestMethod.GET)
 	public String showLoginForm() {
-		return "loginForm";
+		return "/login/loginForm";
 	}
 }

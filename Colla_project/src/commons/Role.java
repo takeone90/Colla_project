@@ -13,4 +13,10 @@ public class Role implements GrantedAuthority{
 	public String getAuthority() {
 		return authority;
 	}
+
+	@Override
+	public String toString() {
+		return "[" + authority + "]";
+	}
+	
 }

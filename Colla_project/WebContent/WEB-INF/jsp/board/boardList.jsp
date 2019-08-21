@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+보드리스트요
 </body>
 </html>

@@ -8,8 +8,8 @@
 <title>로그인</title>
 </head>
 <body>
-	<form>	
-		<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token}">
+	<form action="login" method="post">	
+		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 		<input type="text" name="m_email" placeholder="아이디를 입력해주세요">
 		<input type="password" name="m_pw" placeholder="비밀번호를 입력해주세요">
 		<input type="submit" value="로그인">
