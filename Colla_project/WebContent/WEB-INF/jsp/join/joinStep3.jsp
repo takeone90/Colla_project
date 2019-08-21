@@ -4,9 +4,20 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>joinStep3</title>
 </head>
 <body>
-
+	<form action="" method="post">
+		회원가입
+		EMAIL
+		<input type="email" name="m_email" readonly="readonly" value="">
+		PASSWORD
+		<input type="password" name="m_pw">
+		NAME
+		<input type="text" name="m_name">
+		<input type="checkbox">
+		약관에 동의합니다.
+		<input type="submit" value="시작하기">
+	</form>
 </body>
 </html>
