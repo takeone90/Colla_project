@@ -1,6 +1,7 @@
 package controller;
 
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.aspectj.apache.bcel.classfile.InnerClass;
@@ -86,13 +87,15 @@ public class MemberController {
 	@ResponseBody
 	@RequestMapping(value="/emailDuplicationCheck", method = RequestMethod.POST)
 	public boolean emailDuplicationCheck(String emailAddress, HttpSession session) {
+		System.out.println("emailAddress : "+emailAddress);
+		System.out.println("emailAddress : "+emailAddress);
+		
 		if(memberService.getMemberByEmail(emailAddress) != null) {
 			return true;
 		} else {
 			session.setAttribute("emailAddress", emailAddress);
 			return false;
 		}
-		
 	}
 	
 	@RequestMapping(value="/joinStep1", method = RequestMethod.GET)
