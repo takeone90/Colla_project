@@ -7,6 +7,8 @@
 <title>채팅 메인</title>
 </head>
 <body>
+<%@ include file="/WEB-INF/jsp/inc/headerWs.jsp" %>
+<%@ include file="/WEB-INF/jsp/inc/navWs.jsp" %>
 	<div id="wsBody">
 		<div class="chatArea">
 			<div class="chat">

@@ -9,6 +9,8 @@
 <title>Insert title here</title>
 </head>
 <body>
+<%@ include file="/WEB-INF/jsp/inc/headerWs.jsp" %>
+<%@ include file="/WEB-INF/jsp/inc/navWs.jsp" %>
 	<div id="wsBody">
 		<h2>Workspace</h2>
 		<h3>Workspace List</h3>
