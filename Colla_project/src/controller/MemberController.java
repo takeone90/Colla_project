@@ -37,7 +37,6 @@ public class MemberController {
 	public class inner implements Runnable {
 		String emailAddress;
 		HttpSession session;
-		
 		public inner(String emailAddress, HttpSession session) {
 			this.emailAddress = emailAddress;
 			this.session = session;
