@@ -44,10 +44,6 @@ public class MemberController {
 		String emailAddress = (String)session.getAttribute("emailAddress");
 		String verifyCode = (String)session.getAttribute("verifyCode");
 		session.setAttribute("inputVerifyCode", inputVerifyCode);
-		
-//		EmailVerify emailVerify = memberService.getEmailVerify(emailAddress);
-
-//		System.out.println("emailAddress : "+emailAddress+" emailVerify : "+emailVerify);
 		if(verifyCode.equals(inputVerifyCode)) {
 			return true;
 		}else {
