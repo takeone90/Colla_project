@@ -43,9 +43,9 @@ public class MemberController {
 	public boolean checkVerifyCode(String verifyCode, HttpSession session) {
 		String emailAddress = (String)session.getAttribute("emailAddress");
 		session.setAttribute("verifyCode", verifyCode);
+
 		EmailVerify emailVerify = memberService.getEmailVerify(emailAddress);
-		System.out.println("세션에 있는 emailAddress : "+emailAddress+"입력한 인증번호 : "+verifyCode);
-		
+
 		System.out.println("emailAddress : "+emailAddress+" emailVerify : "+emailVerify);
 		if(verifyCode.equals(emailVerify.getVerifyCode())) {
 			return true;
