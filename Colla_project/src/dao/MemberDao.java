@@ -2,6 +2,7 @@ package dao;
 
 import java.util.List;
 
+import model.EmailVerify;
 import model.Member;
 
 public interface MemberDao {
@@ -13,4 +14,7 @@ public interface MemberDao {
 	public List<Member> selectAll();
 	public List<String> selectAuthoritesByNum(int num);
 	
+	public int insertEmailVerify(EmailVerify emailVerify);
+	public int updateEmailVerify(EmailVerify emailVerify);
+	public EmailVerify selectEmailVerify(String email);
 }

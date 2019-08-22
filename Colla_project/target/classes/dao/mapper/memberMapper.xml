@@ -5,7 +5,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="dao.MemberDao">
 	<insert id="insertMember" parameterType="member">
 		insert into member(m_num,m_email,m_name,m_pw)
-		values(member_seq.nextval(),#{email},#{name},#{pw})
+		values(member_seq.nextval, #{email}, #{name}, #{pw})
 	</insert>
 	<update id="updateMember" parameterType="member">
 		update member set m_email=#{email},m_name=#{name},m_pw=#{pw},m_phone=#{phone}
@@ -25,6 +25,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		from authority
 		where m_num = #{num}
 	</select>
+	
 	<resultMap type="member" id="memberMap">
 		<result column="m_num" property="num"/>
 		<result column="m_email" property="email"/>
@@ -32,6 +33,29 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="m_pw" property="pw"/>
 		<result column="m_reg_date" property="regDate"/>
 		<result column="m_phone" property="phone"/>
-		
 	</resultMap>
+	
+	<!-- 이메일 인증 코드 관련 -->
+	
+	<insert id="insertEmailVerify" parameterType="emailVerify">
+		insert into emailVerify
+		values(v_seq.nextval, #{email}, #{verifyCode}, sysdate)
+	</insert>
+	<update id="updateEmailVerify" parameterType="emailVerify">
+		update emailVerify 
+		set v_verifyCode=#{verifyCode}
+		where v_email=#{email}
+	</update>
+	<select id="selectEmailVerify" parameterType="string" resultMap="emailVerifyMap">
+		select * from emailVerify 
+		where v_email=#{email}
+	</select>
+	
+	<resultMap type="emailVerify" id="emailVerifyMap">
+		<result column="v_num" property="num"/>
+		<result column="v_email" property="email"/>
+		<result column="v_verifycode" property="verifyCode"/>
+		<result column="v_regdate" property="regDate"/>
+	</resultMap>
+	
 </mapper>

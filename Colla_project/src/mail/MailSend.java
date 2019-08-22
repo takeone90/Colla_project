@@ -13,8 +13,19 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
  
 public class MailSend {
-    
-    public void MailSend(String emailAddress) {
+	public String setCode() {
+		StringBuffer sb = new StringBuffer();
+		int a = 0;
+		for (int i = 0; i < 10; i++) {
+			a = (int) (Math.random() * 122 + 1);
+			if ((a >= 48 && a <= 57) || (a >= 65 && a <= 90) || (a >= 97 && a <= 122))
+				sb.append((char) a);
+			else
+				i--;
+		}
+		return sb.toString();
+	}
+    public String MailSend(String emailAddress) {
     	
         Properties prop = System.getProperties();
         prop.put("mail.smtp.starttls.enable", "true");
@@ -22,7 +33,9 @@ public class MailSend {
         prop.put("mail.smtp.auth", "true");
         prop.put("mail.smtp.port", "587");
         
-        Authenticode code = new Authenticode();
+//        Authenticode code = new Authenticode();
+        
+        String code = setCode();
         
         Authenticator auth = new MailAuth();
         
@@ -37,7 +50,7 @@ public class MailSend {
             InternetAddress to = new InternetAddress(emailAddress);         
             msg.setRecipient(Message.RecipientType.TO, to);            
             msg.setSubject("인증코드 테스트", "UTF-8");
-            msg.setText(code.setCode(), "UTF-8");            
+            msg.setText(code, "UTF-8");            
             Transport.send(msg);
             
         } catch(AddressException ae) {            
@@ -47,6 +60,7 @@ public class MailSend {
         } catch(UnsupportedEncodingException e) {
             System.out.println("UnsupportedEncodingException : " + e.getMessage());			
         }
+        return code;
                 
     }
 }

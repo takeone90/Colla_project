@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import dao.MemberDao;
+import model.EmailVerify;
 import model.Member;
 
 @Service
@@ -50,5 +51,22 @@ public class MemberService {
 	}
 	public List<String> getMemberAuthorities(int num){
 		return dao.selectAuthoritesByNum(num);
+	}
+	
+	public boolean addEmailVerify(EmailVerify emailVerify) {
+		if(dao.insertEmailVerify(emailVerify) > 0) {
+			return true;
+		}
+		return false;
+	}
+	
+	public boolean modifyEmailVerify(EmailVerify emailVerify) {
+		if(dao.updateEmailVerify(emailVerify)>0) {
+			return true;
+		}
+		return false;
+	}
+	public EmailVerify getEmailVerify(String email) {
+		return dao.selectEmailVerify(email);
 	}
 }
