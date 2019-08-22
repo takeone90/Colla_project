@@ -1,6 +1,5 @@
 package controller;
 
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.request;
 
 import javax.servlet.http.HttpSession;
 
@@ -32,21 +31,25 @@ public class MemberController {
 		return "/join/joinStep2";
 	}
 	
-	
-	@RequestMapping(value="/joinStep2", method = RequestMethod.POST)
-	public String JoinStep2() {
-		
-		return "/join/joinStep2";
-	}
+//	
+//	@RequestMapping(value="/joinStep2", method = RequestMethod.POST)
+//	public String JoinStep2() {
+//		
+//		return "/join/joinStep2";
+//	}
 	
 	@ResponseBody
 	@RequestMapping(value="/checkVerifyCode")
-	public boolean checkVerifyCode(String verifycode, HttpSession session) {
+	public boolean checkVerifyCode(String verifyCode, HttpSession session) {
 		String emailAddress = (String)session.getAttribute("emailAddress");
+		session.setAttribute("verifyCode", verifyCode);
 		EmailVerify emailVerify = memberService.getEmailVerify(emailAddress);
-		System.out.println("emailAddress : "+emailAddress+"emailVerify : "+emailVerify);
-		if(verifycode.equals(emailVerify.getVerifyCode())) {
+		System.out.println("세션에 있는 emailAddress : "+emailAddress+"입력한 인증번호 : "+verifyCode);
+		if(verifyCode.equals(emailVerify.getVerifyCode())) {
+			//true면 joinStep3으로 이동가능
 			return true;
+		}else {
+			//false면 joinStep2 페이지 보여주는 요청생성
 		}
 		return false;
 	}

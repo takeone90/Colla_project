@@ -18,6 +18,7 @@ $(function() {
 			dataType: "json",
 			success: function(result) {
 				if(result) {
+					//joinStep3 으로 이동하는 동작이 여기서 발생해야된다.
 					alert("성공");
 				} else {
 					$("#checkSentence").text("인증 코드가 일치하지 않습니다.");
@@ -35,7 +36,7 @@ $(function() {
 		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 		회원가입
 		인증 코드 입력
-		<input type="text" name="verifycode" placeholder="인증 코드를 입력해주세요.">
+		<input type="text" name="verifyCode" placeholder="인증 코드를 입력해주세요.">
 		<%-- <input type="hidden" name="emailAddress" value="${param.emailAddress}"> --%>
 		<input type="button" onclick="location.href='testMail2'" value="인증 코드 재발송">
 		<span id="checkSentence"></span>
