@@ -14,7 +14,7 @@
 			username-parameter="m_email"
 			password-parameter="m_pw"
 			authentication-failure-url="/loginForm?login=fail"
-			default-target-url="/boardList" 
+			default-target-url="/workspace" 
 			login-processing-url="/login"
 			login-page="/loginForm" />
 		<security:logout 
