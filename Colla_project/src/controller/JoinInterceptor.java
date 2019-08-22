@@ -27,7 +27,7 @@ public class JoinInterceptor extends HandlerInterceptorAdapter{
 		if(verifyCode!=null && verifyCode.equals(inputVerifyCode)) {
 			return true;
 		}else {
-			response.sendRedirect(request.getContextPath()+"/joinStep2");
+			response.sendRedirect(request.getContextPath()+"/joinStep1");
 			return false;
 		}
 		
