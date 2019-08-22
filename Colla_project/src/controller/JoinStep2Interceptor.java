@@ -9,39 +9,26 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
-import model.EmailVerify;
 import service.MemberService;
-@Component("joinInterceptor")
-public class JoinInterceptor extends HandlerInterceptorAdapter{
+
+@Component("joinStep2Interceptor")
+public class JoinStep2Interceptor extends HandlerInterceptorAdapter {
 	@Autowired
 	private MemberService service;
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
-		System.out.println("joinInterceptor 실행!");
+		System.out.println("joinStep2Interceptor 실행!");
 		HttpSession session = request.getSession();
-		
-//		String emailAddress = (String)session.getAttribute("emailAddress");
-		String verifyCode = (String)session.getAttribute("verifyCode");
-
-		String inputVerifyCode = (String)session.getAttribute("inputVerifyCode");
-		if(verifyCode!=null && verifyCode.equals(inputVerifyCode)) {
+		String emailAddress = (String)session.getAttribute("emailAddress");
+		if(emailAddress != null) {
 			return true;
 		}else {
 			response.sendRedirect(request.getContextPath()+"/joinStep1");
 			return false;
 		}
-		
-//		EmailVerify emailVerify = service.getEmailVerify((String)session.getAttribute("emailAddress"));
-//		String verifyCode = (String)session.getAttribute("verifyCode");
-//		if(verifyCode.equals(emailVerify.getVerifyCode())) {
-//			return true;
-//		}
-//		return false;
 	}
-
 	@Override
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
 			ModelAndView modelAndView) throws Exception {
 	}
-	
 }
