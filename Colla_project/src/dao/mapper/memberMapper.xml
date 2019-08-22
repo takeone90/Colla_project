@@ -35,7 +35,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="m_phone" property="phone"/>
 	</resultMap>
 	
-	<!-- 이메일 인증 코드 관련 -->
+	<!-- 이메일 인증 코드 관련 --> 
 	
 	<insert id="insertEmailVerify" parameterType="emailVerify">
 		insert into emailVerify

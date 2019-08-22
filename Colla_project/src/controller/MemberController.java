@@ -40,24 +40,23 @@ public class MemberController {
 	
 	@ResponseBody
 	@RequestMapping(value="/checkVerifyCode")
-	public boolean checkVerifyCode(String verifyCode, HttpSession session) {
+	public boolean checkVerifyCode(String inputVerifyCode, HttpSession session) {
 		String emailAddress = (String)session.getAttribute("emailAddress");
-		session.setAttribute("verifyCode", verifyCode);
-
-		EmailVerify emailVerify = memberService.getEmailVerify(emailAddress);
-
-		System.out.println("emailAddress : "+emailAddress+" emailVerify : "+emailVerify);
-		if(verifyCode.equals(emailVerify.getVerifyCode())) {
+		String verifyCode = (String)session.getAttribute("verifyCode");
+		session.setAttribute("inputVerifyCode", inputVerifyCode);
+		if(verifyCode.equals(inputVerifyCode)) {
 			return true;
 		}else {
 			//false면 joinStep2 페이지 보여주는 요청생성
+			return false;
 		}
-		return false;
+		
 	}
 	
 	
 	@RequestMapping(value="/joinStep3", method = RequestMethod.GET)
 	public String showJoinStep3() {
+		
 		return "/join/joinStep3";
 	}
 	
@@ -72,11 +71,8 @@ public class MemberController {
 		MailSend ms = new MailSend();
 		String tmpCode = ms.MailSend(emailAddress);
 		if(tmpCode != null) {
-			EmailVerify emailVerify = new EmailVerify();
-			emailVerify.setVerifyCode(tmpCode);
-			emailVerify.setEmail(emailAddress);
-			memberService.addEmailVerify(emailVerify);
-			System.out.println(emailVerify);
+			session.setAttribute("verifyCode", tmpCode);
+			System.out.println("인증 코드1 : "+tmpCode);
 		}
 		return "redirect:joinStep2";
 	}
@@ -87,11 +83,8 @@ public class MemberController {
 		MailSend ms = new MailSend();
 		String tmpCode = ms.MailSend(emailAddress);
 		if(tmpCode != null) {
-			EmailVerify emailVerify = new EmailVerify();
-			emailVerify.setVerifyCode(tmpCode);
-			emailVerify.setEmail(emailAddress);
-			memberService.modifyEmailVerify(emailVerify);
-			System.out.println(emailVerify);
+			session.setAttribute("verifyCode", tmpCode);
+			System.out.println("인증 코드 재발송 : "+tmpCode);
 		}
 		return "redirect:joinStep2";
 	}

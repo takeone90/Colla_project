@@ -19,14 +19,24 @@ public class JoinInterceptor extends HandlerInterceptorAdapter{
 			throws Exception {
 		System.out.println("joinInterceptor 실행!");
 		HttpSession session = request.getSession();
-		EmailVerify emailVerify = service.getEmailVerify((String)session.getAttribute("emailAddress"));
+		
+//		String emailAddress = (String)session.getAttribute("emailAddress");
 		String verifyCode = (String)session.getAttribute("verifyCode");
-		if(verifyCode!=null && verifyCode.equals(emailVerify.getVerifyCode())) {
+
+		String inputVerifyCode = (String)session.getAttribute("inputVerifyCode");
+		if(verifyCode!=null && verifyCode.equals(inputVerifyCode)) {
 			return true;
 		}else {
 			response.sendRedirect("/joinStep2");
 			return false;
 		}
+		
+//		EmailVerify emailVerify = service.getEmailVerify((String)session.getAttribute("emailAddress"));
+//		String verifyCode = (String)session.getAttribute("verifyCode");
+//		if(verifyCode.equals(emailVerify.getVerifyCode())) {
+//			return true;
+//		}
+//		return false;
 	}
 
 	@Override

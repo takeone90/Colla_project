@@ -7,11 +7,14 @@
 <title>joinStep3</title>
 </head>
 <body>
+<%
+String emailAddress = (String)session.getAttribute("emailAddress");
+%>
 <%@ include file="/WEB-INF/jsp/inc/headerMain.jsp" %>
 	<form action="" method="post">
 		회원가입
 		EMAIL
-		<input type="email" name="m_email" readonly="readonly" value="">
+		<input type="email" name="m_email" readonly="readonly" value="${emailAddress}">
 		PASSWORD
 		<input type="password" name="m_pw">
 		NAME
