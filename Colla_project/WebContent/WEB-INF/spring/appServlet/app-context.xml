@@ -15,8 +15,12 @@
 	<mvc:interceptors>
 		<mvc:interceptor>
 			<mvc:mapping path="/joinStep2"/>
-			<mvc:mapping path="/joinStep3"/>
-		<ref bean="joinInterceptor"/>
+		<ref bean="joinStep2Interceptor"/>
 		</mvc:interceptor>
+		<mvc:interceptor>
+			<mvc:mapping path="/joinStep3"/>
+		<ref bean="joinStep3Interceptor"/>
+		</mvc:interceptor>
+		
 	</mvc:interceptors>
 </beans>

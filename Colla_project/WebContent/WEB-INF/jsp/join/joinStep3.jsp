@@ -11,14 +11,15 @@
 String emailAddress = (String)session.getAttribute("emailAddress");
 %>
 <%@ include file="/WEB-INF/jsp/inc/headerMain.jsp" %>
-	<form action="" method="post">
+	<form action="joinMember" method="post">
+		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 		회원가입
 		EMAIL
-		<input type="email" name="m_email" readonly="readonly" value="${emailAddress}">
+		<input type="email" name="email" readonly="readonly" value="${emailAddress}">
 		PASSWORD
-		<input type="password" name="m_pw">
+		<input type="password" name="pw">
 		NAME
-		<input type="text" name="m_name">
+		<input type="text" name="name">
 		<input type="checkbox">
 		약관에 동의합니다.
 		<input type="submit" value="시작하기">
