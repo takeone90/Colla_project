@@ -43,6 +43,7 @@ public class MemberController {
 	public boolean checkVerifyCode(String verifyCode, HttpSession session) {
 		String emailAddress = (String)session.getAttribute("emailAddress");
 		session.setAttribute("verifyCode", verifyCode);
+
 		EmailVerify emailVerify = memberService.getEmailVerify(emailAddress);
 
 		System.out.println("emailAddress : "+emailAddress+" emailVerify : "+emailVerify);
