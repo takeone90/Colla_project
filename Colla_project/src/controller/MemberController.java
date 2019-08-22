@@ -44,14 +44,9 @@ public class MemberController {
 		String emailAddress = (String)session.getAttribute("emailAddress");
 		session.setAttribute("verifyCode", verifyCode);
 		EmailVerify emailVerify = memberService.getEmailVerify(emailAddress);
-<<<<<<< HEAD
-		System.out.println("세션에 있는 emailAddress : "+emailAddress+"입력한 인증번호 : "+verifyCode);
-		if(verifyCode.equals(emailVerify.getVerifyCode())) {
-			//true면 joinStep3으로 이동가능
-=======
+
 		System.out.println("emailAddress : "+emailAddress+" emailVerify : "+emailVerify);
-		if(verifycode.equals(emailVerify.getVerifyCode())) {
->>>>>>> branch 'master' of https://github.com/benefitallhumankind/Colla_project.git
+		if(verifyCode.equals(emailVerify.getVerifyCode())) {
 			return true;
 		}else {
 			//false면 joinStep2 페이지 보여주는 요청생성
