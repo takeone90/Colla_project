@@ -9,4 +9,8 @@ public class WorkSpaceController {
 	public String showWsMain() {
 		return "/workspace/wsMain";
 	}
+	@RequestMapping("/chatMain")
+	public String chatMain() {
+		return "/chatting/chatMain";
+	}
 }
