@@ -15,11 +15,14 @@ import javax.mail.internet.MimeMessage;
 public class MailSend {
     
     public void MailSend(String emailAddress) {
+    	
         Properties prop = System.getProperties();
         prop.put("mail.smtp.starttls.enable", "true");
         prop.put("mail.smtp.host", "smtp.gmail.com");
         prop.put("mail.smtp.auth", "true");
         prop.put("mail.smtp.port", "587");
+        
+        Authenticode code = new Authenticode();
         
         Authenticator auth = new MailAuth();
         
@@ -34,8 +37,7 @@ public class MailSend {
             InternetAddress to = new InternetAddress(emailAddress);         
             msg.setRecipient(Message.RecipientType.TO, to);            
             msg.setSubject("인증코드 테스트", "UTF-8");
-            msg.setText("집가자", "UTF-8");            
-            
+            msg.setText(code.setCode(), "UTF-8");            
             Transport.send(msg);
             
         } catch(AddressException ae) {            
