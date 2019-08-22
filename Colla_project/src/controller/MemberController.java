@@ -7,6 +7,7 @@ import org.aspectj.apache.bcel.classfile.InnerClass;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -53,7 +54,7 @@ public class MemberController {
 		}
 	}
 
-	@RequestMapping(value="/testMail", method = RequestMethod.POST)
+	@RequestMapping(value="/testMail", method = RequestMethod.GET)
 	public String testMail(String emailAddress, Model model, HttpSession session) {
 		session.setAttribute("emailAddress", emailAddress); //세션에 이메일 저장(30분)
 		Thread innerTest = new Thread(new inner(emailAddress, session));
@@ -66,7 +67,6 @@ public class MemberController {
 //		}
 		return "redirect:joinStep2";
 	}
-	
 	@RequestMapping(value="/testMail2", method = RequestMethod.GET)
 	public String testMail2(HttpSession session) {
 		String emailAddress = (String)session.getAttribute("emailAddress");
@@ -80,6 +80,16 @@ public class MemberController {
 //		}
 		return "redirect:joinStep2";
 	}
+	
+	@ResponseBody
+	@RequestMapping(value="/emailDuplicationCheck", method = RequestMethod.POST)
+	public boolean emailDuplicationCheck(String emailAddress) {
+		if(memberService.getMemberByEmail(emailAddress) != null) {
+			return true;
+		}
+		return false;
+	}
+	
 	@RequestMapping(value="/joinStep1", method = RequestMethod.GET)
 	public String showJoinStep1() {
 		return "/join/joinStep1";
