@@ -1,12 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
 
-</body>
-</html>
+<div id="wsMainHeader">
+	<div class="container">
+		<h1 id="logo">
+			<a href="#">
+				COLLA
+				<img />
+			</a>
+		</h1>
+		
+		<div id="chatRoomInfo">
+			(주)질 수 없조 > 개발부서채팅방
+		</div>
+		
+		<div class="main-nav">
+		</div>
+	</div>
+</div>
