@@ -18,12 +18,21 @@ public class JoinInterceptor extends HandlerInterceptorAdapter{
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		HttpSession session = request.getSession();
-		EmailVerify emailVerify = service.getEmailVerify((String)session.getAttribute("emailAddress"));
+		
+//		String emailAddress = (String)session.getAttribute("emailAddress");
 		String verifyCode = (String)session.getAttribute("verifyCode");
-		if(verifyCode.equals(emailVerify.getVerifyCode())) {
+		String inputVerifyCode = (String)session.getAttribute("inputVerifyCode");
+		if(verifyCode.equals(inputVerifyCode)) {
 			return true;
 		}
 		return false;
+		
+//		EmailVerify emailVerify = service.getEmailVerify((String)session.getAttribute("emailAddress"));
+//		String verifyCode = (String)session.getAttribute("verifyCode");
+//		if(verifyCode.equals(emailVerify.getVerifyCode())) {
+//			return true;
+//		}
+//		return false;
 	}
 
 	@Override
