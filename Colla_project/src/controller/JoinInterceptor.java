@@ -17,13 +17,16 @@ public class JoinInterceptor extends HandlerInterceptorAdapter{
 	private MemberService service;
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
+		System.out.println("joinInterceptor 실행!");
 		HttpSession session = request.getSession();
 		EmailVerify emailVerify = service.getEmailVerify((String)session.getAttribute("emailAddress"));
 		String verifyCode = (String)session.getAttribute("verifyCode");
-		if(verifyCode.equals(emailVerify.getVerifyCode())) {
+		if(verifyCode!=null && verifyCode.equals(emailVerify.getVerifyCode())) {
 			return true;
+		}else {
+			response.sendRedirect("/joinStep2");
+			return false;
 		}
-		return false;
 	}
 
 	@Override
