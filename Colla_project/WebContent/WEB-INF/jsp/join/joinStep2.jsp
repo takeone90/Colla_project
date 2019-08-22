@@ -6,7 +6,9 @@
 <head>
 <meta charset="UTF-8">
 <title>joinStep2</title>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.js"
+  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+  crossorigin="anonymous"></script>
 <script type="text/javascript">
 $(function() {
 	$("#verifyCodeForm").on("submit", function() {
@@ -39,7 +41,7 @@ $(function() {
 		<%-- <input type="hidden" name="emailAddress" value="${param.emailAddress}"> --%>
 		<input type="button" onclick="location.href='testMail2'" value="인증 코드 재발송">
 		<span id="checkSentence"></span>
-		<input type="submit" onclick="location.href='joinStep3'" value="다음단계">
+		<input type="submit" value="다음단계">
 	</form>
 	<h3>
 		<c:if test='${param.joinStep2 eq "false"}'>

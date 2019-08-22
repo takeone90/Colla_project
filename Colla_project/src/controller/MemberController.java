@@ -44,7 +44,7 @@ public class MemberController {
 	public boolean checkVerifyCode(String verifycode, HttpSession session) {
 		String emailAddress = (String)session.getAttribute("emailAddress");
 		EmailVerify emailVerify = memberService.getEmailVerify(emailAddress);
-		System.out.println("emailAddress : "+emailAddress+"emailVerify : "+emailVerify);
+		System.out.println("emailAddress : "+emailAddress+" emailVerify : "+emailVerify);
 		if(verifycode.equals(emailVerify.getVerifyCode())) {
 			return true;
 		}
