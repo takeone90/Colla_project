@@ -57,6 +57,8 @@ public class MemberController {
 	@RequestMapping(value="/testMail", method = RequestMethod.GET)
 	public String testMail(String emailAddress, Model model, HttpSession session) {
 		session.setAttribute("emailAddress", emailAddress); //세션에 이메일 저장(30분)
+		
+		model.addAttribute(emailAddress);
 		Thread innerTest = new Thread(new inner(emailAddress, session));
 		innerTest.start();
 //		MailSend ms = new MailSend();

@@ -25,7 +25,7 @@ $(function() {
 				if(result) { //이메일 중복임
 					$("#checkSentence").text("이미 가입된 이메일입니다.");
 				} else { //이메일 중복 아님
-					location.href="${contextPath}/testMail";
+					location.href="${contextPath}/testMail?emailAddress="+${emailAddress};
 				}
 			}
 		}); //end ajax 
