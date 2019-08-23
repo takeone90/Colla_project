@@ -78,7 +78,6 @@ $(function() {
 		<span id="checkSentence"></span>
 		<input type="submit" value="인증 코드 발송">
 	</form>
-	<!-- <input type="button" onclick="location.href='joinStep2'" value="다음 단계"><br> -->
 	또는		
 	<button onclick="">구글 계정 연동</button>	
 	<button onclick="">네이버 계정 연동</button>

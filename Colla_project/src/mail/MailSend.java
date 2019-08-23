@@ -13,26 +13,12 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
  
 public class MailSend {
-//	public String setCode() {
-//		StringBuffer sb = new StringBuffer();
-//		int a = 0;
-//		for (int i = 0; i < 10; i++) {
-//			a = (int) (Math.random() * 122 + 1);
-//			if ((a >= 48 && a <= 57) || (a >= 65 && a <= 90) || (a >= 97 && a <= 122))
-//				sb.append((char) a);
-//			else
-//				i--;
-//		}
-//		return sb.toString();
-//	}
     public void MailSend(String emailAddress, String code) {
         Properties prop = System.getProperties();
         prop.put("mail.smtp.starttls.enable", "true");
         prop.put("mail.smtp.host", "smtp.gmail.com");
         prop.put("mail.smtp.auth", "true");
         prop.put("mail.smtp.port", "587");
-//        Authenticode code = new Authenticode();
-//        String code = setCode();
         Authenticator auth = new MailAuth();
         Session session = Session.getDefaultInstance(prop, auth);
         MimeMessage msg = new MimeMessage(session);
@@ -53,5 +39,3 @@ public class MailSend {
         }        
     }
 }
-
-
