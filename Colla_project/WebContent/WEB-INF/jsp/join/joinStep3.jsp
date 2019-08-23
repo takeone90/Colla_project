@@ -11,35 +11,62 @@
 <script type="text/javascript">
 $(function() { 
 	$("#name").on("blur", function() {
-		var name = $("#name").val();
-		var nameReg = /^{1, 10}$/;
-		result = nameReg.test(name);
-		if(!result) {
-			$("#checkName").text("이름은 한 글자 이상 열 글자 이하로 입력해주세요.");
-		} 
+		nameReg();
 	});
 	
 	$("#pw").on("blur", function() {
-		var pw = $("#pw").val();
-		var pwReg = /^{1, 20}$/;
-		result = pwReg.test(pw);
-		if(!result) {
-			$("#checkPw").text("비밀번호는 한 글자 이상 스무 글자 이하로 입력해주세요.");
-		}
+		pwReg();
 	});
 	
 	$("#joinMemberForm").on("submit", function() {
-		var result = $("#checkbox").is("checked");
-		alert(result);
-		if(!result) {
-			$("#checkCheckBox").text("약관 동의는 필수입니다.");
-			return false;
-		} else {
-			$("#checkCheckBox").text("");
+		var nameResult = nameReg();
+		var pwResult = pwReg()
+		var checkBoxResult = checkBox();
+		alert(nameResult + ", "+  pwResult + ", "+ checkBoxResult);
+		if(nameResult && pwResult && checkBoxResult){
+			alert("안녕");
+		}else{
 			return false;
 		}
+		alert("안녕");
 	});
-});
+}); //end onload
+
+
+function nameReg(){
+	var name = $("#name").val();
+	var nameReg = /^{1, 10}$/;
+	result = nameReg.test(name);
+	if(result) {
+		$("#checkName").text("");
+		return true;
+	}else{
+		$("#checkName").text("이름은 한 글자 이상 열 글자 이하로 입력해주세요.");
+		return false;
+	}
+}
+function pwReg(){
+	var pw = $("#pw").val();
+	var pwReg = /^{1, 20}$/;
+	result = pwReg.test(pw);
+	if(result) {
+		$("#checkPw").text("");
+		return true;
+	}else{
+		$("#checkPw").text("비밀번호는 한 글자 이상 스무 글자 이하로 입력해주세요.");
+		return false;
+	}
+}
+
+function checkBox(){
+	var result = $("#checkbox").is(":checked");
+	if(!result) {
+		$("#checkCheckBox").text("약관 동의는 필수입니다.");
+		return false;
+	} else {
+		return true;
+	}
+}
 
 </script>
 </head>
