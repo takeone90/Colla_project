@@ -49,9 +49,13 @@ public class WorkSpaceController {
 	
 	
 	@RequestMapping("/chatMain")
-	public String showChatMain() {
-		return "/chatting/chatMain";
+	public String showChatMain(HttpSession session,int wNum) {
+		session.setAttribute("currWnum", wNum); //워크스페이스 번호를 세션에 저장
+		return "/chatting/chatMain";//뒤에 ?붙여서 파라미터로 채팅방번호로!
 	}
+	
+	
+	
 	@RequestMapping("/addWs")
 	public String addWs(String wsName,String targetUser1,String targetUser2,HttpSession session) {
 		String userEmail = (String)session.getAttribute("userEmail");

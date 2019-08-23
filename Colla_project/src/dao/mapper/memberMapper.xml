@@ -29,7 +29,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="selectAllMemberByWnum" parameterType="int" resultMap="memberMap">
 		select m.m_num,m.m_email,m.m_name,m.m_pw,m.m_regDate,m.m_phone
 		from member m,workspace_member ws
-		where ws.m_num=#{wNum} and m.m_num=ws.m_num
+		where ws.w_num=#{wNum} and m.m_num=ws.m_num
 	</select>
 	
 	

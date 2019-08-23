@@ -48,11 +48,11 @@
 			<c:forEach items="${wsList}" var="ws">
 				<li class="ws">
 					<h4>
-						<a href="chatMain">${ws.name}</a>
+						<a href="chatMain?wNum="${ws.num}>${ws.name}</a>
 					</h4>
 					<div class="wsDetail">
 						<div class="wsChatList">
-							<p>chat List</p>
+							<p>채팅리스트</p>
 							<ul>
 								<li>개발팀</li>
 								<li>편집팀</li>
@@ -62,7 +62,7 @@
 						
 						
 						<div class="wsMember">
-						<p>member List</p>
+						<p>참여자 목록</p>
 						<ul>
 						<c:forEach items="${mList}" var="m"><!-- workspacemember 테이블 만들고 그 테이블리스트를 여기 넣는다 -->
 								<li>${m.name}</li>
