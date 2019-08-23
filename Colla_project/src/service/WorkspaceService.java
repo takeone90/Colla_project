@@ -14,7 +14,7 @@ import model.WsMember;
 @Service
 public class WorkspaceService {
 	@Autowired
-	private WorkspaceDao dao;
+	private WspaceDao dao;
 	@Autowired
 	private wsMemberDao wmDao;
 	public boolean addWorkspace(int mNum,String name) {
