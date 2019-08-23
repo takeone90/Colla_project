@@ -25,6 +25,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		from authority
 		where m_num = #{num}
 	</select>
+	<!-- ws 번호가 n 인 모든 멤버리스트 -->
+	<select id="selectAllMemberByWnum" parameterType="int" resultMap="memberMap">
+		select m.m_num,m.m_email,m.m_name,m.m_pw,m.m_regDate,m.m_phone
+		from member m,workspace_member ws
+		where ws.m_num=#{wNum} and m.m_num=ws.m_num
+	</select>
+	
 	
 	<resultMap type="member" id="memberMap">
 		<result column="m_num" property="num"/>

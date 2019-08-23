@@ -53,6 +53,12 @@ public class MemberService {
 		return dao.selectAuthoritesByNum(num);
 	}
 	
+	//workspace num으로 member List를 꺼내야한다.
+	public List<Member> getAllMemberByWnum(int wNum){
+		return dao.selectAllMemberByWnum(wNum);
+	}
+	
+	
 	public boolean addEmailVerify(EmailVerify emailVerify) {
 		if(dao.insertEmailVerify(emailVerify) > 0) {
 			return true;
