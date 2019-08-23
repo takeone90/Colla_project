@@ -2,6 +2,7 @@ package service;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import dao.WorkspaceDao;
@@ -9,6 +10,7 @@ import model.Workspace;
 
 @Service
 public class WorkspaceService {
+	@Autowired
 	private WorkspaceDao dao;
 	public boolean addWorkspace(int mNum,String name) {
 		boolean result = false;
