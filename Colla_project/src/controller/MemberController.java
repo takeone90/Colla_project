@@ -99,7 +99,7 @@ public class MemberController {
 			return false;
 		}	
 	}
-	
+	//회원가입 완료시키기
 	@RequestMapping(value="/joinMember", method = RequestMethod.POST)
 	public String joinMember(Member member) {
 		boolean result = memberService.addMember(member.getEmail(), member.getName(), member.getPw());
@@ -109,7 +109,7 @@ public class MemberController {
 			return "/join/joinStep3"; //실패 시 어디로 갈지는 정의 필요
 		}
 	}
-	
+	//인증코드 
 	public String setCode() {
 		StringBuffer sb = new StringBuffer();
 		int a = 0;

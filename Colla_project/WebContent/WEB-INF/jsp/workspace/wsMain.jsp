@@ -23,14 +23,16 @@
 </style>
 <script>
 	$(function(){
-// 		$("#addWsModal").hide();
 		$("#openModal").on("click",function(){
 			$("#addWsModal").fadeIn(300);
 		});
 		$("#closeModal").on("click",function(){
 			$("#addWsModal").fadeOut(300);
 			return false;
-		})
+		});
+		
+		
+		
 	});
 	
 </script>
@@ -89,16 +91,16 @@
 						<div class="row">
 							<h4>Workspace 이름</h4>
 							<div>
-								<input type="text" placeholder="workspace이름">
+								<input type="text" placeholder="workspace이름" name="wsName">
 							</div>
 						</div>
 						<div class="row">
 							<h4>멤버 초대</h4>
 							<div>
-								<input type="text" placeholder="초대할멤버1">
+								<input type="text" placeholder="초대할멤버1" name="targetUser1">
 							</div>
 							<div>
-								<input type="text" placeholder="초대할멤버2">
+								<input type="text" placeholder="초대할멤버2" name="targetUser2">
 							</div>
 							<div>
 								<a href="#">멤버추가버튼</a>
@@ -107,7 +109,7 @@
 					</div> <!-- end addWsInputWrap -->
 
 					<div>
-						<button>workspace만들기</button>
+						<button type="submit">workspace만들기</button>
 						<button id="closeModal">닫기</button>
 					</div>
 				</form>
