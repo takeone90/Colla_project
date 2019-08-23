@@ -23,7 +23,7 @@ $(function() {
 			console.log("1 ajax실행");
 			var data = $(this).serialize();
 			$.ajax({
-				url: "emailDuplicationCheck",
+				url: "checkEmailDuplication",
 				data: data,
 				type: "post",
 				dataType: "json",
@@ -31,7 +31,7 @@ $(function() {
 					if(result) { //이메일 중복임
 						$("#checkSentence").text("이미 가입된 이메일입니다.");
 					} else { //이메일 중복 아님
-						location.href="${contextPath}/testMail";
+						location.href="${contextPath}/sendVerifyMail";
 					}
 				}
 			}); //end ajax 
@@ -46,7 +46,7 @@ $(function() {
 			var data = $(this).parent().serialize();
 			console.log("2 ajax실행");
 			$.ajax({
-				url: "emailDuplicationCheck",
+				url: "checkEmailDuplication",
 				data: data,
 				type: "post",
 				dataType: "json",
@@ -78,7 +78,6 @@ $(function() {
 		<span id="checkSentence"></span>
 		<input type="submit" value="인증 코드 발송">
 	</form>
-	<!-- <input type="button" onclick="location.href='joinStep2'" value="다음 단계"><br> -->
 	또는		
 	<button onclick="">구글 계정 연동</button>	
 	<button onclick="">네이버 계정 연동</button>
