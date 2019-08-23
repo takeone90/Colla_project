@@ -6,13 +6,33 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>워크스페이스 메인</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <style>
-
+#addWsModal{
+	display : none;
+	position : fixed;
+	top : 30%;
+	left : 30%;
+	width : 500px;
+	height : 350px;
+	background-color: #e1e4e8;
+	text-align: center;
+	border-radius: 10px;
+}
 </style>
 <script>
-
+	$(function(){
+// 		$("#addWsModal").hide();
+		$("#openModal").on("click",function(){
+			$("#addWsModal").fadeIn(300);
+		});
+		$("#closeModal").on("click",function(){
+			$("#addWsModal").fadeOut(300);
+			return false;
+		})
+	});
+	
 </script>
 </head>
 <body>
@@ -51,7 +71,7 @@
 			</li>
 		</ul>
 		<div>
-			<a href="">워크스페이스 추가</a>
+			<button id="openModal">워크스페이스 추가</button>
 		</div>
 
 
@@ -88,61 +108,13 @@
 
 					<div>
 						<button>workspace만들기</button>
-						<button>닫기</button>
+						<button id="closeModal">닫기</button>
 					</div>
 				</form>
 			</div> <!-- end modalBody -->
 		</div><!-- end addWsModal -->
 	</div><!-- end wsBody -->
 	
-	
-	
-	
-	
-<!-- <div class="wrap"> -->
-<!--   <label for="modal" class="button">워크스페이스 추가</label> -->
-<!-- </div> -->
-<!-- <input type="checkbox" id="modal" class="hidden"> -->
-<!-- <div class="box_modal"> -->
-<!--   <label for="modal" class="closer">x</label> -->
-  
-<!--   <div id="addWsModal"> -->
-<!-- 			<div class="modalHead"> -->
-<!-- 				<h3 align="center">Workspace 만들기</h3> -->
-<!-- 			</div> -->
-<!-- 			<div class="modalBody"> -->
-<!-- 				<p align="center">Workspace를 만들고 멤버를 초대하세요</p> -->
-<!-- 				<form action="addWs" method="post"> -->
-<%-- 					<input type="hidden" value="${_csrf.token}" --%>
-<%-- 						name="${_csrf.parameterName}"> --%>
-<!-- 					<div class="addWsInputWrap"> -->
-<!-- 						<div class="row"> -->
-<!-- 							<h4 align="center">Workspace 이름</h4> -->
-<!-- 							<div align="center"> -->
-<!-- 								<input type="text" placeholder="workspace이름"> -->
-<!-- 							</div> -->
-<!-- 						</div> -->
-<!-- 						<div class="row"> -->
-<!-- 							<h4 align="center">멤버 초대</h4> -->
-<!-- 							<div align="center"> -->
-<!-- 								<input type="text" placeholder="초대할멤버1"> -->
-<!-- 							</div> -->
-<!-- 							<div align="center"> -->
-<!-- 								<input type="text" placeholder="초대할멤버2"> -->
-<!-- 							</div> -->
-<!-- 							<div align="center"> -->
-<!-- 								<a href="#">멤버추가버튼</a> -->
-<!-- 							</div> -->
-<!-- 						</div> -->
-<!-- 					</div> end addWsInputWrap -->
-
-<!-- 					<div align="center"> -->
-<!-- 						<button>workspace만들기</button> -->
-<!-- 						<button>닫기</button> -->
-<!-- 					</div>  -->
-<!-- 				</form> -->
-<!-- 			</div>end modalBody -->
-<!-- 		</div>end addWsModal -->
   
 
 </body>
