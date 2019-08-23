@@ -7,7 +7,9 @@
 <meta charset="UTF-8">
 <title>COLLA</title>
 
-
+<link rel="stylesheet" href="css/reset.css"/>
+<link rel="stylesheet" href="css/base.css"/>
+<link rel="stylesheet" href="css/headerMain.css"/>
 
 </head>
 <body>
