@@ -14,6 +14,16 @@
   crossorigin="anonymous"></script>
 </head>
 <body>
-	<h1>알람</h1>
+<!-- 
+	https://blog.naver.com/coding-/221400113716
+ -->
+	<h1>알림설정</h1>
+	<p>워크스페이스 초대 알림</p>
+	<p>공지 알림</p>
+	<p>게시글 댓글 알림</p>
+	
+	<input type="checkbox" id="wsAlarm">
+	<input type="checkbox" id="boardAlarm">
+	<input type="checkbox" id="replyAlarm">
 </body>
 </html>

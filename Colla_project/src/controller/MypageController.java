@@ -5,12 +5,14 @@ import java.security.Principal;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import model.Member;
+import service.LicenseService;
 import service.MemberService;
 
 @Controller
@@ -25,6 +27,8 @@ public class MypageController {
  
 	@Autowired
 	private MemberService memberService;
+	@Autowired
+	private LicenseService licenseService;
 	
 	@RequestMapping(value = "/myPageMainForm", method = RequestMethod.GET)
 	public String myPageMainForm(Model model, Principal principal, HttpSession session) {
@@ -50,7 +54,11 @@ public class MypageController {
 	}	
 	
 	@RequestMapping(value = "/myPageLicenseForm", method = RequestMethod.GET)
-	public String myPageLicenseForm() {
+	public String myPageLicenseForm(HttpSession session, Model model) {
+		String emailAddress = (String)session.getAttribute("emailAddress");
+		int mNum = memberService.getMemberByEmail(emailAddress).getNum();
+		model.addAttribute("useLicense",licenseService.getUseLicense(mNum));
+		model.addAttribute("licenseList", licenseService.getLicenseList(mNum));
 		return "/myPage/myPageLicense";
 	}
 	

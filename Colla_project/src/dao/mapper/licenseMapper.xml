@@ -2,14 +2,24 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="dao.LicenseDao">
 	<select id="selectLicense" resultMap="licenseMap">
+		select * from license where l_num = #{num}
+	</select>
+	<select id="selectUseLicense" resultMap="licenseMap">
+		select * 
+		from license 
+		where l_end_date >= sysdate and m_num = #{mNum}
 	</select>
 	<select id="selectAllLicense" resultMap="licenseMap">
+		select * 
+		from license
+		where m_num = #{num}
+		order by l_end_date desc
 	</select>
 	<resultMap type="license" id="licenseMap">
 		<result property="num" column="l_num"/>
 		<result property="mNum" column="m_num"/>
-		<result property="type" column="type"/>
+		<result property="type" column="l_type"/>
 		<result property="startDate" column="l_start_date"/>
-		<result property="startDate" column="l_end_date"/>
+		<result property="endDate" column="l_end_date"/>
 	</resultMap>
 </mapper>
