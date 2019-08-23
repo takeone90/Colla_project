@@ -6,9 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>COLLA</title>
-
-
-
+<link href="css/headerMain.css" type="stylesheet" rel="text/css">
 </head>
 <body>
 	<div id="wrap">
