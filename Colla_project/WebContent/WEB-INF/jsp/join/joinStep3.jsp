@@ -9,55 +9,48 @@
   integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
   crossorigin="anonymous"></script>
 <script type="text/javascript">
-$(function() { 
-	$("#name").on("blur", function() {
-		nameReg();
-	});
-	
+$(function() {
 	$("#pw").on("blur", function() {
 		pwReg();
 	});
-	
+	$("#name").on("blur", function() {
+		nameReg();
+	});
 	$("#joinMemberForm").on("submit", function() {
+		var pwResult = pwReg();
 		var nameResult = nameReg();
-		var pwResult = pwReg()
 		var checkBoxResult = checkBox();
 		alert(nameResult + ", "+  pwResult + ", "+ checkBoxResult);
 		if(nameResult && pwResult && checkBoxResult){
-			alert("안녕");
 		}else{
 			return false;
 		}
-		alert("안녕");
 	});
 }); //end onload
-
-
-function nameReg(){
-	var name = $("#name").val();
-	var nameReg = /^{1, 10}$/;
-	result = nameReg.test(name);
-	if(result) {
-		$("#checkName").text("");
-		return true;
-	}else{
-		$("#checkName").text("이름은 한 글자 이상 열 글자 이하로 입력해주세요.");
-		return false;
-	}
-}
 function pwReg(){
 	var pw = $("#pw").val();
-	var pwReg = /^{1, 20}$/;
+	var pwReg = /^[A-Za-z0-9]{1,20}$/;
 	result = pwReg.test(pw);
 	if(result) {
 		$("#checkPw").text("");
 		return true;
 	}else{
-		$("#checkPw").text("비밀번호는 한 글자 이상 스무 글자 이하로 입력해주세요.");
+		$("#checkPw").text("비밀번호는 1~20자리로 입력해주세요.");
 		return false;
 	}
 }
-
+function nameReg(){
+	var name = $("#name").val();
+	var nameReg = /^[\w\Wㄱ-ㅎㅏ-ㅣ가-힣]{2,20}$/;
+	result = nameReg.test(name);
+	if(result) {
+		$("#checkName").text("");
+		return true;
+	}else{
+		$("#checkName").text("이름은 2~10자리 이내로 입력해주세요.");
+		return false;
+	}
+}
 function checkBox(){
 	var result = $("#checkbox").is(":checked");
 	if(!result) {
@@ -67,7 +60,6 @@ function checkBox(){
 		return true;
 	}
 }
-
 </script>
 </head>
 <body>
