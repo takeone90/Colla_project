@@ -4,9 +4,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="dao.WorkspaceDao">
 	<insert id="insertWorkspace" parameterType="workspace">
+		<selectKey order="BEFORE" keyProperty="num" resultType="int">
+			select w_seq.nextval from dual
+		</selectKey>
 		insert into workspace(w_num,m_num,w_name)
-		values(w_seq.nextval,#{mNum},#{name})
+		values(#{num},#{mNum},#{name})
 	</insert>
+	<!-- wsMember 테이블에 insertWorkspace가 되면서 wNum과 mNum을 묶는 기능이 필요하다 -->
+	
 	<update id="updateWorkspace" parameterType="workspace">
 		update workspace set m_num=#{mNum},w_name=#{name}
 		where w_num=#{num}
@@ -20,6 +25,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="selectAllWorkspace" resultMap="workspaceMap">
 		select * from workspace
 	</select>
+	<select id="selectWnum"></select>
 	<resultMap type="workspace" id="workspaceMap">
 		<result column="w_num" property="num"/>
 		<result column="m_num" property="mNum"/>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.wsMemberDao">
+	<insert id="insertWsMember" parameterType="wsMember">
+		insert into workspace_member(wm_num,w_num,m_num)
+		values(wm_seq.nextval,#{wNum},#{mNum})
+	</insert>
+	<delete id="deleteWsMember">
+		delete workspace_member where w_num=#{wNum} and m_num=#{mNum}
+	</delete>
+	<select id="selectAllWsMember" resultMap="wsMemberMap">
+		select * from workspace_member
+	</select>
+	<select id="selectAllMnumByWnum" resultType="int" parameterType="int">
+		select m_num from workspace_member where w_num=#{wNum}
+	</select>
+	<select id="selectAllWnumByMnum" resultType="int" parameterType="int">
+		select w_num from workspace_member where m_num=#{mNum}
+	</select>
+	<resultMap type="wsMember" id="wsMemberMap">
+		<result column="wm_num" property="wmNum"/>
+		<result column="w_num" property="mNum"/>
+		<result column="w_num" property="wNum"/>
+	</resultMap>
+</mapper>
