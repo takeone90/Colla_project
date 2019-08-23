@@ -13,3 +13,4 @@ public interface wsMemberDao {
 	public List<Integer> selectAllMnumByWnum(int wNum);
 	public List<Integer> selectAllWnumByMnum(int mNum);
 }
+ 

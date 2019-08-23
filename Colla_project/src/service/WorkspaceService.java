@@ -34,7 +34,7 @@ public class WorkspaceService {
 		}
 		return result;
 		
-	}
+	}  
 	public void addWsMember() {
 		
 	}

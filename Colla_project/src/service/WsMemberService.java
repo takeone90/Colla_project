@@ -22,7 +22,7 @@ public class WsMemberService {
 		if(dao.insertWsMember(wsMember)>0) {
 			result = true;
 		}
-		return result;
+		return result; 
 	}
 	public boolean removeWsMember(int wNum,int mNum) {
 		boolean result = false;

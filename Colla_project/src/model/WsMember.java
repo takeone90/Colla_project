@@ -10,7 +10,7 @@ public class WsMember {
 	public void setWsNum(int wmNum) {
 		this.wmNum = wmNum;
 	}
-	public int getwNum() {
+	public int getwNum() { 
 		return wNum;
 	}
 	public void setwNum(int wNum) {
