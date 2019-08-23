@@ -84,16 +84,16 @@
 								<a href="#">멤버추가버튼</a>
 							</div>
 						</div>
-					</div> end addWsInputWrap
+					</div> <!-- end addWsInputWrap -->
 
 					<div>
 						<button>workspace만들기</button>
 						<button>닫기</button>
 					</div>
 				</form>
-			</div>end modalBody
-		</div>end addWsModal
-	</div>end wsBody
+			</div> <!-- end modalBody -->
+		</div><!-- end addWsModal -->
+	</div><!-- end wsBody -->
 	
 	
 	
@@ -144,7 +144,6 @@
 <!-- 			</div>end modalBody -->
 <!-- 		</div>end addWsModal -->
   
-</div>
-</div>
+
 </body>
 </html>
