@@ -50,7 +50,6 @@ public class MemberController {
 			ms.MailSend(emailAddress, tmpCode);
 			if(tmpCode != null) {
 				session.setAttribute("verifyCode", tmpCode);
-				System.out.println("인증 코드1 : "+tmpCode);
 			}
 		}
 	}
@@ -86,10 +85,7 @@ public class MemberController {
 	
 	@ResponseBody
 	@RequestMapping(value="/emailDuplicationCheck", method = RequestMethod.POST)
-	public boolean emailDuplicationCheck(String emailAddress, HttpSession session) {
-		System.out.println("emailAddress : "+emailAddress);
-		System.out.println("emailAddress : "+emailAddress);
-		
+	public boolean emailDuplicationCheck(String emailAddress, HttpSession session) {		
 		if(memberService.getMemberByEmail(emailAddress) != null) {
 			return true;
 		} else {
