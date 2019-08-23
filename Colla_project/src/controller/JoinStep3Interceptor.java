@@ -17,7 +17,6 @@ public class JoinStep3Interceptor extends HandlerInterceptorAdapter{
 	private MemberService service;
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
-		System.out.println("joinStep3Interceptor 실행!");
 		HttpSession session = request.getSession();
 		String verifyCode = (String)session.getAttribute("verifyCode");
 		String inputVerifyCode = (String)session.getAttribute("inputVerifyCode");
