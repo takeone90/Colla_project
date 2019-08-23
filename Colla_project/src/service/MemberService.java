@@ -69,4 +69,13 @@ public class MemberService {
 	public EmailVerify getEmailVerify(String email) {
 		return dao.selectEmailVerify(email);
 	}
+	
+	//CheckPass() 추가 
+	public boolean checkPass(String email, String pw) {
+		Member originMember = dao.selectMemberByEmail(email);
+		if(originMember.getPw().equals(pw)) {
+			return true;
+		}
+		return false;
+	}
 }

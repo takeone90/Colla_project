@@ -26,5 +26,4 @@
 		<property name="mapperInterface" value="dao.MemberDao"/>
 	</bean>
 	<context:component-scan base-package="service"></context:component-scan>
-	
 </beans>
