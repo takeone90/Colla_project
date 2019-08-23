@@ -14,23 +14,58 @@ request.setAttribute("contextPath", contextPath);
   crossorigin="anonymous"></script>
 <script type="text/javascript">
 $(function() {
-	$("#emailForm").on("submit", function() {
-		var data = $(this).serialize(); 
-		$.ajax({
-			url: "emailDuplicationCheck",
-			data: data,
-			type: "post",
-			dataType: "json",
-			success: function(result) {
-				if(result) { //이메일 중복임
-					$("#checkSentence").text("이미 가입된 이메일입니다.");
-				} else { //이메일 중복 아님
-					location.href="${contextPath}/testMail?emailAddress="+${emailAddress};
+	$("#emailForm").on("submit", function(e) {
+		e.preventDefault();
+		var emailAddress = $("#emailAddress").val(); 
+		if(emailAddress == "") {
+			$("#checkSentence").text("필수 정보입니다.");
+		} else {
+			console.log("1 ajax실행");
+			var data = $(this).serialize();
+			$.ajax({
+				url: "emailDuplicationCheck",
+				data: data,
+				type: "post",
+				dataType: "json",
+				success: function(result) {
+					if(result) { //이메일 중복임
+						$("#checkSentence").text("이미 가입된 이메일입니다.");
+					} else { //이메일 중복 아님
+						location.href="${contextPath}/testMail";
+					}
 				}
-			}
-		}); //end ajax 
+			}); //end ajax 
+		}
 		return false;
 	})
+	$("#emailAddress").on("blur", function() {
+		var emailAddress = $("#emailAddress").val();
+		if(emailAddress == "") {
+			$("#checkSentence").text("이메일을 입력해주세요.");
+		} else {
+			var data = $(this).parent().serialize();
+			console.log("2 ajax실행");
+			$.ajax({
+				url: "emailDuplicationCheck",
+				data: data,
+				type: "post",
+				dataType: "json",
+				success: function(result) {
+					if(result) { //이메일 중복임
+						$("#checkSentence").text("이미 가입된 이메일입니다.");
+					} else {
+						$("#checkSentence").text("멋진 이메일이네요!");
+					}
+				},
+				error: function(request, status, error) {
+					alert("request:"+request+"\n"
+							+"status:"+status+"\n"
+							+"error:"+error+"\n");
+				}
+			}); //end ajax
+		}
+		return false;
+	});
 }); //end onload
 </script>
 </head>
@@ -39,7 +74,7 @@ $(function() {
 	<form method="post" id="emailForm">
 		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 		EMAIL			
-		<input type="email" name="emailAddress" placeholder="example@c0lla.com">
+		<input type="email" name="emailAddress" id="emailAddress" placeholder="example@c0lla.com">
 		<span id="checkSentence"></span>
 		<input type="submit" value="인증 코드 발송">
 	</form>
@@ -47,6 +82,5 @@ $(function() {
 	또는		
 	<button onclick="">구글 계정 연동</button>	
 	<button onclick="">네이버 계정 연동</button>
-	
 </body>
 </html>

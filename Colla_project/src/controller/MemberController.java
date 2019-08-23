@@ -1,6 +1,7 @@
 package controller;
 
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.aspectj.apache.bcel.classfile.InnerClass;
@@ -55,10 +56,10 @@ public class MemberController {
 	}
 
 	@RequestMapping(value="/testMail", method = RequestMethod.GET)
-	public String testMail(String emailAddress, Model model, HttpSession session) {
-		session.setAttribute("emailAddress", emailAddress); //세션에 이메일 저장(30분)
-		
-		model.addAttribute(emailAddress);
+	public String testMail(HttpSession session) {
+//		session.setAttribute("emailAddress", emailAddress); //세션에 이메일 저장(30분)
+//		model.addAttribute(emailAddress);
+		String emailAddress = (String)session.getAttribute("emailAddress");
 		Thread innerTest = new Thread(new inner(emailAddress, session));
 		innerTest.start();
 //		MailSend ms = new MailSend();
@@ -85,11 +86,16 @@ public class MemberController {
 	
 	@ResponseBody
 	@RequestMapping(value="/emailDuplicationCheck", method = RequestMethod.POST)
-	public boolean emailDuplicationCheck(String emailAddress) {
+	public boolean emailDuplicationCheck(String emailAddress, HttpSession session) {
+		System.out.println("emailAddress : "+emailAddress);
+		System.out.println("emailAddress : "+emailAddress);
+		
 		if(memberService.getMemberByEmail(emailAddress) != null) {
 			return true;
+		} else {
+			session.setAttribute("emailAddress", emailAddress);
+			return false;
 		}
-		return false;
 	}
 	
 	@RequestMapping(value="/joinStep1", method = RequestMethod.GET)
