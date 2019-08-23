@@ -44,7 +44,7 @@ $(function() {
 		인증 코드 입력
 		<input type="text" name="inputVerifyCode" placeholder="인증 코드를 입력해주세요.">
 		<%-- <input type="hidden" name="emailAddress" value="${param.emailAddress}"> --%>
-		<input type="button" onclick="location.href='testMail2'" value="인증 코드 재발송">
+		<input type="button" onclick="location.href='resendVerifyMail'" value="인증 코드 재발송">
 		<span id="checkSentence"></span>
 		<input type="submit" value="다음단계">
 	</form>

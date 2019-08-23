@@ -20,7 +20,6 @@ $(function() {
 		var pwResult = pwReg();
 		var nameResult = nameReg();
 		var checkBoxResult = checkBox();
-		alert(nameResult + ", "+  pwResult + ", "+ checkBoxResult);
 		if(nameResult && pwResult && checkBoxResult){
 		}else{
 			return false;

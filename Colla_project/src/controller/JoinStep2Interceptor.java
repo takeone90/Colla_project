@@ -17,7 +17,6 @@ public class JoinStep2Interceptor extends HandlerInterceptorAdapter {
 	private MemberService service;
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
-		System.out.println("joinStep2Interceptor 실행!");
 		HttpSession session = request.getSession();
 		String emailAddress = (String)session.getAttribute("emailAddress");
 		if(emailAddress != null) {
