@@ -49,8 +49,8 @@ public class WorkSpaceController {
 	
 	
 	@RequestMapping("/chatMain")
-	public String showChatMain(HttpSession session,int wNum) {
-		session.setAttribute("currWnum", wNum); //워크스페이스 번호를 세션에 저장
+	public String showChatMain(HttpSession session) { //HttpSession session,int wNum
+//		session.setAttribute("currWnum", wNum); //워크스페이스 번호를 세션에 저장
 		return "/chatting/chatMain";//뒤에 ?붙여서 파라미터로 채팅방번호로!
 	}
 	
@@ -63,6 +63,6 @@ public class WorkSpaceController {
 		//workspace 생성
 		wService.addWorkspace(member.getNum(), wsName);
 		//targetUser들에게 초대메일 보내기
-		return "redirect:workpace";
+		return "redirect:workspace";
 	}
 }

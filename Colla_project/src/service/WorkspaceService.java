@@ -17,15 +17,12 @@ public class WorkspaceService {
 	private WorkspaceDao dao;
 	@Autowired
 	private wsMemberDao wmDao;
-	//workspace 의 w_num 이랑 wsMember 테이블의 w_num이랑 다르다.
-	//insertWorkspace가 되면서 wsMember 테이블에  wNum과 mNum을 묶는 기능이 필요하다
 	public boolean addWorkspace(int mNum,String name) {
 		boolean result = false;
 		Workspace ws = new Workspace();
 		ws.setmNum(mNum);
 		ws.setName(name);
-		if(dao.insertWorkspace(ws)>0) { //이때 ws에 wNum이 들어갈까?
-			//어떻게 w_num을 가져올까
+		if(dao.insertWorkspace(ws)>0) { 
 			WsMember wsMember = new WsMember();
 			wsMember.setmNum(mNum);
 			wsMember.setwNum(ws.getNum());
@@ -33,9 +30,6 @@ public class WorkspaceService {
 			result = true;
 		}
 		return result;
-		
-	}  
-	public void addWsMember() {
 		
 	}
 	public boolean modifyWorkspace(Workspace ws) {
