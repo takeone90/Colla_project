@@ -1,5 +1,9 @@
 package dao;
 
-public interface BoardDao {
+import java.util.List;
 
+import model.Board;
+
+public interface BoardDao {
+	public List<Board> selectAllBoardByWnum(int wNum);
 }
