@@ -14,10 +14,10 @@ public class ChatRoomController {
 	@Autowired
 	private ChatRoomService crService;
 	@RequestMapping("/addChat")
-	public String addChatRoom(String crName,String targetUser1,String targetUser2,HttpSession session) {
+	public String addChatRoom(int wNum,String crName,String targetUser1,String targetUser2,HttpSession session) {
 		Member member = (Member)session.getAttribute("user");
 		int mNum = member.getNum();
-		crService.addChatRoom(23, mNum, crName);//세션에 저장된 wNum, mNum 을가져와야한다.                          임시 테스트 workspace번호 23
+		crService.addChatRoom(wNum, mNum, crName);//세션에 저장된 wNum, mNum 을가져와야한다.                          
 		return "redirect:workspace";
 	}
 }
