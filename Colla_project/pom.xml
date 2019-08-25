@@ -185,7 +185,12 @@
 			<artifactId>mail</artifactId>
 			<version>1.4</version>
 		</dependency>
-
+		<!-- 히카리커넥션풀 -->
+		<dependency>
+			<groupId>com.zaxxer</groupId>
+			<artifactId>HikariCP</artifactId>
+			<version>2.4.6</version>
+		</dependency>
 
 	</dependencies>
 </project>
