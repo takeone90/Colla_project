@@ -3,7 +3,7 @@
 <div id="header">
 	<div class="container clearFix">
 		<h1 id="logo" class="floatleft">
-			<a href="/main"> <img src="img/COLLA_LOGO_200px.png" />
+			<a href="main"> <img src="img/COLLA_LOGO_200px.png" />
 			</a>
 		</h1>
 		<nav class="floatleft">
