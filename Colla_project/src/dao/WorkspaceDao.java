@@ -2,15 +2,12 @@ package dao;
 
 import java.util.List;
 
-import org.apache.ibatis.annotations.Param;
-
-import model.WsMember;
+import model.Workspace;
 
 public interface WorkspaceDao {
-	public int insertWsMember(WsMember wsMember);
-	public int deleteWsMember(@Param("wNum")int wNum,@Param("mNum")int mNum);
-	public List<WsMember> selectAllWsMember();
-	public List<Integer> selectAllMnumByWnum(int wNum);
-	public List<Integer> selectAllWnumByMnum(int mNum);
+	public int insertWorkspace(Workspace workspace);
+	public int updateWorkspace(Workspace workspace);
+	public int deleteWorkspace(int num);
+	public Workspace selectWorkspace(int num);
+	public List<Workspace> selectAllWorkspace();
 }
- 
