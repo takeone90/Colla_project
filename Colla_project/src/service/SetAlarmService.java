@@ -1,5 +1,8 @@
 package service;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,7 +15,6 @@ public class SetAlarmService {
 	@Autowired
 	SetAlarmDao setAlarmDao;
 	
-	//알람 설정
 	public boolean addSetAlarm(SetAlarm setAlarm) {
 		if(setAlarmDao.insertSetAlarm(setAlarm)>0) {
 			return true;
@@ -20,22 +22,8 @@ public class SetAlarmService {
 		return false;
 	}
 	
-	public boolean modifySetWsAlarm(int result, int mNum) {
-		if(setAlarmDao.updateSetWsAlarm(result,mNum)>0) {
-			return true;
-		}
-		return false;
-	}
-	
-	public boolean modifySetNoticeAlarm(int result, int mNum) {
-		if(setAlarmDao.updateSetNoticeAlarm(result,mNum)>0) {
-			return true;
-		}
-		return false;
-	}
-	
-	public boolean modifySetReplyAlarm(int result, int mNum) {
-		if(setAlarmDao.updateSetReplyAlarm(result,mNum)>0) {
+	public boolean modifySetAlarm(String type, int result,int mNum) {
+		if(setAlarmDao.updateSetAlarm(type,result,mNum)>0) {
 			return true;
 		}
 		return false;

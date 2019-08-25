@@ -9,23 +9,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</insert>
 	<update id="updateSetAlarm">
 		update setAlarm
-		set #{param1} = #{param2}
+		set ${param1} = #{param2}
 		where m_num = #{param3}
-	</update>
-	<update id="updateSetWsAlarm">
-		update setAlarm
-		set sa_workspace = #{param1}
-		where m_num = #{param2}
-	</update>
-	<update id="updateSetNoticeAlarm">
-		update setAlarm
-		set sa_notice = #{param1}
-		where m_num = #{param2}
-	</update>
-	<update id="updateSetReplyAlarm">
-		update setAlarm
-		set sa_reply = #{param1}
-		where m_num = #{param2}
 	</update>
 	<delete id="deleteSetAlarm">
 		delete
