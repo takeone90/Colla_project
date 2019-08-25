@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.SetAlarmDao">
+	<insert id="insertSetAlarm" parameterType="setAlarm">
+		insert into setAlarm 
+		values(#{num}, #{workspace}, #{notice}, #{reply});
+	</insert>
+	<update id="updateSetWsAlarm">
+		update setAlarm
+		set sa_workspace = #{param1}
+		where m_num = #{param2}
+	</update>
+	<update id="updateSetNoticeAlarm">
+		update setAlarm
+		set sa_notice = #{param1}
+		where m_num = #{param2}
+	</update>
+	<update id="updateSetReplyAlarm">
+		update setAlarm
+		set sa_reply = #{param1}
+		where m_num = #{param2}
+	</update>
+	<delete id="deleteSetAlarm">
+		delete
+		from setAlarm 
+		where m_num = #{num}
+	</delete>
+	<select id="selectSetAlarm" resultMap="setAlarmMap">
+		select *
+		from setAlarm
+		where m_num = #{num}
+	</select>
+	<resultMap type="setAlarm" id="setAlarmMap">
+		<result column="m_num" property="num"/>
+		<result column="sa_workspace" property="workspace"/>
+		<result column="sa_notice" property="notice"/>
+		<result column="sa_reply" property="reply"/>
+	</resultMap>
+</mapper>

@@ -1,6 +1,7 @@
 package controller;
 
 import java.security.Principal;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -10,18 +11,22 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import model.Member;
+import model.SetAlarm;
+import service.SetAlarmService;
 import service.LicenseService;
 import service.MemberService;
 
 @Controller
 public class MypageController {
 	// myPageMainForm(Model model, Principal principal, HttpSession session):String > 마이페이지 메인화면 (로그인한 멤버 정보 출력)
-	// myPageModifyForm(Model model, HttpSession session, String checkPass):String > 비밀번호 입력 화면
-	// myPageCheckPassForm(String pw, HttpSession session):String > 회원정보관리 화면
-	// myPageLicenseForm() 
-	// myPageAlarmForm()
+	// myPageCheckPassForm(String pw, HttpSession session):String > 비밀번호 입력 화면
+	// myPageModifyForm(Model model, HttpSession session, String checkPass):String > 회원정보관리 화면
+	// myPageLicenseForm(HttpSession session, Model model) : 라이선스 화면
+	// myPageAlarmForm(HttpSession session, Model model) : 알림 설정 화면
+	// modifysetAlarm(HttpSession session, int type,int result) : 알림 설정값 수정시 업데이트 로직
 	// myPageCheckPass(String pw, HttpSession session):String > 비밀번호 확인 로직
 	// modifyMember(Member member):String > 회원 정보 업데이트 로직
  
@@ -29,6 +34,8 @@ public class MypageController {
 	private MemberService memberService;
 	@Autowired
 	private LicenseService licenseService;
+	@Autowired
+	private SetAlarmService setAlarmService;
 	
 	@RequestMapping(value = "/myPageMainForm", method = RequestMethod.GET)
 	public String myPageMainForm(Model model, Principal principal, HttpSession session) {
@@ -63,8 +70,33 @@ public class MypageController {
 	}
 	
 	@RequestMapping(value = "/myPageAlarmForm", method = RequestMethod.GET)
-	public String myPageAlarmForm() {
+	public String myPageAlarmForm(HttpSession session, Model model) {
+		String emailAddress = (String)session.getAttribute("emailAddress");
+		int mNum = memberService.getMemberByEmail(emailAddress).getNum();
+		SetAlarm setAlarm = setAlarmService.getSetAlarm(mNum);
+		model.addAttribute("wsAlarm",setAlarm.getWorkspace());
+		model.addAttribute("boardAlarm",setAlarm.getNotice());
+		model.addAttribute("replyAlarm",setAlarm.getReply());
 		return "/myPage/myPageAlarm";
+	}
+	
+	@RequestMapping(value = "/modifysetAlarm", method = RequestMethod.GET)
+	@ResponseBody
+	public void modifysetAlarm(HttpSession session, int type,int result) {
+		//type > 0:워크스페이스 설정, 1:공지 설정, 2:댓글설정 
+		//result > 0:설정ON, 1:설정OFF
+		String emailAddress = (String)session.getAttribute("emailAddress");
+		int mNum = memberService.getMemberByEmail(emailAddress).getNum();
+		if(type==0) {
+			setAlarmService.modifySetWsAlarm(result,mNum);
+			System.out.println("워크스페이스 설정 수정");
+		}else if(type==1) {
+			setAlarmService.modifySetNoticeAlarm(result,mNum);
+			System.out.println("공지 설정 수정");
+		}else if(type==2) {
+			setAlarmService.modifySetReplyAlarm(result,mNum);
+			System.out.println("댓글 설정 수정");
+		}
 	}
 	
 	@RequestMapping(value = "/myPageCheckPass", method = RequestMethod.POST)

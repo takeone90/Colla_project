@@ -11,6 +11,7 @@
 		<config>WebContent/WEB-INF/spring/appServlet/app-context.xml</config>
 		<config>WebContent/WEB-INF/spring/security-context.xml</config>
 		<config>src/dao/mapper/licenseMapper.xml</config>
+		<config>src/dao/mapper/setAlarmMapper.xml</config>
 	</configs>
 	<autoconfigs>
 	</autoconfigs>
