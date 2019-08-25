@@ -15,6 +15,8 @@
   crossorigin="anonymous"></script>
 </head>
 <body>
+	<%@ include file="/WEB-INF/jsp/inc/headerWs.jsp"%>
+	<%@ include file="/WEB-INF/jsp/inc/navWs.jsp"%>
 	<h1>라이선스</h1>
 	회원님의 라이선스는 ${useLicense.endDate } 종료 예정입니다<br>
 	<button onclick="#">라이선스 연장</button>

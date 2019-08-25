@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>태권 워크스페이스</title>
+<title>태권 + 수빈 워크스페이스</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <style>
 #addWsModal{
@@ -31,8 +31,13 @@
 	text-align: center;
 	border-radius: 10px;
 }
+.wsDetail{
+display : none;
+}
 </style>
 <script>
+	var wNum;
+
 	$(function(){
 		$("#openWsModal").on("click",function(){
 			$("#addWsModal").fadeIn(300);
@@ -49,6 +54,13 @@
 			$("#addChatModal").fadeOut(300);
 			return false;
 		});
+		
+		//워크스페이스 하나 숨기고 닫기
+		$("#showWsDetail").on("click",function(){
+			wNum = $("#wNum").val(); //눌렀을때 wNum을 쿼리에서 쓸수있게됐다.
+			$(".wsDetail").toggle();
+		});
+		
 	});
 	
 </script>
@@ -64,12 +76,14 @@
 			<c:forEach items="${wsList}" var="ws">
 				<li class="ws">
 					<h4>${ws.name}</h4>
+					<button id="showWsDetail">워크스페이스 상세보기</button>
+					
 					<div class="wsDetail">
+						<input type="hidden" value="${ws.num}" id="wNum">
 						<div class="wsChatList">
 							<p>채팅리스트</p>
 							<ul>
 							<c:forEach items="${crList}" var="cr">
-							
 							<c:choose>
 								<c:when  test="${cr.crName eq '기본채팅방'}">
 									<li><a href="chatMain">${cr.crName}</a></li>
@@ -95,7 +109,7 @@
 						</div>
 					</div>
 					<div>
-						<a href="#">나가기</a>
+						<a href="#">워크스페이스 나가기</a>
 					</div>
 				</li>
 			</c:forEach>
