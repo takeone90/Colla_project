@@ -18,16 +18,72 @@ request.setAttribute("contextPath", contextPath);
 <script type="text/javascript">
 $(function() {
 	thisMonthCalendar();
+	
 	$("#addScheduleButton").on("click", function() {
 		$("#addScheduleForm").show("slow");
 	});
 	$("#close").on("click", function() {
 		$("#addScheduleForm").hide("slow");
 	});
-	$("#add").on("click", function() {
-		$("#addScheduleForm").hide("slow");
+	
+	$("#addScheduleForm").on("submit", function(e) {
+		e.preventDefault();
+		var data = $(this).serialize();
+// 		var mNum = $("").val();
+// 		var yearCalendarInt = checkBoxYear();
+// 		var annuallyInt = checkBoxAnnually();
+// 		var monthlyInt = checkBoxMonthly();
+// 		console.log(yearCalendarInt+" "+annuallyInt+" "+monthlyInt+" "+data);
+		$.ajax({
+			url: "addSchedule",
+			data: data,
+			type: "get",
+			dataType: "json",
+			success: function(result) {
+				if(result) {
+					alert("성공!");
+					$("#addScheduleForm").hide("slow");
+				} else {
+					alert("실패..");
+				}
+			},
+			error: function(request, status, error) {
+				alert("request:"+request+"\n"
+						+"status:"+status+"\n"
+						+"error:"+error+"\n");
+			}
+		}); //end ajax
+		return false;
 	});
 });
+
+function checkBoxYear() {
+	var result = $("#1").is(":checked");
+	alert(result);
+	if(result) {
+		return 1;
+	} else {
+		return 0;
+	}
+}
+function checkBoxAnnually() {
+	var result = $("#2").is(":checked");
+	alert(result);
+	if(result) {
+		return 1;
+	} else {
+		return 0;
+	}
+}
+function checkBoxMonthly() {
+	var result = $("#3").is(":checked");
+	alert(result);
+	if(result) {
+		return 1;
+	} else {
+		return 0;
+	}
+}
 
 var today = new Date();
 var date = new Date();
@@ -103,23 +159,23 @@ function thisMonthCalendar() {
 	<button onclick="nextYearCalendar()">내년</button>
 	<div id="calMonthBody"></div>
 		<form id="addScheduleForm" class="addScheduleModal">
-			제목<input type="text" name="title"><br>
+			<input type="hidden" name="mNum" id="mNum" value="1">
+			<input type="hidden" name="wNum" id="wNum" value="1">
+			제목<input type="text" name="title" id="title"><br>
 			기간
-			(시작날짜)<input type="date" name="startDate"><br>
-			(시작날짜)<input type="date" name="endDate"><br>
-			상세<textarea rows="5" cols="21" name="content"></textarea><br>
-			타입<select name="type">
+			(시작날짜)<input type="date" name="startDate" id="startDate"><br>
+			(시작날짜)<input type="date" name="endDate" id="endDate"><br>
+			상세<textarea rows="5" cols="21" name="content" id="content"></textarea><br>
+			타입<select name="type" id="">
 				<option value="project">프로젝트</option>
 				<option value="vacation">휴가</option>
 				<option value="event">행사</option>
 				</select><br>
-			<input type="checkbox" name="calCheckYear" value="CheckYear">연간 달력 표시<br>
-			
-			<label><input type="checkbox" name="calRepeat" value="repeatMonthly">매년 반복</label>
-			<label><input type="checkbox" name="calRepeat" value="repeatYearly">매월 반복</label><br>
-			
+			<label><input type="checkbox" name="yearCalendar" id="1">연간 달력 표시</label><br>
+			<label><input type="checkbox" name="annually" id="2">매년 반복</label>
+			<label><input type="checkbox" name="monthly" id="3">매월 반복</label><br>
 			<input type="button" id="close" value="닫기">
-			<input type="button" id="add" value="추가">
+			<input type="submit" id="add" value="추가">
 		</form>
 </body>
 </html>
