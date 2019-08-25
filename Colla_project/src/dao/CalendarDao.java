@@ -9,5 +9,4 @@ public interface CalendarDao {
 	public int deleteCalendar(int cNum);
 	public Calendar selectCalendar(int cNum);
 	public List<Calendar> selectAllCalendar();
-	public List<Calendar> selectAllCalendarByCnum(int cNum);
 }
