@@ -17,11 +17,8 @@
 			default-target-url="/workspace" 
 			login-processing-url="/login"
 			login-page="/loginForm" />
-		<security:logout 
-			invalidate-session="true"
-			logout-url="/logout" 
-			logout-success-url="/loginForm"
-			delete-cookies="JSESSIONID" />
+		<security:logout invalidate-session="true" logout-url="/logout" 
+			logout-success-url="/loginForm" delete-cookies="JSESSIONID" />
 	</security:http>
 	<security:authentication-manager>
 		<security:authentication-provider

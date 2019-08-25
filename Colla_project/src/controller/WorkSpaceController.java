@@ -11,9 +11,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import model.ChatRoom;
 import model.Member;
 import model.Workspace;
 import model.WsMember;
+import service.ChatRoomService;
 import service.MemberService;
 import service.WorkspaceService;
 import service.WsMemberService;
@@ -26,7 +28,8 @@ public class WorkSpaceController {
 	private WorkspaceService wService;
 	@Autowired
 	private WsMemberService wsService;
-	
+	@Autowired
+	private ChatRoomService crService;
 	@RequestMapping("/workspace")
 	public String showWsMain(Principal principal,HttpSession session,Model model) {
 		//Ws메인이 보여질때 시큐리티가 갖고있는 principal 정보의 userid 를 가져와서
@@ -36,16 +39,20 @@ public class WorkSpaceController {
 		//이메일을 기반으로 멤버하나를 찾는다
 		Member user = mService.getMemberByEmail(userEmail);
 		session.setAttribute("user", user);
+		//session에 user와 userEmail이 같이 담긴 상태
 		
 		List<Workspace> wsList = wService.getWsListByMnum(user.getNum());//유저 번호로 WS 들을 모두 꺼낸다.
-		int wNum = 1; //선택한 workspace 번호
+		model.addAttribute("wsList", wsList);
+		int wNum = 23; //선택한 workspace 번호 ->접혀있는 리스트를 누르면 나오게해야한다.                                  임시 테스트 workspace번호 23
 		List<Member> mList = mService.getAllMemberByWnum(wNum);
 		model.addAttribute("mList", mList);
-		model.addAttribute("wsList", wsList);
+		//해당 workspace의 모든 chatRoomList
+		List<ChatRoom> crList = crService.getAllChatRoomByWnum(wNum);
+		model.addAttribute("crList",crList);
 		return "/workspace/wsMain";
 	}
 	
-	//showSelectWs(int wNum) 핸들러 만들어야한다.
+	//workspace가 선택됐을때(클릭만 되도) workspace의 wNum을 넘기는 뭔가가 필요하다!! 0825 12:44 수빈
 	
 	
 	@RequestMapping("/chatMain")
