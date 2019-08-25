@@ -5,21 +5,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="dao.CalendarDao">
 	<insert id="insertCalendar" parameterType="calendar">
 		insert into calendar(cal_num, m_num, w_num, cal_type, cal_start_date, cal_end_date, cal_title, cal_content, cal_regDate, cal_annually, cal_monthly, cal_yearCalendar) 
-		values(cal_seq.nextval, #{mNum}, #{wNum}, #{type}, #{startDate}, #{endDate}, #{title}, #{content}, #{regDate}, #{annually}, #{monthly}, #{yearCalendar})
+		values(cal_seq.nextval, #{mNum}, #{wNum}, #{type}, #{startDate}, #{endDate}, #{title}, #{content}, sysdate, #{annually}, #{monthly}, #{yearCalendar})
 	</insert>
-<!-- 	<update id="updateCalendar" parameterType="calendar"> -->
-<!-- 		update calendar -->
-<!-- 		set  -->
-<!-- 		where cal_num=#{cNum} -->
-<!-- 	</update> -->
-<!-- 	<delete id="deleteCalendar" parameterType="int"> -->
-<!-- 	</delete> -->
-<!-- 	<select id="selectCalendar"> -->
-<!-- 	</select> -->
-<!-- 	<select id="selectAllCalendar"> -->
-<!-- 	</select> -->
-<!-- 	<select id="selectAllCalendarByCnum"> -->
-<!-- 	</select> -->
+	<update id="updateCalendar" parameterType="calendar">
+		update calendar
+		set m_num=#{mNum}, w_num=#{wNum}, cal_type=#{type}, cal_start_date=#{startDate}, cal_end_date=#{endDate}, cal_title=#{title}, cal_content=#{content}, cal_annually=#{annually}, cal_monthly=#{monthly}, cal_yearCalendar=#{yearCalendar} 
+		where cal_num=#{cNum}
+	</update>
+	<delete id="deleteCalendar" parameterType="int">
+		delete calendar
+		where cal_num=#{cNum}
+	</delete>
+	<select id="selectCalendar" parameterType="int" resultMap="calendarMap">
+		select * from calendar where cal_num=#{cNum}
+	</select>
+	<select id="selectAllCalendar" resultMap="calendarMap">
+		select * from calendar
+	</select>
 	<resultMap type="calendar" id="calendarMap">
 		<result column="cal_num" property="cNum"/>
 		<result column="m_num" property="mNum"/>
