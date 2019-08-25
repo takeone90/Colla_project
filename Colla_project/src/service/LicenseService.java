@@ -22,6 +22,7 @@ public class LicenseService {
 	}
 	
 	public List<License> getLicenseList(int mNum){
+		System.out.println(licenseDao.selectAllLicense(mNum));
 		return licenseDao.selectAllLicense(mNum);
 	}
 	
