@@ -3,32 +3,32 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="dao.CalendarDao">
-	<insert id="insertCalendar">
-		insert into calendar 
-		values(cal_seq.nextval, #{}, #{}, #{}, #{}, #{}, #{}, #{}, #{}, )
-	</insert>
-	<update id="updateCalendar">
-	</update>
-	<delete id="deleteCalendar">
-	</delete>
-	<select id="selectCalendar">
-	</select>
-	<select id="selectAllCalendar">
-	</select>
-	<select id="selectAllCalendarByCnum">
-	</select>
-	<resultMap type="calendar" id="calendarMap">
-		<result column="cal_num" property=""/>
-		<result column="m_num" property=""/>
-		<result column="w_num" property=""/>
-		<result column="cal_type" property=""/>
-		<result column="cal_start_date" property=""/>
-		<result column="cal_end_date" property=""/>
-		<result column="cal_title" property=""/>
-		<result column="cal_content" property=""/>
-		<result column="cal_regDate" property=""/>
-		<result column="cal_annually" property=""/>
-		<result column="cal_monthly" property=""/>
-		<result column="cal_yearCalendar" property=""/>
-	</resultMap>
+<!-- 	<insert id="insertCalendar"> -->
+<!-- 		insert into calendar  -->
+<!-- 		values(cal_seq.nextval, #{}, #{}, #{}, #{}, #{}, #{}, #{}, #{}, ) -->
+<!-- 	</insert> -->
+<!-- 	<update id="updateCalendar"> -->
+<!-- 	</update> -->
+<!-- 	<delete id="deleteCalendar"> -->
+<!-- 	</delete> -->
+<!-- 	<select id="selectCalendar"> -->
+<!-- 	</select> -->
+<!-- 	<select id="selectAllCalendar"> -->
+<!-- 	</select> -->
+<!-- 	<select id="selectAllCalendarByCnum"> -->
+<!-- 	</select> -->
+<!-- 	<resultMap type="calendar" id="calendarMap"> -->
+<!-- 		<result column="cal_num" property=""/> -->
+<!-- 		<result column="m_num" property=""/> -->
+<!-- 		<result column="w_num" property=""/> -->
+<!-- 		<result column="cal_type" property=""/> -->
+<!-- 		<result column="cal_start_date" property=""/> -->
+<!-- 		<result column="cal_end_date" property=""/> -->
+<!-- 		<result column="cal_title" property=""/> -->
+<!-- 		<result column="cal_content" property=""/> -->
+<!-- 		<result column="cal_regDate" property=""/> -->
+<!-- 		<result column="cal_annually" property=""/> -->
+<!-- 		<result column="cal_monthly" property=""/> -->
+<!-- 		<result column="cal_yearCalendar" property=""/> -->
+<!-- 	</resultMap> -->
 </mapper>
