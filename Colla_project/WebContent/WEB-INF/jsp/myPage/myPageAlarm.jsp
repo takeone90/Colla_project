@@ -74,7 +74,7 @@
 		//result > 0:설정ON, 1:설정OFF
 		console.log("ajax입성");
 		$.ajax({
-			url : "modifysetAlarm",
+			url : "testmodifysetAlarm",
 			data : {"type":type,"result":result},
 			type : "get",
 			dataType : "json"
