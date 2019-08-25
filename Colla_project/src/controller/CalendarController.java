@@ -22,4 +22,9 @@ public class CalendarController {
 		return "/calendar/calSearchList";
 	}
 	
+	@RequestMapping(value="/addSchedule")
+	public String addSchedule() {
+		
+		return "";
+	}
 }

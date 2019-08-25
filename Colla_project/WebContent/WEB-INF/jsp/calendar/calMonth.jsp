@@ -16,8 +16,6 @@ request.setAttribute("contextPath", contextPath);
   integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
   crossorigin="anonymous"></script>
 <script type="text/javascript">
-var numOfWeekRow;
-var firstDayOfWeek;
 $(function() {
 	thisMonthCalendar();
 	$("#addScheduleButton").on("click", function() {
@@ -30,9 +28,9 @@ $(function() {
 		$("#addScheduleForm").hide("slow");
 	});
 });
+
 var today = new Date();
 var date = new Date();
-
 function preMonthCalendar() {
 	today = new Date(today.getFullYear(), today.getMonth()-1, today.getDate());
 	thisMonthCalendar();
@@ -54,9 +52,9 @@ function thisMonthCalendar() {
 	var lastDay = new Date(today.getFullYear(), today.getMonth()+1, 0);
 	var calMonthTitle = $("#calMonthTitle");
 	calMonthTitle.html(today.getFullYear()+"년 "+(today.getMonth()+1)+"월");
-	firstDayOfWeek = firstDay.getDay();
+	var firstDayOfWeek = firstDay.getDay();
 	var lastDayDate = lastDay.getDate();
-	numOfWeekRow = Math.ceil((lastDayDate+firstDayOfWeek)/7);
+	var numOfWeekRow = Math.ceil((lastDayDate+firstDayOfWeek)/7);
 	var calendar = "<table border = '1'>";
 	calendar += "<tr>";
 	calendar += "<th>일</th>";

@@ -13,7 +13,7 @@ public interface MemberDao {
 	public Member selectMemberByEmail(String email);
 	public List<Member> selectAll();
 	public List<String> selectAuthoritesByNum(int num);
-	
+	public List<Member> selectAllMemberByWnum(int wNum);
 	public int insertEmailVerify(EmailVerify emailVerify);
 	public int updateEmailVerify(EmailVerify emailVerify);
 	public EmailVerify selectEmailVerify(String email);

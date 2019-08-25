@@ -25,6 +25,17 @@
 		<property name="sqlSessionFactory" ref="sqlSessionFactory"/>
 		<property name="mapperInterface" value="dao.MemberDao"/>
 	</bean>
+	<bean id="workspaceDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+		<property name="mapperInterface" value="dao.WorkspaceDao"/>
+	</bean>
+	<bean id="wsMemberDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+		<property name="mapperInterface" value="dao.wsMemberDao"/>
+	</bean>
+	<bean id="licenseDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+		<property name="mapperInterface" value="dao.LicenseDao"/>
+	</bean>
 	<context:component-scan base-package="service"></context:component-scan>
-	
 </beans>
