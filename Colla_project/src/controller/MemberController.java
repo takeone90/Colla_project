@@ -54,7 +54,7 @@ public class MemberController {
 		return "/join/joinStep3";
 	}
 	
-	@RequestMapping(value="/loginForm", method = RequestMethod.GET)
+	@RequestMapping(value="/loginForm")
 	public String showLoginForm() {
 		return "/login/loginForm";
 	}
@@ -110,6 +110,7 @@ public class MemberController {
 		}
 	}
 	
+	
 	public String setCode() {
 		StringBuffer sb = new StringBuffer();
 		int a = 0;
@@ -123,6 +124,8 @@ public class MemberController {
 		return sb.toString();
 	}
 
+	
+	//메일발송과 화면전환 처리를 위한 스레드 
 	public class inner implements Runnable {
 		String emailAddress;
 		HttpSession session;

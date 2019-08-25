@@ -6,7 +6,7 @@ import org.apache.ibatis.annotations.Param;
 
 import model.WsMember;
 
-public interface wsMemberDao {
+public interface WsMemberDao {
 	public int insertWsMember(WsMember wsMember);
 	public int deleteWsMember(@Param("wNum")int wNum,@Param("mNum")int mNum);
 	public List<WsMember> selectAllWsMember();

@@ -6,14 +6,14 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import dao.wsMemberDao;
+import dao.WsMemberDao;
 import model.Workspace;
 import model.WsMember;
 
 @Service
 public class WsMemberService {
 	@Autowired
-	private wsMemberDao dao;
+	private WsMemberDao dao;
 	public boolean addWsMember(int wNum,int mNum) {
 		boolean result = false;
 		WsMember wsMember = new WsMember();
