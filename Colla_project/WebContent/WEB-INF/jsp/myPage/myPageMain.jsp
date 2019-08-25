@@ -8,14 +8,18 @@
 	String contextPath = request.getContextPath();
 	request.setAttribute("contextPath", contextPath);
 %>
-<title>Insert title here</title>
+<title>마이페이지 메인</title>
 <script src="https://code.jquery.com/jquery-3.4.1.js"
   integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
   crossorigin="anonymous"></script>
 </head>
 <body>
+	<%@ include file="/WEB-INF/jsp/inc/headerWs.jsp"%>
+	<%@ include file="/WEB-INF/jsp/inc/navWs.jsp"%>
 	<h1>마이페이지메인</h1>
-	<img src="">
+	<form action="" method="post" enctype="multipart/form-data">
+		<input type="file" name="profileImg">
+	</form>
 	<p>이메일 : ${member.email}</p>
 	<p>이름 : ${member.name}</p>
 	<p>전화번호 : ${member.phone}</p>
