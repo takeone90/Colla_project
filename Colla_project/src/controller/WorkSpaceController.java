@@ -2,7 +2,9 @@ package controller;
 
 import java.security.Principal;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -40,15 +42,26 @@ public class WorkSpaceController {
 		Member user = mService.getMemberByEmail(userEmail);
 		session.setAttribute("user", user);
 		//session에 user와 userEmail이 같이 담긴 상태
-		
+		List<Map<String, Object>> workspaceList = new ArrayList<Map<String,Object>>();
 		List<Workspace> wsList = wService.getWsListByMnum(user.getNum());//유저 번호로 WS 들을 모두 꺼낸다.
-		model.addAttribute("wsList", wsList);
-		int wNum = 23; //선택한 workspace 번호 ->접혀있는 리스트를 누르면 나오게해야한다.                                  임시 테스트 workspace번호 23
-		List<Member> mList = mService.getAllMemberByWnum(wNum);
-		model.addAttribute("mList", mList);
-		//해당 workspace의 모든 chatRoomList
-		List<ChatRoom> crList = crService.getAllChatRoomByWnum(wNum);
-		model.addAttribute("crList",crList);
+		for(int i = 0;i<wsList.size();i++) {
+			int wsNum = wsList.get(i).getNum();
+			Map<String, Object> wsMap = new HashMap<String, Object>();
+			wsMap.put("wsInfo", wsList.get(i));
+			wsMap.put("crList", crService.getAllChatRoomByWnum(wsNum));
+			wsMap.put("mList", mService.getAllMemberByWnum(wsNum));
+			workspaceList.add(wsMap);
+		}
+		
+//		model.addAttribute("wsList", wsList);
+//		int wNum = 23; //선택한 workspace 번호 ->접혀있는 리스트를 누르면 나오게해야한다.                                  임시 테스트 workspace번호 23
+//		List<Member> mList = mService.getAllMemberByWnum(wNum);
+//		model.addAttribute("mList", mList);
+//		//해당 workspace의 모든 chatRoomList
+//		List<ChatRoom> crList = crService.getAllChatRoomByWnum(wNum);
+//		model.addAttribute("crList",crList);
+		model.addAttribute("workspaceList", workspaceList);
+//		System.out.println(workspaceList);
 		return "/workspace/wsMain";
 	}
 	

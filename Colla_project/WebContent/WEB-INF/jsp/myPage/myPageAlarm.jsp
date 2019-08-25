@@ -43,7 +43,7 @@
 				$(".toggleFG:eq(" + i + ")").css('left', 40);
 				$(".toggleBG:eq(" + i + ")").css('background', '#CCCCCC');
 			}
-		}
+		};		
 
 		//토글 버튼 클릭 시  on/off
 		for (var m = 0; m < 3; m++) {

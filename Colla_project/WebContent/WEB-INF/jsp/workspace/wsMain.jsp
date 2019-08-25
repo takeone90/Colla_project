@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>워크스페이스 메인</title>
+<title>수빈 워크스페이스</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <style>
 #addWsModal{
@@ -31,10 +31,13 @@
 	text-align: center;
 	border-radius: 10px;
 }
+.wsDetail{
+display : none;
+}
 </style>
 <script>
 	$(function(){
-		$("#openWsModal").on("click",function(){
+		$(".openWsModal").on("click",function(){
 			$("#addWsModal").fadeIn(300);
 		});
 		$("#closeWsModal").on("click",function(){
@@ -42,13 +45,21 @@
 			return false;
 		});
 		
-		$("#openChatModal").on("click",function(){
+		$(".openChatModal").on("click",function(){
+			var wNum = $(this).attr("data-wnum");
+			$("#addCrWnum").val(wNum); //채팅방 추가모달에 숨어있는 addCrWnum 부분에 wNum담기
 			$("#addChatModal").fadeIn(300);
 		});
 		$("#closeChatModal").on("click",function(){
 			$("#addChatModal").fadeOut(300);
 			return false;
 		});
+		
+		//워크스페이스 하나 숨기고 닫기
+		$(".showWsDetail").on("click",function(){
+			$(".wsDetail").toggle();
+		});
+		
 	});
 	
 </script>
@@ -61,15 +72,16 @@
 		<h3>Workspace List</h3>
 		<ul>
 		
-			<c:forEach items="${wsList}" var="ws">
+			<c:forEach items="${workspaceList}" var="ws">
 				<li class="ws">
-					<h4>${ws.name}</h4>
+					<h4>${ws.wsInfo.name}</h4>
+					<button class="showWsDetail">워크스페이스 상세보기</button> <!-- 누르면 ws.wsInfo.num인 wsDetail만 열려야한다 -->
+					
 					<div class="wsDetail">
 						<div class="wsChatList">
 							<p>채팅리스트</p>
 							<ul>
-							<c:forEach items="${crList}" var="cr">
-							
+							<c:forEach items="${ws.crList}" var="cr">
 							<c:choose>
 								<c:when  test="${cr.crName eq '기본채팅방'}">
 									<li><a href="chatMain">${cr.crName}</a></li>
@@ -80,7 +92,7 @@
 							</c:choose>
 								
 							</c:forEach>
-								<button id="openChatModal"> 채팅방 추가(+)</button>
+								<button class="openChatModal" data-wnum="${ws.wsInfo.num}"> 채팅방 추가(+)</button>
 							</ul>
 						</div>
 						
@@ -88,21 +100,21 @@
 						<div class="wsMember">
 						<p>참여자 목록</p>
 						<ul>
-						<c:forEach items="${mList}" var="m"><!-- workspacemember 테이블 만들고 그 테이블리스트를 여기 넣는다 -->
+						<c:forEach items="${ws.mList}" var="m"><!-- workspacemember 테이블 만들고 그 테이블리스트를 여기 넣는다 -->
 							<li>${m.name}</li>
 						</c:forEach>
 						</ul>
 						</div>
 					</div>
 					<div>
-						<a href="#">나가기</a>
+						<a href="#">워크스페이스 나가기</a>
 					</div>
 				</li>
 			</c:forEach>
 			
 		</ul>
 		<div>
-			<button id="openWsModal">워크스페이스 추가</button>
+			<button class="openWsModal">워크스페이스 추가</button>
 		</div>
 		<!-- 임시로 만든 로그아웃버튼 -->
 		<div>
@@ -159,6 +171,7 @@
 			<div class="modalBody">
 				<p>채팅방을 만들고 멤버를 초대하세요</p>
 				<form action="addChat" method="post">
+					워크스페이스 번호 : <input type="text" id="addCrWnum" name="wNum">
 					<input type="hidden" value="${_csrf.token}" name="${_csrf.parameterName}">
 					<div class="addChatInputWrap">
 						<div class="row">
