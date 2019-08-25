@@ -17,7 +17,9 @@
 	<%@ include file="/WEB-INF/jsp/inc/headerWs.jsp"%>
 	<%@ include file="/WEB-INF/jsp/inc/navWs.jsp"%>
 	<h1>마이페이지메인</h1>
-	<img src="">
+	<form action="" method="post" enctype="multipart/form-data">
+		<input type="file" name="profileImg">
+	</form>
 	<p>이메일 : ${member.email}</p>
 	<p>이름 : ${member.name}</p>
 	<p>전화번호 : ${member.phone}</p>

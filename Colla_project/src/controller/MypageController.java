@@ -38,24 +38,23 @@ public class MypageController {
 	private LicenseService licenseService;
 	@Autowired
 	private SetAlarmService setAlarmService;
-
+	
 	@RequestMapping(value = "/myPageMainForm", method = RequestMethod.GET)
-	public String myPageMainForm(Model model, Principal principal, HttpSession session) {
-		String emailAddress = principal.getName();
-		session.setAttribute("emailAddress", emailAddress);
-		model.addAttribute("member", memberService.getMemberByEmail(emailAddress));
+	public String myPageMainForm(Model model, HttpSession session) {
+		Member member = memberService.getMemberByEmail((String)session.getAttribute("userEmail"));
+		model.addAttribute("member", member);
 		return "/myPage/myPageMain";
 	}
 
 	@RequestMapping(value = "/myPageCheckPassForm", method = RequestMethod.GET)
-	public String myPageCheckPassForm(String pw, HttpSession session) {
+	public String myPageCheckPassForm() {
 		return "/myPage/myPageCheckPass";
 	}
 
 	@RequestMapping(value = "/myPageModifyForm", method = RequestMethod.GET)
 	public String myPageModifyForm(Model model, HttpSession session, String checkPass) {
-		String emailAddress = (String) session.getAttribute("emailAddress");
-		model.addAttribute("member", memberService.getMemberByEmail(emailAddress));
+		Member member = memberService.getMemberByEmail((String)session.getAttribute("userEmail"));
+		model.addAttribute("member", member); 
 		if (checkPass != null && checkPass.equals("fail")) {
 			return "/myPage/myPageModifyForm?checkPass=fail";
 		}
@@ -64,65 +63,45 @@ public class MypageController {
 
 	@RequestMapping(value = "/myPageLicenseForm", method = RequestMethod.GET)
 	public String myPageLicenseForm(HttpSession session, Model model) {
-		String emailAddress = (String) session.getAttribute("emailAddress");
-		int mNum = memberService.getMemberByEmail(emailAddress).getNum();
-		model.addAttribute("useLicense", licenseService.getUseLicense(mNum));
-		model.addAttribute("licenseList", licenseService.getLicenseList(mNum));
+		Member member = memberService.getMemberByEmail((String)session.getAttribute("userEmail"));
+		model.addAttribute("member", member);
+		model.addAttribute("useLicense", licenseService.getUseLicense(member.getNum()));
+		model.addAttribute("licenseList", licenseService.getLicenseList(member.getNum()));
 		return "/myPage/myPageLicense";
 	}
 
 	@RequestMapping(value = "/myPageAlarmForm", method = RequestMethod.GET)
 	public String myPageAlarmForm(HttpSession session, Model model) {
-		String emailAddress = (String) session.getAttribute("emailAddress");
-		int mNum = memberService.getMemberByEmail(emailAddress).getNum();
-		SetAlarm setAlarm = setAlarmService.getSetAlarm(mNum);
+		Member member = memberService.getMemberByEmail((String)session.getAttribute("userEmail"));
+		model.addAttribute("member", member);
+		SetAlarm setAlarm = setAlarmService.getSetAlarm(member.getNum());
 		model.addAttribute("wsAlarm", setAlarm.getWorkspace());
 		model.addAttribute("boardAlarm", setAlarm.getNotice());
 		model.addAttribute("replyAlarm", setAlarm.getReply());
 		return "/myPage/myPageAlarm";
 	}
+	
 
 	@RequestMapping(value = "/modifysetAlarm", method = RequestMethod.GET)
 	@ResponseBody
 	public void modifysetAlarm(HttpSession session, int type, int result) {
 		// type > 0:워크스페이스 설정, 1:공지 설정, 2:댓글설정
 		// result > 0:설정ON, 1:설정OFF
-		String emailAddress = (String) session.getAttribute("emailAddress");
-		int mNum = memberService.getMemberByEmail(emailAddress).getNum();
+		Member member = memberService.getMemberByEmail((String)session.getAttribute("userEmail"));
+		String typeStr = null;
 		if (type == 0) {
-			setAlarmService.modifySetWsAlarm(result, mNum);
-			System.out.println("워크스페이스 설정 수정");
+			typeStr = "SA_WORKSPACE"; 
 		} else if (type == 1) {
-			setAlarmService.modifySetNoticeAlarm(result, mNum);
-			System.out.println("공지 설정 수정");
+			typeStr = "SA_NOTICE";
 		} else if (type == 2) {
-			setAlarmService.modifySetReplyAlarm(result, mNum);
-			System.out.println("댓글 설정 수정");
+			typeStr = "SA_REPLY";
 		}
-	}
-	
-	@RequestMapping(value = "/testmodifysetAlarm", method = RequestMethod.GET)
-	@ResponseBody
-	public void testmodifysetAlarm(HttpSession session, int type, int result) {
-		// type > 0:워크스페이스 설정, 1:공지 설정, 2:댓글설정
-		// result > 0:설정ON, 1:설정OFF
-		String emailAddress = (String) session.getAttribute("emailAddress");
-		int mNum = memberService.getMemberByEmail(emailAddress).getNum();
-		if (type == 0) {
-			setAlarmService.modifySetAlarm("SA_WORKSPACE",result, mNum);
-			System.out.println("워크스페이스 설정 수정");
-		} else if (type == 1) {
-			setAlarmService.modifySetAlarm("SA_NOTICE",result, mNum);
-			System.out.println("공지 설정 수정");
-		} else if (type == 2) {
-			setAlarmService.modifySetAlarm("SA_REPLY",result, mNum);
-			System.out.println("댓글 설정 수정");
-		}
+		setAlarmService.modifySetAlarm(typeStr, result, member.getNum());
 	}
 
 	@RequestMapping(value = "/myPageCheckPass", method = RequestMethod.POST)
 	public String myPageCheckPass(String pw, HttpSession session) {
-		String emailAddress = (String) session.getAttribute("emailAddress");
+		String emailAddress = (String)session.getAttribute("userEmail");
 		boolean result = memberService.checkPass(emailAddress, pw);
 		if (result) { // 비밀번호 일치
 			return "redirect:myPageModifyForm";
@@ -132,10 +111,8 @@ public class MypageController {
 	}
 
 	@RequestMapping(value = "/modifyMember", method = RequestMethod.POST)
-	public String modifyMember(Member member) {
-		Member tmpMember = memberService.getMemberByEmail(member.getEmail());
-		member.setNum(tmpMember.getNum());
-		System.out.println(member);
+	public String modifyMember(Member member, HttpSession session) {
+		member.setNum(((Member)session.getAttribute("user")).getNum());
 		if (memberService.modifyMember(member)) {
 			return "redirect:myPageMainForm";
 		} else {
