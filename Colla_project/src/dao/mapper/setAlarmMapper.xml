@@ -7,10 +7,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		insert into setAlarm 
 		values(#{num}, #{workspace}, #{notice}, #{reply});
 	</insert>
-	<update id="updateSetAlarm">
+	<update id="updateSetAlarm" parameterType="map">
 		update setAlarm
-		set #{param1} = #{param2}
-		where m_num = #{param3}
+		set ${type} = #{result}
+		where m_num = #{mNum}
 	</update>
 	<update id="updateSetWsAlarm">
 		update setAlarm
