@@ -51,5 +51,9 @@
 		<property name="sqlSessionFactory" ref="sqlSessionFactory"/>
 		<property name="mapperInterface" value="dao.ChatRoomDao"/>
 	</bean>
+	<bean id="calendarDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+		<property name="mapperInterface" value="dao.CalendarDao"/>
+	</bean>
 	<context:component-scan base-package="service"></context:component-scan>
 </beans>
