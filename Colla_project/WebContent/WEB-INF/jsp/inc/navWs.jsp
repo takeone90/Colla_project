@@ -4,7 +4,9 @@
 <div id="wsNav">
 	<div>
 		<div>
-			<img alt="" src="">
+			<a href="myPageMainForm">
+				<img alt="나의 프로필 사진" src="img/pic.jpg" style="width:50px;">
+			</a>
 		</div>
 		<div>
 			<p>${sessionScope.user.name}님 반갑습니다^^</p>
