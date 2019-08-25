@@ -3,13 +3,16 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="dao.CalendarDao">
-<!-- 	<insert id="insertCalendar"> -->
-<!-- 		insert into calendar  -->
-<!-- 		values(cal_seq.nextval, #{}, #{}, #{}, #{}, #{}, #{}, #{}, #{}, ) -->
-<!-- 	</insert> -->
-<!-- 	<update id="updateCalendar"> -->
+	<insert id="insertCalendar" parameterType="calendar">
+		insert into calendar(cal_num, m_num, w_num, cal_type, cal_start_date, cal_end_date, cal_title, cal_content, cal_regDate, cal_annually, cal_monthly, cal_yearCalendar) 
+		values(cal_seq.nextval, #{mNum}, #{wNum}, #{type}, #{startDate}, #{endDate}, #{title}, #{content}, #{regDate}, #{annually}, #{monthly}, #{yearCalendar})
+	</insert>
+<!-- 	<update id="updateCalendar" parameterType="calendar"> -->
+<!-- 		update calendar -->
+<!-- 		set  -->
+<!-- 		where cal_num=#{cNum} -->
 <!-- 	</update> -->
-<!-- 	<delete id="deleteCalendar"> -->
+<!-- 	<delete id="deleteCalendar" parameterType="int"> -->
 <!-- 	</delete> -->
 <!-- 	<select id="selectCalendar"> -->
 <!-- 	</select> -->
@@ -17,18 +20,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <!-- 	</select> -->
 <!-- 	<select id="selectAllCalendarByCnum"> -->
 <!-- 	</select> -->
-<!-- 	<resultMap type="calendar" id="calendarMap"> -->
-<!-- 		<result column="cal_num" property=""/> -->
-<!-- 		<result column="m_num" property=""/> -->
-<!-- 		<result column="w_num" property=""/> -->
-<!-- 		<result column="cal_type" property=""/> -->
-<!-- 		<result column="cal_start_date" property=""/> -->
-<!-- 		<result column="cal_end_date" property=""/> -->
-<!-- 		<result column="cal_title" property=""/> -->
-<!-- 		<result column="cal_content" property=""/> -->
-<!-- 		<result column="cal_regDate" property=""/> -->
-<!-- 		<result column="cal_annually" property=""/> -->
-<!-- 		<result column="cal_monthly" property=""/> -->
-<!-- 		<result column="cal_yearCalendar" property=""/> -->
-<!-- 	</resultMap> -->
+	<resultMap type="calendar" id="calendarMap">
+		<result column="cal_num" property="cNum"/>
+		<result column="m_num" property="mNum"/>
+		<result column="w_num" property="wNum"/>
+		<result column="cal_type" property="type"/>
+		<result column="cal_start_date" property="startDate"/>
+		<result column="cal_end_date" property="endDate"/>
+		<result column="cal_title" property="title"/>
+		<result column="cal_content" property="content"/>
+		<result column="cal_regDate" property="regDate"/>
+		<result column="cal_annually" property="annually"/>
+		<result column="cal_monthly" property="monthly"/>
+		<result column="cal_yearCalendar" property="yearCalendar"/>
+	</resultMap>
 </mapper>

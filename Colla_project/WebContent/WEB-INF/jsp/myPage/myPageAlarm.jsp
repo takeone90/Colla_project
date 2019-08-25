@@ -101,12 +101,13 @@
 
 	function getToggleBtnState(toggleBtnId) {
 		const left_px = parseInt($('#' + toggleBtnId).css('left'));
-
 		return (left_px > 0) ? "on" : "off";
 	}
 </script>
 </head>
 <body>
+	<%@ include file="/WEB-INF/jsp/inc/headerWs.jsp"%>
+	<%@ include file="/WEB-INF/jsp/inc/navWs.jsp"%>
 	<h1>알림 설정</h1>
 	워크스페이스 초대 알림
 	<div class='toggleBG' id="wsBG">
