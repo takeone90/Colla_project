@@ -7,10 +7,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="selectAllBoardByWnum" parameterType="int" resultMap="boardMap">
 		select b_num, m_name, w_num, b_title, b_content, b_regdate, b_readCnt
 		from board b, member m
-		where b.w_num = #{num} and m.m_num=b.m_num
+		where b.w_num = #{wNum} and m.m_num=b.m_num
 		order by b_regdate desc
 	</select>
-	
+	<select id="selectBoardBybNum" parameterType="int" resultMap="boardMap">
+		select b_num, m_name, w_num, b_title, b_content, b_regdate, b_readCnt
+		from board b, member m
+		where b.b_num = #{bNum} and m.m_num=b.m_num
+	</select>
 	<insert id="insertDefaultBoard" parameterType="board">
 		insert into board
 		values(

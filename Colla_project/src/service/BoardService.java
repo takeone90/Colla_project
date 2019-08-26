@@ -20,4 +20,7 @@ public class BoardService {
 	public boolean addDefaultBoard(Board board) {
 		return bDao.insertDefaultBoard(board)>0?true:false;
 	}
+	public Board getBoardByBnum(int bNum) {
+		return bDao.selectBoardBybNum(bNum);
+	}
 }

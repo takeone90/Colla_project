@@ -12,7 +12,6 @@ public class Board {
 	private Timestamp bRegDate;
 	private int readCnt;
 	
-	
 	public String getmName() {
 		return mName;
 	}

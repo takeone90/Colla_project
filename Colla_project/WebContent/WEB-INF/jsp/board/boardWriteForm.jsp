@@ -4,7 +4,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>글쓰기</title>
+<title>게시글 작성</title>
+<link rel="stylesheet" type="text/css" href="../css/reset.css"/>
+<link rel="stylesheet" type="text/css" href="../css/base.css"/>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 </head>
@@ -30,7 +32,7 @@
 			});
 		});
 	</script>
-	<div class="wsBody">
+	<div id="wsBody">
 		<h3>게시글 작성</h3>
 		<div id="inputWrap">
 			<form id="writeForm" action="../board/write" method="post">

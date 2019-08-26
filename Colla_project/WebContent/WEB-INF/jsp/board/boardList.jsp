@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -43,7 +44,7 @@
 <body>
 	<%@ include file="/WEB-INF/jsp/inc/headerWs.jsp" %>
 	<%@ include file="/WEB-INF/jsp/inc/navWs.jsp" %>
-	<div class="container">
+	<div id="wsBody">
 		<h3>공지 &amp; 익명 게시판</h3>
 		<ul id="boardList">
 			<li id="listHead">
@@ -71,8 +72,12 @@
 			<c:forEach items="${bList}" var="board">
 			<li>
 				<div>${board.bNum }</div>
-				<div>${board.bTitle } <span class="replyCount">[0]</span></div>
-				<div>${board.bRegDate }</div>
+				<div>
+					<a href="../board/view?num=${board.bNum}">${board.bTitle } <span class="replyCount">[0]</span></a>
+				</div>
+				<div>
+				<fmt:formatDate value="${board.bRegDate }" pattern="yyyy-MM-dd"/>
+				</div>
 				<div>${board.mName }</div>
 				<div>${board.readCnt }</div>
 			</li>
