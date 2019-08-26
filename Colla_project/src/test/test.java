@@ -28,14 +28,9 @@ public class test {
 	private MemberDao dao;
 	@Test
 	public void serviceTest() {
-		int memberNum = 1;
-		//getWnum
-		int workspaceNum = 1;
-		System.out.println(memberNum+"번 멤버가 참여한 워크스페이스 번호 : "+wsMemberService.getWnumByMnum(memberNum));
-		System.out.println("워크스페이스"+workspaceNum+"번에 있는 멤버들 번호 : "+wsMemberService.getMnumByWnum(workspaceNum));
-//		List<Member> mList = mService.getAllMemberByWnum(1);
-		System.out.println("<워크스페이스1번의 모든 멤버리스트 >");
-		System.out.println(dao.selectAllMemberByWnum(1));
-			
+		String emailAddress="tyqnsdl@naver.com?";
+		int idx = emailAddress.indexOf("?");
+		System.out.println("idx : "+idx);
+		System.out.println(emailAddress.substring(0,idx));
 	}
 }

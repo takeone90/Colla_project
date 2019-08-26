@@ -12,11 +12,12 @@ import model.ChatRoomMember;
 public class ChatRoomMemberService {
 	@Autowired
 	private ChatRoomMemberDao crmDao;
-	public boolean addChatRoomMember(int crNum,int mNum) {
+	public boolean addChatRoomMember(int crNum,int mNum,int wNum) {//workspace만들었을때, chatroom만들었을때, chatroom 초대됐을때 
 		boolean result = false;
 		ChatRoomMember crm = new ChatRoomMember();
 		crm.setCrNum(crNum);
 		crm.setmNum(mNum);
+		crm.setwNum(wNum);
 		if(crmDao.insertChatRoomMember(crm)>0) {
 			result = true;
 		}
@@ -44,5 +45,8 @@ public class ChatRoomMemberService {
 	}
 	public List<ChatRoomMember> getAllChatRoomMemberByCrNum(int crNum){
 		return crmDao.selectAllChatRoomMemberByCrNum(crNum);
+	}
+	public List<ChatRoomMember> getAllChatRoomMemberByWnum(int wNum){
+		return crmDao.selectAllChatRoomMemberBywNum(wNum);
 	}
 }

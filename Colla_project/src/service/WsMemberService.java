@@ -31,6 +31,9 @@ public class WsMemberService {
 		}
 		return result;
 	}
+	public WsMember getWsMember(int wNum,int mNum) {
+		return dao.selectWsMember(wNum, mNum);
+	}
 	public List<Integer> getWnumByMnum(int mNum){
 		return dao.selectAllWnumByMnum(mNum);
 	}

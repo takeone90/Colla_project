@@ -6,12 +6,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import dao.ChatRoomDao;
+import dao.ChatRoomMemberDao;
 import model.ChatRoom;
+import model.ChatRoomMember;
 
 @Service
 public class ChatRoomService {
 	@Autowired
 	private ChatRoomDao crDao;
+	@Autowired
+	private ChatRoomMemberDao crmDao;
 	public boolean addChatRoom(int wNum,int mNum,String crName) {
 		boolean result = false;
 		ChatRoom chatRoom = new ChatRoom();
@@ -19,6 +23,12 @@ public class ChatRoomService {
 		chatRoom.setmNum(mNum);
 		chatRoom.setwNum(wNum);
 		if(crDao.insertChatRoom(chatRoom)>0	) {
+			//채팅방 내 해당 생성자를 추가시킨다
+			ChatRoomMember crm = new ChatRoomMember();
+			crm.setCrNum(chatRoom.getCrNum());
+			crm.setmNum(mNum);
+			crm.setwNum(wNum);
+			crmDao.insertChatRoomMember(crm);//채팅방 멤버한명 생성(채팅방 생성자)
 			result = true;
 		}
 		return result;

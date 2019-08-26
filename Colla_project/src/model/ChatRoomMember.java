@@ -4,6 +4,13 @@ public class ChatRoomMember {
 	private int crmNum;
 	private int crNum;
 	private int mNum;
+	private int wNum;
+	public int getwNum() {
+		return wNum;
+	}
+	public void setwNum(int wNum) {
+		this.wNum = wNum;
+	}
 	public int getCrmNum() {
 		return crmNum;
 	}
@@ -24,7 +31,7 @@ public class ChatRoomMember {
 	}
 	@Override
 	public String toString() {
-		return "채팅방회원정보 [채팅방+회원번호 : " + crmNum + ", 채팅방번호 : " + crNum + ", 회원번호 : " + mNum + "]";
+		return "채팅방회원정보 [채팅방+회원번호 : " + crmNum + ", 채팅방번호 : " + crNum + ", 회원번호 : " + mNum + ", 워크스페이스 번호 : "+wNum+"]";
 	}
 	
 }

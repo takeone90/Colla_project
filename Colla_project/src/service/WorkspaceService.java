@@ -7,9 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import dao.ChatRoomDao;
+import dao.ChatRoomMemberDao;
 import dao.WorkspaceDao;
 import dao.WsMemberDao;
 import model.ChatRoom;
+import model.ChatRoomMember;
 import model.Workspace;
 import model.WsMember;
 
@@ -21,6 +23,8 @@ public class WorkspaceService {
 	private WsMemberDao wmDao;
 	@Autowired
 	private ChatRoomDao chatDao;
+	@Autowired
+	private ChatRoomMemberDao crmDao;
 	public boolean addWorkspace(int mNum,String name) {
 		boolean result = false;
 		Workspace ws = new Workspace();
@@ -36,11 +40,18 @@ public class WorkspaceService {
 			
 			//기본채팅방 하나를 만들어주는 작업
 			ChatRoom chatRoom = new ChatRoom();
-//			chatRoom.setCrName(ws.getName()+"의 "+"기본채팅방");
 			chatRoom.setCrName("기본채팅방");
 			chatRoom.setmNum(mNum); //workspace생성자가 기본채팅방의 생성자가 된다
 			chatRoom.setwNum(ws.getNum()); //workspace의 wNum을 채팅방정보에 담는다
+			chatRoom.setCrIsDefault(1);
 			chatDao.insertChatRoom(chatRoom);//채팅방생성
+			
+			//채팅방 내 해당 생성자를 추가시킨다
+			ChatRoomMember crm = new ChatRoomMember();
+			crm.setCrNum(chatRoom.getCrNum());
+			crm.setmNum(mNum);
+			crm.setwNum(ws.getNum());
+			crmDao.insertChatRoomMember(crm);//기본 채팅방 멤버한명 생성(워크스페이스 생성자)
 			result = true;
 		}
 		return result;

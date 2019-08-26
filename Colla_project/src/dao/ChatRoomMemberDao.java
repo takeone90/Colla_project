@@ -13,4 +13,5 @@ public interface ChatRoomMemberDao {
 	public ChatRoomMember selectChatRoomMember(int crmNum);
 	public List<ChatRoomMember> selectAllChatRoomMember();
 	public List<ChatRoomMember> selectAllChatRoomMemberByCrNum(int crNum);
+	public List<ChatRoomMember> selectAllChatRoomMemberBywNum(int wNum);
 }

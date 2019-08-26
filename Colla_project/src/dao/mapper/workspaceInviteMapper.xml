@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.WorkspaceInvite">
+	<insert id="insertWorkspaceInvite" parameterType="workspaceInvite">
+		insert into workspace_invite(wi_num,wi_target_user,w_num)
+		values(wi_seq.nextval,#{wiTargetUser},#{wNum})
+	</insert>
+	<select id="selectWorkspaceInvite" parameterType="string" resultMap="wiMap">
+		select * from workspace_invite where wi_target_user=#{wiTargetUser}
+	</select>
+	<select id="selectAllWorkspaceInvite" resultMap="wiMap">
+		select * from workspace_invite
+	</select>
+	<resultMap type="workspaceInvite" id="wiMap">
+		<result column="wi_num" property="wiNum"/>
+		<result column="wi_target_user" property="wiTargetUser"/>
+		<result column="w_num" property="wNum"/>
+		<result column="wi_isaccept" property="isAccept"/>
+		<result column="wi_wasjoinedus" property="wasJoinedUs"/>
+	</resultMap>
+</mapper>

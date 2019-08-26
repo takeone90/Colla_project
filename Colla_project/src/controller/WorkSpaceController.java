@@ -13,12 +13,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import controller.MemberController.inner;
+import mail.MailSend;
 import model.ChatRoom;
 import model.Member;
 import model.Workspace;
 import model.WsMember;
 import service.ChatRoomService;
 import service.MemberService;
+import service.WorkspaceInviteService;
 import service.WorkspaceService;
 import service.WsMemberService;
 
@@ -29,9 +32,11 @@ public class WorkSpaceController {
 	@Autowired
 	private WorkspaceService wService;
 	@Autowired
-	private WsMemberService wsService;
+	private WsMemberService wsmService;
 	@Autowired
 	private ChatRoomService crService;
+	@Autowired
+	private WorkspaceInviteService wiService;
 	@RequestMapping("/workspace")
 	public String showWsMain(Principal principal,HttpSession session,Model model) {
 		//Ws메인이 보여질때 시큐리티가 갖고있는 principal 정보의 userid 를 가져와서
@@ -65,5 +70,70 @@ public class WorkSpaceController {
 		wService.addWorkspace(member.getNum(), wsName);
 		//targetUser들에게 초대메일 보내기
 		return "redirect:workspace";
+	}
+	//워크스페이스에 멤버 초대하는부분
+	@RequestMapping("/inviteMember")
+	public String inviteMember(int wNum, String targetUser,HttpSession session) {
+		String emailAddress = targetUser;
+		//ws초대 여부를 db에 담는다
+		wiService.addWorkspaceInvite(targetUser, wNum);
+		Member member = mService.getMemberByEmail(targetUser);
+		if(member!=null) {
+			//가입이 되어있으면
+			emailAddress+="*";
+			Thread innerTest = new Thread(new inner(emailAddress, session));
+			innerTest.start();
+		}else {
+			//가입이 안 되어있으면
+			emailAddress+="?";
+			Thread innerTest = new Thread(new inner(emailAddress, session));
+			innerTest.start();
+		}
+//		Thread innerTest = new Thread(new inner(emailAddress, session));
+//		innerTest.start();
+		return "redirect:workspace";
+	}
+	//워크스페이스 초대에 수락하는부분
+	@RequestMapping("/addMember")
+	public String addMember(HttpSession session,Principal principal) {
+		//로그인 되어있다면 principal에 아이디가 있을거임 
+		String userEmail = principal.getName();
+		if(userEmail!=null) {
+			//로그인 안되어있으면
+			
+		}else {
+			
+		}
+		
+		String targetUserEmail = (String)session.getAttribute("targetUser");
+		System.out.println(targetUserEmail);
+		int inviteWnum = (Integer)session.getAttribute("inviteWnum");
+		//targetUser를 초대수락할때 가져와야하는 이유 : 가입되어있는지/안되어있는지 멤버하나를 WsMember 테이블에 추가하기위해
+		//가입이 안되있으면 가입시키고 바로 초대할지?
+		Member member = mService.getMemberByEmail(targetUserEmail);
+		if(member!=null) {
+			wsmService.addWsMember(inviteWnum, member.getNum());
+			session.removeAttribute("targetUser");
+			session.removeAttribute("inviteWnum");
+		}
+		return "redirect:main";
+	}
+	
+	public class inner implements Runnable {
+		String emailAddress;
+		HttpSession session;
+		public inner(String emailAddress, HttpSession session) {
+			this.emailAddress = emailAddress;
+			this.session = session;
+		}
+		@Override
+		public void run() {
+			MailSend ms = new MailSend();
+			String tmpCode = "<a href='http://localhost:8081/Colla_project/addMember'><b>워크스페이스 초대</b>를 수락하려면 누르세요</a>";
+			ms.MailSend(emailAddress, tmpCode);
+			if(tmpCode != null) {
+				session.setAttribute("verifyCode", tmpCode);
+			}
+		}
 	}
 }
