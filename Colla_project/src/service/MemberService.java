@@ -5,26 +5,31 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import dao.MemberDao;
+import dao.SetAlarmDao;
 import model.EmailVerify;
 import model.Member;
+import model.SetAlarm;
 
 @Service
 public class MemberService {
 	@Autowired
 	private MemberDao dao;
+	@Autowired
+	private SetAlarmDao setAlarmDao;
 	
-	public boolean addMember(String email,String name,String pw) {
-		boolean result = false;
-		Member member = new Member();
-		member.setEmail(email);
-		member.setName(name);
-		member.setPw(pw);
+	@Transactional
+	public boolean addMember(Member member) {
 		if(dao.insertMember(member)>0) {
-			result = true;
+			SetAlarm setAlarm = new SetAlarm();
+			setAlarm.setNum(member.getNum());
+			if(setAlarmDao.insertSetAlarm(setAlarm)>0) {
+				return true;
+			}
 		}
-		return result;
+		return false;
 	}
 	public boolean modifyMember(Member member) {
 		boolean result = false;

@@ -5,7 +5,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="dao.SetAlarmDao">
 	<insert id="insertSetAlarm" parameterType="setAlarm">
 		insert into setAlarm 
-		values(#{num}, #{workspace}, #{notice}, #{reply});
+		values(#{num}, #{workspace}, #{notice}, #{reply})
 	</insert>
 	<update id="updateSetAlarm">
 		update setAlarm
