@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.ChatRoomMemberDao">
+	<insert id="insertChatRoomMember" parameterType="chatRoomMember">
+		insert into chatroom_member(crm_num,cr_num,m_num)
+		values(crm_seq.nextval,#{crNum},#{mNum})
+	</insert>
+	<update id="updateChatRoomMember" parameterType="chatRoomMember">
+		update chatroom_member set cr_num=#{crNum},m_num=#{mNum}
+	</update>
+	<delete id="deleteChatRoomMember" parameterType="int">
+		delete chatroom_member where crm_num=#{crmNum}
+	</delete>
+	<select id="selectChatRoomMember" parameterType="int" resultMap="crmMap">
+		select * from chatroom_member where crm_num=#{crmNum}
+	</select>
+	<select id="selectAllChatRoomMember" resultMap="crmMap">
+		select * from chatroom_member
+	</select>
+	<select id="selectAllChatRoomMemberByCrNum" parameterType="int" resultMap="crmMap">
+		select * from chatroom_member where cr_num=#{crNum}
+	</select>
+	<resultMap type="chatRoomMember" id="crmMap">
+		<result column="crm_num" property="crmNum"/>
+		<result column="cr_num" property="crNum"/>
+		<result column="m_num" property="mNum"/>
+	</resultMap>
+</mapper>

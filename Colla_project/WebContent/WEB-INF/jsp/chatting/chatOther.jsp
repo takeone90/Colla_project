@@ -4,12 +4,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>채팅 메인</title>
+<title>개별 채팅</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script>
 
 $(function(){
-	$("#chatRoomInfo > p").text("메인채팅방");
+	var crNum = $("#crNum").val();
+	var str = crNum + "번 채팅방";
+	$("#chatRoomInfo > p").text(str);
 });
 </script>
 </head>
@@ -18,6 +20,8 @@ $(function(){
 <%@ include file="/WEB-INF/jsp/inc/navWs.jsp" %>
 	<div id="wsBody">
 		<div class="chatArea">
+			<input type="hidden" value="${chatRoom.crNum}" id="crNum"> <!-- 개별채팅방에 해당 chatRoom 객체가 떠다님 -->
+			
 			<div class="chat">
 				<div class="profileImg">
 					<a href="#"> 이미지 <img alt="" src=""></a>

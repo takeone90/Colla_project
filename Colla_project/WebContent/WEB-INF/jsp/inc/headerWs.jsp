@@ -9,7 +9,7 @@
 		</h1>
 		
 		<div id="chatRoomInfo">
-			(주)질 수 없조 > 개발부서채팅방
+			<p>채팅방 이름</p>
 		</div>
 		
 		<div class="main-nav">

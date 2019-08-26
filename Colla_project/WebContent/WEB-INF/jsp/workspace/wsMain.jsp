@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>수빈 워크스페이스</title>
+<title>워크스페이스</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <style>
 #addWsModal{
@@ -57,7 +57,8 @@ display : none;
 		
 		//워크스페이스 하나 숨기고 닫기
 		$(".showWsDetail").on("click",function(){
-			$(".wsDetail").toggle();
+			$(this).next().toggle();
+			return false;
 		});
 		
 	});
@@ -76,7 +77,6 @@ display : none;
 				<li class="ws">
 					<h4>${ws.wsInfo.name}</h4>
 					<button class="showWsDetail">워크스페이스 상세보기</button> <!-- 누르면 ws.wsInfo.num인 wsDetail만 열려야한다 -->
-					
 					<div class="wsDetail">
 						<div class="wsChatList">
 							<p>채팅리스트</p>
@@ -87,7 +87,7 @@ display : none;
 									<li><a href="chatMain">${cr.crName}</a></li>
 								</c:when>
 								<c:otherwise>
-									<li><a href="#">${cr.crName}</a></li>
+									<li><a href="chatOther?crNum=${cr.crNum}">${cr.crName}</a></li>
 								</c:otherwise>
 							</c:choose>
 								
@@ -171,7 +171,7 @@ display : none;
 			<div class="modalBody">
 				<p>채팅방을 만들고 멤버를 초대하세요</p>
 				<form action="addChat" method="post">
-					워크스페이스 번호 : <input type="text" id="addCrWnum" name="wNum">
+					<input type="hidden" id="addCrWnum" name="wNum">
 					<input type="hidden" value="${_csrf.token}" name="${_csrf.parameterName}">
 					<div class="addChatInputWrap">
 						<div class="row">

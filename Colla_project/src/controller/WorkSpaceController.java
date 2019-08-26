@@ -52,28 +52,9 @@ public class WorkSpaceController {
 			wsMap.put("mList", mService.getAllMemberByWnum(wsNum));
 			workspaceList.add(wsMap);
 		}
-		
-//		model.addAttribute("wsList", wsList);
-//		int wNum = 23; //선택한 workspace 번호 ->접혀있는 리스트를 누르면 나오게해야한다.                                  임시 테스트 workspace번호 23
-//		List<Member> mList = mService.getAllMemberByWnum(wNum);
-//		model.addAttribute("mList", mList);
-//		//해당 workspace의 모든 chatRoomList
-//		List<ChatRoom> crList = crService.getAllChatRoomByWnum(wNum);
-//		model.addAttribute("crList",crList);
 		model.addAttribute("workspaceList", workspaceList);
-//		System.out.println(workspaceList);
 		return "/workspace/wsMain";
 	}
-	
-	//workspace가 선택됐을때(클릭만 되도) workspace의 wNum을 넘기는 뭔가가 필요하다!! 0825 12:44 수빈
-	
-	
-	@RequestMapping("/chatMain")
-	public String showChatMain(HttpSession session) { //HttpSession session,int wNum
-//		session.setAttribute("currWnum", wNum); //워크스페이스 번호를 세션에 저장
-		return "/chatting/chatMain";//뒤에 ?붙여서 파라미터로 채팅방번호로!
-	}
-	
 	
 	
 	@RequestMapping("/addWs")
