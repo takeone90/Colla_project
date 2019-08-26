@@ -5,11 +5,26 @@ import java.sql.Timestamp;
 public class Board {
 	private int bNum;
 	private int mNum;
+	private String mName;
 	private int wNum;
 	private String bTitle;
 	private String bContent;
 	private Timestamp bRegDate;
+	private int readCnt;
 	
+	
+	public String getmName() {
+		return mName;
+	}
+	public void setmName(String mName) {
+		this.mName = mName;
+	}
+	public int getReadCnt() {
+		return readCnt;
+	}
+	public void setReadCnt(int readCnt) {
+		this.readCnt = readCnt;
+	}
 	public int getwNum() {
 		return wNum;
 	}

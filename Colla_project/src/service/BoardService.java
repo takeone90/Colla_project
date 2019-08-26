@@ -17,5 +17,7 @@ public class BoardService {
 	public List<Board> getAllBoardByWnum(int wNum) {
 		return bDao.selectAllBoardByWnum(wNum);
 	}
-	
+	public boolean addDefaultBoard(Board board) {
+		return bDao.insertDefaultBoard(board)>0?true:false;
+	}
 }
