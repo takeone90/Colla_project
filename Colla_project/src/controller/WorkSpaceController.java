@@ -2,7 +2,9 @@ package controller;
 
 import java.security.Principal;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -11,12 +13,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import controller.MemberController.inner;
+import mail.MailSend;
 import model.ChatRoom;
 import model.Member;
 import model.Workspace;
 import model.WsMember;
 import service.ChatRoomService;
 import service.MemberService;
+import service.WorkspaceInviteService;
 import service.WorkspaceService;
 import service.WsMemberService;
 
@@ -27,9 +32,11 @@ public class WorkSpaceController {
 	@Autowired
 	private WorkspaceService wService;
 	@Autowired
-	private WsMemberService wsService;
+	private WsMemberService wsmService;
 	@Autowired
 	private ChatRoomService crService;
+	@Autowired
+	private WorkspaceInviteService wiService;
 	@RequestMapping("/workspace")
 	public String showWsMain(Principal principal,HttpSession session,Model model) {
 		//Ws메인이 보여질때 시큐리티가 갖고있는 principal 정보의 userid 를 가져와서
@@ -40,36 +47,76 @@ public class WorkSpaceController {
 		Member user = mService.getMemberByEmail(userEmail);
 		session.setAttribute("user", user);
 		//session에 user와 userEmail이 같이 담긴 상태
-		
+		List<Map<String, Object>> workspaceList = new ArrayList<Map<String,Object>>();
 		List<Workspace> wsList = wService.getWsListByMnum(user.getNum());//유저 번호로 WS 들을 모두 꺼낸다.
-		model.addAttribute("wsList", wsList);
-		int wNum = 23; //선택한 workspace 번호 ->접혀있는 리스트를 누르면 나오게해야한다.                                  임시 테스트 workspace번호 23
-		List<Member> mList = mService.getAllMemberByWnum(wNum);
-		model.addAttribute("mList", mList);
-		//해당 workspace의 모든 chatRoomList
-		List<ChatRoom> crList = crService.getAllChatRoomByWnum(wNum);
-		model.addAttribute("crList",crList);
+		for(int i = 0;i<wsList.size();i++) {
+			int wsNum = wsList.get(i).getNum();
+			Map<String, Object> wsMap = new HashMap<String, Object>();
+			wsMap.put("wsInfo", wsList.get(i));
+			wsMap.put("crList", crService.getAllChatRoomByWnum(wsNum));
+			wsMap.put("mList", mService.getAllMemberByWnum(wsNum));
+			workspaceList.add(wsMap);
+		}
+		model.addAttribute("workspaceList", workspaceList);
 		return "/workspace/wsMain";
 	}
 	
-	//workspace가 선택됐을때(클릭만 되도) workspace의 wNum을 넘기는 뭔가가 필요하다!! 0825 12:44 수빈
-	
-	
-	@RequestMapping("/chatMain")
-	public String showChatMain(HttpSession session) { //HttpSession session,int wNum
-//		session.setAttribute("currWnum", wNum); //워크스페이스 번호를 세션에 저장
-		return "/chatting/chatMain";//뒤에 ?붙여서 파라미터로 채팅방번호로!
-	}
-	
-	
-	
+	//워크스페이스 추가
 	@RequestMapping("/addWs")
 	public String addWs(String wsName,String targetUser1,String targetUser2,HttpSession session) {
 		String userEmail = (String)session.getAttribute("userEmail");
 		Member member = mService.getMemberByEmail(userEmail);
-		//workspace 생성
 		wService.addWorkspace(member.getNum(), wsName);
-		//targetUser들에게 초대메일 보내기
+		//targetUser들에게 초대메일 보내기 해야함
 		return "redirect:workspace";
+	}
+	
+	
+	//워크스페이스에 멤버 초대하는부분
+	@RequestMapping("/inviteMember")
+	public String inviteMember(int wNum, String targetUser,HttpSession session) {
+		String emailAddress = targetUser;
+		//ws초대 여부를 db에 담는다
+		wiService.addWorkspaceInvite(emailAddress, wNum);
+		Member member = mService.getMemberByEmail(emailAddress);
+		Thread innerTest = new Thread(new inner(emailAddress,wNum));
+		innerTest.start();
+		return "redirect:workspace";
+	}
+	
+	
+	//워크스페이스 초대에 수락하는부분
+	@RequestMapping("/addMember")
+	public String addMember(String id,int wNum,HttpSession session) { 
+		String userEmail = id;
+		if(mService.getMemberByEmail(userEmail)!=null) {
+			//회원이다.
+			Member member = mService.getMemberByEmail(userEmail);
+			wsmService.addWsMember(wNum, member.getNum());
+			return "redirect:loginForm";
+		}else {
+			//비회원이다
+			return "redirect:joinStep1";
+		}
+		
+	}
+	
+	
+	
+	
+	
+	public class inner implements Runnable {
+		String emailAddress;
+		int wNum;
+		public inner(String emailAddress,int wNum) {
+			this.emailAddress = emailAddress;
+			this.wNum = wNum;
+		}
+		@Override
+		public void run() {
+			MailSend ms = new MailSend();
+			String tmpCode = "<a href='http://localhost:8081/Colla_project/addMember?id="+emailAddress+"&wNum="+wNum+"'><b>워크스페이스 초대</b>를 수락하려면 누르세요</a>";
+			ms.MailSend(emailAddress, tmpCode);
+		}
 	}
 }

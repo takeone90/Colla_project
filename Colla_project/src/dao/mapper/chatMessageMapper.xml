@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.ChatMessageDao">
+	<insert id="insertChatMessage" parameterType="chatMessage">
+		insert into chat_message(cm_num,cr_num,m_num,cm_content)
+		values(cm_seq.nextval,#{crNum},#{mNum},#{cmContent})
+	</insert>
+	<delete id="deleteChatMessage" parameterType="int">
+		delete chat_message where cm_num=#{cmNum}
+	</delete>
+	<select id="selectChatMessageByCmNum" parameterType="int" resultMap="cmMap">
+		select * from chat_message where cm_num=#{cmNum}
+	</select>
+	<select id="selectAllChatMessageByCrNum" parameterType="int" resultMap="cmMap">
+		select * from chat_message where cr_num=#{crNum}
+	</select>
+	<resultMap type="chatMessage" id="cmMap">
+		<result column="cr_num" property="crNum"/>
+		<result column="cm_num" property="cmNum"/>
+		<result column="m_num" property="mNum"/>
+		<result column="cm_content" property="cmContent"/>
+		<result column="cm_write_date" property="cmWriteDate"/>
+	</resultMap>
+</mapper>

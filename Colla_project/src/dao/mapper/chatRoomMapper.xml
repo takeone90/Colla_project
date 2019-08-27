@@ -4,8 +4,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="dao.ChatRoomDao">
 	<insert id="insertChatRoom" parameterType="chatRoom">
-		insert into chatroom(cr_num,w_num,m_num,cr_name)
-		values(cr_seq.nextval,#{wNum},#{mNum},#{crName}) <!-- wNum이 맞는지..? -->
+		<selectKey order="BEFORE" keyProperty="crNum" resultType="int">
+			select cr_seq.nextval from dual
+		</selectKey>
+		insert into chatroom(cr_num,w_num,m_num,cr_name,cr_isdefault)
+		values(#{crNum},#{wNum},#{mNum},#{crName},#{crIsDefault})
 	</insert>
 	<update id="updateChatRoom" parameterType="chatRoom"><!-- chatroom수정은 이름만 바꾸게 -->
 		update chatroom cr_name=#{crName} where cr_num=#{crNum}
@@ -32,5 +35,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="w_num" property="wNum"/>
 		<result column="cr_name" property="crName"/>
 		<result column="cr_regdate" property="crRegDate"/>
+		<result column="cr_isdefault" property="crIsDefault"/>
 	</resultMap>
 </mapper>

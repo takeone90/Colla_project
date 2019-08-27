@@ -1,13 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Board List</title>
-<link rel="stylesheet" type="text/css" href="css/reset.css"/>
-<link rel="stylesheet" type="text/css" href="css/base.css"/>
+<link rel="stylesheet" type="text/css" href="../css/reset.css"/>
+<link rel="stylesheet" type="text/css" href="../css/base.css"/>
 <style type="text/css">
 	.container{width: 1200px;}
 	#boardList {
@@ -41,7 +42,9 @@
 </head>
 
 <body>
-	<div class="container">
+	<%@ include file="/WEB-INF/jsp/inc/headerWs.jsp" %>
+	<%@ include file="/WEB-INF/jsp/inc/navWs.jsp" %>
+	<div id="wsBody">
 		<h3>공지 &amp; 익명 게시판</h3>
 		<ul id="boardList">
 			<li id="listHead">
@@ -51,22 +54,13 @@
 				<div>작성자</div>
 				<div>조회수</div>
 			</li>
-			<li>
-				<div>공지</div>
-				<div>대체 휴무 관련하여 공지합니다. [2]</div>
-				<div>2018-08-23</div>
-				<div>김미경</div>
-				<div>25</div>
-			</li>
-			<li>
-				<div>76</div>
-				<div>부장님 가발이셨네요...또르르 [5]</div>
-				<div>2018-08-20</div>
-				<div>익명</div>
-				<div>99</div>
-			</li>
-			
-<%-- 			<c:forEach items="" var=""> --%>
+<!-- 			<li> -->
+<!-- 				<div>공지</div> -->
+<!-- 				<div>대체 휴무 관련하여 공지합니다. [2]</div> -->
+<!-- 				<div>2018-08-23</div> -->
+<!-- 				<div>김미경</div> -->
+<!-- 				<div>25</div> -->
+<!-- 			</li> -->
 <!-- 			<li> -->
 <!-- 				<div>76</div> -->
 <!-- 				<div>부장님 가발이셨네요...또르르 [5]</div> -->
@@ -74,7 +68,21 @@
 <!-- 				<div>익명</div> -->
 <!-- 				<div>99</div> -->
 <!-- 			</li> -->
-<%-- 			</c:forEach> --%>
+			
+			<c:forEach items="${bList}" var="board">
+			<li>
+				<div>${board.bNum }</div>
+				<div>
+					<a href="../board/view?num=${board.bNum}">${board.bTitle } <span class="replyCount">[0]</span></a>
+				</div>
+				<div>
+				<fmt:formatDate value="${board.bRegDate }" pattern="yyyy-MM-dd"/>
+				</div>
+				<div>${board.mName }</div>
+				<div>${board.readCnt }</div>
+			</li>
+			</c:forEach>
+			<a href="../board/write">글쓰기</a>
 			
 		</ul>
 	</div>

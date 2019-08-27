@@ -15,6 +15,8 @@
   crossorigin="anonymous"></script>
 </head>
 <body>
+	<%@ include file="/WEB-INF/jsp/inc/headerWs.jsp"%>
+	<%@ include file="/WEB-INF/jsp/inc/navWs.jsp"%>
 	<h1>비밀번호확인</h1>
 	<form action="myPageCheckPass" method="post">
 		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">

@@ -9,6 +9,13 @@ public class Member {
 	private String pw;
 	private Date regDate;
 	private String phone;
+	private String profileImg;
+	public String getProfileImg() {
+		return profileImg;
+	}
+	public void setProfileImg(String profileImg) {
+		this.profileImg = profileImg;
+	}
 	public int getNum() {
 		return num;
 	}
@@ -48,7 +55,7 @@ public class Member {
 	@Override
 	public String toString() {
 		return "Member [num=" + num + ", email=" + email + ", name=" + name + ", pw=" + pw + ", regDate=" + regDate
-				+ ", phone=" + phone + "]";
+				+ ", phone=" + phone + ", profileImg="+profileImg+"]";
 	}
 	
 }

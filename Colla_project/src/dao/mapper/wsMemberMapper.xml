@@ -10,6 +10,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<delete id="deleteWsMember">
 		delete workspace_member where w_num=#{wNum} and m_num=#{mNum}
 	</delete>
+	<select id="selectWsMember" resultMap="wsMemberMap">
+		select * from workspace_member where w_num=#{wNum} and m_num=#{mNum}
+	</select>
 	<select id="selectAllWsMember" resultMap="wsMemberMap">
 		select * from workspace_member
 	</select>
