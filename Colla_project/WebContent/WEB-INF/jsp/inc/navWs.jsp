@@ -17,7 +17,7 @@
 		<option value="2"></option>
 		<option value="3"></option>
 	</select>
-	<div>
+	<div id="myChatList">
 		<h3>
 			My Chats
 		</h3>

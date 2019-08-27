@@ -42,6 +42,16 @@
 	text-align: center;
 	border-radius: 10px;
 }
+/* 네비게이션의 채팅방리스트와 게시판, 캘린더는 wsMain페이지에서는 숨겼습니다. */
+#myChatList{
+	display: none;
+}
+#ws-subfunction{
+	display: none;
+}
+#chatRoomInfo{
+	display: none;
+}
 .wsDetail{
 display : none;
 }

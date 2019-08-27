@@ -40,6 +40,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="m_pw" property="pw"/>
 		<result column="m_reg_date" property="regDate"/>
 		<result column="m_phone" property="phone"/>
+		<result column="m_profileimg" property="profileImg"/>
 	</resultMap>
 	
 	<!-- 이메일 인증 코드 관련 --> 

@@ -14,6 +14,12 @@ public class WorkspaceInviteService {
 	private WorkspaceInviteDao wiDao;
 	public boolean addWorkspaceInvite(String targetUser,int wNum) {
 		boolean result = false;
+		WorkspaceInvite wi = new WorkspaceInvite();
+		wi.setWiTargetUser(targetUser);
+		wi.setwNum(wNum);
+		if(wiDao.insertWorkspaceInvite(wi)>0) {
+			result = true;
+		}
 		return result;
 	}
 	public void isAccept(String targetUser) {
