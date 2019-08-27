@@ -1,6 +1,6 @@
-﻿
-# Created by https://www.gitignore.io/api/web,git,java,maven,eclipse,java-web
-# Edit at https://www.gitignore.io/?templates=web,git,java,maven,eclipse,java-web
+
+# Created by https://www.gitignore.io/api/web,java,maven,eclipse,java-web
+# Edit at https://www.gitignore.io/?templates=web,java,maven,eclipse,java-web
 
 ### Eclipse ###
 .metadata
@@ -47,6 +47,7 @@ local.properties
 
 # STS (Spring Tool Suite)
 .springBeans
+pom.properties
 
 # Code Recommenders
 .recommenders/
@@ -70,21 +71,6 @@ local.properties
 .apt_generated
 
 .sts4-cache/
-
-### Git ###
-# Created by git for backups. To disable backups in Git:
-# $ git config --global mergetool.keepBackup false
-*.orig
-
-# Created by git when using merge tools for conflicts
-*.BACKUP.*
-*.BASE.*
-*.LOCAL.*
-*.REMOTE.*
-*_BACKUP_*.txt
-*_BASE_*.txt
-*_LOCAL_*.txt
-*_REMOTE_*.txt
 
 ### Java ###
 # Compiled class file
@@ -139,4 +125,4 @@ buildNumber.properties
 *.rss
 *.xhtml
 
-# End of https://www.gitignore.io/api/web,git,java,maven,eclipse,java-web
+# End of https://www.gitignore.io/api/web,java,maven,eclipse,java-web
