@@ -32,8 +32,9 @@
 				<pre>${board.bContent }</pre>
 			</div>
 			<div class="row">
-				<a href="modify">수정</a>
-				<a href="delete">삭제</a>
+				<a href="checkPass?mode=modify&bNum=${board.bNum }">수정</a>
+				<a href="checkPass?mode=delete&bNum=${board.bNum }">삭제</a>
+				<a href="list">목록</a>
 			</div>
 		</div>
 		<div id="boardReply">
@@ -50,9 +51,6 @@
 					</div>
 				</li>
 			</ul>
-			<script type="text/javascript">
-				
-			</script>
 			<div id="addReplyDiv">
 				<form>
 					<div class="replyImg"><img src="img/pic.jpg"></div>

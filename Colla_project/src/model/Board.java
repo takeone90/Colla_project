@@ -11,7 +11,15 @@ public class Board {
 	private String bContent;
 	private Timestamp bRegDate;
 	private int readCnt;
+	private String bPw;
 	
+	
+	public String getbPw() {
+		return bPw;
+	}
+	public void setbPw(String bPw) {
+		this.bPw = bPw;
+	}
 	public String getmName() {
 		return mName;
 	}
