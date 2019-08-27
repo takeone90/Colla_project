@@ -57,6 +57,8 @@ display : none;
 }
 </style>
 <script>
+	var wNum;
+
 	$(function(){
 		//WS추가 모달
 		$(".openWsModal").on("click",function(){
@@ -123,7 +125,9 @@ display : none;
 				<li class="ws">
 					<h4>${ws.wsInfo.name}</h4>
 					<button class="showWsDetail">워크스페이스 상세보기</button> <!-- 누르면 ws.wsInfo.num인 wsDetail만 열려야한다 -->
+
 					<div class="wsDetail">
+						<input type="hidden" value="${ws.num}" id="wNum">
 						<div class="wsChatList">
 							<p>채팅리스트</p>
 							<ul>

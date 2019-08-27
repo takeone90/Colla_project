@@ -16,6 +16,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		delete
 		from setAlarm 
 		where m_num = #{num}
+		ㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴ
 	</delete>
 	<select id="selectSetAlarm" resultMap="setAlarmMap">
 		select *
