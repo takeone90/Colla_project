@@ -11,6 +11,7 @@ public interface WsMemberDao {
 	public int deleteWsMember(@Param("wNum")int wNum,@Param("mNum")int mNum);
 	public WsMember selectWsMember(@Param("wNum")int wNum,@Param("mNum")int mNum);
 	public List<WsMember> selectAllWsMember();
+	public List<WsMember> selectAllWsMemberByCrNum(int crNum);
 	public List<Integer> selectAllMnumByWnum(int wNum);
 	public List<Integer> selectAllWnumByMnum(int mNum);
 }

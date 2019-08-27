@@ -18,6 +18,7 @@ import mail.MailSend;
 import model.ChatRoom;
 import model.Member;
 import model.Workspace;
+import model.WorkspaceInvite;
 import model.WsMember;
 import service.ChatRoomService;
 import service.MemberService;
@@ -89,17 +90,23 @@ public class WorkSpaceController {
 	@RequestMapping("/addMember")
 	public String addMember(String id,int wNum,HttpSession session) { 
 		String userEmail = id;
-		if(mService.getMemberByEmail(userEmail)!=null) {
-			//회원이다.
-			Member member = mService.getMemberByEmail(userEmail);
-			wsmService.addWsMember(wNum, member.getNum());
-			return "redirect:loginForm";
+		WorkspaceInvite wi = wiService.getWorkspaceInviteByTargetUser(userEmail);
+		if(wi!=null) {
+			if(mService.getMemberByEmail(userEmail)!=null) {
+				//회원이다.
+				Member member = mService.getMemberByEmail(userEmail);
+				wsmService.addWsMember(wNum, member.getNum());
+				return "redirect:loginForm";
+			}else {
+				//비회원이다
+				session.setAttribute("inviteUserEmail", userEmail);
+				session.setAttribute("inviteWnum", wNum);
+				return "redirect:joinStep3";
+			}
 		}else {
-			//비회원이다
-			session.setAttribute("inviteUserEmail", userEmail);
-			session.setAttribute("inviteWnum", wNum);
-			return "redirect:joinStep3";
+			return "redirect:error";
 		}
+		
 		
 	}
 	

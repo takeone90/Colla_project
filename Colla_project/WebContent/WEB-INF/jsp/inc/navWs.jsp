@@ -21,19 +21,13 @@
 		<h3>
 			My Chats
 		</h3>
-		<ul>
+		<ul class="chatList">
+			<c:forEach items="${chatRoomList}" var="cr">
 			<li>
-				<a href="#">개발팀</a>
+				<a href="chatMain?crNum=${cr.crNum}">${cr.crName}</a>
 			</li>
-			<li>
-				<a href="#">인사팀</a>
-			</li>
-			<li>
-				<a href="#">신입들</a>
-			</li>
-			<li>
-				<a href="#">마케팅팀</a>
-			</li>
+			</c:forEach>
+			
 		</ul>
 	</div>
 	
