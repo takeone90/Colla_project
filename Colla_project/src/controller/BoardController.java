@@ -1,7 +1,9 @@
 package controller;
 
 import java.security.Principal;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -46,6 +48,48 @@ public class BoardController {
 		return "/board/boardView";
 	}
 
+	@RequestMapping(value="/checkPass", method = RequestMethod.GET)
+	public String showCheckPass(
+			Model model,
+			String mode,
+			int bNum
+			) {
+		Map<String, Object> updateMap = new HashMap<String, Object>();
+		if(mode.equals("modify") || mode.equals("delete")) {
+			updateMap.put("mode", mode);
+			updateMap.put("bNum", bNum);
+			model.addAttribute("updateMap", updateMap);
+			return "/board/boardCheckPass";
+		} else {
+			return "redirect:error";
+		}
+	}
+	
+	@RequestMapping(value="/checkPass", method = RequestMethod.POST)
+	public String showUpdate(
+			Model model,
+			String pw,
+			int bNum,
+			String mode
+			) {
+		System.out.println("pw  : "+pw+", bNum : "+bNum );
+		if(bService.getBoardByBnum(bNum)!=null) {
+			Board board = bService.getBoardByBnum(bNum);
+			if(board.getbPw().equals(pw)) {
+				//비밀번호 일치
+				return "redirect:"+mode;
+			} else {
+				//비밀번호 불일치
+				System.out.println("글 암호 불일치....글번호:"+ bNum);
+				model.addAttribute("bNum", bNum);
+				model.addAttribute("mode", mode);
+				return "redirect:checkPass?msg=false";
+			}
+		}else {
+			return "redirect:error";
+		}
+	}
+
 	@RequestMapping(value="/modify", method = RequestMethod.GET)
 	public String showModifyForm() {
 		return "/board/boardModifyForm";
@@ -73,7 +117,6 @@ public class BoardController {
 			) {
 //		int wNum = (int)session.getAttribute("currWnum");
 		int wNum = 1;
-		
 		if(!boardType.equals("anonymous")) {
 			String usermail = principal.getName();
 			int mNum = mService.getMemberByEmail(usermail).getNum();
@@ -82,6 +125,7 @@ public class BoardController {
 			board.setmNum(mNum);
 			board.setwNum(wNum);
 			board.setbContent(content);
+			board.setbPw(pw);
 			
 			bService.addDefaultBoard(board);
 		}
