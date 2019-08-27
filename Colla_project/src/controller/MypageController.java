@@ -1,5 +1,7 @@
 package controller;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.security.Principal;
 import java.util.Map;
 
@@ -12,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import model.Member;
 import model.SetAlarm;
@@ -31,6 +34,7 @@ public class MypageController {
 	// modifysetAlarm(HttpSession session, int type,int result) : 알림 설정값 수정시 업데이트 로직
 	// myPageCheckPass(String pw, HttpSession session):String > 비밀번호 확인 로직
 	// modifyMember(Member member):String > 회원 정보 업데이트 로직
+	// updateProfileImg(MultipartFile[] profileImg, HttpSession session) : 프로필 이미지 추가
 
 	@Autowired
 	private MemberService memberService;
@@ -38,6 +42,8 @@ public class MypageController {
 	private LicenseService licenseService;
 	@Autowired
 	private SetAlarmService setAlarmService;
+	
+	private static final String FILE_PATH = "c:/temp/";
 	
 	@RequestMapping(value = "/myPageMainForm", method = RequestMethod.GET)
 	public String myPageMainForm(Model model, HttpSession session) {
@@ -118,5 +124,20 @@ public class MypageController {
 		} else {
 			return "redirect:myPageModifyForm";
 		}
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/updateProfileImg", method = RequestMethod.POST)
+	public boolean updateProfileImg(MultipartFile[] profileImg, HttpSession session) {
+		Member member = memberService.getMemberByEmail((String)session.getAttribute("userEmail"));
+		return memberService.registerProfileImg(profileImg, member.getNum());
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/image")
+	public byte[] getImage(HttpSession session, String fileName) {
+		Member member = memberService.getMemberByEmail((String)session.getAttribute("userEmail"));
+		System.out.println("getProfileImg : " + member.getProfileImg());
+		return memberService.getProfileImg(member,member.getProfileImg()); 
 	}
 }
