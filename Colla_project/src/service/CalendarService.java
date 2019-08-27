@@ -39,4 +39,7 @@ public class CalendarService {
 	public List<Calendar> getAllCalendar() {
 		return calendarDao.selectAllCalendar();
 	}
+	public List<Calendar> getAllCalendarByMonth() {
+		return calendarDao.selectAllCalendarByMonth();
+	}
 }
