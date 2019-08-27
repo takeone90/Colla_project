@@ -12,12 +12,17 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import javax.mail.Session;
+import javax.servlet.http.HttpSession;
+
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.multipart.MultipartFile;
+
+import com.sun.mail.handlers.multipart_mixed;
 
 import dao.MemberDao;
 import dao.SetAlarmDao;
@@ -27,12 +32,14 @@ import model.SetAlarm;
 
 @Service
 public class MemberService {
+	
 	@Autowired
 	private MemberDao dao;
 	@Autowired
 	private SetAlarmDao setAlarmDao;
 	
 	//파일 저장 경로
+	private static final String THUMBNAIL_PATH="c:\\thumbnail";
 	private static final String UPLOAD_PATH="c:\\temp";
 	
 	@Transactional
@@ -103,33 +110,63 @@ public class MemberService {
 		}
 		return false;
 	}
-	
-	
-	public boolean registerProfileImg(MultipartFile[] profileImg, int mNum) {
-		String fullName = writeFile(profileImg);
-		Member member = new Member();
-		member.setNum(mNum);
-		member.setProfileImg(fullName);
-		System.out.println("mNum : " + mNum);
-		System.out.println("fullName : " + fullName);
-		if(dao.insertProfileImg(member)>0) {
+		
+	public boolean modifyProfileImg(MultipartFile[] profileImg,Member member, String type,HttpSession session) {
+		if(profileImg.length != 0) {//사용자가 첨부파일을 첨부한 경우
+			String fullName = writeFile(profileImg,type,session);//type에 따라 다른 폴더에 저장
+			if(type.equals("profileImg")) {
+				String beforeFileName = member.getProfileImg();
+				File file = new File(UPLOAD_PATH + "/" + beforeFileName);
+				member.setProfileImg(fullName);
+				if(dao.insertProfileImg(member)>0) {
+					if(file.exists()) {
+						file.delete();
+					}
+					return true;
+				}
+			}else if (type.equals("thumbnail")) {
+				
+				return true;
+			}
+			
+			return false;
+		}else {//사용자가 첨부파일 없이 [저장]을 클릭한 경우는 변경할 데이터가 없음
 			return true;
 		}
-		return false;
 	}
 	
-	public String writeFile(MultipartFile[] profileImg) {
+	public String writeFile(MultipartFile[] profileImg,String type,HttpSession session) {
 		String fullName = null;
 		UUID uuid = UUID.randomUUID();
 		for(MultipartFile multipartFile : profileImg) {
 			fullName = uuid.toString() + "_" + multipartFile.getOriginalFilename();
-			File saveFile = new File(UPLOAD_PATH,fullName);
+			File saveFile = null;
+			if(type.equals("profileImg")) {
+				saveFile = new File(UPLOAD_PATH,fullName);
+			}else if (type.equals("thumbnail")) {
+				System.out.println("1");
+				String beforefullName = (String)session.getAttribute("fullName");
+				System.out.println("2");
+				if(beforefullName!=null) {
+					System.out.println("3");
+					System.out.println(beforefullName);
+					File file = new File(beforefullName);
+					if(file.exists()) {
+						System.out.println("4");
+						System.out.println("섬네일 삭제");
+						file.delete();
+					}
+					
+				}
+				saveFile = new File(THUMBNAIL_PATH,fullName);
+				System.out.println("세션에 저장 : " + fullName);
+				session.setAttribute("thumbnail", fullName);
+			}
 			try {
 				multipartFile.transferTo(saveFile);
 			} catch (IllegalStateException | IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-				System.out.println("파일복사 예외발생");
 				return null;
 			}
 		}
@@ -137,11 +174,18 @@ public class MemberService {
 	}
 	
 	public byte[] getProfileImg(Member member,String fileName) {
+		if(fileName==null) {
+			fileName = "profileImage.png";
+		}
 		File file = new File(UPLOAD_PATH+"/"+fileName);
+
+		if(!file.exists()) {
+			fileName = "profileImage.png";
+			file = new File(UPLOAD_PATH+"/"+fileName);
+		}
 		InputStream in = null;
 		try {
 			in = new FileInputStream(file);
-			System.out.println("byte[] 반환");
 			return IOUtils.toByteArray(in);
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
