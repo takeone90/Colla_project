@@ -9,6 +9,13 @@ public class ChatRoom {
 	private int wNum;
 	private String crName;
 	private Date crRegDate;
+	private int crIsDefault;
+	public int getCrIsDefault() {
+		return crIsDefault;
+	}
+	public void setCrIsDefault(int crIsDefault) {
+		this.crIsDefault = crIsDefault;
+	}
 	public int getCrNum() {
 		return crNum;
 	}
@@ -41,7 +48,7 @@ public class ChatRoom {
 	}
 	public String toString() {
 		return "채팅방정보 [채팅방번호 : " + crNum + ", 생성자 : " + mNum + ", 워크스페이스번호 : " + wNum + ", 채팅방이름 : " + crName + ", 채팅방생성일 : "
-				+ crRegDate + "]";
+				+ crRegDate + ", 1이면 기본채팅방 : "+crIsDefault+"]";
 	}
 	
 }
