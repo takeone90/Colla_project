@@ -102,7 +102,7 @@ public class MemberController {
 	
 	@RequestMapping(value="/joinMember", method = RequestMethod.POST)
 	public String joinMember(Member member) {
-		boolean result = memberService.addMember(member.getEmail(), member.getName(), member.getPw());
+		boolean result = memberService.addMember(member);
 		if(result) {
 			return "redirect:main";
 		} else {
