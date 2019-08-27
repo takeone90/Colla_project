@@ -1,11 +1,23 @@
 package service;
 
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
+import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.FileCopyUtils;
+import org.springframework.web.multipart.MultipartFile;
 
 import dao.MemberDao;
 import dao.SetAlarmDao;
@@ -19,6 +31,9 @@ public class MemberService {
 	private MemberDao dao;
 	@Autowired
 	private SetAlarmDao setAlarmDao;
+	
+	//파일 저장 경로
+	private static final String UPLOAD_PATH="c:\\temp";
 	
 	@Transactional
 	public boolean addMember(Member member) {
@@ -81,7 +96,6 @@ public class MemberService {
 		return dao.selectEmailVerify(email);
 	}
 	
-	//CheckPass() 추가 
 	public boolean checkPass(String email, String pw) {
 		Member originMember = dao.selectMemberByEmail(email);
 		if(originMember.getPw().equals(pw)) {
@@ -89,4 +103,64 @@ public class MemberService {
 		}
 		return false;
 	}
+	
+	
+	public boolean registerProfileImg(MultipartFile[] profileImg, int mNum) {
+		String fullName = writeFile(profileImg);
+		Member member = new Member();
+		member.setNum(mNum);
+		member.setProfileImg(fullName);
+		System.out.println("mNum : " + mNum);
+		System.out.println("fullName : " + fullName);
+		if(dao.insertProfileImg(member)>0) {
+			return true;
+		}
+		return false;
+	}
+	
+	public String writeFile(MultipartFile[] profileImg) {
+		String fullName = null;
+		UUID uuid = UUID.randomUUID();
+		for(MultipartFile multipartFile : profileImg) {
+			fullName = uuid.toString() + "_" + multipartFile.getOriginalFilename();
+			File saveFile = new File(UPLOAD_PATH,fullName);
+			try {
+				multipartFile.transferTo(saveFile);
+			} catch (IllegalStateException | IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				System.out.println("파일복사 예외발생");
+				return null;
+			}
+		}
+		return fullName;
+	}
+	
+	public byte[] getProfileImg(Member member,String fileName) {
+		File file = new File(UPLOAD_PATH+"/"+fileName);
+		InputStream in = null;
+		try {
+			in = new FileInputStream(file);
+			System.out.println("byte[] 반환");
+			return IOUtils.toByteArray(in);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			try {
+				if(in != null) {
+					in.close();
+				}
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return null;
+	}
+	
+
 }

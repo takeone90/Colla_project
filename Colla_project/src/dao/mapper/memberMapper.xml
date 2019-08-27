@@ -34,7 +34,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		from member m,workspace_member ws
 		where ws.w_num=#{wNum} and m.m_num=ws.m_num
 	</select>
-	
+	<insert id="insertProfileImg">
+		update member 
+		set m_profileImg = #{profileImg} 
+		where m_num = #{num} 
+	</insert>
 	
 	<resultMap type="member" id="memberMap">
 		<result column="m_num" property="num"/>
@@ -43,6 +47,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="m_pw" property="pw"/>
 		<result column="m_reg_date" property="regDate"/>
 		<result column="m_phone" property="phone"/>
+		<result column="m_profileimg" property="profileImg"/>
 	</resultMap>
 	
 	<!-- 이메일 인증 코드 관련 --> 

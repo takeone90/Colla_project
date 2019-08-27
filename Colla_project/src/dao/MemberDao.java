@@ -17,4 +17,5 @@ public interface MemberDao {
 	public int insertEmailVerify(EmailVerify emailVerify);
 	public int updateEmailVerify(EmailVerify emailVerify);
 	public EmailVerify selectEmailVerify(String email);
+	public int insertProfileImg(Member member);
 }
