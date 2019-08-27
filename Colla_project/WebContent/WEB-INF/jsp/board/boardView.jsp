@@ -45,13 +45,14 @@
 						<p>
 						</p>
 						<p>
-							열매를 맺어 우리 인생을 풍부하게 한느것이다 보라 청춘을! 그들의 몸이 얼마나 튼튼하며
-							그들의 피부가 얼마나 생생하며 그들의 눈에 무엇이 타오르고 있는가?
-							우리 눈이 그것을 보는 때에 우리의 귀는 생의 찬미를
+							댓글입니다~
 						</p>
 					</div>
 				</li>
 			</ul>
+			<script type="text/javascript">
+				
+			</script>
 			<div id="addReplyDiv">
 				<form>
 					<div class="replyImg"><img src="img/pic.jpg"></div>
