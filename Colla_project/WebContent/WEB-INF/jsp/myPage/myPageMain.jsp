@@ -30,6 +30,7 @@
 			var formData = new FormData();
 			var profileImgFile = $("input[name='profileImg']");
 			var files = profileImgFile[0].files;
+			var result = $("#btnReset").cli
 			for(var i=0;i<files.length;i++){
 				formData.append("profileImg", files[i]);
 			}
@@ -39,10 +40,30 @@
 				contentType : false,
 				type : "post",
 				data : formData,
-				success:function(result){
-					alert("업로드 완료!");}
+				success:function(result){}
 			});//end ajax
 		});//submit end
+		
+		//첨부파일 변경시 발생하는 이벤트
+		$("#btnFile").on("change", function(){
+			var formData = new FormData();
+			var profileImgFile = $("input[name='profileImg']");
+			var files = profileImgFile[0].files;
+			var result = $("#btnReset").cli
+			for(var i=0;i<files.length;i++){
+				formData.append("profileImg", files[i]);
+			}
+			$.ajax({
+				url : "${contextPath}/modifyProfileImg?type=thumbnail",
+				processData : false,
+				contentType : false,
+				type : "post",
+				data : formData,
+				success:function(result){
+					
+				}
+			});//end ajax
+		});//change end
 		
 	});//end onload
 	
@@ -77,7 +98,7 @@
 	
 
 	<div class="myprofileImg">
-		<img alt="나의 프로필 사진" id="myProfileImg">
+		<img alt="나의 프로필 사진" id="myProfileImg" src="${contextPath }/getProfileImg?type=profileImg&fileName=${member.profileImg}">
 	</div>
 	<p>이메일 : ${member.email}</p>
 	<p>이름 : ${member.name}</p>
@@ -92,9 +113,7 @@
 	<!-- 프로필 편집 모달창 (수정할 예정~~) -->
 	<div class="profileImg-modal">
 		<form id="profileImgForm" enctype="multipart/form-data">
-			<!--  
-			<img alt="나의 프로필 사진" id="thumbNailImg" src="${contextPath }/getProfileImg?type=thumbnail&fileName=${member.profileImg}">
-			-->
+			<img alt="프로피" id="thumbNailImg" src="${contextPath }/getProfileImg?type=thumbnail&fileName=${member.profileImg}">
 			<input type="file" id="btnFile" name="profileImg" value="사진 선택" accept=".jpg,.jpeg,.png,.gif,.bmp"><br>
 			<input type="submit" id="btnSave" value="저장"><br>
 			<input type="button" id="btnReset" value="기본이미지로 변경"><br>
