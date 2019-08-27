@@ -89,4 +89,13 @@ public class CalendarController {
 		System.out.println(cNum);
 		return calendarService.removeCalendar(cNum);
 	}
+	@ResponseBody
+	@RequestMapping(value="/selectSchedule", method = RequestMethod.POST)
+	public Calendar selectSchedule(Calendar calendar) {
+		System.out.println(calendar);
+		int cNum = calendar.getcNum();
+		System.out.println(cNum);
+		return calendarService.getCalendar(cNum);
+	}
+	
 }
