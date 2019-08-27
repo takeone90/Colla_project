@@ -11,9 +11,9 @@ request.setAttribute("contextPath", contextPath);
 <meta charset="UTF-8">
 <title>calMonth</title>
 <style type="text/css">
-.addScheduleModal{display: none; border: 1px solid black; width: 300px; height: 250px; top: 10%; left: 10%; position: absolute; background-color: skyblue;}
-.detailScheduleModal{display: none; border: 1px solid black; width: 300px; height: 250px; top: 10%; left: 10%; position: absolute; background-color: skyblue;}
-.modifyScheduleModal{display: none; border: 1px solid black; width: 300px; height: 250px; top: 10%; left: 10%; position: absolute; background-color: skyblue;}
+.addScheduleModal{display: none; width: 300px; height: 250px; top: 10%; left: 10%; position: absolute; background-color: #ffe8ea;}
+.detailScheduleModal{display: none; width: 300px; height: 250px; top: 10%; left: 10%; position: absolute; background-color: #ffd9dc;}
+.modifyScheduleModal{display: none; width: 300px; height: 250px; top: 10%; left: 10%; position: absolute; background-color: #ffe8ea;}
 </style>
 <script src="https://code.jquery.com/jquery-3.4.1.js"
   integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
@@ -33,9 +33,16 @@ $(function() {
 	$("#modifyScheduleButton").on("click", function() {
 		$("#detailScheduleForm").show("slow");
 	});
+	//상세 모달에서 수정 버튼을 눌렀을 때
 	$("#detailModifyButton").on("click", function() {
+		var data = $("#detailScheduleForm").serialize();
 		$("#detailScheduleForm").hide("fast");
 		$("#modifyScheduleForm").show("slow");
+// 		$.ajax({
+// 			url: "selectSchedule",
+			
+// 		})
+		
 	});
 	//삭제
 	$("#delete").on("click", function() {
@@ -64,6 +71,10 @@ $(function() {
 	$("#detailScheduleFormClose").on("click", function() {
 		$("#detailScheduleForm").hide("slow");
 		$("#addScheduleForm").hide("slow");
+	});
+	
+	$("#modifyScheduleFormClose").on("click", function() {
+		$("#modifyScheduleForm").hide("slow");
 	});
 	
 	$("#addScheduleForm").on("submit", function() {
@@ -184,9 +195,13 @@ function tmpShowSchedule() {
 						$("#detailScheduleForm").show("slow");
 						$("#detailCNum").val(allCalendar[ii].cNum);
 						$("#detailTitle").val(title);
+						$("#modifyTitle").val(title);
 						$("#detailStartDate").val(startDateYMD);
+						$("#modifyTitle").val(startDateYMD);
 						$("#detailEndDate").val(endDateYMD);
+						$("#modifyTitle").val(endDateYMD);
 						$("#detailContent").val(allCalendar[ii].content);
+						$("#modifyTitle").val(allCalendar[ii].content);
 					});	
 				})(i)
 			}
@@ -267,22 +282,21 @@ function tmpShowSchedule() {
  		<input type="hidden" name="cNum" id="modifyCNum">
 		<input type="hidden" name="mNum" id="mNum" value="1">
 		<input type="hidden" name="wNum" id="wNum" value="1">
-		제목<input type="text" name="title" id="detailTitle" readonly="readonly"><br>
+		제목<input type="text" name="title" id="modifyTitle" readonly="readonly"><br>
 		기간
-		(시작날짜)<input type="date" name="startDate" id="detailStartDate" readonly="readonly"><br>
- 		(시작날짜)<input type="date" name="endDate" id="detailEndDate" readonly="readonly"><br>	
-		상세<textarea rows="5" cols="21" name="content" id="detailContent" readonly="readonly"></textarea><br>
-		타입<select name="type" id="detailType">
+		(시작날짜)<input type="date" name="startDate" id="modifyStartDate" readonly="readonly"><br>
+ 		(시작날짜)<input type="date" name="endDate" id="modifyEndDate" readonly="readonly"><br>	
+		상세<textarea rows="5" cols="21" name="content" id="modifyContent" readonly="readonly"></textarea><br>
+		타입<select name="type" id="modifyType">
 			<option value="project">프로젝트</option>
-			<option value="vacation" selected="selected">휴가</option>
+			<option value="vacation">휴가</option>
 			<option value="event">행사</option>
 			</select><br>
 		<label><input type="checkbox" name="yearCalendar" value="yearCalendar">연간 달력 표시</label><br>
 		<label><input type="checkbox" name="annually" value="annually">매년 반복</label>
 		<label><input type="checkbox" name="monthly" value="monthly">매월 반복</label><br>
-		<input type="button" id="detailScheduleFormClose" value="닫기">
+		<input type="button" id="modifyScheduleFormClose" value="닫기">
 		<input type="button" id="modify" value="수정">
-		
 	</form>
 </body>
 </html>
