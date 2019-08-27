@@ -127,17 +127,20 @@ public class MypageController {
 	}
 	
 	@ResponseBody
-	@RequestMapping(value = "/updateProfileImg", method = RequestMethod.POST)
-	public boolean updateProfileImg(MultipartFile[] profileImg, HttpSession session) {
+	@RequestMapping(value = "/modifyProfileImg", method = RequestMethod.POST)
+	public boolean modifyProfileImg(MultipartFile[] profileImg,String type,HttpSession session) {
+		System.out.println("1. 컨트롤러 type : " + type);
 		Member member = memberService.getMemberByEmail((String)session.getAttribute("userEmail"));
-		return memberService.registerProfileImg(profileImg, member.getNum());
+		System.out.println("5. 결과값 : " + memberService.modifyProfileImg(profileImg,type,member));
+		return memberService.modifyProfileImg(profileImg,type,member);
 	}
 	
 	@ResponseBody
-	@RequestMapping(value = "/image")
-	public byte[] getImage(HttpSession session, String fileName) {
+	@RequestMapping(value = "/getProfileImg")
+	public byte[] getProfileImg(HttpSession session,String fileName,String type) {
+		// thumbnail profileimg
 		Member member = memberService.getMemberByEmail((String)session.getAttribute("userEmail"));
-		System.out.println("getProfileImg : " + member.getProfileImg());
-		return memberService.getProfileImg(member,member.getProfileImg()); 
+		System.out.println("getProfileImg type : " + type);
+		return memberService.getProfileImg(member,member.getProfileImg(),type); 
 	}
 }

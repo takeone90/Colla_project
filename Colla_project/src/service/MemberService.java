@@ -19,6 +19,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.sun.mail.handlers.multipart_mixed;
+
 import dao.MemberDao;
 import dao.SetAlarmDao;
 import model.EmailVerify;
@@ -33,6 +35,7 @@ public class MemberService {
 	private SetAlarmDao setAlarmDao;
 	
 	//파일 저장 경로
+	private static final String THUMBNAIL_PATH="c:\\thumbnail";
 	private static final String UPLOAD_PATH="c:\\temp";
 	
 	@Transactional
@@ -104,44 +107,67 @@ public class MemberService {
 		return false;
 	}
 	
-	
-	public boolean registerProfileImg(MultipartFile[] profileImg, int mNum) {
-		String fullName = writeFile(profileImg);
-		Member member = new Member();
-		member.setNum(mNum);
-		member.setProfileImg(fullName);
-		System.out.println("mNum : " + mNum);
-		System.out.println("fullName : " + fullName);
-		if(dao.insertProfileImg(member)>0) {
-			return true;
+	public boolean modifyProfileImg(MultipartFile[] profileImg,String type, Member member) {
+		if(writeFile(profileImg,type,member)) {
+			if(dao.insertProfileImg(member)>0) {
+				return true;
+			}
 		}
 		return false;
 	}
 	
-	public String writeFile(MultipartFile[] profileImg) {
+	public boolean writeFile(MultipartFile[] profileImg,String type,Member member) {
 		String fullName = null;
 		UUID uuid = UUID.randomUUID();
+		String fileName = null;
 		for(MultipartFile multipartFile : profileImg) {
-			fullName = uuid.toString() + "_" + multipartFile.getOriginalFilename();
-			File saveFile = new File(UPLOAD_PATH,fullName);
+			fileName = multipartFile.getOriginalFilename();
+		}
+
+		String fullName = uuid.toString() + "_" + fileName;
+		
+		
+		String filePath = null;
+		String path = null;
+		boolean result = true;
+		for(MultipartFile multipartFile : profileImg) {
+			File saveFile = null;
+			if(type!=null && type.equals("thumbnail")) {
+				path = THUMBNAIL_PATH;
+			}else{
+				System.out.println("temp를 가져온다");
+				path = UPLOAD_PATH;
+			}
+			filePath = path + "/" + fullName;
+			File file = new File(filePath);
+			if(file.exists()) {
+				result = file.delete();
+			}
+			if(result) {
+				saveFile = new File(path,member.getEmail());
+			}	
 			try {
 				multipartFile.transferTo(saveFile);
 			} catch (IllegalStateException | IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 				System.out.println("파일복사 예외발생");
-				return null;
+				return false;
 			}
 		}
-		return fullName;
+		return true;
 	}
 	
-	public byte[] getProfileImg(Member member,String fileName) {
-		File file = new File(UPLOAD_PATH+"/"+fileName);
+	public byte[] getProfileImg(Member member,String fileName,String type) {
+		File file = null;
+		if(type != null && type.equals("thumbnail")) {
+			file = new File(THUMBNAIL_PATH+"/"+fileName);
+		}else {
+			file = new File(UPLOAD_PATH+"/"+fileName);
+		} 
 		InputStream in = null;
 		try {
 			in = new FileInputStream(file);
-			System.out.println("byte[] 반환");
 			return IOUtils.toByteArray(in);
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
