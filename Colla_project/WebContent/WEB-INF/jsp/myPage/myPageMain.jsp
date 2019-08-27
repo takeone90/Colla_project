@@ -17,6 +17,9 @@
 		$(".myprofileImg").on("click", function(){
 			$(".profileImg-modal").show();
 		});// end myprofileImg click
+		$("#profileImgForm input[type='button']").on("click", function() {
+			$(".profileImg-modal").hide();
+		});
 		
 		$("#btnFile").on("change", function(){
 			if($(this)[0].files[0] != null){
@@ -34,15 +37,15 @@
 					data : formData,
 					success:function(result){
 						if(result){
-							alert("업로드 완료!!");
+							$(".profileImg-modal").hide();
+							$("#myProfileImg").attr("src","${contextPath }/image?fileName=${member.profileImg}")
 						}
 					},error : function() {
-						alert("에러발생");
+						
 					}
 				});//end ajax
-				alert("값 추가 성공");
 			}else{
-				alert("선택값 없음");
+				
 			}
 		});
 		
@@ -63,6 +66,12 @@
 		display: none;}
 	.profileImg-modal > input{
 		margin-bottom: 5px;}
+		
+	.myprofileImg{
+		width : 150px;
+		height : 150px;
+		radius : 75px;
+	}
 	
 </style>
 </head>
@@ -73,7 +82,7 @@
 	
 
 	<div class="myprofileImg">
-		<img alt="나의 프로필 사진" src="${contextPath }/image?fileName=${member.profileImg}" style="width:150px;">
+		<img alt="나의 프로필 사진" id="myProfileImg" src="${contextPath }/image?fileName=${member.profileImg}">
 	</div>
 	<p>이메일 : ${member.email}</p>
 	<p>이름 : ${member.name}</p>
@@ -90,7 +99,6 @@
 		<form id="profileImgForm" enctype="multipart/form-data">
 			<input type="file" id="btnFile" name="profileImg" value="사진 선택" accept=".jpg,.jpeg,.png,.gif,.bmp"><br>
 			<input type="button" id="btnReset" value="기본이미지로 변경"><br>
-			<input type="submit" id="btnSave" value="저장">
 			<input type="button" id="btnClose" value="닫기"><br>
 		</form>
 	</div>
