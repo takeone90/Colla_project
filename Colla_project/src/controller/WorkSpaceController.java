@@ -44,7 +44,7 @@ public class WorkSpaceController {
 		//세션에 그 userEmail저장하고
 		session.setAttribute("userEmail", userEmail);
 		//이메일을 기반으로 멤버하나를 찾는다
-		Member user = mService.getMemberByEmail(userEmail);
+		Member user = mService.getMemberByEmail(userEmail);//로그인한사람
 		session.setAttribute("user", user);
 		//session에 user와 userEmail이 같이 담긴 상태
 		List<Map<String, Object>> workspaceList = new ArrayList<Map<String,Object>>();
@@ -96,7 +96,9 @@ public class WorkSpaceController {
 			return "redirect:loginForm";
 		}else {
 			//비회원이다
-			return "redirect:joinStep1";
+			session.setAttribute("inviteUserEmail", userEmail);
+			session.setAttribute("inviteWnum", wNum);
+			return "redirect:joinStep3";
 		}
 		
 	}

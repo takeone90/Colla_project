@@ -4,7 +4,6 @@ public class WorkspaceInvite {
 	private int wiNum;
 	private String wiTargetUser;
 	private int wNum;
-	private int isAccept;
 	private int wasJoinedUs;
 	public int getWiNum() {
 		return wiNum;
@@ -24,12 +23,6 @@ public class WorkspaceInvite {
 	public void setwNum(int wNum) {
 		this.wNum = wNum;
 	}
-	public int getIsAccept() {
-		return isAccept;
-	}
-	public void setIsAccept(int isAccept) {
-		this.isAccept = isAccept;
-	}
 	public int getWasJoinedUs() {
 		return wasJoinedUs;
 	}
@@ -38,8 +31,7 @@ public class WorkspaceInvite {
 	}
 	@Override
 	public String toString() {
-		return "워크스페이스 초대정보 [wiNum : " + wiNum + ", 초대유저 : " + wiTargetUser + ", 초대워크스페이스번호 : " + wNum + ", 수락여부 : "
-				+ isAccept + ", 가입여부 : " + wasJoinedUs + "]";
+		return "워크스페이스 초대정보 [wiNum : " + wiNum + ", 초대유저 : " + wiTargetUser + ", 초대워크스페이스번호 : " + wNum + ", 가입여부 : " + wasJoinedUs + "]";
 	}
 	
 }

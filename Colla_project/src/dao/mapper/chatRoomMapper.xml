@@ -23,6 +23,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="selectChatRoomByMnum" parameterType="int" resultMap="chatRoomMap">
 		select * from chatroom where m_num=#{mNum}
 	</select>
+	<select id="selectDefaultChatRoomByWnum" parameterType="int" resultMap="chatRoomMap">
+		select * from chatroom where w_num=#{wNum} and cr_isdefault=1
+	</select>
+	
 	<select id="selectAll" resultMap="chatRoomMap">
 		select * from chatroom
 	</select>

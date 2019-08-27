@@ -16,7 +16,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import mail.MailSend;
 import model.EmailVerify;
 import model.Member;
-import service.MemberService; 
+import service.MemberService;
+import service.WsMemberService; 
 
 @Controller
 public class MemberController {
@@ -37,7 +38,8 @@ public class MemberController {
 	
 	@Autowired
 	private MemberService memberService;
-	
+	@Autowired
+	private WsMemberService wsmService;
 	
 	@RequestMapping(value="/joinStep1", method = RequestMethod.GET)
 	public String showJoinStep1() {
@@ -101,8 +103,18 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value="/joinMember", method = RequestMethod.POST)
-	public String joinMember(Member member) {
+	public String joinMember(Member member,HttpSession session) {
 		boolean result = memberService.addMember(member);
+		String inviteUserEmail = (String)session.getAttribute("inviteUserEmail");
+		int inviteWnum = (Integer)session.getAttribute("inviteWnum");
+		System.out.println("초대받은사람이네요 inviteUserEmail : "+inviteUserEmail+", 초대받은wNum : "+inviteWnum);
+		if(inviteUserEmail!=null && member.getEmail().equals(inviteUserEmail)) {
+			//이게 차있다면 초대받은사람임
+			//wsmember로 추가
+			wsmService.addWsMember(inviteWnum, member.getNum());
+		}
+		session.removeAttribute("InviteUserEmail");
+		session.removeAttribute("inviteWnum");
 		if(result) {
 			return "redirect:main";
 		} else {

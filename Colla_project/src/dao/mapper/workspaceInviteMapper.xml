@@ -17,7 +17,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="wi_num" property="wiNum"/>
 		<result column="wi_target_user" property="wiTargetUser"/>
 		<result column="w_num" property="wNum"/>
-		<result column="wi_isaccept" property="isAccept"/>
 		<result column="wi_wasjoinedus" property="wasJoinedUs"/>
 	</resultMap>
 </mapper>

@@ -22,10 +22,6 @@ public class WorkspaceInviteService {
 		}
 		return result;
 	}
-	public void isAccept(String targetUser) {
-		WorkspaceInvite wi = getWorkspaceInviteByTargetUser(targetUser);
-		wi.setIsAccept(1);
-	}
 	public void wasJoinedUs(String targetUser) {
 		WorkspaceInvite wi = getWorkspaceInviteByTargetUser(targetUser);
 		wi.setWasJoinedUs(1);
