@@ -55,10 +55,10 @@ function thisYearCalendar() {
 	var year = today.getFullYear();
 	var calYearTitle = $("#calYearTitle");
 	calYearTitle.html(year+"년 ");
-	
+	'${contextPath}/calMonth'
 	var calendar = "<table border = '1'>";
 	calendar += "<tr>";
-	calendar += "<th width=\"150\" id="+year+"01"+">1월</th>";
+	calendar += "<th width=\"150\" id="+year+"01"+"><a href=\"${contextPath}/calMonth?year=2019&month=1\">1월</a></th>";
 	calendar += "<th width=\"150\" id="+year+"02"+">2월</th>";
 	calendar += "<th width=\"150\" id="+year+"03"+">3월</th>";
 	calendar += "<th width=\"150\" id="+year+"04"+">4월</th>";
@@ -121,6 +121,8 @@ function showYearSchedule() {
 </script>
 </head>
 <body>
+<%@ include file="/WEB-INF/jsp/inc/headerWs.jsp"%>
+<%@ include file="/WEB-INF/jsp/inc/navWs.jsp"%>
 	<form action="calSearchList">
 		<input type="text" name="calSearch" placeholder="검색어를 입력해주세요.">
 		<input type="submit" value="검색">
