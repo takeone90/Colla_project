@@ -8,8 +8,15 @@
 <title>게시글 상세</title>
 <link rel="stylesheet" type="text/css" href="../css/reset.css"/>
 <link rel="stylesheet" type="text/css" href="../css/base.css"/>
+<link rel="stylesheet" type="text/css" href="../css/headerWs.css"/>
+<link rel="stylesheet" type="text/css" href="../css/navWs.css"/>
+<link rel="stylesheet" type="text/css" href="../css/board.css"/>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script type="text/javascript" src="../js/boardReply.js"></script>
+<script type="text/javascript">
+	const bNum = ${board.bNum};
+</script>
 </head>
 <body>
 	<%@ include file="/WEB-INF/jsp/inc/headerWs.jsp" %>
@@ -39,27 +46,16 @@
 		</div>
 		<div id="boardReply">
 			<h3>댓글</h3>
-			<ul id="replyBox">
-				<li>
-					<div class="replyImg"><img src="img/pic.jpg"></div>
-					<div class="replyDetail">
-						<p>
-						</p>
-						<p>
-							댓글입니다~
-						</p>
-					</div>
-				</li>
+			<ul id="replyBox" class="clearFix">
 			</ul>
-			<div id="addReplyDiv">
-				<form>
-					<div class="replyImg"><img src="img/pic.jpg"></div>
-					<input type="text" name="r_content" placeholder="내용을 입력해주세요"/>
+			<form id="addReplyDiv">
+				<div class="replyImg"><img src="../img/pic.jpg"></div>
+				<div id="inputBox">
+					<textarea rows="2" cols="50"></textarea>
 					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 					<button>댓글 추가</button>
-				</form>
-				
-			</div>
+				</div>
+			</form>
 		</div>
 	</div>
 </body>

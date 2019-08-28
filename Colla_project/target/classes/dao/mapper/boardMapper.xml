@@ -5,30 +5,43 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="dao.BoardDao">
 	
 	<select id="selectAllBoardByWnum" parameterType="int" resultMap="boardMap">
-		select b_num, m_name, w_num, b_title, b_content, b_regdate, b_readCnt, b_pw
+		select b_num, m_name, w_num, b_title, b_content, b_regdate, b_readCnt, b_pw, b_type
 		from board b, member m
 		where b.w_num = #{wNum} and m.m_num=b.m_num
 		order by b_regdate desc
 	</select>
 	<select id="selectBoardBybNum" parameterType="int" resultMap="boardMap">
-		select b_num, m_name, w_num, b_title, b_content, b_regdate, b_readCnt, b_pw
+		select b_num, m_name, w_num, b_title, b_content, b_regdate, b_readCnt, b_pw, b_type
 		from board b, member m
 		where b.b_num = #{bNum} and m.m_num=b.m_num
 	</select>
-	<insert id="insertDefaultBoard" parameterType="board">
+	<delete id="deleteBoard" parameterType="int">
+		delete from board where b_num = #{bNum}
+	</delete>
+	<insert id="insertBoard" parameterType="board">
+		<selectKey resultType="int" keyProperty="bNum" order="BEFORE">
+			select b_seq.nextval from dual
+		</selectKey>
 		insert into board
 		values(
-				b_seq.nextval, 
+				#{bNum}, 
 				#{mNum}, 
 				#{wNum}, 
 				#{bTitle}, 
 				#{bContent}, 
 				sysdate, 
 				0,
-				#{bPw}
+				#{bPw},
+				#{bType}
 			)
 	</insert>
-	
+	<update id="updateBoard" parameterType="board">
+		update board set
+			b_title = #{bTitle},
+			b_content = #{bContent},
+			b_type = #{bType}
+		where b_num = #{bNum}
+	</update>
 	<resultMap type="board" id="boardMap" >
 		<result column="b_num" property="bNum"/>
 		<result column="m_num" property="mNum"/>
@@ -39,6 +52,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="b_regdate" property="bRegDate"/>
 		<result column="b_readCnt" property="readCnt"/>
 		<result column="b_pw" property="bPw"/>
+		<result column="b_type" property="bType"/>
 	</resultMap>
 	
 </mapper>

@@ -14,3 +14,10 @@ a:visited, a:link, a:focus, a:hover, a:active{
 .clearFix:after{content:""; display:block; clear:both;}
 .container {overflow:hidden; position:relative;}
 .floatleft {float:left;}
+
+
+#wsBody{
+	width:calc(100% - 200px);
+	margin-left:200px;
+	padding-top:70px;
+}

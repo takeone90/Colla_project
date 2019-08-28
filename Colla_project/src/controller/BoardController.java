@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import model.Board;
-import model.Member;
 import service.BoardService;
 import service.MemberService;
 
@@ -29,7 +28,10 @@ public class BoardController {
 	private MemberService mService;
 	
 	@RequestMapping("/list")
-	public String showBoardList(HttpSession session, Model model) {
+	public String showBoardList(
+			HttpSession session, 
+			Model model
+			) {
 //		int wNum = (int)session.getAttribute("currWnum");
 		int wNum = 1;
 		List<Board> bList = bService.getAllBoardByWnum(wNum);
@@ -70,34 +72,62 @@ public class BoardController {
 			Model model,
 			String pw,
 			int bNum,
-			String mode
+			String mode,
+			HttpSession session
 			) {
-		System.out.println("pw  : "+pw+", bNum : "+bNum );
+		String view = "redirect:error";
 		if(bService.getBoardByBnum(bNum)!=null) {
 			Board board = bService.getBoardByBnum(bNum);
 			if(board.getbPw().equals(pw)) {
 				//비밀번호 일치
-				return "redirect:"+mode;
+				session.setAttribute("pwConfirmedBnum", bNum);
+				if(mode.equals("modify")) {
+					model.addAttribute("bNum", bNum);
+					view = "redirect:modify";
+				} else if(mode.equals("delete")) {
+					if(bService.removeBoard(bNum)) {
+						view = "redirect:list";
+					}
+				}
 			} else {
 				//비밀번호 불일치
-				System.out.println("글 암호 불일치....글번호:"+ bNum);
 				model.addAttribute("bNum", bNum);
 				model.addAttribute("mode", mode);
-				return "redirect:checkPass?msg=false";
+				view = "redirect:checkPass?msg=false";
 			}
-		}else {
+		}
+		return view;
+	}
+
+	@RequestMapping(value="/modify", method = RequestMethod.GET)
+	public String showModifyForm(HttpSession session, Model model, int bNum) {
+		if(session.getAttribute("pwConfirmedBnum") != null && (int)session.getAttribute("pwConfirmedBnum")==bNum) {
+			model.addAttribute("board", bService.getBoardByBnum(bNum));
+			
+			session.removeAttribute("pwConfirmedBnum");
+			return "/board/boardModifyForm";
+		} else {
 			return "redirect:error";
 		}
 	}
 
-	@RequestMapping(value="/modify", method = RequestMethod.GET)
-	public String showModifyForm() {
-		return "/board/boardModifyForm";
-	}
-
 	@RequestMapping(value="/modify", method = RequestMethod.POST)
-	public String modifyBoard() {
-		return "/board/boardModifyForm";
+	public String modifyBoard(
+			int bNum,
+			String title,
+			String content,
+			String boardType
+			) {
+		Board board = new Board();
+		board.setbNum(bNum);
+		board.setbContent(content);
+		board.setbTitle(title);
+		board.setbType(boardType);
+		
+		if(bService.modifyBoard(board)) {
+			return "redirect:/board/view?num="+bNum;
+		}
+		return "redirect:error";
 	}
 	
 	@RequestMapping(value="/write", method = RequestMethod.GET)
@@ -117,7 +147,7 @@ public class BoardController {
 			) {
 //		int wNum = (int)session.getAttribute("currWnum");
 		int wNum = 1;
-		if(!boardType.equals("anonymous")) {
+		if(boardType.equals("anonymous") || boardType.equals("default") || boardType.equals("notice")) {
 			String usermail = principal.getName();
 			int mNum = mService.getMemberByEmail(usermail).getNum();
 			Board board = new Board();
@@ -126,8 +156,14 @@ public class BoardController {
 			board.setwNum(wNum);
 			board.setbContent(content);
 			board.setbPw(pw);
+			board.setbType(boardType);
 			
-			bService.addDefaultBoard(board);
+			if(bService.addBoard(board)) {
+				return "redirect:/board/view?num="+board.getbNum();
+			}
+		}else {
+			//타입 설정 오류
+			return "redirct:error";
 		}
 		return "redirect:/board/list";
 	}

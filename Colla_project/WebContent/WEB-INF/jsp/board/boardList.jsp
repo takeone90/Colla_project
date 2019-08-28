@@ -9,6 +9,9 @@
 <title>Board List</title>
 <link rel="stylesheet" type="text/css" href="../css/reset.css"/>
 <link rel="stylesheet" type="text/css" href="../css/base.css"/>
+<link rel="stylesheet" type="text/css" href="../css/headerWs.css"/>
+<link rel="stylesheet" type="text/css" href="../css/navWs.css"/>
+<link rel="stylesheet" type="text/css" href="../css/board.css"/>
 <style type="text/css">
 	.container{width: 1200px;}
 	#boardList {
@@ -27,15 +30,18 @@
 		width:5%;
 	}
 	#boardList div:nth-child(2){
-		width:65%;
+		width:10%;
 	}
 	#boardList div:nth-child(3){
-		width:10%;
+		width:55%;
 	}
 	#boardList div:nth-child(4){
 		width:10%;
 	}
 	#boardList div:nth-child(5){
+		width:10%;
+	}
+	#boardList div:nth-child(6){
 		width:10%;
 	}
 </style>
@@ -49,29 +55,29 @@
 		<ul id="boardList">
 			<li id="listHead">
 				<div>No.</div>
+				<div>종류</div>
 				<div>제목</div>
 				<div>작성일</div>
 				<div>작성자</div>
 				<div>조회수</div>
 			</li>
-<!-- 			<li> -->
-<!-- 				<div>공지</div> -->
-<!-- 				<div>대체 휴무 관련하여 공지합니다. [2]</div> -->
-<!-- 				<div>2018-08-23</div> -->
-<!-- 				<div>김미경</div> -->
-<!-- 				<div>25</div> -->
-<!-- 			</li> -->
-<!-- 			<li> -->
-<!-- 				<div>76</div> -->
-<!-- 				<div>부장님 가발이셨네요...또르르 [5]</div> -->
-<!-- 				<div>2018-08-20</div> -->
-<!-- 				<div>익명</div> -->
-<!-- 				<div>99</div> -->
-<!-- 			</li> -->
 			
 			<c:forEach items="${bList}" var="board">
 			<li>
 				<div>${board.bNum }</div>
+				<div>
+					<c:choose>
+						<c:when test="${board.bType eq 'notice'}">
+							공지
+						</c:when>
+						<c:when test="${board.bType eq 'anonymous'}">
+							익명
+						</c:when>
+						<c:otherwise >
+							일반
+						</c:otherwise>
+					</c:choose>
+				</div>
 				<div>
 					<a href="../board/view?num=${board.bNum}">${board.bTitle } <span class="replyCount">[0]</span></a>
 				</div>
@@ -82,9 +88,29 @@
 				<div>${board.readCnt }</div>
 			</li>
 			</c:forEach>
-			<a href="../board/write">글쓰기</a>
-			
 		</ul>
+		
+		<ul id=pagination>
+			<li><a href="#" class="currPage">1</a></li>
+			<li><a href="#">2</a></li>
+			<li><a href="#">3</a></li>
+			<li><a href="#">4</a></li>
+			<li><a href="#">5</a></li>
+		</ul>
+		
+		<a href="../board/write">글쓰기</a>
+		<div id="searchWrap">
+			<form action="list">
+				<select name="keywordType" id="keywordType">
+					<option value="t">제목</option>
+					<option value="c">내용</option>
+					<option value="tc">제목+내용</option>
+					<option value="a">작성자</option>
+				</select>
+				<input type="text" name="keyword" placeholder="검색어">
+				<button>검색</button>
+			</form>
+		</div>
 	</div>
 </body>
 </html>

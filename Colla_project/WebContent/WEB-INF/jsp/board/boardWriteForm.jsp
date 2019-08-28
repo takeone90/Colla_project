@@ -7,6 +7,8 @@
 <title>게시글 작성</title>
 <link rel="stylesheet" type="text/css" href="../css/reset.css"/>
 <link rel="stylesheet" type="text/css" href="../css/base.css"/>
+<link rel="stylesheet" type="text/css" href="../css/headerWs.css"/>
+<link rel="stylesheet" type="text/css" href="../css/navWs.css"/>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 </head>
@@ -41,7 +43,7 @@
 						말머리
 						<select id="boardType" name="boardType">
 							<option value="default">일반</option>
-							<option value="noice">공지</option>
+							<option value="notice">공지</option>
 							<option value="anonymous">익명</option>
 						</select>
 					</label>

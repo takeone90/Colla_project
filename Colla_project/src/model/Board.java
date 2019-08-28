@@ -12,8 +12,15 @@ public class Board {
 	private Timestamp bRegDate;
 	private int readCnt;
 	private String bPw;
+	private String bType;
 	
 	
+	public String getbType() {
+		return bType;
+	}
+	public void setbType(String bType) {
+		this.bType = bType;
+	}
 	public String getbPw() {
 		return bPw;
 	}
