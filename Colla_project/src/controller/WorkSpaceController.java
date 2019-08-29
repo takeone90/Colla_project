@@ -88,12 +88,13 @@ public class WorkSpaceController {
 		String userEmail = (String)session.getAttribute("userEmail");
 		Member member = mService.getMemberByEmail(userEmail);
 		int wNum = wService.addWorkspace(member.getNum(), wsName);
+		if(targetUser!="" && targetUser!=null) {
+			//targetUser들에게 초대메일 보내기 해야함
+			wiService.addWorkspaceInvite(targetUser, wNum);
+			Thread innerTest = new Thread(new inner(targetUser,wNum));
+			innerTest.start();
+		}
 		
-		
-		//targetUser들에게 초대메일 보내기 해야함
-		wiService.addWorkspaceInvite(targetUser, wNum);
-		Thread innerTest = new Thread(new inner(targetUser,wNum));
-		innerTest.start();
 		return "redirect:workspace";
 	}
 	
