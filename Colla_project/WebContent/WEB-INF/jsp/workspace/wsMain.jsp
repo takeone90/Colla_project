@@ -26,7 +26,7 @@
 	top : 30%;
 	left : 30%;
 	width : 500px;
-	height : 350px;
+	height : 400px;
 	background-color: #e1e4e8;
 	text-align: center;
 	border-radius: 10px;
@@ -55,10 +55,14 @@
 .wsDetail{
 display : none;
 }
+.row ul{
+	list-style: none;
+	padding-left: 0px;
+}
 </style>
 <script>
 	var wNum;
-
+	
 	$(function(){
 		//WS추가 모달
 		$(".openWsModal").on("click",function(){
@@ -70,9 +74,12 @@ display : none;
 		});
 		//ChatRoom추가 모달
 		$(".openChatModal").on("click",function(){
-			var wNum = $(this).attr("data-wnum");
+			wNum = $(this).attr("data-wnum");
+			thisWsMemberList(wNum);
+			$("#thisWnum").val(wNum);
 			$(".addWnum").val(wNum); //채팅방 추가모달에 숨어있는 addWnum 부분에 wNum담기
 			$("#addChatModal").fadeIn(300);
+			return false;
 		});
 		$("#closeChatModal").on("click",function(){
 			$("#addChatModal").fadeOut(300);
@@ -80,7 +87,7 @@ display : none;
 		});
 		//WS Member추가 모달
 		$(".openAddMemberModal").on("click",function(){
-			var wNum = $(this).attr("data-wnum");
+			wNum = $(this).attr("data-wnum");
 			$(".addWnum").val(wNum); //멤버 추가모달에 숨어있는 addWnum 부분에 wNum담기
 			$("#addMemberModal").fadeIn(300);
 		});
@@ -110,7 +117,24 @@ display : none;
 		});
 		
 	});
-	
+	function thisWsMemberList(wNum){
+			var wsMemberList = $("#wsMemberList");
+			$.ajax({
+				url : "${contextPath}/thisWsMemberList",
+				data : {"wNum":wNum},
+				dataType : "json",
+				success : function(d){
+					wsMemberList.empty();
+					$.each(d,function(idx,item){
+						var str='<li><input type="checkbox" value="'+item.num+'" name="mNumList">'+item.name+'</li>';
+							wsMemberList.append(str);
+						});
+				},
+				error : function(){
+					alert("wsMemberList 띄우기 에러발생");
+				}
+			});
+	}
 </script>
 </head>
 <body>
@@ -120,7 +144,6 @@ display : none;
 		<h2>Workspace</h2>
 		<h3>Workspace List</h3>
 		<ul>
-		
 			<c:forEach items="${workspaceList}" var="ws">
 				<li class="ws">
 					<h4>${ws.wsInfo.name}</h4>
@@ -150,7 +173,7 @@ display : none;
 						</div>
 					</div>
 					<div>
-						<a href="#">워크스페이스 나가기</a>
+						<a href="exitWs?wNum=${ws.wsInfo.num}">워크스페이스 나가기</a>
 					</div>
 				</li>
 			</c:forEach>
@@ -211,7 +234,7 @@ display : none;
 			<div class="modalBody">
 				<p>채팅방을 만들고 멤버를 초대하세요</p>
 				<form action="addChat" method="post">
-					<input type="hidden" class="addWnum" name="wNum">
+					<input type="text" class="addWnum" name="wNum">
 					<input type="hidden" value="${_csrf.token}" name="${_csrf.parameterName}">
 					<div class="addChatInputWrap">
 						<div class="row">
@@ -222,10 +245,7 @@ display : none;
 						</div>
 						<div class="row">
 							<h4>멤버 초대</h4>
-								<ul>
-<%-- 									<c:forEach items="${wsMemberList}" var="wsm"> --%>
-<%-- 										<li><input type="checkbox" value="${wsm.num}" name="wsmList">${wsm.name}</li> --%>
-<%-- 									</c:forEach> --%>
+								<ul id="wsMemberList">
 								</ul>
 							<div>
 								<a href="#">멤버추가버튼</a>

@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import controller.MemberController.inner;
 import mail.MailSend;
@@ -20,6 +22,7 @@ import model.Member;
 import model.Workspace;
 import model.WorkspaceInvite;
 import model.WsMember;
+import service.ChatRoomMemberService;
 import service.ChatRoomService;
 import service.MemberService;
 import service.WorkspaceInviteService;
@@ -36,6 +39,8 @@ public class WorkSpaceController {
 	private WsMemberService wsmService;
 	@Autowired
 	private ChatRoomService crService;
+	@Autowired
+	private ChatRoomMemberService crmService;
 	@Autowired
 	private WorkspaceInviteService wiService;
 	@RequestMapping("/workspace")
@@ -60,6 +65,20 @@ public class WorkSpaceController {
 		}
 		model.addAttribute("workspaceList", workspaceList);
 		return "/workspace/wsMain";
+	}
+	
+	@ResponseBody
+	@RequestMapping("/thisWsMemberList")
+	public List<Member> showThisWsMember(@RequestParam("wNum") int wNum) {
+		
+		List<WsMember> wsmList = wsmService.getAllWsMemberByWnum(wNum);
+		List<Member> wsMemberList = new ArrayList<Member>();
+		for(WsMember wsm : wsmList) {
+			Member member = mService.getMember(wsm.getmNum());
+			wsMemberList.add(member);
+		}
+		
+		return wsMemberList;
 	}
 	
 	//워크스페이스 추가
@@ -101,20 +120,32 @@ public class WorkSpaceController {
 				//회원이다.
 				Member member = mService.getMemberByEmail(userEmail);
 				wsmService.addWsMember(wNum, member.getNum());
+				wiService.removeWorkspaceInvite(userEmail, wNum);
 				return "redirect:loginForm";
 			}else {
 				//비회원이다
 				session.setAttribute("inviteUserEmail", userEmail);
 				session.setAttribute("inviteWnum", wNum);
+				wiService.removeWorkspaceInvite(userEmail, wNum);
 				return "redirect:joinStep3";
 			}
 		}else {
+			
 			return "redirect:error";
 		}
 		
 		
 	}
 	
+	@RequestMapping("/exitWs")
+	public String exitWs(int wNum,HttpSession session) {
+		Member member = (Member)session.getAttribute("user");
+		wsmService.removeWsMember(wNum, member.getNum());
+		//mNum과 wNum을 이용해서 모든 chatRoomMember값을 지운다
+		crmService.removeChatRoomMemberByWnumMnum(wNum, member.getNum());
+		//exit 한사람이 chatroom의 생성자일지라도 그 chatroom 은 지워지지 않는다.
+		return "redirect:workspace";
+	}
 	
 	
 	

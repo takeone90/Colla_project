@@ -62,10 +62,20 @@ public class ChatRoomController {
 		return "/chatting/chatMain";
 	}
 	@RequestMapping("/addChat")
-	public String addChatRoom(int wNum,String crName,String targetUser1,String targetUser2,HttpSession session) {
+	public String addChatRoom(int wNum,String crName,HttpSession session,HttpServletRequest request) {
+		//현재 로그인하고 채팅방만드는 사람을 chatroom member로 넣어준다
 		Member member = (Member)session.getAttribute("user");
 		int mNum = member.getNum();
-		crService.addChatRoom(wNum, mNum, crName);//세션에 저장된 wNum, mNum 을가져와야한다.                          
+		int crNum = crService.addChatRoom(wNum, mNum, crName);//세션에 저장된 wNum, mNum 을가져와야한다.
+		
+		for(String stringMnum : request.getParameterValues("mNumList")) {
+			//멤버초대 체크리스트로 선택된 member들의 Num
+			int num = Integer.parseInt(stringMnum);
+			//그 member의 num을 이용해서 chatRoomMember로 넣어준다.
+			crmService.addChatRoomMember(crNum, num, wNum);
+		}
+		
+		
 		return "redirect:workspace";
 	}
 	@RequestMapping("/inviteChatMember")

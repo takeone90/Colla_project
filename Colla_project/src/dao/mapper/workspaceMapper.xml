@@ -17,6 +17,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<delete id="deleteWorkspace" parameterType="int">
 		delete workspace where w_num=#{num}
 	</delete>
+	
 	<select id="selectWorkspace" parameterType="int" resultMap="workspaceMap">
 		select * from workspace where w_num=#{num}
 	</select>
