@@ -16,8 +16,8 @@ public class ChatRoomService {
 	private ChatRoomDao crDao;
 	@Autowired
 	private ChatRoomMemberDao crmDao;
-	public boolean addChatRoom(int wNum,int mNum,String crName) {
-		boolean result = false;
+	public int addChatRoom(int wNum,int mNum,String crName) {
+//		boolean result = false;
 		ChatRoom chatRoom = new ChatRoom();
 		chatRoom.setCrName(crName);
 		chatRoom.setmNum(mNum);
@@ -29,9 +29,9 @@ public class ChatRoomService {
 			crm.setmNum(mNum);
 			crm.setwNum(wNum);
 			crmDao.insertChatRoomMember(crm);//채팅방 멤버한명 생성(채팅방 생성자)
-			result = true;
+//			result = true;
 		}
-		return result;
+		return chatRoom.getCrNum();
 	}
 	public boolean modifyChatRoom(ChatRoom chatRoom) {
 		boolean result = false;

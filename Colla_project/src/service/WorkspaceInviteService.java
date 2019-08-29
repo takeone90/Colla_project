@@ -22,6 +22,13 @@ public class WorkspaceInviteService {
 		}
 		return result;
 	}
+	public boolean removeWorkspaceInvite(String targetUser, int wNum) {
+		boolean result = false;
+		if(wiDao.deleteWorkspaceInvite(targetUser, wNum)>0) {
+			result = true;
+		}
+		return result;
+	}
 	public void wasJoinedUs(String targetUser,int wNum) {
 		WorkspaceInvite wi = getWorkspaceInviteByTargetUser(targetUser,wNum);
 		wi.setWasJoinedUs(1);
