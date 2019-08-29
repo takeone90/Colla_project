@@ -16,6 +16,7 @@
 <script type="text/javascript" src="../js/boardReply.js"></script>
 <script type="text/javascript">
 	const bNum = ${board.bNum};
+	const mNum = ${sessionScope.user.num};
 </script>
 </head>
 <body>
@@ -51,7 +52,7 @@
 			<form id="addReplyDiv">
 				<div class="replyImg"><img src="../img/pic.jpg"></div>
 				<div id="inputBox">
-					<textarea rows="2" cols="50"></textarea>
+					<textarea rows="2" cols="50" name="rContent"></textarea>
 					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 					<button>댓글 추가</button>
 				</div>
