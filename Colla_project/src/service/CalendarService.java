@@ -13,8 +13,6 @@ import org.springframework.stereotype.Service;
 import dao.CalendarDao;
 import model.Calendar;
 
-
-
 @Service
 public class CalendarService {
 	@Autowired

@@ -11,8 +11,8 @@ request.setAttribute("contextPath", contextPath);
 <meta charset="UTF-8">
 <title>calMonth</title>
 <style type="text/css">
-/* .yearCalendar{display: none;} */
-/* .monthCalendar{display: none; width: 1000px; height: 1000px;} */
+.yearCalendar{border-collapse: collapse;}
+.monthCalendar{border-collapse: collapse;}
 .addScheduleModal{display: none; width: 300px; height: 250px; top: 10%; left: 10%; position: absolute; background-color: #ffe8ea;}
 .detailScheduleModalOfYearCal{display: none; width: 300px; height: 250px; top: 10%; left: 10%; position: absolute; background-color: #ffd9dc;}
 .modifyScheduleModal{display: none; width: 300px; height: 250px; top: 10%; left: 10%; position: absolute; background-color: #ffe8ea;}
@@ -167,7 +167,7 @@ $(function() {
 		if((today.getMonth()+1)<10) {
 			var month = "0"+(today.getMonth()+1);
 		}
-		var calendar = "<table border = '1'>";
+		var calendar = "<table border = '1' class=\"drawMonthCalendar\">";
 		calendar += "<tr>";
 		calendar += "<th width=\"150\">일</th>";
 		calendar += "<th width=\"150\">월</th>";
@@ -337,8 +337,7 @@ $(function() {
 		var year = today.getFullYear();
 		var calYearTitle = $("#calYearTitle");
 		calYearTitle.html(year+"년 ");
-		'${contextPath}/calMonth'
-		var calendar = "<table border = '1'>";
+		var calendar = "<table border = '1' class=\"drawYearCalendar\">";
 		calendar += "<tr>";
 		calendar += "<th width=\"150\" id="+year+"01"+"><a onclick=\"moveToWantedCalendar("+year+", 0, 1)\">1월</a></th>";
 		calendar += "<th width=\"150\" id="+year+"02"+"><a onclick=\"moveToWantedCalendar("+year+", 1, 1)\">2월</th>";
@@ -512,7 +511,6 @@ $(function() {
 </div>	
 
 <!-- 연간 달력 -->
-
 <div id="yearCalendar" class="yearCalendar">
 	<button onclick="preYearOfYearCal()">작년</button>
 	<h1 id="calYearTitle"></h1>
