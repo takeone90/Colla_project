@@ -1,0 +1,98 @@
+@charset "UTF-8";
+
+#wsNav {
+	width:200px;
+	height:calc(100% - 70px);
+	position:fixed;
+	left:0;
+	bottom:0;
+	color:#fff;
+	background-color:#403C39;
+}
+#navContainer{
+	width:100%;
+	margin:0 auto;
+	text-align:center;
+}
+#aboutProfile{
+	margin-top:30px;
+}
+
+#aboutProfile  a{
+	display:block;
+	border-radius:50%;
+	border:2px solid #fff;
+	margin:0 auto;
+	width:96px;
+	height:96px;
+	overflow:hidden;
+}
+#aboutProfile a > img{
+	width:100%;
+}
+#aboutProfile p {
+	margin:10px 0;
+	text-align:center;	
+}
+#myChatList{
+	margin: 20px 0;
+	text-align:right;
+}
+#myChatList h3{
+	padding:0 30px;
+}
+#myChatList ul{
+	padding-top:5px;
+}
+#myChatList ul li{
+	padding:3px 30px;
+	font-size:14px;
+}
+#myChatList ul li.currChat{
+	background-color:#E5675A;
+}
+#myChatList ul li.currChat a{
+	color:#fff;
+}
+#myChatList ul li a {
+	transition:color 0.5s;
+	color:#CCCBCA;
+}
+#myChatList ul li a:hover{
+	color:#fff;
+}
+
+#ws-subfunction{
+	padding-top:20px;
+}
+#ws-subfunction li{
+	float:left;
+	width:50%;
+}
+#ws-subfunction li a{
+	transition:background-color 0.5s;
+	display:block;
+	border-radius:8px;
+	padding:10px 0;
+	width:80px;
+	margin:0 auto;
+	background-color:#888;
+	color:#fff;
+	font-size:14px;
+}
+#ws-subfunction li a:hover{
+	background-color:#E5675A;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
