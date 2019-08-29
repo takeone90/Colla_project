@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<c:set var="contextPath" value="<%=request.getContextPath() %>"/>
 <div id="wsNav">
 	<div id="navContainer">
 		<div id="aboutProfile">
@@ -29,10 +30,10 @@
 		<hr>
 		<ul id="ws-subfunction" class="clearFix">
 			<li>
-				<a href="#">Calendar</a>
+				<a href="${contextPath}/calMonth">Calendar</a>
 			</li>
 			<li>
-				<a href="#">Board</a>
+				<a href="board/list">Board</a>
 	    	</li>
 		</ul>
 	</div>

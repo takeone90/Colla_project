@@ -7,6 +7,11 @@
 <head>
 <meta charset="UTF-8">
 <title>워크스페이스</title>
+<link rel="stylesheet" type="text/css" href="css/reset.css"/>
+<link rel="stylesheet" type="text/css" href="css/base.css"/>
+<link rel="stylesheet" type="text/css" href="css/headerWs.css"/>
+<link rel="stylesheet" type="text/css" href="css/navWs.css"/>
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <style>
 #addWsModal{
@@ -16,7 +21,7 @@
 	left : 30%;
 	width : 500px;
 	height : 350px;
-	background-color: #e1e4e8;
+	background-color: white;
 	text-align: center;
 	border-radius: 10px;
 }
@@ -27,7 +32,7 @@
 	left : 30%;
 	width : 500px;
 	height : 400px;
-	background-color: #e1e4e8;
+	background-color: white;
 	text-align: center;
 	border-radius: 10px;
 }
@@ -38,7 +43,7 @@
 	left : 30%;
 	width : 500px;
 	height : 250px;
-	background-color: #e1e4e8;
+	background-color: white;
 	text-align: center;
 	border-radius: 10px;
 }
@@ -146,7 +151,7 @@ display : none;
 		<ul>
 			<c:forEach items="${workspaceList}" var="ws">
 				<li class="ws">
-					<h4>${ws.wsInfo.name}</h4>
+					<h3 style="font-weight: bolder;">${ws.wsInfo.name}</h3>
 					<button class="showWsDetail">워크스페이스 상세보기</button> <!-- 누르면 ws.wsInfo.num인 wsDetail만 열려야한다 -->
 
 					<div class="wsDetail">
@@ -173,7 +178,7 @@ display : none;
 						</div>
 					</div>
 					<div>
-						<a href="exitWs?wNum=${ws.wsInfo.num}">워크스페이스 나가기</a>
+						<a href="exitWs?wNum=${ws.wsInfo.num}" style="color:red">워크스페이스 나가기</a>
 					</div>
 				</li>
 			</c:forEach>
