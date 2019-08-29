@@ -24,7 +24,6 @@ request.setAttribute("contextPath", contextPath);
 	<label><input type="checkbox" name="calType" id="calType" value="event">행사</label>
 	<button onclick="location.href='${contextPath}/calMonth'">월간</button>
 	<button onclick="location.href='${contextPath}/calYear'">연간</button>
-	
 	<table>
 		<tr>
 			<th>제목</th>
