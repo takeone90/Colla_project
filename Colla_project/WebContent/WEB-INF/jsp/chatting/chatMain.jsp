@@ -5,7 +5,13 @@
 <head>
 <meta charset="UTF-8">
 <title>채팅 메인</title>
+<link rel="stylesheet" type="text/css" href="css/reset.css"/>
+<link rel="stylesheet" type="text/css" href="css/base.css"/>
+<link rel="stylesheet" type="text/css" href="css/headerWs.css"/>
+<link rel="stylesheet" type="text/css" href="css/navWs.css"/>
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
 <style>
 	#addCrMemberModal{
 	display : none;
@@ -14,7 +20,7 @@
 	left : 30%;
 	width : 500px;
 	height : 340px;
-	background-color: #e1e4e8;
+	background-color: white;
 	text-align: center;
 	align-content : center;
 	border-radius: 10px;
@@ -86,14 +92,16 @@ $(function(){
 		<%---------------------------------------------채팅방 멤버추가모달 ----------------------------------------------------%>
 		<div id="addCrMemberModal">
 			<div class="modalHead">
-				<h3>채팅방 초대</h3>
+				<h3 style="font-weight: bolder; font-size: 30px">채팅방 초대</h3>
 			</div>
+			<br><br>
 			<div class="modalBody">
 				<p>채팅방에 멤버를 초대하세요</p>
 				<form action="inviteChatMember" method="post">
 					<input type="hidden" class="addCrNum" name="crNum" value="${chatRoom.crNum}">
 					<input type="hidden" value="${wNum}" name="wNum">
 					<input type="hidden" value="${_csrf.token}" name="${_csrf.parameterName}">
+					<br><br>
 					<div class="addCrMemberInputWrap">
 						<div class="row">
 							<h4>워크스페이스 회원목록</h4>
