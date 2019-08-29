@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import model.Member;
@@ -26,7 +27,7 @@ public class ReplyController {
 		return rList;
 	}
 	
-	@RequestMapping("/add/{bNum}")
+	@RequestMapping(value = "/add/{bNum}", method = RequestMethod.POST, produces = "application/text;charset=UTF-8")
 	public String addReply(@PathVariable int bNum, HttpSession session, String content) {
 		Member user = (Member)session.getAttribute("user");
 		int mNum = user.getNum();
