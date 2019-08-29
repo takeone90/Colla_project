@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,144 +10,134 @@
 %>
 <title>마이페이지 메인</title>
 <script src="https://code.jquery.com/jquery-3.4.1.js"
-  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
-  crossorigin="anonymous"></script>
+	integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+	crossorigin="anonymous"></script>
 <script type="text/javascript">
-	$(function(){
-		$(".myprofileImg").on("click", function(){
-			$(".profileImg-modal").show();
-		});// end myprofileImg click
-		//[]
-		$("#profileImgForm input[type='button']").on("click", function() {
-			$(".profileImg-modal").hide();
+
+	var profileImgType = null;
+	$(function() {
+		// [닫기]버튼 클릭 시, 모달창 닫힘
+		$(".btnClose").on("click", function() {
+			closeModal();
 		});
 		
-		//첨부파일 변경시 발생하는 이벤트
-		//$("#btnFile").on("change", function(){
-			
-		//[저장] 버튼 클릭 시 동작하는 이벤트
-		$("#profileImgForm").on("submit",function(){
-			var formData = new FormData();
-			var profileImgFile = $("input[name='profileImg']");
-			var files = profileImgFile[0].files;
-			var result = $("#btnReset").cli
-			for(var i=0;i<files.length;i++){
-				formData.append("profileImg", files[i]);
-			}
-			$.ajax({
-				url : "${contextPath}/modifyProfileImg?type=profileImg",
-				processData : false,
-				contentType : false,
-				type : "post",
-				data : formData,
-				success:function(result){}
-			});//end ajax
-		});//submit end
 		
-		//첨부파일 변경시 발생하는 이벤트
-		$("#btnFile").on("change", function(){
+		// 프로필 이미지 선택 시 모달 창 출력
+		$(".myprofileImg").on("click", function() {
+			console.log("모달 리셋 됨??" + profileImgType);
+			$(".profileImg-modal").show();
+		});
+
+		//이미지 업로드 전 미리보기
+		$(".btnFile").on('change', function() {
+			if (this.files && this.files[0]) {
+				var reader = new FileReader();
+				reader.onload = function(e) {
+					$('.thumbNailImg').attr("src", e.target.result);
+				}
+				reader.readAsDataURL(this.files[0]);
+			}
+		});//end change
+		
+		//기본이미지로 변경
+		$(".btnReset").on("click",function(){
+			$('.thumbNailImg').attr("src", "${contextPath}/img/profileImage.png");
+			profileImgType = "defaultImg";
+			console.log("기본이미지 선택시 ???" + profileImgType);
+		});
+
+		
+		//[저장] 버튼 클릭 시 동작하는 이벤트
+		$(".profileImgForm").on("submit", function() {
 			var formData = new FormData();
 			var profileImgFile = $("input[name='profileImg']");
 			var files = profileImgFile[0].files;
-			var result = $("#btnReset").cli
+			
 			for(var i=0;i<files.length;i++){
-				formData.append("profileImg", files[i]);
+				formData.append("profileImg", files[i]);	
 			}
+			formData.append("profileImgType", profileImgType);
+			
+			
 			$.ajax({
-				url : "${contextPath}/modifyProfileImg?type=thumbnail",
+				url : "${contextPath}/modifyProfileImg",
 				processData : false,
 				contentType : false,
-				type : "post",
 				data : formData,
-				success:function(result){
-					
+				type : "post",
+				success : function(data) {
+					if(data){
+						$('.myProfileImg').attr("src","${contextPath}/showProfileImg");
+						closeModal();					
+					}else{
+						alert("프로필 변경에 실패하였습니다");
+					}
 				}
 			});//end ajax
-		});//change end
-		
+			return false;
+		});//submit end
 	});//end onload
+	
+	function closeModal(){
+		$(".thumbNailImg").attr("src","${contextPath}/showProfileImg");
+		profileImgType = null;
+		$(".profileImg-modal").hide();
+	};
+	
 	
 </script>
 <style type="text/css">
-	.profileImg-modal{
-		border: 1px solid black;
-		width : 300px;
-		height : 300px;
-		padding: 10px;
-		display: none;
-		position: absolute;
-		top: 35%;
-		left: 35%;
-		}
-	.profileImg-modal > input{
-		margin-bottom: 5px;}
-		
-	#myProfileImg,#thumbNailImg{
-		width : 150px;
-		height : 150px;
-		border-radius: 75px;
-		border: 1px solid black;
-	}
+.profileImg-modal {
+	border: 1px solid black;
+	width: 300px;
+	height: 300px;
+	padding: 10px;
+	display: none;
+	position: absolute;
+	top: 35%;
+	left: 35%;
+}
 
+.profileImg-modal>input {
+	margin-bottom: 5px;
+}
+
+.myProfileImg, .thumbNailImg {
+	width: 150px;
+	height: 150px;
+	border-radius: 75px;
+	border: 1px solid black;
+}
 </style>
 </head>
 <body>
 	<%@ include file="/WEB-INF/jsp/inc/headerWs.jsp"%>
 	<%@ include file="/WEB-INF/jsp/inc/navWs.jsp"%>
 	<h1>마이페이지메인</h1>
-	
+
 
 	<div class="myprofileImg">
-		<img alt="나의 프로필 사진" id="myProfileImg" src="${contextPath }/getProfileImg?type=profileImg&fileName=${member.profileImg}">
+		<img alt="나의 프로필 사진" class="myProfileImg" src="${contextPath }/showProfileImg?fileName=${member.profileImg}">
+		
 	</div>
 	<p>이메일 : ${member.email}</p>
 	<p>이름 : ${member.name}</p>
 	<p>전화번호 : ${member.phone}</p>
+
 	<!-- 삭제예정 start -->
 	<button onclick="location.href='${contextPath}/myPageCheckPassForm'">회원정보관리</button>
 	<button onclick="location.href='${contextPath}/myPageAlarmForm'">알림설정</button>
 	<button onclick="location.href='${contextPath}/myPageLicenseForm'">라이센스</button>
 	<!-- 삭제예정 end -->
-	
-	<!-- img update modal -->
-	<!-- 프로필 편집 모달창 (수정할 예정~~) -->
+
 	<div class="profileImg-modal">
-		<form id="profileImgForm" enctype="multipart/form-data">
-			<img alt="프로피" id="thumbNailImg" src="${contextPath }/getProfileImg?type=thumbnail&fileName=${member.profileImg}">
-			<input type="file" id="btnFile" name="profileImg" value="사진 선택" accept=".jpg,.jpeg,.png,.gif,.bmp"><br>
-			<input type="submit" id="btnSave" value="저장"><br>
-			<input type="button" id="btnReset" value="기본이미지로 변경"><br>
-			<input type="button" id="btnClose" value="닫기"><br>
+		<form class="profileImgForm" enctype="multipart/form-data">
+			<img alt="나의 프로필 사진" class="thumbNailImg" src="${contextPath }/showProfileImg?fileName=${member.profileImg}">
+			<input type="file" class="btnFile" name="profileImg" value="사진 선택" multiple><br> 
+			<input type="button" class="btnReset" value="기본이미지로 변경"><br> 
+			<input type="submit" class="btnSave" value="저장"><br> 
+			<input type="button" class="btnClose" value="닫기"><br>
 		</form>
 	</div>
-	
-	<!-- 
-	
-		$("#profileImgForm").on("submit",function(){
-			if($(this)[0].files[0] != null){
-				var formData = new FormData();
-				var profileImg = $("input[name='profileImg']");
-				var files = profileImg[0].files;
-				for(var i=0;i<files.length;i++){
-					formData.append("profileImg", files[i]);
-				}
-				$.ajax({
-					url : "${contextPath}/modifyProfileImg?type=profileimg",
-					processData : false,
-					contentType : false,
-					type : "post",
-					data : formData,
-					success:function(result){
-						alert("db저장 성공");
-					},error : function() {
-						
-					}
-				});//end ajax
-			}else{
-				//첨부한 파일이 없는 경우, 아무런 이벤트도 일어나지 않는다
-			}
-		});
-	
-	 -->
 </body>
 </html>

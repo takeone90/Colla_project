@@ -36,7 +36,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	<insert id="insertProfileImg">
 		update member 
-		set m_profileImg = #{profileImg} 
+		set m_profileImg = #{profileImg, jdbcType=VARCHAR} 
 		where m_num = #{num} 
 	</insert>
 	
