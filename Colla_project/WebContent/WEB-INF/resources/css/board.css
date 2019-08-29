@@ -1,0 +1,54 @@
+@charset "UTF-8";
+
+#pagination{}
+#pagination li{
+	display:inline-block;
+}
+
+
+/* board view */
+#replyBox > li {
+	margin-bottom:5px;
+}
+.replyAuthor a {
+	font-size:13px;
+	color:crimson;
+}
+.replyImg {
+	width:46px;
+	height:46px;
+	border-radius:50%;
+	overflow:hidden; 
+	float:left;
+	margin-right:10px;
+	border:2px solid #fff;
+}
+.replyImg img {width: 100%}
+.replyDetail {
+	float:left;
+	width:calc(100% - 60px);
+}
+.replyDetail .replyAuthor{
+	margin-bottom:5px;
+}
+.replyDetail .replyContent{
+	font-size:14px;
+	line-height:17px;
+}
+.regdate{
+	font-size:13px;
+	color:#aaa;
+}
+#addReplyDiv{
+	display:block;
+	margin-top:20px;
+}
+#addReplyDiv *{vertical-align:middle;}
+#addReplyDiv .replyImg {
+	display:inline-block;
+	float:none;
+}
+#addReplyDiv #inputBox{
+	display:inline-block;
+	vertical-align:middle;
+}
