@@ -31,6 +31,10 @@ public class CalendarController {
 	public String showCalMonth() {
 		return "/calendar/calMonth";
 	}
+	@RequestMapping(value="/calDetail", method = RequestMethod.GET)
+	public String showCalDetail() {
+		return "/calendar/calDetail";
+	}
 	
 	@ResponseBody
 	@RequestMapping(value="/showAllCalendar", method=RequestMethod.GET)
