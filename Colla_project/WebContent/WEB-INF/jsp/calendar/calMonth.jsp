@@ -11,8 +11,8 @@ request.setAttribute("contextPath", contextPath);
 <meta charset="UTF-8">
 <title>calMonth</title>
 <style type="text/css">
-.yearCalendar{border-collapse: collapse;}
-.monthCalendar{border-collapse: collapse;}
+.drawMonthCalendar{border-collapse: collapse;}
+.drawYearCalendar{border-collapse: collapse;}
 .addScheduleModal{display: none; width: 300px; height: 250px; top: 10%; left: 10%; position: absolute; background-color: #ffe8ea;}
 .detailScheduleModalOfYearCal{display: none; width: 300px; height: 250px; top: 10%; left: 10%; position: absolute; background-color: #ffd9dc;}
 .modifyScheduleModal{display: none; width: 300px; height: 250px; top: 10%; left: 10%; position: absolute; background-color: #ffe8ea;}
