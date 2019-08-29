@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.ReplyDao">
+	
+	<select id="selectReplyByBnum" parameterType="int" resultMap="replyMap">
+		select r_num, b_num, m_name, m_profileimg, r.m_num, r_content, r_regdate
+		from reply r, member m
+		where r.b_num = #{bNum} and m.m_num = r.m_num
+		order by r.r_regdate desc
+	</select>
+<!-- 	<select id="selectBoardBybNum" parameterType="int" resultMap="replyMap"> -->
+<!-- 		select b_num, m_name, w_num, b_title, b_content, b_regdate, b_readCnt, b_pw, b_type -->
+<!-- 		from board b, member m -->
+<!-- 		where b.b_num = #{bNum} and m.m_num=b.m_num -->
+<!-- 	</select> -->
+<!-- 	<delete id="deleteBoard" parameterType="int"> -->
+<!-- 		delete from board where b_num = #{bNum} -->
+<!-- 	</delete> -->
+<!-- 	<insert id="insertBoard" parameterType="reply"> -->
+<!-- 		<selectKey resultType="int" keyProperty="bNum" order="BEFORE"> -->
+<!-- 			select b_seq.nextval from dual -->
+<!-- 		</selectKey> -->
+<!-- 		insert into board -->
+<!-- 		values( -->
+<!-- 				#{bNum},  -->
+<!-- 				#{mNum},  -->
+<!-- 				#{wNum},  -->
+<!-- 				#{bTitle},  -->
+<!-- 				#{bContent},  -->
+<!-- 				sysdate,  -->
+<!-- 				0, -->
+<!-- 				#{bPw}, -->
+<!-- 				#{bType} -->
+<!-- 			) -->
+<!-- 	</insert> -->
+<!-- 	<update id="updateBoard" parameterType="board"> -->
+<!-- 		update board set -->
+<!-- 			b_title = #{bTitle}, -->
+<!-- 			b_content = #{bContent}, -->
+<!-- 			b_type = #{bType} -->
+<!-- 		where b_num = #{bNum} -->
+<!-- 	</update> -->
+	<resultMap type="reply" id="replyMap" >
+		<result column="r_num" property="rNum"/>
+		<result column="b_num" property="bNum"/>
+		<result column="m_num" property="mNum"/>
+		<result column="m_name" property="mName"/>
+		<result column="m_profileimg" property="imgPath"/>
+		<result column="r_content" property="content"/>
+		<result column="r_regdate" property="regDate"/>
+	</resultMap>
+	
+</mapper>

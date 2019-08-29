@@ -1,5 +1,9 @@
 package dao;
 
-public interface ReplyDao {
+import java.util.List;
 
+import model.Reply;
+
+public interface ReplyDao {
+	public List<Reply> selectReplyByBnum(int bNum);
 }

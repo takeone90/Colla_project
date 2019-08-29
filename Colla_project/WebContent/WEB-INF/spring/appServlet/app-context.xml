@@ -15,6 +15,7 @@
 	<mvc:annotation-driven></mvc:annotation-driven>
 	<mvc:resources location="/WEB-INF/resources/img/" mapping="/img/**"/>
 	<mvc:resources location="/WEB-INF/resources/css/" mapping="/css/**"/>
+	<mvc:resources location="/WEB-INF/resources/js/" mapping="/js/**"/>
 	<mvc:interceptors>
 		<mvc:interceptor>
 			<mvc:mapping path="/joinStep2"/>

@@ -15,10 +15,21 @@ public class BoardService {
 	private BoardDao bDao;
 	
 	public List<Board> getAllBoardByWnum(int wNum) {
+		for( Board b : bDao.selectAllBoardByWnum(wNum)) {
+//			if(b.getbType()) {
+//				
+//			}
+		}
 		return bDao.selectAllBoardByWnum(wNum);
 	}
-	public boolean addDefaultBoard(Board board) {
-		return bDao.insertDefaultBoard(board)>0?true:false;
+	public boolean addBoard(Board board) {
+		return bDao.insertBoard(board)>0?true:false;
+	}
+	public boolean modifyBoard(Board board) {
+		return bDao.updateBoard(board)>0?true:false;
+	}
+	public boolean removeBoard(int bNum) {
+		return bDao.deleteBoard(bNum)>0?true:false;
 	}
 	public Board getBoardByBnum(int bNum) {
 		return bDao.selectBoardBybNum(bNum);

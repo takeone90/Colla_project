@@ -7,6 +7,8 @@
 <title>게시글 작성</title>
 <link rel="stylesheet" type="text/css" href="../css/reset.css"/>
 <link rel="stylesheet" type="text/css" href="../css/base.css"/>
+<link rel="stylesheet" type="text/css" href="../css/headerWs.css"/>
+<link rel="stylesheet" type="text/css" href="../css/navWs.css"/>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 </head>
@@ -15,7 +17,7 @@
 	<%@ include file="/WEB-INF/jsp/inc/navWs.jsp" %>
 	<script>
 		$(function(){
-			$("#writeForm").submit(function(){
+			$("#modifyForm").submit(function(){
 				if (!$("#title").val().trim()){
 					alert("제목을 입력해주세요.");
 					$("#title").focus().val("");
@@ -37,7 +39,7 @@
 						말머리
 						<select id="boardType" name="boardType">
 							<option value="default">일반</option>
-							<option value="noice">공지</option>
+							<option value="notice">공지</option>
 							<option value="anonymous">익명</option>
 						</select>
 					</label>
@@ -51,10 +53,11 @@
 				<div class="row">
 					<label>
 						내용
-						<textarea id="content" name="content" cols="70" rows="10">${board.Content }</textarea>
+						<textarea id="content" name="content" cols="70" rows="10">${board.bContent }</textarea>
 					</label>
 				</div>
 				<div id="btns">
+					<input type="hidden" name="bNum" value="${board.bNum}">
 					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 					<button>등록</button>
 					<a href="#" onclick="window.location.replace('list')">취소</a>
