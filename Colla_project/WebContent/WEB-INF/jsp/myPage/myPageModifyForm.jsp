@@ -21,7 +21,7 @@
 		});
 
 		// 프로필 이미지 선택 시 모달 창 출력
-		$(".myprofileImg").on("click", function() {
+		$(".myProfileImg").on("click", function() {
 			console.log("모달 리셋 됨??" + profileImgType);
 			$(".profileImg-modal").show();
 		});
@@ -87,6 +87,32 @@
 	};
 </script>
 <style type="text/css">
+#myPageModify {
+	width : 800px;
+	margin: 0 auto;
+	text-align: center;
+}
+
+#myPageModify > div {
+	text-align: center;
+	display: inline-block;
+}
+
+#myPageModify>div:last-child div > *{
+	display: inline-block;
+}
+
+#myPageModify>div:last-child div > .title{
+	color : red;
+}
+
+#myPageModify>div:last-child div > .content{
+	color : blue;
+}
+
+
+
+
 .profileImg-modal {
 	border: 1px solid black;
 	width: 300px;
@@ -96,6 +122,7 @@
 	position: absolute;
 	top: 35%;
 	left: 35%;
+	background-color: white;
 }
 
 .profileImg-modal>input {
@@ -116,29 +143,37 @@
 	<div id="wsBody">
 		<h3>마이페이지</h3>
 		<h4>회원정보 관리</h4>
-		<div id="myPageCheckPass">
-			<div class="myprofileImg">
-				<img alt="나의 프로필 사진" class="myProfileImg" src="${contextPath }/showProfileImg?fileName=${member.profileImg}">
+		<div id="myPageModify">
+			<div>
+				<img alt="나의 프로필 사진" class="myProfileImg"
+					src="${contextPath }/showProfileImg?fileName=${member.profileImg}">
 			</div>
-			<form action="modifyMember" method="post">
-				<div>
-					<p class="title">이메일</p>
-					<input type="text" name="email" value="${member.email}" class="content">
-				</div>
-				<div>
-					<p class="title">이름</p>
-					<input type="text" name="name" value="${member.name}" class="content">
-				</div>
-				<div>
-					<p class="title">비밀번호</p>
-					<input type="tel" name="pw" value="${member.pw}" class="content">
-				</div>
-				<div>
-					<p class="title">전화번호 </p>
-					<input type="tel" name="phone" value="${member.phone}" class="content">
-				</div>
-				<button>수정</button>
-			</form>
+			<div>
+				<form action="modifyMember" method="post">
+					<div>
+						<p class="title">이메일</p>
+						<input type="text" name="email" value="${member.email}"
+							class="content">
+					</div>
+					<div>
+						<p class="title">이름</p>
+						<input type="text" name="name" value="${member.name}"
+							class="content">
+					</div>
+					<div>
+						<p class="title">비밀번호</p>
+						<input type="tel" name="pw" value="${member.pw}" class="content">
+					</div>
+					<div>
+						<p class="title">전화번호</p>
+						<input type="tel" name="phone" value="${member.phone}"
+							class="content">
+					</div>
+					<button>수정</button>
+				</form>
+			</div>
+
+
 
 		</div>
 	</div>

@@ -18,12 +18,12 @@
 	display: inline-block;
 }
 
-.title {
+#myPageCheckPass form .title {
 	width: 150px;
 	text-align: right;
 }
 
-.content {
+#myPageCheckPass form .content {
 	width: 300px;
 }
 </style>
