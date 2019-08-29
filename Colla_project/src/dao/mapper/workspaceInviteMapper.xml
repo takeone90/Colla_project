@@ -7,8 +7,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		insert into workspace_invite(wi_num,wi_target_user,w_num)
 		values(wi_seq.nextval,#{wiTargetUser},#{wNum})
 	</insert>
-	<select id="selectWorkspaceInvite" parameterType="string" resultMap="wiMap">
-		select * from workspace_invite where wi_target_user=#{wiTargetUser}
+	<select id="selectWorkspaceInvite" resultMap="wiMap">
+		select * from workspace_invite where wi_target_user=#{wiTargetUser} and w_num=#{wNum}
 	</select>
 	<select id="selectAllWorkspaceInvite" resultMap="wiMap">
 		select * from workspace_invite
