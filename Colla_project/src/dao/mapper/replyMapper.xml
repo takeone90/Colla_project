@@ -10,6 +10,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where r.b_num = #{bNum} and m.m_num = r.m_num
 		order by r.r_regdate desc
 	</select>
+	
+<!-- 	<insert id="insertReply" parameterMap="replyMap"> -->
+<!-- 		insert into reply -->
+<!-- 		values( -->
+<!-- 			r_seq.nextval, -->
+<!-- 			#{bNum}, -->
+<!-- 			#{mNum}, -->
+<!-- 			#{content}, -->
+			
+<!-- 			) -->
+<!-- 	</insert> -->
+
 <!-- 	<select id="selectBoardBybNum" parameterType="int" resultMap="replyMap"> -->
 <!-- 		select b_num, m_name, w_num, b_title, b_content, b_regdate, b_readCnt, b_pw, b_type -->
 <!-- 		from board b, member m -->
