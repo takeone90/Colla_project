@@ -25,8 +25,9 @@ public class WorkspaceService {
 	private ChatRoomDao chatDao;
 	@Autowired
 	private ChatRoomMemberDao crmDao;
-	public boolean addWorkspace(int mNum,String name) {
-		boolean result = false;
+	public int addWorkspace(int mNum,String name) {
+//		boolean result = false;
+		int wNum = 0;
 		Workspace ws = new Workspace();
 		ws.setmNum(mNum);
 		ws.setName(name);
@@ -52,10 +53,10 @@ public class WorkspaceService {
 			crm.setmNum(mNum);
 			crm.setwNum(ws.getNum());
 			crmDao.insertChatRoomMember(crm);//기본 채팅방 멤버한명 생성(워크스페이스 생성자)
-			result = true;
+//			result = true;
+			wNum = ws.getNum();
 		}
-		return result;
-		
+		return wNum;
 	}
 	public boolean modifyWorkspace(Workspace ws) {
 		boolean result = false;

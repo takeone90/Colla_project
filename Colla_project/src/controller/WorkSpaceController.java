@@ -64,11 +64,17 @@ public class WorkSpaceController {
 	
 	//워크스페이스 추가
 	@RequestMapping("/addWs")
-	public String addWs(String wsName,String targetUser1,String targetUser2,HttpSession session) {
+	public String addWs(String wsName,String targetUser,HttpSession session) {
+		//현재 로그인된 생성자를 워크스페이스에 담으면서 생성
 		String userEmail = (String)session.getAttribute("userEmail");
 		Member member = mService.getMemberByEmail(userEmail);
-		wService.addWorkspace(member.getNum(), wsName);
+		int wNum = wService.addWorkspace(member.getNum(), wsName);
+		
+		
 		//targetUser들에게 초대메일 보내기 해야함
+		wiService.addWorkspaceInvite(targetUser, wNum);
+		Thread innerTest = new Thread(new inner(targetUser,wNum));
+		innerTest.start();
 		return "redirect:workspace";
 	}
 	
@@ -76,11 +82,9 @@ public class WorkSpaceController {
 	//워크스페이스에 멤버 초대하는부분
 	@RequestMapping("/inviteMember")
 	public String inviteMember(int wNum, String targetUser,HttpSession session) {
-		String emailAddress = targetUser;
 		//ws초대 여부를 db에 담는다
-		wiService.addWorkspaceInvite(emailAddress, wNum);
-		Member member = mService.getMemberByEmail(emailAddress);
-		Thread innerTest = new Thread(new inner(emailAddress,wNum));
+		wiService.addWorkspaceInvite(targetUser, wNum);
+		Thread innerTest = new Thread(new inner(targetUser,wNum));
 		innerTest.start();
 		return "redirect:workspace";
 	}
@@ -90,7 +94,8 @@ public class WorkSpaceController {
 	@RequestMapping("/addMember")
 	public String addMember(String id,int wNum,HttpSession session) { 
 		String userEmail = id;
-		WorkspaceInvite wi = wiService.getWorkspaceInviteByTargetUser(userEmail);
+		//targetUser랑 wNum으로 ws 초대정보를 불러와야한다.
+		WorkspaceInvite wi = wiService.getWorkspaceInviteByTargetUser(userEmail,wNum);
 		if(wi!=null) {
 			if(mService.getMemberByEmail(userEmail)!=null) {
 				//회원이다.
