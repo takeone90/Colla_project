@@ -13,11 +13,11 @@
 <link rel="stylesheet" type="text/css" href="../css/board.css"/>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script type="text/javascript" src="../js/boardReply.js"></script>
 <script type="text/javascript">
 	const bNum = ${board.bNum};
 	const mNum = ${sessionScope.user.num};
 </script>
+<script type="text/javascript" src="../js/boardReply.js"></script>
 </head>
 <body>
 	<%@ include file="/WEB-INF/jsp/inc/headerWs.jsp" %>

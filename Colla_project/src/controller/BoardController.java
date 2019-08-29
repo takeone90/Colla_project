@@ -32,8 +32,7 @@ public class BoardController {
 			HttpSession session, 
 			Model model
 			) {
-//		int wNum = (int)session.getAttribute("currWnum");
-		int wNum = 1;
+		int wNum = (int)session.getAttribute("currWnum");
 		List<Board> bList = bService.getAllBoardByWnum(wNum);
 		model.addAttribute("bList", bList);
 		return "/board/boardList";
@@ -145,8 +144,7 @@ public class BoardController {
 			String title,
 			String content
 			) {
-//		int wNum = (int)session.getAttribute("currWnum");
-		int wNum = 1;
+		int wNum = (int)session.getAttribute("currWnum");
 		if(boardType.equals("anonymous") || boardType.equals("default") || boardType.equals("notice")) {
 			String usermail = principal.getName();
 			int mNum = mService.getMemberByEmail(usermail).getNum();
