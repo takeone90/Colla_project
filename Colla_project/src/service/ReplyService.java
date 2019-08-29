@@ -17,4 +17,8 @@ public class ReplyService {
 	public List<Reply> getReplyByBnum(int bNum){
 		return rDao.selectReplyByBnum(bNum);
 	}
+	
+	public boolean addReply(Reply r) {
+		return rDao.insertReply(r)>0?true:false;
+	}
 }
