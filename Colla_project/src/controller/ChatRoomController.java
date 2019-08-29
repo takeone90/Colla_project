@@ -58,6 +58,7 @@ public class ChatRoomController {
 		
 		session.setAttribute("currWnum", wNum);
 		//해당 채팅방의 wNum 정보를 통해 wNum의 모든 채팅방리스트를 꺼내야한다.
+		session.setAttribute("currWnum", wNum);
 		List<ChatRoom> chatRoomList = crService.getAllChatRoomByWnum(wNum);
 		model.addAttribute("chatRoomList", chatRoomList);
 		
