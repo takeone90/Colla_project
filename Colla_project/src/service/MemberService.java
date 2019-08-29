@@ -193,30 +193,31 @@ public class MemberService {
 		}
 		
 
-		InputStream in = null;
-		try {
-			in = new FileInputStream(file);
-			return IOUtils.toByteArray(in);
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} finally {
-			try {
-				if(in != null) {
-					in.close();
-				}
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-		return null;
-	}
-	
-	
-	
+
+      InputStream in = null;
+      try {
+         in = new FileInputStream(file);
+         return IOUtils.toByteArray(in);
+      } catch (FileNotFoundException e) {
+         // TODO Auto-generated catch block
+         e.printStackTrace();
+      } catch (IOException e) {
+         // TODO Auto-generated catch block
+         e.printStackTrace();
+      } finally {
+         try {
+            if(in != null) {
+               in.close();
+            }
+         } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+         }
+      }
+      return null;
+   }
+   
+   
+   
 
 }
