@@ -101,6 +101,7 @@ hs_err_pid*
 target/
 
 ### Maven ###
+*.MF
 pom.properties
 pom.xml.tag
 pom.xml.releaseBackup
