@@ -5,6 +5,7 @@ import java.io.FileOutputStream;
 import java.security.Principal;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -127,17 +128,16 @@ public class MypageController {
 	}
 	
 	@ResponseBody
-	@RequestMapping(value = "/updateProfileImg", method = RequestMethod.POST)
-	public boolean updateProfileImg(MultipartFile[] profileImg, HttpSession session) {
+	@RequestMapping(value = "/modifyProfileImg", method = RequestMethod.POST)
+	public boolean modifyProfileImg(MultipartFile[] profileImg, String profileImgType, HttpSession session) {
 		Member member = memberService.getMemberByEmail((String)session.getAttribute("userEmail"));
-		return memberService.registerProfileImg(profileImg, member.getNum());
+		return memberService.updateProfileImg(profileImg,profileImgType,member);
 	}
 	
 	@ResponseBody
-	@RequestMapping(value = "/image")
-	public byte[] getImage(HttpSession session, String fileName) {
+	@RequestMapping(value = "/showProfileImg")
+	public byte[] showProfileImg(HttpSession session, HttpServletRequest request) {
 		Member member = memberService.getMemberByEmail((String)session.getAttribute("userEmail"));
-		System.out.println("getProfileImg : " + member.getProfileImg());
-		return memberService.getProfileImg(member,member.getProfileImg()); 
+		return memberService.getProfileImg(member.getProfileImg(),request); 
 	}
 }

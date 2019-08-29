@@ -9,4 +9,8 @@ public class MainController {
 	public String main() {
 		return "/main/main";
 	}
+	@RequestMapping("/error")
+	public String error() {
+		return "/error/error";
+	}
 }

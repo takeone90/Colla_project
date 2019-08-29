@@ -61,5 +61,8 @@ public class WsMemberService {
 	public List<WsMember> getAllWsMember(){
 		return dao.selectAllWsMember();
 	}
+	public List<WsMember> getAllWsMemberByCrNum(int crNum){
+		return dao.selectAllWsMemberByCrNum(crNum);
+	}
 	
 }

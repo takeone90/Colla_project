@@ -34,9 +34,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		from member m,workspace_member ws
 		where ws.w_num=#{wNum} and m.m_num=ws.m_num
 	</select>
+	
+	<select id="selectMember" parameterType="int" resultMap="memberMap">
+		select * from member where m_num=#{num}
+	</select>
 	<insert id="insertProfileImg">
 		update member 
-		set m_profileImg = #{profileImg} 
+		set m_profileImg = #{profileImg, jdbcType=VARCHAR} 
 		where m_num = #{num} 
 	</insert>
 	

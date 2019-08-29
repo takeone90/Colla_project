@@ -1,6 +1,8 @@
 package dao;
 
 import java.util.List;
+import java.util.Map;
+
 import model.Calendar;
 
 public interface CalendarDao {
@@ -10,4 +12,7 @@ public interface CalendarDao {
 	public Calendar selectCalendar(int cNum);
 	public List<Calendar> selectAllCalendar();
 	public List<Calendar> selectAllCalendarByMonth();
+	public List<Calendar> selectAllCalendarSearched(Map<String, Object> param);
+//	public int insertCalendarAnnually(Calendar calendar);
+//	public int insertCalendarMonthly(Calendar calendar);
 }

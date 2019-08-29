@@ -16,6 +16,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="selectAllWsMember" resultMap="wsMemberMap">
 		select * from workspace_member
 	</select>
+	<select id="selectAllWsMemberByCrNum" resultMap="wsMemberMap" parameterType="int">
+		select wsm.wm_num,wsm.m_num,wsm.w_num from workspace_member wsm,chatroom cr
+		where cr.cr_num=#{crNum} and cr.w_num=wsm.w_num
+	</select>
 	<select id="selectAllMnumByWnum" resultType="int" parameterType="int">
 		select m_num from workspace_member where w_num=#{wNum}
 	</select>

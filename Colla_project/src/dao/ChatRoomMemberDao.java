@@ -2,6 +2,8 @@ package dao;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import model.ChatRoom;
 import model.ChatRoomMember;
 
@@ -11,6 +13,7 @@ public interface ChatRoomMemberDao {
 	public int updateChatRoomMember(ChatRoomMember chatRoomMember);
 	public int deleteChatRoomMember(int crmNum);
 	public ChatRoomMember selectChatRoomMember(int crmNum);
+	public ChatRoomMember selectChatRoomMemberByAnother(@Param("crNum")int crNum,@Param("wNum")int wNum,@Param("mNum")int mNum);
 	public List<ChatRoomMember> selectAllChatRoomMember();
 	public List<ChatRoomMember> selectAllChatRoomMemberByCrNum(int crNum);
 	public List<ChatRoomMember> selectAllChatRoomMemberBywNum(int wNum);

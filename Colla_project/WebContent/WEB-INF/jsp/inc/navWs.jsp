@@ -43,7 +43,7 @@
 			</li>
 			<li>
 				<a href="#">Board</a>
-			</li>
+	    </li>
 		</ul>
 	</div>
 </div>

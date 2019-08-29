@@ -187,10 +187,7 @@ display : none;
 						<div class="row">
 							<h4>멤버 초대</h4>
 							<div>
-								<input type="text" placeholder="초대할멤버1" name="targetUser1">
-							</div>
-							<div>
-								<input type="text" placeholder="초대할멤버2" name="targetUser2">
+								<input type="text" placeholder="초대할멤버 이메일" name="targetUser">
 							</div>
 							<div>
 								<a href="#">멤버추가버튼</a>
@@ -225,12 +222,11 @@ display : none;
 						</div>
 						<div class="row">
 							<h4>멤버 초대</h4>
-							<div>
-								<input type="text" placeholder="초대할멤버1" name="targetUser1">
-							</div>
-							<div>
-								<input type="text" placeholder="초대할멤버2" name="targetUser2">
-							</div>
+								<ul>
+<%-- 									<c:forEach items="${wsMemberList}" var="wsm"> --%>
+<%-- 										<li><input type="checkbox" value="${wsm.num}" name="wsmList">${wsm.name}</li> --%>
+<%-- 									</c:forEach> --%>
+								</ul>
 							<div>
 								<a href="#">멤버추가버튼</a>
 							</div>
