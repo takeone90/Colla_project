@@ -113,7 +113,7 @@ public class MemberService {
 	}
 	public boolean updateProfileImg(MultipartFile[] profileImg, String profileImgType, Member member) {
 		if(profileImg.length != 0 || (profileImgType != null && profileImgType.equals("defaultImg"))) {
-		//사용자가 선택한 이미지 또는 기본이미지로 프로필을 변경하는 경우 , 두가지 경우를 처리한다
+		//사용자가 선택한 이미지 또는 기본이미지로 프로필을 변경하는 경우를 처리
 			System.out.println("1. 파일을 첨부했거나, 기본이미지로 설정했다");
 			String beforeFileName = member.getProfileImg();
 			File beforeFile = new File(UPLOAD_PATH + "/" + beforeFileName); 
@@ -154,38 +154,7 @@ public class MemberService {
 			return true;
 		}
 	}
-	public boolean test(MultipartFile[] profileImg, String profileImgType, Member member) {
-		if(profileImg.length == 0) {//사용자가 첨부파일 없이 [저장]을 클릭한 경우는 변경할 데이터가 없음
-			if(profileImgType!=null && profileImgType.equals("defaultImg")) {
-				String beforeFileName = member.getProfileImg();
-				File beforeFile = new File(UPLOAD_PATH + "/" + beforeFileName);			
-				member.setProfileImg(null);
-				if(dao.insertProfileImg(member)>0) { //member DB에 파일명 insert가 성공하면
-					if(beforeFile.exists()) { // 그 전에 저장된 파일을 삭제한다
-						beforeFile.delete();
-					}
-					return true;
 
-			}else {
-				return true;
-			}
-			}
-			return true;
-		}else {//사용자가 첨부파일을 첨부한 경우
-			String fullName = writeFile(profileImg);//폴더 저장
-			String beforeFileName = member.getProfileImg();
-			File beforeFile = new File(UPLOAD_PATH + "/" + beforeFileName);			
-			member.setProfileImg(fullName);
-			if(dao.insertProfileImg(member)>0) { //member DB에 파일명 insert가 성공하면
-				if(beforeFile.exists()) { // 그 전에 저장된 파일을 삭제한다
-					beforeFile.delete();
-				}
-				return true;
-			}
-			return false;
-		}
-	}
-	
 	//파일을 해당 경로에 저장
 	public String writeFile(MultipartFile[] profileImg) {
 		String fullName = null;
@@ -206,14 +175,23 @@ public class MemberService {
 	
 	//이미지를 가져옴
 	public byte[] getProfileImg(String profileImgName,HttpServletRequest request) {
-		String path = UPLOAD_PATH;
-		if(profileImgName == null) {
-			//
+		File file = new File(UPLOAD_PATH+"/"+profileImgName);
+		String path = null;
+		//1. 파일 네임을 받아와서 파일을 생성한다
+		if(file.exists()) {
+			System.out.println("파일이 존재하한다");
+			//2. 해당 프로필 이미지가 존재한다
+			
+		}else {
+			System.out.println("파일이 존재하지 않는다");
+			//2. 해당 프로필 이미지가 존재하지 않는다
+			//3. 기본이미지로 보여준다
 			profileImgName = "profileImage.png";
 			path = request.getSession().getServletContext().getRealPath("/WEB-INF/resources/img");
+			file = new File(path+"/"+profileImgName);
+			
 		}
-		// 파일을  생성한다
-		File file = new File(path+"/"+profileImgName);
+		
 
 		InputStream in = null;
 		try {
