@@ -22,6 +22,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="selectAllCalendar" resultMap="calendarMap">
 		select * from calendar
 	</select>
+	<select id="selectAllCalendarSearched" parameterType="map" resultMap="calendarMap">
+		select * from calendar
+		where 1=0
+		<if test="title != null"> or cal_title like '%'||#{title}||'%' </if>
+		<if test="content != null"> or cal_content like '%'||#{content}||'%' </if>
+		<if test="mNum != null"> or m_num like '%'||#{mNum}||'%' </if>
+		<if test="searchType == 0"> or 1=1 </if>
+	</select>
+<!-- 	<insert id="insertCalendarAnnually" parameterType="calendar"> -->
+<!-- 		insert into calendar(cal_num, m_num, w_num, cal_type, cal_start_date, cal_end_date, cal_title, cal_content, cal_regDate, cal_annually, cal_monthly, cal_yearCalendar)  -->
+<!-- 		values(cal_seq.nextval, #{mNum}, #{wNum}, #{type}, #{startDate}, #{endDate}, #{title}, #{content}, sysdate, #{annually}, #{monthly}, #{yearCalendar}) -->
+<!-- 	</insert> -->
+<!-- 	<insert id="insertCalendarMonthly" parameterType="calendar"> -->
+<!-- 		insert into calendar(cal_num, m_num, w_num, cal_type, cal_start_date, cal_end_date, cal_title, cal_content, cal_regDate, cal_annually, cal_monthly, cal_yearCalendar)  -->
+<!-- 		values(cal_seq.nextval, #{mNum}, #{wNum}, #{type}, #{startDate}, #{endDate}, #{title}, #{content}, sysdate, #{annually}, #{monthly}, #{yearCalendar}) -->
+<!-- 	</insert> -->
 	<resultMap type="calendar" id="calendarMap">
 		<result column="cal_num" property="cNum"/>
 		<result column="m_num" property="mNum"/>
