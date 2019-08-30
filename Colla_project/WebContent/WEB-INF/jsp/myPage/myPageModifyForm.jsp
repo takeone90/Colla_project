@@ -15,14 +15,15 @@
 <script type="text/javascript">
 	var profileImgType = null;
 	$(function() {
+		
 		// [닫기]버튼 클릭 시, 모달창 닫힘
 		$(".btnClose").on("click", function() {
 			closeModal();
 		});
+		
 
 		// 프로필 이미지 선택 시 모달 창 출력
 		$(".myProfileImg").on("click", function() {
-			console.log("모달 리셋 됨??" + profileImgType);
 			$(".profileImg-modal").show();
 		});
 
@@ -44,7 +45,6 @@
 					$('.thumbNailImg').attr("src",
 							"${contextPath}/img/profileImage.png");
 					profileImgType = "defaultImg";
-					console.log("기본이미지 선택시 ???" + profileImgType);
 				});
 
 		//[저장] 버튼 클릭 시 동작하는 이벤트
@@ -182,13 +182,11 @@
 	<!-- 프로필 수정 모달-->
 	<div class="profileImg-modal">
 		<form class="profileImgForm" enctype="multipart/form-data">
-			<img alt="나의 프로필 사진" class="thumbNailImg"
-				src="${contextPath }/showProfileImg?fileName=${member.profileImg}">
-			<input type="file" class="btnFile" name="profileImg" value="사진 선택"
-				multiple><br> <input type="button" class="btnReset"
-				value="기본이미지로 변경"><br> <input type="submit"
-				class="btnSave" value="저장"><br> <input type="button"
-				class="btnClose" value="닫기"><br>
+			<img alt="나의 프로필 사진" class="thumbNailImg" src="${contextPath }/showProfileImg?fileName=${member.profileImg}">
+			<input type="file" class="btnFile" name="profileImg" value="사진 선택" accept="image/*" multiple><br> 
+			<input type="button" class="btnReset" value="기본이미지로 변경"><br> 
+			<input type="submit" class="btnSave" value="저장"><br> 
+			<input type="button" class="btnClose" value="닫기"><br>
 		</form>
 	</div>
 

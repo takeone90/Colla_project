@@ -66,7 +66,7 @@
 			</div>
 		</div>
 	</div>
-
+	${sessionScope }
 
 	<!-- 삭제예정 start -->
 	<div>

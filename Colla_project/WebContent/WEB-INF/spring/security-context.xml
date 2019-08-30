@@ -1,29 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:mvc="http://www.springframework.org/schema/mvc"
-	xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:security="http://www.springframework.org/schema/security"
-	xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-4.2.xsd
-		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
-		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
-	<context:component-scan base-package="service"></context:component-scan>
-	<security:http use-expressions="true" auto-config="true">
-		<security:csrf disabled="true"/>
-		<security:form-login 
-			username-parameter="m_email"
-			password-parameter="m_pw"
-			authentication-failure-url="/loginForm?login=fail"
-			default-target-url="/workspace" 
-			login-processing-url="/login"
-			login-page="/loginForm" />
-		<security:logout invalidate-session="true" logout-url="/logout" 
-			logout-success-url="/loginForm" delete-cookies="JSESSIONID" />
-	</security:http>
-	<security:authentication-manager>
-		<security:authentication-provider
-			user-service-ref="memberDetailsService">
-		</security:authentication-provider>
-	</security:authentication-manager>
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xmlns:mvc="http://www.springframework.org/schema/mvc"
+   xmlns:context="http://www.springframework.org/schema/context"
+   xmlns:security="http://www.springframework.org/schema/security"
+   xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-4.2.xsd
+      http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
+      http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+      http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+   <context:component-scan base-package="service"></context:component-scan>
+   <bean id="loginSuccessHandler" class="controller.LoginSuccessHandler"></bean>
+   <security:http use-expressions="true" auto-config="true">
+      <security:csrf disabled="true"/>  
+	  <security:form-login 
+         username-parameter="m_email"
+         password-parameter="m_pw"
+         authentication-failure-url="/loginForm?login=fail"
+         authentication-success-handler-ref="loginSuccessHandler"
+         login-processing-url="/login"
+         login-page="/loginForm" />
+      <security:logout invalidate-session="true" logout-url="/logout" 
+         logout-success-url="/loginForm" delete-cookies="JSESSIONID" />
+   </security:http>
+   <security:authentication-manager>
+      <security:authentication-provider
+         user-service-ref="memberDetailsService">
+      </security:authentication-provider>
+   </security:authentication-manager>
 </beans>
