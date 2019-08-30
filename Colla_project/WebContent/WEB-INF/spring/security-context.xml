@@ -20,6 +20,9 @@
 			login-page="/loginForm" />
 		<security:logout invalidate-session="true" logout-url="/logout" 
 			logout-success-url="/loginForm" delete-cookies="JSESSIONID" />
+		<security:session-management>
+			<security:concurrency-control max-sessions="1" expired-url="/main"/>
+		</security:session-management>
 	</security:http>
 	<security:authentication-manager>
 		<security:authentication-provider

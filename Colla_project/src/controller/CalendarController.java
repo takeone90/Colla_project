@@ -60,9 +60,23 @@ public class CalendarController {
 					tmpList.add(tmp.get(i));
 				}
 			}
+//			System.out.println(getWeekOfMonth(tmp.get(i).getStartDate()));
+//			tmpMap.put("weekCount"+tmp.get(i).getcNum(), getWeekOfMonth(tmp.get(i).getStartDate()));
 		}
 		return tmpList;
 	}
+	
+	private int getWeekOfMonth(String date) {
+		System.out.println(date);
+		java.util.Calendar tmpCalendar = java.util.Calendar.getInstance();
+		int year = Integer.parseInt(date.substring(0, 4));
+		int month = Integer.parseInt(date.substring(5, 7));
+		int day = Integer.parseInt(date.substring(8, 10));
+		System.out.println(year+" "+month+" "+day);
+		tmpCalendar.set(year, month - 1, day);
+		return tmpCalendar.get(java.util.Calendar.WEEK_OF_MONTH);
+	}
+	
 	@ResponseBody
 	@RequestMapping(value="/showYearCheckedCalendar", method=RequestMethod.GET)
 	public List<Calendar> showYearCheckedCalendar(boolean t1, boolean t2, boolean t3) {
