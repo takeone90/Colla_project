@@ -148,6 +148,15 @@ public class WorkSpaceController {
 		return "redirect:workspace";
 	}
 	
+	@ResponseBody
+	@RequestMapping("/dropSession")
+	public void dropSession(HttpSession session) {
+		session.removeAttribute("currWnum");
+		session.removeAttribute("userEmail");
+		session.removeAttribute("user");
+		session.removeAttribute("inviteUserEmail");
+		session.removeAttribute("inviteWnum");
+	}
 	
 	
 	

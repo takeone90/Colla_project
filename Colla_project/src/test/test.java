@@ -8,9 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import dao.ChatMessageDao;
 import dao.MemberDao;
 import model.Member;
 import model.Workspace;
+import service.ChatMessageService;
 import service.MemberService;
 import service.WorkspaceService;
 import service.WsMemberService;
@@ -19,18 +21,11 @@ import service.WsMemberService;
 @ContextConfiguration("file:WebContent/WEB-INF/spring/root-context.xml")
 public class test {
 	@Autowired
-	private WsMemberService wsMemberService;
+	private ChatMessageService cmService;
 	@Autowired
-	private WorkspaceService wService;
-	@Autowired
-	private MemberService mService;
-	@Autowired
-	private MemberDao dao;
+	private ChatMessageDao cmDao;
 	@Test
 	public void serviceTest() {
-		String emailAddress="tyqnsdl@naver.com?";
-		int idx = emailAddress.indexOf("?");
-		System.out.println("idx : "+idx);
-		System.out.println(emailAddress.substring(0,idx));
+		System.out.println(cmDao.selectAllChatMessageByCrNum(250));
 	}
 }
