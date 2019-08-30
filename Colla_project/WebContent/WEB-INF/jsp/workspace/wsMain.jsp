@@ -133,12 +133,25 @@ display : none;
 					$.each(d,function(idx,item){
 						var str='<li><input type="checkbox" value="'+item.num+'" name="mNumList">'+item.name+'</li>';
 							wsMemberList.append(str);
-						});
+					});
 				},
 				error : function(){
 					alert("wsMemberList 띄우기 에러발생");
 				}
 			});
+	}
+	function dropSession(){
+		$("#logoutBtn").on("click",function(){
+			$.ajax({
+				url : "${contextPath}/dropSession",
+				success : function(){
+					alert("로그아웃 성공");
+				},
+				error : function(){
+					alert("로그아웃 세션드랍 에러발생");
+				}
+			});
+		})
 	}
 </script>
 </head>
@@ -191,7 +204,7 @@ display : none;
 		<div>
 			<form action="logout" method="post">
 			<input type="hidden" value="${_csrf.token}" name="${_csrf.parameterName}">
-			<input type="submit" value="임시 로그아웃 버튼">
+			<input type="submit" value="임시 로그아웃 버튼" id="logoutBtn">
 			</form>
 		</div>
 
@@ -239,7 +252,7 @@ display : none;
 			<div class="modalBody">
 				<p>채팅방을 만들고 멤버를 초대하세요</p>
 				<form action="addChat" method="post">
-					<input type="text" class="addWnum" name="wNum">
+					<input type="hidden" class="addWnum" name="wNum">
 					<input type="hidden" value="${_csrf.token}" name="${_csrf.parameterName}">
 					<div class="addChatInputWrap">
 						<div class="row">

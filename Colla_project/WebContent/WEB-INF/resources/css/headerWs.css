@@ -85,3 +85,11 @@ a.member-btn {
 a.member-btn:hover{
 	background-color:#EC6D63;
 }
+#chatRoomInfo p{
+	font-size : 25px;
+	color: #CCCBCA;
+	
+}
+#chatRoomInfo{
+	padding-left: 30px;
+}

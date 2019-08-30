@@ -9,14 +9,19 @@
 	String contextPath = request.getContextPath();
 	request.setAttribute("contextPath", contextPath);
 %>
-<title>Insert title here</title>
+<title>라이선스관리</title>
+<link rel="stylesheet" type="text/css" href="css/reset.css"/>
+<link rel="stylesheet" type="text/css" href="css/base.css"/>
+<link rel="stylesheet" type="text/css" href="css/headerWs.css"/>
+<link rel="stylesheet" type="text/css" href="css/navMyPage.css"/>
 <script src="https://code.jquery.com/jquery-3.4.1.js"
   integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
   crossorigin="anonymous"></script>
 </head>
 <body>
 	<%@ include file="/WEB-INF/jsp/inc/headerWs.jsp"%>
-	<%@ include file="/WEB-INF/jsp/inc/navWs.jsp"%>
+	<%@ include file="/WEB-INF/jsp/inc/navMyPage.jsp"%>
+	<div id="wsBody">
 	<h1>라이선스</h1>
 	회원님의 라이선스는 ${useLicense.endDate } 종료 예정입니다<br>
 	<button onclick="#">라이선스 연장</button>
@@ -37,7 +42,7 @@
 			</tr>		
 		</c:forEach>
 	</table>
-
+</div>
 
 </body>
 </html>

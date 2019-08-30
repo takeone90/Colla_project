@@ -1,6 +1,6 @@
 @charset "UTF-8";
 
-#wsNav {
+#mypageNav {
 	width:200px;
 	height:calc(100% - 70px);
 	position:fixed;
@@ -34,31 +34,40 @@
 	margin:10px 0;
 	text-align:center;	
 }
-#myChatList{
+#myPageList{
 	margin: 20px 0;
 	text-align:right;
 }
-#myChatList h3{
+#myPageList h3{
+	font-size : 20px;
 	padding:0 30px;
 }
-#myChatList ul{
+#myPageList ul{
 	padding-top:5px;
 }
-#myChatList ul li{
+#myPageList ul li{
 	padding:3px 30px;
 	font-size:14px;
 }
-#myChatList ul li.currChat{
+#myPageList ul li.currChat{
 	background-color:#E5675A;
 }
-#myChatList ul li.currChat a{
+#myPageList ul li.currChat a{
 	color:#fff;
 }
-#myChatList ul li a{
+#myPageList ul li a {
 	transition:color 0.5s;
 	color:#CCCBCA;
 }
-#myChatList ul li a:hover{
+#myPageList ul li a:hover{
+	color:#fff;
+}
+
+#myPageList h3>a {
+	transition:color 0.5s;
+	color:#CCCBCA;
+}
+#myPageList h3>a:hover{
 	color:#fff;
 }
 

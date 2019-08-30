@@ -10,9 +10,9 @@
 			</a>
 		</h1>
 		
-<!-- 		<div id="chatRoomInfo"> -->
-<!-- 			<p>채팅방 이름</p> -->
-<!-- 		</div> -->
+		<div id="chatRoomInfo">
+			<p>채팅방 이름</p>
+		</div>
 		
 		<div class="main-nav">
 		</div>

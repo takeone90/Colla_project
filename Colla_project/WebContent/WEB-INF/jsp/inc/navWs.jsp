@@ -2,7 +2,29 @@
     pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:set var="contextPath" value="<%=request.getContextPath() %>"/>
+<script>
+	$(function(){
+		loadChatList();
+	});
+	function loadChatList(){
+		var currWnum = $("#currWnum").val();
+		var chatList = $(".chatList");
+		$.ajax({
+			data : {"currWnum":currWnum},
+			url : "${contextPath}/getChatList",
+			dataType :"json",
+			success : function(d){
+				chatList.empty();
+				$.each(d,function(idx,item){
+					var str='<li><a href="${contextPath}/chatMain?crNum='+item.crNum+'">'+item.crName+'</a></li>';
+						chatList.append(str);
+					});
+			}
+		});
+	}
+</script>
 <div id="wsNav">
+	<input type="hidden" value="${sessionScope.currWnum}" id="currWnum">
 	<div id="navContainer">
 		<div id="aboutProfile">
 			<a href="myPageMainForm">
@@ -20,11 +42,6 @@
 				My Chats
 			</h3>
 			<ul class="chatList">
-				<c:forEach items="${chatRoomList}" var="cr">
-				<li>
-					<a href="chatMain?crNum=${cr.crNum}">${cr.crName}</a>
-				</li>
-				</c:forEach>
 			</ul>
 		</div>
 		<hr>
