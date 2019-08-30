@@ -21,39 +21,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			sysdate
 			)
 	</insert>
-
-<!-- 	<select id="selectBoardBybNum" parameterType="int" resultMap="replyMap"> -->
-<!-- 		select b_num, m_name, w_num, b_title, b_content, b_regdate, b_readCnt, b_pw, b_type -->
-<!-- 		from board b, member m -->
-<!-- 		where b.b_num = #{bNum} and m.m_num=b.m_num -->
-<!-- 	</select> -->
-<!-- 	<delete id="deleteBoard" parameterType="int"> -->
-<!-- 		delete from board where b_num = #{bNum} -->
-<!-- 	</delete> -->
-<!-- 	<insert id="insertBoard" parameterType="reply"> -->
-<!-- 		<selectKey resultType="int" keyProperty="bNum" order="BEFORE"> -->
-<!-- 			select b_seq.nextval from dual -->
-<!-- 		</selectKey> -->
-<!-- 		insert into board -->
-<!-- 		values( -->
-<!-- 				#{bNum},  -->
-<!-- 				#{mNum},  -->
-<!-- 				#{wNum},  -->
-<!-- 				#{bTitle},  -->
-<!-- 				#{bContent},  -->
-<!-- 				sysdate,  -->
-<!-- 				0, -->
-<!-- 				#{bPw}, -->
-<!-- 				#{bType} -->
-<!-- 			) -->
-<!-- 	</insert> -->
-<!-- 	<update id="updateBoard" parameterType="board"> -->
-<!-- 		update board set -->
-<!-- 			b_title = #{bTitle}, -->
-<!-- 			b_content = #{bContent}, -->
-<!-- 			b_type = #{bType} -->
-<!-- 		where b_num = #{bNum} -->
-<!-- 	</update> -->
+	<update id="updateReply" parameterType="reply">
+		update reply set r_content = #{content} where r_num = #{rNum}
+	</update>
+	<delete id="deleteReply" parameterType="int">
+		delete from reply where r_num = #{rNum}	
+	</delete>
+	
 	<resultMap type="reply" id="replyMap" >
 		<result column="r_num" property="rNum"/>
 		<result column="b_num" property="bNum"/>

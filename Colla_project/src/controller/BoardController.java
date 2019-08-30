@@ -7,11 +7,13 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import model.Board;
 import service.BoardService;
@@ -30,11 +32,21 @@ public class BoardController {
 	@RequestMapping("/list")
 	public String showBoardList(
 			HttpSession session, 
-			Model model
+			Model model,
+			@RequestParam(value="page", defaultValue = "1") int page
 			) {
 		int wNum = (int)session.getAttribute("currWnum");
-		List<Board> bList = bService.getAllBoardByWnum(wNum);
+		if(page<=0) {
+			page=1;
+		}
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("wNum", wNum);
+		param.put("page", page);
+		
+		List<Board> bList = bService.getBoardListPage(param);
+//		List<Board> bList = bService.getAllBoardByWnum(wNum);
 		model.addAttribute("bList", bList);
+		model.addAttribute("listInf", param);
 		return "/board/boardList";
 	}
 	
@@ -44,6 +56,7 @@ public class BoardController {
 			Model model,
 			int num
 			) {
+		bService.readCntUp(num);
 		Board board = bService.getBoardByBnum(num);
 		model.addAttribute("board", board);
 		return "/board/boardView";
@@ -165,4 +178,19 @@ public class BoardController {
 		}
 		return "redirect:/board/list";
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
