@@ -59,7 +59,7 @@
 }
 </style>
 <script>
-var chatArea;
+var chatArea = $(".chat");
 $(function(){
 	//헤더에 채팅방과 워크스페이스 정보 바꾸기
 	var isDefault = $("#isDefault").val();
@@ -109,6 +109,7 @@ $(function(){
 		success : function(d){
 			$.each(d,function(idx,item){
 				loadPastMsg(item.mName,item.cmContent);
+				chatArea.scrollTop($("#chatArea")[0].scrollHeight);
 			});
 		},
 		error : function(){
@@ -129,10 +130,11 @@ $(function(){
 			stompClient.subscribe("/category/msg/"+crNum,function(jsonStr){
 				var userId = JSON.parse(jsonStr.body).userId;
 				var message = JSON.parse(jsonStr.body).message;
+				var writeTime = JSON.parse(jsonStr.body).writeTime;
 				if(userId == $("#userName").val()){
-					addMyMsg(userId,message);
+					addMyMsg(userId,message,writeTime);
 				}else{
-					addMsg(userId,message);
+					addMsg(userId,message,writeTime);
 				}
 				
 				$("#chatArea").scrollTop($("#chatArea")[0].scrollHeight);
@@ -147,21 +149,21 @@ $(function(){
 	}
 	
 	
-	function addMsg(userId,msg){
+	function addMsg(userId,msg,writeTime){
 		var chatMsg = $("<div class='chatMsg'></div>");
 		chatMsg.append("<div class='profileImg'><a href='#'>이미지<img alt='' src=''></a></div>");
-		chatMsg.append("<div class='name'><p>"+userId+" <span class='date'>10:36</span></p></div>");
+		chatMsg.append("<div class='name'><p>"+userId+" <span class='date'>"+writeTime+"</span></p></div>");
 		chatMsg.append("<p class='content'>"+msg+"</p>");
 		chatArea.append(chatMsg);
 	}
-	function addMyMsg(userId,msg){
+	function addMyMsg(userId,msg,writeTime){
 		var chatMsg = $("<div class='myMsg'></div>");
 		chatMsg.append("<div class='profileImg'><a href='#'>이미지<img alt='' src=''></a></div>");
-		chatMsg.append("<div class='name'><p>"+userId+" <span class='date'>10:36</span></p></div>");
+		chatMsg.append("<div class='name'><p>"+userId+" <span class='date'>"+writeTime+"</span></p></div>");
 		chatMsg.append("<p class='content'>"+msg+"</p>");
 		chatArea.append(chatMsg);
 	}
-	function loadPastMsg(userId,msg){
+	function loadPastMsg(userId,msg,writeTime){
 		var myId = $("#userName").val();
 		var chatMsg;
 		if(userId == myId){//지금은 불러온 메세지중에 작성자 이름이 현재 로그인되있는 이름과같으면 myMsg 로 처리함
@@ -170,7 +172,7 @@ $(function(){
 			chatMsg = $("<div class='chatMsg'></div>");
 		}
 		chatMsg.append("<div class='profileImg'><a href='#'>이미지<img alt='' src=''></a></div>");
-		chatMsg.append("<div class='name'><p>"+userId+" <span class='date'>10:36</span></p></div>");
+		chatMsg.append("<div class='name'><p>"+userId+" <span class='date'>"+writeTime+"</span></p></div>");
 		chatMsg.append("<p class='content'>"+msg+"</p>");
 		chatArea.append(chatMsg);
 	}	

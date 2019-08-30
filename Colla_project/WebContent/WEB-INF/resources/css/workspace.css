@@ -1,0 +1,66 @@
+@charset "UTF-8";
+#wsh2{
+	font-size: 2em;
+	font-weight: bolder;
+}
+#addWsModal{
+	display : none;
+	position : fixed;
+	top : 30%;
+	left : 30%;
+	width : 500px;
+	height : 350px;
+	background-color: white;
+	text-align: center;
+	border-radius: 10px;
+}
+#addChatModal{
+	display : none;
+	position : fixed;
+	top : 30%;
+	left : 30%;
+	width : 500px;
+	height : 400px;
+	background-color: white;
+	text-align: center;
+	border-radius: 10px;
+}
+#addMemberModal{
+	display : none;
+	position : fixed;
+	top : 30%;
+	left : 30%;
+	width : 500px;
+	height : 250px;
+	background-color: white;
+	text-align: center;
+	border-radius: 10px;
+}
+/* 네비게이션의 채팅방리스트와 게시판, 캘린더는 wsMain페이지에서는 숨겼습니다. */
+#myChatList{
+	display: none;
+}
+#ws-subfunction{
+	display: none;
+}
+#chatRoomInfo{
+	display: none;
+}
+.wsDetail{
+display : none;
+}
+.row ul{
+	list-style: none;
+	padding-left: 0px;
+}
+.ws{
+	padding : 30px;
+	background-color: #bcc2be;
+}
+.ws li{
+	display: inline-block;
+	padding : 10px;
+}
+.wsDetail{
+	padding : 10px;
+}

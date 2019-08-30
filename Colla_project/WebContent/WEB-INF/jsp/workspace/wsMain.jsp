@@ -11,59 +11,11 @@
 <link rel="stylesheet" type="text/css" href="css/base.css"/>
 <link rel="stylesheet" type="text/css" href="css/headerWs.css"/>
 <link rel="stylesheet" type="text/css" href="css/navWs.css"/>
+<link rel="stylesheet" type="text/css" href="css/workspace.css"/>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <style>
-#addWsModal{
-	display : none;
-	position : fixed;
-	top : 30%;
-	left : 30%;
-	width : 500px;
-	height : 350px;
-	background-color: white;
-	text-align: center;
-	border-radius: 10px;
-}
-#addChatModal{
-	display : none;
-	position : fixed;
-	top : 30%;
-	left : 30%;
-	width : 500px;
-	height : 400px;
-	background-color: white;
-	text-align: center;
-	border-radius: 10px;
-}
-#addMemberModal{
-	display : none;
-	position : fixed;
-	top : 30%;
-	left : 30%;
-	width : 500px;
-	height : 250px;
-	background-color: white;
-	text-align: center;
-	border-radius: 10px;
-}
-/* 네비게이션의 채팅방리스트와 게시판, 캘린더는 wsMain페이지에서는 숨겼습니다. */
-#myChatList{
-	display: none;
-}
-#ws-subfunction{
-	display: none;
-}
-#chatRoomInfo{
-	display: none;
-}
-.wsDetail{
-display : none;
-}
-.row ul{
-	list-style: none;
-	padding-left: 0px;
-}
+
 </style>
 <script>
 	var wNum;
@@ -159,7 +111,7 @@ display : none;
 	<%@ include file="/WEB-INF/jsp/inc/headerWs.jsp"%>
 	<%@ include file="/WEB-INF/jsp/inc/navWs.jsp"%>
 	<div id="wsBody">
-		<h2>Workspace</h2>
+		<h2 id="wsh2">Workspace</h2>
 		<h3>Workspace List</h3>
 		<ul>
 			<c:forEach items="${workspaceList}" var="ws">
