@@ -13,8 +13,15 @@ public class Board {
 	private int readCnt;
 	private String bPw;
 	private String bType;
+	private int replyCnt;
 	
 	
+	public int getReplyCnt() {
+		return replyCnt;
+	}
+	public void setReplyCnt(int replyCnt) {
+		this.replyCnt = replyCnt;
+	}
 	public String getbType() {
 		return bType;
 	}

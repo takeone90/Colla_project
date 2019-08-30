@@ -54,7 +54,7 @@
 				<div id="inputBox">
 					<textarea rows="2" cols="50" name="rContent"></textarea>
 					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
-					<button>댓글 추가</button>
+					<button onclick="addReply(); return false;">댓글 추가</button>
 				</div>
 			</form>
 		</div>

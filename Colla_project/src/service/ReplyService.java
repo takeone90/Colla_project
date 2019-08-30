@@ -21,4 +21,10 @@ public class ReplyService {
 	public boolean addReply(Reply r) {
 		return rDao.insertReply(r)>0?true:false;
 	}
+	public boolean removeReply(int rNum) {
+		return rDao.deleteReply(rNum)>0?true:false;
+	}
+	public boolean modifyReply(Reply r) {
+		return rDao.updateReply(r)>0?true:false;
+	}
 }
