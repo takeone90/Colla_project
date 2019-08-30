@@ -110,9 +110,10 @@ public class ChatRoomController {
 	@MessageMapping("/send/{var1}/{var2}")
 	public String sendMsg(String msg,@DestinationVariable(value="var1")String userEmail,@DestinationVariable(value="var2")String crNum) {
 		Member member = mService.getMemberByEmail(userEmail);
-		String jsonStr = "{\"message\":\""+msg+"\",\"userId\":\""+member.getName()+"\"}";
+		int cmNum = cmService.addChatMessage(Integer.parseInt(crNum), member.getNum(), msg);
+		ChatMessage cm = cmService.getChatMessageByCmNum(cmNum);
+		String jsonStr = "{\"message\":\""+msg+"\",\"userId\":\""+member.getName()+"\",\"writeTime\":\""+cm.getCmWriteDate()+"\"}";
 		//여기서 아이디,crNum,내용을 db에 저장(트랜잭션)
-		cmService.addChatMessage(Integer.parseInt(crNum), member.getNum(), msg);
 		//chatRoom 들어올때 chatMessageList를 뿌리기만 하면된다. 한번에 10개정도만 불러오고 스크롤 올리면 그위에 10개씩 계속 로드
 		
 		return jsonStr;
