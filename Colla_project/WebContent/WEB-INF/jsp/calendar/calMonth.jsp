@@ -77,6 +77,7 @@ $(function() {
 			success: function(result) {
 				if(result) {
 					alert("수정 성공");
+					location.reload();
 				} else {
 					alert("수정 실패");
 				}
@@ -100,6 +101,7 @@ $(function() {
 				if(result) {
 					alert("성공!");
 					$("#addScheduleForm").hide("slow");
+					location.reload();
 				} else {
 					alert("실패..");
 				}
@@ -123,6 +125,7 @@ $(function() {
 			success: function(result) {
 				if(result) {
 					alert("삭제 성공");
+					location.reload();
 				} else {
 					alert("삭제 실패");
 				}
