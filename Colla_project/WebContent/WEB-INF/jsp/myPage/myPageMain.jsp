@@ -77,7 +77,7 @@
 		</div>
 		<!-- 삭제예정 end -->
 	</div>
-
+	${sessionScope }
 
 	
 

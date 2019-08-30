@@ -10,6 +10,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import commons.Role;
 
 public class MemberDetails implements UserDetails{
+	private static final long serialVersionUID = 1L;
 	private String email;
 	private String pw;
 	private List<Role> authorities;
@@ -93,9 +94,36 @@ public class MemberDetails implements UserDetails{
 		// TODO Auto-generated method stub
 		return isEnabled;
 	}
+	
+	
 
 	public String getEmail() {
 		return email;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		// TODO Auto-generated method stub
+		return super.equals(obj);
+	}
+
+	@Override
+	public int hashCode() {
+		// TODO Auto-generated method stub
+		return super.hashCode();
+	}
+	
+
+	@Override
+	protected Object clone() throws CloneNotSupportedException {
+		// TODO Auto-generated method stub
+		return super.clone();
+	}
+
+	@Override
+	protected void finalize() throws Throwable {
+		// TODO Auto-generated method stub
+		super.finalize();
 	}
 
 	public void setEmail(String email) {

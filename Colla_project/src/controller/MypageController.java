@@ -141,6 +141,6 @@ public class MypageController {
 	@RequestMapping(value = "/showProfileImg")
 	public byte[] showProfileImg(HttpSession session, HttpServletRequest request) {
 		Member member = memberService.getMemberByEmail((String)session.getAttribute("userEmail"));
-		return memberService.getProfileImg(member.getProfileImg(),request); 
+		return memberService.getProfileImg(member,request); 
 	}
 }

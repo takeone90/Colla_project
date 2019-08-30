@@ -122,6 +122,11 @@ public class MemberController {
 		}
 	}
 	
+	@RequestMapping(value="/loginDuplication", method = RequestMethod.GET)
+	public String loginDuplication() {
+		return "/login/loginDuplication";
+	}
+	
 	
 	public String setCode() {
 		StringBuffer sb = new StringBuffer();
