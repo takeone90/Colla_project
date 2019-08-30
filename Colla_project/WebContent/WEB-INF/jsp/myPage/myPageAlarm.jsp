@@ -8,7 +8,11 @@
 	String contextPath = request.getContextPath();
 	request.setAttribute("contextPath", contextPath);
 %>
-<title>Insert title here</title>
+<title>알람설정</title>
+<link rel="stylesheet" type="text/css" href="css/reset.css"/>
+<link rel="stylesheet" type="text/css" href="css/base.css"/>
+<link rel="stylesheet" type="text/css" href="css/headerWs.css"/>
+<link rel="stylesheet" type="text/css" href="css/navMyPage.css"/>
 <style type="text/css">
 .toggleBG {
 	background: #CCCCCC;
@@ -107,22 +111,23 @@
 </head>
 <body>
 	<%@ include file="/WEB-INF/jsp/inc/headerWs.jsp"%>
-	<%@ include file="/WEB-INF/jsp/inc/navWs.jsp"%>
-	<h1>알림 설정</h1>
-	워크스페이스 초대 알림
-	<div class='toggleBG' id="wsBG">
-		<button id='wsSetAlarm' class='toggleFG wsAlarm'></button>
+	<%@ include file="/WEB-INF/jsp/inc/navMyPage.jsp"%>
+	<div id="wsBody">
+		<h1>알림 설정</h1>
+		워크스페이스 초대 알림
+		<div class='toggleBG' id="wsBG">
+			<button id='wsSetAlarm' class='toggleFG wsAlarm'></button>
+		</div>
+	
+		공지 알림
+		<div class='toggleBG' id="boardBG">
+			<button id='boardSetAlarm' class='toggleFG boardAlarm'></button>
+		</div>
+	
+		게시글 댓글 알림
+		<div class='toggleBG' id="replyBG">
+			<button id='replySetAlarm' class='toggleFG replyAlarm'></button>
+		</div>
 	</div>
-
-	공지 알림
-	<div class='toggleBG' id="boardBG">
-		<button id='boardSetAlarm' class='toggleFG boardAlarm'></button>
-	</div>
-
-	게시글 댓글 알림
-	<div class='toggleBG' id="replyBG">
-		<button id='replySetAlarm' class='toggleFG replyAlarm'></button>
-	</div>
-
 </body>
 </html>

@@ -8,17 +8,23 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.handler.annotation.DestinationVariable;
+import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import mail.MailSend;
+import model.ChatMessage;
 import model.ChatRoom;
 import model.ChatRoomMember;
 import model.Member;
 import model.WsMember;
+import service.ChatMessageService;
 import service.ChatRoomMemberService;
 import service.ChatRoomService;
 import service.MemberService;
@@ -30,6 +36,8 @@ public class ChatRoomController {
 	private ChatRoomService crService;
 	@Autowired
 	private ChatRoomMemberService crmService;
+	@Autowired
+	private ChatMessageService cmService;
 	@Autowired
 	private MemberService mService;
 	@Autowired
@@ -55,12 +63,23 @@ public class ChatRoomController {
 		}
 		model.addAttribute("wsMemberList", wsMemberList);
 		model.addAttribute("wNum", wNum);
-		//해당 채팅방의 wNum 정보를 통해 wNum의 모든 채팅방리스트를 꺼내야한다.
-		List<ChatRoom> chatRoomList = crService.getAllChatRoomByWnum(wNum);
-		model.addAttribute("chatRoomList", chatRoomList);
+		
+		session.setAttribute("currWnum", wNum);
+//		//해당 채팅방의 wNum 정보를 통해 wNum의 모든 채팅방리스트를 꺼내야한다.
+//		List<ChatRoom> chatRoomList = crService.getAllChatRoomByWnum(wNum);
+//		model.addAttribute("chatRoomList", chatRoomList);
 		
 		return "/chatting/chatMain";
 	}
+	
+	//채팅방 리스트 왼쪽 네비게이션에 출력
+	@ResponseBody
+	@RequestMapping("/getChatList")
+	public List<ChatRoom> getChatList(@RequestParam("currWnum")int currWnum){
+		List<ChatRoom> crList = crService.getAllChatRoomByWnum(currWnum);
+		return crList;
+	}
+	
 	@RequestMapping("/addChat")
 	public String addChatRoom(int wNum,String crName,HttpSession session,HttpServletRequest request) {
 		//현재 로그인하고 채팅방만드는 사람을 chatroom member로 넣어준다
@@ -85,5 +104,24 @@ public class ChatRoomController {
 			crmService.addChatRoomMember(crNum, member.getNum(), wNum);
 		}
 		return "redirect:chatMain?crNum="+crNum;
+	}
+	
+	@SendTo("/category/msg/{var2}")
+	@MessageMapping("/send/{var1}/{var2}")
+	public String sendMsg(String msg,@DestinationVariable(value="var1")String userEmail,@DestinationVariable(value="var2")String crNum) {
+		Member member = mService.getMemberByEmail(userEmail);
+		int cmNum = cmService.addChatMessage(Integer.parseInt(crNum), member.getNum(), msg);
+		ChatMessage cm = cmService.getChatMessageByCmNum(cmNum);
+		String jsonStr = "{\"message\":\""+msg+"\",\"userId\":\""+member.getName()+"\",\"writeTime\":\""+cm.getCmWriteDate()+"\"}";
+		//여기서 아이디,crNum,내용을 db에 저장(트랜잭션)
+		//chatRoom 들어올때 chatMessageList를 뿌리기만 하면된다. 한번에 10개정도만 불러오고 스크롤 올리면 그위에 10개씩 계속 로드
+		
+		return jsonStr;
+	}
+	@RequestMapping("/loadPastMsg")
+	@ResponseBody
+	public List<ChatMessage> loadPastMsg(@RequestParam("crNum")int crNum) {
+		List<ChatMessage> cmList = cmService.getAllChatMessageByCrNum(crNum);
+		return cmList;
 	}
 }

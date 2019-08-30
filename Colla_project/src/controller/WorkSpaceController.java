@@ -91,12 +91,13 @@ public class WorkSpaceController {
 		String userEmail = (String)session.getAttribute("userEmail");
 		Member member = mService.getMemberByEmail(userEmail);
 		int wNum = wService.addWorkspace(member.getNum(), wsName);
+		if(targetUser!="" && targetUser!=null) {
+			//targetUser들에게 초대메일 보내기 해야함
+			wiService.addWorkspaceInvite(targetUser, wNum);
+			Thread innerTest = new Thread(new inner(targetUser,wNum));
+			innerTest.start();
+		}
 		
-		
-		//targetUser들에게 초대메일 보내기 해야함
-		wiService.addWorkspaceInvite(targetUser, wNum);
-		Thread innerTest = new Thread(new inner(targetUser,wNum));
-		innerTest.start();
 		return "redirect:workspace";
 	}
 	
@@ -150,6 +151,15 @@ public class WorkSpaceController {
 		return "redirect:workspace";
 	}
 	
+	@ResponseBody
+	@RequestMapping("/dropSession")
+	public void dropSession(HttpSession session) {
+		session.removeAttribute("currWnum");
+		session.removeAttribute("userEmail");
+		session.removeAttribute("user");
+		session.removeAttribute("inviteUserEmail");
+		session.removeAttribute("inviteWnum");
+	}
 	
 	
 	

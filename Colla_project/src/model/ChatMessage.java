@@ -8,6 +8,13 @@ public class ChatMessage {
 	private int mNum;
 	private String cmContent;
 	private Timestamp cmWriteDate;
+	private String mName;
+	public String getmName() {
+		return mName;
+	}
+	public void setmName(String mName) {
+		this.mName = mName;
+	}
 	public int getCmNum() {
 		return cmNum;
 	}
@@ -40,7 +47,7 @@ public class ChatMessage {
 	}
 	@Override
 	public String toString() {
-		return "채팅메세지 [메세지번호 : " + cmNum + ", 채팅방번호 : " + crNum + ", 작성자번호 : " + mNum + ", 메세지내용 : " + cmContent
+		return "채팅메세지 [메세지번호 : " + cmNum + ", 채팅방번호 : " + crNum + ", 작성자번호 : " + mNum + ", 작성자 : "+mName+", 메세지내용 : " + cmContent
 				+ ", 작성시간 : " + cmWriteDate + "]";
 	}
 	

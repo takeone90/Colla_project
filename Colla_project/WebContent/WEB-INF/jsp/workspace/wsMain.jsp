@@ -11,59 +11,11 @@
 <link rel="stylesheet" type="text/css" href="css/base.css"/>
 <link rel="stylesheet" type="text/css" href="css/headerWs.css"/>
 <link rel="stylesheet" type="text/css" href="css/navWs.css"/>
+<link rel="stylesheet" type="text/css" href="css/workspace.css"/>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <style>
-#addWsModal{
-	display : none;
-	position : fixed;
-	top : 30%;
-	left : 30%;
-	width : 500px;
-	height : 350px;
-	background-color: white;
-	text-align: center;
-	border-radius: 10px;
-}
-#addChatModal{
-	display : none;
-	position : fixed;
-	top : 30%;
-	left : 30%;
-	width : 500px;
-	height : 400px;
-	background-color: white;
-	text-align: center;
-	border-radius: 10px;
-}
-#addMemberModal{
-	display : none;
-	position : fixed;
-	top : 30%;
-	left : 30%;
-	width : 500px;
-	height : 250px;
-	background-color: white;
-	text-align: center;
-	border-radius: 10px;
-}
-/* 네비게이션의 채팅방리스트와 게시판, 캘린더는 wsMain페이지에서는 숨겼습니다. */
-#myChatList{
-	display: none;
-}
-#ws-subfunction{
-	display: none;
-}
-#chatRoomInfo{
-	display: none;
-}
-.wsDetail{
-display : none;
-}
-.row ul{
-	list-style: none;
-	padding-left: 0px;
-}
+
 </style>
 <script>
 	var wNum;
@@ -133,12 +85,25 @@ display : none;
 					$.each(d,function(idx,item){
 						var str='<li><input type="checkbox" value="'+item.num+'" name="mNumList">'+item.name+'</li>';
 							wsMemberList.append(str);
-						});
+					});
 				},
 				error : function(){
 					alert("wsMemberList 띄우기 에러발생");
 				}
 			});
+	}
+	function dropSession(){
+		$("#logoutBtn").on("click",function(){
+			$.ajax({
+				url : "${contextPath}/dropSession",
+				success : function(){
+					alert("로그아웃 성공");
+				},
+				error : function(){
+					alert("로그아웃 세션드랍 에러발생");
+				}
+			});
+		})
 	}
 </script>
 </head>
@@ -146,7 +111,7 @@ display : none;
 	<%@ include file="/WEB-INF/jsp/inc/headerWs.jsp"%>
 	<%@ include file="/WEB-INF/jsp/inc/navWs.jsp"%>
 	<div id="wsBody">
-		<h2>Workspace</h2>
+		<h2 id="wsh2">Workspace</h2>
 		<h3>Workspace List</h3>
 		<ul>
 			<c:forEach items="${workspaceList}" var="ws">
@@ -191,7 +156,7 @@ display : none;
 		<div>
 			<form action="logout" method="post">
 			<input type="hidden" value="${_csrf.token}" name="${_csrf.parameterName}">
-			<input type="submit" value="임시 로그아웃 버튼">
+			<input type="submit" value="임시 로그아웃 버튼" id="logoutBtn">
 			</form>
 		</div>
 
@@ -239,7 +204,7 @@ display : none;
 			<div class="modalBody">
 				<p>채팅방을 만들고 멤버를 초대하세요</p>
 				<form action="addChat" method="post">
-					<input type="text" class="addWnum" name="wNum">
+					<input type="hidden" class="addWnum" name="wNum">
 					<input type="hidden" value="${_csrf.token}" name="${_csrf.parameterName}">
 					<div class="addChatInputWrap">
 						<div class="row">

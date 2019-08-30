@@ -9,7 +9,11 @@
    String contextPath = request.getContextPath();
    request.setAttribute("contextPath", contextPath);
 %>
-<title>Insert title here</title>
+<title>비밀번호 확인</title>
+<link rel="stylesheet" type="text/css" href="css/reset.css"/>
+<link rel="stylesheet" type="text/css" href="css/base.css"/>
+<link rel="stylesheet" type="text/css" href="css/headerWs.css"/>
+<link rel="stylesheet" type="text/css" href="css/navMyPage.css"/>
 <script src="https://code.jquery.com/jquery-3.4.1.js"
 	integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
 	crossorigin="anonymous"></script>
@@ -30,7 +34,7 @@
 </head>
 <body>
 	<%@ include file="/WEB-INF/jsp/inc/headerWs.jsp"%>
-	<%@ include file="/WEB-INF/jsp/inc/navWs.jsp"%>
+	<%@ include file="/WEB-INF/jsp/inc/navMyPage.jsp"%>
 	<div id="wsBody">
 		<h3>마이페이지</h3>
 		<h4>회원정보 관리</h4>
