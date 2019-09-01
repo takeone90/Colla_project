@@ -12,11 +12,7 @@
 <link rel="stylesheet" type="text/css" href="css/headerWs.css"/>
 <link rel="stylesheet" type="text/css" href="css/navWs.css"/>
 <link rel="stylesheet" type="text/css" href="css/workspace.css"/>
-
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<style>
-
-</style>
 <script>
 	var wNum;
 	
@@ -69,11 +65,11 @@
 		
 		//워크스페이스 하나 숨기고 닫기
 		$(".showWsDetail").on("click",function(){
-			$(this).next().toggle();
+			$(this).next().toggle(300);
 			return false;
 		});
 		
-	});
+	});// onload.function end
 	function thisWsMemberList(wNum){
 			var wsMemberList = $("#wsMemberList");
 			$.ajax({
@@ -111,23 +107,27 @@
 	<%@ include file="/WEB-INF/jsp/inc/headerWs.jsp"%>
 	<%@ include file="/WEB-INF/jsp/inc/navWs.jsp"%>
 	<div id="wsBody">
-		<h2 id="wsh2">Workspace</h2>
+		<div id="wsBodyContainer"> 
+		<h2>Workspace</h2>
 		<h3>Workspace List</h3>
 		<ul>
 			<c:forEach items="${workspaceList}" var="ws">
 				<li class="ws">
-					<h3 style="font-weight: bolder;">${ws.wsInfo.name}</h3>
-					<button class="showWsDetail">워크스페이스 상세보기</button> <!-- 누르면 ws.wsInfo.num인 wsDetail만 열려야한다 -->
-
+					<h3>${ws.wsInfo.name}</h3>
+					<a href="#" class="showWsDetail">상세보기</a>
 					<div class="wsDetail">
 						<input type="hidden" value="${ws.num}" id="wNum">
 						<div class="wsChatList">
 							<p>채팅리스트</p>
 							<ul>
 							<c:forEach items="${ws.crList}" var="cr">
-								<li><a href="chatMain?crNum=${cr.crNum}">${cr.crName}</a></li>
+								<div class="crRoundBox">
+									<li><a href="chatMain?crNum=${cr.crNum}">${cr.crName}</a></li>
+								</div>
 							</c:forEach>
-								<button class="openChatModal" data-wnum="${ws.wsInfo.num}"> 채팅방 추가(+)</button>
+								<div class="addBox">
+								<a href="#" class="openChatModal" data-wnum="${ws.wsInfo.num}">+</a>
+								</div>
 							</ul>
 						</div>
 						
@@ -136,13 +136,17 @@
 						<p>참여자 목록</p>
 						<ul>
 						<c:forEach items="${ws.mList}" var="m"><!-- workspacemember 테이블 만들고 그 테이블리스트를 여기 넣는다 -->
+						<div class="wsmRoundBox">
 							<li>${m.name}</li>
+						</div>
 						</c:forEach>
-							<button class="openAddMemberModal" data-wnum="${ws.wsInfo.num}"> 멤버 추가(+)</button>
+							<div class="addBox">
+							<a href="#" class="openAddMemberModal" data-wnum="${ws.wsInfo.num}">+</a>
+							</div>
 						</ul>
 						</div>
 					</div>
-					<div>
+					<div id="exitWs">
 						<a href="exitWs?wNum=${ws.wsInfo.num}" style="color:red">워크스페이스 나가기</a>
 					</div>
 				</li>
@@ -262,7 +266,7 @@
 		
 		
 		
-		
+		</div><!-- end wsBodyContainer -->
 	</div><!-- end wsBody -->
 </body>
 </html>
