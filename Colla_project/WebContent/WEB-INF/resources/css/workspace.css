@@ -1,7 +1,13 @@
 @charset "UTF-8";
-#wsh2{
+#wsBodyContainer h2{
 	font-size: 2em;
 	font-weight: bolder;
+	margin-bottom: 30px;
+}
+#wsBodyContainer h3{
+	font-size: 1em;
+	font-weight: bolder;
+	margin-bottom: 30px;
 }
 #addWsModal{
 	display : none;
@@ -9,10 +15,20 @@
 	top : 30%;
 	left : 30%;
 	width : 500px;
-	height : 350px;
 	background-color: white;
 	text-align: center;
 	border-radius: 10px;
+	padding : 30px;
+	box-shadow:2px 2px 10px 1px #6e6d6d;
+}
+#addWsModal h3{
+	font-size: 27px;
+}
+#addWsModal p{
+	margin-bottom: 20px;
+}
+.row{
+	margin-bottom: 10px;	
 }
 #addChatModal{
 	display : none;
@@ -20,10 +36,17 @@
 	top : 30%;
 	left : 30%;
 	width : 500px;
-	height : 400px;
 	background-color: white;
 	text-align: center;
 	border-radius: 10px;
+	padding : 30px;
+	box-shadow:2px 2px 10px 1px #6e6d6d;
+}
+#addChatModal h3{
+	font-size: 27px;
+}
+#addChatModal p{
+	margin-bottom: 20px;
 }
 #addMemberModal{
 	display : none;
@@ -31,12 +54,18 @@
 	top : 30%;
 	left : 30%;
 	width : 500px;
-	height : 250px;
 	background-color: white;
 	text-align: center;
 	border-radius: 10px;
+	padding : 30px;
+	box-shadow:2px 2px 10px 1px #6e6d6d;
 }
-/* 네비게이션의 채팅방리스트와 게시판, 캘린더는 wsMain페이지에서는 숨겼습니다. */
+#addMemberModal h3{
+	font-size: 27px;
+}
+#addMemberModal p{
+	margin-bottom: 20px;
+}
 #myChatList{
 	display: none;
 }
@@ -55,12 +84,70 @@ display : none;
 }
 .ws{
 	padding : 30px;
+	margin-bottom : 10px;
 	background-color: #bcc2be;
+}
+.ws h3{
+	display: inline-block;
+	font-weight: bolder;
 }
 .ws li{
 	display: inline-block;
 	padding : 10px;
 }
+.wsDetail p{
+	font-weight: bolder;
+}
+.showWsDetail{
+	position: relative;
+	left : 75%;
+}
+.showWsDetail:hover{
+	color: #f2452e;
+	font-weight: bolder;
+}
 .wsDetail{
 	padding : 10px;
+}
+#wsBodyContainer{
+	padding:30px;
+}
+#exitWs{
+	text-align: right;
+}
+.crRoundBox{
+	display: inline-block;
+	margin-right: 10px;
+	margin-top : 10px;
+	margin-bottom : 10px;
+	background-color: white;
+	border-radius: 10px;
+}
+.crRoundBox:hover{
+	background-color: #f54b38;
+	font-weight: bolder;
+}
+.wsmRoundBox{
+	display: inline-block;
+	margin-right: 10px;
+	margin-top : 10px;
+	margin-bottom : 10px;
+	background-color: white;
+	border-radius: 10px;
+}
+.addBox{
+	display: inline-block;
+	margin-right: 10px;
+	margin-bottom : 10px;
+	background-color: white;
+	width:20px;
+	height:20px;
+	text-align : center;
+	border-radius: 10px;
+}
+.openChatModal{
+	font-weight: bolder;
+}
+.openAddMemberModal{
+	font-weight: bolder;
 }

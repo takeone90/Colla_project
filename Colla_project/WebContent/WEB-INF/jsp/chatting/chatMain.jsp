@@ -11,53 +11,12 @@
 <link rel="stylesheet" type="text/css" href="css/base.css"/>
 <link rel="stylesheet" type="text/css" href="css/headerWs.css"/>
 <link rel="stylesheet" type="text/css" href="css/navWs.css"/>
+<link rel="stylesheet" type="text/css" href="css/chatMain.css"/>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script type="text/javascript" src="js/stomp.js"></script>
 <script type="text/javascript" src="js/sockjs.js"></script>
-<style>
-	#addCrMemberModal{
-	display : none;
-	position : fixed;
-	top : 30%;
-	left : 30%;
-	width : 500px;
-	height : 340px;
-	background-color: white;
-	text-align: center;
-	align-content : center;
-	border-radius: 10px;
-}
-.row ul{
-	list-style: none;
-	padding-left: 0px;
-}
-.chatMsg{
-	position: relative;
-	opacity: 1;
-	background-color: #ebe6e6;
-	border-bottom : 0.5px solid #bdbbbb;
-}
-.myMsg{
-	position: relative;
-	opacity: 1;
-	background-color: #deeafc;
-	border-bottom : 0.5px solid #bdbbbb;
-}
-.chat{
-	position: static;
-	background-color: white;
-	height : 500px;
- 	overflow-y:scroll;
-}
-.name > p {
-	font-weight: bolder;
-}
-.date{
-	font-weight: normal;
-	font-size: 5px;
-}
-</style>
+
 <script>
 var chatArea = $(".chat");
 $(function(){
@@ -108,7 +67,9 @@ $(function(){
 		dataType :"json",
 		success : function(d){
 			$.each(d,function(idx,item){
-				loadPastMsg(item.mName,item.cmContent);
+				var writeDate = new Date(item.cmWriteDate);
+				var writeTime = writeDate.getFullYear()+"-"+writeDate.getMonth()+"-"+writeDate.getDay()+" "+writeDate.getHours()+"시"+writeDate.getMinutes()+"분";
+				loadPastMsg(item.mName,item.cmContent,writeTime);
 				chatArea.scrollTop($("#chatArea")[0].scrollHeight);
 			});
 		},
@@ -117,6 +78,12 @@ $(function(){
 		}
 	});
 	
+	
+	//첨부파일Detail 숨기고 닫기
+	$("#attachBtn").on("click",function(){
+		$(this).prev().toggle(300);
+		return false;
+	});
 	
 });//onload-function end
 	var sock;
@@ -148,21 +115,23 @@ $(function(){
 		$("#chatInput").val("");
 	}
 	
-	
+	//받은 메시지 화면에 추가
 	function addMsg(userId,msg,writeTime){
 		var chatMsg = $("<div class='chatMsg'></div>");
-		chatMsg.append("<div class='profileImg'><a href='#'>이미지<img alt='' src=''></a></div>");
-		chatMsg.append("<div class='name'><p>"+userId+" <span class='date'>"+writeTime+"</span></p></div>");
+		chatMsg.append("<div class='profileImg'><a href='#'><img alt='' src=''></a></div>");
+		chatMsg.append("<div class='name'><p>"+userId+" <span class='date'>"+writeTime+"</span></p></div><br>");
 		chatMsg.append("<p class='content'>"+msg+"</p>");
 		chatArea.append(chatMsg);
 	}
+	//내가 쓴 메시지 화면에 추가
 	function addMyMsg(userId,msg,writeTime){
 		var chatMsg = $("<div class='myMsg'></div>");
-		chatMsg.append("<div class='profileImg'><a href='#'>이미지<img alt='' src=''></a></div>");
-		chatMsg.append("<div class='name'><p>"+userId+" <span class='date'>"+writeTime+"</span></p></div>");
+		chatMsg.append("<div class='profileImg'><a href='#'><img alt='' src=''></a></div>");
+		chatMsg.append("<div class='name'><p>"+userId+" <span class='date'>"+writeTime+"</span></p></div><br>");
 		chatMsg.append("<p class='content'>"+msg+"</p>");
 		chatArea.append(chatMsg);
 	}
+	//과거 메시지 화면에 추가
 	function loadPastMsg(userId,msg,writeTime){
 		var myId = $("#userName").val();
 		var chatMsg;
@@ -171,18 +140,12 @@ $(function(){
 		}else{
 			chatMsg = $("<div class='chatMsg'></div>");
 		}
-		chatMsg.append("<div class='profileImg'><a href='#'>이미지<img alt='' src=''></a></div>");
-		chatMsg.append("<div class='name'><p>"+userId+" <span class='date'>"+writeTime+"</span></p></div>");
+		chatMsg.append("<div class='profileImg'><a href='#'><img alt='' src=''></a></div>");
+		chatMsg.append("<div class='name'><p>"+userId+" <span class='date'>"+writeTime+"</span></p></div><br>");
 		chatMsg.append("<p class='content'>"+msg+"</p>");
 		chatArea.append(chatMsg);
 	}	
 	
-// 	function connectMsg(){
-// 		var userName= $("#userName").val();
-// 		var msg = userName + "님이 접속했습니다";
-// 		stompClient.send("/client/send",{},msg);
-// 	}
-
 	
 </script>
 </head>
@@ -203,7 +166,12 @@ $(function(){
 			</div>
 		</div>
 		<div id="inputBox">
-			<a id="attachBtn" href="#">첨부파일</a>
+			<div class="attachDetail">
+				<div class="attach"><a href="#">파일첨부</a></div>
+				<div class="attach"><a href="#">코드첨부</a></div>
+				<div class="attach"><a href="#">지도첨부</a></div>
+			</div>
+			<a href="#" id="attachBtn">첨부파일</a>
 			<input type="text" id="chatInput" placeholder="메세지 작성부분">
 			<a id="sendChat" href="#">전송</a>
 		</div>

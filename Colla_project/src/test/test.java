@@ -26,6 +26,6 @@ public class test {
 	private ChatMessageDao cmDao;
 	@Test
 	public void serviceTest() {
-		System.out.println(cmDao.selectAllChatMessageByCrNum(250));
+		System.out.println(cmService.getAllChatMessageByCrNum(250));
 	}
 }

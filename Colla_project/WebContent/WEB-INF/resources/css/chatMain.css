@@ -1,0 +1,76 @@
+@charset "UTF-8";
+#addCrMemberModal{
+	display : none;
+	position : fixed;
+	top : 30%;
+	left : 30%;
+	width : 500px;
+	height : 340px;
+	background-color: white;
+	text-align: center;
+	align-content : center;
+	border-radius: 10px;
+}
+.row ul{
+	list-style: none;
+	padding-left: 0px;
+}
+.chatMsg{
+	position: relative;
+	opacity: 1;
+	background-color: #ebe6e6;
+	border-bottom : 0.5px solid #bdbbbb;
+	padding : 10px;
+}
+.myMsg{
+	position: relative;
+	opacity: 1;
+	background-color: #deeafc;
+	border-bottom : 0.5px solid #bdbbbb;
+	padding : 10px;
+}
+.chat{
+	position: static;
+	background-color: white;
+	height : 500px;
+ 	overflow-y:scroll;
+}
+.name > p {
+	font-weight: bolder;
+}
+.date{
+	font-weight: normal;
+	font-size: 5px;
+}
+.profileImg{
+	display: inline-block;
+	width : 45px;
+	height : 45px;
+	border-radius: 50px;
+	background-color: white;
+	margin-right: 10px;
+}
+.name{
+	display: inline-block;
+	position: relative;
+	top: 0px;
+	
+}
+.content{
+	display: inline-block;
+	position: relative;
+	left : 50px;
+}
+.attachDetail{
+	display : none;
+	text-align :center;
+	background-color: #f5f5f5;
+	border : 0.5px solid #949292;
+	border-radius : 5px 5px 0px 0px;
+	width : 200px;
+	padding : 10px;
+}
+.attach{
+	display: inline-block;
+	padding-right : 5px;
+}
