@@ -22,6 +22,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="selectChatRoomMemberByAnother" resultMap="crmMap">
 		select * from chatroom_member where cr_num=#{crNum} and w_num=#{wNum} and m_num=#{mNum}
 	</select>
+	<select id="selectChatRoomMemberByCrNumMnum" resultMap="crmMap">
+		select * from chatroom_member where cr_num=#{crNum} and m_num=#{mNum}
+	</select>
 	<select id="selectAllChatRoomMember" resultMap="crmMap">
 		select * from chatroom_member
 	</select>
