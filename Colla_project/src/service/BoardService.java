@@ -29,6 +29,20 @@ public class BoardService {
 	public List<Board> getBoardListPage(Map<String,Object> param){
 		List<Board> bList = null;
 		int page = (Integer) param.get("page");
+		int type = (Integer) param.get("type");
+		String keyword = (String)param.get("keyword");
+		
+		if (type == 1) {
+			param.put("title", keyword);
+		} else if (type == 2) {
+			param.put("content", keyword);
+		} else if (type == 3) {
+			param.put("title", keyword);
+			param.put("content", keyword);
+		} else if (type == 4) {
+			param.put("name", keyword);
+		}
+		
 		param.put("firstItem", getFirstItem(page));
 		param.put("lastItem", getLastItem(page));
 		param.put("startNum", getStartNum(page));
@@ -36,14 +50,7 @@ public class BoardService {
 		param.put("totalPage", getTotalPage(param));
 		param.put("lastStartNum", (((int) param.get("totalPage") - 1) / PAGE_NUM) * PAGE_NUM + 1);
 		bList = bDao.selectBoardListPage(param);
-		System.out.println(
-				"firstItem : " + param.get("firstItem")
-				+"\nlastItem : " + param.get("lastItem")
-				+"\nstartNum : " + param.get("startNum")
-				+"\nendNum : " + param.get("endNum")
-				+"\ntotalPage : " + param.get("totalPage")
-				+"\nlastStartNum : " + param.get("lastStartNum")
-		);
+		
 		return bList;
 	}
 	public boolean addBoard(Board board) {
@@ -55,6 +62,11 @@ public class BoardService {
 	public boolean removeBoard(int bNum) {
 		return bDao.deleteBoard(bNum)>0?true:false;
 	}
+	
+//	public Board getBoardByBnumWithFile(int bNum) {
+//		return bDao.selectBoardBybNumWithFile(bNum);
+//	}
+	
 	public Board getBoardByBnum(int bNum) {
 		return bDao.selectBoardBybNum(bNum);
 	}

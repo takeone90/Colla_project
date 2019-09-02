@@ -1,14 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="contextPath" value="<%=request.getContextPath() %>"/>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>게시글 작성</title>
-<link rel="stylesheet" type="text/css" href="../css/reset.css"/>
-<link rel="stylesheet" type="text/css" href="../css/base.css"/>
-<link rel="stylesheet" type="text/css" href="../css/headerWs.css"/>
-<link rel="stylesheet" type="text/css" href="../css/navWs.css"/>
+<link rel="stylesheet" type="text/css" href="${contextPath}/css/reset.css"/>
+<link rel="stylesheet" type="text/css" href="${contextPath}/css/base.css"/>
+<link rel="stylesheet" type="text/css" href="${contextPath}/css/headerWs.css"/>
+<link rel="stylesheet" type="text/css" href="${contextPath}/css/navWs.css"/>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 </head>
@@ -37,7 +39,7 @@
 	<div id="wsBody">
 		<h3>게시글 작성</h3>
 		<div id="inputWrap">
-			<form id="writeForm" action="../board/write" method="post">
+			<form id="writeForm" action="${contextPath}/board/write" method="post" enctype="multipart/form-data">
 				<div class="row">
 					<label>
 						말머리
@@ -64,10 +66,16 @@
 						<textarea id="content" name="content" cols="70" rows="10"></textarea>
 					</label>
 				</div>
+				<div class="row">
+					<label>
+						파일 첨부
+						<input multiple="multiple" id="file" type="file" name="file" >
+					</label>
+				</div>
 				<div id="btns">
 					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 					<button>등록</button>
-					<a href="#" onclick="window.location.replace('list')">취소</a>
+					<a href="list?page=${listInf.page}&keyword=${listInf.keyword}&keywordType=${listInf.type}">취소</a>
 				</div>
 			</form>
 		</div>

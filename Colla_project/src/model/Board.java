@@ -14,8 +14,15 @@ public class Board {
 	private String bPw;
 	private String bType;
 	private int replyCnt;
-	
-	
+//	private List<String> fileName;
+//	
+//	
+//	public List<String> getFileName() {
+//		return fileName;
+//	}
+//	public void setFileName(List<String> fileName) {
+//		this.fileName = fileName;
+//	}
 	public int getReplyCnt() {
 		return replyCnt;
 	}

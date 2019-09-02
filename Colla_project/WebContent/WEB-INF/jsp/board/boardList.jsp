@@ -2,16 +2,17 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<c:set var="contextPath" value="<%=request.getContextPath() %>"/>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Board List</title>
-<link rel="stylesheet" type="text/css" href="../css/reset.css"/>
-<link rel="stylesheet" type="text/css" href="../css/base.css"/>
-<link rel="stylesheet" type="text/css" href="../css/headerWs.css"/>
-<link rel="stylesheet" type="text/css" href="../css/navWs.css"/>
-<link rel="stylesheet" type="text/css" href="../css/board.css"/>
+<link rel="stylesheet" type="text/css" href="${contextPath}/css/reset.css"/>
+<link rel="stylesheet" type="text/css" href="${contextPath}/css/base.css"/>
+<link rel="stylesheet" type="text/css" href="${contextPath}/css/headerWs.css"/>
+<link rel="stylesheet" type="text/css" href="${contextPath}/css/navWs.css"/>
+<link rel="stylesheet" type="text/css" href="${contextPath}/css/board.css"/>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <style type="text/css">
 	#wsBodyContainer{
@@ -100,7 +101,7 @@
 						</c:choose>
 					</div>
 					<div>
-						<a href="../board/view?num=${board.bNum}">${board.bTitle } <span class="replyCount">[${board.replyCnt }]</span></a>
+						<a href="${contextPath}/board/view?num=${board.bNum}">${board.bTitle } <span class="replyCount">[${board.replyCnt }]</span></a>
 					</div>
 					<div>
 					<fmt:formatDate value="${board.bRegDate }" pattern="yyyy-MM-dd"/>
@@ -126,16 +127,27 @@
 				<li><a href="list?page=${listInf.totalPage }" id="lastPage"><i class="fas fa-step-forward"></i></a></li>
 			</ul>
 			
-			<a href="../board/write">글쓰기</a>
+			<a href="${contextPath}/board/write">글쓰기</a>
 			<div id="searchWrap">
+				<script>
+// 					$(function(){
+// 						$("#searchWrap form").submit(function(){
+// 							let $keyword = $("input[name='keyword']").val().trim();
+// 							if(!$keyword){
+// 								alert("검색어를 입력해주세요.");
+// 								return false;
+// 							}
+// 						});
+// 					})
+				</script>
 				<form action="list">
 					<select name="keywordType" id="keywordType">
-						<option value="t">제목</option>
-						<option value="c">내용</option>
-						<option value="tc">제목+내용</option>
-						<option value="a">작성자</option>
+						<option value="1" ${empty listInf.keyword || listInf.type eq 1?'selected':'' }>제목</option>
+						<option value="2" ${not empty listInf.keyword && listInf.type eq 2?'selected':'' }>내용</option>
+						<option value="3" ${not empty listInf.keyword && listInf.type eq 3?'selected':'' }>제목+내용</option>
+						<option value="4" ${not empty listInf.keyword && listInf.type eq 4?'selected':'' }>작성자</option>
 					</select>
-					<input type="text" name="keyword" placeholder="검색어">
+					<input type="text" name="keyword" placeholder="검색어" value="${listInf.keyword }">
 					<button>검색</button>
 				</form>
 			</div>
