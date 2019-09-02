@@ -1,5 +1,7 @@
 package controller;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -15,8 +17,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import mail.MailSend;
 import model.ChatMessage;
@@ -124,4 +129,15 @@ public class ChatRoomController {
 		List<ChatMessage> cmList = cmService.getAllChatMessageByCrNum(crNum);
 		return cmList;
 	}
+	@ResponseBody
+	@RequestMapping("/fileUpload")
+	public String chatFileUpload(MultipartFile[] chatFile, HttpSession session) throws IOException{
+		System.out.println(chatFile);
+		return "파일이름";
+	}
+//	@RequestMapping(value = "/modifyProfileImg", method = RequestMethod.POST)
+//	public boolean modifyProfileImg(MultipartFile[] profileImg, String profileImgType, HttpSession session) {
+//		Member member = memberService.getMemberByEmail((String)session.getAttribute("userEmail"));
+//		return memberService.updateProfileImg(profileImg,profileImgType,member);
+//	}
 }
