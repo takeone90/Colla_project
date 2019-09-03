@@ -44,8 +44,6 @@ public class MypageController {
 	@Autowired
 	private SetAlarmService setAlarmService;
 	
-	private static final String FILE_PATH = "c:/temp/";
-	
 	@RequestMapping(value = "/myPageMainForm", method = RequestMethod.GET)
 	public String myPageMainForm(Model model, HttpSession session) {
 		Member member = memberService.getMemberByEmail((String)session.getAttribute("userEmail"));
