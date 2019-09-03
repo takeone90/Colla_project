@@ -100,6 +100,7 @@ $(function(){
 		}
 	});
 	
+	//과거메세지 불러오기
 	var crNum = $("#crNum").val();
 	$.ajax({
 		url : "${contextPath}/loadPastMsg",
@@ -107,9 +108,13 @@ $(function(){
 		dataType :"json",
 		success : function(d){
 			$.each(d,function(idx,item){
+				var originName; 
+				if(item.cmType=='file'){
+					originName = item.cmContent.substring(item.cmContent.indexOf("_")+1);
+				}
 				var writeDate = new Date(item.cmWriteDate);
 				var writeTime = writeDate.getFullYear()+"-"+writeDate.getMonth()+"-"+writeDate.getDay()+" "+writeDate.getHours()+"시"+writeDate.getMinutes()+"분";
-				loadPastMsg(item.mName,item.cmContent,writeTime);
+				loadPastMsg(item.cmType,item.mName,item.cmContent,writeTime,originName);
 				chatArea.scrollTop($("#chatArea")[0].scrollHeight);
 			});
 		},
@@ -134,7 +139,8 @@ $(function(){
 			success : function(jsonStr){
 				var cmNum = jsonStr.cmNum;
 				var fileName = jsonStr.fileName;
-				sendFile(fileName,cmNum);
+				var originName = jsonStr.originName;
+				sendFile(fileName,originName,cmNum);
 				$("#addFileModal").fadeOut(300);
 			},
 			error : function(){
@@ -144,9 +150,8 @@ $(function(){
 	});
 });//onload-function end
 //파일형태 메세지 보내기
-function sendFile(fileName,cmNum){
-	stompClient.send("/client/sendFile/"+$("#userEmail").val()+"/"+$("#crNum").val()+"/"+cmNum,{},fileName);
-	alert("sendFile 실행완료");
+function sendFile(fileName,originName,cmNum){
+	stompClient.send("/client/sendFile/"+$("#userEmail").val()+"/"+$("#crNum").val()+"/"+cmNum+"/"+originName,{},fileName);
 }
 	
 	<%-------------------------------------------------------WebSocket 연결과 채팅메세지 박스-----------------------------------------------------%>
@@ -161,11 +166,12 @@ function sendFile(fileName,cmNum){
 			stompClient.subscribe("/category/msg/"+crNum,function(jsonStr){
 				var userId = JSON.parse(jsonStr.body).userId;
 				var message = JSON.parse(jsonStr.body).message;
+				var originName = "";
 				var writeTime = JSON.parse(jsonStr.body).writeTime;
 				if(userId == $("#userName").val()){
-					addMyMsg("message",userId,message,writeTime);
+					addMyMsg("message",userId,message,writeTime,originName);
 				}else{
-					addMsg("message",userId,message,writeTime);
+					addMsg("message",userId,message,writeTime,originName);
 				}
 				
 				$("#chatArea").scrollTop($("#chatArea")[0].scrollHeight);
@@ -175,11 +181,12 @@ function sendFile(fileName,cmNum){
 			stompClient.subscribe("/category/file/"+crNum, function(jsonStr) {
 				var userId = JSON.parse(jsonStr.body).userId;
 				var fileName = JSON.parse(jsonStr.body).fileName;
+				var originName = JSON.parse(jsonStr.body).originName;
 				var writeTime = JSON.parse(jsonStr.body).writeTime;
 				if(userId == $("#userName").val()){
-					addMyMsg("file",userId,fileName,writeTime);
+					addMyMsg("file",userId,fileName,writeTime,originName);
 				}else{
-					addMsg("file",userId,fileName,writeTime);
+					addMsg("file",userId,fileName,writeTime,originName);
 				}
 				$("#chatArea").scrollTop($("#chatArea")[0].scrollHeight);
 			});
@@ -193,12 +200,8 @@ function sendFile(fileName,cmNum){
 	}
 	
 
-	
-	
-	
-	
 // 	메시지 박스 태그를 생성하는 함수
-	function appendMsg(msgType,type,userId,msg,writeTime){
+	function appendMsg(msgType,type,userId,msg,writeTime,originName){
 		var chatMsg = $("<div class='"+msgType+"'></div>");
 		if(type=='message'){
 			chatMsg.append("<div class='profileImg'><a href='#'><img alt='' src=''></a></div>");
@@ -208,24 +211,24 @@ function sendFile(fileName,cmNum){
 		}else if(type=='file'){
 			chatMsg.append("<div class='profileImg'><a href='#'><img alt='' src=''></a></div>");
 			chatMsg.append("<div class='name'><p>"+userId+" <span class='date'>"+writeTime+"</span></p></div><br>");
-			chatMsg.append("<p class='content'><a href='${contextPath}/download'>"+msg+"</a></p>");
+			chatMsg.append("<p class='content'><a href='${contextPath}/download?name="+msg+"'>"+originName+"</a></p>");
 			chatArea.append(chatMsg);
 		}
 		
 		
 	}
 	//받은 메시지 화면에 추가
-	function addMsg(type,userId,msg,writeTime){
+	function addMsg(type,userId,msg,writeTime,originName){
 		var msgType = "chatMsg";
-		appendMsg(msgType,type,userId,msg,writeTime);
+		appendMsg(msgType,type,userId,msg,writeTime,originName);
 	}
 	//내가 쓴 메시지 화면에 추가
-	function addMyMsg(type,userId,msg,writeTime){
+	function addMyMsg(type,userId,msg,writeTime,originName){
 		var msgType = "myMsg";
-		appendMsg(msgType,type,userId,msg,writeTime);
+		appendMsg(msgType,type,userId,msg,writeTime,originName);
 	}
 	//과거 메시지 화면에 추가
-	function loadPastMsg(userId,msg,writeTime){
+	function loadPastMsg(type,userId,msg,writeTime,originName){
 		var myId = $("#userName").val();
 		var msgType;
 		if(userId == myId){//지금은 불러온 메세지중에 작성자 이름이 현재 로그인되있는 이름과같으면 myMsg 로 처리함
@@ -233,8 +236,7 @@ function sendFile(fileName,cmNum){
 		}else{
 			msgType = "chatMsg";
 		}
-		type="message";
-		appendMsg(msgType,type,userId,msg,writeTime);
+		appendMsg(msgType,type,userId,msg,writeTime,originName);
 	}	
 	
 	
