@@ -14,8 +14,15 @@ public class Board {
 	private String bPw;
 	private String bType;
 	private int replyCnt;
+	private String isNotice;
 	
 	
+	public String getIsNotice() {
+		return isNotice;
+	}
+	public void setIsNotice(String isNotice) {
+		this.isNotice = isNotice;
+	}
 	public int getReplyCnt() {
 		return replyCnt;
 	}

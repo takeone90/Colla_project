@@ -30,8 +30,7 @@ $(function(){
 <div id="wsMainHeader">
 	<div class="container">
 		<h1 id="logo">
-			<a href="${contextPath}/workspace"> <img
-				src="../img/COLLA_LOGO_200px_brighten.png" />
+			<a href="${contextPath}/workspace"> <img src="${}/img/COLLA_LOGO_200px_brighten.png" />
 			</a>
 		</h1>
 

@@ -1,14 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="contextPath" value="<%=request.getContextPath() %>"/>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>비밀번호 확인</title>
-<link rel="stylesheet" type="text/css" href="../css/reset.css"/>
-<link rel="stylesheet" type="text/css" href="../css/base.css"/>
-<link rel="stylesheet" type="text/css" href="../css/headerWs.css"/>
-<link rel="stylesheet" type="text/css" href="../css/navWs.css"/>
+<link rel="stylesheet" type="text/css" href="${contextPath}/css/reset.css"/>
+<link rel="stylesheet" type="text/css" href="${contextPath}/css/base.css"/>
+<link rel="stylesheet" type="text/css" href="${contextPath}/css/headerWs.css"/>
+<link rel="stylesheet" type="text/css" href="${contextPath}/css/navWs.css"/>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 </head>
 <body>
@@ -30,7 +31,7 @@
 			<input type="hidden" name="mode" value="${updateMap.mode }">
 			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 			<button>확인</button>
-			<a href="#" onclick="window.location.replace('list')">취소</a>
+			<a href="${contextPath }/board/view?num=${updateMap.bNum}">취소</a>
 			<script>
 			</script>
 		</form>

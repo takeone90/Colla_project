@@ -7,8 +7,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<selectKey resultType="int" keyProperty="cmNum" order="BEFORE">
 			select cm_seq.nextval from dual
 		</selectKey>
-		insert into chat_message(cm_num,cr_num,m_num,cm_content)
-		values(#{cmNum},#{crNum},#{mNum},#{cmContent})
+		insert into chat_message(cm_num,cr_num,m_num,cm_content,cm_type)
+		values(#{cmNum},#{crNum},#{mNum},#{cmContent},#{cmType})
 	</insert>
 	<delete id="deleteChatMessage" parameterType="int">
 		delete chat_message where cm_num=#{cmNum}
@@ -17,7 +17,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from chat_message where cm_num=#{cmNum}
 	</select>
 	<select id="selectAllChatMessageByCrNum" parameterType="int" resultMap="cmMap">
-		select cm.cm_num,cm.cr_num,cm.m_num,cm.cm_content,cm.cm_write_date,m.m_name
+		select cm.cm_num,cm.cr_num,cm.m_num,cm.cm_content,cm.cm_write_date,m.m_name,cm.cm_type
 		from chat_message cm,member m where cm.m_num=m.m_num and cm.cr_num=#{crNum}
 		order by cm.cm_write_date asc
 	</select>
@@ -28,5 +28,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="cm_content" property="cmContent"/>
 		<result column="cm_write_date" property="cmWriteDate"/>
 		<result column="m_name" property="mName"/>
+		<result column="cm_type" property="cmType"/>
 	</resultMap>
 </mapper>

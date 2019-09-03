@@ -50,7 +50,7 @@
 				<a href="${contextPath}/calMonth">Calendar</a>
 			</li>
 			<li>
-				<a href="board/list">Board</a>
+				<a href="${contextPath}/board/list">Board</a>
 	    	</li>
 		</ul>
 	</div>

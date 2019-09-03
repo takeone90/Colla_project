@@ -9,6 +9,14 @@ public class ChatMessage {
 	private String cmContent;
 	private Timestamp cmWriteDate;
 	private String mName;
+	private String cmType;
+	
+	public String getCmType() {
+		return cmType;
+	}
+	public void setCmType(String cmType) {
+		this.cmType = cmType;
+	}
 	public String getmName() {
 		return mName;
 	}
@@ -48,7 +56,7 @@ public class ChatMessage {
 	@Override
 	public String toString() {
 		return "채팅메세지 [메세지번호 : " + cmNum + ", 채팅방번호 : " + crNum + ", 작성자번호 : " + mNum + ", 작성자 : "+mName+", 메세지내용 : " + cmContent
-				+ ", 작성시간 : " + cmWriteDate + "]";
+				+ ", 작성시간 : " + cmWriteDate + ", 메세지 타입 :"+cmType+"]";
 	}
 	
 }
