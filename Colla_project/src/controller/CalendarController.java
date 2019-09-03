@@ -9,6 +9,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.StringTokenizer;
 
+import javax.servlet.http.HttpSession;
+
 import org.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import model.Calendar;
+import model.Member;
 import service.CalendarService;
 
 @Controller
@@ -28,7 +31,13 @@ public class CalendarController {
 	private CalendarService calendarService;
 	
 	@RequestMapping(value="/calMonth", method = RequestMethod.GET)
-	public String showCalMonth() {
+	public String showCalMonth(HttpSession session, Model model) {
+		int wNum = (int)session.getAttribute("currWnum");
+		int mNum = ((Member)session.getAttribute("user")).getNum();
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("wNum", wNum);
+		param.put("mNum", mNum);
+		model.addAttribute("userData", param);
 		return "/calendar/calMonth";
 	}
 	@RequestMapping(value="/calDetail", method = RequestMethod.GET)
@@ -38,30 +47,29 @@ public class CalendarController {
 	
 	@ResponseBody
 	@RequestMapping(value="/showAllCalendar", method=RequestMethod.GET)
-	public List<Calendar> showAllCalendar(boolean t1, boolean t2, boolean t3) {
-		List<Calendar> tmp = calendarService.getAllCalendar();
+	public List<Calendar> showAllCalendar(HttpSession session, boolean type1, boolean type2, boolean type3) {
+		int wNum = (int)session.getAttribute("currWnum");
+		List<Calendar> tmp = calendarService.getAllCalendar(wNum);
 		List<Calendar> tmpList = new ArrayList<Calendar>();
 		for(int i=0; i<tmp.size(); i++) {
-			if(t1) {
+			if(type1) {
 				String typeTmp = tmp.get(i).getType();
 				if(typeTmp.equals("project")) {
 					tmpList.add(tmp.get(i));
 				}
 			}
-			if(t2) {
+			if(type2) {
 				String typeTmp = tmp.get(i).getType();
 				if(typeTmp.equals("vacation")) {
 					tmpList.add(tmp.get(i));
 				}
 			}
-			if(t3) {
+			if(type3) {
 				String typeTmp = tmp.get(i).getType();
 				if(typeTmp.equals("event")) {
 					tmpList.add(tmp.get(i));
 				}
 			}
-//			System.out.println(getWeekOfMonth(tmp.get(i).getStartDate()));
-//			tmpMap.put("weekCount"+tmp.get(i).getcNum(), getWeekOfMonth(tmp.get(i).getStartDate()));
 		}
 		return tmpList;
 	}
@@ -79,8 +87,9 @@ public class CalendarController {
 	
 	@ResponseBody
 	@RequestMapping(value="/showYearCheckedCalendar", method=RequestMethod.GET)
-	public List<Calendar> showYearCheckedCalendar(boolean t1, boolean t2, boolean t3) {
-		List<Calendar> tmp = calendarService.getAllCalendar();
+	public List<Calendar> showYearCheckedCalendar(HttpSession session, boolean type1, boolean type2, boolean type3) {
+		int wNum = (int)session.getAttribute("currWnum");
+		List<Calendar> tmp = calendarService.getAllCalendar(wNum);
 		List<Calendar> yearCheckedCalendarList = new ArrayList<Calendar>();
 		for(int i=0; i<tmp.size(); i++) {
 			String yearChecked = tmp.get(i).getYearCalendar();
@@ -90,19 +99,19 @@ public class CalendarController {
 		}
 		List<Calendar> tmpList = new ArrayList<Calendar>();
 		for(int i=0; i<yearCheckedCalendarList.size(); i++) {
-			if(t1) {
+			if(type1) {
 				String typeTmp = yearCheckedCalendarList.get(i).getType();
 				if(typeTmp.equals("project")) {
 					tmpList.add(yearCheckedCalendarList.get(i));
 				}
 			}
-			if(t2) {
+			if(type2) {
 				String typeTmp = yearCheckedCalendarList.get(i).getType();
 				if(typeTmp.equals("vacation")) {
 					tmpList.add(yearCheckedCalendarList.get(i));
 				}
 			}
-			if(t3) {
+			if(type3) {
 				String typeTmp = yearCheckedCalendarList.get(i).getType();
 				if(typeTmp.equals("event")) {
 					tmpList.add(yearCheckedCalendarList.get(i));
@@ -150,11 +159,11 @@ public class CalendarController {
 		}
 		boolean result = calendarService.addCalendar(calendar);
 		String startDateTmp = calendar.getStartDate();
-		if(calendar.getAnnually().equals("1")) {
+		if(calendar.getAnnually().equals("1")) { //년 반복
 			calendarService.addCalendarAnnually(calendar);
 		} 
 		calendar.setStartDate(startDateTmp);
-		if(calendar.getMonthly().equals("1")) {
+		if(calendar.getMonthly().equals("1")) { //월 반복
 			calendarService.addCalendarMonthly(calendar);
 		}
 		return result;

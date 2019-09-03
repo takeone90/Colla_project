@@ -20,23 +20,15 @@ public class Calendar {
 	public int getcNum() {
 		return cNum;
 	}
-
-
 	public void setcNum(int cNum) {
 		this.cNum = cNum;
 	}
-
-
 	public int getmNum() {
 		return mNum;
 	}
-
-
 	public void setmNum(int mNum) {
 		this.mNum = mNum;
 	}
-
-
 	public int getwNum() {
 		return wNum;
 	}
