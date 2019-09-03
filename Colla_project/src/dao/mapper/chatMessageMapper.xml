@@ -28,5 +28,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="cm_content" property="cmContent"/>
 		<result column="cm_write_date" property="cmWriteDate"/>
 		<result column="m_name" property="mName"/>
+		<result column="cm_type" property="cmType"/>
 	</resultMap>
 </mapper>

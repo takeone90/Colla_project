@@ -72,8 +72,7 @@
 						type : "post",
 						success : function(data) {
 							if (data) {
-								$('.myProfileImg').attr("src",
-										"${contextPath}/showProfileImg");
+								$('.myProfileImg').attr("src", "${contextPath}/showProfileImg");
 								closeModal();
 							} else {
 								alert("프로필 변경에 실패하였습니다");

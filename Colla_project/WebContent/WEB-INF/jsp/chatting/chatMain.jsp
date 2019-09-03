@@ -39,10 +39,65 @@ $(function(){
 		return false;
 	});
 	
+	
+	//파일업로드 모달
+	$(".openFileUploadModal").on("click",function(){
+		$("#addFileModal").fadeIn(300);
+	});
+	$(".closeFileModal").on("click",function(){
+		$("#addFileModal").fadeOut(300);
+		return false;
+	});
+	
+	$("#addFileForm").on("submit",function(){
+		var formData = new FormData();
+		var chatFile = $("input[name='chatFile']");
+		var files = chatFile[0].files;
+		for (var i = 0; i < files.length; i++) {
+			formData.append("chatFile", files[i]);
+		}
+		$.ajax({
+			url : "${contextPath}/fileUpload",
+			data : {"formData" : formData},
+			dataType : "json",
+			success : function(d){
+				alert(d);
+			},
+			error : function(){
+				alert("파일업로드 오류 발생");
+			}
+		});
+		return false;
+	});
+	
+	//코드업로드 모달
+	$(".openCodeModal").on("click",function(){
+		$("#addCodeModal").fadeIn(300);
+	});
+	$(".closeCodeModal").on("click",function(){
+		$("#addCodeModal").fadeOut(300);
+		return false;
+	});
+	
+	//지도업로드 모달
+	$(".openLocationModal").on("click",function(){
+		$("#addLocationModal").fadeIn(300);
+	});
+	$(".closeLocationModal").on("click",function(){
+		$("#addLocationModal").fadeOut(300);
+		return false;
+	});
+	
 	//모달 바깥쪽이 클릭되거나 다른 모달이 클릭될때 현재 모달 숨기기
 	$("#wsBody").mouseup(function(e){
 		if($("#addCrMemberModal").has(e.target).length===0)
 		$("#addCrMemberModal").fadeOut(300);
+		if($("#addFileModal").has(e.target).length===0)
+			$("#addFileModal").fadeOut(300);
+		if($("#addCodeModal").has(e.target).length===0)
+			$("#addCodeModal").fadeOut(300);
+		if($("#addLocationModal").has(e.target).length===0)
+			$("#addLocationModal").fadeOut(300);
 		return false;
 	});
 	
@@ -59,6 +114,10 @@ $(function(){
 			sendMsg();
 			chatArea.scrollTop($("#chatArea")[0].scrollHeight);
 		}
+	$(".fileUploadBtn").on("click",function(){
+		sendFile();
+		chatArea.scrollTop($("#chatArea")[0].scrollHeight);
+	});
 	});
 	var crNum = $("#crNum").val();
 	$.ajax({
@@ -86,6 +145,8 @@ $(function(){
 	});
 	
 });//onload-function end
+
+	<%-------------------------------------------------------WebSocket 연결과 채팅메세지 박스-----------------------------------------------------%>
 	var sock;
 	var stompClient;
 	function connect(){
@@ -109,41 +170,41 @@ $(function(){
 			
 		});
 	}
+	
 	function sendMsg(){
 		var msg = $("#chatInput").val();
 		stompClient.send("/client/send/"+$("#userEmail").val()+"/"+$("#crNum").val(),{},msg);
 		$("#chatInput").val("");
 	}
-	
-	//받은 메시지 화면에 추가
-	function addMsg(userId,msg,writeTime){
-		var chatMsg = $("<div class='chatMsg'></div>");
+
+// 	메시지 박스 태그를 생성하는 함수
+	function appendMsg(msgType,userId,msg,writeTime){
+		var chatMsg = $("<div class='"+msgType+"'></div>");
 		chatMsg.append("<div class='profileImg'><a href='#'><img alt='' src=''></a></div>");
 		chatMsg.append("<div class='name'><p>"+userId+" <span class='date'>"+writeTime+"</span></p></div><br>");
 		chatMsg.append("<p class='content'>"+msg+"</p>");
 		chatArea.append(chatMsg);
 	}
+	//받은 메시지 화면에 추가
+	function addMsg(userId,msg,writeTime){
+		var msgType = "chatMsg";
+		appendMsg(msgType,userId,msg,writeTime);
+	}
 	//내가 쓴 메시지 화면에 추가
 	function addMyMsg(userId,msg,writeTime){
-		var chatMsg = $("<div class='myMsg'></div>");
-		chatMsg.append("<div class='profileImg'><a href='#'><img alt='' src=''></a></div>");
-		chatMsg.append("<div class='name'><p>"+userId+" <span class='date'>"+writeTime+"</span></p></div><br>");
-		chatMsg.append("<p class='content'>"+msg+"</p>");
-		chatArea.append(chatMsg);
+		var msgType = "myMsg";
+		appendMsg(msgType,userId,msg,writeTime);
 	}
 	//과거 메시지 화면에 추가
 	function loadPastMsg(userId,msg,writeTime){
 		var myId = $("#userName").val();
-		var chatMsg;
+		var msgType;
 		if(userId == myId){//지금은 불러온 메세지중에 작성자 이름이 현재 로그인되있는 이름과같으면 myMsg 로 처리함
-			chatMsg = $("<div class='myMsg'></div>");
+			msgType = "myMsg";
 		}else{
-			chatMsg = $("<div class='chatMsg'></div>");
+			msgType = "chatMsg";
 		}
-		chatMsg.append("<div class='profileImg'><a href='#'><img alt='' src=''></a></div>");
-		chatMsg.append("<div class='name'><p>"+userId+" <span class='date'>"+writeTime+"</span></p></div><br>");
-		chatMsg.append("<p class='content'>"+msg+"</p>");
-		chatArea.append(chatMsg);
+		appendMsg(msgType,userId,msg,writeTime);
 	}	
 	
 	
@@ -167,13 +228,16 @@ $(function(){
 		</div>
 		<div id="inputBox">
 			<div class="attachDetail">
-				<div class="attach"><a href="#">파일첨부</a></div>
-				<div class="attach"><a href="#">코드첨부</a></div>
-				<div class="attach"><a href="#">지도첨부</a></div>
+				<div class="attach"><a href="#" class="openFileUploadModal">파일첨부</a></div>
+				<div class="attach"><a href="#" class="openCodeModal">코드첨부</a></div>
+				<div class="attach"><a href="#" class="openLocationModal">지도첨부</a></div>
 			</div>
 			<a href="#" id="attachBtn">첨부파일</a>
 			<input type="text" id="chatInput" placeholder="메세지 작성부분">
 			<a id="sendChat" href="#">전송</a>
+			<div>
+				<p id="attachedFileName"></p>
+			</div>
 		</div>
 		
 		<%---------------------------------------------채팅방 멤버추가모달 ----------------------------------------------------%>
@@ -207,6 +271,76 @@ $(function(){
 				</form>
 			</div> <!-- end modalBody -->
 		</div><!-- end addMemberModal -->
+		
+		
+		
+		<%---------------------------------------------파일첨부 모달 ----------------------------------------------------%>
+		<div id="addFileModal">
+			<div class="modalHead">
+				<h3 style="font-weight: bolder; font-size: 30px">파일 업로드</h3>
+			</div>
+			<br><br>
+			<div class="modalBody">
+				<p>업로드 할 파일을 선택하세요</p>
+				<form id="addFileForm" method="post" enctype="multipart/form-data">
+					<input type="hidden" class="addCrNum" name="crNum" value="${chatRoom.crNum}">
+					<input type="hidden" value="${wNum}" name="wNum">
+					<input type="hidden" value="${sessionScope.user.num}" name="mNum">
+					<input type="hidden" value="${_csrf.token}" name="${_csrf.parameterName}">
+					<br><br>
+					<div class="addFileInputWrap">
+						<div class="row">
+							<input type="file" class="btnFile" name="chatFile" value="파일 선택" accept="image/*" multiple>
+						</div>
+					</div> <!-- end addFileInputWrap -->
+
+					<div>
+						<input type="submit" class="fileUploadBtn" value="업로드"><br> 
+						<input type="button" class="closeFileModal" value="닫기"><br>
+					</div>
+				</form>
+			</div> <!-- end modalBody -->
+		</div><!-- end addFileModal -->
+		
+		
+		<%---------------------------------------------코드첨부 모달 ----------------------------------------------------%>
+		<div id="addCodeModal">
+			<div class="modalHead">
+				<h3 style="font-weight: bolder; font-size: 30px">코드 업로드</h3>
+			</div>
+			<br><br>
+			<div class="modalBody">
+				<p>추가할 코드의 종류를 선택하세요</p>
+				<form action="writeCode">
+					<div class="row">
+						<p> java javascript c c++ c# python </p>
+					</div>
+					<input type="submit" class="codeUpload" value="업로드"><br> 
+					<input type="button" class="closeCodeModal" value="닫기"><br>
+					
+				</form>
+			</div> <!-- end modalBody -->
+		</div><!-- end addCodeModal -->
+		
+		
+		<%---------------------------------------------지도첨부 모달 ----------------------------------------------------%>
+		<div id="addLocationModal">
+			<div class="modalHead">
+				<h3 style="font-weight: bolder; font-size: 30px">지도 업로드</h3>
+			</div>
+			<br><br>
+			<div class="modalBody">
+				<p>멤버들과 위치를 공유할 수 있습니다</p>
+				<form action="locationUpload">
+					<div class="row">
+						<p> 지도~ </p>
+					</div>
+					<input type="submit" class="locationUpload" value="업로드"><br> 
+					<input type="button" class="closeLocationModal" value="닫기"><br>
+					
+				</form>
+			</div> <!-- end modalBody -->
+		</div><!-- end addLocationModal -->
 		
 		
 		
