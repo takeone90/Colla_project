@@ -10,6 +10,11 @@ request.setAttribute("contextPath", contextPath);
 <head>
 <meta charset="UTF-8">
 <title>calMonth</title>
+<link rel="stylesheet" type="text/css" href="css/reset.css"/>
+<link rel="stylesheet" type="text/css" href="css/base.css"/>
+<link rel="stylesheet" type="text/css" href="css/headerWs.css"/>
+<link rel="stylesheet" type="text/css" href="css/navWs.css"/>
+<link rel="stylesheet" type="text/css" href="css/workspace.css"/>
 <style type="text/css">
 
 td{border: 0px; padding: 0px;}
@@ -682,6 +687,8 @@ function nextYearOfYearCal() {
 <!-- 공통 부분 -->
 <%@ include file="/WEB-INF/jsp/inc/headerWs.jsp"%>
 <%@ include file="/WEB-INF/jsp/inc/navWs.jsp"%>
+<div id="wsBody">
+		<div id="wsBodyContainer">
 	<form action="calSearchList">
 		<select name="searchType">
 			<option value="1">제목</option>
@@ -805,5 +812,7 @@ function nextYearOfYearCal() {
 			<input type="button" id="detailScheduleFormOfYearCalClose" value="닫기">
 		</form>
 	</div>	
+	</div>
+	</div>
 </body>
 </html>

@@ -88,7 +88,7 @@ $(function(){
 	
 	<%--채팅 연결 및 전송--%>
 	chatArea = $(".chat");
-	connect();
+// 	connect();
 	$("#sendChat").on("click",function(){
 			sendMsg();
 			chatArea.scrollTop($("#chatArea")[0].scrollHeight);
@@ -154,44 +154,7 @@ function sendFile(fileName,originName,cmNum){
 	stompClient.send("/client/sendFile/"+$("#userEmail").val()+"/"+$("#crNum").val()+"/"+cmNum+"/"+originName,{},fileName);
 }
 	
-	<%-------------------------------------------------------WebSocket 연결과 채팅메세지 박스-----------------------------------------------------%>
-	var sock;
-	var stompClient;
-	function connect(){
-		sock = new SockJS("${contextPath}/chat");
-		stompClient = Stomp.over(sock);
-		stompClient.connect({},function(){
-			var crNum = $("#crNum").val();
-			//일반메세지 구독
-			stompClient.subscribe("/category/msg/"+crNum,function(jsonStr){
-				var userId = JSON.parse(jsonStr.body).userId;
-				var message = JSON.parse(jsonStr.body).message;
-				var originName = "";
-				var writeTime = JSON.parse(jsonStr.body).writeTime;
-				if(userId == $("#userName").val()){
-					addMyMsg("message",userId,message,writeTime,originName);
-				}else{
-					addMsg("message",userId,message,writeTime,originName);
-				}
-				
-				$("#chatArea").scrollTop($("#chatArea")[0].scrollHeight);
-			});
-			
-			//파일메세지 구독
-			stompClient.subscribe("/category/file/"+crNum, function(jsonStr) {
-				var userId = JSON.parse(jsonStr.body).userId;
-				var fileName = JSON.parse(jsonStr.body).fileName;
-				var originName = JSON.parse(jsonStr.body).originName;
-				var writeTime = JSON.parse(jsonStr.body).writeTime;
-				if(userId == $("#userName").val()){
-					addMyMsg("file",userId,fileName,writeTime,originName);
-				}else{
-					addMsg("file",userId,fileName,writeTime,originName);
-				}
-				$("#chatArea").scrollTop($("#chatArea")[0].scrollHeight);
-			});
-		});
-	}
+	<%-------------------------------------------------------WebSocket 연결부분은 headerWs로 넘어갔습니다.-----------------------------------------------------%>
 	//일반 메세지 보내기
 	function sendMsg(){
 		var msg = $("#chatInput").val();

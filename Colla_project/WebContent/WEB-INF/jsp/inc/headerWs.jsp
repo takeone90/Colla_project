@@ -12,7 +12,39 @@ function duplicateConnect(){
 	sock = new SockJS("${contextPath}/chat");
 	stompClient = Stomp.over(sock);
 	stompClient.connect({},function(){
-		stompClient.subscribe("/category/msg/" + ${member.num},function(){
+		<%----------------------------------------채팅메시지 구독부분----------------------------------------------%>
+		var crNum = $("#crNum").val();
+		//일반메세지 구독
+		stompClient.subscribe("/category/msg/"+crNum,function(jsonStr){
+			var userId = JSON.parse(jsonStr.body).userId;
+			var message = JSON.parse(jsonStr.body).message;
+			var originName = "";
+			var writeTime = JSON.parse(jsonStr.body).writeTime;
+			if(userId == $("#userName").val()){
+				addMyMsg("message",userId,message,writeTime,originName);
+			}else{
+				addMsg("message",userId,message,writeTime,originName);
+			}
+			
+			$("#chatArea").scrollTop($("#chatArea")[0].scrollHeight);
+		});
+		
+		//파일메세지 구독
+		stompClient.subscribe("/category/file/"+crNum, function(jsonStr) {
+			var userId = JSON.parse(jsonStr.body).userId;
+			var fileName = JSON.parse(jsonStr.body).fileName;
+			var originName = JSON.parse(jsonStr.body).originName;
+			var writeTime = JSON.parse(jsonStr.body).writeTime;
+			if(userId == $("#userName").val()){
+				addMyMsg("file",userId,fileName,writeTime,originName);
+			}else{
+				addMsg("file",userId,fileName,writeTime,originName);
+			}
+			$("#chatArea").scrollTop($("#chatArea")[0].scrollHeight);
+		});
+		<%-----------------------------------------------------------------------------------------------------%>
+		
+		stompClient.subscribe("/category/loginMsg/" + ${member.num},function(){
 			alert("로그인 요청 시도가 있었습니다.");
 			$.ajax({ 
 				url : "${contextPath}/dropSession"
