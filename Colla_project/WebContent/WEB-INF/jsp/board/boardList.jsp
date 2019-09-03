@@ -19,11 +19,19 @@
 		width: 80%;
 		margin: 0 auto;	
 	}
+	#listHead{
+		background-color: #777;
+		color:#fff;
+	}
 	#boardList {
 		width:100%;
+		font-size:14px;
 	}
 	#boardList li{
-		margin-bottom:6px;
+		height : 30px;
+	}
+	#boardList li * {
+		vertical-align:middle;
 	}
 	#boardList li:after{
 		content:"";
@@ -31,25 +39,24 @@
 		clear:both;
 	}
 	#boardList div{
+		height:100%;
 		float:left;
 		text-align:center;
 	}
 	#boardList div:nth-child(1){
-		width:5%;
-	}
-	#boardList div:nth-child(2){
+		font-size:13px;
 		width:10%;
 	}
+	#boardList div:nth-child(2){
+		width:60%;
+	}
 	#boardList div:nth-child(3){
-		width:55%;
+		width:10%;
 	}
 	#boardList div:nth-child(4){
 		width:10%;
 	}
 	#boardList div:nth-child(5){
-		width:10%;
-	}
-	#boardList div:nth-child(6){
 		width:10%;
 	}
 	.replyCount{
@@ -62,6 +69,13 @@
 	}
 	.reverse {
 		transform:rotate(180deg);
+	}
+	.noticeMark {
+		display:inline-block;
+		padding: 4px 5px;
+		border-radius: 5px;
+		background-color: #E5675A;
+		color:#fff;
 	}
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -77,7 +91,6 @@
 			<ul id="boardList">
 				<li id="listHead">
 					<div>No.</div>
-					<div>종류</div>
 					<div>제목</div>
 					<div>작성일</div>
 					<div>작성자</div>
@@ -86,36 +99,22 @@
 				
 				<c:forEach items="${bList}" var="board">
 				<li>
-					<div>${board.bNum }</div>
-					<div>
-						<c:choose>
-							<c:when test="${board.bType eq 'notice'}">
-								공지
-							</c:when>
-							<c:when test="${board.bType eq 'anonymous'}">
-								익명
-							</c:when>
-							<c:otherwise >
-								일반
-							</c:otherwise>
-						</c:choose>
-					</div>
+					<div>${board.isNotice == 'y'?'<span class="noticeMark">공지</span>':board.bNum }</div>
 					<div>
 						<a href="${contextPath}/board/view?num=${board.bNum}">${board.bTitle } <span class="replyCount">[${board.replyCnt }]</span></a>
 					</div>
 					<div>
 					<fmt:formatDate value="${board.bRegDate }" pattern="yyyy-MM-dd"/>
 					</div>
-					<div>${board.mName }</div>
+					<div>${board.bType == 'anonymous'?'익명':board.mName }</div>
 					<div>${board.readCnt }</div>
 				</li>
 				</c:forEach>
 			</ul>
 			
 			<ul id=pagination>
-				<li><a href="list?page=1" id="firstPage"><i class="fas fa-step-backward"></i></a>
-				<li><a href="list?page=${listInf.startNum-1>0?listInf.startNum-1:1}" id="prevPage" ${instInf.startNum }><i class="fas fa-play reverse"></i></a>
-				</li>
+				<li><a href="list?page=1" id="firstPage"><i class="fas fa-step-backward"></i></a></li>
+				<li><a href="list?page=${listInf.startNum-1>0?listInf.startNum-1:1}" id="prevPage" ${instInf.startNum }><i class="fas fa-play reverse"></i></a></li>
 					<c:forEach var="i" begin="${listInf.startNum }" end="${listInf.endNum }">
 					<c:if test="${i<=listInf.totalPage }">
 						<li>

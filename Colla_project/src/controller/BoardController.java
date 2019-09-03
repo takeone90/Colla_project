@@ -30,7 +30,7 @@ import service.MemberService;
 @RequestMapping("/board")
 public class BoardController {
 
-	String UPLOAD_PATH = "c:\\temp\\";
+	private static final String UPLOAD_PATH = "c:\\temp\\";
 	
 	@Autowired
 	private BoardService bService;

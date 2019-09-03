@@ -4,7 +4,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="dao.BoardDao">
 	<select id="selectBoardListPage" parameterType="map" resultMap="boardMap">
-		select rn, b_num, m_name, w_num, b_title, b_regdate, b_readcnt, b_type, r_cnt
+		select b_num, m_name, w_num, b_title, b_regdate, b_readcnt, b_type, r_cnt, 'y' as isnotice 
+		from (
+			    select rownum, b_num, m_name, w_num, b_title, b_regdate, b_readcnt, b_type
+			            , (select count(*) from reply r where r.b_num = b.b_num) as r_cnt
+			    from board b, member m
+			    where b.w_num = #{wNum}
+			        and b.b_type = 'notice'
+			        and b.m_num = m.m_num
+			    order by b.b_num desc
+		)
+		where rownum &lt;= 5
+		UNION ALL
+		select b_num, m_name, w_num, b_title, b_regdate, b_readcnt, b_type, r_cnt, 'n' as isnotice 
 		from (select rn, b_num, m_name, w_num, b_title, b_regdate, b_readcnt, b_type, r_cnt
 		        from (select rownum as rn, b_num, m_name, w_num, b_title, b_content, b_regdate, b_readCnt, b_type, r_cnt
 		                from (select b_num, m_name, w_num, b_title, b_content, b_regdate, b_readCnt, b_type
@@ -101,6 +113,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="b_pw" property="bPw"/>
 		<result column="b_type" property="bType"/>
 		<result column="r_cnt" property="replyCnt"/>
+		<result column="isnotice" property="isNotice"/>
 	</resultMap>
 	
 </mapper>

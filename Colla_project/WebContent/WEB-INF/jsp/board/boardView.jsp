@@ -32,7 +32,7 @@
 				<h4 id="title">${board.bTitle }</h4>
 			</div>
 			<div class="row">
-				<span>${board.mName }</span>
+				<span>${board.bType == 'anonymous'?'익명':board.mName }</span>
 				<span>조회수 ${board.readCnt }</span>
 				<span>
 					<fmt:formatDate value="${board.bRegDate }" pattern="yyyy-MM-dd HH:mm:ss"/>

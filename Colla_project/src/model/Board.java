@@ -14,15 +14,15 @@ public class Board {
 	private String bPw;
 	private String bType;
 	private int replyCnt;
-//	private List<String> fileName;
-//	
-//	
-//	public List<String> getFileName() {
-//		return fileName;
-//	}
-//	public void setFileName(List<String> fileName) {
-//		this.fileName = fileName;
-//	}
+	private String isNotice;
+	
+	
+	public String getIsNotice() {
+		return isNotice;
+	}
+	public void setIsNotice(String isNotice) {
+		this.isNotice = isNotice;
+	}
 	public int getReplyCnt() {
 		return replyCnt;
 	}
