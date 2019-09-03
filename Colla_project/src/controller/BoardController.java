@@ -41,10 +41,6 @@ public class BoardController {
 	@Autowired
 	private MemberService mService;
 	
-	@RequestMapping("/download")
-	public View download(String name) {
-		return fService.getDownload(name);
-	}
 	@RequestMapping("/list")
 	public String showBoardList(
 			HttpSession session, 
