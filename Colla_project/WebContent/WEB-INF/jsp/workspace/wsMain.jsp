@@ -16,7 +16,7 @@
 <script>
 	var wNum;
 	
-	$(function(){
+	$(function(){	
 		//WS추가 모달
 		$(".openWsModal").on("click",function(){
 			$("#addWsModal").fadeIn(300);
@@ -88,19 +88,7 @@
 				}
 			});
 	}
-	function dropSession(){
-		$("#logoutBtn").on("click",function(){
-			$.ajax({
-				url : "${contextPath}/dropSession",
-				success : function(){
-					alert("로그아웃 성공");
-				},
-				error : function(){
-					alert("로그아웃 세션드랍 에러발생");
-				}
-			});
-		})
-	}
+
 </script>
 </head>
 <body>

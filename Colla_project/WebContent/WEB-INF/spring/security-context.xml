@@ -10,6 +10,7 @@
       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
    <context:component-scan base-package="service"></context:component-scan>
    <bean id="loginSuccessHandler" class="controller.LoginSuccessHandler"></bean>
+   <bean id="logoutSuccessHandler" class="controller.LogoutSuccessHandler"></bean>
    <security:http use-expressions="true" auto-config="true">
       <security:csrf disabled="true"/>  
 	  <security:form-login 
@@ -19,8 +20,7 @@
          authentication-success-handler-ref="loginSuccessHandler"
          login-processing-url="/login"
          login-page="/loginForm" />
-      <security:logout invalidate-session="true" logout-url="/logout" 
-         logout-success-url="/loginForm" delete-cookies="JSESSIONID" />
+      <security:logout invalidate-session="false" success-handler-ref="logoutSuccessHandler"/>
    </security:http>
    <security:authentication-manager>
       <security:authentication-provider
