@@ -99,6 +99,10 @@
 	position: relative;
 	left : 50px;
 }
+.content a{
+	color : #f54640;
+	font-weight: bolder;
+}
 .attachDetail{
 	display : none;
 	text-align :center;
@@ -115,4 +119,7 @@
 .attach a:hover{
 	color : #f04943;
 	
+}
+.uploadFileName{
+	color : blue;
 }

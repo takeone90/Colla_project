@@ -130,24 +130,25 @@ public class ChatRoomController {
 		Member member = mService.getMemberByEmail(userEmail);
 		int cmNum = cmService.addChatMessage(Integer.parseInt(crNum), member.getNum(), msg, "message");
 		ChatMessage cm = cmService.getChatMessageByCmNum(cmNum);
-		String jsonStr = "{\"message\":\"" + msg + "\",\"userId\":\"" + member.getName() + "\",\"writeTime\":\""
-				+ cm.getCmWriteDate() + "\"}";
+		String jsonStr = "{\"message\":\"" + msg + "\",\"userId\":\"" + member.getName()
+				+ "\",\"writeTime\":\"" + cm.getCmWriteDate() + "\"}";
 		return jsonStr;
 	}
 
 	// 파일메세지 받고 보내기
 	@SendTo("/category/file/{var2}")
-	@MessageMapping("/sendFile/{var1}/{var2}/{var3}")
+	@MessageMapping("/sendFile/{var1}/{var2}/{var3}/{var4}")
 	public String sendFileMsg(String fileName,
 			@DestinationVariable(value = "var1") String userEmail,
 			@DestinationVariable(value = "var2") String crNum,
-			@DestinationVariable(value="var3") int cmNum) {
-		System.out.println("[sendFileMsg가 받은것 ] 파일이름 : "+fileName+", 보낸사람이메일 : "+userEmail+", 채팅방번호  :"+ crNum+",cmNum : "+cmNum);
+			@DestinationVariable(value="var3") int cmNum,
+			@DestinationVariable(value="var4")String originName) {
+		System.out.println("[sendFileMsg가 받은것 ] 파일이름 : "+fileName+",originName : "+originName+",보낸사람이메일 : "+userEmail+", 채팅방번호  :"+ crNum+",cmNum : "+cmNum);
 		Member member = mService.getMemberByEmail(userEmail);
 		//chatFileUpload에서 나온 cmNum이 있어야한다.
 		
 		ChatMessage cm = cmService.getChatMessageByCmNum(cmNum);
-		String jsonStr = "{\"fileName\":\"" + fileName + "\",\"userId\":\"" + member.getName()
+		String jsonStr = "{\"fileName\":\"" + fileName + "\",\"originName\" : \""+originName+"\",\"userId\":\"" + member.getName()
 				+ "\",\"writeTime\":\"" + cm.getCmWriteDate() + "\"}";
 		return jsonStr;
 	}
@@ -164,7 +165,7 @@ public class ChatRoomController {
 //			System.out.println("파일 길이 : " + file.getBytes().length);
 			String saveName = cmService.addFile(request, user);
 			int cmNum = cmService.addChatMessage(crNum, user.getNum(), saveName, "file");
-			String jsonStr = "{\"cmNum\":\"" + cmNum + "\",\"fileName\":\"" + saveName + "\"}" ; 
+			String jsonStr = "{\"cmNum\":\"" + cmNum + "\",\"fileName\":\"" + saveName + "\",\"originName\":\""+file.getOriginalFilename()+"\"}" ; 
 			return jsonStr;
 		} else {
 			return null;
