@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.BoardFileDao">
+	<insert id="insertFile" parameterType="boardFile">
+		insert into boardfile values(
+			bf_seq.nextval, #{bNum}, #{fileName}
+		)
+	</insert>
+	<select id="selectFilesByBnum" parameterType="int" resultMap="boardFileMap">
+		select * from boardfile where b_num = #{bNum}
+	</select>
+	<resultMap type="boardFile" id="boardFileMap" >
+		<result column="bf_num" property="bfNum"/>
+		<result column="b_num" property="bNum"/>
+		<result column="bf_name" property="fileName"/>
+	</resultMap>
+	
+</mapper>

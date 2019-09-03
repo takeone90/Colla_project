@@ -11,64 +11,12 @@
 <link rel="stylesheet" type="text/css" href="css/base.css"/>
 <link rel="stylesheet" type="text/css" href="css/headerWs.css"/>
 <link rel="stylesheet" type="text/css" href="css/navWs.css"/>
-
+<link rel="stylesheet" type="text/css" href="css/workspace.css"/>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<style>
-#addWsModal{
-	display : none;
-	position : fixed;
-	top : 30%;
-	left : 30%;
-	width : 500px;
-	height : 350px;
-	background-color: white;
-	text-align: center;
-	border-radius: 10px;
-}
-#addChatModal{
-	display : none;
-	position : fixed;
-	top : 30%;
-	left : 30%;
-	width : 500px;
-	height : 400px;
-	background-color: white;
-	text-align: center;
-	border-radius: 10px;
-}
-#addMemberModal{
-	display : none;
-	position : fixed;
-	top : 30%;
-	left : 30%;
-	width : 500px;
-	height : 250px;
-	background-color: white;
-	text-align: center;
-	border-radius: 10px;
-}
-/* 네비게이션의 채팅방리스트와 게시판, 캘린더는 wsMain페이지에서는 숨겼습니다. */
-#myChatList{
-	display: none;
-}
-#ws-subfunction{
-	display: none;
-}
-#chatRoomInfo{
-	display: none;
-}
-.wsDetail{
-display : none;
-}
-.row ul{
-	list-style: none;
-	padding-left: 0px;
-}
-</style>
 <script>
 	var wNum;
 	
-	$(function(){
+	$(function(){	
 		//WS추가 모달
 		$(".openWsModal").on("click",function(){
 			$("#addWsModal").fadeIn(300);
@@ -117,11 +65,11 @@ display : none;
 		
 		//워크스페이스 하나 숨기고 닫기
 		$(".showWsDetail").on("click",function(){
-			$(this).next().toggle();
+			$(this).next().toggle(300);
 			return false;
 		});
 		
-	});
+	});// onload.function end
 	function thisWsMemberList(wNum){
 			var wsMemberList = $("#wsMemberList");
 			$.ajax({
@@ -140,42 +88,34 @@ display : none;
 				}
 			});
 	}
-	function dropSession(){
-		$("#logoutBtn").on("click",function(){
-			$.ajax({
-				url : "${contextPath}/dropSession",
-				success : function(){
-					alert("로그아웃 성공");
-				},
-				error : function(){
-					alert("로그아웃 세션드랍 에러발생");
-				}
-			});
-		})
-	}
+
 </script>
 </head>
 <body>
 	<%@ include file="/WEB-INF/jsp/inc/headerWs.jsp"%>
 	<%@ include file="/WEB-INF/jsp/inc/navWs.jsp"%>
 	<div id="wsBody">
+		<div id="wsBodyContainer"> 
 		<h2>Workspace</h2>
 		<h3>Workspace List</h3>
 		<ul>
 			<c:forEach items="${workspaceList}" var="ws">
 				<li class="ws">
-					<h3 style="font-weight: bolder;">${ws.wsInfo.name}</h3>
-					<button class="showWsDetail">워크스페이스 상세보기</button> <!-- 누르면 ws.wsInfo.num인 wsDetail만 열려야한다 -->
-
+					<h3>${ws.wsInfo.name}</h3>
+					<a href="#" class="showWsDetail">상세보기</a>
 					<div class="wsDetail">
 						<input type="hidden" value="${ws.num}" id="wNum">
 						<div class="wsChatList">
 							<p>채팅리스트</p>
 							<ul>
 							<c:forEach items="${ws.crList}" var="cr">
-								<li><a href="chatMain?crNum=${cr.crNum}">${cr.crName}</a></li>
+								<div class="crRoundBox">
+									<li><a href="chatMain?crNum=${cr.crNum}">${cr.crName}</a></li>
+								</div>
 							</c:forEach>
-								<button class="openChatModal" data-wnum="${ws.wsInfo.num}"> 채팅방 추가(+)</button>
+								<div class="addBox">
+								<a href="#" class="openChatModal" data-wnum="${ws.wsInfo.num}">+</a>
+								</div>
 							</ul>
 						</div>
 						
@@ -184,13 +124,17 @@ display : none;
 						<p>참여자 목록</p>
 						<ul>
 						<c:forEach items="${ws.mList}" var="m"><!-- workspacemember 테이블 만들고 그 테이블리스트를 여기 넣는다 -->
+						<div class="wsmRoundBox">
 							<li>${m.name}</li>
+						</div>
 						</c:forEach>
-							<button class="openAddMemberModal" data-wnum="${ws.wsInfo.num}"> 멤버 추가(+)</button>
+							<div class="addBox">
+							<a href="#" class="openAddMemberModal" data-wnum="${ws.wsInfo.num}">+</a>
+							</div>
 						</ul>
 						</div>
 					</div>
-					<div>
+					<div id="exitWs">
 						<a href="exitWs?wNum=${ws.wsInfo.num}" style="color:red">워크스페이스 나가기</a>
 					</div>
 				</li>
@@ -310,7 +254,7 @@ display : none;
 		
 		
 		
-		
+		</div><!-- end wsBodyContainer -->
 	</div><!-- end wsBody -->
 </body>
 </html>

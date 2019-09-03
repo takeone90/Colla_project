@@ -50,6 +50,9 @@ public class ChatRoomMemberService {
 	public ChatRoomMember getChatRoomMemberByAnother(int crNum,int wNum,int mNum) {
 		return crmDao.selectChatRoomMemberByAnother(crNum, wNum,mNum);
 	}
+	public ChatRoomMember getChatRoomMemberByCrNumMnum(int crNum,int mNum) {
+		return crmDao.selectChatRoomMemberByCrNumMnum(crNum, mNum);
+	}
 	public List<ChatRoomMember> getAllChatRoomMember(){
 		return crmDao.selectAllChatRoomMember();
 	}

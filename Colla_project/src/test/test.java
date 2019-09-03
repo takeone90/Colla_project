@@ -26,6 +26,8 @@ public class test {
 	private ChatMessageDao cmDao;
 	@Test
 	public void serviceTest() {
-		System.out.println(cmDao.selectAllChatMessageByCrNum(250));
+		String testStr = "76fcb5dc-2015-462a-8258-ab1ea01c0c65_boonguh.jpg";
+		int idx = testStr.indexOf("_")+1;
+		System.out.println(testStr.substring(idx));
 	}
 }

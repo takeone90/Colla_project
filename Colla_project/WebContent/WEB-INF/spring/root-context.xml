@@ -35,6 +35,10 @@
 		<property name="sqlSessionFactory" ref="sqlSessionFactory"/>
 		<property name="mapperInterface" value="dao.BoardDao"/>
 	</bean>
+	<bean id="boardFileDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+		<property name="mapperInterface" value="dao.BoardFileDao"/>
+	</bean>
 	<bean id="replyDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
 		<property name="sqlSessionFactory" ref="sqlSessionFactory"/>
 		<property name="mapperInterface" value="dao.ReplyDao"/>
@@ -85,4 +89,9 @@
 		<property name="dataSource" ref="dataSource"/>
 	</bean>
 	<tx:annotation-driven transaction-manager="txManager"/>
+	<!-- Multifile upload -->
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="maxUploadSize" value="5242880"></property> <!-- 5MB -->
+		<property name="maxInMemorySize" value="1048576"></property> <!-- 1MB -->
+	</bean>
 </beans>

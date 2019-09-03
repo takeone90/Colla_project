@@ -119,10 +119,7 @@ public class MypageController {
 
 	@RequestMapping(value = "/modifyMember", method = RequestMethod.POST)
 	public String modifyMember(Member member, HttpSession session) {
-		System.out.println("modifyMember Controller 시작!");
-		System.out.println("member : " + member);
 		member.setNum(((Member)session.getAttribute("user")).getNum());
-		System.out.println("num : " + ((Member)session.getAttribute("user")).getNum());
 		if (memberService.modifyMember(member)) {
 			return "redirect:myPageMainForm";
 		} else {
@@ -141,6 +138,6 @@ public class MypageController {
 	@RequestMapping(value = "/showProfileImg")
 	public byte[] showProfileImg(HttpSession session, HttpServletRequest request) {
 		Member member = memberService.getMemberByEmail((String)session.getAttribute("userEmail"));
-		return memberService.getProfileImg(member.getProfileImg(),request); 
+		return memberService.getProfileImg(member,request); 
 	}
 }
