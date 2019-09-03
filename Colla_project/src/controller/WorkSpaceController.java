@@ -49,7 +49,6 @@ public class WorkSpaceController {
 		String userEmail = principal.getName();
 		//세션에 그 userEmail저장하고
 		session.setAttribute("userEmail", userEmail);
-		
 		//이메일을 기반으로 멤버하나를 찾는다
 		Member user = mService.getMemberByEmail(userEmail);//로그인한사람
 		session.setAttribute("user", user);

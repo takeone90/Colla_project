@@ -49,26 +49,6 @@ $(function(){
 		return false;
 	});
 	
-	$("#addFileForm").on("submit",function(){
-		var formData = new FormData();
-		var chatFile = $("input[name='chatFile']");
-		var files = chatFile[0].files;
-		for (var i = 0; i < files.length; i++) {
-			formData.append("chatFile", files[i]);
-		}
-		$.ajax({
-			url : "${contextPath}/fileUpload",
-			data : {"formData" : formData},
-			dataType : "json",
-			success : function(d){
-				alert(d);
-			},
-			error : function(){
-				alert("파일업로드 오류 발생");
-			}
-		});
-		return false;
-	});
 	
 	//코드업로드 모달
 	$(".openCodeModal").on("click",function(){
@@ -91,7 +71,7 @@ $(function(){
 	//모달 바깥쪽이 클릭되거나 다른 모달이 클릭될때 현재 모달 숨기기
 	$("#wsBody").mouseup(function(e){
 		if($("#addCrMemberModal").has(e.target).length===0)
-		$("#addCrMemberModal").fadeOut(300);
+			$("#addCrMemberModal").fadeOut(300);
 		if($("#addFileModal").has(e.target).length===0)
 			$("#addFileModal").fadeOut(300);
 		if($("#addCodeModal").has(e.target).length===0)
@@ -100,7 +80,11 @@ $(function(){
 			$("#addLocationModal").fadeOut(300);
 		return false;
 	});
-	
+	//첨부파일Detail 숨기고 닫기
+	$("#attachBtn").on("click",function(){
+		$(this).prev().toggle(300);
+		return false;
+	});
 	
 	<%--채팅 연결 및 전송--%>
 	chatArea = $(".chat");
@@ -114,11 +98,8 @@ $(function(){
 			sendMsg();
 			chatArea.scrollTop($("#chatArea")[0].scrollHeight);
 		}
-	$(".fileUploadBtn").on("click",function(){
-		sendFile();
-		chatArea.scrollTop($("#chatArea")[0].scrollHeight);
 	});
-	});
+	
 	var crNum = $("#crNum").val();
 	$.ajax({
 		url : "${contextPath}/loadPastMsg",
@@ -137,15 +118,37 @@ $(function(){
 		}
 	});
 	
-	
-	//첨부파일Detail 숨기고 닫기
-	$("#attachBtn").on("click",function(){
-		$(this).prev().toggle(300);
-		return false;
-	});
-	
-});//onload-function end
 
+	//파일업로드에서 업로드 <a>태그가 눌렸을때
+	$("#fileUploadBtn").on("click",function(){
+		var addFileForm = $("#addFileForm")[0];
+		var formData = new FormData(addFileForm);
+		$.ajax({
+			url : "${contextPath}/uploadFile",
+			data : formData,
+			processData : false,
+			contentType : false,
+			enctype: "multipart/form-data",
+			type : "post",
+			dataType : "json",
+			success : function(jsonStr){
+				var cmNum = jsonStr.cmNum;
+				var fileName = jsonStr.fileName;
+				sendFile(fileName,cmNum);
+				$("#addFileModal").fadeOut(300);
+			},
+			error : function(){
+				alert("파일전송 에러발생");
+			}
+		});
+	});
+});//onload-function end
+//파일형태 메세지 보내기
+function sendFile(fileName,cmNum){
+	stompClient.send("/client/sendFile/"+$("#userEmail").val()+"/"+$("#crNum").val()+"/"+cmNum,{},fileName);
+	alert("sendFile 실행완료");
+}
+	
 	<%-------------------------------------------------------WebSocket 연결과 채팅메세지 박스-----------------------------------------------------%>
 	var sock;
 	var stompClient;
@@ -153,47 +156,73 @@ $(function(){
 		sock = new SockJS("${contextPath}/chat");
 		stompClient = Stomp.over(sock);
 		stompClient.connect({},function(){
-// 			connectMsg();
 			var crNum = $("#crNum").val();
+			//일반메세지 구독
 			stompClient.subscribe("/category/msg/"+crNum,function(jsonStr){
 				var userId = JSON.parse(jsonStr.body).userId;
 				var message = JSON.parse(jsonStr.body).message;
 				var writeTime = JSON.parse(jsonStr.body).writeTime;
 				if(userId == $("#userName").val()){
-					addMyMsg(userId,message,writeTime);
+					addMyMsg("message",userId,message,writeTime);
 				}else{
-					addMsg(userId,message,writeTime);
+					addMsg("message",userId,message,writeTime);
 				}
 				
 				$("#chatArea").scrollTop($("#chatArea")[0].scrollHeight);
 			});
 			
+			//파일메세지 구독
+			stompClient.subscribe("/category/file/"+crNum, function(jsonStr) {
+				var userId = JSON.parse(jsonStr.body).userId;
+				var fileName = JSON.parse(jsonStr.body).fileName;
+				var writeTime = JSON.parse(jsonStr.body).writeTime;
+				if(userId == $("#userName").val()){
+					addMyMsg("file",userId,fileName,writeTime);
+				}else{
+					addMsg("file",userId,fileName,writeTime);
+				}
+				$("#chatArea").scrollTop($("#chatArea")[0].scrollHeight);
+			});
 		});
 	}
-	
+	//일반 메세지 보내기
 	function sendMsg(){
 		var msg = $("#chatInput").val();
 		stompClient.send("/client/send/"+$("#userEmail").val()+"/"+$("#crNum").val(),{},msg);
 		$("#chatInput").val("");
 	}
+	
 
+	
+	
+	
+	
 // 	메시지 박스 태그를 생성하는 함수
-	function appendMsg(msgType,userId,msg,writeTime){
+	function appendMsg(msgType,type,userId,msg,writeTime){
 		var chatMsg = $("<div class='"+msgType+"'></div>");
-		chatMsg.append("<div class='profileImg'><a href='#'><img alt='' src=''></a></div>");
-		chatMsg.append("<div class='name'><p>"+userId+" <span class='date'>"+writeTime+"</span></p></div><br>");
-		chatMsg.append("<p class='content'>"+msg+"</p>");
-		chatArea.append(chatMsg);
+		if(type=='message'){
+			chatMsg.append("<div class='profileImg'><a href='#'><img alt='' src=''></a></div>");
+			chatMsg.append("<div class='name'><p>"+userId+" <span class='date'>"+writeTime+"</span></p></div><br>");
+			chatMsg.append("<p class='content'>"+msg+"</p>");
+			chatArea.append(chatMsg);
+		}else if(type=='file'){
+			chatMsg.append("<div class='profileImg'><a href='#'><img alt='' src=''></a></div>");
+			chatMsg.append("<div class='name'><p>"+userId+" <span class='date'>"+writeTime+"</span></p></div><br>");
+			chatMsg.append("<p class='content'><a href='${contextPath}/download'>"+msg+"</a></p>");
+			chatArea.append(chatMsg);
+		}
+		
+		
 	}
 	//받은 메시지 화면에 추가
-	function addMsg(userId,msg,writeTime){
+	function addMsg(type,userId,msg,writeTime){
 		var msgType = "chatMsg";
-		appendMsg(msgType,userId,msg,writeTime);
+		appendMsg(msgType,type,userId,msg,writeTime);
 	}
 	//내가 쓴 메시지 화면에 추가
-	function addMyMsg(userId,msg,writeTime){
+	function addMyMsg(type,userId,msg,writeTime){
 		var msgType = "myMsg";
-		appendMsg(msgType,userId,msg,writeTime);
+		appendMsg(msgType,type,userId,msg,writeTime);
 	}
 	//과거 메시지 화면에 추가
 	function loadPastMsg(userId,msg,writeTime){
@@ -204,7 +233,8 @@ $(function(){
 		}else{
 			msgType = "chatMsg";
 		}
-		appendMsg(msgType,userId,msg,writeTime);
+		type="message";
+		appendMsg(msgType,type,userId,msg,writeTime);
 	}	
 	
 	
@@ -295,7 +325,7 @@ $(function(){
 					</div> <!-- end addFileInputWrap -->
 
 					<div>
-						<input type="submit" class="fileUploadBtn" value="업로드"><br> 
+						<a href="#" id="fileUploadBtn">업로드</a><br> 
 						<input type="button" class="closeFileModal" value="닫기"><br>
 					</div>
 				</form>
