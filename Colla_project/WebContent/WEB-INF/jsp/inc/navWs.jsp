@@ -28,9 +28,9 @@
 	<div id="navContainer">
 		<div id="aboutProfile">
 			<a href="myPageMainForm">
-				<img alt="나의 프로필 사진" src="${contextPath }/showProfileImg?fileName=${member.profileImg}" />
+				<img alt="나의 프로필 사진" src="${contextPath }/showProfileImg" />
 			</a>
-			<p>${sessionScope.user.name}님</p>
+			<p>${member.name}님</p>
 		</div>
 		<select name="currWorkspace">
 			<option value="1" selected>질수없조프로젝트</option>

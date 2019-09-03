@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
-import org.springframework.web.servlet.View;
 
 import model.Board;
 import model.BoardFile;
@@ -45,13 +44,12 @@ public class BoardController {
 	public String showBoardList(
 			HttpSession session, 
 			Model model,
-			@RequestParam(value="page", defaultValue = "1") int page,
+			@RequestParam(value="page", defaultValue="1") int page,
 			@RequestParam(value="keywordType", defaultValue = "0") int type,
 			@RequestParam(value="keyword", required = false) String keyword
 			) {
 		int wNum = (int)session.getAttribute("currWnum");
 		Map<String, Object> param = new HashMap<String, Object>();
-		
 		if(page<=0) {
 			page=1;
 		}
@@ -62,7 +60,6 @@ public class BoardController {
 		
 		List<Board> bList = bService.getBoardListPage(param);
 		model.addAttribute("bList", bList);
-		model.addAttribute("listInf", param);
 		session.setAttribute("listInf", param);
 		return "/board/boardList";
 	}

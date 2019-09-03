@@ -3,8 +3,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:set var="contextPath" value="<%=request.getContextPath()%>" />
 <c:set var="member" value="<%=request.getSession().getAttribute(\"user\")%>" />
-<script type="text/javascript" src="js/stomp.js"></script>
-<script type="text/javascript" src="js/sockjs.js"></script>
+<script type="text/javascript" src="${contextPath }/js/stomp.js"></script>
+<script type="text/javascript" src="${contextPath }/js/sockjs.js"></script>
 <script>
 var sock;
 var stompClient;

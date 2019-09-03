@@ -42,7 +42,6 @@ public class BoardService {
 		} else if (type == 4) {
 			param.put("name", keyword);
 		}
-		
 		param.put("firstItem", getFirstItem(page));
 		param.put("lastItem", getLastItem(page));
 		param.put("startNum", getStartNum(page));
