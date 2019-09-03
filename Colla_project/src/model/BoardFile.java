@@ -4,7 +4,16 @@ public class BoardFile {
 	private int bfNum;
 	private int bNum;
 	private String fileName;
+	private String originName;
 	
+	
+	
+	public String getOriginName() {
+		return originName;
+	}
+	public void setOriginName(String originName) {
+		this.originName = originName;
+	}
 	public int getBfNum() {
 		return bfNum;
 	}

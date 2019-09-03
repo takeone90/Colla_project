@@ -44,8 +44,8 @@
 			<div class="row">
 				<c:forEach items="${fList}" var="file">
 					<p>
-						<a href="${contextPath}/file/download?name=${file.fileName}">
-							${file.fileName }
+						<a href="${contextPath}/board/download?name=${file.fileName}">
+							${file.originName }
 						</a>
 					</p>
 				</c:forEach>
