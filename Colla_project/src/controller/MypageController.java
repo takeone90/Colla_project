@@ -119,10 +119,7 @@ public class MypageController {
 
 	@RequestMapping(value = "/modifyMember", method = RequestMethod.POST)
 	public String modifyMember(Member member, HttpSession session) {
-		System.out.println("modifyMember Controller 시작!");
-		System.out.println("member : " + member);
 		member.setNum(((Member)session.getAttribute("user")).getNum());
-		System.out.println("num : " + ((Member)session.getAttribute("user")).getNum());
 		if (memberService.modifyMember(member)) {
 			return "redirect:myPageMainForm";
 		} else {

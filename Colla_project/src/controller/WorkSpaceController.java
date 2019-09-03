@@ -150,19 +150,7 @@ public class WorkSpaceController {
 		//exit 한사람이 chatroom의 생성자일지라도 그 chatroom 은 지워지지 않는다.
 		return "redirect:workspace";
 	}
-	
-	@ResponseBody
-	@RequestMapping("/dropSession")
-	public void dropSession(HttpSession session) {
-		session.removeAttribute("currWnum");
-		session.removeAttribute("userEmail");
-		session.removeAttribute("user");
-		session.removeAttribute("inviteUserEmail");
-		session.removeAttribute("inviteWnum");
-	}
-	
-	
-	
+		
 	public class inner implements Runnable {
 		String emailAddress;
 		int wNum;
