@@ -180,6 +180,7 @@ public class MemberController {
 	@RequestMapping("/checkLoginDuplication")
 	public void checkLoginDuplication(HttpServletRequest request, HttpServletResponse response,String userEmail) throws IOException {
 		boolean result = true;
+		Member member = (Member)request.getSession().getAttribute("user");
 		for (String key : loginMember.keySet()) {// 로그인한 멤버가 담긴 MAP에서 해당 이메일이 있는지 확인한다
 			if (key.equals(userEmail)) {
 				result = false; // 중복으로 로그인 : false 반환, 정상 로그인 : true 반환
@@ -194,7 +195,7 @@ public class MemberController {
 			}
 		} else { // 중복 로그인의 경우
 			simpMessagingTemplate.setMessageConverter(new StringMessageConverter());
-			simpMessagingTemplate.convertAndSend("/category/msg/80","[result:0]"); // 기존 로그인된 유저에게 요청을 보낸다 ==> 기존 유저의 브라우저에서는 alert가 뜬 뒤, 자동 로그아웃 된다.
+			simpMessagingTemplate.convertAndSend("/category/loginMsg/"+member.getNum(),"[result:0]"); // 기존 로그인된 유저에게 요청을 보낸다 ==> 기존 유저의 브라우저에서는 alert가 뜬 뒤, 자동 로그아웃 된다.
 			loginMember.put(userEmail, request.getSession()); // map에 해당 멤버를 담은 뒤,
 			System.out.println(request.getSession() + "님이 로그인 하셨습니다.");
 			response.sendRedirect("workspace"); //워크스페이스로 이동한다			
