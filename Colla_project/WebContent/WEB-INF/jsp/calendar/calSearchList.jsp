@@ -10,6 +10,12 @@ request.setAttribute("contextPath", contextPath);
 <head>
 <meta charset="UTF-8">
 <title>calSearchList</title>
+<link rel="stylesheet" type="text/css" href="css/reset.css"/>
+<link rel="stylesheet" type="text/css" href="css/base.css"/>
+<link rel="stylesheet" type="text/css" href="css/headerWs.css"/>
+<link rel="stylesheet" type="text/css" href="css/navWs.css"/>
+<link rel="stylesheet" type="text/css" href="css/workspace.css"/>
+
 </head>
 <body>
 <%@ include file="/WEB-INF/jsp/inc/headerWs.jsp"%>
