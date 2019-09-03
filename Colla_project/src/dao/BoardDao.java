@@ -13,5 +13,6 @@ public interface BoardDao {
 	public int deleteBoard(int bNum);
 	public int updateBoard(Board board);
 	public Board selectBoardBybNum(int bNum);
+//	public Board selectBoardBybNumWithFile(int bNum);
 	public int updateReadCnt(int bNum);
 }
