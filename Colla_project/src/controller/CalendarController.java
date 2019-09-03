@@ -128,10 +128,12 @@ public class CalendarController {
 
 //검색-----------------------------------------------------------------------
 	@RequestMapping(value="/calSearchList", method = RequestMethod.GET)
-	public String showCalSearchList(Model model, @RequestParam(required=false)String searchKeyword, @RequestParam(defaultValue="0")int searchType) {	
+	public String showCalSearchList(HttpSession session, Model model, @RequestParam(required=false)String searchKeyword, @RequestParam(defaultValue="0")int searchType) {	
+		int wNum = (int)session.getAttribute("currWnum");
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("searchType", searchType);
 		param.put("searchKeyword", searchKeyword);
+		param.put("wNum", wNum);
 		System.out.println("param : "+param);
 		Map<String, Object> result = calendarService.getAllCalendarSearched(param);
 		System.out.println("controller result : "+result);

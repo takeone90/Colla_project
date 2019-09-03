@@ -24,7 +24,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	<select id="selectAllCalendarSearched" parameterType="map" resultMap="calendarMap">
 		select * from calendar
-		where 1=0
+		where w_num=#{wNum}
 		<if test="title != null"> or cal_title like '%'||#{title}||'%' </if>
 		<if test="content != null"> or cal_content like '%'||#{content}||'%' </if>
 		<if test="mNum != null"> or m_num like '%'||#{mNum}||'%' </if>
