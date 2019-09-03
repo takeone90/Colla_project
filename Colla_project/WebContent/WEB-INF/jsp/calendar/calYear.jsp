@@ -22,9 +22,10 @@ td{border: 0px; padding: 0px;}
 <script type="text/javascript">
 var today = new Date();
 var date = new Date();
+var numOfWeekRow = 0;
 $(function() {
 	thisMonthCalendar(today);
-	tmpShowSchedule();
+	showSchedule();
 	//추가 모달 열기
 	$("#addScheduleButton").on("click", function() {
 		$("#addScheduleForm").show("slow");
@@ -34,14 +35,26 @@ $(function() {
 		$("#addScheduleForm").hide("slow");
 	});
 	//추가 모달에서 연 반복 버튼 눌렀을 때 
-	$("#addAnnually").on("click", function() {
-		$("#endDate").attr("readonly", false);
-	})
+	$("#addAnnually").on("change", function() {
+		if($("#addAnnually").is(":checked")) {
+			var startDateTmp = $("#startDate").val();
+			$("#endDate").val(startDateTmp); //종료일=시작일
+			$("#endDate").prop("readonly", true); //종료일 입력 못하게 	
+		} else {
+			$("#endDate").prop("readonly", false);
+		}
+	});
 	//추가 모달에서 월 반복 버튼 눌렀을 때 
-	$("#addAnnually").on("click", function() {
-		$("#endDate").attr("readonly", false);
-	})
-	
+	$("#addMonthly").on("change", function() {
+		if($("#addMonthly").is(":checked")) {
+			var startDateTmp = $("#startDate").val();
+			console.log(startDateTmp);
+			$("#endDate").val(startDateTmp); //종료일=시작일
+			$("#endDate").prop("readonly", true); //종료일 입력 못하게 	
+		} else {
+			$("#endDate").prop("readonly", false);
+		}
+	});
 	//상세 모달 닫기
 	$("#detailScheduleFormOfMonthCalClose").on("click", function() {
 		$("#detailScheduleFormOfMonthCal").hide("slow");
@@ -72,7 +85,9 @@ $(function() {
 			success: function(result) {
 				if(result) {
 					alert("수정 성공");
-					location.reload();
+					$("#modifyScheduleForm").hide("slow");
+					thisMonthCalendar(today);
+					showSchedule();
 				} else {
 					alert("수정 실패");
 				}
@@ -96,7 +111,8 @@ $(function() {
 				if(result) {
 					alert("성공!");
 					$("#addScheduleForm").hide("slow");
-					location.reload();
+					thisMonthCalendar(today);
+					showSchedule();
 				} else {
 					alert("실패..");
 				}
@@ -120,7 +136,9 @@ $(function() {
 			success: function(result) {
 				if(result) {
 					alert("삭제 성공");
-					location.reload();
+					$("#detailScheduleFormOfMonthCal").hide("slow");
+					thisMonthCalendar(today);
+					showSchedule();
 				} else {
 					alert("삭제 실패");
 				}
@@ -135,15 +153,15 @@ $(function() {
 	//타입 지정
 	$("#calType1").on("change", function() {
 		thisMonthCalendar(today);
-		tmpShowSchedule();
+		showSchedule();
 	});
 	$("#calType2").on("change", function() {
 		thisMonthCalendar(today);
-		tmpShowSchedule();
+		showSchedule();
 	});
 	$("#calType3").on("change", function() {
 		thisMonthCalendar(today);
-		tmpShowSchedule();
+		showSchedule();
 	});
 	//원하는 날짜로 달력 이동
 	$("#wantedCalendarButton").on("click", function() {
@@ -153,12 +171,10 @@ $(function() {
 		console.log(wantedYear+" "+wantedMonth+" "+wantedDate);
 		moveToWantedCalendar(wantedYear, wantedMonth-1, wantedDate);
 	});
-});
+});	
 function thisMonthCalendar(today) {
-	console.log("thisMonthCalendar 실행");
+	console.log("month today? "+today);
 	//달력 상단 날짜 그리기
-	var firstDay = new Date(today.getFullYear(), today.getMonth(), 1);
-	var lastDay = new Date(today.getFullYear(), today.getMonth()+1, 0);
 	var calMonthTitle = $("#calMonthTitle");
 	calMonthTitle.html(today.getFullYear()+"년 "+(today.getMonth()+1)+"월");
 	//달력 상단 요일 그리기
@@ -178,6 +194,8 @@ function thisMonthCalendar(today) {
 	calendar += "</tr>";
 	calendar += "</table>";
 	//달력 하단 날짜 그리기
+	var firstDay = new Date(today.getFullYear(), today.getMonth(), 1);
+	var lastDay = new Date(today.getFullYear(), today.getMonth()+1, 0);
 	var firstDayOfWeek = firstDay.getDay();
 	var lastDayDate = lastDay.getDate();
 	var numOfWeekRow = Math.ceil((lastDayDate+firstDayOfWeek)/7);
@@ -186,16 +204,16 @@ function thisMonthCalendar(today) {
 	for(var i=0; i<numOfWeekRow; i++) { //줄
 		calendar += "<div>";
 		calendar += "<table height=\"120px\" border = '1' class=\"drawMonthCalendarLower\" style=\"\">";
-		
-		calendar += "<tr height=\"15px\" class="+today.getFullYear()+month+i+">";
+		calendar += "<tr height=\"15px\" class="+today.getFullYear()+"-"+month+"-"+i+">";
 		for(var j=0; j<7; j++) { //날짜 칸
 			if(j<firstDayOfWeek && i==0 || dateCount>lastDayDate) { //날짜 없는 부분
 				calendar += "<th width=\"150\" style=\"padding: 0px; height: 20px; position: relative; text-align: left; background-color: #ffe8ef\">&nbsp;</th>";
 			} else {
 				if(dateCount<10) { //10일 전
-					calendar += "<th width=\"150\" style=\"padding: 0px; height: 20px; position: relative; text-align: left; background-color: #ffe8ef\" id="+today.getFullYear()+month+"0"+dateCount+">"+dateCount+"</th>";
+					calendar += "<th onclick=\"clickOnDate("+today.getFullYear()+month+"0"+dateCount+")\" width=\"150\" style=\"padding: 0px; height: 20px; position: relative; text-align: left; background-color: #ffe8ef\" id="+today.getFullYear()+month+"0"+dateCount+">"+dateCount+"</th>";
+					
 				} else { //10일 후
-					calendar += "<th width=\"150\" style=\"padding: 0px; height: 20px; position: relative; text-align: left; background-color: #ffe8ef\" id="+today.getFullYear()+month+dateCount+">"+dateCount+"</th>";
+					calendar += "<th onclick=\"clickOnDate("+today.getFullYear()+month+dateCount+")\" width=\"150\" style=\"padding: 0px; height: 20px; position: relative; text-align: left; background-color: #ffe8ef\" id="+today.getFullYear()+month+dateCount+">"+dateCount+"</th>";
 				}
 				dateCount++;
 			}
@@ -210,14 +228,13 @@ function thisMonthCalendar(today) {
 	var calMonthBody = $("#calMonthBody"); 
 	calMonthBody.html(calendar);	
 }
-function tmpShowSchedule() {
-	console.log("tmpShowSchedule 실행");
-	var t1 = $("#calType1").prop("checked");
-	var t2 = $("#calType2").prop("checked");
-	var t3 = $("#calType3").prop("checked");
+function showSchedule() {
+	var type1 = $("#calType1").prop("checked");
+	var type2 = $("#calType2").prop("checked");
+	var type3 = $("#calType3").prop("checked");
 	$.ajax({ 
 		url:"showAllCalendar",
-		data: {"t1":t1, "t2":t2, "t3":t3},
+		data: {"type1":type1, "type2":type2, "type3":type3},
 		type:"get",
 		dataType:"json",
 		success: function(allCalendar) { //모든 스케쥴을 가져옴
@@ -226,13 +243,13 @@ function tmpShowSchedule() {
 					var title = allCalendar[ii].title;
 					//시작일
 					var startDateStr = allCalendar[ii].startDate;
-					var startDateStrDate = new Date(allCalendar[ii].startDate);
+					var startDateStrDate = new Date(allCalendar[ii].startDate);	
 					//시작 년 월 일
 					var startDateYMD = startDateStr.substring(0, 10); //2019-08-30
 					var startDateYear = startDateStr.substring(0, 4);
 					var startDateMonth = startDateStr.substring(5, 7);
+					var startDateYearMonth = startDateStr.substring(0, 7);
 					var startDateDate = startDateStr.substring(8, 10);
-					var startDateNumber = startDateYear+startDateMonth+startDateDate; //20190830
 					//종료일
 					var endDateStr = allCalendar[ii].endDate;
 					var endDateStrDate = new Date(allCalendar[ii].endDate);
@@ -240,57 +257,104 @@ function tmpShowSchedule() {
 					var endDateYMD = endDateStr.substring(0, 10);
 					var endDateYear = endDateStr.substring(0, 4);
 					var endDateMonth = endDateStr.substring(5, 7);
+					var endDateYearMonth = endDateStr.substring(0, 7);
 					var endDateDate = endDateStr.substring(8, 10);
 					
-					var gap = Number(endDateStrDate.getTime()-startDateStrDate.getTime())/(1000*60*60*24)+Number(1); //시작일~종료일 기간 구하기
+					var weekCountOfFirstDate = whichWeek(startDateStr); //시작일이 몇 번째 주인지 구하기(0~5)
+					var weekCountOfLastDate = whichWeek(endDateStr); //종료일이 몇 번째 주인지 구하기(0~5)
 					
-					var firstDateOfThisSchedule = new Date(startDateYear, startDateMonth-1, 1); //해당 일정이 있는 월의 첫날 구하기
-					var firstDayOfThisSchedule = firstDateOfThisSchedule.getDay(); //첫날 요일 구하기
-					
-					var weekCountOfThisSchedule = Math.ceil((Number(firstDayOfThisSchedule)+Number(startDateDate))/7); //해당 날짜가 몇 번째 주인지 구하기(0~5)
-					console.log("weekCountOfThisSchedule : "+weekCountOfThisSchedule);
-					
-					var trClassWhereIWantToAppend = startDateYear+startDateMonth+(Number(weekCountOfThisSchedule)-1); //tr 클래스
-					console.log("trClassWhereIWantToAppend : "+trClassWhereIWantToAppend);
-					
-					var trClassWhereIWantToAppendNext = startDateYear+(Number(startDateMonth)+Number(1))+1; //tr 클래스
-					console.log("trClassWhereIWantToAppendNext : "+trClassWhereIWantToAppendNext);
-
+					var trClassWhereIWantToAppend = startDateYearMonth+"-"+(Number(weekCountOfFirstDate)-1); //tr 클래스 //첫번째 줄
+					var trClassWhereIWantToAppendLast = endDateYearMonth+"-"+(Number(weekCountOfLastDate)-1); //tr 클래스 //마지막 줄
+				
 					var startDateOfThisSchedule = new Date(startDateYear, startDateMonth-1, startDateDate); //해당 일정 시작 날짜 구하기
 					var startDayOfThisSchedule = startDateOfThisSchedule.getDay(); //해당 일정 시작 요일 구하기(0~6)
-					console.log("startDayOfThisSchedule : "+startDayOfThisSchedule);	
 					
 					var endDateOfThisSchedule = new Date(endDateYear, endDateMonth-1, endDateDate); //해당 일정 마지막 날짜 구하기
 					var endDayOfThisSchedule = endDateOfThisSchedule.getDay(); //해당 일정 마지막 요일 구하기(0~6)
-					console.log("endDayOfThisSchedule : "+endDayOfThisSchedule);	
 					
-					if(startDayOfThisSchedule<=endDayOfThisSchedule) { //줄 안 넘어가는 경우
-						var tr = trMaker1(startDayOfThisSchedule, endDayOfThisSchedule, gap, title, randomColor());
-						$("."+trClassWhereIWantToAppend).after(tr);
-						tr.children('.tdClass').on("click", function() {
-							putContentIntoTd(allCalendar[ii]);
-						});
-					} else if(startDayOfThisSchedule>endDayOfThisSchedule) { //줄 넘어가는 경우
+					if(startDateMonth==endDateMonth) { //월 안 넘어가는 경우
+						var dateDiff = Math.abs(weekCountOfLastDate-weekCountOfFirstDate);
+						if(dateDiff == 0) { //줄 안 넘어가는 경우
+							var gap = Number(endDateStrDate.getTime()-startDateStrDate.getTime())/(1000*60*60*24)+Number(1); //시작일~종료일 기간 구하기
+							var tr = trMakerFullLine(startDayOfThisSchedule, endDayOfThisSchedule, gap, title, randomColor());
+							$("."+trClassWhereIWantToAppend).after(tr);
+							tr.children('.tdClass').on("click", function() {
+								putContentIntoTd(allCalendar[ii]);
+							});
+						} else if(dateDiff >= 1) { //줄 넘어가는 경우
+							var randomColorRandom = randomColor();
+							var repeatGapFirstRow = Number(7)-Number(startDayOfThisSchedule); //첫 줄
+							var tr = trMakerFirstLine(startDayOfThisSchedule, repeatGapFirstRow, title, randomColorRandom);
+							$("."+trClassWhereIWantToAppend).after(tr);
+							tr.children('.tdClass').on("click", function() {
+								putContentIntoTd(allCalendar[ii]);
+							});	
+							if(dateDiff>1) { //중간 줄
+								for(var i=weekCountOfFirstDate; i<weekCountOfLastDate-1; i++) {
+									var tr = trMakerMiddleLine(7, title, randomColorRandom);
+									$("."+startDateYearMonth+"-"+i).after(tr);
+									tr.children('.tdClass').on("click", function() {
+										putContentIntoTd(allCalendar[ii]);
+									});
+								}
+							}
+							var repeatGapLastRow = (Number(endDayOfThisSchedule)+Number(1)); //마지막 줄
+							var tr = trMakerLastLine(endDayOfThisSchedule, repeatGapLastRow, title, randomColorRandom);
+							$("."+trClassWhereIWantToAppendLast).after(tr);
+							tr.children('.tdClass').on("click", function() {
+								putContentIntoTd(allCalendar[ii]);
+							});
+						}
+					} else { //월 넘어가는 경우											
 						var randomColorRandom = randomColor();
-						var repeatGapFirstRow = Number(7)-Number(startDayOfThisSchedule); //첫줄
-						var tr = trMaker2(startDayOfThisSchedule, endDayOfThisSchedule, repeatGapFirstRow, title, randomColorRandom);
+						var repeatGapFirstRow = Number(7)-Number(startDayOfThisSchedule); //첫 줄
+						var tr = trMakerFirstLine(startDayOfThisSchedule, repeatGapFirstRow, title, randomColorRandom);
 						$("."+trClassWhereIWantToAppend).after(tr);
 						tr.children('.tdClass').on("click", function() {
 							putContentIntoTd(allCalendar[ii]);
-						});
-						var repeatGapSecondRow = (Number(endDayOfThisSchedule)+Number(1)); //둘쨋줄
-						var tr = trMaker3(startDayOfThisSchedule, endDayOfThisSchedule, repeatGapSecondRow, title, randomColorRandom);
-						$("."+(Number(trClassWhereIWantToAppend)+Number(1))).after(tr);
+						});							
+						for(var i=weekCountOfFirstDate; i<=findOutNumOfWeekRow(startDateStrDate); i++) {
+							var tr = trMakerMiddleLine(7, title, randomColorRandom);
+							var tmpid = startDateYearMonth+"-"+i;
+							$("."+tmpid).after(tr);							
+							tr.children('.tdClass').on("click", function() {
+								putContentIntoTd(allCalendar[ii]);
+							});
+						}
+// 						if((endDateStrDate.getMonth()-startDateStrDate.getMonth())>1) { ???????????????????? 세 달 이상
+// 							var nextMonthTmp = new Date(startDateStrDate.getFullYear(), (Number(startDateStrDate.getMonth())+Number(1)), 1);
+// 							var tr = trMaker4(startDayOfThisSchedule, endDayOfThisSchedule, 7, title, randomColorRandom);
+// 							for(var i=0; i<=findOutNumOfWeekRow(nextMonthTmp); i++) {						
+// 								$("."+nextMonthTmp.getFullYear()+"-"+(Number(nextMonthTmp.getMonth())+Number(1))+"-"+i).after(tr);							
+// 								tr.children('.tdClass').on("click", function() {
+// 									putContentIntoTd(allCalendar[ii]);
+// 								});
+// 							}
+// 						} 	
+						for(var i=0; i<weekCountOfLastDate-1; i++) {
+							var tr = trMakerMiddleLine(7, title, randomColorRandom);
+							$("."+endDateYearMonth+"-"+i).after(tr);							
+							tr.children('.tdClass').on("click", function() {
+								putContentIntoTd(allCalendar[ii]);
+							});
+						}							
+						var repeatGapLastRow = (Number(endDayOfThisSchedule)+Number(1)); //마지막 줄
+						var tr = trMakerLastLine(endDayOfThisSchedule, repeatGapLastRow, title, randomColorRandom);
+						$("."+trClassWhereIWantToAppendLast).after(tr);
 						tr.children('.tdClass').on("click", function() {
 							putContentIntoTd(allCalendar[ii]);
 						});
-					}
+					}					
 				})(i)
 			}
 		}
 	});
 }
-
+function clickOnDate(dateTmp) { //날짜 클릭 시 추가 모달 열기
+	$("#addScheduleForm").show("slow");
+	var dateReformed = String(dateTmp).substring(0, 4)+"-"+String(dateTmp).substring(4, 6)+"-"+String(dateTmp).substring(6, 8);
+	$("#startDate").val(dateReformed);	
+}
 function putContentIntoTd(allCalendarr) {
 	$("#detailScheduleFormOfMonthCal").show("slow");
 	$("#detailCNumOfMonthCal").val(allCalendarr.cNum);
@@ -305,87 +369,103 @@ function putContentIntoTd(allCalendarr) {
 	$("#modifyContent").val(allCalendarr.content);
 	$("#detailTypeOfMonthCal").val(allCalendarr.type);
 	$("#modifyType").val(allCalendarr.type);
-	
 	var yearCalendarTmp = allCalendarr.yearCalendar;
 	$("#detailYearCalendarOfMonthCal").prop("checked", change(yearCalendarTmp));
 	$("#modifyYearCalendar").prop("checked", change(yearCalendarTmp));
-	
 	var annuallyTmp = allCalendarr.annually;
 	$("#detailAnnuallyOfMonthCal").prop("checked", change(annuallyTmp));
 	$("#modifyAnnually").prop("checked", change(annuallyTmp));
-	
 	var monthlyTmp = allCalendarr.monthly;
 	$("#detailMonthlyOfMonthCal").prop("checked", change(monthlyTmp));
 	$("#modifyMonthly").prop("checked", change(monthlyTmp));
 }
-
-function trMaker1(startDayOfThisSchedule, endDayOfThisSchedule, gap, title, color) {
+function whichWeek(dateStr) { //달(1~12)
+	var dateStrDate = new Date(dateStr);
+	var dateYMD = dateStr.substring(0, 10);
+	var dateYear = dateStr.substring(0, 4);
+	var dateMonth = dateStr.substring(5, 7);
+	var dateDate = dateStr.substring(8, 10);
+	var firstDateOfDate = new Date(dateYear, dateMonth-1, 1); //종료일이 있는 월의 첫날 구하기
+	var firstDayOfDate = firstDateOfDate.getDay(); //종료일 첫날 요일 구하기
+	var weekCount = Math.ceil((Number(firstDayOfDate)+Number(dateDate))/7); //종료일이 몇 번째 주인지 구하기(0~5)
+	return weekCount;
+}
+function findOutNumOfWeekRow(thisDay) {
+	var firstDay = new Date(thisDay.getFullYear(), thisDay.getMonth(), 1);
+	var lastDay = new Date(thisDay.getFullYear(), thisDay.getMonth()+1, 0);
+	var firstDayOfWeek = firstDay.getDay();
+	var lastDayDate = lastDay.getDate();
+	var numOfWeekRow = Math.ceil((lastDayDate+firstDayOfWeek)/7);
+	return numOfWeekRow;
+}
+function trMakerFullLine(startDayOfThisSchedule, endDayOfThisSchedule, gap, title, color) { //앞,중간,뒤
 	var tr = $("<tr style=\"border: 0px white;\" height=\"20\">");
 	for(var l=0; l<startDayOfThisSchedule; l++) { 
-		let tdEtc = $("<td colspan=\"1\"; style=\"margin-bottom: 1pt; margin-top: 1pt; background-color: \"></td>");
+		let tdEtc = $("<td colspan=\"1\"; style=\"margin-bottom: 1pt; margin-top: 1pt;\"></td>");
 		tr.append(tdEtc);
 	}
 	var td = $("<td class=\"tdClass\" colspan="+gap+"><div style=\"border: 1px; margin-bottom: 1pt; margin-top: 1pt; border-radius: 10px; background-color: "+color+"\">"+"&nbsp;&nbsp;"+title+"</div></td>");
 	tr.append(td);
 	var numberOfTdEtc = Number(6)-Number(endDayOfThisSchedule);
 	for(var l=0; l<numberOfTdEtc; l++) {
-		let tdEtc = $("<td colspan=\"1\"; style=\"margin-bottom: 1pt; margin-top: 1pt; background-color: \"></td>");
+		let tdEtc = $("<td colspan=\"1\"; style=\"margin-bottom: 1pt; margin-top: 1pt;\"></td>");
 		tr.append(tdEtc);
 	}
 	return tr;
 }
-
-function trMaker2(startDayOfThisSchedule, endDayOfThisSchedule, gap, title, color) {
+function trMakerFirstLine(startDayOfThisSchedule, gap, title, color) { //앞,중간
 	var tr = $("<tr style=\"border: 0px white;\" height=\"20\">");
 	for(var l=0; l<startDayOfThisSchedule; l++) {
-		let tdEtc = $("<td colspan=\"1\"; style=\"margin-bottom: 1pt; margin-top: 1pt; background-color: \"></td>");
+		let tdEtc = $("<td colspan=\"1\"; style=\"margin-bottom: 1pt; margin-top: 1pt;\"></td>");
 		tr.append(tdEtc);
 	}
-	var td = $("<td class=\"tdClass\" colspan="+gap+"><div style=\"border: 1px; margin-bottom: 1pt; margin-top: 1pt; border-radius: 10px; background-color: "+color+"\">"+"&nbsp;&nbsp;"+title+"</div></td>");
+	var td = $("<td class=\"tdClass\" colspan="+gap+"><div style=\"border: 1px; margin-bottom: 1pt; margin-top: 1pt; border-bottom-left-radius: 10px; border-top-left-radius: 10px; background-color: "+color+"\">"+"&nbsp;&nbsp;"+title+"</div></td>");
 	tr.append(td);
 	return tr;
 }
-
-function trMaker3(startDayOfThisSchedule, endDayOfThisSchedule, gap, title, color) {
+function trMakerLastLine(endDayOfThisSchedule, gap, title, color) { //중간,뒤
 	var tr = $("<tr style=\"border: 0px white;\" height=\"20\">");
-	var td = $("<td class=\"tdClass\" colspan="+gap+"><div style=\"border: 1px; margin-bottom: 1pt; margin-top: 1pt; border-radius: 10px; background-color: "+color+"\">"+"&nbsp;&nbsp;"+title+"</div></td>");
+	var td = $("<td class=\"tdClass\" colspan="+gap+"><div style=\"border: 1px; margin-bottom: 1pt; margin-top: 1pt; border-bottom-right-radius: 10px; border-top-right-radius: 10px; background-color: "+color+"\">"+"&nbsp;&nbsp;"+title+"</div></td>");
 	tr.append(td);
 	var numberOfTdEtc = Number(6)-Number(endDayOfThisSchedule);
 	for(var l=0; l<numberOfTdEtc; l++) {
-		let tdEtc = $("<td colspan=\"1\"; style=\"margin-bottom: 1pt; margin-top: 1pt; background-color: \"></td>");
+		let tdEtc = $("<td colspan=\"1\"; style=\"margin-bottom: 1pt; margin-top: 1pt;\"></td>");
 		tr.append(tdEtc);
 	}
 	return tr;
 }
-
-
+function trMakerMiddleLine(gap, title, color) { //중간
+	var tr = $("<tr style=\"border: 0px white;\" height=\"20\">");
+	var td = $("<td class=\"tdClass\" colspan="+gap+"><div style=\"border: 1px; margin-bottom: 1pt; margin-top: 1pt; background-color: "+color+"\">"+"&nbsp;&nbsp;"+title+"</div></td>");
+	tr.append(td);
+	return tr;
+}
 function moveToWantedCalendar(wantedYear, wantedMonth, wantedDate) {
 	today = new Date(wantedYear, wantedMonth, wantedDate);
 	thisMonthCalendar(today);
-	tmpShowSchedule();
-	console.log("moveToWantedCalendar 실행!!");
+	showSchedule();
 	$("#yearCalendar").hide();
 	$("#monthCalendar").show();	
 }
 function preMonthOfMonthCal() {
 	today = new Date(today.getFullYear(), today.getMonth()-1, today.getDate());
 	thisMonthCalendar(today);
-	tmpShowSchedule();
+	showSchedule();
 }
 function nextMonthOfMonthCal() { 
 	today = new Date(today.getFullYear(), today.getMonth()+1, today.getDate());
 	thisMonthCalendar(today);
-	tmpShowSchedule();
+	showSchedule();
 }
 function preYearOfMonthCal() {
 	today = new Date(today.getFullYear()-1, today.getMonth(), today.getDate());
 	thisMonthCalendar(today);
-	tmpShowSchedule();
+	showSchedule();
 }
 function nextYearOfMonthCal() {
 	today = new Date(today.getFullYear()+1, today.getMonth(), today.getDate());
 	thisMonthCalendar(today);
-	tmpShowSchedule();
+	showSchedule();
 }
 function change(param) {
 	if(param == "1") {
@@ -462,7 +542,7 @@ function randomColor() {
 			<label><input type="checkbox" name="monthly" id="detailMonthlyOfMonthCal" value="monthly">매월 반복</label><br>
 			<input type="button" id="detailScheduleFormOfMonthCalClose" value="닫기">
 			<input type="button" id="delete" value="삭제">
-			<input type="button" id="detailModifyButton" value="수정">z
+			<input type="button" id="detailModifyButton" value="수정">
 		</form>
 	</div>	
 </body>

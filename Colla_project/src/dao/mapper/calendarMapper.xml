@@ -19,8 +19,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="selectCalendar" parameterType="int" resultMap="calendarMap">
 		select * from calendar where cal_num=#{cNum}
 	</select>
-	<select id="selectAllCalendar" resultMap="calendarMap">
-		select * from calendar
+	<select id="selectAllCalendar" parameterType="int" resultMap="calendarMap">
+		select * from calendar where w_num=#{wNum}
 	</select>
 	<select id="selectAllCalendarSearched" parameterType="map" resultMap="calendarMap">
 		select * from calendar

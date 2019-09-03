@@ -10,6 +10,24 @@
   crossorigin="anonymous"></script>
 <script type="text/javascript">
 
+
+if(startDayOfThisSchedule<=endDayOfThisSchedule) { //줄 안 넘어가는 경우
+	var tr = trMaker1(startDayOfThisSchedule, endDayOfThisSchedule, gap, title, randomColor());
+	$("."+trClassWhereIWantToAppend).after(tr);
+	tr.children('.tdClass').on("click", function() {
+		putContentIntoTd(allCalendar[ii]);
+	});
+}
+
+
+//날짜를 클릭했을 때 
+$(".thDate").on("click", function() {
+	$("#addScheduleForm").show("slow");
+	var tmpp = $(this).attr("id");
+	alert(tmpp);
+});
+
+
 function (startDateStr, endDateStr) {
 	//시작 년 월 일
 	var startDateStrDate = new Date(startDateStr);
@@ -101,11 +119,12 @@ function trMaker3(startDayOfThisSchedule, endDayOfThisSchedule, gap, title) {
 	<table border='1' style="border-collapse: collapse;">
 		<tr height="20" style="border-radius: 2px;">
 			<th width="">1</th>
-			<th onclick="">2</th>
+			<th onclick="$(\"#addScheduleForm\").show(\"slow\")">2</th>
 			<th>3</th>
 			<th>4</th>
-			<th>5</th>
-			<th>6</th>
+			<th >5</th>
+			<th style="border-bottom-left-radius:  ; border-top-left-radius: ;">6</th>
+			<div></div>
 			<th colspan="1" >7</th>
 			<td class="tdClass" bordercolor="white"></td>
 		</tr>

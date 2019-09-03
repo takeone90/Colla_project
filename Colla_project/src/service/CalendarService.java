@@ -39,11 +39,8 @@ public class CalendarService {
 	public Calendar getCalendar(int cNum) {
 		return calendarDao.selectCalendar(cNum);
 	}
-	public List<Calendar> getAllCalendar() {
-		return calendarDao.selectAllCalendar();
-	}
-	public List<Calendar> getAllCalendarByMonth() {
-		return calendarDao.selectAllCalendarByMonth();
+	public List<Calendar> getAllCalendar(int wNum) {
+		return calendarDao.selectAllCalendar(wNum);
 	}
 	public Map<String, Object> getAllCalendarSearched(Map<String, Object> param) {
 		Map<String, Object> result = new HashMap<String, Object>();
@@ -67,7 +64,7 @@ public class CalendarService {
 			int yearOrigin = Integer.parseInt(calendar.getStartDate().substring(0, 4))+1;
 			String startDateChanged = yearOrigin+calendar.getStartDate().substring(4, 10);
 			calendar.setStartDate(startDateChanged);
-			System.out.println("Annually startDateChanged : "+startDateChanged);
+			calendar.setEndDate(startDateChanged);
 			result = calendarDao.insertCalendar(calendar);
 		}
 		if(result>0) {
@@ -85,8 +82,8 @@ public class CalendarService {
 			cal.setTime(monthOriginDate);
 			cal.add(java.util.Calendar.MONTH, 1);
 			String startDateChanged = monthOriginTrans.format(cal.getTime());
-			System.out.println("Monthly startDateChanged : "+startDateChanged);
 			calendar.setStartDate(startDateChanged);
+			calendar.setEndDate(startDateChanged);
 			result = calendarDao.insertCalendar(calendar);
 		}
 		if(result>0) {
