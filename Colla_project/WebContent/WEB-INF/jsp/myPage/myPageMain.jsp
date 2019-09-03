@@ -58,15 +58,15 @@
 			<img alt="나의 프로필 사진" class="myProfileImg" src="${contextPath}/showProfileImg?fileName=${member.profileImg}">
 			<div>
 				<p class="title">이메일</p>
-				<p class="content">${member.email} </p>
+				<p class="content">${requestScope.member.email} </p>
 			</div>
 			<div>
 				<p class="title">회원 이름</p>
-				<p class="content">${member.name} </p>
+				<p class="content">${requestScope.member.name} </p>
 			</div>
 			<div>
 				<p class="title">핸드폰 번호</p>
-				<p class="content">${member.phone} &nbsp</p>
+				<p class="content">${requestScope.member.phone}&nbsp</p>
 			</div>
 		</div>
 		<!-- 삭제예정 start -->
@@ -77,11 +77,6 @@
 		</div>
 		<!-- 삭제예정 end -->
 	</div>
-	${sessionScope }
-
-	
-
-
 
 </body>
 </html>

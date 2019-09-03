@@ -195,13 +195,10 @@ public class BoardController {
 				
 				List<MultipartFile> fList = multifileReq.getFiles("file");
 				String src = multifileReq.getParameter("src");
-				System.out.println("src value : "+src);
 				
 				for(MultipartFile mf : fList) {
 					String originFileName = mf.getOriginalFilename();//원본파일명
 					long fileSize = mf.getSize(); //파일사이즈
-					System.out.println("originFileName : " + originFileName);
-					System.out.println("fileSize : " + fileSize);
 					UUID uuid = UUID.randomUUID();
 					
 					//시스템시간(ms) + uuid + 원본파일명
