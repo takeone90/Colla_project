@@ -125,7 +125,7 @@ $(function(){
 	
 
 	//파일업로드에서 업로드 <a>태그가 눌렸을때
-	$("#fileUploadBtn").on("click",function(){
+	$(".fileUploadBtn").on("click",function(){
 		var addFileForm = $("#addFileForm")[0];
 		var formData = new FormData(addFileForm);
 		$.ajax({
@@ -227,11 +227,10 @@ function sendFile(fileName,originName,cmNum){
 				<div class="attach"><a href="#" class="openCodeModal">코드첨부</a></div>
 				<div class="attach"><a href="#" class="openLocationModal">지도첨부</a></div>
 			</div>
+			<div id="chatInputInstance">
 			<a href="#" id="attachBtn">첨부파일</a>
 			<input type="text" id="chatInput" placeholder="메세지 작성부분">
 			<a id="sendChat" href="#">전송</a>
-			<div>
-				<p id="attachedFileName"></p>
 			</div>
 		</div>
 		
@@ -289,9 +288,9 @@ function sendFile(fileName,originName,cmNum){
 						</div>
 					</div> <!-- end addFileInputWrap -->
 
-					<div>
-						<a href="#" id="fileUploadBtn">업로드</a><br> 
-						<input type="button" class="closeFileModal" value="닫기"><br>
+					<div id="innerBtn">
+						<a href="#" class="fileUploadBtn">업로드</a><br> 
+						<a href="#" class="closeFileModal">닫기</a>
 					</div>
 				</form>
 			</div> <!-- end modalBody -->
@@ -310,9 +309,10 @@ function sendFile(fileName,originName,cmNum){
 					<div class="row">
 						<p> java javascript c c++ c# python </p>
 					</div>
-					<input type="submit" class="codeUpload" value="업로드"><br> 
-					<input type="button" class="closeCodeModal" value="닫기"><br>
-					
+					<div id="innerBtn">
+					<a href="#" class="codeUpload">업로드</a><br> 
+					<a href="#" class="closeCodeModal">닫기</a><br>
+					</div>
 				</form>
 			</div> <!-- end modalBody -->
 		</div><!-- end addCodeModal -->
@@ -330,9 +330,10 @@ function sendFile(fileName,originName,cmNum){
 					<div class="row">
 						<p> 지도~ </p>
 					</div>
-					<input type="submit" class="locationUpload" value="업로드"><br> 
-					<input type="button" class="closeLocationModal" value="닫기"><br>
-					
+					<div id="innerBtn">
+					<a href="#" class="locationUpload">업로드</a><br> 
+					<a href="#" class="closeLocationModal">닫기</a><br>
+					</div>
 				</form>
 			</div> <!-- end modalBody -->
 		</div><!-- end addLocationModal -->
