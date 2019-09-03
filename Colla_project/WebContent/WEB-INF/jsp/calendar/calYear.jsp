@@ -482,6 +482,8 @@ function randomColor() {
 </script>
 </head>
 <body>
+	<div id="wsBody">
+		<div id="wsBodyContainer">
 	<button type="button" id="addScheduleButton">일정 추가</button>
 	<label><input type="checkbox" name="calType" id="calType1" value="project" checked="checked">프로젝트</label>
 	<label><input type="checkbox" name="calType" id="calType2" value="vacation" checked="checked">휴가</label>
@@ -545,5 +547,7 @@ function randomColor() {
 			<input type="button" id="detailModifyButton" value="수정">
 		</form>
 	</div>	
+	</div>
+	</div>
 </body>
 </html>
