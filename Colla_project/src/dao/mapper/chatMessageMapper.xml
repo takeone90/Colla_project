@@ -17,7 +17,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from chat_message where cm_num=#{cmNum}
 	</select>
 	<select id="selectAllChatMessageByCrNum" parameterType="int" resultMap="cmMap">
-		select cm.cm_num,cm.cr_num,cm.m_num,cm.cm_content,cm.cm_write_date,m.m_name,cm.cm_type
+		select cm.cm_num,cm.cr_num,cm.m_num,cm.cm_content,cm.cm_write_date,m.m_name,cm.cm_type,m.m_profileimg
 		from chat_message cm,member m where cm.m_num=m.m_num and cm.cr_num=#{crNum}
 		order by cm.cm_write_date asc
 	</select>
@@ -28,6 +28,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="cm_content" property="cmContent"/>
 		<result column="cm_write_date" property="cmWriteDate"/>
 		<result column="m_name" property="mName"/>
+		<result column="m_profileimg" property="profileImg"/>
 		<result column="cm_type" property="cmType"/>
+		<result column="cm_isfavorite" property="isFavorite"/>
 	</resultMap>
 </mapper>

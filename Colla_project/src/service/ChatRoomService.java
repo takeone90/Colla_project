@@ -47,6 +47,13 @@ public class ChatRoomService {
 		}
 		return result;
 	}
+//	public boolean removeEmptyChatRoom() {
+//		boolean result = false;
+//		if(crDao.deleteEmptyChatRoom()>0) {
+//			result = true;
+//		}
+//		return result;
+//	}
 	public ChatRoom getChatRoomByCrNum(int crNum) {
 		return crDao.selectChatRoom(crNum);
 	}
@@ -61,5 +68,8 @@ public class ChatRoomService {
 	}
 	public List<ChatRoom> getAllChatRoomByWnum(int wNum){
 		return crDao.selectAllByWnum(wNum);
+	}
+	public List<ChatRoom> getAllChatRoomByWnumMnum(int wNum,int mNum){
+		return crDao.selectAllChatRoomByWnumMnum(wNum, mNum);
 	}
 }

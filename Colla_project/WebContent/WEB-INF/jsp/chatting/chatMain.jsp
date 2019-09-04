@@ -67,6 +67,14 @@ $(function(){
 		$("#addLocationModal").fadeOut(300);
 		return false;
 	});
+	//회원정보 모달
+	$(".openMemberInfo").on("click",function(){
+		$("#memberInfoModal").fadeIn(100);
+	});
+	$(".closeMemberInfo").on("click",function(){
+		$("#memberInfoModal").fadeOut(100);
+		return false;
+	});
 	
 	//모달 바깥쪽이 클릭되거나 다른 모달이 클릭될때 현재 모달 숨기기
 	$("#wsBody").mouseup(function(e){
@@ -78,17 +86,18 @@ $(function(){
 			$("#addCodeModal").fadeOut(300);
 		if($("#addLocationModal").has(e.target).length===0)
 			$("#addLocationModal").fadeOut(300);
+		if($("#memberInfoModal").has(e.target).length===0)
+			$("#memberInfoModal").fadeOut(300);
 		return false;
 	});
 	//첨부파일Detail 숨기고 닫기
 	$("#attachBtn").on("click",function(){
-		$(this).prev().toggle(300);
+		$(".attachDetail").toggle(300);
 		return false;
 	});
 	
 	<%--채팅 연결 및 전송--%>
 	chatArea = $(".chat");
-// 	connect();
 	$("#sendChat").on("click",function(){
 			sendMsg();
 			chatArea.scrollTop($("#chatArea")[0].scrollHeight);
@@ -114,7 +123,7 @@ $(function(){
 				}
 				var writeDate = new Date(item.cmWriteDate);
 				var writeTime = writeDate.getFullYear()+"-"+writeDate.getMonth()+"-"+writeDate.getDay()+" "+writeDate.getHours()+"시"+writeDate.getMinutes()+"분";
-				loadPastMsg(item.cmType,item.mName,item.cmContent,writeTime,originName);
+				loadPastMsg(item.cmType,item.mName,item.cmContent,writeTime,originName,item.profileImg,item.cmNum);
 				chatArea.scrollTop($("#chatArea")[0].scrollHeight);
 			});
 		},
@@ -162,36 +171,67 @@ function sendFile(fileName,originName,cmNum){
 		$("#chatInput").val("");
 	}
 	
+	//미경 시작
+	//즐겨찾기 등록,해제를 하는 함수
+	var favoriteResult;
+	var favoriteCmNum;
+	function chatFavorite(e){ 
+	   var favoriteClassName = $(e).attr('class');
+	   if(favoriteClassName == "chatFavorite"){
+	      $(e).attr('class','chatFavoriteOn');
+	      favoriteCmNum = $(e).attr('value');
+	      favoriteResult = 1;
+	   }else{
+	      $(e).attr('class','chatFavorite');
+	      favoriteCmNum = $(e).attr('value');
+	      favoriteResult = 0;
+	   }
+	   console.log("cmNum :" + favoriteCmNum);
+	   console.log("결과 :" + favoriteResult);
+	   $.ajax({
+	      url : "${contextPath}/chatFavorite",
+	      data : {"favoriteResult" : favoriteResult,"favoriteCmNum":favoriteCmNum},
+	      type : "post",
+	      dataType : "json",
+	      success : function(result){
+	         if(result){
+	            alert("컨트롤 입성 성공!");
+	         }
+	      }
+	   });//end ajax
+	}//end favoirte()
+	//미경 끝
 
 // 	메시지 박스 태그를 생성하는 함수
-	function appendMsg(msgType,type,userId,msg,writeTime,originName){
+	function appendMsg(msgType,type,userId,msg,writeTime,originName,profileImg,isFavorite,cmNum){
 		var chatMsg = $("<div class='"+msgType+"'></div>");
+		var imgTag = "<img alt='' src='${contextPath}/showProfileImg?fileName="+profileImg+"'></a>";
+		var favorite = "<div class='chatFavorite' onclick='chatFavorite(this)' value = '"+ cmNum +"'></div>"; //즐겨찾기 아이콘
+		
 		if(type=='message'){
-			chatMsg.append("<div class='profileImg'><a href='#'><img alt='' src=''></a></div>");
-			chatMsg.append("<div class='name'><p>"+userId+" <span class='date'>"+writeTime+"</span></p></div><br>");
-			chatMsg.append("<p class='content'>"+msg+"</p>");
+			chatMsg.append("<div class='profileImg'><a href='#' class='openMemberInfo'>"+imgTag+"</div>");
+			chatMsg.append("<div class='onlyMsgBox'><div class='name'><p>"+userId+" <span class='date'>"+writeTime+"</span></p></div>"+favorite+"<br><p class='content'>"+msg+"</p></div>");
 			chatArea.append(chatMsg);
 		}else if(type=='file'){
-			chatMsg.append("<div class='profileImg'><a href='#'><img alt='' src=''></a></div>");
-			chatMsg.append("<div class='name'><p>"+userId+" <span class='date'>"+writeTime+"</span></p></div><br>");
-			chatMsg.append("<p class='content'><a href='${contextPath}/download?name="+msg+"'>"+originName+"</a></p>");
+			chatMsg.append("<div class='profileImg'><a href='#' class='openMemberInfo'>"+imgTag+"</a></div>");
+			chatMsg.append("<div class='onlyMsgBox'><div class='name'><p>"+userId+" <span class='date'>"+writeTime+"</span></p></div>"+favorite+"<br><p class='content'><a href='${contextPath}/download?name="+msg+"'>"+originName+"</a></p></div>");
 			chatArea.append(chatMsg);
 		}
 		
 		
 	}
 	//받은 메시지 화면에 추가
-	function addMsg(type,userId,msg,writeTime,originName){
+	function addMsg(type,userId,msg,writeTime,originName,profileImg,isFavorite,cmNum){
 		var msgType = "chatMsg";
-		appendMsg(msgType,type,userId,msg,writeTime,originName);
+		appendMsg(msgType,type,userId,msg,writeTime,originName,profileImg,isFavorite,cmNum);
 	}
 	//내가 쓴 메시지 화면에 추가
-	function addMyMsg(type,userId,msg,writeTime,originName){
+	function addMyMsg(type,userId,msg,writeTime,originName,profileImg,isFavorite,cmNum){
 		var msgType = "myMsg";
-		appendMsg(msgType,type,userId,msg,writeTime,originName);
+		appendMsg(msgType,type,userId,msg,writeTime,originName,profileImg,isFavorite,cmNum);
 	}
 	//과거 메시지 화면에 추가
-	function loadPastMsg(type,userId,msg,writeTime,originName){
+	function loadPastMsg(type,userId,msg,writeTime,originName,profileImg,isFavorite,cmNum){
 		var myId = $("#userName").val();
 		var msgType;
 		if(userId == myId){//지금은 불러온 메세지중에 작성자 이름이 현재 로그인되있는 이름과같으면 myMsg 로 처리함
@@ -199,7 +239,7 @@ function sendFile(fileName,originName,cmNum){
 		}else{
 			msgType = "chatMsg";
 		}
-		appendMsg(msgType,type,userId,msg,writeTime,originName);
+		appendMsg(msgType,type,userId,msg,writeTime,originName,profileImg,isFavorite,cmNum);
 	}	
 	
 	
@@ -337,7 +377,20 @@ function sendFile(fileName,originName,cmNum){
 				</form>
 			</div> <!-- end modalBody -->
 		</div><!-- end addLocationModal -->
-		
+		<%---------------------------------------------회원정보 모달 ----------------------------------------------------%>
+		<div id="memberInfoModal">
+			<div class="modalHead">
+				<h3 style="font-weight: bolder; font-size: 30px">회원정보</h3>
+			</div>
+			<br><br>
+			<div class="modalBody">
+				<p>회원정보입니다</p>
+					<div class="row">
+					<p>내용~</p>
+					</div>
+					<a href="#" class="closeMemberInfo">닫기</a><br>
+			</div> <!-- end modalBody -->
+		</div><!-- end memberInfoModal -->
 		
 		
 	</div><!-- end wsBody -->

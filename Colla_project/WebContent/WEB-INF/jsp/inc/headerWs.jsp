@@ -20,10 +20,13 @@ function duplicateConnect(){
 			var message = JSON.parse(jsonStr.body).message;
 			var originName = "";
 			var writeTime = JSON.parse(jsonStr.body).writeTime;
+			var profileImg = JSON.parse(jsonStr.body).profileImg;
+			var isFavorite = JSON.parse(jsonStr.body).isFavorite;
+			var cmNum = JSON.parse(jsonStr.body).cmNum;
 			if(userId == $("#userName").val()){
-				addMyMsg("message",userId,message,writeTime,originName);
+				addMyMsg("message",userId,message,writeTime,originName,isFavorite,cmNum);
 			}else{
-				addMsg("message",userId,message,writeTime,originName);
+				addMsg("message",userId,message,writeTime,originName,isFavorite,cmNum);
 			}
 			
 			$("#chatArea").scrollTop($("#chatArea")[0].scrollHeight);
@@ -35,10 +38,13 @@ function duplicateConnect(){
 			var fileName = JSON.parse(jsonStr.body).fileName;
 			var originName = JSON.parse(jsonStr.body).originName;
 			var writeTime = JSON.parse(jsonStr.body).writeTime;
+			var profileImg = JSON.parse(jsonStr.body).profileImg;
+			var isFavorite = JSON.parse(jsonStr.body).isFavorite;
+			var cmNum = JSON.parse(jsonStr.body).cmNum;
 			if(userId == $("#userName").val()){
-				addMyMsg("file",userId,fileName,writeTime,originName);
+				addMyMsg("file",userId,fileName,writeTime,originName,isFavorite,cmNum);
 			}else{
-				addMsg("file",userId,fileName,writeTime,originName);
+				addMsg("file",userId,fileName,writeTime,originName,isFavorite,cmNum);
 			}
 			$("#chatArea").scrollTop($("#chatArea")[0].scrollHeight);
 		});
@@ -53,13 +59,21 @@ function duplicateConnect(){
 		});// end subcribe
 	}); //end connect
 }// end duplicateConnect
-
 $(function(){
 	duplicateConnect();
+	//채팅방이고 추가채팅방인 경우에만 나가기 버튼 활성화
+	if($("#crNum").val()!="" && $("#crIsDefault").val()=="0"){
+		$("#exitChatRoom").show();
+	}
+	
+	
 }); //onload function end
 
 </script>
 <div id="wsMainHeader">
+
+	<input type="hidden" value="${chatRoom.crNum}" id="crNum">
+	<input type="hidden" value="${chatRoom.crIsDefault}" id="crIsDefault">
 	<div class="container">
 		<h1 id="logo">
 			<a href="${contextPath}/workspace"> <img src="${contextPath}/img/COLLA_LOGO_200px_brighten.png" />
@@ -69,7 +83,9 @@ $(function(){
 		<div id="chatRoomInfo">
 			<p>채팅방 이름</p>
 		</div>
-
+		<div id="etcBox"><a href="exitChatRoom?crNum=${chatRoom.crNum}" id="exitChatRoom">채팅방 나가기</a></div>
 		<div class="main-nav"></div>
 	</div>
+	
+		
 </div>

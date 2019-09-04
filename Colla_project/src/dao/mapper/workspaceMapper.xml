@@ -24,7 +24,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="selectAllWorkspace" resultMap="workspaceMap">
 		select * from workspace
 	</select>
-	<select id="selectWnum"></select>
+	
 	<resultMap type="workspace" id="workspaceMap">
 		<result column="w_num" property="num"/>
 		<result column="m_num" property="mNum"/>
