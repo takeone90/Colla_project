@@ -16,7 +16,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<delete id="deleteChatRoom" parameterType="int">
 		delete chatroom where cr_num=#{crNum}
 	</delete>
-	
+<!-- 	<delete id="deleteEmptyChatRoom"> -->
+<!-- 		delete from chatroom cr where ( -->
+<!-- 		select count(*) from chatroom_member crm where crm.cr_num=cr.cr_num)=0 -->
+<!-- 	</delete> -->
 	<select id="selectChatRoom" parameterType="int" resultMap="chatRoomMap">
 		select * from chatroom where cr_num=#{crNum}
 	</select>
@@ -32,6 +35,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	<select id="selectAllByWnum" parameterType="int" resultMap="chatRoomMap">
 		select * from chatroom where w_num=#{wNum}
+	</select>
+	<select id="selectAllChatRoomByWnumMnum" resultMap="chatRoomMap">
+		select cr.w_num,cr.cr_num,cr.m_num,cr.cr_name,cr.cr_regdate,cr.cr_isdefault
+		from chatroom cr,chatroom_member crm,member m
+		where cr.w_num=#{wNum} and cr.cr_num=crm.cr_num and crm.m_num=m.m_num and m.m_num=#{mNum}
 	</select>
 	<resultMap type="chatRoom" id="chatRoomMap">
 		<result column="cr_num" property="crNum"/>

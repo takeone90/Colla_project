@@ -44,6 +44,13 @@ public class ChatRoomMemberService {
 		}
 		return result;
 	}
+	public boolean removeChatRoomMemberByCrNumMnum(int crNum,int mNum) {
+		boolean result = false;
+		if(crmDao.deleteChatRoomMemberByCrNumMnum(crNum, mNum)>0) {
+			result = true;
+		}
+		return result;
+	}
 	public ChatRoomMember getChatRoomMember(int crmNum) {
 		return crmDao.selectChatRoomMember(crmNum);
 	}

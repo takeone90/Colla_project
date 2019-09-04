@@ -85,11 +85,27 @@ a.member-btn {
 a.member-btn:hover{
 	background-color:#EC6D63;
 }
+#chatRoomInfo{
+	display : inline-block;
+	position : relative;
+	padding-left: 35px;
+}
 #chatRoomInfo p{
 	font-size : 25px;
 	color: #CCCBCA;
-	
 }
-#chatRoomInfo{
-	padding-left: 30px;
+#etcBox{
+	display: inline-block;
+	position: absolute;
+	right : 10%;
+}
+#exitChatRoom{
+	display : none;
+	color : #f5f3f2;
+	font-size: 13px;
+	transition:color .5s;
+}
+#exitChatRoom:hover{
+	color : #f74d3e;
+	
 }

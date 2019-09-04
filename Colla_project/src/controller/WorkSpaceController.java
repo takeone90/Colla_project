@@ -56,11 +56,11 @@ public class WorkSpaceController {
 		List<Map<String, Object>> workspaceList = new ArrayList<Map<String,Object>>();
 		List<Workspace> wsList = wService.getWsListByMnum(user.getNum());//유저 번호로 WS 들을 모두 꺼낸다.
 		for(int i = 0;i<wsList.size();i++) {
-			int wsNum = wsList.get(i).getNum();
+			int wNum = wsList.get(i).getNum();
 			Map<String, Object> wsMap = new HashMap<String, Object>();
 			wsMap.put("wsInfo", wsList.get(i));
-			wsMap.put("crList", crService.getAllChatRoomByWnum(wsNum));
-			wsMap.put("mList", mService.getAllMemberByWnum(wsNum));
+			wsMap.put("crList", crService.getAllChatRoomByWnumMnum(wNum, user.getNum()));
+			wsMap.put("mList", mService.getAllMemberByWnum(wNum));
 			workspaceList.add(wsMap);
 		}
 		model.addAttribute("workspaceList", workspaceList);

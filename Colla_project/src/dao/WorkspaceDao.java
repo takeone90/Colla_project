@@ -12,4 +12,5 @@ public interface WorkspaceDao {
 	public int deleteWorkspace(int num);
 	public Workspace selectWorkspace(int num);
 	public List<Workspace> selectAllWorkspace();
+	
 }
