@@ -55,7 +55,7 @@
 	<div id="wsBody">
 		<h3>마이페이지</h3>
 		<div id="myPageMain">
-			<img alt="나의 프로필 사진" class="myProfileImg" src="${contextPath}/showProfileImg?fileName=${member.profileImg}">
+			<img alt="나의 프로필 사진" class="myProfileImg" src="${contextPath}/showProfileImg">
 			<div>
 				<p class="title">이메일</p>
 				<p class="content">${requestScope.member.email} </p>
