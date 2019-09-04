@@ -57,8 +57,30 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 								  	   )
 								)*(#{page}-1))
 	</select>
-	<select id="selectCountAllByWnum" parameterType="int" resultType="int">
-		select count(b_num) from board where w_num=#{wNum}
+	<select id="selectCountAllByWnum" parameterType="map" resultType="int">
+<!-- 		select count(b_num) from board where w_num=#{wNum} -->
+
+						select count(b_num)
+		                from board
+		                where w_num=#{wNum} and 1=0
+		                 <if test="title != null">
+		                 	or upper(b_title) like ('%'||upper('${keyword}')||'%')
+		                 </if>
+		                 <if test="content != null">
+		                 	or upper(b_content) like ('%'||upper('${keyword}')||'%')
+		                 </if>
+		                 <if test="name != null">
+		                 	or upper(m_name) like ('%'||upper('${keyword}')||'%')
+		                 </if>
+		                 <if test="type == 0">
+		                 	or 1=1
+		                 </if>
+
+	</select>
+	<select id="selectCountNoticeByWnum" parameterType="map">
+		select count(b_num)
+		from board
+		where w_num=#{wNum} and b_type='notice'
 	</select>
 	<select id="selectAllBoardByWnum" parameterType="int" resultMap="boardMap">		
 		    select b_num, m_name, w_num, b_title, b_regdate, b_readCnt, b_type

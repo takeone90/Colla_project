@@ -47,6 +47,7 @@ public class BoardService {
 		param.put("startNum", getStartNum(page));
 		param.put("endNum", getEndNum(page));
 		param.put("totalPage", getTotalPage(param));
+		System.out.println(param.get("totalPage"));
 		param.put("lastStartNum", (((int) param.get("totalPage") - 1) / PAGE_NUM) * PAGE_NUM + 1);
 		bList = bDao.selectBoardListPage(param);
 		
@@ -92,11 +93,13 @@ public class BoardService {
 	}
 
 	public int getTotalPage(Map<String, Object> param) {
-		return (int) Math.ceil(getBoardCnt(param) / (double) ITEMS_PER_PAGE);
+		return (int) Math.ceil(getBoardCnt(param)==0?1:getBoardCnt(param)/ (double) ITEMS_PER_PAGE);
 	}
-
+	public int getNoticeCnt(Map<String, Object> param) {
+		return bDao.selectCountNoticeByWnum(param);
+	}
 	public int getBoardCnt(Map<String, Object> param) {		
-		return bDao.selectCountAllByWnum((int)param.get("wNum"));
+		return bDao.selectCountAllByWnum(param);
 	}
 	
 	

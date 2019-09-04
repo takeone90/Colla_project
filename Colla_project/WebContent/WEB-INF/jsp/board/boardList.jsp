@@ -118,7 +118,7 @@
 					<c:forEach var="i" begin="${listInf.startNum }" end="${listInf.endNum }">
 					<c:if test="${i<=listInf.totalPage }">
 						<li>
-							<a href="list?page=${i}" ${listInf.page==i?'class=\"currPage\" onclick=\"return false;\"':'' }>${i}</a>
+							<a href="list?page=${i}&keywordType=${listInf.type}&keyword=${listInf.keyword}" ${listInf.page==i?'class=\"currPage\" onclick=\"return false;\"':'' }>${i}</a>
 						</li>
 					</c:if>
 					</c:forEach>				
