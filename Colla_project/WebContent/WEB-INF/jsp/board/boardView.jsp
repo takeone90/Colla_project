@@ -61,7 +61,7 @@
 			<ul id="replyBox" class="clearFix">
 			</ul>
 			<form id="addReplyDiv">
-				<div class="replyImg"><img src="${contextPath}/img/pic.jpg"></div>
+				<div class="replyImg"><img src="${contextPath}/showProfileImg"></div>
 				<div id="inputBox">
 					<textarea rows="2" cols="50" name="rContent"></textarea>
 					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">

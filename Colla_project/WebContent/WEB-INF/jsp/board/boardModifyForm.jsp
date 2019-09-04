@@ -40,9 +40,9 @@
 					<label>
 						말머리
 						<select id="boardType" name="boardType">
-							<option value="default">일반</option>
-							<option value="notice">공지</option>
-							<option value="anonymous">익명</option>
+							<option value="default" ${board.bType=='default'?'selected':''}>일반</option>
+							<option value="notice" ${board.bType=='notice'?'selected':''}>공지</option>
+							<option value="anonymous" ${board.bType=='anonymous'?'selected':''}>익명</option>
 						</select>
 					</label>
 				</div>

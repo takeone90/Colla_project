@@ -8,12 +8,14 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -134,8 +136,14 @@ public class MypageController {
 	
 	@ResponseBody
 	@RequestMapping(value = "/showProfileImg")
-	public byte[] showProfileImg(HttpSession session, HttpServletRequest request) {
-		Member member = memberService.getMemberByEmail((String)session.getAttribute("userEmail"));
-		return memberService.getProfileImg(member,request); 
+	public byte[] showProfileImg(HttpSession session, HttpServletRequest request, @RequestParam(value = "num", defaultValue = "0")int mNum) {
+		Member member = null;
+		if(mNum == 0) {
+			member = memberService.getMemberByEmail((String)session.getAttribute("userEmail"));
+			return memberService.getProfileImg(member,request); 
+		} else {
+			member = memberService.getMember(mNum);
+			return memberService.getProfileImg(member, request);
+		}
 	}
 }

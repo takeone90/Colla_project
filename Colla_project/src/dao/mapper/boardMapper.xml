@@ -3,7 +3,7 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="dao.BoardDao">
-	<select id="selectBoardListPage" parameterType="map" resultMap="boardMap">
+	<select id="selectBoardListPage" parameterType="map" resultMap="boardMap"> 
 		select b_num, m_name, w_num, b_title, b_regdate, b_readcnt, b_type, r_cnt, 'y' as isnotice 
 		from (
 			    select rownum, b_num, m_name, w_num, b_title, b_regdate, b_readcnt, b_type
@@ -14,7 +14,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			        and b.m_num = m.m_num
 			    order by b.b_num desc
 		)
-		where rownum &lt;= 5
+<!-- 		where rownum &lt;= 5  ////////최대 5개-->
 		UNION ALL
 		select b_num, m_name, w_num, b_title, b_regdate, b_readcnt, b_type, r_cnt, 'n' as isnotice 
 		from (select rn, b_num, m_name, w_num, b_title, b_regdate, b_readcnt, b_type, r_cnt
@@ -39,11 +39,48 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		                 	or 1=1
 		                 </if>
 		              )
-		        where rn &lt;=#{lastItem}
-		)where rn &gt;=#{firstItem}
+		        where rn &lt;= #{lastItem} -
+		        						((select count(*) 
+										from (select b_num 
+										        from board 
+										        where w_num=186
+										            and b_type='notice'
+										  	   )
+										)*#{page})
+		        				
+		)where rn &gt;=#{firstItem} -
+        						((select count(*) 
+								from (select b_num 
+								        from board 
+								        where w_num=186
+								            and b_type='notice'
+								  	   )
+								)*(#{page}-1))
 	</select>
-	<select id="selectCountAllByWnum" parameterType="int" resultType="int">
-		select count(b_num) from board where w_num=#{wNum}
+	<select id="selectCountAllByWnum" parameterType="map" resultType="int">
+<!-- 		select count(b_num) from board where w_num=#{wNum} -->
+
+						select count(b_num)
+		                from board
+		                where w_num=#{wNum} and 1=0
+		                 <if test="title != null">
+		                 	or upper(b_title) like ('%'||upper('${keyword}')||'%')
+		                 </if>
+		                 <if test="content != null">
+		                 	or upper(b_content) like ('%'||upper('${keyword}')||'%')
+		                 </if>
+		                 <if test="name != null">
+		                 	or upper(m_name) like ('%'||upper('${keyword}')||'%')
+		                 </if>
+		                 <if test="type == 0">
+		                 	or 1=1
+		                 </if>
+
+	</select>
+	<select id="selectCountNoticeByWnum" parameterType="map">
+		select count(b_num)
+		from board
+		where w_num=#{wNum} and b_type='notice'
 	</select>
 	<select id="selectAllBoardByWnum" parameterType="int" resultMap="boardMap">		
 		    select b_num, m_name, w_num, b_title, b_regdate, b_readCnt, b_type
