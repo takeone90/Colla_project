@@ -83,8 +83,9 @@ public class ChatRoomController {
 	// 채팅방 리스트 왼쪽 네비게이션에 출력
 	@ResponseBody
 	@RequestMapping("/getChatList")
-	public List<ChatRoom> getChatList(@RequestParam("currWnum") int currWnum) {
-		List<ChatRoom> crList = crService.getAllChatRoomByWnum(currWnum);
+	public List<ChatRoom> getChatList(@RequestParam("currWnum") int currWnum,HttpSession session) {
+		Member user = (Member)session.getAttribute("user");
+		List<ChatRoom> crList = crService.getAllChatRoomByWnumMnum(currWnum, user.getNum());
 		return crList;
 	}
 
@@ -101,15 +102,18 @@ public class ChatRoomController {
 		Member member = (Member) session.getAttribute("user");
 		int mNum = member.getNum();
 		int crNum = crService.addChatRoom(wNum, mNum, crName);// 세션에 저장된 wNum, mNum 을가져와야한다.
-
-		for (String stringMnum : request.getParameterValues("mNumList")) {
-			// 멤버초대 체크리스트로 선택된 member들의 Num
-			int num = Integer.parseInt(stringMnum);
-			// 그 member의 num을 이용해서 chatRoomMember로 넣어준다.
-			crmService.addChatRoomMember(crNum, num, wNum);
+		String[] mNumList = request.getParameterValues("mNumList");
+		if(mNumList!=null) {
+			for (String stringMnum : mNumList) {
+				// 멤버초대 체크리스트로 선택된 member들의 Num
+				int num = Integer.parseInt(stringMnum);
+				// 그 member의 num을 이용해서 chatRoomMember로 넣어준다.
+				crmService.addChatRoomMember(crNum, num, wNum);
+			}
 		}
+		
 
-		return "redirect:workspace";
+		return "redirect:chatMain?crNum="+crNum;
 	}
 
 	@RequestMapping("/inviteChatMember")
@@ -131,7 +135,10 @@ public class ChatRoomController {
 		int cmNum = cmService.addChatMessage(Integer.parseInt(crNum), member.getNum(), msg, "message");
 		ChatMessage cm = cmService.getChatMessageByCmNum(cmNum);
 		String jsonStr = "{\"message\":\"" + msg + "\",\"userId\":\"" + member.getName()
-				+ "\",\"writeTime\":\"" + cm.getCmWriteDate() + "\"}";
+				+ "\",\"writeTime\":\"" + cm.getCmWriteDate()
+				+ "\",\"profileImg\":\""+member.getProfileImg()
+				+"\",\"isFavorite\":\"" + 0
+				+"\",\"cmNum\":\""+cmNum+"\"}";
 		return jsonStr;
 	}
 
@@ -149,7 +156,10 @@ public class ChatRoomController {
 		
 		ChatMessage cm = cmService.getChatMessageByCmNum(cmNum);
 		String jsonStr = "{\"fileName\":\"" + fileName + "\",\"originName\" : \""+originName+"\",\"userId\":\"" + member.getName()
-				+ "\",\"writeTime\":\"" + cm.getCmWriteDate() + "\"}";
+				+ "\",\"writeTime\":\"" + cm.getCmWriteDate()
+				+ "\",\"profileImg\":\""+member.getProfileImg()
+				+"\",\"isFavorite\":\""+0
+				+"\",\"cmNum\":\""+cmNum+"\"}";
 		return jsonStr;
 	}
 	
@@ -171,4 +181,29 @@ public class ChatRoomController {
 			return null;
 		}
 	}
+	
+	@RequestMapping(value = "/chatFavorite", method = RequestMethod.POST)
+	public void chatFavorite(int favoriteResult, int favoriteCmNum) {
+	      System.out.println("favoriteResult : " + favoriteResult);
+	      System.out.println("favoriteCmNum : " + favoriteCmNum);
+	}
+	
+	@RequestMapping("/exitChatRoom")
+	public String exitChatRoom(int crNum,HttpSession session){
+		Member user = (Member)session.getAttribute("user");
+		crmService.removeChatRoomMemberByCrNumMnum(crNum, user.getNum());
+		return "redirect:workspace";
+	}
+	
+//	@ResponseBody
+//	@RequestMapping("/removeEmptyChatRoom")
+//	public String removeEmptyChatRoom(){
+//		System.out.println("removeEmptyChatroom 요청받음");
+//		boolean result = false;
+//		if(crService.removeEmptyChatRoom()) {
+//			result = true;
+//		}
+//		System.out.println("실행되나요");
+//		return "{\"result\":"+result+"}";
+//	}
 }

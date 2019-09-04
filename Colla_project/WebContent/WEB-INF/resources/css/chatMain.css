@@ -12,6 +12,18 @@
 	box-shadow:2px 2px 10px 1px #6e6d6d;
 }
 
+#memberInfoModal{
+	display : none;
+	position : fixed;
+	top : 30%;
+	left : 30%;
+	width : 500px;
+	background-color: white;
+	text-align: center;
+	border-radius: 10px;
+	padding : 30px;
+	box-shadow:2px 2px 10px 1px #6e6d6d;	
+}
 #addFileModal{
 	display : none;
 	position : fixed;
@@ -90,6 +102,17 @@
 	background-color: white;
 	margin-right: 10px;
 }
+.profileImg img{
+	width : 100%;
+	border-radius: 50px;
+}
+.profileImg a{
+	width : 100%;
+}
+.onlyMsgBox{
+	display: inline-block;
+	position: relative;
+}
 .name{
 	display: inline-block;
 	position: relative;
@@ -99,7 +122,7 @@
 .content{
 	display: inline-block;
 	position: relative;
-	left : 50px;
+	paddig : 10px;
 }
 .content a{
 	color : #f54640;
@@ -134,4 +157,17 @@
 	color: white;
 	text-align: center;
 	border-radius: 5px;
+}
+.chatFavorite{
+   width : 18px;
+   height: 18px;
+   background-image : url("../img/favorite.png");
+   background-size: contain;
+}
+
+.chatFavoriteOn{
+   width : 18px;
+   height: 18px;
+   background-image : url("../img/favorite_on.png");
+   background-size: contain;
 }

@@ -181,10 +181,8 @@ public class MemberService {
          in = new FileInputStream(file);
          return IOUtils.toByteArray(in);
       } catch (FileNotFoundException e) {
-         // TODO Auto-generated catch block
          e.printStackTrace();
       } catch (IOException e) {
-         // TODO Auto-generated catch block
          e.printStackTrace();
       } finally {
          try {
@@ -192,7 +190,6 @@ public class MemberService {
                in.close();
             }
          } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
          }
       }

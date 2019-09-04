@@ -68,6 +68,25 @@
 			$(this).next().toggle(300);
 			return false;
 		});
+		//빈 채팅방 제거하기...
+// 		$("#removeEmptyChatRoom").on("click",function(){
+// 			$.ajax({
+// 				url : "${contextPath}/removeEmptyChatRoom",
+// 				dataType : "json",
+// 				success:function(d){
+// 					if(d.result){
+// 						alert("빈 채팅방 제거 완료");
+// 					}else{
+// 						alert("빈 채팅방이 없습니다");
+// 					}
+// 				},
+// 				error:function(){
+// 					alert("빈채팅방 제거 오류발생");
+// 				}
+// 			});
+// 			return false;
+// 		});
+		
 		
 	});// onload.function end
 	function thisWsMemberList(wNum){
@@ -149,9 +168,11 @@
 			<form action="logout" method="post">
 			<input type="hidden" value="${_csrf.token}" name="${_csrf.parameterName}">
 			<input type="submit" value="임시 로그아웃 버튼" id="logoutBtn">
+			
 			</form>
+			
 		</div>
-
+<!-- 		<a href="#" id="removeEmptyChatRoom">빈 채팅방 제거하기</a> -->
 
 		<%------------------------------------워크스페이스 추가 모달  ---------------------------------------%>
 		<div id="addWsModal">

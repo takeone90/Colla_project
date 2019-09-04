@@ -16,6 +16,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<delete id="deleteChatRoomMemberByWnumMnum">
 		delete chatroom_member where w_num=#{wNum} and m_num=#{mNum}
 	</delete>
+	<delete id="deleteChatRoomMemberByCrNumMnum">
+		delete chatroom_member where cr_num=#{crNum} and m_num=#{mNum}
+	</delete>
 	<select id="selectChatRoomMember" parameterType="int" resultMap="crmMap">
 		select * from chatroom_member where crm_num=#{crmNum}
 	</select>
