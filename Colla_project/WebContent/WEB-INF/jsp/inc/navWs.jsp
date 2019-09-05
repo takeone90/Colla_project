@@ -27,7 +27,7 @@
 	<input type="hidden" value="${sessionScope.currWnum}" id="currWnum">
 	<div id="navContainer">
 		<div id="aboutProfile">
-			<a href="myPageMainForm">
+			<a href="${contextPath }/myPageMainForm">
 				<img alt="나의 프로필 사진" src="${contextPath }/showProfileImg" />
 			</a>
 			<p>${member.name}님</p>

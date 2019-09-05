@@ -149,7 +149,7 @@
 		<div id="myPageModify">
 			<div>
 				<img alt="나의 프로필 사진" class="myProfileImg"
-					src="${contextPath }/showProfileImg?fileName=${member.profileImg}">
+					src="${contextPath }/showProfileImg">
 			</div>
 			<div>
 				<form action="modifyMember" method="post">
@@ -185,7 +185,7 @@
 	<!-- 프로필 수정 모달-->
 	<div class="profileImg-modal">
 		<form class="profileImgForm" enctype="multipart/form-data">
-			<img alt="나의 프로필 사진" class="thumbNailImg" src="${contextPath }/showProfileImg?fileName=${member.profileImg}">
+			<img alt="나의 프로필 사진" class="thumbNailImg" src="${contextPath }/showProfileImg">
 			<input type="file" class="btnFile" name="profileImg" value="사진 선택" accept="image/*" multiple><br> 
 			<input type="button" class="btnReset" value="기본이미지로 변경"><br> 
 			<input type="submit" class="btnSave" value="저장"><br> 
