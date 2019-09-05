@@ -38,8 +38,7 @@ var favoriteArea;
 	$(function(){
 		loadChatFromDB();
 		favoriteArea = $("#favoriteArea");
-	
-	$(function(){
+		
 	//헤더에 채팅방과 워크스페이스 정보 바꾸기
 	var isDefault = $("#isDefault").val();
 	if(isDefault==1){ //기본채팅방이면
@@ -303,7 +302,7 @@ var editor = CodeMirror.fromTextArea(textarea,{
 				readOnly : true
 			});
 			codeMsg.setSize("800", "50");	
-      
+		}
 		if(!area){
 			chatArea.append(chatMsg);
 		}else{
