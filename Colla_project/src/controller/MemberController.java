@@ -120,6 +120,8 @@ public class MemberController {
 	@RequestMapping(value="/joinMember", method = RequestMethod.POST)
 	public String joinMember(Member member,HttpSession session) {
 		boolean result = memberService.addMember(member);
+		
+		
 		String inviteUserEmail = (String)session.getAttribute("inviteUserEmail");
 		int inviteWnum = (Integer)session.getAttribute("inviteWnum");
 		System.out.println("초대받은사람이네요 inviteUserEmail : "+inviteUserEmail+", 초대받은wNum : "+inviteWnum);
@@ -135,6 +137,9 @@ public class MemberController {
 		} else {
 			return "/join/joinStep3"; //실패 시 어디로 갈지는 정의 필요
 		}
+		
+		
+		
 	}
 	
 	@RequestMapping(value="/loginDuplication", method = RequestMethod.GET)
