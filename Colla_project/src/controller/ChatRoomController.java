@@ -54,7 +54,7 @@ public class ChatRoomController {
 	@RequestMapping("/chatMain")
 	public String showChatMain(HttpSession session, int crNum, Model model) {
 		ChatRoom chatRoom = crService.getChatRoomByCrNum(crNum);
-		model.addAttribute("chatRoom", chatRoom);
+		session.setAttribute("chatRoom", chatRoom);//챗방번호 세션에 저장
 
 		// 해당 workspace에 참여중인 멤버들 정보도 model에 담아야한다.
 		List<WsMember> wsmList = wsmService.getAllWsMemberByCrNum(crNum); // 해당 채팅방 wsm 리스트를 꺼내와서
