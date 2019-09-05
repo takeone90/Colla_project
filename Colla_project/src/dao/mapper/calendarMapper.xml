@@ -4,12 +4,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="dao.CalendarDao">
 	<insert id="insertCalendar" parameterType="calendar">
-		insert into calendar(cal_num, m_num, w_num, cal_type, cal_start_date, cal_end_date, cal_title, cal_content, cal_regDate, cal_annually, cal_monthly, cal_yearCalendar) 
-		values(cal_seq.nextval, #{mNum}, #{wNum}, #{type}, #{startDate}, #{endDate}, #{title}, #{content}, sysdate, #{annually}, #{monthly}, #{yearCalendar})
+		insert into calendar(cal_num, m_num, w_num, cal_type, cal_start_date, cal_end_date, cal_title, cal_content, cal_regDate, cal_annually, cal_monthly, cal_yearCalendar, cal_color) 
+		values(cal_seq.nextval, #{mNum}, #{wNum}, #{type}, #{startDate}, #{endDate}, #{title}, #{content}, sysdate, #{annually}, #{monthly}, #{yearCalendar}, #{color})
 	</insert>
 	<update id="updateCalendar" parameterType="calendar">
 		update calendar
-		set m_num=#{mNum}, w_num=#{wNum}, cal_type=#{type}, cal_start_date=#{startDate}, cal_end_date=#{endDate}, cal_title=#{title}, cal_content=#{content}, cal_annually=#{annually}, cal_monthly=#{monthly}, cal_yearCalendar=#{yearCalendar} 
+		set m_num=#{mNum}, w_num=#{wNum}, cal_type=#{type}, cal_start_date=#{startDate}, cal_end_date=#{endDate}, cal_title=#{title}, cal_content=#{content}, cal_annually=#{annually}, cal_monthly=#{monthly}, cal_yearCalendar=#{yearCalendar}, cal_color=#{color} 
 		where cal_num=#{cNum}
 	</update>
 	<delete id="deleteCalendar" parameterType="int">
@@ -30,14 +30,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="mNum != null"> or m_num like '%'||#{mNum}||'%' </if>
 		<if test="searchType == 0"> or 1=1 </if>
 	</select>
-<!-- 	<insert id="insertCalendarAnnually" parameterType="calendar"> -->
-<!-- 		insert into calendar(cal_num, m_num, w_num, cal_type, cal_start_date, cal_end_date, cal_title, cal_content, cal_regDate, cal_annually, cal_monthly, cal_yearCalendar)  -->
-<!-- 		values(cal_seq.nextval, #{mNum}, #{wNum}, #{type}, #{startDate}, #{endDate}, #{title}, #{content}, sysdate, #{annually}, #{monthly}, #{yearCalendar}) -->
-<!-- 	</insert> -->
-<!-- 	<insert id="insertCalendarMonthly" parameterType="calendar"> -->
-<!-- 		insert into calendar(cal_num, m_num, w_num, cal_type, cal_start_date, cal_end_date, cal_title, cal_content, cal_regDate, cal_annually, cal_monthly, cal_yearCalendar)  -->
-<!-- 		values(cal_seq.nextval, #{mNum}, #{wNum}, #{type}, #{startDate}, #{endDate}, #{title}, #{content}, sysdate, #{annually}, #{monthly}, #{yearCalendar}) -->
-<!-- 	</insert> -->
 	<resultMap type="calendar" id="calendarMap">
 		<result column="cal_num" property="cNum"/>
 		<result column="m_num" property="mNum"/>
@@ -51,5 +43,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="cal_annually" property="annually"/>
 		<result column="cal_monthly" property="monthly"/>
 		<result column="cal_yearCalendar" property="yearCalendar"/>
+		<result column="cal_color" property="color"/>
 	</resultMap>
 </mapper>

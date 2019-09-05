@@ -50,6 +50,7 @@ public class CalendarController {
 	public List<Calendar> showAllCalendar(HttpSession session, boolean type1, boolean type2, boolean type3) {
 		int wNum = (int)session.getAttribute("currWnum");
 		List<Calendar> tmp = calendarService.getAllCalendar(wNum);
+//		System.out.println("tmp : "+tmp);
 		List<Calendar> tmpList = new ArrayList<Calendar>();
 		for(int i=0; i<tmp.size(); i++) {
 			if(type1) {
@@ -71,6 +72,7 @@ public class CalendarController {
 				}
 			}
 		}
+//		System.out.println("tmpList : "+tmpList);
 		return tmpList;
 	}
 	
@@ -90,6 +92,7 @@ public class CalendarController {
 	public List<Calendar> showYearCheckedCalendar(HttpSession session, boolean type1, boolean type2, boolean type3) {
 		int wNum = (int)session.getAttribute("currWnum");
 		List<Calendar> tmp = calendarService.getAllCalendar(wNum);
+//		System.out.println("tmp : "+tmp); //ok
 		List<Calendar> yearCheckedCalendarList = new ArrayList<Calendar>();
 		for(int i=0; i<tmp.size(); i++) {
 			String yearChecked = tmp.get(i).getYearCalendar();
@@ -97,6 +100,7 @@ public class CalendarController {
 				yearCheckedCalendarList.add(tmp.get(i));
 			}
 		}
+//		System.out.println("yearCheckedCalendarList : "+yearCheckedCalendarList); //?
 		List<Calendar> tmpList = new ArrayList<Calendar>();
 		for(int i=0; i<yearCheckedCalendarList.size(); i++) {
 			if(type1) {
@@ -118,7 +122,7 @@ public class CalendarController {
 				}
 			}
 		}
-		System.out.println(tmpList);
+//		System.out.println("tmpList : "+tmpList);
 		return tmpList;
 	}
 	@RequestMapping(value="/calYear", method = RequestMethod.GET)
@@ -163,7 +167,7 @@ public class CalendarController {
 		String startDateTmp = calendar.getStartDate();
 		if(calendar.getAnnually().equals("1")) { //년 반복
 			calendarService.addCalendarAnnually(calendar);
-		} 
+		}
 		calendar.setStartDate(startDateTmp);
 		if(calendar.getMonthly().equals("1")) { //월 반복
 			calendarService.addCalendarMonthly(calendar);
@@ -172,7 +176,7 @@ public class CalendarController {
 	}
 	@ResponseBody
 	@RequestMapping(value="/modifySchedule")
-	public boolean modifySchedule(Calendar calendar) {
+	public boolean modifySchedule(Calendar calendar) throws ParseException {
 		System.out.println("modifySchedule");
 		if(calendar.getAnnually()!=null && calendar.getAnnually().equals("annually")) {
 			calendar.setAnnually("1");
@@ -191,6 +195,14 @@ public class CalendarController {
 		}
 		System.out.println(calendar);
 		boolean result = calendarService.modifyCalendar(calendar);
+		String startDateTmp = calendar.getStartDate();
+		if(calendar.getAnnually().equals("1")) { //년 반복
+			calendarService.addCalendarAnnually(calendar);
+		} 
+		calendar.setStartDate(startDateTmp);
+		if(calendar.getMonthly().equals("1")) { //월 반복
+			calendarService.addCalendarMonthly(calendar);
+		}
 		return result;
 	}
 	@ResponseBody
@@ -209,12 +221,4 @@ public class CalendarController {
 		System.out.println(cNum);
 		return calendarService.getCalendar(cNum);
 	}
-//	@ResponseBody
-//	@RequestMapping(value="/selectSchedule", method = RequestMethod.POST)
-//	public Calendar selectAllScheduleByMonth(Calendar calendar) {
-//		System.out.println(calendar);
-//		int cNum = calendar.getcNum();
-//		System.out.println(cNum);
-//		return calendarService.getCalendar(cNum);
-//	}
 }

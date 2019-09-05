@@ -43,7 +43,6 @@ public class CalendarService {
 		return calendarDao.selectAllCalendar(wNum);
 	}
 	public Map<String, Object> getAllCalendarSearched(Map<String, Object> param) {
-//		param.compute(, );
 		Map<String, Object> result = new HashMap<String, Object>();
 		int searchType = (Integer)param.get("searchType");
 		String searchKeyword = (String)param.get("searchKeyword");
