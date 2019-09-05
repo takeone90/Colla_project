@@ -125,7 +125,6 @@ public class ChatRoomController {
 		List<ChatMessage> cmList = cmService.getAllChatMessageByCrNum(crNum);
 		return cmList;
 	}
-	
 	// 일반메세지 받고 보내기
 	@SendTo("/category/msg/{var2}")
 	@MessageMapping("/send/{var1}/{var2}")

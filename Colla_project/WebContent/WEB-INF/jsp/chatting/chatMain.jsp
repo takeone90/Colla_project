@@ -19,7 +19,9 @@
 
 <script>
 var chatArea = $(".chat");
-$(function(){
+
+	$(function(){
+	
 	//헤더에 채팅방과 워크스페이스 정보 바꾸기
 	var isDefault = $("#isDefault").val();
 	if(isDefault==1){ //기본채팅방이면
@@ -156,7 +158,15 @@ $(function(){
 function sendFile(fileName,originName,cmNum){
 	stompClient.send("/client/sendFile/"+$("#userEmail").val()+"/"+$("#crNum").val()+"/"+cmNum+"/"+originName,{},fileName);
 }
-	
+
+var textarea = $("#editor");
+var editor = CodeMirror.fromTextArea(textarea,{
+    lineNumbers: true,
+    lineWrapping: true,
+    theme: "eclipse",
+    val: textarea.value
+});
+
 	<%-------------------------------------------------------WebSocket 연결부분은 headerWs로 넘어갔습니다.-----------------------------------------------------%>
 	//일반 메세지 보내기
 	function sendMsg(){
@@ -223,6 +233,10 @@ function sendFile(fileName,originName,cmNum){
 	
 	
 </script>
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.5.0/styles/androidstudio.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.5.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
 </head>
 <body>
 <%@ include file="/WEB-INF/jsp/inc/headerWs.jsp" %>
@@ -251,6 +265,11 @@ function sendFile(fileName,originName,cmNum){
 			<input type="text" id="chatInput" placeholder="메세지 작성부분">
 			<a id="sendChat" href="#">전송</a>
 			</div>
+		</div>
+		<div>
+			<pre><code class="java">
+			for(int i=0;i<10;i++)
+			</code></pre>
 		</div>
 		
 		<%---------------------------------------------채팅방 멤버추가모달 ----------------------------------------------------%>
