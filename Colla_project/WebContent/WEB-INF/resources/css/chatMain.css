@@ -1,72 +1,36 @@
 @charset "UTF-8";
-
-#addCrMemberModal {
+.attachModal{
 	display: none;
 	position: fixed;
-	top: 30%;
+	top: 15%;
 	left: 30%;
 	width: 500px;
 	background-color: white;
 	text-align: center;
 	border-radius: 10px;
 	padding: 30px;
+	z-index: 2;
 	box-shadow: 2px 2px 10px 1px #6e6d6d;
 }
-
-#memberInfoModal {
-	display: none;
-	position: fixed;
-	top: 30%;
-	left: 30%;
-	width: 500px;
-	background-color: white;
-	text-align: center;
-	border-radius: 10px;
-	padding: 30px;
-	box-shadow: 2px 2px 10px 1px #6e6d6d;
-}
-
-#addFileModal {
-	display: none;
-	position: fixed;
-	top: 30%;
-	left: 30%;
-	width: 500px;
-	background-color: white;
-	text-align: center;
-	border-radius: 10px;
-	padding: 30px;
-	box-shadow: 2px 2px 10px 1px #6e6d6d;
-}
-
 .addFileInputWrap {
 	margin-bottom: 10px;
 }
 
 #addCodeModal {
-	display: none;
-	position: fixed;
-	top: 30%;
-	left: 30%;
-	width: 500px;
-	background-color: white;
-	text-align: center;
-	border-radius: 10px;
-	padding: 30px;
-	box-shadow: 2px 2px 10px 1px #6e6d6d;
+ 	text-align: left; 
 }
 
-#addLocationModal {
-	display: none;
-	position: fixed;
-	top: 30%;
-	left: 30%;
-	width: 500px;
+#chatFavoriteModal{
+	display : none;
+	position : fixed;
+	top : 30%;
+	left : 30%;
+	width : 500px;
 	background-color: white;
 	text-align: center;
 	border-radius: 10px;
-	padding: 30px;
-	box-shadow: 2px 2px 10px 1px #6e6d6d;
+	padding : 30px;
+	box-shadow:2px 2px 10px 1px #6e6d6d;
 }
 
 .row ul {
@@ -81,7 +45,10 @@
 	border-bottom: 0.5px solid #bdbbbb;
 	padding: 10px;
 }
-
+#chatInput{
+	resize: none;
+	width : 85%;	
+}
 .myMsg {
 	position: relative;
 	opacity: 1;
@@ -159,7 +126,9 @@
 	display: inline-block;
 	padding-right: 5px;
 }
-
+#attachBtn{
+	vertical-align: middle;
+}
 .attach a:hover {
 	color: #f04943;
 }
@@ -167,7 +136,9 @@
 .uploadFileName {
 	color: blue;
 }
-
+#innerBtn{
+	margin-top: 10px;
+}
 #innerBtn a {
 	display: inline-block;
 	position: relative;
@@ -191,7 +162,7 @@
 	
 }
 
-.chatFavoriteOn {
+.chatFavorite.on {
 	display: inline-block;
 	position: relative;
 	width: 18px;
@@ -199,4 +170,16 @@
 	background-image: url("../img/favorite_on.png");
 	background-size: contain;
 	margin-left: 10px;
+}
+#editor{
+/* 	width: 400px; */
+/* 	height : 100px; */
+	padding : 5px;
+	margin-bottom: 10px;
+}
+.CodeMirror-scroll{
+/* 	padding-left : 35px; */
+	padding : 10px 10px 10px 25px;
+/* 	padding : 10px; */
+	font-weight: bolder;
 }

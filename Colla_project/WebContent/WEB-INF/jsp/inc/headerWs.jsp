@@ -19,14 +19,21 @@ function duplicateConnect(){
 		stompClient.subscribe("/category/msg/"+crNum,function(cm){
 				msgInfo = JSON.parse(cm.body);
 				addMsg(msgInfo);
-			$("#chatArea").scrollTop($("#chatArea")[0].scrollHeight);
+				$("#chatArea").scrollTop($("#chatArea")[0].scrollHeight);
 		});
 		
 		//파일메세지 구독
 		stompClient.subscribe("/category/file/"+crNum, function(cm) {
 				msgInfo = JSON.parse(cm.body);
-				addMsg(msgInfo)
-			$("#chatArea").scrollTop($("#chatArea")[0].scrollHeight);
+				addMsg(msgInfo);
+				$("#chatArea").scrollTop($("#chatArea")[0].scrollHeight);
+		});
+		
+		//코드메시지 구독
+		stompClient.subscribe("/category/code/"+crNum, function(cm){
+				msgInfo = JSON.parse(cm.body);
+				addMsg(msgInfo);
+				$("#chatArea").scrollTop($("#chatArea")[0].scrollHeight);
 		});
 		<%-----------------------------------------------------------------------------------------------------%>
 		

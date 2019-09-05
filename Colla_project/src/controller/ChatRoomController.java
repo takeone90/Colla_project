@@ -121,29 +121,38 @@ public class ChatRoomController {
 
 	@ResponseBody
 	@RequestMapping("/loadPastMsg")
-	public List<ChatMessage> loadPastMsg(@RequestParam("crNum") int crNum) {
-		List<ChatMessage> cmList = cmService.getAllChatMessageByCrNum(crNum);
+	public List<ChatMessage> loadPastMsg(@RequestParam("crNum") int crNum,HttpSession session) {
+		Member member = (Member)session.getAttribute("user");
+		int mNum = member.getNum();
+		List<ChatMessage> cmList = cmService.getAllChatMessageByCrNum(crNum,mNum);
 		return cmList;
 	}
 	// 일반메세지 받고 보내기
 	@SendTo("/category/msg/{var2}")
 	@MessageMapping("/send/{var1}/{var2}")
-	public ChatMessage sendMsg(String msg, @DestinationVariable(value = "var1") String userEmail,
+	public ChatMessage sendMsg(String msg,
+			@DestinationVariable(value = "var1") String userEmail,
 			@DestinationVariable(value = "var2") String crNum) {
 //		System.out.println("sendMsg 핸들러 실행");
 		Member member = mService.getMemberByEmail(userEmail);
 		int cmNum = cmService.addChatMessage(Integer.parseInt(crNum), member.getNum(), msg, "message");
 		ChatMessage cm = cmService.getChatMessageByCmNum(cmNum);
-		System.out.println(cm);
-//		String jsonStr = "{\"message\":\"" + msg + "\",\"userId\":\"" + member.getName()
-//				+ "\",\"userNum\":\"" + member.getNum()
-//				+ "\",\"writeTime\":\"" + cm.getCmWriteDate()
-//				+ "\",\"profileImg\":\""+member.getProfileImg()
-//				+"\",\"isFavorite\":\"" + 0
-//				+"\",\"cmNum\":\""+cmNum+"\"}";
 		return cm;
 	}
-
+	// 코드메세지 받고 보내기
+	@SendTo("/category/code/{var2}")
+	@MessageMapping("/sendCode/{var1}/{var2}/{var3}")
+	public ChatMessage sendCode(String code,
+			@DestinationVariable(value="var1")String userEmail,
+			@DestinationVariable(value="var2")String crNum,
+			@DestinationVariable(value="var3")String type) {
+		Member member = mService.getMemberByEmail(userEmail);
+		System.out.println("code : "+code+", type : "+type+", crNum : "+crNum+", mNum : "+member.getNum());
+		int cmNum = cmService.addChatMessage(Integer.parseInt(crNum), member.getNum(), code, "code_"+type);
+		ChatMessage cm = cmService.getChatMessageByCmNum(cmNum);
+		
+		return cm;
+	}
 	// 파일메세지 받고 보내기
 	@SendTo("/category/file/{var2}")
 	@MessageMapping("/sendFile/{var1}/{var2}/{var3}/{var4}")
@@ -152,17 +161,7 @@ public class ChatRoomController {
 			@DestinationVariable(value = "var2") String crNum,
 			@DestinationVariable(value="var3") int cmNum,
 			@DestinationVariable(value="var4")String originName) {
-		System.out.println("[sendFileMsg가 받은것 ] 파일이름 : "+fileName+",originName : "+originName+",보낸사람이메일 : "+userEmail+", 채팅방번호  :"+ crNum+",cmNum : "+cmNum);
-//		Member member = mService.getMemberByEmail(userEmail);
-		//chatFileUpload에서 나온 cmNum이 있어야한다.
-		
 		ChatMessage cm = cmService.getChatMessageByCmNum(cmNum);
-//		String jsonStr = "{\"fileName\":\"" + fileName + "\",\"originName\" : \""+originName+"\",\"userId\":\"" + member.getName()
-//				+ "\",\"userNum\":\"" + member.getNum()
-//				+ "\",\"writeTime\":\"" + cm.getCmWriteDate()
-//				+ "\",\"profileImg\":\""+member.getProfileImg()
-//				+"\",\"isFavorite\":\""+0
-//				+"\",\"cmNum\":\""+cmNum+"\"}";
 		return cm;
 	}
 	
@@ -185,12 +184,22 @@ public class ChatRoomController {
 		}
 	}
 	
+	@ResponseBody
 	@RequestMapping(value = "/chatFavorite", method = RequestMethod.POST)
-	public void chatFavorite(int favoriteResult, int favoriteCmNum) {
-	      System.out.println("favoriteResult : " + favoriteResult);
-	      System.out.println("favoriteCmNum : " + favoriteCmNum);
+	public void chatFavorite(int favoriteResult, int cmNum, HttpSession session) {
+	      Member member = (Member)session.getAttribute("user");
+	      int mNum = member.getNum();
+	      cmService.modifyChatFavorite(favoriteResult, mNum, cmNum);     
 	}
 	
+	@ResponseBody
+	@RequestMapping(value = "/showChatFavoriteList", method = RequestMethod.POST)
+	public List<ChatMessage> showChatFavoriteList(@RequestParam("crNum") int crNum,HttpSession session) {
+		Member member = (Member)session.getAttribute("user");
+		int mNum = member.getNum();
+		return cmService.getChatFavoriteList(crNum, mNum);
+	}
+		
 	@RequestMapping("/exitChatRoom")
 	public String exitChatRoom(int crNum,HttpSession session){
 		Member user = (Member)session.getAttribute("user");
@@ -198,15 +207,4 @@ public class ChatRoomController {
 		return "redirect:workspace";
 	}
 	
-//	@ResponseBody
-//	@RequestMapping("/removeEmptyChatRoom")
-//	public String removeEmptyChatRoom(){
-//		System.out.println("removeEmptyChatroom 요청받음");
-//		boolean result = false;
-//		if(crService.removeEmptyChatRoom()) {
-//			result = true;
-//		}
-//		System.out.println("실행되나요");
-//		return "{\"result\":"+result+"}";
-//	}
 }
