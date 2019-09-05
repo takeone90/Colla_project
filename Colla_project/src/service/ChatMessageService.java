@@ -64,8 +64,20 @@ public class ChatMessageService {
 	public ChatMessage getChatMessageByCmNum(int cmNum) {
 		return cmDao.selectChatMessageByCmNum(cmNum);
 	}
-	public List<ChatMessage> getAllChatMessageByCrNum(int crNum){
+	public List<ChatMessage> getAllChatMessageByCrNum(int crNum,int mNum){
 		
-		return cmDao.selectAllChatMessageByCrNum(crNum);
+		return cmDao.selectAllChatMessageByCrNum(crNum,mNum);
+	}
+	
+	public int modifyChatFavorite(int favoriteResult, int mNum, int cmNum) {
+		if(favoriteResult==1) {
+			return cmDao.insertFavorite(mNum, cmNum);
+		}else {
+			return cmDao.deleteFavorite(cmNum);
+		}
+	}
+	
+	public List<ChatMessage> getChatFavoriteList(int crNum, int mNum){
+		return cmDao.selectChatFavoriteList(crNum, mNum);
 	}
 }

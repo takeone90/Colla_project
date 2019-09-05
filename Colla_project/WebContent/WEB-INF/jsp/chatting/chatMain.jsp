@@ -19,8 +19,10 @@
 
 <script>
 var chatArea = $(".chat");
-
+var favoriteArea;
 	$(function(){
+		loadChatFromDB();
+		favoriteArea = $("#favoriteArea");
 	
 	//헤더에 채팅방과 워크스페이스 정보 바꾸기
 	var isDefault = $("#isDefault").val();
@@ -76,7 +78,18 @@ var chatArea = $(".chat");
 	$(".closeMemberInfo").on("click",function(){
 		$("#memberInfoModal").fadeOut(100);
 		return false;
-	});        
+	});
+	
+	//즐겨찾기 모달
+	$(".openchatFavoriteModal").on("click",function(){
+		favoriteArea.empty();
+		showFavoriteList();
+		$("#chatFavoriteModal").fadeIn(100);
+	});
+	$("#closechatFavorite").on("click",function(){
+		$("#chatFavoriteModal").fadeOut(100);
+		return false;
+	});
 	
 	//모달 바깥쪽이 클릭되거나 다른 모달이 클릭될때 현재 모달 숨기기
 	$("#wsBody").mouseup(function(e){
@@ -111,23 +124,6 @@ var chatArea = $(".chat");
 		}
 	});
 	
-	//과거메세지 불러오기
-	var crNum = $("#crNum").val();
-	$.ajax({
-		url : "${contextPath}/loadPastMsg",
-		data : {"crNum":crNum},
-		dataType :"json",
-		success : function(d){
-			$.each(d,function(idx,item){
-				addMsg(item);
-				chatArea.scrollTop($("#chatArea")[0].scrollHeight);
-			});
-		},
-		error : function(){
-			alert("채팅내역 불러오기 실패");
-		}
-	});
-	
 
 	//파일업로드에서 업로드 <a>태그가 눌렸을때
 	$(".fileUploadBtn").on("click",function(){
@@ -159,6 +155,25 @@ function sendFile(fileName,originName,cmNum){
 	stompClient.send("/client/sendFile/"+$("#userEmail").val()+"/"+$("#crNum").val()+"/"+cmNum+"/"+originName,{},fileName);
 }
 
+
+//과거메세지 불러오기
+function loadChatFromDB(){
+	var crNum = $("#crNum").val();
+	$.ajax({
+		url : "${contextPath}/loadPastMsg",
+		data : {"crNum":crNum},
+		dataType :"json",
+		success : function(d){
+			$.each(d,function(idx,item){
+				addMsg(item);
+				chatArea.scrollTop($("#chatArea")[0].scrollHeight);
+			});
+		},
+		error : function(){
+			alert("채팅내역 불러오기 실패");
+		}
+	});
+}
 var textarea = $("#editor");
 var editor = CodeMirror.fromTextArea(textarea,{
     lineNumbers: true,
@@ -175,39 +190,33 @@ var editor = CodeMirror.fromTextArea(textarea,{
 		$("#chatInput").val("");
 	}
 	
-	//미경 시작
-	//즐겨찾기 등록,해제를 하는 함수
+	//즐겨찾기 등록,해제
 	var favoriteResult;
-	var favoriteCmNum;
+	var cmNum;
 	function chatFavorite(e){ 
 	   var favoriteClassName = $(e).attr('class');
+	   cmNum = $(e).attr('value');
 	   if(favoriteClassName == "chatFavorite"){
-	      $(e).attr('class','chatFavoriteOn');
-	      favoriteCmNum = $(e).attr('value');
+	   	  $(".chatFavorite[value='"+cmNum+"']").addClass('on');
 	      favoriteResult = 1;
 	   }else{
-	      $(e).attr('class','chatFavorite');
-	      favoriteCmNum = $(e).attr('value');
+	   	  $(".chatFavorite[value='"+cmNum+"']").removeClass('on');
 	      favoriteResult = 0;
 	   }
-	   console.log("cmNum :" + favoriteCmNum);
-	   console.log("결과 :" + favoriteResult);
+
 	   $.ajax({
 	      url : "${contextPath}/chatFavorite",
-	      data : {"favoriteResult" : favoriteResult,"favoriteCmNum":favoriteCmNum},
-	      type : "post",
-	      dataType : "json",
-	      success : function(result){
-	         if(result){
-	            alert("컨트롤 입성 성공!");
-	         }
-	      }
+	      data : {"favoriteResult" : favoriteResult,"cmNum":cmNum},
+	      type : "post"
 	   });//end ajax
+	   
+	   
 	}//end favoirte()
 	
 	//받은 메시지 화면에 추가
-	function addMsg(msgInfo){
+	function addMsg(msgInfo, area){
 		var msgType;
+		var isFavoriteClass=(msgInfo.isFavorite == 0)?"chatFavorite":"chatFavorite on";
 		if(msgInfo.mName == $("#userName").val()){
 			msgType="myMsg";
 		} else {
@@ -215,18 +224,44 @@ var editor = CodeMirror.fromTextArea(textarea,{
 		}
 		var chatMsg = $("<div class='"+msgType+"'></div>");
 		var imgTag = "<img alt='"+msgInfo.mName+"님의 프로필 사진' src='${contextPath}/showProfileImg?num="+ msgInfo.mNum+ "'></a>";
-		var favorite = "<div class='chatFavorite' onclick='chatFavorite(this)' value = '"+ msgInfo.cmNum +"'></div>"; //즐겨찾기 아이콘
+		var favorite = "<div class='"+isFavoriteClass+"' onclick='chatFavorite(this)' value = '"+ msgInfo.cmNum +"'></div>"; //즐겨찾기 아이콘
 		var originName = getOriginName(msgInfo.cmContent);
 		var date = new Date(msgInfo.cmWriteDate);
 		var writeTime = date.getFullYear()+"-"+date.getMonth()+"-"+date.getDay()+" "+date.getHours()+"시"+date.getMinutes()+"분";
-		
 		chatMsg.append("<div class='profileImg'><a href='#' class='openMemberInfo'>"+imgTag+"</a></div>");
 		chatMsg.append("<div class='onlyMsgBox'><div class='name'><p>"+msgInfo.mName+" <span class='date'>"+writeTime+"</span></p></div>"+favorite+"<br><p class='content'>"+( msgInfo.cmType=='message'?msgInfo.cmContent : "<a href='${contextPath}/download?name="+msgInfo.cmContent+"'>"+originName+"</a>" )+"</p></div>");
-		chatArea.append(chatMsg);
+		
+		if(!area){
+			chatArea.append(chatMsg);
+		}else{
+			console.log(chatMsg);
+			favoriteArea.append(chatMsg[0]);
+		}
+		
 	}
 	
+	//즐겨찾기 리스트 그리기
+	function showFavoriteList(){
+		var crNum = $("#crNum").val();
+		$.ajax({
+			url : "${contextPath}/showChatFavoriteList",
+			data : {"crNum":crNum},
+			type : "post",
+			dataType :"json",
+			success : function(messageList){
+				console.log(messageList);
+				for(var i=0; i<messageList.length; i++){
+					addMsg(messageList[i], "true");
+				}
+			},
+			error : function(){
+				alert("즐겨찾기 리스트 불러오기 실패");
+			}
+		});//end ajax
+	}//end function
+
 	function getOriginName(fileName){
-		var idx = fileName.indexOf("_")+1;
+		var idx = (fileName.indexOf("_")) + 1;
 		var originName= fileName.substring(idx);
 		return originName;
 	}
@@ -250,6 +285,9 @@ var editor = CodeMirror.fromTextArea(textarea,{
 		<div class="chatArea">
 			<div class="addCrMember">
 			<button class="openAddCrMemberModal">채팅방 초대</button>
+			</div>
+			<div class="chatFavoriteList">
+				<button class="openchatFavoriteModal">즐겨찾기</button>
 			</div>
 			<div class="chat" id="chatArea">
 			</div>
@@ -389,7 +427,19 @@ var editor = CodeMirror.fromTextArea(textarea,{
 					<a href="#" class="closeMemberInfo">닫기</a><br>
 			</div> <!-- end modalBody -->
 		</div><!-- end memberInfoModal -->
-		
+		<%---------------------------------------------즐겨찾기 모달 ----------------------------------------------------%>
+		<div id="chatFavoriteModal">
+			<div class="modalHead">
+				<h3 style="font-weight: bolder; font-size: 30px">즐겨찾기</h3>
+			</div>
+			<br><br>
+			<div class="modalBody">
+				<p>즐겨찾기 리스트입니다.</p>
+					<div id="favoriteArea">
+					</div>
+					<button id="closechatFavorite">닫기</button>
+			</div> <!-- end modalBody -->
+		</div>
 		
 	</div><!-- end wsBody -->
 </body>

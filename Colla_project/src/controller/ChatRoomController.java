@@ -121,8 +121,10 @@ public class ChatRoomController {
 
 	@ResponseBody
 	@RequestMapping("/loadPastMsg")
-	public List<ChatMessage> loadPastMsg(@RequestParam("crNum") int crNum) {
-		List<ChatMessage> cmList = cmService.getAllChatMessageByCrNum(crNum);
+	public List<ChatMessage> loadPastMsg(@RequestParam("crNum") int crNum,HttpSession session) {
+		Member member = (Member)session.getAttribute("user");
+		int mNum = member.getNum();
+		List<ChatMessage> cmList = cmService.getAllChatMessageByCrNum(crNum,mNum);
 		return cmList;
 	}
 	// 일반메세지 받고 보내기
@@ -185,12 +187,22 @@ public class ChatRoomController {
 		}
 	}
 	
+	@ResponseBody
 	@RequestMapping(value = "/chatFavorite", method = RequestMethod.POST)
-	public void chatFavorite(int favoriteResult, int favoriteCmNum) {
-	      System.out.println("favoriteResult : " + favoriteResult);
-	      System.out.println("favoriteCmNum : " + favoriteCmNum);
+	public void chatFavorite(int favoriteResult, int cmNum, HttpSession session) {
+	      Member member = (Member)session.getAttribute("user");
+	      int mNum = member.getNum();
+	      cmService.modifyChatFavorite(favoriteResult, mNum, cmNum);     
 	}
 	
+	@ResponseBody
+	@RequestMapping(value = "/showChatFavoriteList", method = RequestMethod.POST)
+	public List<ChatMessage> showChatFavoriteList(@RequestParam("crNum") int crNum,HttpSession session) {
+		Member member = (Member)session.getAttribute("user");
+		int mNum = member.getNum();
+		return cmService.getChatFavoriteList(crNum, mNum);
+	}
+		
 	@RequestMapping("/exitChatRoom")
 	public String exitChatRoom(int crNum,HttpSession session){
 		Member user = (Member)session.getAttribute("user");
