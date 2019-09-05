@@ -15,6 +15,8 @@
 <link rel="stylesheet" type="text/css" href="${contextPath}/css/board.css"/>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="${contextPath}/lib/ckeditor4/ckeditor.js"></script>
+
 <script type="text/javascript">
 	const bNum = ${board.bNum};
 	const mNum = ${sessionScope.user.num};

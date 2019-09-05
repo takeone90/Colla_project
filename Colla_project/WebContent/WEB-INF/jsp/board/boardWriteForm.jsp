@@ -13,12 +13,19 @@
 <link rel="stylesheet" type="text/css" href="${contextPath}/css/navWs.css"/>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="${contextPath}/lib/ckeditor4/ckeditor.js"></script>
+
+
 </head>
 <body>
 	<%@ include file="/WEB-INF/jsp/inc/headerWs.jsp" %>
 	<%@ include file="/WEB-INF/jsp/inc/navWs.jsp" %>
 	<script>
 		$(function(){
+			CKEDITOR.replace('content',{
+				filebrowserImageUploadUrl: "${contextPath}/board/ckeditorUpload",
+			});
+			
 			$("#writeForm").submit(function(){
 				if( !$("#pw").val().trim() ){
 					alert("글을 수정하고 삭제할 때 사용하실\n비밀번호를 입력해주세요.");

@@ -1,21 +1,28 @@
 package controller;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
+import java.io.PrintWriter;
 import java.security.Principal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
@@ -39,6 +46,33 @@ public class BoardController {
 	
 	@Autowired
 	private MemberService mService;
+	
+	@RequestMapping("/ckeditorUpload")
+	public String ckeditorUpload(
+			HttpServletRequest request,
+			HttpServletResponse response,
+			@RequestParam MultipartFile upload) throws Exception{
+		
+		UUID uuid = UUID.randomUUID();
+		
+		response.setCharacterEncoding("utf-8");
+		response.setContentType("text/html; charset=utf-8");
+		
+		String fileName = upload.getOriginalFilename();
+		byte[] bytes = upload.getBytes();
+		
+		String uploadPath = UPLOAD_PATH + "boardImg\\";
+		
+		OutputStream out = new FileOutputStream(new File(uploadPath + fileName));
+		out.write(bytes);
+		
+		PrintWriter printWriter = response.getWriter();
+		String fileUrl = UPLOAD_PATH + fileName;
+		printWriter.println("{\"filename\" : \""+fileName+"\", \"uploaded\" : 1, \"url\":\""+fileUrl+"\"}");
+		printWriter.flush();		
+		
+		return null;
+	}
 	
 	@RequestMapping("/list")
 	public String showBoardList(
@@ -191,11 +225,9 @@ public class BoardController {
 				////////////////////////////////////////// 190902 multifile upload -TK
 				
 				List<MultipartFile> fList = multifileReq.getFiles("file");
-				String src = multifileReq.getParameter("src");
 				
 				for(MultipartFile mf : fList) {
 					String originFileName = mf.getOriginalFilename();//원본파일명
-					long fileSize = mf.getSize(); //파일사이즈
 					UUID uuid = UUID.randomUUID();
 					
 					//시스템시간(ms) + uuid + 원본파일명
