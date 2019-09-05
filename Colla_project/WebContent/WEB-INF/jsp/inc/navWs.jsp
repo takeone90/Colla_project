@@ -16,7 +16,7 @@
 			success : function(d){
 				chatList.empty();
 				$.each(d,function(idx,item){
-					var str='<li><a href="${contextPath}/chatMain?crNum='+item.crNum+'">'+item.crName+'</a></li>';
+					var str='<li '+ (${chatRoom.crNum}==item.crNum?'class="currChat"':"")+'><a href="${contextPath}/chatMain?crNum='+item.crNum+'">'+item.crName+'</a></li>';
 						chatList.append(str);
 					});
 			}

@@ -89,12 +89,7 @@ public class ChatRoomController {
 		return crList;
 	}
 
-	@ResponseBody
-	@RequestMapping("/loadPastMsg")
-	public List<ChatMessage> loadPastMsg(@RequestParam("crNum") int crNum) {
-		List<ChatMessage> cmList = cmService.getAllChatMessageByCrNum(crNum);
-		return cmList;
-	}
+
 
 	@RequestMapping("/addChat")
 	public String addChatRoom(int wNum, String crName, HttpSession session, HttpServletRequest request) {
@@ -125,6 +120,12 @@ public class ChatRoomController {
 		return "redirect:chatMain?crNum=" + crNum;
 	}
 
+	@ResponseBody
+	@RequestMapping("/loadPastMsg")
+	public List<ChatMessage> loadPastMsg(@RequestParam("crNum") int crNum) {
+		List<ChatMessage> cmList = cmService.getAllChatMessageByCrNum(crNum);
+		return cmList;
+	}
 	// 일반메세지 받고 보내기
 	@SendTo("/category/msg/{var2}")
 	@MessageMapping("/send/{var1}/{var2}")
