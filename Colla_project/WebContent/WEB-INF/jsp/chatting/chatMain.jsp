@@ -76,7 +76,7 @@ var chatArea = $(".chat");
 	$(".closeMemberInfo").on("click",function(){
 		$("#memberInfoModal").fadeOut(100);
 		return false;
-	});
+	});        
 	
 	//모달 바깥쪽이 클릭되거나 다른 모달이 클릭될때 현재 모달 숨기기
 	$("#wsBody").mouseup(function(e){
