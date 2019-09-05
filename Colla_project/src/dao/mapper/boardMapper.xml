@@ -6,7 +6,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="selectBoardListPage" parameterType="map" resultMap="boardMap"> 
 		select b_num, m_name, w_num, b_title, b_regdate, b_readcnt, b_type, r_cnt, 'y' as isnotice 
 		from (
-			    select rownum, b_num, m_name, w_num, b_title, b_regdate, b_readcnt, b_type
+			    select rownum as r, b_num, m_name, w_num, b_title, b_regdate, b_readcnt, b_type
 			            , (select count(*) from reply r where r.b_num = b.b_num) as r_cnt
 			    from board b, member m
 			    where b.w_num = #{wNum}
@@ -14,7 +14,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			        and b.m_num = m.m_num
 			    order by b.b_num desc
 		)
-<!-- 		where rownum &lt;= 5  ////////최대 5개-->
+		where r &lt;= 10  <!-- 최대 10개  -->
 		UNION ALL
 		select b_num, m_name, w_num, b_title, b_regdate, b_readcnt, b_type, r_cnt, 'n' as isnotice 
 		from (select rn, b_num, m_name, w_num, b_title, b_regdate, b_readcnt, b_type, r_cnt
@@ -43,7 +43,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		        						((select count(*) 
 										from (select b_num 
 										        from board 
-										        where w_num=186
+										        where w_num=#{wNum}
 										            and b_type='notice'
 										  	   )
 										)*#{page})
@@ -52,7 +52,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         						((select count(*) 
 								from (select b_num 
 								        from board 
-								        where w_num=186
+								        where w_num=#{wNum}
 								            and b_type='notice'
 								  	   )
 								)*(#{page}-1))
@@ -61,8 +61,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <!-- 		select count(b_num) from board where w_num=#{wNum} -->
 
 						select count(b_num)
-		                from board
-		                where w_num=#{wNum} and 1=0
+		                from (select * from board where w_num=#{wNum})
+		                where 1=0
 		                 <if test="title != null">
 		                 	or upper(b_title) like ('%'||upper('${keyword}')||'%')
 		                 </if>
@@ -77,7 +77,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		                 </if>
 
 	</select>
-	<select id="selectCountNoticeByWnum" parameterType="map">
+	<select id="selectCountNoticeByWnum" parameterType="map" resultType="int">
 		select count(b_num)
 		from board
 		where w_num=#{wNum} and b_type='notice'

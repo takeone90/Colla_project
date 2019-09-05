@@ -117,13 +117,7 @@ $(function(){
 		dataType :"json",
 		success : function(d){
 			$.each(d,function(idx,item){
-				var originName; 
-				if(item.cmType=='file'){
-					originName = item.cmContent.substring(item.cmContent.indexOf("_")+1);
-				}
-				var writeDate = new Date(item.cmWriteDate);
-				var writeTime = writeDate.getFullYear()+"-"+writeDate.getMonth()+"-"+writeDate.getDay()+" "+writeDate.getHours()+"시"+writeDate.getMinutes()+"분";
-				loadPastMsg(item.cmType,item.mName,item.cmContent,writeTime,originName,item.profileImg,item.cmNum);
+				addMsg(item);
 				chatArea.scrollTop($("#chatArea")[0].scrollHeight);
 			});
 		},
@@ -200,47 +194,32 @@ function sendFile(fileName,originName,cmNum){
 	      }
 	   });//end ajax
 	}//end favoirte()
-	//미경 끝
-
-// 	메시지 박스 태그를 생성하는 함수
-	function appendMsg(msgType,type,userId,msg,writeTime,originName,profileImg,isFavorite,cmNum){
-		var chatMsg = $("<div class='"+msgType+"'></div>");
-		var imgTag = "<img alt='' src='${contextPath}/showProfileImg?fileName="+profileImg+"'></a>";
-		var favorite = "<div class='chatFavorite' onclick='chatFavorite(this)' value = '"+ cmNum +"'></div>"; //즐겨찾기 아이콘
-		
-		if(type=='message'){
-			chatMsg.append("<div class='profileImg'><a href='#' class='openMemberInfo'>"+imgTag+"</div>");
-			chatMsg.append("<div class='onlyMsgBox'><div class='name'><p>"+userId+" <span class='date'>"+writeTime+"</span></p></div>"+favorite+"<br><p class='content'>"+msg+"</p></div>");
-			chatArea.append(chatMsg);
-		}else if(type=='file'){
-			chatMsg.append("<div class='profileImg'><a href='#' class='openMemberInfo'>"+imgTag+"</a></div>");
-			chatMsg.append("<div class='onlyMsgBox'><div class='name'><p>"+userId+" <span class='date'>"+writeTime+"</span></p></div>"+favorite+"<br><p class='content'><a href='${contextPath}/download?name="+msg+"'>"+originName+"</a></p></div>");
-			chatArea.append(chatMsg);
-		}
-		
-		
-	}
+	
 	//받은 메시지 화면에 추가
-	function addMsg(type,userId,msg,writeTime,originName,profileImg,isFavorite,cmNum){
-		var msgType = "chatMsg";
-		appendMsg(msgType,type,userId,msg,writeTime,originName,profileImg,isFavorite,cmNum);
-	}
-	//내가 쓴 메시지 화면에 추가
-	function addMyMsg(type,userId,msg,writeTime,originName,profileImg,isFavorite,cmNum){
-		var msgType = "myMsg";
-		appendMsg(msgType,type,userId,msg,writeTime,originName,profileImg,isFavorite,cmNum);
-	}
-	//과거 메시지 화면에 추가
-	function loadPastMsg(type,userId,msg,writeTime,originName,profileImg,isFavorite,cmNum){
-		var myId = $("#userName").val();
+	function addMsg(msgInfo){
 		var msgType;
-		if(userId == myId){//지금은 불러온 메세지중에 작성자 이름이 현재 로그인되있는 이름과같으면 myMsg 로 처리함
-			msgType = "myMsg";
-		}else{
+		if(msgInfo.mName == $("#userName").val()){
+			msgType="myMsg";
+		} else {
 			msgType = "chatMsg";
 		}
-		appendMsg(msgType,type,userId,msg,writeTime,originName,profileImg,isFavorite,cmNum);
-	}	
+		var chatMsg = $("<div class='"+msgType+"'></div>");
+		var imgTag = "<img alt='"+msgInfo.mName+"님의 프로필 사진' src='${contextPath}/showProfileImg?num="+ msgInfo.mNum+ "'></a>";
+		var favorite = "<div class='chatFavorite' onclick='chatFavorite(this)' value = '"+ msgInfo.cmNum +"'></div>"; //즐겨찾기 아이콘
+		var originName = getOriginName(msgInfo.cmContent);
+		var date = new Date(msgInfo.cmWriteDate);
+		var writeTime = date.getFullYear()+"-"+date.getMonth()+"-"+date.getDay()+" "+date.getHours()+"시"+date.getMinutes()+"분";
+		
+		chatMsg.append("<div class='profileImg'><a href='#' class='openMemberInfo'>"+imgTag+"</a></div>");
+		chatMsg.append("<div class='onlyMsgBox'><div class='name'><p>"+msgInfo.mName+" <span class='date'>"+writeTime+"</span></p></div>"+favorite+"<br><p class='content'>"+( msgInfo.cmType=='message'?msgInfo.cmContent : "<a href='${contextPath}/download?name="+msgInfo.cmContent+"'>"+originName+"</a>" )+"</p></div>");
+		chatArea.append(chatMsg);
+	}
+	
+	function getOriginName(fileName){
+		var idx = fileName.indexOf("_")+1;
+		var originName= fileName.substring(idx);
+		return originName;
+	}
 	
 	
 </script>

@@ -11,6 +11,9 @@ public class ChatMessage {
 	private String mName;
 	private String profileImg;
 	private int isFavorite;
+	private String cmType;
+	
+	
 	public int getIsFavorite() {
 		return isFavorite;
 	}
@@ -23,7 +26,6 @@ public class ChatMessage {
 	public void setProfileImg(String profileImg) {
 		this.profileImg = profileImg;
 	}
-	private String cmType;
 	
 	public String getCmType() {
 		return cmType;

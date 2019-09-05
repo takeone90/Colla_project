@@ -89,12 +89,6 @@ public class ChatRoomController {
 		return crList;
 	}
 
-	@ResponseBody
-	@RequestMapping("/loadPastMsg")
-	public List<ChatMessage> loadPastMsg(@RequestParam("crNum") int crNum) {
-		List<ChatMessage> cmList = cmService.getAllChatMessageByCrNum(crNum);
-		return cmList;
-	}
 
 	@RequestMapping("/addChat")
 	public String addChatRoom(int wNum, String crName, HttpSession session, HttpServletRequest request) {
@@ -125,42 +119,52 @@ public class ChatRoomController {
 		return "redirect:chatMain?crNum=" + crNum;
 	}
 
+	@ResponseBody
+	@RequestMapping("/loadPastMsg")
+	public List<ChatMessage> loadPastMsg(@RequestParam("crNum") int crNum) {
+		List<ChatMessage> cmList = cmService.getAllChatMessageByCrNum(crNum);
+		return cmList;
+	}
+	
 	// 일반메세지 받고 보내기
 	@SendTo("/category/msg/{var2}")
 	@MessageMapping("/send/{var1}/{var2}")
-	public String sendMsg(String msg, @DestinationVariable(value = "var1") String userEmail,
+	public ChatMessage sendMsg(String msg, @DestinationVariable(value = "var1") String userEmail,
 			@DestinationVariable(value = "var2") String crNum) {
 //		System.out.println("sendMsg 핸들러 실행");
 		Member member = mService.getMemberByEmail(userEmail);
 		int cmNum = cmService.addChatMessage(Integer.parseInt(crNum), member.getNum(), msg, "message");
 		ChatMessage cm = cmService.getChatMessageByCmNum(cmNum);
-		String jsonStr = "{\"message\":\"" + msg + "\",\"userId\":\"" + member.getName()
-				+ "\",\"writeTime\":\"" + cm.getCmWriteDate()
-				+ "\",\"profileImg\":\""+member.getProfileImg()
-				+"\",\"isFavorite\":\"" + 0
-				+"\",\"cmNum\":\""+cmNum+"\"}";
-		return jsonStr;
+		System.out.println(cm);
+//		String jsonStr = "{\"message\":\"" + msg + "\",\"userId\":\"" + member.getName()
+//				+ "\",\"userNum\":\"" + member.getNum()
+//				+ "\",\"writeTime\":\"" + cm.getCmWriteDate()
+//				+ "\",\"profileImg\":\""+member.getProfileImg()
+//				+"\",\"isFavorite\":\"" + 0
+//				+"\",\"cmNum\":\""+cmNum+"\"}";
+		return cm;
 	}
 
 	// 파일메세지 받고 보내기
 	@SendTo("/category/file/{var2}")
 	@MessageMapping("/sendFile/{var1}/{var2}/{var3}/{var4}")
-	public String sendFileMsg(String fileName,
+	public ChatMessage sendFileMsg(String fileName,
 			@DestinationVariable(value = "var1") String userEmail,
 			@DestinationVariable(value = "var2") String crNum,
 			@DestinationVariable(value="var3") int cmNum,
 			@DestinationVariable(value="var4")String originName) {
 		System.out.println("[sendFileMsg가 받은것 ] 파일이름 : "+fileName+",originName : "+originName+",보낸사람이메일 : "+userEmail+", 채팅방번호  :"+ crNum+",cmNum : "+cmNum);
-		Member member = mService.getMemberByEmail(userEmail);
+//		Member member = mService.getMemberByEmail(userEmail);
 		//chatFileUpload에서 나온 cmNum이 있어야한다.
 		
 		ChatMessage cm = cmService.getChatMessageByCmNum(cmNum);
-		String jsonStr = "{\"fileName\":\"" + fileName + "\",\"originName\" : \""+originName+"\",\"userId\":\"" + member.getName()
-				+ "\",\"writeTime\":\"" + cm.getCmWriteDate()
-				+ "\",\"profileImg\":\""+member.getProfileImg()
-				+"\",\"isFavorite\":\""+0
-				+"\",\"cmNum\":\""+cmNum+"\"}";
-		return jsonStr;
+//		String jsonStr = "{\"fileName\":\"" + fileName + "\",\"originName\" : \""+originName+"\",\"userId\":\"" + member.getName()
+//				+ "\",\"userNum\":\"" + member.getNum()
+//				+ "\",\"writeTime\":\"" + cm.getCmWriteDate()
+//				+ "\",\"profileImg\":\""+member.getProfileImg()
+//				+"\",\"isFavorite\":\""+0
+//				+"\",\"cmNum\":\""+cmNum+"\"}";
+		return cm;
 	}
 	
 	//uploadFile ajax 요청을 받으면, db에 해당 메세지를 저장하고 c:\temp\에 파일 저장함
