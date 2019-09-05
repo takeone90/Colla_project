@@ -8,6 +8,7 @@
 <script>
 var sock;
 var stompClient;
+var msgInfo;
 function duplicateConnect(){
 	sock = new SockJS("${contextPath}/chat");
 	stompClient = Stomp.over(sock);
@@ -15,37 +16,16 @@ function duplicateConnect(){
 		<%----------------------------------------채팅메시지 구독부분----------------------------------------------%>
 		var crNum = $("#crNum").val();
 		//일반메세지 구독
-		stompClient.subscribe("/category/msg/"+crNum,function(jsonStr){
-			var userId = JSON.parse(jsonStr.body).userId;
-			var message = JSON.parse(jsonStr.body).message;
-			var originName = "";
-			var writeTime = JSON.parse(jsonStr.body).writeTime;
-			var profileImg = JSON.parse(jsonStr.body).profileImg;
-			var isFavorite = JSON.parse(jsonStr.body).isFavorite;
-			var cmNum = JSON.parse(jsonStr.body).cmNum;
-			if(userId == $("#userName").val()){
-				addMyMsg("message",userId,message,writeTime,originName,isFavorite,cmNum);
-			}else{
-				addMsg("message",userId,message,writeTime,originName,isFavorite,cmNum);
-			}
-			
+		stompClient.subscribe("/category/msg/"+crNum,function(cm){
+				msgInfo = JSON.parse(cm.body);
+				addMsg(msgInfo);
 			$("#chatArea").scrollTop($("#chatArea")[0].scrollHeight);
 		});
 		
 		//파일메세지 구독
-		stompClient.subscribe("/category/file/"+crNum, function(jsonStr) {
-			var userId = JSON.parse(jsonStr.body).userId;
-			var fileName = JSON.parse(jsonStr.body).fileName;
-			var originName = JSON.parse(jsonStr.body).originName;
-			var writeTime = JSON.parse(jsonStr.body).writeTime;
-			var profileImg = JSON.parse(jsonStr.body).profileImg;
-			var isFavorite = JSON.parse(jsonStr.body).isFavorite;
-			var cmNum = JSON.parse(jsonStr.body).cmNum;
-			if(userId == $("#userName").val()){
-				addMyMsg("file",userId,fileName,writeTime,originName,isFavorite,cmNum);
-			}else{
-				addMsg("file",userId,fileName,writeTime,originName,isFavorite,cmNum);
-			}
+		stompClient.subscribe("/category/file/"+crNum, function(cm) {
+				msgInfo = JSON.parse(cm.body);
+				addMsg(msgInfo)
 			$("#chatArea").scrollTop($("#chatArea")[0].scrollHeight);
 		});
 		<%-----------------------------------------------------------------------------------------------------%>
