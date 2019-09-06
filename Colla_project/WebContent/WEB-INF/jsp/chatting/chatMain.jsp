@@ -105,7 +105,19 @@ var infowindow;
 	});
 	
 	//모달 바깥쪽이 클릭되거나 다른 모달이 클릭될때 현재 모달 숨기기
-	$("#wsBody").mouseup(function(e){
+// 	function closeModals(){
+// 		$("#addCrMemberModal").hide();
+// 		$("#addFileModal").hide();
+// 		$("#addCodeModal").hide();
+// 		$("#addLocationModal").hide();
+// 		$("#memberInfoModal").hide();
+// 		return false;
+// 	}
+// 	$("#wsBody").click(function(){
+// 		closeModals();
+// 	});
+	$("body").mouseup(function(e){
+		console.log('마우스 업!',e, e.target);
 		if($("#addCrMemberModal").has(e.target).length===0)
 			$("#addCrMemberModal").fadeOut(300);
 		if($("#addFileModal").has(e.target).length===0)
@@ -116,7 +128,6 @@ var infowindow;
 			$("#addLocationModal").fadeOut(300);
 		if($("#memberInfoModal").has(e.target).length===0)
 			$("#memberInfoModal").fadeOut(300);
-		return false;
 	});
 	//첨부파일Detail 숨기고 닫기
 	$("#attachBtn").on("click",function(){
