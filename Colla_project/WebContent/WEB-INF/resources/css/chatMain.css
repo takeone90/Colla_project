@@ -51,7 +51,7 @@
 .chat {
 	position: static;
 	background-color: white;
-	height: 500px;
+	height: 750px;
 	overflow-y: scroll;
 }
 

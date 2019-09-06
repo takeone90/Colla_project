@@ -12,6 +12,7 @@
 #navContainer{
 	width:100%;
 	margin:0 auto;
+	height:100%;
 	text-align:center;
 }
 #aboutProfile{
@@ -61,9 +62,16 @@
 #myChatList ul li a:hover{
 	color:#fff;
 }
-
+#subfunction{
+	width : 100%;
+	display: block;
+	position : absolute;
+	bottom: 0;
+	
+}
 #ws-subfunction{
 	padding-top:20px;
+	margin-bottom: 30px;
 }
 #ws-subfunction li{
 	float:left;

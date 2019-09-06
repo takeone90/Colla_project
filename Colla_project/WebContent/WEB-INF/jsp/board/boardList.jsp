@@ -86,6 +86,7 @@
 	<%@ include file="/WEB-INF/jsp/inc/headerWs.jsp" %>
 	<%@ include file="/WEB-INF/jsp/inc/navWs.jsp" %>
 	<div id="wsBody">
+	<input type="hidden" value="board" id="pageType">
 		<div id="wsBodyContainer">
 			<h3>공지 &amp; 익명 게시판</h3>
 			<ul id="boardList">

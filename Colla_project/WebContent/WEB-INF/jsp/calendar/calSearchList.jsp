@@ -20,6 +20,7 @@ request.setAttribute("contextPath", contextPath);
 <body>
 <%@ include file="/WEB-INF/jsp/inc/headerWs.jsp"%>
 <%@ include file="/WEB-INF/jsp/inc/navWs.jsp"%>
+	<input type="hidden" value="calendar" id="pageType">
 	<form action="calSearchList">
 		<input type="text" name="calSearch" placeholder="검색어를 입력해주세요.">
 		<input type="submit" value="검색">
