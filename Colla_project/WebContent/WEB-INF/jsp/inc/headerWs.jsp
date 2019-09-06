@@ -52,8 +52,19 @@ $(function(){
 	if($("#crNum").val()!="" && $("#crIsDefault").val()=="0"){
 		$("#exitChatRoom").show();
 	}
-	
-	
+	//헤더에 채팅방과 워크스페이스 정보 바꾸기
+	var isDefault = $("#isDefault").val();
+	if(isDefault==1){ //기본채팅방이면
+		$("#chatRoomInfo > p").text("기본채팅방");
+		$(".addCrMember").hide();
+	}else{
+	 	var crName = $("#crName").val();
+	 	$("#chatRoomInfo > p").text(crName);
+	}
+	var calendar = $("#calendar");
+	if(calendar!=""){
+		$("#chatRoomInfo > p").text("캘린더");
+	}
 }); //onload function end
 
 </script>

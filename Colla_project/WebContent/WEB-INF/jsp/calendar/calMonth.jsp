@@ -829,6 +829,8 @@ function nextYearOfYearCal() {
 <%@ include file="/WEB-INF/jsp/inc/headerWs.jsp"%>
 <%@ include file="/WEB-INF/jsp/inc/navWs.jsp"%>
 <div id="wsBody">
+	<input type="hidden" value="${sessionScope.currWnum}" id="currWnum">
+	<input type="hidden" value="calendar" id="calendar">
 		<div id="wsBodyContainer">
 	<form action="calSearchList">
 		<select name="searchType">
