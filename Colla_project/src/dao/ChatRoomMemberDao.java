@@ -13,6 +13,7 @@ public interface ChatRoomMemberDao {
 	public int insertChatRoomMember(ChatRoomMember chatRoomMember);
 	public int updateChatRoomMember(ChatRoomMember chatRoomMember);
 	public int deleteChatRoomMember(int crmNum);
+	public int deleteAllChatRoomMemberByMnum(int mNum);
 	public int deleteChatRoomMemberByWnumMnum(@Param("wNum")int wNum,@Param("mNum")int mNum);
 	public int deleteChatRoomMemberByCrNumMnum(@Param("crNum")int crNum,@Param("mNum")int mNum);
 	public ChatRoomMember selectChatRoomMember(int crmNum);

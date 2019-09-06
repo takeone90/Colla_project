@@ -13,6 +13,7 @@
 <link rel="stylesheet" type="text/css" href="css/base.css"/>
 <link rel="stylesheet" type="text/css" href="css/headerWs.css"/>
 <link rel="stylesheet" type="text/css" href="css/navMyPage.css"/>
+<link rel="stylesheet" type="text/css" href="css/myPage.css"/>
 <script src="https://code.jquery.com/jquery-3.4.1.js"
 	integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
 	crossorigin="anonymous"></script>
@@ -175,9 +176,9 @@
 					<button>수정</button>
 				</form>
 			</div>
-
-
-
+		</div>
+		<div id="deleteMember">
+			<a href="#">회원 탈퇴하기(누르면 바로 탈퇴되고 메인으로 추방)</a>
 		</div>
 	</div>
 

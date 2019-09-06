@@ -35,6 +35,7 @@
 <script>
 var chatArea = $(".chat");
 var favoriteArea;
+var editor;
 	$(function(){
 		loadChatFromDB();
 		favoriteArea = $("#favoriteArea");
@@ -181,8 +182,10 @@ var favoriteArea;
 	//code형태 메세지 보내기
 	function sendCode(){
 		var code = editor.getValue();
-// 		alert("userEmail :"+$("#userEmail").val()+", crNum : "+$("#crNum").val()+", code : "+code+", type : "+type);
-		//잘 들어옴. type은 codemirror의 mode
+ 		//alert("userEmail :"+$("#userEmail").val()+", crNum : "+$("#crNum").val()+", code : "+code+", type : "+type);
+		if(type.includes('/')){
+			type = 'java';
+		}
 		stompClient.send("/client/sendCode/"+$("#userEmail").val()+"/"+$("#crNum").val()+"/"+type,{},code);
 		$("#addCodeModal").fadeOut(300);
 	}
@@ -210,13 +213,6 @@ function loadChatFromDB(){
 		}
 	});
 }
-var textarea = $("#editor");
-var editor = CodeMirror.fromTextArea(textarea,{
-    lineNumbers: true,
-    lineWrapping: true,
-    theme: "eclipse",
-    val: textarea.value
-});
 
 	//일반 메세지 보내기
 	function sendMsg(){
@@ -274,13 +270,6 @@ var editor = CodeMirror.fromTextArea(textarea,{
 			var cmType = msgInfo.cmType;
 			codeType = cmType.substring(cmType.indexOf("_")+1);
 			var contentStr = "<textarea class='codeMsg' id='codeMsg'>"+msgInfo.cmContent+"</textarea>";
-// 			var codeMsg = CodeMirror.fromTextArea($('#codeMsg')[0],{
-// 				mode : codeType,
-// 				theme : "gruvbox-dark",
-// 				lineNumbers : true,
-// 				autoCloseTags : true
-// 			});
-// 				codeMsg.setSize("800", "30");
 		}
 		
 		chatMsg.append("<div class='profileImg'><a href='#' class='openMemberInfo'>"+imgTag+"</a></div>");
@@ -301,8 +290,28 @@ var editor = CodeMirror.fromTextArea(textarea,{
 				autoCloseTags : true,
 				readOnly : true
 			});
-			codeMsg.setSize("800", "50");	
+			
+			//줄 길이에 따른 codeMsg box height 조정
+			var height;
+			var lineCount = codeMsg.lineCount();
+			if(lineCount == 1){
+				height = 40 * lineCount;
+			}
+			else if(lineCount < 3 && lineCount >=2){
+				height = 35 * lineCount;
+			}
+			else if(lineCount < 10 && lineCount >=3){
+				height = 30 * lineCount;
+			}
+			else if(lineCount <= 20 && lineCount >=10) {
+				height = 17 * lineCount;
+			} else {
+			    height = 350;
+			}
+			codeMsg.setSize("100%", height);
 		}
+		
+		
 		if(!area){
 			chatArea.append(chatMsg);
 		}else{
@@ -441,7 +450,6 @@ var editor = CodeMirror.fromTextArea(textarea,{
 			</div>
 			<br><br>
 			<div class="modalBody">
-				<form action="writeCode">
 					<div class="row">
 						<select name="codeType" id="codeType">
 							<option value="text/x-java">java</option>
@@ -451,11 +459,35 @@ var editor = CodeMirror.fromTextArea(textarea,{
 							<option value="sql">sql</option>
 							<option value="php">php</option>
 						</select>
+<!-- 						<div id="selectCodeType"> -->
+<!-- 							<input type="radio" class="radioType" name="codeType" value="text/x-java" checked/>JAVA -->
+<!-- 							<input type="radio" class="radioType" name="codeType" value="javascript"/> JAVA Script -->
+<!-- 							<input type="radio" class="radioType" name="codeType" value="css"/>CSS -->
+<!-- 							<input type="radio" class="radioType" name="codeType" value="xml"/>XML -->
+<!-- 							<input type="radio" class="radioType" name="codeType" value="sql"/>SQL -->
+<!-- 							<input type="radio" class="radioType" name="codeType" value="php"/>PHP -->
+<!-- 						</div> -->
 						<textarea id="editor"></textarea>
 						<script>
-							//CodeMirror textArea를 만들고 mode를 설정할 수 있는 selectbox의 type을 선언하
 							var type = $("#codeType option:selected").val();
-							var editor = CodeMirror.fromTextArea($('#editor')[0],{
+// 							var type;
+// 							$(function(){
+// 								type = $('input:radio[name="codeType"]:checked').val();	
+// 								$("input[name='codeType']").click(function(){
+// 									type = $('input:radio[name="codeType"]:checked').val();
+// 									editor.setOption("mode", type);
+// 									console.log(type);
+// 								});
+// 								editor = CodeMirror.fromTextArea($('#editor')[0],{
+// 									mode : type,
+// 									theme : "gruvbox-dark",
+// 									lineNumbers : true,
+// 									autoCloseTags : true
+// 								});
+// 								editor.setSize("500", "300");
+								
+// 							});
+							editor = CodeMirror.fromTextArea($('#editor')[0],{
 								mode : type,
 								theme : "gruvbox-dark",
 								lineNumbers : true,
@@ -468,7 +500,6 @@ var editor = CodeMirror.fromTextArea(textarea,{
 					<a href="#" class="codeUpload">업로드</a><br> 
 					<a href="#" class="closeCodeModal">닫기</a><br>
 					</div>
-				</form>
 			</div> <!-- end modalBody -->
 		</div><!-- end addCodeModal -->
 		
@@ -507,16 +538,18 @@ var editor = CodeMirror.fromTextArea(textarea,{
 			</div> <!-- end modalBody -->
 		</div><!-- end memberInfoModal -->
 		<%---------------------------------------------즐겨찾기 모달 ----------------------------------------------------%>
-		<div id="chatFavoriteModal">
+		<div id="chatFavoriteModal"  class="attachModal">
 			<div class="modalHead">
 				<h3 style="font-weight: bolder; font-size: 30px">즐겨찾기</h3>
 			</div>
 			<br><br>
 			<div class="modalBody">
-				<p>즐겨찾기 리스트입니다.</p>
-					<div id="favoriteArea">
+				<p align="center">즐겨찾기 리스트입니다.</p>
+					<div id="favoriteArea" align="left">
 					</div>
+			<div class="row">			
 					<button id="closechatFavorite">닫기</button>
+			</div>
 			</div> <!-- end modalBody -->
 		</div>
 		

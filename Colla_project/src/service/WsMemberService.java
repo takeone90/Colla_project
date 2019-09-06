@@ -49,6 +49,13 @@ public class WsMemberService {
 		}
 		return result;
 	}
+	public boolean removeAllWsMemberByMnum(int mNum) {
+		boolean result = false;
+		if(dao.deleteAllWsMemberByMnum(mNum)>0) {
+			result = true;
+		}
+		return result;
+	}
 	public WsMember getWsMember(int wNum,int mNum) {
 		return dao.selectWsMember(wNum, mNum);
 	}

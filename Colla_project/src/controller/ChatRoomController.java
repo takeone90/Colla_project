@@ -105,8 +105,6 @@ public class ChatRoomController {
 				crmService.addChatRoomMember(crNum, num, wNum);
 			}
 		}
-		
-
 		return "redirect:chatMain?crNum="+crNum;
 	}
 
@@ -133,7 +131,6 @@ public class ChatRoomController {
 	public ChatMessage sendMsg(String msg,
 			@DestinationVariable(value = "var1") String userEmail,
 			@DestinationVariable(value = "var2") String crNum) {
-//		System.out.println("sendMsg 핸들러 실행");
 		Member member = mService.getMemberByEmail(userEmail);
 		int cmNum = cmService.addChatMessage(Integer.parseInt(crNum), member.getNum(), msg, "message");
 		ChatMessage cm = cmService.getChatMessageByCmNum(cmNum);
@@ -147,7 +144,10 @@ public class ChatRoomController {
 			@DestinationVariable(value="var2")String crNum,
 			@DestinationVariable(value="var3")String type) {
 		Member member = mService.getMemberByEmail(userEmail);
-		System.out.println("code : "+code+", type : "+type+", crNum : "+crNum+", mNum : "+member.getNum());
+		if(type.equals("java")) {
+			type = "text/x-java";
+		}
+//		System.out.println("code : "+code+", type : "+type+", crNum : "+crNum+", mNum : "+member.getNum());
 		int cmNum = cmService.addChatMessage(Integer.parseInt(crNum), member.getNum(), code, "code_"+type);
 		ChatMessage cm = cmService.getChatMessageByCmNum(cmNum);
 		
@@ -173,8 +173,6 @@ public class ChatRoomController {
 		Member user = (Member)session.getAttribute("user");
 		if (itr.hasNext()) {
 			MultipartFile file = request.getFile(itr.next());
-//			System.out.println("파일 이름 : "+file.getOriginalFilename());
-//			System.out.println("파일 길이 : " + file.getBytes().length);
 			String saveName = cmService.addFile(request, user);
 			int cmNum = cmService.addChatMessage(crNum, user.getNum(), saveName, "file");
 			String jsonStr = "{\"cmNum\":\"" + cmNum + "\",\"fileName\":\"" + saveName + "\",\"originName\":\""+file.getOriginalFilename()+"\"}" ; 
