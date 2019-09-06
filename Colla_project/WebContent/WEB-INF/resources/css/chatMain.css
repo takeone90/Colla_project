@@ -73,6 +73,8 @@
 	border-radius: 50px;
 	background-color: white;
 	margin-right: 10px;
+	margin-top: 5px;
+	vertical-align: top;
 }
 
 .profileImg img {
