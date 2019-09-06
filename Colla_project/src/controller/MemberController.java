@@ -58,7 +58,6 @@ public class MemberController {
 	private SimpMessagingTemplate simpMessagingTemplate;
 	private static Map<String, Object> loginMember = new HashMap<>(); //로그인한 멤버를 담기위한 map	
 
-	
 	@RequestMapping(value="/joinStep1", method = RequestMethod.GET)
 	public String showJoinStep1() {
 		return "/join/joinStep1";
@@ -78,7 +77,27 @@ public class MemberController {
 	public String showLoginForm() {
 		return "/login/loginForm";
 	}
-
+	
+//	네이버 API 회원가입
+	@RequestMapping(value="/callBackJoin", method = RequestMethod.GET)
+	public String showCallBackJoin() {
+		return "/join/callBackJoin";
+	}
+	
+	@RequestMapping(value="/joinMemberAPI", method = RequestMethod.POST)
+	public String joinMemberAPI(Member member) {
+		System.out.println("join member : "+member);
+		boolean result = memberService.addMember(member);
+		System.out.println("join result : "+result);
+		return "redirect:main";
+	}
+	
+//	네이버 API 로그인	
+	@RequestMapping(value="/callBackLogin", method = RequestMethod.GET)
+	public String showCallBackLogin() {
+		return "/login/callBackLogin";
+	}
+	
 	@ResponseBody
 	@RequestMapping(value="/checkEmailDuplication", method = RequestMethod.POST)
 	public boolean checkEmailDuplication(String emailAddress, HttpSession session) {		
@@ -122,6 +141,7 @@ public class MemberController {
 	
 	@RequestMapping(value="/joinMember", method = RequestMethod.POST)
 	public String joinMember(Member member,HttpSession session) {
+		System.out.println("member : "+member);
 		boolean result = memberService.addMember(member);
 		
 		String inviteUserEmail = (String)session.getAttribute("inviteUserEmail");
@@ -149,7 +169,6 @@ public class MemberController {
 	public String loginDuplication() {
 		return "/login/loginDuplication";
 	}
-	
 	
 	public String setCode() {
 		StringBuffer sb = new StringBuffer();
@@ -208,7 +227,6 @@ public class MemberController {
 			System.out.println(request.getSession() + "님이 로그인 하셨습니다.");
 			response.sendRedirect("workspace"); //워크스페이스로 이동한다			
 		}
-
 	}
 	//회원 탈퇴버튼
 	@RequestMapping("/removeMember")

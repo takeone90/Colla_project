@@ -19,7 +19,7 @@
          authentication-failure-url="/loginForm?login=fail"
          authentication-success-handler-ref="loginSuccessHandler"
          login-processing-url="/login"
-         login-page="/loginForm" />
+         login-page="/loginForm"/>
       <security:logout invalidate-session="false" success-handler-ref="logoutSuccessHandler"/>
    </security:http>
    <security:authentication-manager>

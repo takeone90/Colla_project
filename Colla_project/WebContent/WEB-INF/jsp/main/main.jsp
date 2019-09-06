@@ -5,10 +5,32 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="google-signin-client_id" content="504860758033-8nonf1fgo3sk1c4sfv2dv4n52tciijjo.apps.googleusercontent.com">
 <title>COLLA</title>
 <link rel="stylesheet" type="text/css" href="css/reset.css"/>
 <link rel="stylesheet" type="text/css" href="css/base.css"/>
 <link rel="stylesheet" type="text/css" href="css/headerMain.css"/>
+<script src="https://code.jquery.com/jquery-3.4.1.js"
+  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+  crossorigin="anonymous"></script>
+<!-- 구글 API -->
+<script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script>
+<script>
+// $(function() {
+// 	onload();
+// })
+function signOut() {
+	var auth2 = gapi.auth2.getAuthInstance();
+	auth2.signOut().then(function () {
+		console.log('User signed out.');
+	});
+}
+function onLoad() {
+    gapi.load('auth2', function() {
+      gapi.auth2.init();
+    });
+  }
+</script>
 </head>
 <body>
 	<div id="wrap">
@@ -30,6 +52,8 @@
 				<h1>협력사 로고와 이름</h1>
 			</div>
 		</section>
+			
+		<a href="#" onclick="signOut();">Sign out</a>
 		
 		<%@ include file="/WEB-INF/jsp/inc/footerMain.jsp" %>
 	</div>
