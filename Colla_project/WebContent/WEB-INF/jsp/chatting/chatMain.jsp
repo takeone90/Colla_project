@@ -56,7 +56,6 @@ var infowindow;
 		return false;
 	});
 	
-	
 	//파일업로드 모달
 	$(".openFileUploadModal").on("click",function(){
 		$("#addFileModal").fadeIn(300);
@@ -201,6 +200,11 @@ var infowindow;
 	function sendFile(fileName,originName,cmNum){
 		stompClient.send("/client/sendFile/"+$("#userEmail").val()+"/"+$("#crNum").val()+"/"+cmNum+"/"+originName,{},fileName);
 	}
+	
+	//map형태 메세지 보내기 //미경
+	function sendMap(addressId){
+		stompClient.send("/client/sendMap/"+$("#userEmail").val()+"/"+$("#crNum").val(),{},addressId);
+	}
 
 //과거메세지 불러오기
 function loadChatFromDB(){
@@ -277,6 +281,8 @@ function loadChatFromDB(){
 			var cmType = msgInfo.cmType;
 			codeType = cmType.substring(cmType.indexOf("_")+1);
 			var contentStr = "<textarea class='codeMsg' id='codeMsg'>"+msgInfo.cmContent+"</textarea>";
+		}else if(msgInfo.cmType=='map'){
+			contentStr = msgInfo.cmContent;
 		}
 		
 		chatMsg.append("<div class='profileImg'><a href='#' class='openMemberInfo'>"+imgTag+"</a></div>");
@@ -590,7 +596,7 @@ function loadChatFromDB(){
         '                <div class="ellipsis">'+  places.road_address_name + 
         '                <div class="jibun ellipsis">'+places.address_name+'</div>' + 
         '                <div class="phone">'+places.phone+'</div>' + 
-       '                	<div id="shareMap" onclick="shareMap('+places.id+')">공유하기</div>' +
+       '                	<div id="mapUpload" onclick="mapUpload('+places.id+')">공유하기</div>' +
         '            </div>' + 
         '        </div>' + 
         '    </div>' +    
@@ -614,13 +620,11 @@ function loadChatFromDB(){
 	    }
 	}
 
-	
-	function shareMap(placeId){
-	
-	var addressId =  'https://map.kakao.com/link/map/'+placeId;
-	alert(addressId);
-	$("#addLocationModal").fadeOut(300);
-	$("#chatInput").val(addressId);
+	//지도 공유하기 버튼 눌렸을 경우
+	function mapUpload(placeId){
+		var addressId =  'https://map.kakao.com/link/map/'+placeId;
+		$("#addLocationModal").fadeOut(300);
+		sendMap(addressId);
 	return false;
 	}
 </script>
