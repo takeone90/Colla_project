@@ -200,5 +200,6 @@ public class ChatRoomController {
 		crmService.removeChatRoomMemberByCrNumMnum(crNum, user.getNum());
 		return "redirect:workspace";
 	}
+
 	
 }
