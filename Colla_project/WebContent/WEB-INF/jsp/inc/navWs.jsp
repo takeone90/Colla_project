@@ -44,6 +44,7 @@
 			<ul class="chatList">
 			</ul>
 		</div>
+		<div id="subfunction" align="center">
 		<hr>
 		<ul id="ws-subfunction" class="clearFix">
 			<li>
@@ -53,5 +54,6 @@
 				<a href="${contextPath}/board/list">Board</a>
 	    	</li>
 		</ul>
+		</div>
 	</div>
 </div>

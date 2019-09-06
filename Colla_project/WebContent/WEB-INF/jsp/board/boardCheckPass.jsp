@@ -24,6 +24,7 @@
 	<%@ include file="/WEB-INF/jsp/inc/headerWs.jsp" %>
 	<%@ include file="/WEB-INF/jsp/inc/navWs.jsp" %>
 	<div id="wsBody">
+	<input type="hidden" value="board" id="pageType">
 		<h3>게시글 비밀번호 확인</h3>
 		<form id="passForm" action="checkPass" method="post">
 			<input type="password" name="pw" placeholder="비밀번호를 입력해주세요">

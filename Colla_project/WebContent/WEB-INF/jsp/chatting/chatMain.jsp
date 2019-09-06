@@ -633,6 +633,7 @@ function loadChatFromDB(){
 <%@ include file="/WEB-INF/jsp/inc/headerWs.jsp" %>
 <%@ include file="/WEB-INF/jsp/inc/navWs.jsp" %>
 	<div id="wsBody">
+		<input type="hidden" value="chatroom" id="pageType">
 		<input type="hidden" value="${chatRoom.crIsDefault}" id="isDefault">
 		<input type="hidden" value="${chatRoom.crName}" id="crName">
 		<input type="hidden" value="${sessionScope.user.name}" id="userName">
