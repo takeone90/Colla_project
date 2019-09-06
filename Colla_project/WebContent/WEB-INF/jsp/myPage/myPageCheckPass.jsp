@@ -36,6 +36,7 @@
 	<%@ include file="/WEB-INF/jsp/inc/headerWs.jsp"%>
 	<%@ include file="/WEB-INF/jsp/inc/navMyPage.jsp"%>
 	<div id="wsBody">
+	<input type="hidden" value="mypage" id="pageType">
 		<h3>마이페이지</h3>
 		<h4>회원정보 관리</h4>
 		<div id="myPageCheckPass">

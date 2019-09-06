@@ -44,6 +44,7 @@
 		});
 	</script>
 	<div id="wsBody">
+	<input type="hidden" value="board" id="pageType">
 		<h3>게시글 작성</h3>
 		<div id="inputWrap">
 			<form id="writeForm" action="${contextPath}/board/write" method="post" enctype="multipart/form-data">

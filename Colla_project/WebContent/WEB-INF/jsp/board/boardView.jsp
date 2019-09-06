@@ -28,6 +28,7 @@
 	<%@ include file="/WEB-INF/jsp/inc/navWs.jsp" %>
 	
 	<div id="wsBody">
+	<input type="hidden" value="board" id="pageType">
 		<h3>게시글 상세</h3>
 		<div id="boardDetail">
 			<div class="row">

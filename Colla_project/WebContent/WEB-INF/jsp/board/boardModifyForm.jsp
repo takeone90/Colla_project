@@ -37,6 +37,7 @@
 		});
 	</script>
 	<div id="wsBody">
+	<input type="hidden" value="board" id="pageType">
 		<h3>게시글 작성</h3>
 		<div id="inputWrap">
 			<form id="modifyForm" action="${contextPath}/board/modify" method="post">

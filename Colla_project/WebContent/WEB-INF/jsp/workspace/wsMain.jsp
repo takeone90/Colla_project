@@ -114,6 +114,7 @@
 	<%@ include file="/WEB-INF/jsp/inc/headerWs.jsp"%>
 	<%@ include file="/WEB-INF/jsp/inc/navWs.jsp"%>
 	<div id="wsBody">
+		<input type="hidden" value="workspace" id="pageType">
 		<div id="wsBodyContainer"> 
 		<h2>Workspace</h2>
 		<h3>Workspace List</h3>

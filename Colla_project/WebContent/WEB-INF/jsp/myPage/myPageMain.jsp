@@ -53,6 +53,7 @@
 	<%@ include file="/WEB-INF/jsp/inc/headerWs.jsp"%>
 	<%@ include file="/WEB-INF/jsp/inc/navMyPage.jsp"%>
 	<div id="wsBody">
+	<input type="hidden" value="mypage" id="pageType">
 		<h3>마이페이지</h3>
 		<div id="myPageMain">
 			<img alt="나의 프로필 사진" class="myProfileImg" src="${contextPath}/showProfileImg">
