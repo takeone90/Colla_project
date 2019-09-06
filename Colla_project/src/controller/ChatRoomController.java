@@ -54,8 +54,7 @@ public class ChatRoomController {
 	@RequestMapping("/chatMain")
 	public String showChatMain(HttpSession session, int crNum, Model model) {
 		ChatRoom chatRoom = crService.getChatRoomByCrNum(crNum);
-		session.setAttribute("chatRoom", chatRoom);//챗방번호 세션에 저장
-
+		
 		// 해당 workspace에 참여중인 멤버들 정보도 model에 담아야한다.
 		List<WsMember> wsmList = wsmService.getAllWsMemberByCrNum(crNum); // 해당 채팅방 wsm 리스트를 꺼내와서
 		List<Member> wsMemberList = new ArrayList<Member>();
@@ -69,14 +68,11 @@ public class ChatRoomController {
 			}
 			wNum = wsm.getwNum();
 		}
+		model.addAttribute("chatRoom", chatRoom);
 		model.addAttribute("wsMemberList", wsMemberList);
 		model.addAttribute("wNum", wNum);
-
 		session.setAttribute("currWnum", wNum);
-//		//해당 채팅방의 wNum 정보를 통해 wNum의 모든 채팅방리스트를 꺼내야한다.
-//		List<ChatRoom> chatRoomList = crService.getAllChatRoomByWnum(wNum);
-//		model.addAttribute("chatRoomList", chatRoomList);
-
+		session.setAttribute("sessionChatRoom", chatRoom);
 		return "/chatting/chatMain";
 	}
 

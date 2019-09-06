@@ -40,15 +40,7 @@ var editor;
 		loadChatFromDB();
 		favoriteArea = $("#favoriteArea");
 		
-	//헤더에 채팅방과 워크스페이스 정보 바꾸기
-	var isDefault = $("#isDefault").val();
-	if(isDefault==1){ //기본채팅방이면
-		$("#chatRoomInfo > p").text("기본채팅방");
-		$(".addCrMember").hide();
-	}else{
-	 	var crName = $("#crName").val();
-	 	$("#chatRoomInfo > p").text(crName);
-	}
+	
 	
 	//Chat Member추가 모달
 	$(".openAddCrMemberModal").on("click",function(){
