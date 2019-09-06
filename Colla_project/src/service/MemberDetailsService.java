@@ -18,16 +18,19 @@ public class MemberDetailsService implements UserDetailsService{
 	
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		System.out.println("??"+username+"??");
 		Member originMember = memberService.getMemberByEmail(username);
 		String email = originMember.getEmail();
 		String pw = originMember.getPw();
 		int num = originMember.getNum();
-		
+		System.out.println("???");
 		List<String> authList = memberService.getMemberAuthorities(num);
 		MemberDetails member = new MemberDetails();
 		member.setEmail(email);
 		member.setPw(pw);
+		System.out.println("????");
 		System.out.println("[로그인정보 || 아이디 : "+member.getEmail()+", 비밀번호 : "+member.getPw()+"]");
+		
 		for(String auth:authList) {
 			member.addAuth(auth);
 		}
