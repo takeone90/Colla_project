@@ -13,6 +13,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<delete id="deleteChatRoomMember" parameterType="int">
 		delete chatroom_member where crm_num=#{crmNum}
 	</delete>
+	<delete id="deleteAllChatRoomMemberByMnum" parameterType="int">
+		delete chatroom_member where m_num=#{mNum}
+	</delete>
 	<delete id="deleteChatRoomMemberByWnumMnum">
 		delete chatroom_member where w_num=#{wNum} and m_num=#{mNum}
 	</delete>

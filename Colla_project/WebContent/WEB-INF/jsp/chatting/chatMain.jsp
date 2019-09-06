@@ -7,20 +7,36 @@
 <head>
 <meta charset="UTF-8">
 <title>채팅 메인</title>
-<link rel="stylesheet" type="text/css" href="css/reset.css"/>
-<link rel="stylesheet" type="text/css" href="css/base.css"/>
-<link rel="stylesheet" type="text/css" href="css/headerWs.css"/>
-<link rel="stylesheet" type="text/css" href="css/navWs.css"/>
-<link rel="stylesheet" type="text/css" href="css/chatMain.css"/>
+<link rel="stylesheet" type="text/css" href="${contextPath}/css/reset.css"/>
+<link rel="stylesheet" type="text/css" href="${contextPath}/css/base.css"/>
+<link rel="stylesheet" type="text/css" href="${contextPath}/css/headerWs.css"/>
+<link rel="stylesheet" type="text/css" href="${contextPath}/css/navWs.css"/>
+<link rel="stylesheet" type="text/css" href="${contextPath}/css/chatMain.css"/>
 
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=38b5346cba2a9103101abc2c542a2d86&libraries=services"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script type="text/javascript" src="js/stomp.js"></script>
-<script type="text/javascript" src="js/sockjs.js"></script>
+<script type="text/javascript" src="${contextPath}/js/stomp.js"></script>
+<script type="text/javascript" src="${contextPath}/js/sockjs.js"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=38b5346cba2a9103101abc2c542a2d86&libraries=services"></script>
+
+<script type="text/javascript" src="lib/codemirror/lib/codemirror.js"></script>
+<link rel="stylesheet" type="text/css" href="lib/codemirror/lib/codemirror.css"/>
+<link rel="stylesheet" type="text/css" href="lib/codemirror/theme/gruvbox-dark.css"/>
+<script type="text/javascript" src="lib/codemirror/addon/edit/closetag.js"></script>
+<script type="text/javascript" src="lib/codemirror/addon/hint/show-hint.js"></script>
+<script type="text/javascript" src="lib/codemirror/addon/hint/css-hint.js"></script>
+<script type="text/javascript" src="lib/codemirror/mode/javascript/javascript.js"></script>
+<script type="text/javascript" src="lib/codemirror/mode/css/css.js"></script>
+<script type="text/javascript" src="lib/codemirror/mode/clike/clike.js"></script>
+<script type="text/javascript" src="lib/codemirror/mode/xml/xml.js"></script>
+<script type="text/javascript" src="lib/codemirror/mode/sql/sql.js"></script>
+<script type="text/javascript" src="lib/codemirror/mode/php/php.js"></script>
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.32.0/codemirror.min.js"></script> -->
+<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.32.0/codemirror.min.css" /> -->
 
 <script>
 var chatArea = $(".chat");
 var favoriteArea;
+var editor;
 // 마커를 담을 배열입니다
 var markers = [];
 var ps;
@@ -29,15 +45,7 @@ var infowindow;
 	$(function(){
 		loadChatFromDB();
 		favoriteArea = $("#favoriteArea");
-	//헤더에 채팅방과 워크스페이스 정보 바꾸기
-	var isDefault = $("#isDefault").val();
-	if(isDefault==1){ //기본채팅방이면
-		$("#chatRoomInfo > p").text("기본채팅방");
-		$(".addCrMember").hide();
-	}else{
-	 	var crName = $("#crName").val();
-	 	$("#chatRoomInfo > p").text(crName);
-	}
+	
 	
 	//Chat Member추가 모달
 	$(".openAddCrMemberModal").on("click",function(){
@@ -116,6 +124,11 @@ var infowindow;
 		$(".attachDetail").toggle(300);
 		return false;
 	});
+	//select-box 값에 따라 codemirror mode를 바꾸는 과정
+	$("#codeType").change(function(){
+		type = $(this).val();
+		editor.setOption("mode",type);
+	});
 	
 	<%--채팅 연결 및 전송--%>
 	chatArea = $(".chat");
@@ -129,9 +142,13 @@ var infowindow;
 			chatArea.scrollTop($("#chatArea")[0].scrollHeight);
 		}
 	});
+	//코드업로드 버튼 눌렸을 경우
+	$(".codeUpload").on("click",function(){
+		sendCode();
+		chatArea.scrollTop($("#chatArea")[0].scrollHeight);
+	});
 	
-
-	//파일업로드에서 업로드 <a>태그가 눌렸을때
+	//파일업로드 버튼 눌렸을 경우
 	$(".fileUploadBtn").on("click",function(){
 		var addFileForm = $("#addFileForm")[0];
 		var formData = new FormData(addFileForm);
@@ -155,22 +172,24 @@ var infowindow;
 			}
 		});
 	});
-
 });//onload-function end
 
-function shareMap(placeId){
-	
-	var addressId =  'https://map.kakao.com/link/map/'+placeId;
-	alert(addressId);
-	$("#addLocationModal").fadeOut(300);
-	$("#chatInput").val(addressId);
-	return false;
-}
-//파일형태 메세지 보내기
-function sendFile(fileName,originName,cmNum){
-	stompClient.send("/client/sendFile/"+$("#userEmail").val()+"/"+$("#crNum").val()+"/"+cmNum+"/"+originName,{},fileName);
-}
 
+	//code형태 메세지 보내기
+	function sendCode(){
+		var code = editor.getValue();
+ 		//alert("userEmail :"+$("#userEmail").val()+", crNum : "+$("#crNum").val()+", code : "+code+", type : "+type);
+		if(type.includes('/')){
+			type = 'java';
+		}
+		stompClient.send("/client/sendCode/"+$("#userEmail").val()+"/"+$("#crNum").val()+"/"+type,{},code);
+		$("#addCodeModal").fadeOut(300);
+	}
+
+	//파일형태 메세지 보내기
+	function sendFile(fileName,originName,cmNum){
+		stompClient.send("/client/sendFile/"+$("#userEmail").val()+"/"+$("#crNum").val()+"/"+cmNum+"/"+originName,{},fileName);
+	}
 
 //과거메세지 불러오기
 function loadChatFromDB(){
@@ -190,19 +209,7 @@ function loadChatFromDB(){
 		}
 	});
 }
-var textarea = $("#editor");
-/*
- * 
- var editor = CodeMirror.fromTextArea(textarea,{
-	    lineNumbers: true,
-	    lineWrapping: true,
-	    theme: "eclipse",
-	    val: textarea.value
-	}); 
- */
 
-
-	<%-------------------------------------------------------WebSocket 연결부분은 headerWs로 넘어갔습니다.-----------------------------------------------------%>
 	//일반 메세지 보내기
 	function sendMsg(){
 		var msg = $("#chatInput").val();
@@ -248,8 +255,58 @@ var textarea = $("#editor");
 		var originName = getOriginName(msgInfo.cmContent);
 		var date = new Date(msgInfo.cmWriteDate);
 		var writeTime = date.getFullYear()+"-"+date.getMonth()+"-"+date.getDay()+" "+date.getHours()+"시"+date.getMinutes()+"분";
+
+		var contentStr;
+		var codeType;
+		if(msgInfo.cmType=='message'){
+			contentStr = msgInfo.cmContent;
+		}else if(msgInfo.cmType=='file'){
+			contentStr = "<a href='${contextPath}/download?name="+msgInfo.cmContent+"'>"+originName+"</a>";
+		}else if(msgInfo.cmType.includes('code')){
+			var cmType = msgInfo.cmType;
+			codeType = cmType.substring(cmType.indexOf("_")+1);
+			var contentStr = "<textarea class='codeMsg' id='codeMsg'>"+msgInfo.cmContent+"</textarea>";
+		}
+		
 		chatMsg.append("<div class='profileImg'><a href='#' class='openMemberInfo'>"+imgTag+"</a></div>");
-		chatMsg.append("<div class='onlyMsgBox'><div class='name'><p>"+msgInfo.mName+" <span class='date'>"+writeTime+"</span></p></div>"+favorite+"<br><p class='content'>"+( msgInfo.cmType=='message'?msgInfo.cmContent : "<a href='${contextPath}/download?name="+msgInfo.cmContent+"'>"+originName+"</a>" )+"</p></div>");
+		chatMsg.append("<div class='onlyMsgBox'><div class='name'><p>"+msgInfo.mName
+				+"<span class='date'>"+writeTime
+				+"</span></p></div>"+favorite+"<br><p class='content'>"
+				+ contentStr
+				+"</p></div>");
+		chatArea.append(chatMsg);
+// 		console.log(chatArea);
+		
+		if(msgInfo.cmType.includes('code')){
+			console.log(chatArea.find("textarea:last()"));
+			var codeMsg = CodeMirror.fromTextArea( chatArea.find("textarea:last()")[0] ,{
+				mode : codeType,
+				theme : "gruvbox-dark",
+				lineNumbers : true,
+				autoCloseTags : true,
+				readOnly : true
+			});
+			
+			//줄 길이에 따른 codeMsg box height 조정
+			var height;
+			var lineCount = codeMsg.lineCount();
+			if(lineCount == 1){
+				height = 40 * lineCount;
+			}
+			else if(lineCount < 3 && lineCount >=2){
+				height = 35 * lineCount;
+			}
+			else if(lineCount < 10 && lineCount >=3){
+				height = 30 * lineCount;
+			}
+			else if(lineCount <= 20 && lineCount >=10) {
+				height = 17 * lineCount;
+			} else {
+			    height = 350;
+			}
+			codeMsg.setSize("100%", height);
+		}
+		
 		
 		if(!area){
 			chatArea.append(chatMsg);
@@ -547,6 +604,14 @@ var textarea = $("#editor");
 	}
 
 	
+	function shareMap(placeId){
+	
+	var addressId =  'https://map.kakao.com/link/map/'+placeId;
+	alert(addressId);
+	$("#addLocationModal").fadeOut(300);
+	$("#chatInput").val(addressId);
+	return false;
+	}
 </script>
 
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.5.0/styles/androidstudio.min.css">
@@ -580,18 +645,12 @@ var textarea = $("#editor");
 			</div>
 			<div id="chatInputInstance">
 			<a href="#" id="attachBtn">첨부파일</a>
-			<input type="text" id="chatInput" placeholder="메세지 작성부분">
+			<textarea id="chatInput" placeholder="메세지 작성부분"></textarea>
 			<a id="sendChat" href="#">전송</a>
 			</div>
 		</div>
-		<div>
-			<pre><code class="java">
-			for(int i=0;i<10;i++)
-			</code></pre>
-		</div>
-		
 		<%---------------------------------------------채팅방 멤버추가모달 ----------------------------------------------------%>
-		<div id="addCrMemberModal">
+		<div id="addCrMemberModal" class="attachModal">
 			<div class="modalHead">
 				<h3 style="font-weight: bolder; font-size: 30px">채팅방 초대</h3>
 			</div>
@@ -625,7 +684,7 @@ var textarea = $("#editor");
 		
 		
 		<%---------------------------------------------파일첨부 모달 ----------------------------------------------------%>
-		<div id="addFileModal">
+		<div id="addFileModal" class="attachModal">
 			<div class="modalHead">
 				<h3 style="font-weight: bolder; font-size: 30px">파일 업로드</h3>
 			</div>
@@ -654,28 +713,68 @@ var textarea = $("#editor");
 		
 		
 		<%---------------------------------------------코드첨부 모달 ----------------------------------------------------%>
-		<div id="addCodeModal">
-			<div class="modalHead">
+		<div id="addCodeModal" class="attachModal">
+			<div class="modalHead" align="center">
 				<h3 style="font-weight: bolder; font-size: 30px">코드 업로드</h3>
 			</div>
 			<br><br>
 			<div class="modalBody">
-				<p>추가할 코드의 종류를 선택하세요</p>
-				<form action="writeCode">
 					<div class="row">
-						<p> java javascript c c++ c# python </p>
+						<select name="codeType" id="codeType">
+							<option value="text/x-java">java</option>
+							<option value="javascript">javascript</option>
+							<option value="css">css</option>
+							<option value="xml">xml</option>
+							<option value="sql">sql</option>
+							<option value="php">php</option>
+						</select>
+<!-- 						<div id="selectCodeType"> -->
+<!-- 							<input type="radio" class="radioType" name="codeType" value="text/x-java" checked/>JAVA -->
+<!-- 							<input type="radio" class="radioType" name="codeType" value="javascript"/> JAVA Script -->
+<!-- 							<input type="radio" class="radioType" name="codeType" value="css"/>CSS -->
+<!-- 							<input type="radio" class="radioType" name="codeType" value="xml"/>XML -->
+<!-- 							<input type="radio" class="radioType" name="codeType" value="sql"/>SQL -->
+<!-- 							<input type="radio" class="radioType" name="codeType" value="php"/>PHP -->
+<!-- 						</div> -->
+						<textarea id="editor"></textarea>
+						<script>
+							var type = $("#codeType option:selected").val();
+// 							var type;
+// 							$(function(){
+// 								type = $('input:radio[name="codeType"]:checked').val();	
+// 								$("input[name='codeType']").click(function(){
+// 									type = $('input:radio[name="codeType"]:checked').val();
+// 									editor.setOption("mode", type);
+// 									console.log(type);
+// 								});
+// 								editor = CodeMirror.fromTextArea($('#editor')[0],{
+// 									mode : type,
+// 									theme : "gruvbox-dark",
+// 									lineNumbers : true,
+// 									autoCloseTags : true
+// 								});
+// 								editor.setSize("500", "300");
+								
+// 							});
+							editor = CodeMirror.fromTextArea($('#editor')[0],{
+								mode : type,
+								theme : "gruvbox-dark",
+								lineNumbers : true,
+								autoCloseTags : true
+							});
+							editor.setSize("500", "300");
+						</script>
 					</div>
-					<div id="innerBtn">
+					<div id="innerBtn"  align="center">
 					<a href="#" class="codeUpload">업로드</a><br> 
 					<a href="#" class="closeCodeModal">닫기</a><br>
 					</div>
-				</form>
 			</div> <!-- end modalBody -->
 		</div><!-- end addCodeModal -->
 		
 		
 		<%---------------------------------------------지도첨부 모달 ----------------------------------------------------%>
-		<div id="addLocationModal">
+		<div id="addLocationModal" class="attachModal">
 			<div class="modalHead">
 				<h3 style="font-weight: bolder; font-size: 30px">지도 업로드</h3>
 			</div>
@@ -705,7 +804,7 @@ var textarea = $("#editor");
 			</div> <!-- end modalBody -->
 		</div><!-- end addLocationModal -->
 		<%---------------------------------------------회원정보 모달 ----------------------------------------------------%>
-		<div id="memberInfoModal">
+		<div id="memberInfoModal" class="attachModal">
 			<div class="modalHead">
 				<h3 style="font-weight: bolder; font-size: 30px">회원정보</h3>
 			</div>
@@ -719,7 +818,7 @@ var textarea = $("#editor");
 			</div> <!-- end modalBody -->
 		</div><!-- end memberInfoModal -->
 		<%---------------------------------------------즐겨찾기 모달 ----------------------------------------------------%>
-		<div id="chatFavoriteModal">
+		<div id="chatFavoriteModal" class="attachModal">
 			<div class="modalHead">
 				<h3 style="font-weight: bolder; font-size: 30px">즐겨찾기</h3>
 			</div>

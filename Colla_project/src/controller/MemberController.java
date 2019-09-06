@@ -27,6 +27,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import mail.MailSend;
 import model.EmailVerify;
 import model.Member;
+import service.ChatRoomMemberService;
 import service.MemberService;
 import service.WsMemberService; 
 
@@ -52,10 +53,11 @@ public class MemberController {
 	@Autowired
 	private WsMemberService wsmService;
 	@Autowired
+	private ChatRoomMemberService crmService;
+	@Autowired
 	private SimpMessagingTemplate simpMessagingTemplate;
 	private static Map<String, Object> loginMember = new HashMap<>(); //로그인한 멤버를 담기위한 map	
 
-	
 	@RequestMapping(value="/joinStep1", method = RequestMethod.GET)
 	public String showJoinStep1() {
 		return "/join/joinStep1";
@@ -75,7 +77,27 @@ public class MemberController {
 	public String showLoginForm() {
 		return "/login/loginForm";
 	}
-
+	
+//	네이버 API 회원가입
+	@RequestMapping(value="/callBackJoin", method = RequestMethod.GET)
+	public String showCallBackJoin() {
+		return "/join/callBackJoin";
+	}
+	
+	@RequestMapping(value="/joinMemberAPI", method = RequestMethod.POST)
+	public String joinMemberAPI(Member member) {
+		System.out.println("join member : "+member);
+		boolean result = memberService.addMember(member);
+		System.out.println("join result : "+result);
+		return "redirect:main";
+	}
+	
+//	네이버 API 로그인	
+	@RequestMapping(value="/callBackLogin", method = RequestMethod.GET)
+	public String showCallBackLogin() {
+		return "/login/callBackLogin";
+	}
+	
 	@ResponseBody
 	@RequestMapping(value="/checkEmailDuplication", method = RequestMethod.POST)
 	public boolean checkEmailDuplication(String emailAddress, HttpSession session) {		
@@ -119,14 +141,17 @@ public class MemberController {
 	
 	@RequestMapping(value="/joinMember", method = RequestMethod.POST)
 	public String joinMember(Member member,HttpSession session) {
+		System.out.println("member : "+member);
 		boolean result = memberService.addMember(member);
+		
 		String inviteUserEmail = (String)session.getAttribute("inviteUserEmail");
 		int inviteWnum = (Integer)session.getAttribute("inviteWnum");
-		System.out.println("초대받은사람이네요 inviteUserEmail : "+inviteUserEmail+", 초대받은wNum : "+inviteWnum);
-		if(inviteUserEmail!=null && member.getEmail().equals(inviteUserEmail)) {
+		
+		if(inviteUserEmail!=null && member.getEmail().equals(inviteUserEmail) && session.getAttribute("inviteWnum")!=null) {
 			//이게 차있다면 초대받은사람임
 			//wsmember로 추가
 			wsmService.addWsMember(inviteWnum, member.getNum());
+			System.out.println("초대받은사람이네요 inviteUserEmail : "+inviteUserEmail+", 초대받은wNum : "+inviteWnum);
 		}
 		session.removeAttribute("InviteUserEmail");
 		session.removeAttribute("inviteWnum");
@@ -135,13 +160,15 @@ public class MemberController {
 		} else {
 			return "/join/joinStep3"; //실패 시 어디로 갈지는 정의 필요
 		}
+		
+		
+		
 	}
 	
 	@RequestMapping(value="/loginDuplication", method = RequestMethod.GET)
 	public String loginDuplication() {
 		return "/login/loginDuplication";
 	}
-	
 	
 	public String setCode() {
 		StringBuffer sb = new StringBuffer();
@@ -200,9 +227,18 @@ public class MemberController {
 			System.out.println(request.getSession() + "님이 로그인 하셨습니다.");
 			response.sendRedirect("workspace"); //워크스페이스로 이동한다			
 		}
-
 	}
-	
+	//회원 탈퇴버튼
+	@RequestMapping("/removeMember")
+	public String removeMember(HttpSession session) {
+		Member member = (Member)session.getAttribute("user");
+		memberService.removeMember(member.getNum()); //멤버테이블에서 해당멤버 삭제
+		crmService.removeAllChatRoomMemberByMnum(member.getNum()); //chatroom_member 테이블에서 해당 멤버가 들어간 튜플 모두 제거
+		wsmService.removeAllWsMemberByMnum(member.getNum()); //workspace_member 테이블에서 해당 멤버가 들어간 튜플 모두 제거
+		//favorite 모델에서도 m_num을 기준으로 모두 지우는거 만들어야함
+		
+		return "redirect:main";
+	}
 
 	@RequestMapping("/dropSession") //로그아웃 성공 후, 처리
 	public String dropSession(HttpSession session,String userEmail) {

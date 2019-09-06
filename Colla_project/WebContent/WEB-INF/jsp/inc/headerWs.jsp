@@ -19,14 +19,21 @@ function duplicateConnect(){
 		stompClient.subscribe("/category/msg/"+crNum,function(cm){
 				msgInfo = JSON.parse(cm.body);
 				addMsg(msgInfo);
-			$("#chatArea").scrollTop($("#chatArea")[0].scrollHeight);
+				$("#chatArea").scrollTop($("#chatArea")[0].scrollHeight);
 		});
 		
 		//파일메세지 구독
 		stompClient.subscribe("/category/file/"+crNum, function(cm) {
 				msgInfo = JSON.parse(cm.body);
-				addMsg(msgInfo)
-			$("#chatArea").scrollTop($("#chatArea")[0].scrollHeight);
+				addMsg(msgInfo);
+				$("#chatArea").scrollTop($("#chatArea")[0].scrollHeight);
+		});
+		
+		//코드메시지 구독
+		stompClient.subscribe("/category/code/"+crNum, function(cm){
+				msgInfo = JSON.parse(cm.body);
+				addMsg(msgInfo);
+				$("#chatArea").scrollTop($("#chatArea")[0].scrollHeight);
 		});
 		<%-----------------------------------------------------------------------------------------------------%>
 		
@@ -45,8 +52,19 @@ $(function(){
 	if($("#crNum").val()!="" && $("#crIsDefault").val()=="0"){
 		$("#exitChatRoom").show();
 	}
-	
-	
+	//헤더에 채팅방과 워크스페이스 정보 바꾸기
+	var isDefault = $("#isDefault").val();
+	if(isDefault==1){ //기본채팅방이면
+		$("#chatRoomInfo > p").text("기본채팅방");
+		$(".addCrMember").hide();
+	}else{
+	 	var crName = $("#crName").val();
+	 	$("#chatRoomInfo > p").text(crName);
+	}
+	var calendar = $("#calendar");
+	if(calendar!=""){
+		$("#chatRoomInfo > p").text("캘린더");
+	}
 }); //onload function end
 
 </script>
