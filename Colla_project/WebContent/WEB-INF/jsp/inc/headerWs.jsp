@@ -35,6 +35,13 @@ function duplicateConnect(){
 				addMsg(msgInfo);
 				$("#chatArea").scrollTop($("#chatArea")[0].scrollHeight);
 		});
+		
+		//map메시지 구독
+		stompClient.subscribe("/category/map/"+crNum, function(cm){
+				msgInfo = JSON.parse(cm.body);
+				addMsg(msgInfo);
+				$("#chatArea").scrollTop($("#chatArea")[0].scrollHeight);
+		});
 		<%-----------------------------------------------------------------------------------------------------%>
 		
 		stompClient.subscribe("/category/loginMsg/" + ${member.num},function(){
