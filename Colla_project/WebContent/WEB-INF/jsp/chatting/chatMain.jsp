@@ -36,6 +36,7 @@
 <script>
 var chatArea = $(".chat");
 var favoriteArea;
+var chatNavContent;
 var editor;
 // 마커를 담을 배열입니다
 var markers = [];
@@ -45,7 +46,7 @@ var infowindow;
 	$(function(){
 		loadChatFromDB();
 		favoriteArea = $("#favoriteArea");
-	
+		chatNavContent = $("#chatNavContent");
 	
 	//Chat Member추가 모달
 	$(".openAddCrMemberModal").on("click",function(){
@@ -93,31 +94,9 @@ var infowindow;
 		return false;
 	});
 	
-	//즐겨찾기 모달
-	$(".openchatFavoriteModal").on("click",function(){
-		favoriteArea.empty();
-		showFavoriteList();
-		$("#chatFavoriteModal").fadeIn(100);
-	});
-	$("#closechatFavorite").on("click",function(){
-		$("#chatFavoriteModal").fadeOut(100);
-		return false;
-	});
 	
 	//모달 바깥쪽이 클릭되거나 다른 모달이 클릭될때 현재 모달 숨기기
-// 	function closeModals(){
-// 		$("#addCrMemberModal").hide();
-// 		$("#addFileModal").hide();
-// 		$("#addCodeModal").hide();
-// 		$("#addLocationModal").hide();
-// 		$("#memberInfoModal").hide();
-// 		return false;
-// 	}
-// 	$("#wsBody").click(function(){
-// 		closeModals();
-// 	});
-	$("body").mouseup(function(e){
-		console.log('마우스 업!',e, e.target);
+	$("#wsBody").mouseup(function(e){
 		if($("#addCrMemberModal").has(e.target).length===0)
 			$("#addCrMemberModal").fadeOut(300);
 		if($("#addFileModal").has(e.target).length===0)
@@ -329,7 +308,7 @@ function loadChatFromDB(){
 			chatArea.append(chatMsg);
 		}else{
 			console.log(chatMsg);
-			favoriteArea.append(chatMsg[0]);
+			chatNavContent.append(chatMsg[0]);
 		}
 		
 	}
@@ -627,6 +606,8 @@ function loadChatFromDB(){
 		sendMap(addressId);
 	return false;
 	}
+	
+	
 </script>
 
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.5.0/styles/androidstudio.min.css">
@@ -644,11 +625,61 @@ function loadChatFromDB(){
 		<input type="hidden" value="${sessionScope.user.email}" id="userEmail">
 		<input type="hidden" value="${chatRoom.crNum}" id="crNum">
 		<div class="chatArea">
+			<div id="chatNavBox">
+				<div id="openChatNavBox"></div><!-- 슬라이드 메뉴 열 수 있는 띠 -->
+				<div id="chatNav" align="center">
+<!-- 					<ul id="InnerBtns"> -->
+<!-- 						<li class="navInnerBtn" id="favorite">즐겨찾기</li> -->
+<!-- 						<li class="navInnerBtn" id="memberManagement">멤버관리</li> -->
+<!-- 						<li class="navInnerBtn" id="search">검색</li> -->
+<!-- 						<li class="navInnerBtn" id="canvas">캔버스</li> -->
+<!-- 					</ul> -->
+					<ul id="InnerBtns">
+						<label><li class="navInnerBtn"><input type="radio" name="innerBtn" value="favorite" checked>즐겨찾기</li></label>
+						<label><li class="navInnerBtn"><input type="radio" name="innerBtn" value="memberManagement">멤버관리</li></label>
+						<label><li class="navInnerBtn"><input type="radio" name="innerBtn" value="search">검색</li></label>
+						<label><li class="navInnerBtn"><input type="radio" name="innerBtn" value="canvas">캔버스</li></label>
+					</ul>
+				<div id="chatNavContent" align="left"></div>
+				</div>
+			</div>
+			<script>
+				var toggleVal = 0;
+				var navType = $(".navInnerBtn").attr('id');
+				$("#openChatNavBox").on("click",function(){
+					//navBox 토글로 숨기고 열기
+					if(toggleVal==0){
+						$("#chatNavBox").animate({right: 0},200);
+							toggleVal = 1;						
+					}else{
+						$("#chatNavBox").animate({right: -585},200);
+							toggleVal = 0;						
+					}
+				});
+				//navType에 맞는 액션
+				$(function(){
+					$("input[name='innerBtn']").click(function(){
+						var navType = $('input:radio[name="innerBtn"]:checked').val();
+						if(navType=='favorite'){
+							chatNavContent.empty();
+					 		showFavoriteList();		
+						}else if(navType=='memberManagement'){
+							chatNavContent.empty();
+							chatNavContent.append("멤버관리");
+						}else if(navType=='search'){
+							chatNavContent.empty();
+							chatNavContent.append("검색기능");
+						}else if(navType=='canvas'){
+							chatNavContent.empty();
+							chatNavContent.append("캔버스기능");
+						}else{
+							chatNavContent.empty();
+						}
+					});
+				});
+			</script>
 			<div class="addCrMember">
 			<button class="openAddCrMemberModal">채팅방 초대</button>
-			</div>
-			<div class="chatFavoriteList">
-				<button class="openchatFavoriteModal">즐겨찾기</button>
 			</div>
 			<div class="chat" id="chatArea">
 			</div>
@@ -833,19 +864,7 @@ function loadChatFromDB(){
 					<a href="#" class="closeMemberInfo">닫기</a><br>
 			</div> <!-- end modalBody -->
 		</div><!-- end memberInfoModal -->
-		<%---------------------------------------------즐겨찾기 모달 ----------------------------------------------------%>
-		<div id="chatFavoriteModal" class="attachModal">
-			<div class="modalHead">
-				<h3 style="font-weight: bolder; font-size: 30px">즐겨찾기</h3>
-			</div>
-			<br><br>
-			<div class="modalBody">
-				<p>즐겨찾기 리스트입니다.</p>
-					<div id="favoriteArea">
-					</div>
-					<button id="closechatFavorite">닫기</button>
-			</div> <!-- end modalBody -->
-		</div>
+		
 		
 	</div><!-- end wsBody -->
 </body>
