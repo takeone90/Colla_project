@@ -57,7 +57,6 @@ var infowindow;
 		return false;
 	});
 	
-	
 	//파일업로드 모달
 	$(".openFileUploadModal").on("click",function(){
 		$("#addFileModal").fadeIn(300);
@@ -98,6 +97,7 @@ var infowindow;
 	
 	//모달 바깥쪽이 클릭되거나 다른 모달이 클릭될때 현재 모달 숨기기
 	$("#wsBody").mouseup(function(e){
+		if($("#addCrMemberModal").has(e.target).length===0)
 			$("#addCrMemberModal").fadeOut(300);
 		if($("#addFileModal").has(e.target).length===0)
 			$("#addFileModal").fadeOut(300);
@@ -107,7 +107,6 @@ var infowindow;
 			$("#addLocationModal").fadeOut(300);
 		if($("#memberInfoModal").has(e.target).length===0)
 			$("#memberInfoModal").fadeOut(300);
-		return false;
 	});
 	//첨부파일Detail 숨기고 닫기
 	$("#attachBtn").on("click",function(){
@@ -179,6 +178,11 @@ var infowindow;
 	//파일형태 메세지 보내기
 	function sendFile(fileName,originName,cmNum){
 		stompClient.send("/client/sendFile/"+$("#userEmail").val()+"/"+$("#crNum").val()+"/"+cmNum+"/"+originName,{},fileName);
+	}
+	
+	//map형태 메세지 보내기 //미경
+	function sendMap(addressId){
+		stompClient.send("/client/sendMap/"+$("#userEmail").val()+"/"+$("#crNum").val(),{},addressId);
 	}
 
 //과거메세지 불러오기
@@ -256,6 +260,8 @@ function loadChatFromDB(){
 			var cmType = msgInfo.cmType;
 			codeType = cmType.substring(cmType.indexOf("_")+1);
 			var contentStr = "<textarea class='codeMsg' id='codeMsg'>"+msgInfo.cmContent+"</textarea>";
+		}else if(msgInfo.cmType=='map'){
+			contentStr = msgInfo.cmContent;
 		}
 		
 		chatMsg.append("<div class='profileImg'><a href='#' class='openMemberInfo'>"+imgTag+"</a></div>");
@@ -569,7 +575,7 @@ function loadChatFromDB(){
         '                <div class="ellipsis">'+  places.road_address_name + 
         '                <div class="jibun ellipsis">'+places.address_name+'</div>' + 
         '                <div class="phone">'+places.phone+'</div>' + 
-       '                	<div id="shareMap" onclick="shareMap('+places.id+')">공유하기</div>' +
+       '                	<div id="mapUpload" onclick="mapUpload('+places.id+')">공유하기</div>' +
         '            </div>' + 
         '        </div>' + 
         '    </div>' +    
@@ -593,13 +599,11 @@ function loadChatFromDB(){
 	    }
 	}
 
-	
-	function shareMap(placeId){
-	
-	var addressId =  'https://map.kakao.com/link/map/'+placeId;
-	alert(addressId);
-	$("#addLocationModal").fadeOut(300);
-	$("#chatInput").val(addressId);
+	//지도 공유하기 버튼 눌렸을 경우
+	function mapUpload(placeId){
+		var addressId =  'https://map.kakao.com/link/map/'+placeId;
+		$("#addLocationModal").fadeOut(300);
+		sendMap(addressId);
 	return false;
 	}
 	
