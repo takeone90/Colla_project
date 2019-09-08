@@ -15,7 +15,9 @@
 .addFileInputWrap {
 	margin-bottom: 10px;
 }
-
+.chatArea{
+	height : 100%;
+}
 #addCodeModal {
  	text-align: left; 
 }
@@ -264,3 +266,70 @@ pre .CodeMirror-line{
     .info .img {position: absolute;top: 6px;left: 5px;width: 73px;height: 71px;border: 1px solid #ddd;color: #888;overflow: hidden;}
     
     .info .link {color: #5085BB;}
+    
+
+#chatArea {
+	height : 720px;	
+}
+#chatNavBox{
+	display : inline-block;
+	position : fixed;
+	right : -585px;
+	width : 600px;
+	height : 720px;
+	background-color: red;
+	z-index: 10;
+	transition: All 0.2s ease;
+ 	 -webkit-transition: All 0.2s ease;
+ 	 -moz-transition: All 0.2s ease;
+ 	 -o-transition: All 0.2s ease;
+}
+#openChatNavBox{
+	background-color: #E5675A;
+	display: inline-block;
+	float : left;
+	height : 100%;
+	width : 15px;
+}
+#openChatNavBox:hover{
+	cursor : pointer;
+	background-color: #ffae9c;
+}
+#chatNav{	
+	background-color: #f2f4f5;
+	width : 100%;
+	height : 100%;
+}
+#chatNavContent{
+	background-color: white;
+	overflow:auto;
+	margin-left : 15px;
+	border : 0.5px solid #dee1e3;
+	border-radius : 3px;
+	width : 95%;
+	height : 90%;
+}
+.navInnerBtn{
+	background-color: #403C39;
+	width : 90px;
+	height : 20px;
+	margin-top : 8px;
+	margin-bottom : 8px;
+	margin-right : 5px;
+	padding : 10px;
+	border-radius : 5px;
+	display: inline-block;
+}
+.navInnerBtn{
+	color : white;
+}
+.navInnerBtn:hover{
+	cursor : pointer;
+	background-color : #E5675A;
+}
+input[type=radio]{
+	display: none;
+}
+input[type=radio]:radio{
+	backgrount-color : #E5675A;
+}
