@@ -40,13 +40,15 @@
 	text-align:right;
 }
 #myChatList h3{
-	padding:0 30px;
+	font-size : 20px;
+	font-weight : bolder;
+	padding:0 30px 5px 0px;
 }
 #myChatList ul{
 	padding-top:5px;
 }
 #myChatList ul li{
-	padding:3px 30px;
+	padding:10px 30px 10px 10px;
 	font-size:14px;
 }
 #myChatList ul li.currChat{
@@ -56,7 +58,7 @@
 	color:#fff;
 }
 #myChatList ul li a{
-	transition:color 0.5s;
+	transition:color 0.2s;
 	color:#CCCBCA;
 }
 #myChatList ul li a:hover{
@@ -67,26 +69,31 @@
 	display: block;
 	position : absolute;
 	bottom: 0;
-	
+}
+#subfunction hr{
+	border: 0.5px solid #756f6e;
+	width : 80%;
 }
 #ws-subfunction{
-	padding-top:20px;
-	margin-bottom: 30px;
+	
+	padding-top:10px;
+	margin-bottom: 50px;
 }
 #ws-subfunction li{
 	float:left;
 	width:50%;
 }
 #ws-subfunction li a{
-	transition:background-color 0.5s;
-	display:block;
-	border-radius:8px;
-	padding:10px 0;
-	width:80px;
-	margin:0 auto;
+	transition:background-color 0.2s;
+	display:table-cell;
+	vertical-align : middle;
+	border-radius:5px;
+	width:85px;
+	height : 38px;
 	background-color:#888;
 	color:#fff;
 	font-size:14px;
+	
 }
 #ws-subfunction li a:hover{
 	background-color:#E5675A;

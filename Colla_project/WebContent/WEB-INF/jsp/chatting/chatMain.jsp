@@ -681,6 +681,8 @@ function loadChatFromDB(){
 		<input type="hidden" value="${chatRoom.crNum}" id="crNum">
 		<input type="hidden" value="${wNum}" name="wNum" id="wNum">
 		<div class="chatArea">
+			
+			<div class="chat" id="chatArea">
 			<div id="chatNavBox">
 				<div id="openChatNavBox"></div><!-- 슬라이드 메뉴 열 수 있는 띠 -->
 				<div id="chatNav" align="center">
@@ -701,7 +703,7 @@ function loadChatFromDB(){
 						$("#chatNavBox").animate({right: 0},200);
 							toggleVal = 1;						
 					}else{
-						$("#chatNavBox").animate({right: -585},200);
+						$("#chatNavBox").animate({right: -590},200);
 							toggleVal = 0;						
 					}
 				});
@@ -719,7 +721,7 @@ function loadChatFromDB(){
 						}else if(navType=='memberManagement'){
 							chatNavContent.empty();
 							
-							chatNavContent.append("<p class='navInfoMsg'>채팅방에 멤버를 추가할 수 있습니다</p>");
+							chatNavContent.append("<p class='navInfoMsg'>채팅방에 멤버를 추가할 수 있습니다<br>현재 워크스페이스 멤버만 표시됩니다.</p>");
 							showMemberList();
 						}else if(navType=='search'){
 							chatNavContent.empty();
@@ -738,14 +740,13 @@ function loadChatFromDB(){
 				});
 				
 			</script>
-			<div class="chat" id="chatArea">
 			</div>
-			<div id="inputBox">
 			<div class="attachDetail">
 				<div class="attach"><a href="#" class="openFileUploadModal">파일첨부</a></div>
 				<div class="attach"><a href="#" class="openCodeModal">코드첨부</a></div>
 				<div class="attach"><a href="#" class="openLocationModal">지도첨부</a></div>
 			</div>
+			<div id="inputBox">
 			<div id="chatInputInstance">
 			<a href="#" id="attachBtn">첨부파일</a>
 			<textarea id="chatInput" placeholder="메세지 작성부분"></textarea>

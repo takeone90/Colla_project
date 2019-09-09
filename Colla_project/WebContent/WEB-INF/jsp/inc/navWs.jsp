@@ -1,3 +1,4 @@
+<%@page import="org.springframework.web.context.annotation.SessionScope"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -32,10 +33,12 @@
 			</a>
 			<p>${member.name}님</p>
 		</div>
+		
 		<select name="currWorkspace">
-			<option value="1" selected>질수없조프로젝트</option>
-			<option value="2"></option>
-			<option value="3"></option>
+		<c:forEach items="${sessionScope.workspaceList}" var="ws">
+			<option value="1">${ws.wsInfo.name}</option>
+		</c:forEach>
+			
 		</select>
 		<div id="myChatList">
 			<h3>
