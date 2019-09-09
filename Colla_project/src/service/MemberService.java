@@ -86,7 +86,12 @@ public class MemberService {
 	public List<Member> getAllMemberByWnum(int wNum){
 		return dao.selectAllMemberByWnum(wNum);
 	}
-	
+	public List<Member> getAllMemberByCrNum(int crNum){
+		return dao.selectAllMemberByCrNum(crNum);
+	}
+	public List<Member> getAllNotMemberByWnumCrNum(int wNum,int crNum){
+		return dao.selectAllNotMemberByWnumCrNum(wNum, crNum);
+	}
 	
 	public boolean addEmailVerify(EmailVerify emailVerify) {
 		if(dao.insertEmailVerify(emailVerify) > 0) {

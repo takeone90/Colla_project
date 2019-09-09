@@ -10,7 +10,14 @@ public class Member {
 	private Date regDate;
 	private String phone;
 	private String profileImg;
-
+	private int crNum;
+	
+	public int getCrNum() {
+		return crNum;
+	}
+	public void setCrNum(int crNum) {
+		this.crNum = crNum;
+	}
 	public int getNum() {
 		return num;
 	}
