@@ -309,6 +309,10 @@ pre .CodeMirror-line{
 	width : 95%;
 	height : 90%;
 }
+#chatNavContent p{
+	text-align: center;
+	margin-top : 10px;
+}
 .navInnerBtn{
 	background-color: #403C39;
 	width : 90px;
@@ -332,4 +336,7 @@ input[type=radio]{
 }
 input[type=radio]:radio{
 	backgrount-color : #E5675A;
+}
+#wsmListUL{
+	padding : 20px;
 }

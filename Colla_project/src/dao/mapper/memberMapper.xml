@@ -28,13 +28,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		from authority
 		where m_num = #{num}
 	</select>
-	<!-- ws 번호가 n 인 모든 멤버리스트 -->
 	<select id="selectAllMemberByWnum" parameterType="int" resultMap="memberMap">
 		select m.m_num,m.m_email,m.m_name,m.m_pw,m.m_regDate,m.m_phone
 		from member m,workspace_member ws
 		where ws.w_num=#{wNum} and m.m_num=ws.m_num
 	</select>
-	
+	<select id="selectAllMemberByCrNum" parameterType="int" resultMap="memberMap">
+		select m.m_num,m.m_email,m.m_name,m.m_pw,m.m_regDate,m.m_phone
+		from member m,chatroom_member crm
+		where crm.cr_num=#{crNum} and m.m_num=crm.m_num
+	</select>
+	<select id="selectAllNotMemberByWnumCrNum" resultMap="memberMap">
+		(select wm.m_num,m.m_name,m.m_email from workspace w,workspace_member wm, member m
+		where w.w_num=wm.w_num and wm.m_num=m.m_num and wm.w_num=#{wNum})
+		minus
+		(select cm.m_num,m.m_name,m.m_email from chatroom_member cm, member m
+		where cm.m_num=m.m_num and cm.cr_num=#{crNum} and cm.w_num=#{wNum})
+	</select>
 	<select id="selectMember" parameterType="int" resultMap="memberMap">
 		select * from member where m_num=#{num}
 	</select>
@@ -52,6 +62,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="m_reg_date" property="regDate"/>
 		<result column="m_phone" property="phone"/>
 		<result column="m_profileimg" property="profileImg"/>
+		<result column="cr_num" property="crNum"/>
 	</resultMap>
 	
 	<!-- 이메일 인증 코드 관련 --> 
