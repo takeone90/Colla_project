@@ -268,15 +268,14 @@ pre .CodeMirror-line{
     
     .info .link {color: #5085BB;}
     
-#inputBox{
-	display : block;
-	position: relative;
-	
-}
 #chatArea {
 	display : block;
 	position: relative;
-	height : 100%;	
+	height : calc(100% - 70px);	
+}
+#inputBox{
+	height:70px;
+	position: relative;
 }
 #chatNavBox{
 	display : inline-block;

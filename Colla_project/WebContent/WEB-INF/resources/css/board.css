@@ -1,10 +1,74 @@
 @charset "UTF-8";
 
-#pagination{}
-#pagination li{
+/* boardList.jsp*/
+#wsBodyContainer{
+	width: 80%;
+	margin: 0 auto;	
+}
+#boardListView #listHead{
+	background-color: #777;
+	color:#fff;
+}
+#boardListView #boardList {
+	width:100%;
+	font-size:14px;
+}
+#boardListView #boardList li{
+	height : 30px;
+}
+#boardListView #boardList li * {
+	vertical-align:middle;
+}
+#boardListView #boardList li:after{
+	content:"";
+	display:block;
+	clear:both;
+}
+#boardListView #boardList div{
+	height:100%;
+	float:left;
+	text-align:center;
+}
+#boardListView #boardList div:nth-child(1){
+	font-size:13px;
+	width:10%;
+}
+#boardListView #boardList div:nth-child(2){
+	width:60%;
+}
+#boardListView #boardList div:nth-child(3){
+	width:10%;
+}
+#boardListView #boardList div:nth-child(4){
+	width:10%;
+}
+#boardListView #boardList div:nth-child(5){
+	width:10%;
+}
+#boardListView .replyCount{
+	color:#E5675A;
+	font-size:14px;
+}
+#boardListView a.currPage{
+	color:#E5675A;
+	cursor:default;
+}
+#boardListView .reverse {
+	transform:rotate(180deg);
+}
+#boardListView .noticeMark {
 	display:inline-block;
+	padding: 4px 5px;
+	border-radius: 5px;
+	background-color: #E5675A;
+	color:#fff;
 }
 
+#boardListView #pagination{}
+#boardListView #pagination li{
+	display:inline-block;
+}
+/* boardList.jsp END*/
 
 /* board view */
 #replyBox > li {
