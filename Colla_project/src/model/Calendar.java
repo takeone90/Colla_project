@@ -5,6 +5,7 @@ import java.util.Date;
 public class Calendar {
 	private int cNum;
 	private int mNum;
+	private String mName;
 	private int wNum;
 	private String type;
 	private String startDate;
@@ -27,6 +28,12 @@ public class Calendar {
 	}
 	public void setmNum(int mNum) {
 		this.mNum = mNum;
+	}
+	public String getmName() {
+		return mName;
+	}
+	public void setmName(String mName) {
+		this.mName = mName;
 	}
 	public int getwNum() {
 		return wNum;

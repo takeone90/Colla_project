@@ -46,6 +46,7 @@ public class MemberService {
 	@Transactional
 	public boolean addMember(Member member) {
 		if(dao.insertMember(member)>0) {
+			dao.insertAuthority(member.getNum()); //권한 추가
 			SetAlarm setAlarm = new SetAlarm();
 			setAlarm.setNum(member.getNum());
 			if(setAlarmDao.insertSetAlarm(setAlarm)>0) {
@@ -164,7 +165,6 @@ public class MemberService {
 			try {
 				multipartFile.transferTo(saveFile);
 			} catch (IllegalStateException | IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 				return null;
 			}
@@ -200,5 +200,5 @@ public class MemberService {
       }
       return null;
    }
-	
+
 }

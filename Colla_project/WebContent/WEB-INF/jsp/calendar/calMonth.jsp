@@ -14,11 +14,9 @@ request.setAttribute("contextPath", contextPath);
 <link rel="stylesheet" type="text/css" href="css/base.css"/>
 <link rel="stylesheet" type="text/css" href="css/headerWs.css"/>
 <link rel="stylesheet" type="text/css" href="css/navWs.css"/>
-<link rel="stylesheet" type="text/css" href="css/workspace.css"/>
 <style type="text/css">
 
 td{border: 0px; padding: 0px;}
-/* th{} */
 
 /* 월 달력 */
 .drawMonthCalendarUpper{width: 100%; border-collapse: collapse; border: 0px; table-layout: fixed;}
@@ -71,12 +69,14 @@ $(function() {
 var today = new Date();
 var date = new Date();
 var numOfWeekRow = 0;
+
 $(function() {
 	thisMonthCalendar(today);
 	showSchedule();
 	markingOnDate(dateFormatChange2(today));
 	//추가 모달 열기
-	$("#addScheduleButton").on("click", function() {
+	$("#addScheduleButton").on("click", function(e) {
+		$("#detailScheduleFormOfMonthCal").hide("fast");
 		$("#addScheduleForm").show("slow");
 		var todayForAddScheduleForm = new Date(); //고민 좀..
 		$("#startDate").val(dateFormatChange1(todayForAddScheduleForm));
@@ -387,7 +387,7 @@ function showSchedule() {
 					if(startDateMonth==endDateMonth) { //월 안 넘어가는 경우
 						var dateDiff = Math.abs(weekCountOfLastDate-weekCountOfFirstDate);
 						if(dateDiff == 0) { //줄 안 넘어가는 경우
-							var gap = Number(endDateStrDate.getTime()-startDateStrDate.getTime())/(1000*60*60*24)+Number(1); //시작일부터 종료일까지 기간 구하기
+							var gap = Number(endDateStrDate.getTime()-startDateStrDate.getTime())/(1000*60*60*24)+Number(1); //시작일부터 종료일까지 기간
 							var tr = trMakerFullLine(startDayOfThisSchedule, endDayOfThisSchedule, gap, title, color);
 							$("#"+trClassWhereIWantToAppend).after(tr);
 							tr.children('.tdClass').on("click", function() {
@@ -531,7 +531,7 @@ function whichWeek(dateStr) { //달(1~12)
 	var dateDate = dateStr.substring(8, 10);
 	var firstDateOfDate = new Date(dateYear, dateMonth-1, 1); //종료일이 있는 월의 첫날 구하기
 	var firstDayOfDate = firstDateOfDate.getDay(); //종료일 첫날 요일 구하기
-	var weekCount = Math.ceil((Number(firstDayOfDate)+Number(dateDate))/7); //종료일이 몇 번째 주인지 구하기(0~5)
+	var weekCount = Math.ceil((Number(firstDayOfDate)+Number(dateDate))/7); //종료일이 몇 번째 주인지 구하기 0~5
 	return weekCount;
 }
 function findOutNumOfWeekRow(thisDay) {
@@ -831,12 +831,14 @@ function nextYearOfYearCal() {
 <div id="wsBody">
 	<input type="hidden" value="calendar" id="pageType">
 	<input type="hidden" value="${sessionScope.currWnum}" id="currWnum">
-		<div id="wsBodyContainer">
+	<input type="hidden" value="calendar" id="calendar">
+	<div id="wsBodyContainer">
 	<form action="calSearchList">
 		<select name="searchType">
 			<option value="1">제목</option>
-			<option value="2">상세</option>
-			<option value="3">작성자</option>
+			<option value="2">내용</option>
+			<option value="3">제목+내용</option>
+			<option value="4">작성자</option>
 		</select>
 		<input type="text" name="searchKeyword" placeholder="검색어를 입력해주세요.">
 		<input type="submit" value="검색">
