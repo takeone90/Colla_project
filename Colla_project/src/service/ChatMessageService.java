@@ -80,4 +80,7 @@ public class ChatMessageService {
 	public List<ChatMessage> getChatFavoriteList(int crNum, int mNum){
 		return cmDao.selectChatFavoriteList(crNum, mNum);
 	}
+	public int removeAllFavoriteByMnum(int mNum) {
+		return cmDao.deleteFavoriteByMnum(mNum);
+	}
 }

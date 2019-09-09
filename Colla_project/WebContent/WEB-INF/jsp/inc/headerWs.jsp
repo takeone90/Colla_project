@@ -45,14 +45,15 @@ function duplicateConnect(){
 		<%-----------------------------------------------------------------------------------------------------%>
 		
 		stompClient.subscribe("/category/loginMsg/" + ${member.num},function(){
-			alert("로그인 요청 시도가 있었습니다.");
-			$.ajax({ 
-				url : "${contextPath}/dropSession"
-			});
-			location.href="main";
-		});// end subcribe
-	}); //end connect
-}// end duplicateConnect
+	         alert("로그인 요청 시도가 있었습니다.");
+	         $.ajax({ 
+	            url : "${contextPath}/dropSession"
+	         });
+	         location.href="main";
+	      });// end subcribe
+	   }); //end connect
+	}// end duplicateConnect
+
 $(function(){
 	duplicateConnect();
 	

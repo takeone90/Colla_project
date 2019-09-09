@@ -4,7 +4,9 @@ package controller;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.request;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -27,8 +29,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import mail.MailSend;
 import model.EmailVerify;
 import model.Member;
+import service.ChatMessageService;
 import service.ChatRoomMemberService;
 import service.MemberService;
+import service.SetAlarmService;
 import service.WsMemberService; 
 
 @Controller
@@ -55,9 +59,13 @@ public class MemberController {
 	@Autowired
 	private ChatRoomMemberService crmService;
 	@Autowired
+	private ChatMessageService cmService;
+	@Autowired
+	private SetAlarmService saService;
+	@Autowired
 	private SimpMessagingTemplate simpMessagingTemplate;
 	private static Map<String, Object> loginMember = new HashMap<>(); //로그인한 멤버를 담기위한 map	
-
+	private static List<String> loginMemberList = new ArrayList<String>();
 	@RequestMapping(value="/joinStep1", method = RequestMethod.GET)
 	public String showJoinStep1() {
 		return "/join/joinStep1";
@@ -207,27 +215,24 @@ public class MemberController {
 	@RequestMapping("/checkLoginDuplication")
 	public void checkLoginDuplication(HttpServletRequest request, HttpServletResponse response,String userEmail) throws IOException {
 		boolean result = true;
+		simpMessagingTemplate.setMessageConverter(new StringMessageConverter());
 		Member member = (Member)request.getSession().getAttribute("user");
-		for (String key : loginMember.keySet()) {// 로그인한 멤버가 담긴 MAP에서 해당 이메일이 있는지 확인한다
+		for (String key : loginMember.keySet()) {// 중복 로그인 체크
 			if (key.equals(userEmail)) {
-				result = false; // 중복으로 로그인 : false 반환, 정상 로그인 : true 반환
+				result = false; // 중복으로 로그인은 false, 정상 로그인인 true 반환
 			}
 		}
-		if (result) { // 정상적인 로그인의 경우
+		if (result) { // 1. 정상적인 로그인의 경우
 			loginMember.put(userEmail, request.getSession()); // map에 해당 멤버를 담은 뒤,
 			response.sendRedirect("workspace"); // 워크스페이스 메인으로 이동한다
-			System.out.println("정상적인 로그인 멤버 추가 후, 로그인 멤버리스트를 보여줍니다");
-			for(String key : loginMember.keySet()) {
-				System.out.println(key + " : " + loginMember.get(key));
-			}
-		} else { // 중복 로그인의 경우
-			simpMessagingTemplate.setMessageConverter(new StringMessageConverter());
+		} else { // 2. 중복 로그인의 경우
 			simpMessagingTemplate.convertAndSend("/category/loginMsg/"+member.getNum(),"[result:0]"); // 기존 로그인된 유저에게 요청을 보낸다 ==> 기존 유저의 브라우저에서는 alert가 뜬 뒤, 자동 로그아웃 된다.
 			loginMember.put(userEmail, request.getSession()); // map에 해당 멤버를 담은 뒤,
-			System.out.println(request.getSession() + "님이 로그인 하셨습니다.");
-			response.sendRedirect("workspace"); //워크스페이스로 이동한다			
+			response.sendRedirect("workspace"); //워크스페이스로 이동한다	
 		}
+		return;
 	}
+
 	//회원 탈퇴버튼
 	@RequestMapping("/removeMember")
 	public String removeMember(HttpSession session) {
@@ -235,14 +240,19 @@ public class MemberController {
 		memberService.removeMember(member.getNum()); //멤버테이블에서 해당멤버 삭제
 		crmService.removeAllChatRoomMemberByMnum(member.getNum()); //chatroom_member 테이블에서 해당 멤버가 들어간 튜플 모두 제거
 		wsmService.removeAllWsMemberByMnum(member.getNum()); //workspace_member 테이블에서 해당 멤버가 들어간 튜플 모두 제거
-		//favorite 모델에서도 m_num을 기준으로 모두 지우는거 만들어야함
+		cmService.removeAllFavoriteByMnum(member.getNum());//favorite 테이블에서 해당 멤버의 즐겨찾기 튜플 모두 제거
+		saService.removeAllSetAlarmByMnum(member.getNum());//setAlarm 테이블에서 해당 멤버의 알람 설정 값을 모두 제거
 		
 		return "redirect:main";
 	}
 
 	@RequestMapping("/dropSession") //로그아웃 성공 후, 처리
-	public String dropSession(HttpSession session,String userEmail) {
-		loginMember.remove(session.getAttribute("userEmail"));
+	public void dropSession(HttpSession session,String userEmail) {
+		session.invalidate();
+	}
+	@RequestMapping("/logout") //로그아웃 성공 후, 처리
+	public String logout(HttpSession session,String userEmail) {
+		loginMember.remove(session.getAttribute("userEmail")); //로그아웃 추가로 만들어야 함
 		session.invalidate();
 		return "redirect:main";
 	}

@@ -16,6 +16,6 @@ public class LogoutSuccessHandler extends SimpleUrlLogoutSuccessHandler{
 	@Override
 	public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication)
 			throws IOException, ServletException {
-		response.sendRedirect("dropSession"); //checkLoginDuplication로 요청을 보냄(MemberContoroller)	
+		response.sendRedirect("logout"); //checkLoginDuplication로 요청을 보냄(MemberContoroller)	
 	}
 }

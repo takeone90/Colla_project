@@ -29,6 +29,13 @@ public class SetAlarmService {
 		return false;
 	}
 	
+	public boolean removeAllSetAlarmByMnum(int mNum) {
+		if(setAlarmDao.deleteSetAlarm(mNum)>0) {
+			return true;
+		}
+		return false;
+	}
+	
 	public SetAlarm getSetAlarm(int mNum){
 		return setAlarmDao.selectSetAlarm(mNum);
 	}	

@@ -14,4 +14,5 @@ public interface ChatMessageDao {
 	public int insertFavorite(int mNum,int cmNum);
 	public int deleteFavorite(int cmNum);
 	public List<ChatMessage> selectChatFavoriteList(int crNum, int mNum);
+	public int deleteFavoriteByMnum(int mNum);
 }

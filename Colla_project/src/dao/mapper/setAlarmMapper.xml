@@ -15,13 +15,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<delete id="deleteSetAlarm">
 		delete
 		from setAlarm 
-		where m_num = #{num}
-		ㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴ
+		where m_num = #{param1}
 	</delete>
 	<select id="selectSetAlarm" resultMap="setAlarmMap">
 		select *
 		from setAlarm
-		where m_num = #{num}
+		where m_num = #{param1}
 	</select>
 	<resultMap type="setAlarm" id="setAlarmMap">
 		<result column="m_num" property="num"/>

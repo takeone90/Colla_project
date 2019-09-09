@@ -24,7 +24,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from member
 	</select>
 	<select id="selectAuthoritesByNum" parameterType="int" resultType="string">
-		select authority
+		select at_authority
 		from authority
 		where m_num = #{num}
 	</select>

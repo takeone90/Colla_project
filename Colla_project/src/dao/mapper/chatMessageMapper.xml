@@ -36,6 +36,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		from favorite
 		where cm_num = #{param1}
 	</delete>
+	<delete id="deleteFavoriteByMnum">
+		delete 
+		from favorite 
+		where m_num = #{param1};
+	</delete>
 	<select id="selectChatFavoriteList" resultMap="cmMap">
 		select cm.cm_num  ,cm.cr_num,cm.m_num,cm.cm_content,cm.cm_write_date,m.m_name,cm.cm_type,m.m_profileimg,f.f_num
 		from chat_message cm, member m, favorite f 
