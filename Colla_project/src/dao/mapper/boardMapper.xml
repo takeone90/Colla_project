@@ -19,7 +19,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select b_num, m_name, w_num, b_title, b_regdate, b_readcnt, b_type, r_cnt, 'n' as isnotice 
 		from (select rn, b_num, m_name, w_num, b_title, b_regdate, b_readcnt, b_type, r_cnt
 		        from (select rownum as rn, b_num, m_name, w_num, b_title, b_content, b_regdate, b_readCnt, b_type, r_cnt
-		                from (select b_num, m_name, w_num, b_title, b_content, b_regdate, b_readCnt, b_type
+		                from (select b_num, m.m_name, w_num, b_title, b_content, b_regdate, b_readCnt, b_type
 		                         ,(select count(*) from reply r where b.b_num=r.b_num) as r_cnt
 		                           from board b, member m
 		                           where b.w_num = #{wNum} and m.m_num=b.m_num 
@@ -61,13 +61,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <!-- 		select count(b_num) from board where w_num=#{wNum} -->
 
 						select count(b_num)
-		                from (select * from board where w_num=#{wNum})
+		                from (select b.b_num, m.m_name 
+		                		from board b, member m 
+		                		where w_num=#{wNum}
+		                			and b.m_num=m.m_num)
 		                where 1=0
 		                 <if test="title != null">
-		                 	or upper(b_title) like ('%'||upper('${keyword}')||'%')
+		                 	or upper(b_title) like ('%'||upper('${keyword}')||'%')		                 	
 		                 </if>
 		                 <if test="content != null">
-		                 	or upper(b_content) like ('%'||upper('${keyword}')||'%')
+		                 	or upper(b_content) like ('%'||upper('${keyword}')||'%')	                 	)
 		                 </if>
 		                 <if test="name != null">
 		                 	or upper(m_name) like ('%'||upper('${keyword}')||'%')

@@ -20,8 +20,13 @@
 			window.close();
 		}
 		function dataFunction(info){
-			console.log(info);
-// 			window.location.href = "${contextPath}/payment/result";
+			$("#total").val(info.amount.total);
+			$("#partner_order_id").val(info.partner_order_id);
+			$("#approved_at").val(info.approved_at);
+			$("#item_name").val(info.item_name);
+			$("#payment_method_type").val(info.payment_method_type);
+			$("#resultForm").submit();
+			
 		}
 		function openNewWin(){
 			frm = document.getElementById("kakaoPayForm");
@@ -39,6 +44,13 @@
 				<h1>카카오 페이</h1>
 				<form id="kakaoPayForm">
 					<button onclick="openNewWin();">카카오페이로 결제하기</button>
+				</form>
+				<form action="result" id="resultForm" method="post">
+					<input type="hidden" name="total" id="total">
+					<input type="hidden" name="partner_order_id" id="partner_order_id">
+					<input type="hidden" name="approved_at" id="approved_at">
+					<input type="hidden" name="item_name" id="item_name">
+					<input type="hidden" name="payment_method_type" id="payment_method_type">
 				</form>
 			</div>
 		</section>

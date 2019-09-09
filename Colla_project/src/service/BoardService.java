@@ -97,10 +97,13 @@ public class BoardService {
 	public int getTotalPage(Map<String, Object> param) {
 		int notice = getNoticeCnt(param);
 		System.out.println("공지사항 갯수 : "+ notice);
+		System.out.println("보드 토탈 Cnt : "+ getBoardCnt(param));
+		System.out.println(param);
 		int totalPage= (int)Math.ceil(getBoardCnt(param)/ ((double) ITEMS_PER_PAGE - notice));
 		return totalPage<=0?1:totalPage;
 	}
 	public int getNoticeCnt(Map<String, Object> param) {
+		System.out.println(param);
 		int notice = bDao.selectCountNoticeByWnum(param);
 		return notice > 10? 10: notice;
 	}
