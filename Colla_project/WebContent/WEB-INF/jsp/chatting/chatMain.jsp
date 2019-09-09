@@ -76,15 +76,6 @@ var infowindow;
 		$("#addLocationModal").fadeOut(300);
 		return false;
 	});
-	//회원정보 모달
-	$(".openMemberInfo").on("click",function(){
-		$("#memberInfoModal").fadeIn(100);
-	});
-	$(".closeMemberInfo").on("click",function(){
-		$("#memberInfoModal").fadeOut(100);
-		return false;
-	});
-	
 	
 	//모달 바깥쪽이 클릭되거나 다른 모달이 클릭될때 현재 모달 숨기기
 	$("#wsBody").mouseup(function(e){
@@ -172,7 +163,7 @@ function showMemberList(){
 				wsmListUL.append(crMemberLI);
 			});
 			$.each(wsmList,function(idx,item){
-				var wsMemberLI = $("<li><input type='checkbox' value='"+item.num+"' name='wsmList'>"+item.name+"</li>");
+				var wsMemberLI = $("<li><label><input type='checkbox' value='"+item.num+"' name='wsmList'>"+item.name+"</label></li>");
 				wsmListUL.append(wsMemberLI);
 			});
 			
@@ -682,14 +673,14 @@ function loadChatFromDB(){
 					 		showFavoriteList();		
 						}else if(navType=='memberManagement'){
 							chatNavContent.empty();
-							chatNavContent.append("<p>채팅방에 멤버를 추가할 수 있습니다</p>");
+							chatNavContent.append("<p class='navInfoMsg'>채팅방에 멤버를 추가할 수 있습니다</p>");
 							showMemberList();
 						}else if(navType=='search'){
 							chatNavContent.empty();
-							chatNavContent.append("<p>키워드로 채팅방내용을 검색하세요</p>");
+							chatNavContent.append("<p class='navInfoMsg'>키워드로 채팅방내용을 검색하세요</p>");
 						}else if(navType=='canvas'){
 							chatNavContent.empty();
-							chatNavContent.append("<p>캔버스</p>");
+							chatNavContent.append("<p class='navInfoMsg'>캔버스</p>");
 						}else{
 							chatNavContent.empty();
 						}
@@ -699,8 +690,7 @@ function loadChatFromDB(){
 			</script>
 			<div class="chat" id="chatArea">
 			</div>
-		</div>
-		<div id="inputBox">
+			<div id="inputBox">
 			<div class="attachDetail">
 				<div class="attach"><a href="#" class="openFileUploadModal">파일첨부</a></div>
 				<div class="attach"><a href="#" class="openCodeModal">코드첨부</a></div>
@@ -711,7 +701,9 @@ function loadChatFromDB(){
 			<textarea id="chatInput" placeholder="메세지 작성부분"></textarea>
 			<a id="sendChat" href="#">전송</a>
 			</div>
+		</div><!-- inputBox end -->
 		</div>
+		
 		
 		<%---------------------------------------------파일첨부 모달 ----------------------------------------------------%>
 		<div id="addFileModal" class="attachModal">
