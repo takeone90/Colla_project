@@ -14,13 +14,6 @@
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 </head>
 <body>
-	<script>
-		var paymentInfo;
-		function dataFunction(info){
-			paymentInfo = info;
-			$("#paymentInfo").text(info);
-		}
-	</script>
 	<div id="wrap">
 		<%@ include file="/WEB-INF/jsp/inc/headerMain.jsp" %>
 		<section id="main-cover">
@@ -28,12 +21,11 @@
 				<h1>카카오 페이 결제가 정상적으로 완료되었습니다!</h1>
 				<p id="paymentInfo"></p>
 				<div>
-					<p>결제일시 : ${info.approved_at }</p>
-					<p>주문번호 : ${info.partner_order_id }</p>
-					<p>상품명 : ${info.item_name}</p>
-					<p>상품수량 : ${info.quantity }</p>
-					<p>결제금액 : ${info.amount.total }</p>
-					<p>결제방법 : ${info.payment_method_type}</p>
+					<p>결제일시 : ${param.approved_at }</p>
+					<p>주문번호 : ${param.partner_order_id }</p>
+					<p>상품명 : ${param.item_name}</p>
+					<p>결제금액 : ${param.total }</p>
+					<p>결제방법 : ${param.payment_method_type}</p>
 				
 				</div>
 			</div>
