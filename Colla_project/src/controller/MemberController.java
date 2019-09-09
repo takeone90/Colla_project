@@ -236,6 +236,12 @@ public class MemberController {
 
 	@RequestMapping("/dropSession") //로그아웃 성공 후, 처리
 	public String dropSession(HttpSession session,String userEmail) {
+		//loginMember.remove(session.getAttribute("userEmail"));
+		session.invalidate();
+		return "redirect:main";
+	}
+	@RequestMapping("/removeSession") //로그아웃 성공 후, 처리
+	public String logoutSession(HttpSession session,String userEmail) {
 		loginMember.remove(session.getAttribute("userEmail"));
 		session.invalidate();
 		return "redirect:main";
