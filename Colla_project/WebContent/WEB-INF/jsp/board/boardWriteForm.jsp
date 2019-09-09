@@ -35,9 +35,9 @@
 					alert("제목을 입력해주세요.");
 					$("#title").focus().val("");
 					return false;
-				} else if (!$("#content").val().trim()){
+				} else if (!$("#cke_content iframe").contents().find("body").text().trim()){
 					alert("내용을 입력해주세요.");
-					$("#content").focus().val("");
+					$("#cke_content iframe").contents().find("body").focus().val("");
 					return false;
 				}
 			});

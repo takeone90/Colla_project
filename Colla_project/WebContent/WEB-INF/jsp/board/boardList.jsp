@@ -39,7 +39,7 @@
 					</li>
 					
 					<c:forEach items="${bList}" var="board">
-					<li>
+					<li ${board.isNotice == 'y'?'class="noticeLi"':'' }>
 						<div>${board.isNotice == 'y'?'<span class="noticeMark">공지</span>':board.bNum }</div>
 						<div>
 							<a href="${contextPath}/board/view?num=${board.bNum}">${board.bTitle } <span class="replyCount">[${board.replyCnt }]</span></a>
@@ -54,8 +54,8 @@
 				</ul>
 				
 				<ul id=pagination>
-					<li><a href="list?page=1" id="firstPage"><i class="fas fa-step-backward"></i></a></li>
-					<li><a href="list?page=${listInf.startNum-1>0?listInf.startNum-1:1}" id="prevPage" ${instInf.startNum }><i class="fas fa-play reverse"></i></a></li>
+					<li><a href="${listInf.page==1?'javascript:void(0)':'list?page=1' }" id="firstPage" class="${listInf.page==1?'disable':'' }"><i class="fas fa-angle-double-left"></i></a></li>
+					<li><a href="${listInf.page==1?'javascript:void(0)':'list?page=listInf.startNum-1>0?listInf.startNum-1:1' }" id="prevPage" ${instInf.startNum } class="${listInf.page==1?'disable':'' }"><i class="fas fa-angle-left"></i></a></li>
 						<c:forEach var="i" begin="${listInf.startNum }" end="${listInf.endNum }">
 						<c:if test="${i<=listInf.totalPage }">
 							<li>
@@ -63,8 +63,21 @@
 							</li>
 						</c:if>
 						</c:forEach>				
-					<li><a href="list?page=${listInf.endNum+1>listInf.totalPage?listInf.totalPage:listInf.endNum+1 }" id="nextPage"><i class="fas fa-play"></i></a></li>
-					<li><a href="list?page=${listInf.totalPage }" id="lastPage"><i class="fas fa-step-forward"></i></a></li>
+<!-- 					<li> -->
+<%-- 						<a href="${listInf.page==listInf.totalPage?'javascript:void(0)':list?page=listInf.endNum+1>listInf.totalPage?listInf.totalPage:listInf.endNum+1 }" id="nextPage" class="${listInf.page==listInf.totalPage?'disable':'' }"> --%>
+<!-- 							<i class="fas fa-angle-right"></i> -->
+<!-- 						</a> -->
+<!-- 					</li> -->
+					<li>
+						<c:if test="${listInf.page==listInf.totalPage}">
+						<a href="javascript:void(0)" id="lastPage" class="disable">
+						</c:if>
+						<c:if test="${listInf.page<listInf.totalPage}">
+						<a href="list?page=${listInf.totalPage }" id="lastPage">
+						</c:if>
+							<i class="fas fa-angle-double-right"></i>
+						</a>
+					</li>
 				</ul>
 				
 				<a href="${contextPath}/board/write">글쓰기</a>
