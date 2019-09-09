@@ -42,7 +42,9 @@ var editor;
 var markers = [];
 var ps;
 var map;
-var infowindow;
+//var infowindow;
+var overlay;
+var clickedOverlay = null;
 	$(function(){
 		loadChatFromDB();
 		favoriteArea = $("#favoriteArea");
@@ -196,7 +198,12 @@ function showMemberList(){
 	function sendFile(fileName,originName,cmNum){
 		stompClient.send("/client/sendFile/"+$("#userEmail").val()+"/"+$("#crNum").val()+"/"+cmNum+"/"+originName,{},fileName);
 	}
-
+	
+	//map형태 메세지 보내기 
+	function sendMap(placePosition){
+		stompClient.send("/client/sendMap/"+$("#userEmail").val()+"/"+$("#crNum").val(),{},placePosition);
+	}
+	
 //과거메세지 불러오기
 function loadChatFromDB(){
 	var crNum = $("#crNum").val();
@@ -272,6 +279,13 @@ function loadChatFromDB(){
 			var cmType = msgInfo.cmType;
 			codeType = cmType.substring(cmType.indexOf("_")+1);
 			var contentStr = "<textarea class='codeMsg' id='codeMsg'>"+msgInfo.cmContent+"</textarea>";
+		}else if(msgInfo.cmType=='map'){
+			var contentStr = "<div id='staticMap"+msgInfo.cmNum+"' class='staticMap'>"+
+								"<div class='staticMapInfo'>" + 
+									"<p id='placeName"+msgInfo.cmNum+"' class='placeName'></p>"+
+									"<p id='placeAddr"+msgInfo.cmNum+"' class='placeAddr'></p>"+
+								"</div>"+
+							 "</div>";
 		}
 		
 		chatMsg.append("<div class='profileImg'><a href='#' class='openMemberInfo'>"+imgTag+"</a></div>");
@@ -313,6 +327,28 @@ function loadChatFromDB(){
 			codeMsg.setSize("100%", height);
 		}
 		
+		//static Map
+		if(msgInfo.cmType == 'map'){
+			var staticMapContainer;
+			var positionArr = (msgInfo.cmContent).split("_");   
+			var staticMapmarkerPosition = new kakao.maps.LatLng(positionArr[1], positionArr[0]); 
+			var staticMapmarker = {
+			    position: staticMapmarkerPosition
+			};
+			staticMapContainer  = document.getElementById('staticMap'+msgInfo.cmNum), // 이미지 지도를 표시할 div
+			staticMapOption = { 
+				center: new kakao.maps.LatLng(positionArr[1], positionArr[0]),	
+				level: 3, // 이미지 지도의 확대 레벨
+				marker: staticMapmarker
+		    };
+			// 이미지 지도를 표시할 div와 옵션으로 이미지 지도를 생성합니다
+			//var staticMap = new kakao.maps.StaticMap(staticMapContainer, staticMapOption);
+			//"<div class='staticMapInfo'><p class='placeName'></p><p class='placeAddr'></p></div>"+
+			//"#placeAddr"+msgInfo.cmNum
+			$("#placeName"+msgInfo.cmNum).text(positionArr[2]);
+			$("#placeAddr"+msgInfo.cmNum).text(positionArr[3]);
+			var staticMap = new kakao.maps.StaticMap(staticMapContainer, staticMapOption);
+		}
 		
 		if(!area){
 			chatArea.append(chatMsg);
@@ -355,7 +391,7 @@ function loadChatFromDB(){
 		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 		    mapOption = {
 		        center: new kakao.maps.LatLng(37.566826, 126.9786567), // 지도의 중심좌표
-		        level: 5
+		        level: 3
 		    };  
 
 		// 지도를 생성합니다    
@@ -443,17 +479,27 @@ function loadChatFromDB(){
 	        // mouseout 했을 때는 인포윈도우를 닫습니다
 	        (function(marker, places) {
 	            kakao.maps.event.addListener(marker, 'click', function() {
-	                displayInfowindow(marker, title);
-	            });
-
-	            kakao.maps.event.addListener(marker, 'click', function() {
-	                infowindow.close();
+	            	if(clickedOverlay!=null){
+	            		console.log("null이 아닙니다");
+	            		//clickedOverlay.setMap(null);
+	            	}else{
+	            		console.log("null 입니다");
+	            		
+	            	}
+	            	map.setCenter(new kakao.maps.LatLng(places.y, places.x));
+	            	displayOverlay(marker, places);
+	            	clickedOverlay = overlay;
 	            });
 
 	            itemEl.onclick =  function () {
 	            	//displayInfowindow(marker, title);
-	            	console.log("function(marker, places) : " + places[1]);
-	                displayInfowindow(marker, places);
+	            	if(clickedOverlay!=null){
+	            		console.log("null이 아닙니다");
+	            		clickedOverlay.setMap(null);
+	            	}
+	            	map.setCenter(new kakao.maps.LatLng(places.y, places.x));
+	            	displayOverlay(marker, places);
+	                clickedOverlay = overlay;
 	            };
 
 	        })(marker, places[i]);
@@ -569,34 +615,35 @@ function loadChatFromDB(){
 	    infowindow.open(map, marker);
 	} */
 	
-	function displayInfowindow(marker, places) {
-		
-		var content = '<div class="wrap">' + 
-        '    <div class="info">' + 
-        '        <div class="title">' + 
-                             places.place_name + 
-        '            <div class="close" onclick="closeOverlay()" title="닫기"></div>' + 
-        '        </div>' + 
-        '        <div class="body">' + 
-        '            <div class="img">' +
- //       '                <img src="http://cfile181.uf.daum.net/image/250649365602043421936D" width="73" height="70">' +
-        '           </div>' + 
-        '            <div class="desc">' + 
-        '                <div class="ellipsis">'+  places.road_address_name + 
-        '                <div class="jibun ellipsis">'+places.address_name+'</div>' + 
-        '                <div class="phone">'+places.phone+'</div>' + 
-       '                	<div id="shareMap" onclick="shareMap('+places.id+')">공유하기</div>' +
-        '            </div>' + 
-        '        </div>' + 
-        '    </div>' +    
-        '</div>';		
-        overlay = new kakao.maps.CustomOverlay({
-	    	 content : content,
+	function displayOverlay(marker, places) {
+		var overlayContent = 
+			"<div class='overlayWrap'>" +
+				"<div class='overlayInfo'>" +
+					"<div class='placeName'>" + places.place_name + 
+						"<div class='overlayClose' onclick='closeOverlay()' title='닫기'></div>" +
+					"</div>" +
+			
+					"<div class='overlayBody'>" + 
+						"<div class='desc'>"+
+							"<div class='ellipsis'>" + places.road_address_name +
+								"<div class='jibun ellipsis'>" + places.address_name +"</div>" +
+								"<div class='phone'>" + places.phone +"</div>" +
+								"<div id='mapUpload' class='link' onclick='mapUpload("+places.x+","+places.y+",\""+places.place_name+"\",\""+places.road_address_name+"\")'>공유하기</div>"+
+							"</div>" +
+						"</div>" +
+					"</div>" +
+				"</div>" +
+			"</div>";
+
+
+       overlay = new kakao.maps.CustomOverlay({
+	    	 content : overlayContent,
 	    	 map: map,
 	    	 position: marker.getPosition()
 			});
 	    overlay.setMap(map);
 	}
+	
 	
 	function closeOverlay() {
 	    overlay.setMap(null);     
@@ -610,13 +657,12 @@ function loadChatFromDB(){
 	}
 
 	
-	function shareMap(placeId){
-	
-	var addressId =  'https://map.kakao.com/link/map/'+placeId;
-	alert(addressId);
-	$("#addLocationModal").fadeOut(300);
-	$("#chatInput").val(addressId);
-	return false;
+	//지도 공유하기 버튼 눌렸을 경우
+	function mapUpload(placeX,placeY,placeName,placeAddress){
+		
+		sendMap(placeX+"_"+placeY+"_"+placeName+"_"+placeAddress); 
+		$("#addLocationModal").fadeOut(300);
+		return false;
 	}
 	
 	
@@ -804,10 +850,8 @@ function loadChatFromDB(){
 			<br><br>
 			<div class="modalBody">
 				<p>멤버들과 위치를 공유할 수 있습니다</p>
-				<!--<form action="tes"> -->
 				<div class="map_wrap">
 					<div id="map"></div>
-
 					<div id="menu_wrap" class="bg_white">
 						<div class="option">
 							<div>
@@ -822,8 +866,9 @@ function loadChatFromDB(){
 						<div id="pagination"></div>
 					</div>
 				</div>
-				<!-- </form> -->
-				
+				<div id="innerBtn">
+						<a href="#" class="closeLocationModal">닫기</a>
+				</div>
 			</div> <!-- end modalBody -->
 		</div><!-- end addLocationModal -->
 		<%---------------------------------------------회원정보 모달 ----------------------------------------------------%>
