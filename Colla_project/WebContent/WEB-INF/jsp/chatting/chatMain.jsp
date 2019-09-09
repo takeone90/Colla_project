@@ -642,17 +642,16 @@ function loadChatFromDB(){
 				<div id="openChatNavBox"></div><!-- 슬라이드 메뉴 열 수 있는 띠 -->
 				<div id="chatNav" align="center">
 					<ul id="InnerBtns">
-						<li class="navInnerBtn liRadio"><label><input type="radio" name="innerBtn" value="favorite" checked>즐겨찾기</label></li>
-						<li class="navInnerBtn"><label><input type="radio" name="innerBtn" value="memberManagement">멤버관리</label></li>
-						<li class="navInnerBtn"><label><input type="radio" name="innerBtn" value="search">검색</label></li>
-						<li class="navInnerBtn"><label><input type="radio" name="innerBtn" value="canvas">캔버스</label></li>
+						<li class="navInnerBtn"><label class="clicked"><input type="radio" name="innerBtn" value="favorite" checked>즐겨찾기</label></li>
+						<li class="navInnerBtn"><label class="none-clicked"><input type="radio" name="innerBtn" value="memberManagement">멤버관리</label></li>
+						<li class="navInnerBtn"><label class="none-clicked"><input type="radio" name="innerBtn" value="search">검색</label></li>
+						<li class="navInnerBtn"><label class="none-clicked"><input type="radio" name="innerBtn" value="canvas">캔버스</label></li>
 					</ul>
 				<div id="chatNavContent" align="left"></div>
 				</div>
 			</div>
 			<script>
 				var toggleVal = 0;
-				var navType = $(".navInnerBtn").attr('id');
 				$("#openChatNavBox").on("click",function(){
 					//navBox 토글로 숨기고 열기
 					if(toggleVal==0){
@@ -668,22 +667,30 @@ function loadChatFromDB(){
 					showFavoriteList();
 					$("input[name='innerBtn']").click(function(){
 						var navType = $('input:radio[name="innerBtn"]:checked').val();
+						var labelType = $('input:radio[name="innerBtn"]:checked').parent();
+						var anotherLabelType = $('input:radio[name="innerBtn"]:not(:checked)').parent();
 						if(navType=='favorite'){
 							chatNavContent.empty();
+							
 					 		showFavoriteList();		
 						}else if(navType=='memberManagement'){
 							chatNavContent.empty();
+							
 							chatNavContent.append("<p class='navInfoMsg'>채팅방에 멤버를 추가할 수 있습니다</p>");
 							showMemberList();
 						}else if(navType=='search'){
 							chatNavContent.empty();
+							
 							chatNavContent.append("<p class='navInfoMsg'>키워드로 채팅방내용을 검색하세요</p>");
 						}else if(navType=='canvas'){
 							chatNavContent.empty();
+							
 							chatNavContent.append("<p class='navInfoMsg'>캔버스</p>");
 						}else{
 							chatNavContent.empty();
 						}
+						labelType.attr('class','clicked');
+						anotherLabelType.attr('class','none-clicked');
 					});
 				});
 				

@@ -327,32 +327,41 @@ pre .CodeMirror-line{
 }
 .navInnerBtn{
 	background-color: #403C39;
-	width : 90px;
-	height : 20px;
+	width : 124px;
+	height : 40px;
 	margin-top : 8px;
 	margin-bottom : 8px;
 	margin-right : 5px;
-	padding : 10px;
+/* 	padding : 10px; */
 	border-radius : 5px;
 	display: inline-block;
-}
-.navInnerBtn{
 	color : white;
+	
 }
-.navInnerBtn:hover{
-	cursor : pointer;
-	background-color : #E5675A;
-}
+
 input[type=radio]{
 	display: none;
 }
 #InnerBtns li label{
 	display:block;
+	line-height: 38px;
 	width:100%;
 	height:100%;
 }
-.liRadio{
+#InnerBtns li label:hover{
+	cursor : pointer;
 	background-color : #E5675A;
+	border-radius : 5px;
+}
+.clicked{
+	cursor : pointer;
+	border-radius : 5px;
+	background-color : #E5675A;
+}
+.none-clicked{
+	cursor : pointer;
+	border-radius : 5px;
+	background-color : #403C39;
 }
 #wsmListUL{
 	padding : 20px;
