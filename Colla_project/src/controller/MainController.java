@@ -25,9 +25,4 @@ public class MainController {
 	public View download(String name) {
 		return fService.getDownload(name);
 	}
-	
-	@RequestMapping("/payment")
-	public String showPaymentPage() {
-		return "/main/payment";
-	}
 }
