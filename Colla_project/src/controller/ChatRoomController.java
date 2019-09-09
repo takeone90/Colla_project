@@ -148,7 +148,7 @@ public class ChatRoomController {
 		Member member = mService.getMemberByEmail(userEmail);
 		int cmNum = cmService.addChatMessage(Integer.parseInt(crNum), member.getNum(), msg, "message");
 		ChatMessage cm = cmService.getChatMessageByCmNum(cmNum);
-		System.out.println("cm :" + cm);
+//		System.out.println("cm :" + cm);
 		return cm;
 	}
 	// 코드메세지 받고 보내기
