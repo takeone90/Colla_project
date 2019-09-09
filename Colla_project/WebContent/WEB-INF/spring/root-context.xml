@@ -18,7 +18,7 @@
 <!-- 	</bean> -->
 	<!-- 히카리 dataSource -->
 	<bean id="uploadPath" class="java.lang.String">
-		<constructor-arg value="C:\temp"></constructor-arg>
+		<constructor-arg value="C:\temp\"></constructor-arg>
 	</bean>
 	<bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
 		<property name="driverClassName" value="oracle.jdbc.OracleDriver"/>
