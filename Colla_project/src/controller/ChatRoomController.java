@@ -148,6 +148,7 @@ public class ChatRoomController {
 		Member member = mService.getMemberByEmail(userEmail);
 		int cmNum = cmService.addChatMessage(Integer.parseInt(crNum), member.getNum(), msg, "message");
 		ChatMessage cm = cmService.getChatMessageByCmNum(cmNum);
+		System.out.println("cm :" + cm);
 		return cm;
 	}
 	// 코드메세지 받고 보내기
@@ -178,6 +179,18 @@ public class ChatRoomController {
 		ChatMessage cm = cmService.getChatMessageByCmNum(cmNum);
 		return cm;
 	}
+	// Map메세지 받고 보내기
+	@SendTo("/category/map/{var2}")
+	@MessageMapping("/sendMap/{var1}/{var2}")
+	public ChatMessage sendMap(String addressId,
+			@DestinationVariable(value = "var1") String userEmail,
+			@DestinationVariable(value = "var2") String crNum) {
+		Member member = mService.getMemberByEmail(userEmail);
+		int cmNum = cmService.addChatMessage(Integer.parseInt(crNum), member.getNum(), addressId, "map");
+		ChatMessage cm = cmService.getChatMessageByCmNum(cmNum);
+		return cm;
+	}
+
 	
 	//uploadFile ajax 요청을 받으면, db에 해당 메세지를 저장하고 c:\temp\에 파일 저장함
 	@ResponseBody

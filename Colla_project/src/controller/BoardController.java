@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -36,7 +37,8 @@ import service.MemberService;
 @RequestMapping("/board")
 public class BoardController {
 
-	private static final String UPLOAD_PATH = "c:\\temp\\";
+	@Resource(name="uploadPath")
+	private String UPLOAD_PATH;
 	
 	@Autowired
 	private BoardService bService;
@@ -59,17 +61,18 @@ public class BoardController {
 		response.setContentType("text/html; charset=utf-8");
 		
 		String fileName = upload.getOriginalFilename();
+		String uuidName = uuid+"_"+fileName;
 		byte[] bytes = upload.getBytes();
 		
 		String uploadPath = UPLOAD_PATH + "boardImg\\";
-		
-		OutputStream out = new FileOutputStream(new File(uploadPath + fileName));
+		OutputStream out = new FileOutputStream(new File(uploadPath + uuidName));
 		out.write(bytes);
 		
 		PrintWriter printWriter = response.getWriter();
 		String fileUrl = UPLOAD_PATH + fileName;
 		printWriter.println("{\"filename\" : \""+fileName+"\", \"uploaded\" : 1, \"url\":\""+fileUrl+"\"}");
 		printWriter.flush();		
+		
 		
 		return null;
 	}
