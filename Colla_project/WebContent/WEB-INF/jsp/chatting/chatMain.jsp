@@ -88,7 +88,7 @@ var clickedOverlay = null;
 			$("#addCodeModal").fadeOut(300);
 		if($("#addLocationModal").has(e.target).length===0)
 			$("#addLocationModal").fadeOut(300);
-		return false;
+		//return false;
 	});
 	//첨부파일Detail 숨기고 닫기
 	$("#attachBtn").on("click",function(){
@@ -481,14 +481,11 @@ function loadChatFromDB(){
 	            kakao.maps.event.addListener(marker, 'click', function() {
 	            	if(clickedOverlay!=null){
 	            		console.log("null이 아닙니다");
-	            		//clickedOverlay.setMap(null);
-	            	}else{
-	            		console.log("null 입니다");
-	            		
+	            		clickedOverlay.setMap(null);
 	            	}
 	            	map.setCenter(new kakao.maps.LatLng(places.y, places.x));
 	            	displayOverlay(marker, places);
-	            	clickedOverlay = overlay;
+	                clickedOverlay = overlay;
 	            });
 
 	            itemEl.onclick =  function () {
