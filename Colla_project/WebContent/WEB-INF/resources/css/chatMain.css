@@ -221,6 +221,7 @@ pre .CodeMirror-line{
 /* 	z-index: 1; */
 	font-size:12px;
 	border-radius: 10px;}
+
 .bg_white {
 	background:#fff;
 }
@@ -432,12 +433,11 @@ pre .CodeMirror-line{
 #inputBox{
 	display : block;
 	position: relative;
-	
+	height : calc(100% - 70px);	
 }
-#chatArea {
-	display : block;
+#inputBox{
+	height:70px;
 	position: relative;
-	height : 100%;	
 }
 #chatNavBox{
 	display : inline-block;
