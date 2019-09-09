@@ -78,22 +78,19 @@ public class MemberController {
 		return "/login/loginForm";
 	}
 	
-//	네이버 API 회원가입
-	@RequestMapping(value="/callBackJoin", method = RequestMethod.GET)
+
+	@RequestMapping(value="/callBackJoin", method = RequestMethod.GET) // 네이버 API 회원가입
 	public String showCallBackJoin() {
 		return "/join/callBackJoin";
 	}
 	
-	@RequestMapping(value="/joinMemberAPI", method = RequestMethod.POST)
+	@RequestMapping(value="/joinMemberAPI", method = RequestMethod.POST) // API 회원가입
 	public String joinMemberAPI(Member member) {
-		System.out.println("join member : "+member);
-		boolean result = memberService.addMember(member);
-		System.out.println("join result : "+result);
+		memberService.addMember(member);
 		return "redirect:main";
 	}
 	
-//	네이버 API 로그인	
-	@RequestMapping(value="/callBackLogin", method = RequestMethod.GET)
+	@RequestMapping(value="/callBackLogin", method = RequestMethod.GET) // 네이버 API 로그인	
 	public String showCallBackLogin() {
 		return "/login/callBackLogin";
 	}
@@ -160,9 +157,6 @@ public class MemberController {
 		} else {
 			return "/join/joinStep3"; //실패 시 어디로 갈지는 정의 필요
 		}
-		
-		
-		
 	}
 	
 	@RequestMapping(value="/loginDuplication", method = RequestMethod.GET)
@@ -183,7 +177,6 @@ public class MemberController {
 		return sb.toString();
 	}
 
-	
 	//메일발송과 화면전환 처리를 위한 스레드 
 	public class inner implements Runnable {
 		String emailAddress;
@@ -228,6 +221,7 @@ public class MemberController {
 			response.sendRedirect("workspace"); //워크스페이스로 이동한다			
 		}
 	}
+	
 	//회원 탈퇴버튼
 	@RequestMapping("/removeMember")
 	public String removeMember(HttpSession session) {

@@ -23,12 +23,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import model.Calendar;
 import model.Member;
 import service.CalendarService;
+import service.MemberService;
 
 @Controller
 public class CalendarController {
 	
 	@Autowired
 	private CalendarService calendarService;
+	@Autowired
+	private MemberService memberService;
 	
 	@RequestMapping(value="/calMonth", method = RequestMethod.GET)
 	public String showCalMonth(HttpSession session, Model model) {
@@ -50,7 +53,6 @@ public class CalendarController {
 	public List<Calendar> showAllCalendar(HttpSession session, boolean type1, boolean type2, boolean type3) {
 		int wNum = (int)session.getAttribute("currWnum");
 		List<Calendar> tmp = calendarService.getAllCalendar(wNum);
-//		System.out.println("tmp : "+tmp);
 		List<Calendar> tmpList = new ArrayList<Calendar>();
 		for(int i=0; i<tmp.size(); i++) {
 			if(type1) {
@@ -72,7 +74,6 @@ public class CalendarController {
 				}
 			}
 		}
-//		System.out.println("tmpList : "+tmpList);
 		return tmpList;
 	}
 	
@@ -92,7 +93,6 @@ public class CalendarController {
 	public List<Calendar> showYearCheckedCalendar(HttpSession session, boolean type1, boolean type2, boolean type3) {
 		int wNum = (int)session.getAttribute("currWnum");
 		List<Calendar> tmp = calendarService.getAllCalendar(wNum);
-//		System.out.println("tmp : "+tmp); //ok
 		List<Calendar> yearCheckedCalendarList = new ArrayList<Calendar>();
 		for(int i=0; i<tmp.size(); i++) {
 			String yearChecked = tmp.get(i).getYearCalendar();
@@ -100,7 +100,6 @@ public class CalendarController {
 				yearCheckedCalendarList.add(tmp.get(i));
 			}
 		}
-//		System.out.println("yearCheckedCalendarList : "+yearCheckedCalendarList); //?
 		List<Calendar> tmpList = new ArrayList<Calendar>();
 		for(int i=0; i<yearCheckedCalendarList.size(); i++) {
 			if(type1) {
@@ -122,7 +121,6 @@ public class CalendarController {
 				}
 			}
 		}
-//		System.out.println("tmpList : "+tmpList);
 		return tmpList;
 	}
 	@RequestMapping(value="/calYear", method = RequestMethod.GET)
@@ -138,9 +136,7 @@ public class CalendarController {
 		param.put("searchType", searchType);
 		param.put("searchKeyword", searchKeyword);
 		param.put("wNum", wNum);
-		System.out.println("param : "+param);
 		Map<String, Object> result = calendarService.getAllCalendarSearched(param);
-		System.out.println("controller result : "+result);
 		model.addAttribute("searchedCalendarList", result.get("searchedCalendarList"));
 		return "/calendar/calSearchList";
 	}
@@ -177,7 +173,6 @@ public class CalendarController {
 	@ResponseBody
 	@RequestMapping(value="/modifySchedule")
 	public boolean modifySchedule(Calendar calendar) throws ParseException {
-		System.out.println("modifySchedule");
 		if(calendar.getAnnually()!=null && calendar.getAnnually().equals("annually")) {
 			calendar.setAnnually("1");
 		} else {
@@ -193,7 +188,6 @@ public class CalendarController {
 		} else {
 			calendar.setMonthly("0");
 		}
-		System.out.println(calendar);
 		boolean result = calendarService.modifyCalendar(calendar);
 		String startDateTmp = calendar.getStartDate();
 		if(calendar.getAnnually().equals("1")) { //년 반복
@@ -208,17 +202,13 @@ public class CalendarController {
 	@ResponseBody
 	@RequestMapping(value="/removeSchedule", method = RequestMethod.POST)
 	public boolean removeSchedule(Calendar calendar) {
-		System.out.println(calendar);
 		int cNum = calendar.getcNum();
-		System.out.println(cNum);
 		return calendarService.removeCalendar(cNum);
 	}
 	@ResponseBody
 	@RequestMapping(value="/selectSchedule", method = RequestMethod.POST)
 	public Calendar selectSchedule(Calendar calendar) {
-		System.out.println(calendar);
 		int cNum = calendar.getcNum();
-		System.out.println(cNum);
 		return calendarService.getCalendar(cNum);
 	}
 }

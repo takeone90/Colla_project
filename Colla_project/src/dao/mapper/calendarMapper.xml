@@ -23,16 +23,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from calendar where w_num=#{wNum}
 	</select>
 	<select id="selectAllCalendarSearched" parameterType="map" resultMap="calendarMap">
-		select * from calendar
-		where w_num=#{wNum}
-		<if test="title != null"> or cal_title like '%'||#{title}||'%' </if>
-		<if test="content != null"> or cal_content like '%'||#{content}||'%' </if>
-		<if test="mNum != null"> or m_num like '%'||#{mNum}||'%' </if>
+		select cal_title, cal_content, m_name
+		from 
+		(select c.cal_title, c.cal_content, m.m_name
+		from calendar c, member m 
+		where c.m_num = m.m_num
+		and c.w_num=#{wNum}) 
+		where 1=0
+		<if test="title != null"> or cal_title like ('%'||#{title}||'%') </if>
+		<if test="content != null"> or cal_content like ('%'||#{content}||'%') </if>
+		<if test="mName != null"> or m_name like ('%'||#{mName}||'%') </if>
 		<if test="searchType == 0"> or 1=1 </if>
 	</select>
+	
 	<resultMap type="calendar" id="calendarMap">
 		<result column="cal_num" property="cNum"/>
 		<result column="m_num" property="mNum"/>
+		<result column="m_name" property="mName"/>
 		<result column="w_num" property="wNum"/>
 		<result column="cal_type" property="type"/>
 		<result column="cal_start_date" property="startDate"/>

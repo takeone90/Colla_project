@@ -94,21 +94,4 @@
 		<property name="maxUploadSize" value="5242880"></property> <!-- 5MB -->
 		<property name="maxInMemorySize" value="1048576"></property> <!-- 1MB -->
 	</bean>
-	
-	<!-- Login Api -->
-<!-- 	<bean id="naverClientID" class="java.lang.String"> -->
-<!-- 		<constructor-arg value="kIhjMaimMjKNR7gcR2nf"/> -->
-<!-- 	</bean> -->
-<!-- 	<bean id="naverClientSecret" class="java.lang.String"> -->
-<!-- 		<constructor-arg value="JcBU_hIfvD"/> -->
-<!-- 	</bean> -->
-<!-- 	<bean id="naverRedirectUrl" class="java.lang.String"> -->
-<!-- 		<constructor-arg value="http://localhost:8081/Colla_project/main"/> -->
-<!-- 	</bean> -->
-<!-- 	<bean id="naverSns" class="auth.SnsValue"> 패키지 이름 -->
-<!-- 		<constructor-arg value="naver"/> -->
-<!-- 		<constructor-arg ref="naverClientID"/> -->
-<!-- 		<constructor-arg ref="naverClientSecret"/> -->
-<!-- 		<constructor-arg ref="naverRedirectUrl"/> -->
-<!-- 	</bean> -->
 </beans>

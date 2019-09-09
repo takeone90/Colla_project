@@ -9,27 +9,35 @@ request.setAttribute("contextPath", contextPath);
 <html>
 <head>
 <meta charset="UTF-8">
-<title>calSearchList</title>
 <link rel="stylesheet" type="text/css" href="css/reset.css"/>
 <link rel="stylesheet" type="text/css" href="css/base.css"/>
 <link rel="stylesheet" type="text/css" href="css/headerWs.css"/>
 <link rel="stylesheet" type="text/css" href="css/navWs.css"/>
-<link rel="stylesheet" type="text/css" href="css/workspace.css"/>
-
+<script src="https://code.jquery.com/jquery-3.4.1.js"
+  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+  crossorigin="anonymous"></script>
+<title>calSearchList</title>
 </head>
 <body>
 <%@ include file="/WEB-INF/jsp/inc/headerWs.jsp"%>
 <%@ include file="/WEB-INF/jsp/inc/navWs.jsp"%>
+<div id="wsBody">
+<div id="wsBodyContainer">
 	<form action="calSearchList">
-		<input type="text" name="calSearch" placeholder="검색어를 입력해주세요.">
+		<select name="searchType">
+			<option value="1">제목</option>
+			<option value="2">내용</option>
+			<option value="3">제목+내용</option>
+			<option value="4">작성자</option>
+		</select>
+		<input type="text" name="searchKeyword" placeholder="검색어를 입력해주세요.">
 		<input type="submit" value="검색">
 	</form>
-	<button onclick="">일정 추가</button>
 	<label><input type="checkbox" name="calType" id="calType" value="project">프로젝트</label>
 	<label><input type="checkbox" name="calType" id="calType" value="vacation">휴가</label>
 	<label><input type="checkbox" name="calType" id="calType" value="event">행사</label>
 	<button onclick="location.href='${contextPath}/calMonth'">월간</button>
-	<button onclick="location.href='${contextPath}/calYear'">연간</button>
+	<button onclick="location.href='${contextPath}/calMonth'">연간</button>
 	<table>
 		<tr>
 			<th>제목</th>
@@ -40,10 +48,11 @@ request.setAttribute("contextPath", contextPath);
 			<tr>
 				<td>${schedule.title}</td>
 				<td>${schedule.content}</td>
-				<td>${schedule.mNum}</td>
+				<td>${schedule.mName}</td>
 			</tr>
 		</c:forEach>
 	</table>
-	
+</div>
+</div>	
 </body>
 </html>

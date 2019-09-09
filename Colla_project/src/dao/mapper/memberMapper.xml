@@ -24,7 +24,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from member
 	</select>
 	<select id="selectAuthoritesByNum" parameterType="int" resultType="string">
-		select authority
+		select at_authority
 		from authority
 		where m_num = #{num}
 	</select>
@@ -44,6 +44,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where m_num = #{num} 
 	</insert>
 	
+	<!-- 권한 관련 -->
+	<insert id="insertAuthority" parameterType="int">
+		insert into authority(at_num, m_num, at_authority)
+		values(authority_seq.nextval, #{num}, 'ROLE_USER')
+	</insert>
+
 	<resultMap type="member" id="memberMap">
 		<result column="m_num" property="num"/>
 		<result column="m_email" property="email"/>

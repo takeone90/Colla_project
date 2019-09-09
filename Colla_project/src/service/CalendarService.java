@@ -51,11 +51,14 @@ public class CalendarService {
 		} else if(searchType==2) {
 			param.put("content", searchKeyword);
 		} else if(searchType==3) {
-			param.put("mNum", searchKeyword);
+			param.put("title", searchKeyword);
+			param.put("content", searchKeyword);
+		} else if(searchType==4) {
+			param.put("mName", searchKeyword);
 		}
 		List<Calendar> searchedCalendarList = calendarDao.selectAllCalendarSearched(param);
+		System.out.println("searchedCalendarList : "+searchedCalendarList);
 		result.put("searchedCalendarList", searchedCalendarList);
-		System.out.println("service result2 : "+result);
 		return result;
 	}
 	public boolean addCalendarAnnually(Calendar calendar) {
