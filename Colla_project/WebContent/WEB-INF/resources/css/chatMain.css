@@ -346,8 +346,13 @@ pre .CodeMirror-line{
 input[type=radio]{
 	display: none;
 }
-input[type=radio]:radio{
-	backgrount-color : #E5675A;
+#InnerBtns li label{
+	display:block;
+	width:100%;
+	height:100%;
+}
+.liRadio{
+	background-color : #E5675A;
 }
 #wsmListUL{
 	padding : 20px;
