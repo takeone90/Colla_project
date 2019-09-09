@@ -3,6 +3,7 @@ package controller;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -11,6 +12,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
@@ -103,15 +105,31 @@ public class ChatRoomController {
 		}
 		return "redirect:chatMain?crNum="+crNum;
 	}
-
 	@RequestMapping("/inviteChatMember")
 	public String inviteChatMember(int crNum, int wNum, HttpSession session, HttpServletRequest request) {
+		System.out.println("요청받음 crNum : "+crNum+",wNum : "+wNum);
 		for (String mNum : request.getParameterValues("wsmList")) {
 			Member member = mService.getMember(Integer.parseInt(mNum));
 			crmService.addChatRoomMember(crNum, member.getNum(), wNum);
 		}
 		return "redirect:chatMain?crNum=" + crNum;
 	}
+	
+	@ResponseBody
+	@RequestMapping("/showMemberListInChatRoom")
+	public Object showMemberListInChatRoom(@RequestParam("wNum")int wNum,@RequestParam("crNum")int crNum,Model model) {
+		//여기서 현재 채팅방 멤버와 채팅방에 없는 멤버 리스트로 나눠서 뿌려야된다.
+		//채팅방에 없는 워크스페이스 멤버 리스트
+		List<Member> wsmList = mService.getAllNotMemberByWnumCrNum(wNum,crNum);
+		//채팅방에 있는 워크스페이스 멤버 리스트
+		List<Member> crmList = mService.getAllMemberByCrNum(crNum); 
+		Map<String, Object> listMap = new HashMap<String, Object>();
+		listMap.put("wsmList", wsmList);
+		listMap.put("crmList", crmList);
+		return listMap;
+	}
+	
+	
 
 	@ResponseBody
 	@RequestMapping("/loadPastMsg")

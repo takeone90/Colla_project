@@ -48,16 +48,6 @@ var infowindow;
 		favoriteArea = $("#favoriteArea");
 		chatNavContent = $("#chatNavContent");
 	
-	//Chat Member추가 모달
-	$(".openAddCrMemberModal").on("click",function(){
-		$("#addCrMemberModal").fadeIn(300);
-	});
-	$("#closeCrMemberModal").on("click",function(){
-		$("#addCrMemberModal").fadeOut(300);
-		return false;
-	});
-	
-	
 	//파일업로드 모달
 	$(".openFileUploadModal").on("click",function(){
 		$("#addFileModal").fadeIn(300);
@@ -105,8 +95,6 @@ var infowindow;
 			$("#addCodeModal").fadeOut(300);
 		if($("#addLocationModal").has(e.target).length===0)
 			$("#addLocationModal").fadeOut(300);
-		if($("#memberInfoModal").has(e.target).length===0)
-			$("#memberInfoModal").fadeOut(300);
 		return false;
 	});
 	//첨부파일Detail 숨기고 닫기
@@ -164,6 +152,43 @@ var infowindow;
 	});
 });//onload-function end
 
+//채팅방 안에 멤버리스트 보여주고 초대할수 있다
+function showMemberList(){
+	var inviteForm = $("<form id='inviteForm' action='inviteChatMember'></form>");
+	var wsmListUL = $("<ul id='wsmListUL'></ul>");
+	var hiddenTag = $("<input type='hidden' class='addCrNum' name='crNum' value='${chatRoom.crNum}'><input type='hidden' value='${wNum}' name='wNum' id='wNum'>");
+	wsmListUL.append(hiddenTag);
+	var wNum = $("#wNum").val();
+	var crNum = $("#crNum").val();
+	$.ajax({
+		url : "showMemberListInChatRoom",
+		data : {"wNum":wNum,"crNum":crNum},
+		dataType : "json",
+		success : function(jsonListMap){
+			var wsmList = jsonListMap.wsmList;
+			var crmList = jsonListMap.crmList;
+			$.each(crmList,function(idx,crmItem){
+				var crMemberLI = $("<li>"+crmItem.name+"</li>");
+				wsmListUL.append(crMemberLI);
+			});
+			$.each(wsmList,function(idx,item){
+				var wsMemberLI = $("<li><input type='checkbox' value='"+item.num+"' name='wsmList'>"+item.name+"</li>");
+				wsmListUL.append(wsMemberLI);
+			});
+			
+			inviteForm.append(wsmListUL);
+			var isDefault = $("#isDefault").val();
+			if(isDefault==0){
+				var inviteBtn = $("<div align='center'><button type='submit'>초대</button></div>");
+				inviteForm.append(inviteBtn);	
+			}
+			chatNavContent.append(inviteForm);
+		},
+		error : function(){
+			alert("멤버리스트 불러오기 에러발생");
+		}
+	});
+}
 
 	//code형태 메세지 보내기
 	function sendCode(){
@@ -620,16 +645,11 @@ function loadChatFromDB(){
 		<input type="hidden" value="${sessionScope.user.name}" id="userName">
 		<input type="hidden" value="${sessionScope.user.email}" id="userEmail">
 		<input type="hidden" value="${chatRoom.crNum}" id="crNum">
+		<input type="hidden" value="${wNum}" name="wNum" id="wNum">
 		<div class="chatArea">
 			<div id="chatNavBox">
 				<div id="openChatNavBox"></div><!-- 슬라이드 메뉴 열 수 있는 띠 -->
 				<div id="chatNav" align="center">
-<!-- 					<ul id="InnerBtns"> -->
-<!-- 						<li class="navInnerBtn" id="favorite">즐겨찾기</li> -->
-<!-- 						<li class="navInnerBtn" id="memberManagement">멤버관리</li> -->
-<!-- 						<li class="navInnerBtn" id="search">검색</li> -->
-<!-- 						<li class="navInnerBtn" id="canvas">캔버스</li> -->
-<!-- 					</ul> -->
 					<ul id="InnerBtns">
 						<label><li class="navInnerBtn"><input type="radio" name="innerBtn" value="favorite" checked>즐겨찾기</li></label>
 						<label><li class="navInnerBtn"><input type="radio" name="innerBtn" value="memberManagement">멤버관리</li></label>
@@ -654,6 +674,7 @@ function loadChatFromDB(){
 				});
 				//navType에 맞는 액션
 				$(function(){
+					showFavoriteList();
 					$("input[name='innerBtn']").click(function(){
 						var navType = $('input:radio[name="innerBtn"]:checked').val();
 						if(navType=='favorite'){
@@ -661,22 +682,21 @@ function loadChatFromDB(){
 					 		showFavoriteList();		
 						}else if(navType=='memberManagement'){
 							chatNavContent.empty();
-							chatNavContent.append("멤버관리");
+							chatNavContent.append("<p>채팅방에 멤버를 추가할 수 있습니다</p>");
+							showMemberList();
 						}else if(navType=='search'){
 							chatNavContent.empty();
-							chatNavContent.append("검색기능");
+							chatNavContent.append("<p>키워드로 채팅방내용을 검색하세요</p>");
 						}else if(navType=='canvas'){
 							chatNavContent.empty();
-							chatNavContent.append("캔버스기능");
+							chatNavContent.append("<p>캔버스</p>");
 						}else{
 							chatNavContent.empty();
 						}
 					});
 				});
+				
 			</script>
-			<div class="addCrMember">
-			<button class="openAddCrMemberModal">채팅방 초대</button>
-			</div>
 			<div class="chat" id="chatArea">
 			</div>
 		</div>
@@ -692,39 +712,6 @@ function loadChatFromDB(){
 			<a id="sendChat" href="#">전송</a>
 			</div>
 		</div>
-		<%---------------------------------------------채팅방 멤버추가모달 ----------------------------------------------------%>
-		<div id="addCrMemberModal" class="attachModal">
-			<div class="modalHead">
-				<h3 style="font-weight: bolder; font-size: 30px">채팅방 초대</h3>
-			</div>
-			<br><br>
-			<div class="modalBody">
-				<p>채팅방에 멤버를 초대하세요</p>
-				<form action="inviteChatMember" method="post">
-					<input type="hidden" class="addCrNum" name="crNum" value="${chatRoom.crNum}">
-					<input type="hidden" value="${wNum}" name="wNum">
-					<input type="hidden" value="${_csrf.token}" name="${_csrf.parameterName}">
-					<br><br>
-					<div class="addCrMemberInputWrap">
-						<div class="row">
-							<h4>워크스페이스 회원목록</h4>
-								<ul>
-									<c:forEach items="${wsMemberList}" var="wsm">
-										<li><input type="checkbox" value="${wsm.num}" name="wsmList">${wsm.name}</li>
-									</c:forEach>
-								</ul>
-						</div>
-					</div> <!-- end addCrMemberInputWrap -->
-
-					<div>
-						<button type="submit">멤버 초대하기</button>
-						<button id="closeCrMemberModal">닫기</button>
-					</div>
-				</form>
-			</div> <!-- end modalBody -->
-		</div><!-- end addMemberModal -->
-		
-		
 		
 		<%---------------------------------------------파일첨부 모달 ----------------------------------------------------%>
 		<div id="addFileModal" class="attachModal">
