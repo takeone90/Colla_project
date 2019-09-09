@@ -651,10 +651,10 @@ function loadChatFromDB(){
 				<div id="openChatNavBox"></div><!-- 슬라이드 메뉴 열 수 있는 띠 -->
 				<div id="chatNav" align="center">
 					<ul id="InnerBtns">
-						<label><li class="navInnerBtn"><input type="radio" name="innerBtn" value="favorite" checked>즐겨찾기</li></label>
-						<label><li class="navInnerBtn"><input type="radio" name="innerBtn" value="memberManagement">멤버관리</li></label>
-						<label><li class="navInnerBtn"><input type="radio" name="innerBtn" value="search">검색</li></label>
-						<label><li class="navInnerBtn"><input type="radio" name="innerBtn" value="canvas">캔버스</li></label>
+						<li class="navInnerBtn liRadio"><label><input type="radio" name="innerBtn" value="favorite" checked>즐겨찾기</label></li>
+						<li class="navInnerBtn"><label><input type="radio" name="innerBtn" value="memberManagement">멤버관리</label></li>
+						<li class="navInnerBtn"><label><input type="radio" name="innerBtn" value="search">검색</label></li>
+						<li class="navInnerBtn"><label><input type="radio" name="innerBtn" value="canvas">캔버스</label></li>
 					</ul>
 				<div id="chatNavContent" align="left"></div>
 				</div>
@@ -699,17 +699,17 @@ function loadChatFromDB(){
 			</script>
 			<div class="chat" id="chatArea">
 			</div>
-		</div>
-		<div id="inputBox">
-			<div class="attachDetail">
-				<div class="attach"><a href="#" class="openFileUploadModal">파일첨부</a></div>
-				<div class="attach"><a href="#" class="openCodeModal">코드첨부</a></div>
-				<div class="attach"><a href="#" class="openLocationModal">지도첨부</a></div>
-			</div>
-			<div id="chatInputInstance">
-			<a href="#" id="attachBtn">첨부파일</a>
-			<textarea id="chatInput" placeholder="메세지 작성부분"></textarea>
-			<a id="sendChat" href="#">전송</a>
+			<div id="inputBox">
+				<div class="attachDetail">
+					<div class="attach"><a href="#" class="openFileUploadModal">파일첨부</a></div>
+					<div class="attach"><a href="#" class="openCodeModal">코드첨부</a></div>
+					<div class="attach"><a href="#" class="openLocationModal">지도첨부</a></div>
+				</div>
+				<div id="chatInputInstance">
+				<a href="#" id="attachBtn">첨부파일</a>
+				<textarea id="chatInput" placeholder="메세지 작성부분"></textarea>
+				<a id="sendChat" href="#">전송</a>
+				</div>
 			</div>
 		</div>
 		
