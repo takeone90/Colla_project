@@ -64,6 +64,7 @@ public class WorkSpaceController {
 			workspaceList.add(wsMap);
 		}
 		model.addAttribute("workspaceList", workspaceList);
+		session.setAttribute("workspaceList", workspaceList);//네비게이션 바에 셀렉터에 들어갈 session
 		return "/workspace/wsMain";
 	}
 	
