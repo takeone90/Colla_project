@@ -2,6 +2,7 @@ package controller;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -37,7 +38,13 @@ public class PaymentController {
 	@RequestMapping("/kakaoPaySuccess")
 	public String kakaoPaySuccess(@RequestParam("pg_token") String pg_token, Model model) {
 		System.out.println("kakaoPay Success, pg_token : " + pg_token);
-		model.addAttribute("info", pService.kakaoPayInfo(pg_token));
-		return "/main/loading";
+		JSONObject json = new JSONObject(pService.kakaoPayInfo(pg_token));
+		model.addAttribute("info", json);
+		return "/main/kakaoPaySuccess";
+	}
+	
+	@RequestMapping("/result")
+	public String paymentResult() {
+		return "/main/paymentResult";
 	}
 }

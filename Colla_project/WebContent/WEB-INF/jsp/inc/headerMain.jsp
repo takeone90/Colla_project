@@ -34,8 +34,8 @@
 		</nav>
 		<div id="member-nav" class="floatleft">
 			<ul>
-				<li><a href="loginForm" class="member-btn">Login</a></li>
-				<li><a href="joinStep1" class="member-btn">Join us</a></li>
+				<li><a href="${contextPath}/loginForm" class="member-btn">Login</a></li>
+				<li><a href="${contextPath}/joinStep1" class="member-btn">Join us</a></li>
 				<!-- 				<li> -->
 				<!-- 					<a href="#" class="member-btn">Workspace로 이동</a> -->
 				<!-- 				</li> -->

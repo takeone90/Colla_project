@@ -20,7 +20,8 @@
 			window.close();
 		}
 		function dataFunction(info){
-			alert(info);
+			console.log(info);
+// 			window.location.href = "${contextPath}/payment/result";
 		}
 		function openNewWin(){
 			frm = document.getElementById("kakaoPayForm");

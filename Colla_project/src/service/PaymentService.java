@@ -69,7 +69,7 @@ public class PaymentService {
 		params.add("cid", "TC0ONETIME");
 		params.add("tid", kakaoPayReadyVO.getTid());
 		params.add("partner_order_id", "1001");
-		params.add("partner_user_id", "admin" );
+		params.add("partner_user_id", "admin@c0lla.com" );
 		params.add("pg_token", pg_token);
 		params.add("total_amount", "10000");
 		
