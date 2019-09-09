@@ -1,23 +1,28 @@
 @charset "UTF-8";
 
 /* boardList.jsp*/
-#wsBodyContainer{
-	width: 80%;
-	margin: 0 auto;	
-}
-#boardListView #listHead{
-	background-color: #777;
-	color:#fff;
-}
 #boardListView #boardList {
-	width:100%;
-	font-size:14px;
+	width: calc(100% - 20px);
+	padding: 0 10px;
+	font-size:15px;
 }
 #boardListView #boardList li{
-	height : 30px;
+	line-height : 20px;
+	padding: 5px 0;
+}
+#boardListView #boardList li:not(#listHead):hover{
+	background-color:#FCEFEE;	
+}
+#boardListView #boardList #listHead{
+	line-height:30px;
+	background-color: #EAEAEA;
+}
+#boardListView #boardList li.noticeLi{
+	font-weight:600;
+	
 }
 #boardListView #boardList li * {
-	vertical-align:middle;
+/* 	vertical-align:middle; */
 }
 #boardListView #boardList li:after{
 	content:"";
@@ -47,10 +52,11 @@
 }
 #boardListView .replyCount{
 	color:#E5675A;
-	font-size:14px;
+	font-size:12px;
 }
 #boardListView a.currPage{
-	color:#E5675A;
+	background-color:#E5675A;
+	color:#fff;
 	cursor:default;
 }
 #boardListView .reverse {
@@ -58,16 +64,34 @@
 }
 #boardListView .noticeMark {
 	display:inline-block;
-	padding: 4px 5px;
-	border-radius: 5px;
+	padding: 0 7px;
+	border-radius: 10px;
 	background-color: #E5675A;
 	color:#fff;
 }
 
 #boardListView #pagination{}
-#boardListView #pagination li{
+#boardListView #pagination li{	
 	display:inline-block;
+	width:20px;
+	height:20px;
+	font-size:13px;
 }
+#boardListView #pagination li a{	
+	display:block;
+	text-align:center;
+	line-height:20px;
+	width:100%;
+	height:100%;
+	border-radius:50%;
+}
+#boardListView #pagination li a.disable{
+	color: #B7B7B7;
+	cursor:default;
+}	
+#boardListView #pagination li a:not(.disable):not(.currPage):hover{
+	background-color: #e7e7e7;
+}	
 /* boardList.jsp END*/
 
 /* board view */
