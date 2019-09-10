@@ -39,5 +39,10 @@ a:visited, a:link, a:focus, a:hover, a:active{
 	color: #403C39;
 	font-size: 40px;
 	font-weight:900;
-	margin-bottom: 35px;
+}
+#wsBodyContainer > h4{
+	color: #E5675A;
+	font-size: 20px;
+	font-weight: 700;
+	margin-top: 15px;
 }

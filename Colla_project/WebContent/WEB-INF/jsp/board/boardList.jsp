@@ -27,43 +27,41 @@
 	<input type="hidden" value="board" id="pageType">
 		<div id="wsBodyContainer">
 			<h3>자유게시판</h3>
-			<div id="boardListView">
 			
-				<div id="listArea">
-					<ul id="boardList">
-						<li id="listHead">
-							<div>No.</div>
-							<div>제목</div>
-							<div>작성일</div>
-							<div>작성자</div>
-							<div>조회수</div>
+			<div id="boardInner">
+				<ul id="boardList">
+					<li id="listHead">
+						<div>No.</div>
+						<div>제목</div>
+						<div>작성일</div>
+						<div>작성자</div>
+						<div>조회수</div>
+					</li>
+					
+					<c:if test="${listInf.boardCnt <= 0 }">
+					<li>
+						<p class="noBoard">해당 게시글이 없습니다.</p>
+					</li>
+					</c:if>
+					<c:if test="${listInf.boardCnt > 0 }">
+						<c:forEach items="${bList}" var="board">
+						<li ${board.isNotice == 'y'?'class="noticeLi"':'' }>
+							<div>${board.isNotice == 'y'?'<span class="noticeMark">공지</span>':board.bNum }</div>
+							<div>
+								<a href="${contextPath}/board/view?num=${board.bNum}">${board.bTitle } <span class="replyCount">[${board.replyCnt }]</span></a>
+							</div>
+							<div>
+							<fmt:formatDate value="${board.bRegDate }" pattern="yyyy-MM-dd"/>
+							</div>
+							<div>${board.bType == 'anonymous'?'익명':board.mName }</div>
+							<div>${board.readCnt }</div>
 						</li>
-						
-						<c:if test="${listInf.boardCnt <= 0 }">
-						<li>
-							<p class="noBoard">해당 게시글이 없습니다.</p>
-						</li>
-						</c:if>
-						<c:if test="${listInf.boardCnt > 0 }">
-							<c:forEach items="${bList}" var="board">
-							<li ${board.isNotice == 'y'?'class="noticeLi"':'' }>
-								<div>${board.isNotice == 'y'?'<span class="noticeMark">공지</span>':board.bNum }</div>
-								<div>
-									<a href="${contextPath}/board/view?num=${board.bNum}">${board.bTitle } <span class="replyCount">[${board.replyCnt }]</span></a>
-								</div>
-								<div>
-								<fmt:formatDate value="${board.bRegDate }" pattern="yyyy-MM-dd"/>
-								</div>
-								<div>${board.bType == 'anonymous'?'익명':board.mName }</div>
-								<div>${board.readCnt }</div>
-							</li>
-							</c:forEach>
-						</c:if>
-					</ul>
-				
-					<a href="${contextPath}/board/write" id="writeBtn">글쓰기</a>
-				</div>
-				
+						</c:forEach>
+					</c:if>
+				</ul>
+			
+				<a href="${contextPath}/board/write" id="writeBtn">글쓰기</a>
+			
 				<c:if test="${listInf.boardCnt > 0 }">
 				<ul id=pagination>
 					<li>
@@ -107,7 +105,7 @@
 							<i class="fas fa-angle-right"></i>
 						</a>
 					</li>
-
+	
 					<li>
 						<c:if test="${listInf.page >= (listInf.totalPage - ((listInf.totalPage-1)%5))}">
 						<a href="javascript:void(0)" id="lastPage" class="disable pagingIcon">
@@ -143,7 +141,8 @@
 					</form>
 				</div>
 			</div>
-		</div>
+		
+		</div>	
 	</div>
 </body>
 </html>

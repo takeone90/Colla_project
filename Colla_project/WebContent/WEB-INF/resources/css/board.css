@@ -1,73 +1,72 @@
 @charset "UTF-8";
 
 /* boardList.jsp*/
-#boardListView {
-}
-#boardListView #listArea{
+#boardInner {
 	position:relative;
     width: 1280px;
-    margin: 0 auto 20px;
+    margin: 35px auto 20px;
 }
-#boardListView #boardList {
+#boardInner #boardList {
+	margin-bottom:20px;
 }
-#boardListView #boardList li{
+#boardInner #boardList li{
 	line-height : 30px;
 	padding: 5px 0;
 	border-bottom:1px solid #E0E0E0;
 }
-#boardListView #boardList li:not(#listHead):hover{
+#boardInner #boardList li:not(#listHead):hover{
 	background-color:#FCEFEE;	
 }
-#boardListView #boardList #listHead{
+#boardInner #boardList #listHead{
 	background-color: #EAEAEA;
 	border-top: 1px solid #E0E0E0;
 }
-#boardListView #boardList li.noticeLi{
+#boardInner #boardList li.noticeLi{
 	font-weight:600;
 	
 }
-#boardListView #boardList li * {
+#boardInner #boardList li * {
 /* 	vertical-align:middle; */
 }
-#boardListView #boardList li:after{
+#boardInner #boardList li:after{
 	content:"";
 	display:block;
 	clear:both;
 }
-#boardListView #boardList div{
+#boardInner #boardList div{
 	height:100%;
 	float:left;
 	text-align:center;
 }
-#boardListView #boardList div:nth-child(1){
+#boardInner #boardList div:nth-child(1){
 	font-size:13px;
 	width:10%;
 }
-#boardListView #boardList div:nth-child(2){
+#boardInner #boardList div:nth-child(2){
 	width:60%;
 }
-#boardListView #boardList div:nth-child(3){
+#boardInner #boardList div:nth-child(3){
 	width:10%;
 }
-#boardListView #boardList div:nth-child(4){
+#boardInner #boardList div:nth-child(4){
 	width:10%;
 }
-#boardListView #boardList div:nth-child(5){
+#boardInner #boardList div:nth-child(5){
 	width:10%;
 }
-#boardListView .replyCount{
+#boardInner .replyCount{
 	color:#E5675A;
 	font-size:12px;
 }
-#boardListView a.currPage{
+#boardInner a.currPage{
 	background-color:#E5675A;
 	color:#fff;
 	cursor:default;
 }
-#boardListView .reverse {
+#boardInner .reverse {
 	transform:rotate(180deg);
 }
-#boardListView .noticeMark {
+#boardInner .noticeMark {
 	display:inline-block;
 	padding: 0 7px;
 	border-radius: 10px;
@@ -75,17 +74,17 @@
 	color:#fff;
 }
 
-#boardListView #pagination{
+#boardInner #pagination{
 	text-align:center;
 	margin-bottom: 20px;
 }
-#boardListView #pagination li{	
+#boardInner #pagination li{	
 	display:inline-block;
 	width:20px;
 	height:20px;
 	font-size:13px;
 }
-#boardListView #pagination li a{	
+#boardInner #pagination li a{	
 	display:block;
 	text-align:center;
 	line-height:20px;
@@ -93,32 +92,30 @@
 	height:100%;
 	border-radius:50%;
 }
-#boardListView #pagination li a.disable{
+#boardInner #pagination li a.disable{
 	color: #B7B7B7;
 	cursor:default;
 }
-#boardListView #pagination li a:not(.disable):not(.currPage):hover{
+#boardInner #pagination li a:not(.disable):not(.currPage):hover{
 	background-color: #e7e7e7;
 }
-#boardListView #writeBtn{
+#boardInner #writeBtn{
 	display:block;
 	padding: 10px 20px;
-	position:absolute;
-	bottom:-50px;
-	right:10px;
+	float:right;
 	border-radius:5px;
 	background-color: #403C39;
 	color:#fff;
 	transition:background-color .5s;
 }
-#boardListView #writeBtn:hover{
+#boardInner #writeBtn:hover{
 	background-color: #E5675A;
 }
-#boardListView #boardSearchForm{
+#boardInner #boardSearchForm{
 	text-align:center;
 	font-size: 14px;
 }
-#boardListView #boardSearchForm > *{
+#boardInner #boardSearchForm > *{
 	vertical-align:middle;
 	height: 35px;
 	box-sizing: border-box; 
@@ -126,28 +123,47 @@
 	border: 1px solid #e0e0e0;
 	border-radius: 5px;
 }
-#boardListView #boardSearchForm select {
+#boardInner #boardSearchForm select {
 }
-#boardListView #boardSearchForm input[name="keyword"] {
+#boardInner #boardSearchForm input[name="keyword"] {
 	padding: 0 10px;
 }
-#boardListView #boardSearchForm button {
+#boardInner #boardSearchForm button {
 	width:60px;
 	background-color: #403C39;
 	color:#fff;
 	transition:background-color .5s;
 }
-#boardListView #boardSearchForm button:hover{
+#boardInner #boardSearchForm button:hover{
 	background-color: #E5675A;
 	cursor:pointer;
 }
-#boardListView .noBoard{
+#boardInner .noBoard{
 	text-align: center;
 	line-height: 40px;
 }
 /* boardList.jsp END*/
 
 /* board view */
+
+#boardInner #boardDetail .row {
+	border-bottom:1px solid #e0e0e0;
+	padding:10px;
+	line-height:30px;
+}
+#boardInner #boardDetail .row .floatleft {
+	margin-right: 40px;
+}
+#boardInner #boardDetail .bold {
+	display:inline-block;
+	font-size: 16px;
+	margin-left:10px;
+	font-weight: 500;
+}
+#boardInner #boardDetail #content{
+	min-height: 200px;
+	padding: 20px;
+}
 #replyBox > li {
 	margin-bottom:5px;
 }

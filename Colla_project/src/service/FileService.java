@@ -3,6 +3,8 @@ package service;
 import java.io.File;
 import java.util.List;
 
+import javax.annotation.Resource;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.View;
@@ -13,7 +15,9 @@ import model.BoardFile;
 
 @Service
 public class FileService {
-	private static final String UPLOAD_PATH = "c:\\temp";
+
+	@Resource(name="uploadPath")
+	private String UPLOAD_PATH;
 	
 	@Autowired
 	BoardFileDao fDao;

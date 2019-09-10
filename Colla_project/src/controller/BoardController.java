@@ -111,7 +111,6 @@ public class BoardController {
 		Board board = bService.getBoardByBnum(num);
 //		Board board = bService.getBoardByBnumWithFile(num);
 		List<BoardFile> fList = fService.getFilesByBnum(num);
-		System.out.println(fList);
 		model.addAttribute("board", board);
 		model.addAttribute("fList", fList);
 		return "/board/boardView";
@@ -230,31 +229,34 @@ public class BoardController {
 				List<MultipartFile> fList = multifileReq.getFiles("file");
 				
 				for(MultipartFile mf : fList) {
-					String originFileName = mf.getOriginalFilename();//원본파일명
-					UUID uuid = UUID.randomUUID();
-					
-					//시스템시간(ms) + uuid + 원본파일명
-					String saveFileName = "" + System.currentTimeMillis() + uuid +"_"+ originFileName;
-					String saveFile = UPLOAD_PATH + saveFileName;
-					
-					try {
-						//서버(path)에 저장
-						mf.transferTo(new File(saveFile));
+					if(mf.getSize() != 0) {
+						System.out.println("파일 크기 : "+mf.getSize());
+						String originFileName = mf.getOriginalFilename();//원본파일명
+						UUID uuid = UUID.randomUUID();
 						
-						//DB에 게시판번호, 이름 저장
-						BoardFile bf = new BoardFile();
-						bf.setbNum(board.getbNum());
-						bf.setFileName(saveFileName);						
-						fService.addFiles(bf);
+						//시스템시간(ms) + uuid + 원본파일명
+						String saveFileName = "" + System.currentTimeMillis() + uuid +"_"+ originFileName;
+						String saveFile = UPLOAD_PATH + saveFileName;
 						
-					} catch(IllegalStateException e) {
-						e.printStackTrace();
-					} catch(IOException e) {
-						e.printStackTrace();
-					}
-				}			
-				/////////////////////////////////////////////
-				
+						try {
+							//서버(path)에 저장
+							mf.transferTo(new File(saveFile));
+							
+							//DB에 게시판번호, 이름 저장
+							BoardFile bf = new BoardFile();
+							bf.setbNum(board.getbNum());
+							bf.setFileName(saveFileName);						
+							fService.addFiles(bf);
+							
+						} catch(IllegalStateException e) {
+							e.printStackTrace();
+						} catch(IOException e) {
+							e.printStackTrace();
+						}
+					}			
+				}
+	////////////////////////////////////////////////////////////////////////////
+					
 				return "redirect:/board/view?num="+board.getbNum();
 			}
 		}else {
