@@ -63,8 +63,6 @@
 						<pre>${board.bContent }</pre>
 					</div>
 					<c:if test="${fn:length(fList) > 0 }">
-					<p>렝쓰 : ${fn:length(fList)}</p>
-					<p>이름 : ${fList[0].originName}</p>
 					<div class="row">
 						<c:forEach items="${fList}" var="file">
 							<p>
