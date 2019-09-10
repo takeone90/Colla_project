@@ -12,7 +12,7 @@ import model.Board;
 @Service
 public class BoardService {
 	
-	private static final int ITEMS_PER_PAGE = 20;
+	private static final int ITEMS_PER_PAGE = 3;
 	private static final int PAGE_NUM = 5;
 	
 	@Autowired
@@ -99,6 +99,7 @@ public class BoardService {
 		System.out.println("공지사항 갯수 : "+ notice);
 		System.out.println("보드 토탈 Cnt : "+ getBoardCnt(param));
 		System.out.println(param);
+		param.put("boardCnt", getBoardCnt(param));
 		int totalPage= (int)Math.ceil(getBoardCnt(param)/ ((double) ITEMS_PER_PAGE - notice));
 		return totalPage<=0?1:totalPage;
 	}

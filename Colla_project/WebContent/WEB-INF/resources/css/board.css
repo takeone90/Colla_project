@@ -1,21 +1,26 @@
 @charset "UTF-8";
 
 /* boardList.jsp*/
+#boardListView {
+}
+#boardListView #listArea{
+	position:relative;
+    width: 1280px;
+    margin: 0 auto 20px;
+}
 #boardListView #boardList {
-	width: calc(100% - 20px);
-	padding: 0 10px;
-	font-size:15px;
 }
 #boardListView #boardList li{
-	line-height : 20px;
+	line-height : 30px;
 	padding: 5px 0;
+	border-bottom:1px solid #E0E0E0;
 }
 #boardListView #boardList li:not(#listHead):hover{
 	background-color:#FCEFEE;	
 }
 #boardListView #boardList #listHead{
-	line-height:30px;
 	background-color: #EAEAEA;
+	border-top: 1px solid #E0E0E0;
 }
 #boardListView #boardList li.noticeLi{
 	font-weight:600;
@@ -70,7 +75,10 @@
 	color:#fff;
 }
 
-#boardListView #pagination{}
+#boardListView #pagination{
+	text-align:center;
+	margin-bottom: 20px;
+}
 #boardListView #pagination li{	
 	display:inline-block;
 	width:20px;
@@ -88,10 +96,55 @@
 #boardListView #pagination li a.disable{
 	color: #B7B7B7;
 	cursor:default;
-}	
+}
 #boardListView #pagination li a:not(.disable):not(.currPage):hover{
 	background-color: #e7e7e7;
-}	
+}
+#boardListView #writeBtn{
+	display:block;
+	padding: 10px 20px;
+	position:absolute;
+	bottom:-50px;
+	right:10px;
+	border-radius:5px;
+	background-color: #403C39;
+	color:#fff;
+	transition:background-color .5s;
+}
+#boardListView #writeBtn:hover{
+	background-color: #E5675A;
+}
+#boardListView #boardSearchForm{
+	text-align:center;
+	font-size: 14px;
+}
+#boardListView #boardSearchForm > *{
+	vertical-align:middle;
+	height: 35px;
+	box-sizing: border-box; 
+	padding:0;
+	border: 1px solid #e0e0e0;
+	border-radius: 5px;
+}
+#boardListView #boardSearchForm select {
+}
+#boardListView #boardSearchForm input[name="keyword"] {
+	padding: 0 10px;
+}
+#boardListView #boardSearchForm button {
+	width:60px;
+	background-color: #403C39;
+	color:#fff;
+	transition:background-color .5s;
+}
+#boardListView #boardSearchForm button:hover{
+	background-color: #E5675A;
+	cursor:pointer;
+}
+#boardListView .noBoard{
+	text-align: center;
+	line-height: 40px;
+}
 /* boardList.jsp END*/
 
 /* board view */
