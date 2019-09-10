@@ -23,9 +23,26 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from calendar where w_num=#{wNum}
 	</select>
 	<select id="selectAllCalendarSearched" parameterType="map" resultMap="calendarMap">
-		select cal_title, cal_content, m_name
+		select rownum, cal_title, cal_content, m_name, cal_start_date, cal_end_date
+		from
+		(select rownum as rnum, cal_title, cal_content, m_name, cal_start_date, cal_end_date
 		from 
-		(select c.cal_title, c.cal_content, m.m_name
+		(select rownum, c.cal_title, c.cal_content, m.m_name, c.cal_start_date, c.cal_end_date
+		from calendar c, member m 
+		where c.m_num = m.m_num
+		and c.w_num=#{wNum}) 
+		where 1=0
+		<if test="title != null"> or cal_title like ('%'||#{title}||'%') </if>
+		<if test="content != null"> or cal_content like ('%'||#{content}||'%') </if>
+		<if test="mName != null"> or m_name like ('%'||#{mName}||'%') </if>
+		<if test="searchType == 0"> or 1=1 </if>
+		order by cal_start_date asc)
+		where rnum between #{firstRow} and #{endRow}
+	</select>
+	<select id="selectCalendarCount" parameterType="map" resultType="int">
+		select count(*)
+		from 
+		(select c.cal_title, c.cal_content, m.m_name, c.cal_start_date, c.cal_end_date
 		from calendar c, member m 
 		where c.m_num = m.m_num
 		and c.w_num=#{wNum}) 
@@ -35,7 +52,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="mName != null"> or m_name like ('%'||#{mName}||'%') </if>
 		<if test="searchType == 0"> or 1=1 </if>
 	</select>
-	
 	<resultMap type="calendar" id="calendarMap">
 		<result column="cal_num" property="cNum"/>
 		<result column="m_num" property="mNum"/>
