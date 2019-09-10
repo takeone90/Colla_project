@@ -13,7 +13,7 @@
 <link rel="stylesheet" type="text/css" href="css/reset.css"/>
 <link rel="stylesheet" type="text/css" href="css/base.css"/>
 <link rel="stylesheet" type="text/css" href="css/headerWs.css"/>
-<link rel="stylesheet" type="text/css" href="css/navMyPage.css"/>
+<link rel="stylesheet" type="text/css" href="css/navWs.css"/>
 <script src="https://code.jquery.com/jquery-3.4.1.js"
 	integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
 	crossorigin="anonymous"></script>
@@ -34,7 +34,7 @@
 </head>
 <body>
 	<%@ include file="/WEB-INF/jsp/inc/headerWs.jsp"%>
-	<%@ include file="/WEB-INF/jsp/inc/navMyPage.jsp"%>
+	<%@ include file="/WEB-INF/jsp/inc/navWs.jsp" %>
 	<div id="wsBody">
 	<input type="hidden" value="mypage" id="pageType">
 		<h3>마이페이지</h3>
@@ -53,5 +53,13 @@
 			비밀번호를 확인해주세요
 		</c:if>
 	</h3>
+	<!-- 삭제예정 start -->
+	<div>
+		<button onclick="location.href='${contextPath}/myPageCheckPassForm'">회원정보관리</button>
+		<button onclick="location.href='${contextPath}/myPageAlarmForm'">알림설정</button>
+		<button onclick="location.href='${contextPath}/myPageLicenseForm'">라이센스</button>
+	</div>
+	<!-- 삭제예정 end -->
+
 </body>
 </html>
