@@ -246,8 +246,7 @@ public class MemberController {
 		session.invalidate();
 		return "redirect:main";
 	}
-	
-	public Map<String, Object> getLoginMemberList(){
-		return loginMember;
-	}
+	/*
+	 * public Map<String, Object> getLoginMemberList(){ return loginMember; }
+	 */
 }

@@ -121,6 +121,7 @@ public class MypageController {
 	public String modifyMember(Member member, HttpSession session) {
 		member.setNum(((Member)session.getAttribute("user")).getNum());
 		if (memberService.modifyMember(member)) {
+			session.setAttribute("user", member);
 			return "redirect:myPageMainForm";
 		} else {
 			return "redirect:myPageModifyForm";
