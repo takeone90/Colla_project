@@ -1,6 +1,9 @@
 package dao;
 
 import java.util.List;
+import java.util.Map;
+
+import org.apache.ibatis.annotations.Param;
 
 import model.ChatMessage;
 
@@ -10,6 +13,12 @@ public interface ChatMessageDao {
 	public int deleteChatMessage(int cmNum); //메시지번호로 메시지삭제
 	public ChatMessage selectChatMessageByCmNum(int cmNum);//메시지번호로 메시지 한개 선택
 	public List<ChatMessage> selectAllChatMessageByCrNum(int crNum,int mNum);//채팅방번호로 해당채팅방의 전체메시지 선택
+	
+	//검색과 페이징을 위한 ...
+	public List<ChatMessage> searchChatMessage(Map<String, Object> param);
+	public List<ChatMessage> selectChatMessage(@Param("first")int first,@Param("end")int end);
+	public int selectSearchedCmCount(Map<String, Object> param);
+	
 	//favorite 추가, 삭제, 조회
 	public int insertFavorite(int mNum,int cmNum);
 	public int deleteFavorite(int cmNum);

@@ -30,6 +30,7 @@
 <script type="text/javascript" src="lib/codemirror/mode/xml/xml.js"></script>
 <script type="text/javascript" src="lib/codemirror/mode/sql/sql.js"></script>
 <script type="text/javascript" src="lib/codemirror/mode/php/php.js"></script>
+<script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script> <!-- font awsome -->
 <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.32.0/codemirror.min.js"></script> -->
 <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.32.0/codemirror.min.css" /> -->
 
@@ -37,11 +38,13 @@
 var chatArea = $(".chat");
 var favoriteArea;
 var chatNavContent;
+var searchListDiv;
 var editor;
 // 마커를 담을 배열입니다
 var markers = [];
 var ps;
 var map;
+var area=null;
 //var infowindow;
 var overlay;
 var clickedOverlay = null;
@@ -143,7 +146,64 @@ var clickedOverlay = null;
 			}
 		});
 	});
+	
+	
+	
 });//onload-function end
+
+//네비게이션의 검색 탭 누를경우
+function showSearchChatInput(){
+	var searchInputDiv = $("<div id='searchInput' align='center'></div>");
+	var keywordSelect = $("<select name='keywordType' id='keywordType'></select>");
+	var keywordOption1 = $("<option value='1'>내용</option>");
+	var keywordOption2 = $("<option value='2'>작성자</option>");
+	var searchChat = $("<input type='text' id='keyword' placeholder='검색어'>");
+	var searchBtn = $("<button id='searchChatBtn' onclick='searchChatAndDraw();'>검색</button>");
+	keywordSelect.append(keywordOption1);
+	keywordSelect.append(keywordOption2);
+	searchInputDiv.append(keywordSelect);
+	searchInputDiv.append(searchChat);
+	searchInputDiv.append(searchBtn);
+	chatNavContent.append(searchInputDiv);
+	searchListDiv = $("<div id='searchContent'></div>");
+	chatNavContent.append(searchListDiv);
+	var pageDiv = $("<div id='pageNav'></div>");
+		
+	chatNavContent.append(pageDiv);
+	$("#keyword").keydown(function(key){
+		if(key.keyCode==13){
+			searchChatAndDraw();
+		}
+	})
+}
+
+//이 함수가 실행되면 검색된 키워드와 타입에 맞는 리스트와 페이징처리가 실행되야한다.
+	function searchChatAndDraw(){
+		searchListDiv.empty();
+		var keywordType = $("#keywordType option:selected").val();
+		var keyword = $("#keyword").val();
+		var crNum = $("#crNum").val();
+		$.ajax({
+			url : "${contextPath}/searchChatList",
+			dataType : "json",
+			data : {"crNum":crNum,"keywordType":keywordType,"keyword":keyword},
+			success : function(cm){
+				var searchedInfo = cm.searchedCmList;
+				$.each(searchedInfo,function(idx,item){
+					addMsg(item,"searched");
+				});
+// 				var list = cm.searchedCmList;
+// 				console.log(cm.searchedCmList);
+// 				for(var i=0;i<searchedInfo.length;i++){
+					
+// 				}
+			},
+			error : function(){
+				alert("페이징처리 에러발생");
+			}
+		});
+}
+
 
 //채팅방 안에 멤버리스트 보여주고 초대할수 있다
 function showMemberList(){
@@ -160,29 +220,41 @@ function showMemberList(){
 		success : function(jsonListMap){
 			var wsmList = jsonListMap.wsmList;
 			var crmList = jsonListMap.crmList;
+			//채팅방에 있는사람
 			$.each(crmList,function(idx,crmItem){
-				var crMemberLI = $("<li>"+crmItem.name+"</li>");
+				var profileImgTag = "<div class='profileImg'><a href='#'><img alt='프로필사진' src='/Colla_project/showProfileImg?num="+crmItem.num+"'></a></div>";
+				var crMemberLI = $("<li>"+profileImgTag+"<div class='memberNameInSlideMenu'>"+crmItem.name+"</div></li>");
 				wsmListUL.append(crMemberLI);
+				<%--가운데 hr 선 하나 넣자!--%>
 			});
+			//채팅방에 없는사람(ws멤버인사람)
 			$.each(wsmList,function(idx,item){
-				var wsMemberLI = $("<li><label><input type='checkbox' value='"+item.num+"' name='wsmList'>"+item.name+"</label></li>");
+				var profileImgTag = "<div class='profileImg'><a href='#'><img alt='프로필사진' src='/Colla_project/showProfileImg?num="+item.num+"'></a></div>";
+				var wsMemberLI = $("<label><li>"+profileImgTag+"<div class='memberNameInSlideMenu'><input type='checkbox' value='"+item.num+"' name='wsmList'>"+item.name+"<div class='checked-member'><i class='fas fa-check'></i><div>"+"</div></li></label>");
 				wsmListUL.append(wsMemberLI);
 			});
 			
 			inviteForm.append(wsmListUL);
 			var isDefault = $("#isDefault").val();
 			if(isDefault==0){
-				var inviteBtn = $("<div align='center'><button type='submit'>초대</button></div>");
+				var inviteBtn = $("<div align='center'><button type='submit'>선택한 멤버 초대하기</button></div>");
 				inviteForm.append(inviteBtn);	
 			}
 			chatNavContent.append(inviteForm);
+			//체크박스에 클릭된 멤버들 클래스를 다르게 줘서 색깔바꾸기
+			$("#wsmListUL label").on("click",function(){
+				var checkedMember = $("input:checkbox[name='wsmList']:checked").next();
+				checkedMember.css({display : 'inline-block'});
+				var noneCheckedMember = $("input:checkbox[name='wsmList']:not(:checked)").next();
+				noneCheckedMember.hide();
+			});
 		},
 		error : function(){
 			alert("멤버리스트 불러오기 에러발생");
 		}
 	});
 }
-
+	
 	//code형태 메세지 보내기
 	function sendCode(){
 		var code = editor.getValue();
@@ -353,8 +425,11 @@ function loadChatFromDB(){
 		if(!area){
 			chatArea.append(chatMsg);
 		}else{
-			console.log(chatMsg);
-			chatNavContent.append(chatMsg[0]);
+			if(area=="true"){
+			chatNavContent.append(chatMsg[0]);				
+			}else if(area=="searched"){
+			searchListDiv.append(chatMsg[0]);	
+			}
 		}
 		
 	}
@@ -385,7 +460,7 @@ function loadChatFromDB(){
 		return originName;
 	}
 	
-	//지도
+	//////////////////////////////////////////////////////////지도//////////////////////////////////////////////////////////////////
 	function showMap(){
 
 		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
@@ -716,27 +791,26 @@ function loadChatFromDB(){
 						var anotherLabelType = $('input:radio[name="innerBtn"]:not(:checked)').parent();
 						if(navType=='favorite'){
 							chatNavContent.empty();
-							
 					 		showFavoriteList();		
 						}else if(navType=='memberManagement'){
 							chatNavContent.empty();
-							
 							chatNavContent.append("<p class='navInfoMsg'>채팅방에 멤버를 추가할 수 있습니다<br>현재 워크스페이스 멤버만 표시됩니다.</p>");
 							showMemberList();
 						}else if(navType=='search'){
 							chatNavContent.empty();
-							
 							chatNavContent.append("<p class='navInfoMsg'>키워드로 채팅방내용을 검색하세요</p>");
+							showSearchChatInput();
 						}else if(navType=='canvas'){
 							chatNavContent.empty();
-							
 							chatNavContent.append("<p class='navInfoMsg'>캔버스</p>");
+							
 						}else{
 							chatNavContent.empty();
 						}
 						labelType.attr('class','clicked');
 						anotherLabelType.attr('class','none-clicked');
 					});
+					
 				});
 				
 			</script>
@@ -747,13 +821,12 @@ function loadChatFromDB(){
 				<div class="attach"><a href="#" class="openLocationModal">지도첨부</a></div>
 			</div>
 			<div id="inputBox">
-			<div id="chatInputInstance">
-			<a href="#" id="attachBtn">첨부파일</a>
-			<textarea id="chatInput" placeholder="메세지 작성부분"></textarea>
-			<a id="sendChat" href="#">전송</a>
-
-			</div>
-		</div><!-- inputBox end -->
+				<div id="chatInputInstance">
+				<a href="#" id="attachBtn">첨부파일</a>
+				<textarea id="chatInput" placeholder="메세지 작성부분"></textarea>
+				<a id="sendChat" href="#">전송</a>
+				</div><!-- chatInputInstance end -->
+			</div><!-- inputBox end -->
 		</div>
 		
 		

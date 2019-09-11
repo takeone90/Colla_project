@@ -70,7 +70,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		                 	or upper(b_title) like ('%'||upper('${keyword}')||'%')		                 	
 		                 </if>
 		                 <if test="content != null">
-		                 	or upper(b_content) like ('%'||upper('${keyword}')||'%')
+		                 	or upper(b_content) like ('%'||upper('${keyword}')||'%')	       
 		                 </if>
 		                 <if test="name != null">
 		                 	or upper(m_name) like ('%'||upper('${keyword}')||'%')

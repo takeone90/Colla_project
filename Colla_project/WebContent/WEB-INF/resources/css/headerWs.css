@@ -95,9 +95,10 @@ a.member-btn:hover{
 	color: #CCCBCA;
 }
 #etcBox{
-	display: inline-block;
-	position: absolute;
-	right : 10%;
+	display: table-cell;
+	position : absolute;
+	vertical-align : bottom;
+	right : 90px;
 }
 #exitChatRoom{
 	display : none;

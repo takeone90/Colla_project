@@ -19,13 +19,59 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where cm.m_num=m.m_num and cm_num=#{cmNum}
 	</select>
 	<select id="selectAllChatMessageByCrNum" resultMap="cmMap">
-		select a.cm_num  ,a.cr_num,a.m_num,a.cm_content,a.cm_write_date,a.m_name,a.cm_type,a.m_profileimg, f.f_num
+		select a.cm_num,a.cr_num,a.m_num,a.cm_content,a.cm_write_date,a.m_name,a.cm_type,a.m_profileimg, f.f_num
 		from (select cm.cm_num  ,cm.cr_num,cm.m_num,cm.cm_content,cm.cm_write_date,m.m_name,cm.cm_type,m.m_profileimg
         		from chat_message cm, member m 
         		where cm.m_num=m.m_num and cm.cr_num=#{param1}) a left outer join favorite f
 		on f.cm_num = a.cm_num and f.m_num=#{param2}
 		order by a.cm_write_date asc
 	</select>
+	
+	<!-- 검색과 페이징을 위한.. -->
+	<select id="selectChatMessage" resultMap="cmMap">
+		select * from (
+		select rownum as rnum,cm_num,cr_num,m_num,cm_content,cm_write_date,cm_type
+        from(select * from chat_message order by cm_write_date desc))
+		where rnum between #{firstRow} and #{endRow}
+	</select>
+	<select id="searchChatMessage" parameterType="map" resultMap="cmMap">
+			select * from (
+		        select rownum as rnum,m_name,cm_num,cr_num,m_num,cm_content,cm_write_date,cm_type
+		        from (
+		        select * from (select cm.cm_num,m.m_name,cm.cr_num,cm.m_num,cm.cm_content,cm.cm_write_date,cm.cm_type
+		        from chat_message cm, member m
+		        where cm.m_num=m.m_num and cr_num=#{crNum}) cmm
+		        where 1=0
+		        <if test="content!=null">
+		           or cmm.cm_content like('%${keyword}%')
+		        </if>
+		        <if test="name!=null">
+		           or cmm.m_name like('%${keyword}%')
+		        </if>
+		           order by cmm.cm_write_date asc))
+		     where rnum between #{firstRow} and #{endRow}
+	</select>
+	<select id="selectSearchedCmCount" parameterType="map" resultType="int">
+			select count(*) from (
+			select * from (
+		        select rownum as rnum,m_name,cm_num,cr_num,m_num,cm_content,cm_write_date,cm_type
+		        from (
+		        select * from (select cm.cm_num,m.m_name,cm.cr_num,cm.m_num,cm.cm_content,cm.cm_write_date,cm.cm_type
+		        from chat_message cm, member m
+		        where cm.m_num=m.m_num and cr_num=#{crNum}) cmm
+		        where 1=0
+		        <if test="content!=null">
+		           or cmm.cm_content like('%${keyword}%')
+		        </if>
+		        <if test="name!=null">
+		           or cmm.m_name like('%${keyword}%')
+		        </if>
+		           order by cmm.cm_write_date asc))
+		     where rnum between #{firstRow} and #{endRow})
+	</select>
+	
+	
+	
 	<!-- 채팅방 즐겨찾기 추가/삭제/조회 -->
 	<insert id="insertFavorite">
 		insert into favorite
