@@ -7,7 +7,11 @@
     width: 1280px;
     margin: 35px auto 20px;
 }
-
+.myPageInner > div > div:last-child{
+	width: 838px;
+	text-align: right;
+	margin: 0 auto;
+}
 /*myPageAccount*/
 .myPageContent{
 	width: 838px;
@@ -51,7 +55,7 @@
 .myPageContentRow .content{
 	width: 510px;	
 }
-.myPageContentRow #profileImg{
+.myPageAccount #profileImg{
 	border-radius:50%;
 	border:2px solid #fff;
 	margin:0;
@@ -64,19 +68,31 @@
 	border : 0.5px solid #D3CDCD;
 		margin: 0 30px;
 }
-
 #profileImg img{
 	height:100%;
 }
 
-/*모달*/
 
-/* 회원 정보 수정 모달*/
 
-#profileModifyModal #profileImg {
+/* 회원 정보 수정*/
+.myPageInner .myPageModify{
+	width: 450px;
+	margin: 0 auto;
+	border : 1px solid #DADCE0;
+	border-radius: 10px;
+	padding: 60px;
+	
+}
+.myPageModify > p {
+	font-size: 20px;
+	text-align : center;
+	width : 100%;
+	margin-bottom: 30px;
+}
+.myPageModify #profileImg {
 	border-radius:50%;
 	border:2px solid #fff;
-	margin:30px auto;
+	margin: 0 auto 20px auto;
 	width:167px;
 	height:167px;
 	overflow:hidden;
@@ -85,7 +101,10 @@
 #profileModifyModal #profileImg img{
 	height:100%;
 }
-.attachModal{
+.attachImgArea{
+	width: 250px;
+}
+.attachImgArea input{
 	display: none;
 	position: fixed;
 	top: 17%;
@@ -98,6 +117,35 @@
 	z-index: 10;
 	box-shadow: 2px 2px 10px 1px #6e6d6d;
 }
+.attachImgArea label{
+	width :110px;
+	height : 20px;
+	border : 1px solid #BFBFBF;
+	padding-top: 8px;
+}
+.attachImgArea label[for="defalutImgBtn"]{
+	margin-left: 10px;
+}
+.myPageModify .btns{
+	width: 450px;
+	text-align: center;
+	margin: 30px auto 0px;	
+}
+.myPageModify input{
+	border: 1px solid #D1D1D1;
+	border-radius: 5px;
+	line-height:30px;
+	width : 400px;
+	height: 60px;
+	padding: 0 10px;
+	margin-left: 20px;
+	font-size: 15px;
+	text-align: center;
+}
+
+
+
+
 
 .attachModal > *{
 	margin: 0 auto;
@@ -138,9 +186,6 @@
 	text-align: center;
 	border-radius: 5px;
 }
-
-
-
 #myPageMain .myPageContent{
 	float : left;
 	width : 25%;

@@ -141,40 +141,7 @@
 			<li><a href="${contextPath}/myPageAlarmForm">알림설정</a></li>
 			<li><a href="${contextPath}/myPageLicenseForm">라이선스관리</a></li>
 		</ul>
-		<%---------------------------------------------회원정보 모달 ----------------------------------------------------%>
-		<div id="profileImgModal" class="attachModal">
-			<div class="modalHead">
-				<h3 style="font-weight: bolder; font-size: 30px">프로필 이미지</h3>
-			</div>
-			<br>
-			<br>
-			<div class="modalBody">
-				<p>프로필 이미지를 변경해주세요!</p>
-				<div class="row">
-					<p>
-						<form class="profileImgForm" enctype="multipart/form-data">
-							<div id="profileImg">
-								<img alt="나의 프로필 사진" class="thumbNailImg" src="${contextPath }/showProfileImg">
-							</div>
-							<div class="attachImgArea" class="attachModal">
-								
-								<input type="file" id="attachImgBtn" name="profileImg" value="사진 선택" accept="image/*" multiple>
-								<label for="attachImgBtn">프로필 변경</label>
-								
-								<input type="button" id="defalutImgBtn">
-								<label for="defalutImgBtn">기본이미지 변경</label>
-							</div>
-						</form>
-					</p>
-				</div>
-				<div id="innerBtn">
-					<a href="#" class="profileImgUpload">업로드</a><br>
-					<a href="#" class="closeProfileImgModal">닫기</a><br>
-				</div>
-			</div><!-- end modalBody -->
-		</div><!-- end memberInfoModal -->
-		
-
+	
 	</div><!-- end wsBody -->
 
 	
