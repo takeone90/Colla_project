@@ -52,6 +52,13 @@ public class MypageController {
 		model.addAttribute("member", member);
 		return "/myPage/myPageMain";
 	}
+	
+	@RequestMapping(value = "/myPageAccountForm", method = RequestMethod.GET)
+	public String myPageAccountForm(Model model, HttpSession session) {
+		Member member = memberService.getMemberByEmail((String)session.getAttribute("userEmail"));
+		model.addAttribute("member", member);
+		return "/myPage/myPageAccount";
+	}
 
 	@RequestMapping(value = "/myPageCheckPassForm", method = RequestMethod.GET)
 	public String myPageCheckPassForm() {

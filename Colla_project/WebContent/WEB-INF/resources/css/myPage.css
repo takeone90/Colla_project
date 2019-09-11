@@ -2,23 +2,78 @@
 #deleteMember a{
 	font-weight: bolder;
 }
-#myPageMain .myPageContent{
-	float : left;
-	width : 25%;
-	height : 600px;
-	margin-left: 5%;
-	border-radius: 20px;
-	border : 1px solid red;
+.myPageInner {
+	position:relative;
+    width: 1280px;
+    margin: 35px auto 20px;
 }
-.myPageContent h5{
-	font-size: 25px;
-	font-weight: 600;
-	color: #403C39;
-	text-align: center;
-	margin : 30px;
+
+/*myPageAccount*/
+.myPageContent{
+	width: 838px;
+	margin: 0 auto;
+	border : 1px solid #DADCE0;
+	border-radius: 10px;
+	margin-bottom: 30px;
 }
-/* 회원 정보 수정 */
-#profileImg {
+.myPageTitle{
+	width: 790px;
+	height: 56px;
+	padding: 24px 24px 8px;
+}
+.myPageTitle .title{
+	font-size: 22px;
+	font-weight: 400;
+}
+.myPageTitle .content{
+	font-size: 12px;
+	font-weight: 400;
+	padding-top: 20px;
+}
+.myPageContentRow{
+	width: 790px;
+	padding: 8px 24px;
+}
+.myPageContentRow:hover{
+	background-color: #DADCE0;
+}
+.myPageContentRow > p ,.myPageContentRow > div {
+	display: inline-block;
+	vertical-align: middle;
+}
+.myPageContentRow > div {
+	text-align: right;
+}
+.myPageContentRow .title{
+	width: 156px;
+	padding: 16px;
+}
+.myPageContentRow .content{
+	width: 510px;	
+}
+.myPageContentRow #profileImg{
+	border-radius:50%;
+	border:2px solid #fff;
+	margin:0;
+	width:60px;
+	height:60px;
+	overflow:hidden;
+	border: 2px solid #D3CDCD;
+}
+.contentLine{
+	border : 0.5px solid #D3CDCD;
+		margin: 0 30px;
+}
+
+#profileImg img{
+	height:100%;
+}
+
+/*모달*/
+
+/* 회원 정보 수정 모달*/
+
+#profileModifyModal #profileImg {
 	border-radius:50%;
 	border:2px solid #fff;
 	margin:30px auto;
@@ -27,38 +82,9 @@
 	overflow:hidden;
 	border: 2px solid #D3CDCD;
 }
-#profileImg img{
+#profileModifyModal #profileImg img{
 	height:100%;
 }
-#profileInfo{
-	width: 100%;
-	margin: 0 auto;
-}
-#profileInfo > div {
-	width : 80%;
-	margin: 10% auto ;
-}
-#profileInfo>div>p {
-	float: left;
-}
-#profileInfo>div>.title{
-	width : 30%;
-	text-align: right;
-	color : #716568;
-	font-size: 13px;
-}
-
-#profileInfo>div>.content{
-	border-bottom: 1px solid #E0E0E0;
-	width : 60%;
-	color : #65595A;
-	font-size: 16px;
-	font-weight: 500;
-	text-align: left;
-	margin: 0px 0px 0px 5px;
-	padding: 0px 0px 5px 5px;
-}
-
 .attachModal{
 	display: none;
 	position: fixed;
@@ -80,29 +106,14 @@
 	margin-bottom: 10px;
 }
 .attachImgArea {
-	width: 100px;
 	margin: 0 auto;
 	text-align: center;
-	border: 1px solid red;
-}
-.attachImgArea{
 	margin-bottom: 30px;
 }
 .attachImgArea *{
 	float: left;
 }
-.attachImgArea input[type="file"]+label{
-	display: inline-block;
-	color : #716568;
-	padding-bottom: 5px;
-	border-bottom: 1px solid #716568;
-}
-.attachImgArea input[type="button"]+label{
-	display: inline-block;
-	color : #716568;
-	font-size : 10px;
-	padding-top: 10px;
-}
+
 .attachImgArea input[type="file"], .attachImgArea input[type="button"] {
 	position: absolute; 
 	width: 1px; 
@@ -126,4 +137,21 @@
 	color: white;
 	text-align: center;
 	border-radius: 5px;
+}
+
+
+
+#myPageMain .myPageContent{
+	float : left;
+	width : 25%;
+	height : 600px;
+	margin-left: 5%;
+	border-radius: 20px;
+}
+.myPageContent h5{
+	font-size: 25px;
+	font-weight: 600;
+	color: #403C39;
+	text-align: center;
+	margin : 30px;
 }

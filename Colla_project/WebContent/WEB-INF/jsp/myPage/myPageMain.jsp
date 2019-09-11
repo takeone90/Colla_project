@@ -99,10 +99,11 @@
 	<%@ include file="/WEB-INF/jsp/inc/navWs.jsp"%>
 	<div id="wsBody">
 	<input type="hidden" value="mypage" id="pageType">
-		<div id="wsBodyContainer">
+		<div id="wsBodyContainer" class="clearFix">
 			<h3>마이페이지</h3>
 			<div id="myPageMain" class="clearFix">
 				<div class="myPageContent">
+				<!-- 
 					<h5>회원정보 관리</h5>
 					<div id="profileImg">
 						<img alt="나의 프로필 사진" src="${contextPath }/showProfileImg" />
@@ -132,8 +133,14 @@
 				<div class="myPageContent">
 				
 				</div>
+				 -->
 			</div>
 		</div>
+		<ul>
+			<li><a href="${contextPath}/myPageAccountForm">회원정보관리</a></li>
+			<li><a href="${contextPath}/myPageAlarmForm">알림설정</a></li>
+			<li><a href="${contextPath}/myPageLicenseForm">라이선스관리</a></li>
+		</ul>
 		<%---------------------------------------------회원정보 모달 ----------------------------------------------------%>
 		<div id="profileImgModal" class="attachModal">
 			<div class="modalHead">
@@ -166,6 +173,7 @@
 				</div>
 			</div><!-- end modalBody -->
 		</div><!-- end memberInfoModal -->
+		
 
 	</div><!-- end wsBody -->
 
