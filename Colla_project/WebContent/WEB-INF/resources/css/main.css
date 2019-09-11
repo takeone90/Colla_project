@@ -49,14 +49,66 @@
 	font-size: 16px;
 }
 .box-inside {
-    display: flex;
+    display: inline-flex;
     border: 1px solid #b4b4b4;
-    width: 100%;
+    width: 70%;
+    min-width: 930px;
     border-radius: 6px;
     text-align: left;
 }
 .price-each-col {
     padding: 20px;
-    width: 50%;
-    min-width: 300px;
+    width: 30%;
+    border: 1px solid #b4b4b4;
+    margin: 5px;
+    border-radius: 6px;
+}
+.price-title {
+	font-weight: 900;
+    font-size: 32px;
+    margin-bottom: 6px;
+    text-align: left;
+}
+.price-desc {
+    font-size: 15px;
+    word-break: break-word;
+    word-wrap: break-word;
+    white-space: normal;
+    color: #666;
+    padding: 0;
+    line-height: 1.4;
+}
+.price-amount-view {
+    display: flex;
+    align-items: flex-start;
+}
+.price-currency {
+    bottom: auto;
+    font-weight: 900;
+    font-size: 16px;
+    top: 0;
+    margin-right: 2px;
+    position: absolute;
+    line-height: 1;
+}
+.price-currency-unit {
+    font-size: 14px;
+    font-weight: 700;
+    text-align: center;
+    color: #373839;
+    display: inline-block;
+}
+.price-value {
+    font-size: 48px;
+    font-weight: 900;
+    line-height: .75;
+    text-align: center;
+    margin-left: .4em;
+    color: #373839;
+    display: inline-block;
+}
+.price-per {
+    color: #6e7788;
+    font-weight: 400;
+    margin-left: 6px;
 }
