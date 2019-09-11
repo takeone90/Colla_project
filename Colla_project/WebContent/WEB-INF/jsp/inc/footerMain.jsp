@@ -1,4 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<c:set var="contextPath" value="<%=request.getContextPath()%>" />
+<c:set var="member" value="<%=request.getSession().getAttribute(\"user\")%>" />
+<script type="text/javascript" src="${contextPath }/js/stomp.js"></script>
+<script type="text/javascript" src="${contextPath }/js/sockjs.js"></script>
+<script>
+window.onscroll = function() {scrollFunction()};
+function scrollFunction() {
+  if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+    $("#btn_page_top").css('display', 'block');
+  } else {
+	  $("#btn_page_top").css('display', 'none');
+  }
+}
+function topFunction() {
+  document.documentElement.scrollTop = 0;
+}
+</script>
 <div id="footer">
 	<div id="f1">
 		<p>© 2019 Osiris systems inc. All rights reserved.</p>
@@ -29,4 +47,5 @@
 			</ul>
 		</div>
 	</div>
+	<button onclick="topFunction()" id="btn_page_top">TOP</button>
 </div>
