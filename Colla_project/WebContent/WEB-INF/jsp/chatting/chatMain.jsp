@@ -12,6 +12,8 @@
 <link rel="stylesheet" type="text/css" href="${contextPath}/css/headerWs.css"/>
 <link rel="stylesheet" type="text/css" href="${contextPath}/css/navWs.css"/>
 <link rel="stylesheet" type="text/css" href="${contextPath}/css/chatMain.css"/>
+<link rel="stylesheet" type="text/css" href="${contextPath}/css/animate.css"/>
+<link rel="stylesheet" type="text/css" href="${contextPath}/css/animationCheatSheet.css"/>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script type="text/javascript" src="${contextPath}/js/stomp.js"></script>
@@ -208,11 +210,15 @@ function showSearchChatInput(){
 //채팅방 안에 멤버리스트 보여주고 초대할수 있다
 function showMemberList(){
 	var inviteForm = $("<form id='inviteForm' action='inviteChatMember'></form>");
+	var mListDiv = $("<div id='navMList'></div>");
+	inviteForm.append(mListDiv);
+	var crmListUL = $("<ul id='crmListUL' class='isntDefault'></ul>");
 	var wsmListUL = $("<ul id='wsmListUL'></ul>");
 	var hiddenTag = $("<input type='hidden' class='addCrNum' name='crNum' value='${chatRoom.crNum}'><input type='hidden' value='${wNum}' name='wNum' id='wNum'>");
-	wsmListUL.append(hiddenTag);
+	inviteForm.append(hiddenTag);
 	var wNum = $("#wNum").val();
 	var crNum = $("#crNum").val();
+	var isDefault =$("#isDefault").val();
 	$.ajax({
 		url : "showMemberListInChatRoom",
 		data : {"wNum":wNum,"crNum":crNum},
@@ -224,30 +230,37 @@ function showMemberList(){
 			$.each(crmList,function(idx,crmItem){
 				var profileImgTag = "<div class='profileImg'><a href='#'><img alt='프로필사진' src='/Colla_project/showProfileImg?num="+crmItem.num+"'></a></div>";
 				var crMemberLI = $("<li>"+profileImgTag+"<div class='memberNameInSlideMenu'>"+crmItem.name+"</div></li>");
-				wsmListUL.append(crMemberLI);
-				<%--가운데 hr 선 하나 넣자!--%>
-			});
-			//채팅방에 없는사람(ws멤버인사람)
-			$.each(wsmList,function(idx,item){
-				var profileImgTag = "<div class='profileImg'><a href='#'><img alt='프로필사진' src='/Colla_project/showProfileImg?num="+item.num+"'></a></div>";
-				var wsMemberLI = $("<label><li>"+profileImgTag+"<div class='memberNameInSlideMenu'><input type='checkbox' value='"+item.num+"' name='wsmList'>"+item.name+"<div class='checked-member'><i class='fas fa-check'></i><div>"+"</div></li></label>");
-				wsmListUL.append(wsMemberLI);
+				crmListUL.append(crMemberLI);
 			});
 			
-			inviteForm.append(wsmListUL);
-			var isDefault = $("#isDefault").val();
+			mListDiv.append(crmListUL);
+			
+			//추가채팅방이면 초대 가능 옵션이 있다
 			if(isDefault==0){
+				//채팅방에 없는사람(ws멤버인사람)
+				$.each(wsmList,function(idx,item){
+					var profileImgTag = "<div class='profileImg'><a href='#'><img alt='프로필사진' src='/Colla_project/showProfileImg?num="+item.num+"'></a></div>";
+					var wsMemberLI = $("<label><li>"+profileImgTag+"<div class='memberNameInSlideMenu'><input type='checkbox' value='"+item.num+"' name='wsmList'>"+item.name+"<div class='checked-member'><i class='fas fa-check'></i><div>"+"</div></li></label>");
+					wsmListUL.append(wsMemberLI);
+				});
+				mListDiv.append(wsmListUL);
+				wsmListUL.before("<h4>초대 가능한 워크스페이스 멤버</h4>");
 				var inviteBtn = $("<div align='center'><button type='submit'>선택한 멤버 초대하기</button></div>");
-				inviteForm.append(inviteBtn);	
+				inviteForm.append(inviteBtn);
+				//체크박스에 클릭된 멤버들 클래스를 다르게 줘서 색깔바꾸기
+				
 			}
-			chatNavContent.append(inviteForm);
-			//체크박스에 클릭된 멤버들 클래스를 다르게 줘서 색깔바꾸기
+			chatNavContent.append(inviteForm); //이 append를 하고 나서부터 아래처럼 js로만든 태그를 선택할 수 있다.
+			
 			$("#wsmListUL label").on("click",function(){
 				var checkedMember = $("input:checkbox[name='wsmList']:checked").next();
 				checkedMember.css({display : 'inline-block'});
 				var noneCheckedMember = $("input:checkbox[name='wsmList']:not(:checked)").next();
 				noneCheckedMember.hide();
 			});
+			if(isDefault==1){
+				$("#crmListUL").attr('class','isDefault');
+			}
 		},
 		error : function(){
 			alert("멤버리스트 불러오기 에러발생");
@@ -339,7 +352,7 @@ function loadChatFromDB(){
 		var favorite = "<div class='"+isFavoriteClass+"' onclick='chatFavorite(this)' value = '"+ msgInfo.cmNum +"'></div>"; //즐겨찾기 아이콘
 		var originName = getOriginName(msgInfo.cmContent);
 		var date = new Date(msgInfo.cmWriteDate);
-		var writeTime = date.getFullYear()+"-"+date.getMonth()+"-"+date.getDay()+" "+date.getHours()+"시"+date.getMinutes()+"분";
+		var writeTime = date.getFullYear()+"-"+(Number(date.getMonth())+Number(1))+"-"+date.getDate()+" "+date.getHours()+"시"+date.getMinutes()+"분";
 
 		var contentStr;
 		var codeType;
@@ -759,7 +772,7 @@ function loadChatFromDB(){
 			
 			<div class="chat" id="chatArea">
 			<div id="chatNavBox">
-				<div id="openChatNavBox"></div><!-- 슬라이드 메뉴 열 수 있는 띠 -->
+				<div id="openChatNavBox" class="animated infinite pulse"><i class="fas fa-chevron-circle-left"></i></div><!-- 슬라이드 메뉴 열 수 있는 띠 -->
 				<div id="chatNav" align="center">
 					<ul id="InnerBtns">
 						<li class="navInnerBtn"><label class="clicked"><input type="radio" name="innerBtn" value="favorite" checked>즐겨찾기</label></li>
@@ -778,7 +791,7 @@ function loadChatFromDB(){
 						$("#chatNavBox").animate({right: 0},200);
 							toggleVal = 1;						
 					}else{
-						$("#chatNavBox").animate({right: -590},200);
+						$("#chatNavBox").animate({right: -540},200);
 							toggleVal = 0;						
 					}
 				});
@@ -794,7 +807,8 @@ function loadChatFromDB(){
 					 		showFavoriteList();		
 						}else if(navType=='memberManagement'){
 							chatNavContent.empty();
-							chatNavContent.append("<p class='navInfoMsg'>채팅방에 멤버를 추가할 수 있습니다<br>현재 워크스페이스 멤버만 표시됩니다.</p>");
+							chatNavContent.append("<p class='navInfoMsg'>워크스페이스의 멤버를 채팅방에 추가할 수 있습니다.</p>");
+							chatNavContent.append("<h4>채팅방 참여자</h4>");
 							showMemberList();
 						}else if(navType=='search'){
 							chatNavContent.empty();
