@@ -48,8 +48,8 @@
 	<input type="hidden" value="board" id="pageType">
 		<div id="wsBodyContainer">
 		
-			<h3>게시글 작성</h3>
-			<h4>새 글 작성</h4>
+			<h3>자유게시판</h3>
+			<h4>새 게시글 작성</h4>
 			<div id="boardInner">
 				<div id="inputWrap">
 					<form id="writeForm" action="${contextPath}/board/write" method="post" enctype="multipart/form-data">
@@ -80,11 +80,32 @@
 						<div class="row">
 							<textarea id="content" name="content" cols="70" rows="10"></textarea>
 						</div>
-						<div class="row">
-							<label>
-								파일 첨부
-								<input multiple="multiple" id="file" type="file" name="file" >
+						<div class="row clearFix">
+							<label for="file" class="floatleft">
+								<span>파일 첨부</span>
 							</label>
+							<div id="uploadArea" class="floatleft">
+								<span>Choose a file or Drag it here.</span>
+								<input multiple="multiple" id="file" type="file" name="file" >
+							</div>
+							<script type="text/javascript">
+								$(function(){
+									$("#file").change(function(){
+										let $span = $("#uploadArea span");
+										console.log(this.files);
+										$span.empty();
+										if(this.files.length>0){
+											$span.addClass("on");
+											$.each(this.files, function(idx,item){
+												$span.append("파일 "+ (idx+1) +" : "+item.name+"<br/>");
+											})
+										} else {
+											$span.removeClass("on");
+											$span.text("Choose a file or Drag it here.");
+										}
+									})
+								})
+							</script>
 						</div>
 						<div id="btns">
 							<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">

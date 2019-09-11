@@ -168,7 +168,9 @@ public class BoardController {
 	@RequestMapping(value="/modify", method = RequestMethod.GET)
 	public String showModifyForm(HttpSession session, Model model, int bNum) {
 		if(session.getAttribute("pwConfirmedBnum") != null && (int)session.getAttribute("pwConfirmedBnum")==bNum) {
+			List<BoardFile> fList = fService.getFilesByBnum(bNum);
 			model.addAttribute("board", bService.getBoardByBnum(bNum));
+			model.addAttribute("fList", fList);
 			
 			session.removeAttribute("pwConfirmedBnum");
 			return "/board/boardModifyForm";
