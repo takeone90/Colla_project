@@ -88,17 +88,18 @@ a.member-btn:hover{
 #chatRoomInfo{
 	display : inline-block;
 	position : relative;
-	padding-left: 35px;
+	padding-top : 10px;
+	padding-left: 40px;
 }
 #chatRoomInfo p{
-	font-size : 25px;
+	font-size : 20px;
 	color: #CCCBCA;
 }
 #etcBox{
 	display: table-cell;
 	position : absolute;
 	vertical-align : bottom;
-	right : 90px;
+	right : 60px;
 }
 #exitChatRoom{
 	display : none;
