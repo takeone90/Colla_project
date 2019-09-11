@@ -74,24 +74,26 @@
 						</c:forEach>
 					</div>
 					</c:if>
-					<div class="row">
-						<a href="checkPass?mode=modify&bNum=${board.bNum }">수정</a>
-						<a href="checkPass?mode=delete&bNum=${board.bNum }">삭제</a>
-						<a href="list?page=${listInf.page}&keyword=${listInf.keyword}&keywordType=${listInf.type}">목록</a>
+					<div class="row btns">
+						<a href="checkPass?mode=modify&bNum=${board.bNum }" class="btn">수정</a>
+						<a href="checkPass?mode=delete&bNum=${board.bNum }" class="btn">삭제</a>
+						<a href="list?page=${listInf.page}&keyword=${listInf.keyword}&keywordType=${listInf.type}" class="btn">목록</a>
 					</div>
 				</div>
 				<div id="boardReply">
-					<h3>댓글</h3>
-					<ul id="replyBox" class="clearFix">
-					</ul>
-					<form id="addReplyDiv">
-						<div class="replyImg"><img src="${contextPath}/showProfileImg"></div>
-						<div id="inputBox">
-							<textarea rows="2" cols="50" name="rContent"></textarea>
-							<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
-							<button onclick="addReply(); return false;">댓글 추가</button>
-						</div>
-					</form>
+					<h4>댓글</h4>
+					<div id="replyWrap">
+						<ul id="replyBox" class="clearFix">
+						</ul>
+						<form id="addReplyDiv">
+							<div class="replyImg"><img src="${contextPath}/showProfileImg"></div>
+							<div id="inputBox">
+								<textarea rows="3" name="rContent"></textarea>
+								<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+								<button class="btn" onclick="addReply(); return false;">댓글 등록</button>
+							</div>
+						</form>
+					</div>
 				</div>
 			</div>
 		</div>

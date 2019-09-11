@@ -6,27 +6,31 @@ var beforeModifyReply;
 
 function creatModifyForm(target){
 	let $target = $(target);
+	let $detail = $(target).parent().parent(".replyDetail");
 	let $content = $target.parent().next(".replyContent");
 	beforeModifyReply = $target.parent().next(".replyContent").text();
-	let $form = '<form id="modifyReplyDiv">';
-	$form += '<textarea rows="2" cols="50" name="rContent">'+beforeModifyReply+'</textarea>';
-//	$form += '<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">';
-	$form += '<button onclick="modifyReply(this); return false;">댓글 수정</button>';
-	$form += '<button onclick="cancleModify(this); return false;">취소</button>';
+	$content.hide();
+	let $form = '<form id="modifyReplyDiv"> ';
+	$form += '<textarea rows="3" name="rContent">'+beforeModifyReply+'</textarea> ';
+//	$form += '<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"> ';
+	$form += '<button onclick="modifyReply(this); return false;" class="btn">수정</button> ';
+	$form += '<button onclick="cancleModify(this); return false;" class="btn">취소</button> ';
 	$form += '</form>';
- 
-	$content.empty().append($form);
+	$detail.children('#modifyReplyDiv').remove();
+	$detail.append($form);
 }
 
 function cancleModify(target){
-	let $p = $(target).parent().parent();
-	$p.find("form").remove();
-	$p.append(beforeModifyReply);
+	let $target = $(target);
+	let $detail = $(target).parent().parent(".replyDetail");
+	let $content = $detail.children(".replyContent");
+	$target.parent().remove();
+	$content.show();
 }
 
 function modifyReply(target){
 	let $form = $(target).parent("form");
-	let rNum = $form.parent().prev().attr("data-rnum");
+	let rNum = $form.prev().prev().attr("data-rnum");
 	$.ajax({
 		url:"../reply/modify/"+rNum,
 		data: $form.serialize() ,
@@ -113,7 +117,7 @@ function loadReply(){
 				li += '<div class="replyImg"><img src="/Colla_project/showProfileImg?num='+item.mNum+'"></div>';
 				li += '<div class="replyDetail">';
 				li += '<p class="replyAuthor" data-rNum="'+item.rNum+'">';
-				li += '<span>'+item.mName+'</span> ';
+				li += '<span class="replyName">'+item.mName+'</span> ';
 				li += '<span class="regdate">'+date_to_str(date)+'</span>';
 				if(item.mNum == mNum){
 					li += ' <a href="javascript:void(0)" onclick="creatModifyForm(this)">수정</a>';

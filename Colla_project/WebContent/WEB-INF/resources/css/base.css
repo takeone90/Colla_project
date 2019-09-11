@@ -14,7 +14,24 @@ a:visited, a:link, a:focus, a:hover, a:active{
 .clearFix:after{content:""; display:block; clear:both;}
 .container {overflow:hidden; position:relative;}
 .floatleft {float:left;}
-
+body .btn {
+	display:inline-block;
+	padding: 0 20px;
+	color:#fff;
+	border-radius: 5px;
+	background-color: #655B5A;
+	transition:background-color 0.5s;
+	border:0 none;
+}
+button.btn{
+	font-family: 'Noto Sans KR';
+	cursor:pointer;
+	font-size:1rem;
+	height:2rem;
+}
+body .btn:hover{
+	background-color: #E5675A;
+}
 
 /*Workspace 안의 CSS*/
 #wsMainHeader{
@@ -35,12 +52,12 @@ a:visited, a:link, a:focus, a:hover, a:active{
 	padding: 30px 0;
 	margin:0 auto;
 }
-#wsBodyContainer > h3{
+#wsBodyContainer h3{
 	color: #403C39;
 	font-size: 40px;
 	font-weight:900;
 }
-#wsBodyContainer > h4{
+#wsBodyContainer h4{
 	color: #E5675A;
 	font-size: 20px;
 	font-weight: 700;
