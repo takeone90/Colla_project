@@ -152,7 +152,7 @@
 	line-height:30px;
 }
 #boardInner #boardDetail .row .floatleft {
-	margin-right: 40px;
+	margin-right: 60px;
 }
 #boardInner #boardDetail .bold {
 	display:inline-block;
@@ -161,17 +161,33 @@
 	font-weight: 500;
 }
 #boardInner #boardDetail #content{
-	min-height: 200px;
-	padding: 20px;
+	min-height: 120px;
+	padding: 20px 30px;
 }
-#replyBox > li {
+#boardInner #boardDetail .btns{
+	text-align:right;
+	border:0 none;
+	margin-bottom: 20px;
+}
+#boardReply h4 {
+	color:#403C39;
+	margin: 15px 0;
+}
+#boardReply #replyWrap{
+	background-color: #F4F4F4;
+	padding: 25px 70px;
+} 
+#boardReply .replyName {
+	font-weight: 500;
+}
+#boardReply #replyBox > li {
 	margin-bottom:5px;
 }
-.replyAuthor a {
+#boardReply .replyAuthor a {
 	font-size:13px;
 	color:crimson;
 }
-.replyImg {
+#boardReply .replyImg {
 	width:46px;
 	height:46px;
 	border-radius:50%;
@@ -180,32 +196,46 @@
 	margin-right:10px;
 	border:2px solid #fff;
 }
-.replyImg img {width: 100%}
-.replyDetail {
+#boardReply .replyImg img {width: 100%}
+#boardReply .replyDetail {
 	float:left;
-	width:calc(100% - 60px);
+	width:calc(100% - 65px);
+	margin-left: 3px;
 }
-.replyDetail .replyAuthor{
+#boardReply #modifyReplyDiv .btn{
+	font-size:13px;
+	padding: 0 12px;
+	vertical-align:bottom;
+}
+#boardReply #modifyReplyDiv textarea{
+	vertical-align:bottom;
+}
+#boardReply .replyDetail .replyAuthor{
 	margin-bottom:5px;
 }
-.replyDetail .replyContent{
+#boardReply .replyDetail .replyContent{
 	font-size:14px;
 	line-height:17px;
 }
-.regdate{
+#boardReply .regdate{
 	font-size:13px;
 	color:#aaa;
 }
-#addReplyDiv{
+#boardReply #addReplyDiv{
 	display:block;
 	margin-top:20px;
+    border-top: 1px solid #ddd;
+    padding-top: 20px;
 }
-#addReplyDiv *{vertical-align:middle;}
-#addReplyDiv .replyImg {
+#boardReply #addReplyDiv *{vertical-align:middle;}
+#boardReply #addReplyDiv .replyImg {
 	display:inline-block;
 	float:none;
 }
-#addReplyDiv #inputBox{
+#boardReply #addReplyDiv #inputBox{
 	display:inline-block;
+	width: calc(100% - 64px);
 	vertical-align:middle;
 }
+#boardReply textarea{
+	width: calc(100% - 110px);
