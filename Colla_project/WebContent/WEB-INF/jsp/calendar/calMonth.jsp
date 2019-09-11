@@ -224,7 +224,8 @@ $(function() {
 function thisMonthCalendar(today) {
 	console.log(today+"의 월 달력을 그렸습니다.");
 	//달력 상단 날짜 그리기
-	$("#calMonthTitle").html(today.getFullYear()+"년 "+(today.getMonth()+1)+"월");
+	$("#YearTitle").html("<p>"+today.getFullYear()+"년<p>");
+	$("#MonthTitle").html((today.getMonth()+1)+"월");
 	//달력 상단 요일 그리기
 	var month = monthChange(today.getMonth()+1);
 	var calendar = "<table class='drawMonthCalendarUpper'>";
@@ -411,7 +412,7 @@ function changeToBoolean(param) {
 	return param;
 }
 function markingOnDate(dateOrigin) {
-	$("#"+dateOrigin).css({"background-color": "#ffd6d4", "border": "1px solid #fcb4b1"});
+	$("#"+dateOrigin).css({"background-color": "#E6E2E1"});
 }
 function dateChange(d) {
 	if(d<10) { return "0"+d; }
@@ -551,7 +552,7 @@ function thisYearCalendar(today) {
 	console.log(today+"의 연 달력을 그렸습니다.");
 	//달력 상단 날짜 그리기
 	var year = today.getFullYear();
-	$("#calYearTitle").html(year+"년 ");
+	$("#calYearTitle").html(year+"년");
 	//달력 날짜 그리기
 	var monthCount1 = 1;
 	var monthCount2 = 1;
@@ -723,59 +724,87 @@ function nextYearYear() {
 	<input type="hidden" value="${sessionScope.currWnum}" id="currWnum">
 	<input type="hidden" value="calendar" id="calendar">
 	<div id="wsBodyContainer">
-	<form action="calSearchList">
-		<select name="searchType">
-			<option value="1">제목</option>
-			<option value="2">내용</option>
-			<option value="3">제목+내용</option>
-			<option value="4">작성자</option>
-		</select>
-		<input type="text" name="searchKeyword" placeholder="검색어를 입력해주세요.">
-		<input type="submit" value="검색">
-	</form>
-	<button type="button" id="addFormOpen">일정 추가</button>
-	<label><input type="checkbox" name="calType" id="calType1" value="project" checked="checked">프로젝트</label>
-	<label><input type="checkbox" name="calType" id="calType2" value="vacation" checked="checked">휴가</label>
-	<label><input type="checkbox" name="calType" id="calType3" value="event" checked="checked">행사</label>
-	<button id="changeYearCalToMonthCal">월간</button>
-	<button id="changeMonthCalToYearCal">연간</button><br>
-	<hr>	
+	<div class="calHeader">
+		<div>
+		<form action="calSearchList" class="calSearch">
+			<select name="searchType">
+				<option value="1">제목</option>
+				<option value="2">내용</option>
+				<option value="3">제목+내용</option>
+				<option value="4">작성자</option>
+			</select>
+			<input type="text" name="searchKeyword" placeholder="검색어를 입력해주세요.">
+			<input type="submit" value="검색">
+		</form>
+		</div>
+		<div>
+			<button type="button" id="addFormOpen">일정 추가</button>
+		</div>
+		<div>
+			<label><input type="checkbox" name="calType" id="calType1" value="project" checked="checked">프로젝트</label>
+			<label><input type="checkbox" name="calType" id="calType2" value="vacation" checked="checked">휴가</label>
+			<label><input type="checkbox" name="calType" id="calType3" value="event" checked="checked">행사</label>
+		</div>
+		<div style="float: right">
+			<button id="changeYearCalToMonthCal">월간</button>
+			<button id="changeMonthCalToYearCal">연간</button>
+		</div>
+	</div>	
 <!-- 월간 달력 -->
 	<div id="monthCalendar" class="monthCalendar">
-		<button onclick="preYear()">작년</button>
-		<button onclick="preMonth()">이전 달</button>
-		<span id="calMonthTitle"></span>
-		<button onclick="nextMonth()">다음 달</button>
-		<button onclick="nextYear()">내년</button><br>
-		<input type="text" id="wantedYear">년
-		<input type="text" id="wantedMonth">월
-		<input type="text" id="wantedDate">일
-		<input type="button" id="wantedCalendarButton" value="이동">	
+		<div class="dateDisplay">
+			<span id="YearTitle"></span>
+			<button onclick="preYear()">작년</button>
+			<button onclick="preMonth()">이전 달</button>
+			<span id="MonthTitle"></span>
+			<button onclick="nextMonth()">다음 달</button>
+			<button onclick="nextYear()">내년</button>
+		</div>
+		<div class="dateDisplayInput">
+			<input type="text" id="wantedYear"> 년 
+			<input type="text" id="wantedMonth"> 월 
+			<input type="text" id="wantedDate"> 일 
+			<input type="button" id="wantedCalendarButton" value="이동">	
+		</div>
 		<div id="calMonthBody"></div>
 		<!-- 일정 추가 모달 -->
 		<div id="addForm" class="attachModal">
 			<div class="modalHead">
 				<h3 style='font-weight: bolder; font-size: 30px'>일정 추가</h3>
+				<p>일정을 추가하고 멤버들과 공유하세요.</p>
 			</div>
 			<div class="modalBody">
 				<form class="addModal">
 					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 					<input type="hidden" name="mNum" id="mNum" value="${userData.mNum}">
 					<input type="hidden" name="wNum" id="wNum" value="${userData.wNum}">
-					제목<input type="text" name="title" id="title"><br>
-					기간
-					(시작날짜)<input type="date" name="startDate" id="startDate"><br>
-			 		(종료날짜)<input type="date" name="endDate" id="endDate"><br>
-					상세<textarea rows="5" cols="21" name="content" id="content"></textarea><br>
-					타입<select name="type">
-						<option value="project">프로젝트</option>
-						<option value="vacation">휴가</option>
-						<option value="event">행사</option>
-						</select><br>
-					<label><input type="checkbox" name="yearCalendar" id="addYearCalendar" value="yearCalendar">연간 달력 표시</label><br> 
-					<label><input type="checkbox" name="annually" id="addAnnually" value="annually">매년 반복</label>
-					<label><input type="checkbox" name="monthly" id="addMonthly" value="monthly">매월 반복</label><br>
-					색깔<input type="color" name="color" id="addColor" value="#fffde8"><br>
+					<div>
+						<h4>일정</h4>
+						<input type="text" name="title" class="modalTitle" id="title">
+					</div>
+					<div>
+						<h4>기간</h4>
+						<span><input type="date" name="startDate" id="startDate">부터</span> <span><input type="date" name="endDate" id="endDate">까지</span>
+					</div>
+					<div>
+						<h4>내용</h4>
+						<textarea rows="1" cols="21" name="content" class="modalContent" id="content"></textarea>
+					</div>
+					<div>
+						<h4>타입</h4>
+						<select name="type">
+							<option value="project">프로젝트</option>
+							<option value="vacation">휴가</option>
+							<option value="event">행사</option>
+							</select>
+						<label><input type="checkbox" name="yearCalendar" id="addYearCalendar" value="yearCalendar">연간 달력 표시</label> 
+						<label><input type="checkbox" name="annually" id="addAnnually" value="annually">매년 반복</label>
+						<label><input type="checkbox" name="monthly" id="addMonthly" value="monthly">매월 반복</label>
+					</div>
+					<div>
+						<h4>색깔</h4>
+						<input type="color" name="color" id="addColor" value="#fffde8">
+					</div>
 					<div id="innerBtn">
 						<a href="#" id="addFormClose">닫기</a><br>
 						<a href="#" id="addSchedule">추가</a>
@@ -787,6 +816,7 @@ function nextYearYear() {
 		<div id="detailForm" class="attachModal">
 			<div class="modalHead">
 				<h3 style='font-weight: bolder; font-size: 30px'>일정 상세</h3>
+				<p>일정을 자세하게 보여드릴게요.</p>
 			</div>
 			<div class="modalBody">
 				<form class="detailModal">
@@ -794,20 +824,33 @@ function nextYearYear() {
 					<input type="hidden" name="cNum" id="detailCNum">
 					<input type="hidden" name="mNum" id="mNum" value="${userData.mNum}">
 					<input type="hidden" name="wNum" id="wNum" value="${userData.wNum}">
-					제목<input type="text" name="title" id="detailTitle" readonly="readonly"><br>
-					기간
-					(시작날짜)<input type="date" name="startDate" id="detailStartDate" readonly="readonly"><br>
-			 		(종료날짜)<input type="date" name="endDate" id="detailEndDate" readonly="readonly"><br>	
-					상세<textarea rows="5" cols="21" name="content" id="detailContent" readonly="readonly"></textarea><br>
-					타입<select name="type" id="detailType">
-						<option value="project">프로젝트</option>
-						<option value="vacation">휴가</option>
-						<option value="event">행사</option>
-						</select><br>
-					<label><input type="checkbox" name="yearCalendar" id="detailYearCalendar" value="yearCalendar">연간 달력 표시</label><br>
-					<label><input type="checkbox" name="annually" id="detailAnnually" value="annually">매년 반복</label>
-					<label><input type="checkbox" name="monthly" id="detailMonthly" value="monthly">매월 반복</label><br>
-					색깔<input type="color" name="color" id="detailColor" value="#fffde8"><br>
+					<div>
+						<h4>일정</h4>
+						<input type="text" name="title" class="modalTitle" id="detailTitle" readonly="readonly">
+					</div>
+					<div>
+						<h4>기간</h4>
+						<input type="date" name="startDate" id="detailStartDate" readonly="readonly">부터 <input type="date" name="endDate" id="detailEndDate" readonly="readonly">까지
+					</div>
+					<div>
+						<h4>내용</h4>
+						<textarea rows="1" cols="21" name="content" class="modalContent" id="detailContent" readonly="readonly"></textarea>
+					</div>
+					<div>
+						<h4>타입</h4>
+						<select name="type" id="detailType">
+							<option value="project">프로젝트</option>
+							<option value="vacation">휴가</option>
+							<option value="event">행사</option>
+						</select>
+						<label><input type="checkbox" name="yearCalendar" id="detailYearCalendar" value="yearCalendar">연간 달력 표시</label>
+						<label><input type="checkbox" name="annually" id="detailAnnually" value="annually">매년 반복</label>
+						<label><input type="checkbox" name="monthly" id="detailMonthly" value="monthly">매월 반복</label>
+					</div>
+					<div>
+						<h4>색깔</h4>
+						<input type="color" name="color" id="detailColor" value="#fffde8">
+					</div>
 					<div id="innerBtn">
 						<a href="#" id="detailFormClose">닫기</a>
 						<a href="#" id="deleteSchedule">삭제</a>
@@ -820,6 +863,7 @@ function nextYearYear() {
 		<div id="modifyForm" class="attachModal">
 			<div class="modalHead">
 				<h3 style='font-weight: bolder; font-size: 30px'>일정 수정</h3>
+				<p>일정을 조금 바꿔볼까요?</p>
 			</div>
 			<div class="modalBody">
 				<form class="modifyModal">
@@ -827,20 +871,33 @@ function nextYearYear() {
 		 			<input type="hidden" name="cNum" id="modifyCNum">
 					<input type="hidden" name="mNum" id="mNum" value="${userData.mNum}">
 					<input type="hidden" name="wNum" id="wNum" value="${userData.wNum}">
-					제목<input type="text" name="title" id="modifyTitle"><br>
-					기간
-					(시작날짜)<input type="date" name="startDate" id="modifyStartDate"><br>
-		 			(종료날짜)<input type="date" name="endDate" id="modifyEndDate"><br>	
-					상세<textarea rows="5" cols="21" name="content" id="modifyContent"></textarea><br>
-					타입<select name="type" id="modifyType">
-						<option value="project">프로젝트</option>
-						<option value="vacation">휴가</option>
-						<option value="event">행사</option>
-						</select><br>
-					<label><input type="checkbox" name="yearCalendar" id="modifyYearCalendar" value="yearCalendar">연간 달력 표시</label><br>
-					<label><input type="checkbox" name="annually" id="modifyAnnually" value="annually">매년 반복</label>
-					<label><input type="checkbox" name="monthly" id="modifyMonthly" value="monthly">매월 반복</label><br>
-					색깔<input type="color" name="color" id="modifyColor" value="#fffde8"><br>
+					<div>
+						<h4>일정</h4>
+						<input type="text" name="title" class="modalTitle" id="modifyTitle">
+					</div>
+					<div>
+						<h4>기간</h4>
+						<input type="date" name="startDate" id="modifyStartDate">부터 <input type="date" name="endDate" id="modifyEndDate">까지
+					</div>
+					<div>
+						<h4>내용</h4>
+						<textarea rows="5" cols="21" name="content" class="modalContent" id="modifyContent"></textarea>
+					</div>
+					<div>
+						<h4>타입</h4>
+						<select name="type" id="modifyType">
+							<option value="project">프로젝트</option>
+							<option value="vacation">휴가</option>
+							<option value="event">행사</option>
+						</select>
+						<label><input type="checkbox" name="yearCalendar" id="modifyYearCalendar" value="yearCalendar">연간 달력 표시</label>
+						<label><input type="checkbox" name="annually" id="modifyAnnually" value="annually">매년 반복</label>
+						<label><input type="checkbox" name="monthly" id="modifyMonthly" value="monthly">매월 반복</label>
+					</div>
+					<div>
+						<h4>색깔</h4>
+						<input type="color" name="color" id="modifyColor" value="#fffde8">
+					</div>
 					<div id="innerBtn">
 						<a href="#" id="modifyFormClose">닫기</a>
 						<a href="#" id="modifySchedule">수정</a>
@@ -851,32 +908,58 @@ function nextYearYear() {
 	</div>	
 <!-- 연간 달력 -->
 	<div id="yearCalendar" class="yearCalendar">
-		<button onclick="preYearYear()">작년</button>
-		<span id="calYearTitle"></span>
-		<button onclick="nextYearYear()">내년</button>
+		<div class="dateDisplay">
+			<button onclick="preYearYear()">작년</button>
+			<span id="calYearTitle"></span>
+			<button onclick="nextYearYear()">내년</button>
+		</div>
 		<div id="calYearBody"></div>
 		<!-- 일정 상세 모달 --> 
-		<form id="detailFormYear" class="detailModalYear">
-			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
-			<input type="hidden" name="cNum" id="detailCNumYear">
-			<input type="hidden" name="mNum" id="mNum" value="${userData.mNum}">
-			<input type="hidden" name="wNum" id="wNum" value="${userData.wNum}">
-			제목<input type="text" name="title" id="detailTitleYear" readonly="readonly"><br>
-			기간
-			(시작날짜)<input type="date" name="startDate" id="detailStartDateYear" readonly="readonly"><br>
-	 		(종료날짜)<input type="date" name="endDate" id="detailEndDateYear" readonly="readonly"><br>	
-			상세<textarea rows="5" cols="21" name="content" id="detailContentYear" readonly="readonly"></textarea><br>
-			타입<select name="type" id="detailTypeYear">
-				<option value="project">프로젝트</option>
-				<option value="vacation">휴가</option>
-				<option value="event">행사</option>
-				</select><br>
-			<label><input type="checkbox" name="yearCalendar" id="detailYearCalendarYear" value="yearCalendar">연간 달력 표시</label><br>
-			<label><input type="checkbox" name="annually" id="detailAnnuallyYear" value="annually">매년 반복</label>
-			<label><input type="checkbox" name="monthly" id="detailMonthlyYear" value="monthly">매월 반복</label><br>
-			색깔<input type="color" name="color" id="detailColorYear" value="#fffde8"><br>
-			<input type="button" id="detailFormYearClose" value="닫기">
-		</form>
+		<div id="detailFormYear" class="attachModal">
+			<div class="modalHead">
+				<h3 style='font-weight: bolder; font-size: 30px'>일정 상세</h3>
+				<p>일정을 자세하게 보여드릴게요.</p>
+			</div>
+			<div class="modalBody">
+				<form class="detailModalYear">
+					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+					<input type="hidden" name="cNum" id="detailCNumYear">
+					<input type="hidden" name="mNum" id="mNum" value="${userData.mNum}">
+					<input type="hidden" name="wNum" id="wNum" value="${userData.wNum}">
+					
+					<div>
+						<h4>일정</h4>
+						<input type="text" name="title" class="modalTitle" id="detailTitleYear" readonly="readonly">
+					</div>
+					<div>
+						<h4>기간</h4>
+						<input type="date" name="startDate" id="detailStartDateYear" readonly="readonly">부터 <input type="date" name="endDate" id="detailEndDateYear" readonly="readonly">까지
+					</div>
+					<div>
+						<h4>내용</h4>
+						<textarea rows="1" cols="21" name="content" class="modalContent" id="detailContentYear" readonly="readonly"></textarea>
+					</div>
+					<div>
+						<h4>타입</h4>
+						<select name="type" id="detailTypeYear">
+							<option value="project">프로젝트</option>
+							<option value="vacation">휴가</option>
+							<option value="event">행사</option>
+						</select>
+						<label><input type="checkbox" name="yearCalendar" id="detailYearCalendarYear" value="yearCalendar">연간 달력 표시</label>
+						<label><input type="checkbox" name="annually" id="detailAnnuallyYear" value="annually">매년 반복</label>
+						<label><input type="checkbox" name="monthly" id="detailMonthlyYear" value="monthly">매월 반복</label>
+					</div>
+					<div>
+						<h4>색깔</h4>
+						<input type="color" name="color" id="detailColorYear" value="#fffde8">
+					</div>
+					<div id="innerBtn">
+						<a href="#" id="detailFormYearClose">닫기</a>
+					</div>
+				</form>
+			</div>
+		</div>
 	</div>	
 	</div>
 	</div>

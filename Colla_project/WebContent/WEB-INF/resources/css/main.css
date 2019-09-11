@@ -1,0 +1,62 @@
+@charset "UTF-8";
+
+#welcome {
+	display: block;
+	background-color: #D3D1D2;
+}
+#welcome section,
+#collaInfoAll section,
+#pricingAll section,
+#faqAll section,
+#aboutUsAll section {
+	position: relative;
+	display: block;
+	overflow: hidden;
+	height: 890px;
+	text-align: center;
+	padding: 80px 15px 100px 15px;
+}
+#main-cover {
+	background-color: #cfcccf;
+}
+#main-intro {
+	background-color: #EC6D63;
+}
+#main-coworker {
+	background-color: #4D4B4B;
+}
+#tmp,
+#tmp1,
+#tmp2 {
+	visibility: hidden;
+}
+
+.head-title {
+	font-size: 60px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    padding: 15px;
+}
+.head-body {
+	font-size: 22px;
+	font-weight: 400;
+    line-height: 1.4;
+    padding: 15px;
+    margin-bottom: 10px;	
+}
+.head-caption {
+	padding: 15px;
+	font-size: 16px;
+}
+.box-inside {
+    display: flex;
+    border: 1px solid #b4b4b4;
+    width: 100%;
+    border-radius: 6px;
+    text-align: left;
+}
+.price-each-col {
+    padding: 20px;
+    width: 50%;
+    min-width: 300px;
+}
