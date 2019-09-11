@@ -772,7 +772,7 @@ function loadChatFromDB(){
 			
 			<div class="chat" id="chatArea">
 			<div id="chatNavBox">
-				<div id="openChatNavBox" class="animated infinite pulse"><i class="fas fa-chevron-circle-left"></i></div><!-- 슬라이드 메뉴 열 수 있는 띠 -->
+				<div id="openChatNavBox" class="animated bounceInRight"><i class="fas fa-angle-double-left"></i></div><!-- 슬라이드 메뉴 열 수 있는 띠 -->
 				<div id="chatNav" align="center">
 					<ul id="InnerBtns">
 						<li class="navInnerBtn"><label class="clicked"><input type="radio" name="innerBtn" value="favorite" checked>즐겨찾기</label></li>
@@ -787,12 +787,15 @@ function loadChatFromDB(){
 				var toggleVal = 0;
 				$("#openChatNavBox").on("click",function(){
 					//navBox 토글로 숨기고 열기
+					var arrow = $("#openChatNavBox").children();
 					if(toggleVal==0){
 						$("#chatNavBox").animate({right: 0},200);
-							toggleVal = 1;						
+							toggleVal = 1;
+							arrow.attr('class','fas fa-angle-double-right');
 					}else{
 						$("#chatNavBox").animate({right: -540},200);
-							toggleVal = 0;						
+							toggleVal = 0;		
+							arrow.attr('class','fas fa-angle-double-left');
 					}
 				});
 				//navType에 맞는 액션

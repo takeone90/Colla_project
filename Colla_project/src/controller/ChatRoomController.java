@@ -118,7 +118,7 @@ public class ChatRoomController {
 		session.removeAttribute("currWnum");
 		session.removeAttribute("sessionChatRoom");
 		session.setAttribute("wsName", ws.getName());
-		session.setAttribute("currWnum", ws.getNum());
+		session.setAttribute("currWnum", wNum);
 		session.setAttribute("sessionChatRoom", chatRoom);
 		model.addAttribute("chatRoom", chatRoom);
 		model.addAttribute("wsMemberList", wsMemberList);

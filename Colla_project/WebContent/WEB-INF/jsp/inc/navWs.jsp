@@ -37,7 +37,7 @@
 		
 		<select name="currWorkspace" id="workspaceSelector">
 		<c:forEach items="${sessionScope.workspaceList}" var="ws">
-			<option class="wsSelectOption" value="${contextPath}/defaultChatMain?wNum=${ws.wsInfo.num}" selected>${ws.wsInfo.name}</option>
+			<option class="wsSelectOption" value="${contextPath}/defaultChatMain?wNum=${ws.wsInfo.num}" ${sessionScope.currWnum eq ws.wsInfo.num?'selected':''}>${ws.wsInfo.name}</option>
 		</c:forEach>
 		</select>
 		<script>
@@ -45,7 +45,6 @@
 			$('#workspaceSelector').on('change', function() {
 			    location.href= this.value;
 			});
-			$('#workspaceSelector').val(currWname);
 		</script>
 		<div id="myChatList">
 			<h3>
