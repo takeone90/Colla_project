@@ -134,6 +134,7 @@
 						<p class="content">${requestScope.member.phone}</p>
 					</div>
 				</div>
+				<>
 				<button>마이페이지 메인으로 이동</button>
 			</div><!-- myPageInner -->
 		</div>

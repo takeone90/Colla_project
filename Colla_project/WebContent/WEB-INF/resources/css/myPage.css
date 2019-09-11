@@ -42,7 +42,7 @@
 	vertical-align: middle;
 }
 .myPageContentRow > div {
-	text-align: right;
+	position : relative;
 }
 .myPageContentRow .title{
 	width: 156px;
