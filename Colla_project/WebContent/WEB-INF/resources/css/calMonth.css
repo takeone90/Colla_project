@@ -14,7 +14,7 @@ td{border: 0px; padding: 0px;}
 }
 
 .drawMonthCalendarUpper{width: 100%; border-collapse: collapse; border: 0px; table-layout: fixed;}
-.drawMonthCalendarUpper th{height:25px; width: 150px; padding: 0px; margin: 0px; background-color: #ffcac7; vertical-align: center;} /* 요일 */
+.drawMonthCalendarUpper th{height:25px; width: 150px; padding: 0px; margin: 0px; background-color: #E6E2E1; vertical-align: center;} /* 요일 */
 
 .drawMonthCalDiv{position: relative;}
 
@@ -52,7 +52,6 @@ td{border: 0px; padding: 0px;}
 /* .modifyModal{display: none; width: 300px; height: 300px; top: 10%; left: 10%; position: absolute; background-color: #a37f82;} */
 /* .detailModalYear{display: none; width: 300px; height: 300px; top: 10%; left: 10%; position: absolute; background-color: #a37f82;} */
 #wsBodyContainer input,
-
 #wsBodyContainer select,
 #wsBodyContainer input {
 	padding: 5px;
@@ -61,7 +60,7 @@ td{border: 0px; padding: 0px;}
 	box-sizing: border-box;
 }
 .calHeader {
-	background-color: #ccbfb4;
+	background-color: #E6E2E1;
 	padding: 10px;
 	vertical-align: middle;
 	margin-bottom: 10px;

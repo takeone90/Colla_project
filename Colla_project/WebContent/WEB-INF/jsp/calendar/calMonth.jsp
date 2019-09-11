@@ -412,7 +412,7 @@ function changeToBoolean(param) {
 	return param;
 }
 function markingOnDate(dateOrigin) {
-	$("#"+dateOrigin).css({"background-color": "#ffd6d4", "border": "1px solid #fcb4b1"});
+	$("#"+dateOrigin).css({"background-color": "#E6E2E1"});
 }
 function dateChange(d) {
 	if(d<10) { return "0"+d; }
