@@ -84,6 +84,7 @@
 					<h4>댓글</h4>
 					<div id="replyWrap">
 						<ul id="replyBox" class="clearFix">
+							<li>댓글이 없습니다.</li>
 						</ul>
 						<form id="addReplyDiv">
 							<div class="replyImg"><img src="${contextPath}/showProfileImg"></div>
