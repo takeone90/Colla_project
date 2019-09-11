@@ -109,7 +109,7 @@
 }
 #inputBox{
 	height : 60px;
-	background-color: #EBE6E6;
+	background-color: #d1cdcd;
 }
 #chatInputInstance{
 	padding : 10px;
@@ -127,7 +127,7 @@
 	position:fixed;
 	bottom : 60px;
 	text-align: center;
-	background-color: #EBE6E6;
+	background-color: #d1cdcd;
 /* 	border: 0.5px solid #949292; */
 	border-radius: 0px 10px 0px 0px;
 	width: 200px;
