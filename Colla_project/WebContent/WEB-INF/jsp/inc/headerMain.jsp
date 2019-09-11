@@ -12,22 +12,22 @@
 			<ul>
 				<li>
 					<h2>
-						<a href="#"> COLLA? </a>
+						<a href="${contextPath}/collaInfo"> COLLA? </a>
 					</h2>
 				</li><!-- 
 			 --><li>
 					<h2>
-						<a href="#"> PRICING </a>
+						<a href="${contextPath}/pricing"> PRICING </a>
 					</h2>
 				</li><!-- 
 			 --><li>
 					<h2>
-						<a href="#"> ABOUT US </a>
+						<a href="${contextPath}/faq"> FAQ </a>
 					</h2>
 				</li><!-- 
 			 --><li>
 					<h2>
-						<a href="#"> FAQ </a>
+						<a href="${contextPath}/aboutUs"> ABOUT US </a>
 					</h2>
 				</li>
 			</ul>

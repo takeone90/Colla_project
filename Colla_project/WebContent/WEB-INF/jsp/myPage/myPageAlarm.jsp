@@ -12,7 +12,7 @@
 <link rel="stylesheet" type="text/css" href="css/reset.css"/>
 <link rel="stylesheet" type="text/css" href="css/base.css"/>
 <link rel="stylesheet" type="text/css" href="css/headerWs.css"/>
-<link rel="stylesheet" type="text/css" href="css/navMyPage.css"/>
+<link rel="stylesheet" type="text/css" href="css/navWs.css"/>
 <style type="text/css">
 .toggleBG {
 	background: #CCCCCC;
@@ -111,7 +111,7 @@
 </head>
 <body>
 	<%@ include file="/WEB-INF/jsp/inc/headerWs.jsp"%>
-	<%@ include file="/WEB-INF/jsp/inc/navMyPage.jsp"%>
+	<%@ include file="/WEB-INF/jsp/inc/navWs.jsp" %>
 	<div id="wsBody">
 	<input type="hidden" value="mypage" id="pageType">
 		<h1>알림 설정</h1>
@@ -129,6 +129,13 @@
 		<div class='toggleBG' id="replyBG">
 			<button id='replySetAlarm' class='toggleFG replyAlarm'></button>
 		</div>
+			<!-- 삭제예정 start -->
+		<div>
+			<button onclick="location.href='${contextPath}/myPageCheckPassForm'">회원정보관리</button>
+			<button onclick="location.href='${contextPath}/myPageAlarmForm'">알림설정</button>
+			<button onclick="location.href='${contextPath}/myPageLicenseForm'">라이센스</button>
+		</div>
+		<!-- 삭제예정 end -->
 	</div>
 </body>
 </html>

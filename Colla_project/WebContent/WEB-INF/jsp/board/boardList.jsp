@@ -27,8 +27,8 @@
 	<input type="hidden" value="board" id="pageType">
 		<div id="wsBodyContainer">
 			<h3>자유게시판</h3>
-			<div id="boardListView">
 			
+			<div id="boardInner">
 				<ul id="boardList">
 					<li id="listHead">
 						<div>No.</div>
@@ -38,49 +38,86 @@
 						<div>조회수</div>
 					</li>
 					
-					<c:forEach items="${bList}" var="board">
-					<li ${board.isNotice == 'y'?'class="noticeLi"':'' }>
-						<div>${board.isNotice == 'y'?'<span class="noticeMark">공지</span>':board.bNum }</div>
-						<div>
-							<a href="${contextPath}/board/view?num=${board.bNum}">${board.bTitle } <span class="replyCount">[${board.replyCnt }]</span></a>
-						</div>
-						<div>
-						<fmt:formatDate value="${board.bRegDate }" pattern="yyyy-MM-dd"/>
-						</div>
-						<div>${board.bType == 'anonymous'?'익명':board.mName }</div>
-						<div>${board.readCnt }</div>
+					<c:if test="${listInf.boardCnt <= 0 }">
+					<li>
+						<p class="noBoard">해당 게시글이 없습니다.</p>
 					</li>
-					</c:forEach>
+					</c:if>
+					<c:if test="${listInf.boardCnt > 0 }">
+						<c:forEach items="${bList}" var="board">
+						<li ${board.isNotice == 'y'?'class="noticeLi"':'' }>
+							<div>${board.isNotice == 'y'?'<span class="noticeMark">공지</span>':board.bNum }</div>
+							<div>
+								<a href="${contextPath}/board/view?num=${board.bNum}">${board.bTitle } <span class="replyCount">[${board.replyCnt }]</span></a>
+							</div>
+							<div>
+							<fmt:formatDate value="${board.bRegDate }" pattern="yyyy-MM-dd"/>
+							</div>
+							<div>${board.bType == 'anonymous'?'익명':board.mName }</div>
+							<div>${board.readCnt }</div>
+						</li>
+						</c:forEach>
+					</c:if>
 				</ul>
-				
+			
+				<a href="${contextPath}/board/write" id="writeBtn">글쓰기</a>
+			
+				<c:if test="${listInf.boardCnt > 0 }">
 				<ul id=pagination>
-					<li><a href="${listInf.page==1?'javascript:void(0)':'list?page=1' }" id="firstPage" class="${listInf.page==1?'disable':'' }"><i class="fas fa-angle-double-left"></i></a></li>
-					<li><a href="${listInf.page==1?'javascript:void(0)':'list?page=listInf.startNum-1>0?listInf.startNum-1:1' }" id="prevPage" ${instInf.startNum } class="${listInf.page==1?'disable':'' }"><i class="fas fa-angle-left"></i></a></li>
+					<li>
+						<c:if test="${listInf.page >=6 }">
+						<a href="list?page=1&keywordType=${listInf.type }&keyword=${listInf.keyword}" id="firstPage" class="pagingIcon">
+						</c:if>
+						<c:if test="${listInf.page <6 }">
+						<a href="javascript:void(0)" id="firstPage" class="disable pagingIcon">
+						</c:if>						
+							<i class="fas fa-angle-double-left"></i>
+						</a>
+					</li>
+					
+					<li>
+						<c:if test="${listInf.page >=6 }">
+						<a href="list?page=${listInf.startNum-1 }&keywordType=${listInf.type }&keyword=${listInf.keyword}" id="prevPage" class="pagingIcon">
+						</c:if>
+						<c:if test="${listInf.page <6 }">
+						<a href="javascript:void(0)" id="prevPage" class="disable pagingIcon">
+						</c:if>						
+							<i class="fas fa-angle-left"></i>
+						</a>
+					</li>
+						
 						<c:forEach var="i" begin="${listInf.startNum }" end="${listInf.endNum }">
 						<c:if test="${i<=listInf.totalPage }">
 							<li>
 								<a href="list?page=${i}&keywordType=${listInf.type}&keyword=${listInf.keyword}" ${listInf.page==i?'class=\"currPage\" onclick=\"return false;\"':'' }>${i}</a>
 							</li>
 						</c:if>
-						</c:forEach>				
-<!-- 					<li> -->
-<%-- 						<a href="${listInf.page==listInf.totalPage?'javascript:void(0)':list?page=listInf.endNum+1>listInf.totalPage?listInf.totalPage:listInf.endNum+1 }" id="nextPage" class="${listInf.page==listInf.totalPage?'disable':'' }"> --%>
-<!-- 							<i class="fas fa-angle-right"></i> -->
-<!-- 						</a> -->
-<!-- 					</li> -->
+						</c:forEach>	
+									
 					<li>
-						<c:if test="${listInf.page==listInf.totalPage}">
-						<a href="javascript:void(0)" id="lastPage" class="disable">
+						<c:if test="${listInf.page >= (listInf.totalPage - ((listInf.totalPage-1)%5))}">
+						<a href="javascript:void(0)" id="nextPage" class="disable pagingIcon">
 						</c:if>
-						<c:if test="${listInf.page<listInf.totalPage}">
-						<a href="list?page=${listInf.totalPage }" id="lastPage">
+						
+						<c:if test="${listInf.page < (listInf.totalPage - ((listInf.totalPage-1)%5))}">
+						<a href="list?page=${listInf.endNum+1}&keywordType=${listInf.type }&keyword=${listInf.keyword}" id="nextPage" class="pagingIcon">
+						</c:if>
+							<i class="fas fa-angle-right"></i>
+						</a>
+					</li>
+	
+					<li>
+						<c:if test="${listInf.page >= (listInf.totalPage - ((listInf.totalPage-1)%5))}">
+						<a href="javascript:void(0)" id="lastPage" class="disable pagingIcon">
+						</c:if>
+						<c:if test="${listInf.page < (listInf.totalPage - ((listInf.totalPage-1)%5))}">
+						<a href="list?page=${listInf.totalPage }&keywordType=${listInf.type }&keyword=${listInf.keyword}" id="lastPage" class="pagingIcon">
 						</c:if>
 							<i class="fas fa-angle-double-right"></i>
 						</a>
 					</li>
 				</ul>
-				
-				<a href="${contextPath}/board/write">글쓰기</a>
+				</c:if>
 				<div id="searchWrap">
 					<script>
 	// 					$(function(){
@@ -93,19 +130,19 @@
 	// 						});
 	// 					})
 					</script>
-					<form action="list">
+					<form action="list" id="boardSearchForm">
 						<select name="keywordType" id="keywordType">
 							<option value="1" ${empty listInf.keyword || listInf.type eq 1?'selected':'' }>제목</option>
 							<option value="2" ${not empty listInf.keyword && listInf.type eq 2?'selected':'' }>내용</option>
 							<option value="3" ${not empty listInf.keyword && listInf.type eq 3?'selected':'' }>제목+내용</option>
 							<option value="4" ${not empty listInf.keyword && listInf.type eq 4?'selected':'' }>작성자</option>
 						</select>
-						<input type="text" name="keyword" placeholder="검색어" value="${listInf.keyword }">
-						<button>검색</button>
+						<input type="text" name="keyword" value="${listInf.keyword }"><button>검색</button>
 					</form>
 				</div>
 			</div>
-		</div>
+		
+		</div>	
 	</div>
 </body>
 </html>

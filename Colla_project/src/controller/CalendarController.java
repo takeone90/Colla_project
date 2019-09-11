@@ -27,11 +27,8 @@ import service.MemberService;
 
 @Controller
 public class CalendarController {
-	
 	@Autowired
 	private CalendarService calendarService;
-	@Autowired
-	private MemberService memberService;
 	
 	@RequestMapping(value="/calMonth", method = RequestMethod.GET)
 	public String showCalMonth(HttpSession session, Model model) {
@@ -43,11 +40,6 @@ public class CalendarController {
 		model.addAttribute("userData", param);
 		return "/calendar/calMonth";
 	}
-	@RequestMapping(value="/calDetail", method = RequestMethod.GET)
-	public String showCalDetail() {
-		return "/calendar/calDetail";
-	}
-	
 	@ResponseBody
 	@RequestMapping(value="/showAllCalendar", method=RequestMethod.GET)
 	public List<Calendar> showAllCalendar(HttpSession session, boolean type1, boolean type2, boolean type3) {
@@ -76,18 +68,6 @@ public class CalendarController {
 		}
 		return tmpList;
 	}
-	
-	private int getWeekOfMonth(String date) {
-		System.out.println(date);
-		java.util.Calendar tmpCalendar = java.util.Calendar.getInstance();
-		int year = Integer.parseInt(date.substring(0, 4));
-		int month = Integer.parseInt(date.substring(5, 7));
-		int day = Integer.parseInt(date.substring(8, 10));
-		System.out.println(year+" "+month+" "+day);
-		tmpCalendar.set(year, month - 1, day);
-		return tmpCalendar.get(java.util.Calendar.WEEK_OF_MONTH);
-	}
-	
 	@ResponseBody
 	@RequestMapping(value="/showYearCheckedCalendar", method=RequestMethod.GET)
 	public List<Calendar> showYearCheckedCalendar(HttpSession session, boolean type1, boolean type2, boolean type3) {
@@ -123,24 +103,6 @@ public class CalendarController {
 		}
 		return tmpList;
 	}
-	@RequestMapping(value="/calYear", method = RequestMethod.GET)
-	public String showCalYear() {
-		return "/calendar/calYear";
-	}
-
-//검색-----------------------------------------------------------------------
-	@RequestMapping(value="/calSearchList", method = RequestMethod.GET)
-	public String showCalSearchList(HttpSession session, Model model, @RequestParam(required=false)String searchKeyword, @RequestParam(defaultValue="0")int searchType) {	
-		int wNum = (int)session.getAttribute("currWnum");
-		Map<String, Object> param = new HashMap<String, Object>();
-		param.put("searchType", searchType);
-		param.put("searchKeyword", searchKeyword);
-		param.put("wNum", wNum);
-		Map<String, Object> result = calendarService.getAllCalendarSearched(param);
-		model.addAttribute("searchedCalendarList", result.get("searchedCalendarList"));
-		return "/calendar/calSearchList";
-	}
-	
 	@ResponseBody
 	@RequestMapping(value="/addSchedule", method = RequestMethod.POST)
 	public boolean addSchedule(Calendar calendar) throws ParseException {
@@ -171,7 +133,7 @@ public class CalendarController {
 		return result;
 	}
 	@ResponseBody
-	@RequestMapping(value="/modifySchedule")
+	@RequestMapping(value="/modifySchedule", method = RequestMethod.POST)
 	public boolean modifySchedule(Calendar calendar) throws ParseException {
 		if(calendar.getAnnually()!=null && calendar.getAnnually().equals("annually")) {
 			calendar.setAnnually("1");
@@ -202,13 +164,26 @@ public class CalendarController {
 	@ResponseBody
 	@RequestMapping(value="/removeSchedule", method = RequestMethod.POST)
 	public boolean removeSchedule(Calendar calendar) {
-		int cNum = calendar.getcNum();
-		return calendarService.removeCalendar(cNum);
+		return calendarService.removeCalendar(calendar.getcNum());
 	}
 	@ResponseBody
 	@RequestMapping(value="/selectSchedule", method = RequestMethod.POST)
 	public Calendar selectSchedule(Calendar calendar) {
-		int cNum = calendar.getcNum();
-		return calendarService.getCalendar(cNum);
+		return calendarService.getCalendar(calendar.getcNum());
 	}
+	@RequestMapping(value="/calSearchList", method = RequestMethod.GET)
+	public String showCalSearchList(HttpSession session, Model model, 
+			@RequestParam(defaultValue="1")int page,
+			@RequestParam(required=false)String searchKeyword, 
+			@RequestParam(defaultValue="0")int searchType) {	
+		int wNum = (int)session.getAttribute("currWnum");
+		Map<String, Object> tmp = new HashMap<String, Object>();
+		tmp.put("page", page);
+		tmp.put("searchType", searchType);
+		tmp.put("searchKeyword", searchKeyword);
+		tmp.put("wNum", wNum);
+		Map<String, Object> result = calendarService.getAllCalendarSearched(tmp);
+		model.addAllAttributes(result);
+		return "/calendar/calSearchList";
+	}			
 }

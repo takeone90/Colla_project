@@ -13,4 +13,5 @@ public interface CalendarDao {
 	public List<Calendar> selectAllCalendar(int wNum);
 	public List<Calendar> selectAllCalendarByMonth();
 	public List<Calendar> selectAllCalendarSearched(Map<String, Object> param);
+	public int selectCalendarCount(Map<String, Object> param);
 }

@@ -52,6 +52,13 @@ public class MypageController {
 		model.addAttribute("member", member);
 		return "/myPage/myPageMain";
 	}
+	
+	@RequestMapping(value = "/myPageAccountForm", method = RequestMethod.GET)
+	public String myPageAccountForm(Model model, HttpSession session) {
+		Member member = memberService.getMemberByEmail((String)session.getAttribute("userEmail"));
+		model.addAttribute("member", member);
+		return "/myPage/myPageAccount";
+	}
 
 	@RequestMapping(value = "/myPageCheckPassForm", method = RequestMethod.GET)
 	public String myPageCheckPassForm() {
@@ -121,6 +128,7 @@ public class MypageController {
 	public String modifyMember(Member member, HttpSession session) {
 		member.setNum(((Member)session.getAttribute("user")).getNum());
 		if (memberService.modifyMember(member)) {
+			session.setAttribute("user", member);
 			return "redirect:myPageMainForm";
 		} else {
 			return "redirect:myPageModifyForm";

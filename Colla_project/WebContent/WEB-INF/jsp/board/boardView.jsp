@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <c:set var="contextPath" value="<%=request.getContextPath() %>"/>
 <!DOCTYPE html>
 <html>
@@ -15,6 +16,7 @@
 <link rel="stylesheet" type="text/css" href="${contextPath}/css/board.css"/>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script> <!-- font awsome -->
 <script src="${contextPath}/lib/ckeditor4/ckeditor.js"></script>
 
 <script type="text/javascript">
@@ -29,48 +31,71 @@
 	
 	<div id="wsBody">
 	<input type="hidden" value="board" id="pageType">
-		<h3>게시글 상세</h3>
-		<div id="boardDetail">
-			<div class="row">
-				<h4 id="title">${board.bTitle }</h4>
-			</div>
-			<div class="row">
-				<span>${board.bType == 'anonymous'?'익명':board.mName }</span>
-				<span>조회수 ${board.readCnt }</span>
-				<span>
-					<fmt:formatDate value="${board.bRegDate }" pattern="yyyy-MM-dd HH:mm:ss"/>
-				</span>
-			</div>
-			<div class="row">
-				<pre>${board.bContent }</pre>
-			</div>
-			<div class="row">
-				<c:forEach items="${fList}" var="file">
-					<p>
-						<a href="${contextPath}/download?name=${file.fileName}">
-							${file.originName }
-						</a>
-					</p>
-				</c:forEach>
-			</div>
-			<div class="row">
-				<a href="checkPass?mode=modify&bNum=${board.bNum }">수정</a>
-				<a href="checkPass?mode=delete&bNum=${board.bNum }">삭제</a>
-				<a href="list?page=${listInf.page}&keyword=${listInf.keyword}&keywordType=${listInf.type}">목록</a>
-			</div>
-		</div>
-		<div id="boardReply">
-			<h3>댓글</h3>
-			<ul id="replyBox" class="clearFix">
-			</ul>
-			<form id="addReplyDiv">
-				<div class="replyImg"><img src="${contextPath}/showProfileImg"></div>
-				<div id="inputBox">
-					<textarea rows="2" cols="50" name="rContent"></textarea>
-					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
-					<button onclick="addReply(); return false;">댓글 추가</button>
+		<div id="wsBodyContainer">
+		
+			<h3>자유게시판</h3>
+			<h4>게시글 상세보기</h4>
+			<div id="boardInner">
+				<div id="boardDetail">
+					<div class="row">
+						<h5 id="title">
+							<span>제목</span>
+							<span class="bold">${board.bTitle }</span>
+						</h5>
+					</div>
+					<div class="row clearFix">
+						<div class="floatleft">
+							<span>작성자</span>
+							<span class="bold">${board.bType == 'anonymous'?'익명':board.mName }</span>
+						</div>
+						<div class="floatleft">
+							<span>조회수</span> 
+							<span class="bold">${board.readCnt }</span>
+						</div>
+						<div class="floatleft">
+							<span>작성일</span>
+							<span class="bold">
+								<fmt:formatDate value="${board.bRegDate }" pattern="yyyy-MM-dd HH:mm:ss"/>
+							</span>
+						</div>
+					</div>
+					<div id="content" class="row">
+						<pre>${board.bContent }</pre>
+					</div>
+					<c:if test="${fn:length(fList) > 0 }">
+					<div class="row">
+						<c:forEach items="${fList}" var="file">
+							<p>
+								<a href="${contextPath}/download?name=${file.fileName}">
+									<i class="fas fa-save"></i>
+									${file.originName }
+								</a>
+							</p>
+						</c:forEach>
+					</div>
+					</c:if>
+					<div class="row btns">
+						<a href="checkPass?mode=modify&bNum=${board.bNum }" class="btn">수정</a>
+						<a href="checkPass?mode=delete&bNum=${board.bNum }" class="btn">삭제</a>
+						<a href="list?page=${listInf.page}&keyword=${listInf.keyword}&keywordType=${listInf.type}" class="btn">목록</a>
+					</div>
 				</div>
-			</form>
+				<div id="boardReply">
+					<h4>댓글</h4>
+					<div id="replyWrap">
+						<ul id="replyBox" class="clearFix">
+						</ul>
+						<form id="addReplyDiv">
+							<div class="replyImg"><img src="${contextPath}/showProfileImg"></div>
+							<div id="inputBox">
+								<textarea rows="3" name="rContent"></textarea>
+								<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+								<button class="btn" onclick="addReply(); return false;">댓글 등록</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 </body>

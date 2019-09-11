@@ -61,16 +61,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <!-- 		select count(b_num) from board where w_num=#{wNum} -->
 
 						select count(b_num)
-		                from (select b.b_num, m.m_name 
+		                from (select b.b_num, b.b_title, b.b_content, m.m_name 
 		                		from board b, member m 
-		                		where w_num=#{wNum}
-		                			and b.m_num=m.m_num)
+		                		where w_num = #{wNum}
+		                			and b.m_num = m.m_num)
 		                where 1=0
 		                 <if test="title != null">
 		                 	or upper(b_title) like ('%'||upper('${keyword}')||'%')		                 	
 		                 </if>
 		                 <if test="content != null">
-		                 	or upper(b_content) like ('%'||upper('${keyword}')||'%')	                 	
+		                 	or upper(b_content) like ('%'||upper('${keyword}')||'%')	   
 		                 </if>
 		                 <if test="name != null">
 		                 	or upper(m_name) like ('%'||upper('${keyword}')||'%')

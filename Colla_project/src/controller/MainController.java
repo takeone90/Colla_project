@@ -25,4 +25,20 @@ public class MainController {
 	public View download(String name) {
 		return fService.getDownload(name);
 	}
+	@RequestMapping(value="/collaInfo")
+	public String showColla() {
+		return "/main/collaInfo";
+	}
+	@RequestMapping(value="/pricing")
+	public String showPricing() {
+		return "/main/pricing";
+	}
+	@RequestMapping(value="/faq")
+	public String showFaq() {
+		return "/main/faq";
+	}
+	@RequestMapping(value="/aboutUs")
+	public String showAboutUs() {
+		return "/main/aboutUs";
+	}
 }

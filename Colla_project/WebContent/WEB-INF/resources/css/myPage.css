@@ -1,5 +1,157 @@
 @charset "UTF-8";
 #deleteMember a{
-	color : red;
 	font-weight: bolder;
+}
+.myPageInner {
+	position:relative;
+    width: 1280px;
+    margin: 35px auto 20px;
+}
+
+/*myPageAccount*/
+.myPageContent{
+	width: 838px;
+	margin: 0 auto;
+	border : 1px solid #DADCE0;
+	border-radius: 10px;
+	margin-bottom: 30px;
+}
+.myPageTitle{
+	width: 790px;
+	height: 56px;
+	padding: 24px 24px 8px;
+}
+.myPageTitle .title{
+	font-size: 22px;
+	font-weight: 400;
+}
+.myPageTitle .content{
+	font-size: 12px;
+	font-weight: 400;
+	padding-top: 20px;
+}
+.myPageContentRow{
+	width: 790px;
+	padding: 8px 24px;
+}
+.myPageContentRow:hover{
+	background-color: #DADCE0;
+}
+.myPageContentRow > p ,.myPageContentRow > div {
+	display: inline-block;
+	vertical-align: middle;
+}
+.myPageContentRow > div {
+	text-align: right;
+}
+.myPageContentRow .title{
+	width: 156px;
+	padding: 16px;
+}
+.myPageContentRow .content{
+	width: 510px;	
+}
+.myPageContentRow #profileImg{
+	border-radius:50%;
+	border:2px solid #fff;
+	margin:0;
+	width:60px;
+	height:60px;
+	overflow:hidden;
+	border: 2px solid #D3CDCD;
+}
+.contentLine{
+	border : 0.5px solid #D3CDCD;
+		margin: 0 30px;
+}
+
+#profileImg img{
+	height:100%;
+}
+
+/*모달*/
+
+/* 회원 정보 수정 모달*/
+
+#profileModifyModal #profileImg {
+	border-radius:50%;
+	border:2px solid #fff;
+	margin:30px auto;
+	width:167px;
+	height:167px;
+	overflow:hidden;
+	border: 2px solid #D3CDCD;
+}
+#profileModifyModal #profileImg img{
+	height:100%;
+}
+.attachModal{
+	display: none;
+	position: fixed;
+	top: 17%;
+	left: 30%;
+	width: 525px;
+	background-color: white;
+	text-align: center;
+	border-radius: 10px;
+	padding: 30px;
+	z-index: 10;
+	box-shadow: 2px 2px 10px 1px #6e6d6d;
+}
+
+.attachModal > *{
+	margin: 0 auto;
+}
+.attachModal #profileImg{
+	margin-bottom: 10px;
+}
+.attachImgArea {
+	margin: 0 auto;
+	text-align: center;
+	margin-bottom: 30px;
+}
+.attachImgArea *{
+	float: left;
+}
+
+.attachImgArea input[type="file"], .attachImgArea input[type="button"] {
+	position: absolute; 
+	width: 1px; 
+	height: 1px; 
+	padding: 0; 
+	margin: -1px; 
+	overflow: hidden; 
+	clip:rect(0,0,0,0); 
+	border: 0;
+}
+#innerBtn{
+	margin-top: 10px;
+}
+#innerBtn a {
+	display: inline-block;
+	position: relative;
+	width: 500px;
+	padding: 5px;
+	margin-bottom: 5px;
+	background-color: #eb4034;
+	color: white;
+	text-align: center;
+	border-radius: 5px;
+}
+
+
+
+#myPageMain .myPageContent{
+	float : left;
+	width : 25%;
+	height : 600px;
+	margin-left: 5%;
+	border-radius: 20px;
+}
+.myPageContent h5{
+	font-size: 25px;
+	font-weight: 600;
+	color: #403C39;
+	text-align: center;
+	margin : 30px;
 }
