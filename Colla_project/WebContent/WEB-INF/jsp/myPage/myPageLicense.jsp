@@ -24,6 +24,7 @@
 	<div id="wsBody">
 		<input type="hidden" value="mypage" id="pageType">
 		<h1>라이선스</h1>
+		<h4>라이선스 관리</h4>
 		회원님의 라이선스는 ${useLicense.endDate } 종료 예정입니다<br>
 		<button onclick="#">라이선스 연장</button>
 		<button onclick="#">라이선스 변경</button>
