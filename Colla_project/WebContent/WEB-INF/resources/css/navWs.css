@@ -99,6 +99,18 @@
 	background-color:#E5675A;
 }
 
+.wsSelectOption{
+	background-color: #403C39;
+	padding : 5px;
+	color : white;
+}
+#workspaceSelector{
+	width : 90%;
+	padding : 5px;
+	background-color: #5e5756;
+	border : none;
+	border-radius: 3px;
+}
 
 
 

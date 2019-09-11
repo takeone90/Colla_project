@@ -32,11 +32,13 @@ import model.ChatMessage;
 import model.ChatRoom;
 import model.ChatRoomMember;
 import model.Member;
+import model.Workspace;
 import model.WsMember;
 import service.ChatMessageService;
 import service.ChatRoomMemberService;
 import service.ChatRoomService;
 import service.MemberService;
+import service.WorkspaceService;
 import service.WsMemberService;
 
 @Controller
@@ -51,7 +53,8 @@ public class ChatRoomController {
 	private MemberService mService;
 	@Autowired
 	private WsMemberService wsmService;
-	
+	@Autowired
+	private WorkspaceService wService;
 	// 전체채팅방으로 이동
 	@RequestMapping("/chatMain")
 	public String showChatMain(HttpSession session, int crNum, Model model) {
@@ -70,14 +73,58 @@ public class ChatRoomController {
 			}
 			wNum = wsm.getwNum();
 		}
+		Workspace ws = wService.getWorkspace(wNum);
 		model.addAttribute("chatRoom", chatRoom);
 		model.addAttribute("wsMemberList", wsMemberList);
 		model.addAttribute("wNum", wNum);
+		session.setAttribute("wsName", ws.getName());
 		session.setAttribute("currWnum", wNum);
 		session.setAttribute("sessionChatRoom", chatRoom);
 		return "/chatting/chatMain";
 	}
-
+	@ResponseBody
+	@RequestMapping("/searchChatList")
+	public Map<String, Object> searchChatList(@RequestParam(required = false)String keyword,
+			@RequestParam(defaultValue = "0")int keywordType,
+			@RequestParam(defaultValue = "1")int page,
+			@RequestParam("crNum")int crNum){
+//		System.out.println("[검색내용 || keyword : "+keyword +", type : "+keywordType+", page : "+page+", crNum : "+crNum+"]");
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("keyword",keyword);
+		param.put("type",keywordType);
+		param.put("page",page);
+		param.put("crNum", crNum);
+		Map<String, Object> result = cmService.getSearchChatMessageList(param);
+		return result;
+	}
+	@RequestMapping("/defaultChatMain")
+	public String showDefaultChatMain(int wNum, Model model,HttpSession session) {
+		
+		ChatRoom chatRoom = crService.getDefaultChatRoomByWnum(wNum);
+		int crNum = chatRoom.getCrNum();
+		// 해당 workspace에 참여중인 멤버들 정보도 model에 담아야한다.
+		List<WsMember> wsmList = wsmService.getAllWsMemberByCrNum(crNum); // 해당 채팅방 wsm 리스트를 꺼내와서
+		List<Member> wsMemberList = new ArrayList<Member>();
+		for (WsMember wsm : wsmList) { // wsm리스트에 있는 멤버들 길이만큼 돌면서
+			Member member = mService.getMember(wsm.getmNum()); // 멤버하나를 wsm리스트의 mNum으로 조회하고
+			ChatRoomMember crm = crmService.getChatRoomMemberByAnother(crNum, wsm.getwNum(), member.getNum());
+			if (crm == null) { // 그 멤버가 채팅방에 없으면
+				wsMemberList.add(member);// 그 멤버를 진짜 멤버리스트(아이디를 담고있는 리스트)로 바꿈
+			}
+			wNum = wsm.getwNum();
+		}
+		Workspace ws = wService.getWorkspace(wNum);
+		session.removeAttribute("wsName");
+		session.removeAttribute("currWnum");
+		session.removeAttribute("sessionChatRoom");
+		session.setAttribute("wsName", ws.getName());
+		session.setAttribute("currWnum", ws.getNum());
+		session.setAttribute("sessionChatRoom", chatRoom);
+		model.addAttribute("chatRoom", chatRoom);
+		model.addAttribute("wsMemberList", wsMemberList);
+		model.addAttribute("wNum", wNum);
+		return "/chatting/chatMain";
+	}
 	// 채팅방 리스트 왼쪽 네비게이션에 출력
 	@ResponseBody
 	@RequestMapping("/getChatList")
@@ -87,6 +134,7 @@ public class ChatRoomController {
 		return crList;
 	}
 
+	
 
 	@RequestMapping("/addChat")
 	public String addChatRoom(int wNum, String crName, HttpSession session, HttpServletRequest request) {

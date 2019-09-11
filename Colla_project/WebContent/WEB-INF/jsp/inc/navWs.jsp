@@ -26,6 +26,7 @@
 </script>
 <div id="wsNav">
 	<input type="hidden" value="${sessionScope.currWnum}" id="currWnum">
+	<input type="hidden" value="${sessionScope.wsName}" id="currWname">
 	<div id="navContainer">
 		<div id="aboutProfile">
 			<a href="${contextPath }/myPageMainForm">
@@ -34,12 +35,18 @@
 			<p>${member.name}님</p>
 		</div>
 		
-		<select name="currWorkspace">
+		<select name="currWorkspace" id="workspaceSelector">
 		<c:forEach items="${sessionScope.workspaceList}" var="ws">
-			<option value="1">${ws.wsInfo.name}</option>
+			<option class="wsSelectOption" value="${contextPath}/defaultChatMain?wNum=${ws.wsInfo.num}" selected>${ws.wsInfo.name}</option>
 		</c:forEach>
-			
 		</select>
+		<script>
+			var currWname = $("#currWname").val();
+			$('#workspaceSelector').on('change', function() {
+			    location.href= this.value;
+			});
+			$('#workspaceSelector').val(currWname);
+		</script>
 		<div id="myChatList">
 			<h3>
 				My Chats

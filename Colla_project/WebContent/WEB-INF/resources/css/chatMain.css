@@ -131,7 +131,6 @@
 	padding-right: 5px;
 }
 #attachBtn{
-	vertical-align: middle;
 }
 .attach a:hover {
 	color: #f04943;
@@ -533,6 +532,69 @@ input[type=radio]{
 #wsmListUL{
 	padding : 20px;
 }
+#wsmListUL label:hover{
+	cursor: pointer;
+}
+#wsmListUL label li:hover{
+	background-color: #f2f2f0;	
+}
+#wsmListUL label li input[type=checkbox]{
+	display: none;
+}
+.checked-member{
+	display : none;
+	position : relative;
+	width : 10px;
+	height : 10px;
+	margin-left : 10px;
+	color : #6ec748;
+}
+#wsmListUL li{
+	padding : 8px;
+	padding-left : 15px;
+	margin-bottom : 3px;
+	border : 1px solid #d4cbcb;
+	border-radius: 5px;
+}
+.memberNameInSlideMenu{
+	display : inline-block;
+	position : relative;
+	margin-top : 16px;
+}
 .navInfoMsg{
 	text-align: center;
+}
+#searchInput{
+	margin-top : 20px;
+	margin-bottom : 10px;
+}
+#searchContent{
+	width : 98%;
+	border-radius : 5px;
+	margin-left : 1%;
+	height : calc(100% - 140px);
+	background-color: #f7f3f0;
+	align-self: center;
+	border: 1px solid #d4cbcb;
+	
+}
+#keywordType{
+	padding : 5px;
+}
+#keyword{
+	width : 65%;
+	padding : 5px;
+	margin-left : 5px;
+	margin-right : 5px;
+}
+#pageNav{
+	display : inline-block;
+	position : fixed;
+	bottom : 50px;
+	width : 558px;
+	height : 30px;
+	margin-left : 5px;
+	margin-bottom:50px; 
+	border-radius : 5px;
+	border: 1px solid #d4cbcb;
 }
