@@ -1,11 +1,21 @@
 @charset "UTF-8";
 
-/* boardList.jsp*/
+/* board 공통 */
 #boardInner {
 	position:relative;
     width: 1280px;
     margin: 35px auto 20px;
 }
+#boardInner .row {
+	border-bottom:1px solid #e0e0e0;
+	padding:10px;
+	line-height:30px;
+}
+#boardInner .row .floatleft {
+	margin-right: 60px;
+}
+
+/******************************** boardList.jsp *****************************************/
 #boardInner #boardList {
 	margin-bottom:20px;
 }
@@ -142,18 +152,8 @@
 	text-align: center;
 	line-height: 40px;
 }
-/* boardList.jsp END*/
 
-/* board view */
-
-#boardInner #boardDetail .row {
-	border-bottom:1px solid #e0e0e0;
-	padding:10px;
-	line-height:30px;
-}
-#boardInner #boardDetail .row .floatleft {
-	margin-right: 60px;
-}
+/******************************** boardView.jsp *****************************************/
 #boardInner #boardDetail .bold {
 	display:inline-block;
 	font-size: 16px;
@@ -239,3 +239,50 @@
 }
 #boardReply textarea{
 	width: calc(100% - 110px);
+}
+
+/******************************** boardWriteForm.jsp *****************************************/
+#inputWrap .row {
+	border:0 none;
+}
+#inputWrap .row .floatleft {
+	width: 40%;
+}
+#inputWrap .row *{
+	vertical-align:middle;
+}
+#inputWrap label{
+	display:block;
+	width: 300px;
+}
+#inputWrap label #title{
+	width: calc(100% - 100px);
+}
+#inputWrap label > span{
+	display:inline-block;
+	width:75px;
+}
+#inputWrap #writer input {
+	text-align:center;
+}
+#inputWrap input[type='text'],
+#inputWrap select,
+#inputWrap input[type='password']{
+	border: 1px solid #D1D1D1;
+	border-radius: 5px;
+	line-height:30px;
+	height:30px;
+	padding: 0 10px;
+	margin-left: 20px;
+}
+
+
+
+
+
+
+
+
+
+
+
