@@ -67,8 +67,9 @@ public class ChatMessageService {
 		return cmDao.selectChatMessageByCmNum(cmNum);
 	}
 	public List<ChatMessage> getAllChatMessageByCrNum(int crNum,int mNum){
+		List<ChatMessage> chatMessageList = cmDao.selectAllChatMessageByCrNum(crNum,mNum); 
 		
-		return cmDao.selectAllChatMessageByCrNum(crNum,mNum);
+		return chatMessageList;
 	}
 	
 	public int modifyChatFavorite(int favoriteResult, int mNum, int cmNum) {

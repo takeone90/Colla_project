@@ -40,6 +40,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select cr.w_num,cr.cr_num,cr.m_num,cr.cr_name,cr.cr_regdate,cr.cr_isdefault
 		from chatroom cr,chatroom_member crm,member m
 		where cr.w_num=#{wNum} and cr.cr_num=crm.cr_num and crm.m_num=m.m_num and m.m_num=#{mNum}
+		order by cr.cr_num asc
 	</select>
 	<resultMap type="chatRoom" id="chatRoomMap">
 		<result column="cr_num" property="crNum"/>

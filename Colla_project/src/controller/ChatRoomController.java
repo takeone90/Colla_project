@@ -3,6 +3,7 @@ package controller;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -185,6 +186,7 @@ public class ChatRoomController {
 		Member member = (Member)session.getAttribute("user");
 		int mNum = member.getNum();
 		List<ChatMessage> cmList = cmService.getAllChatMessageByCrNum(crNum,mNum);
+		
 		return cmList;
 	}
 	// 일반메세지 받고 보내기

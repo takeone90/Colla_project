@@ -19,7 +19,7 @@
 				$.each(d,function(idx,item){
 					var str='<li '+ ( ${sessionChatRoom.crNum} ==item.crNum?'class="currChat"':"")+'><a href="${contextPath}/chatMain?crNum='+item.crNum+'">'+item.crName+'</a></li>';
 						chatList.append(str);
-					});
+				});
 			}
 		});
 	}

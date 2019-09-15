@@ -231,9 +231,6 @@
 							<h4>멤버 초대</h4>
 								<ul id="wsMemberList">
 								</ul>
-							<div>
-								<a href="#">멤버추가버튼</a>
-							</div>
 						</div>
 					</div> <!-- end addChatInputWrap -->
 
