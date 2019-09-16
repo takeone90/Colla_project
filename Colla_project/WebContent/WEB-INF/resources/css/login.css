@@ -56,18 +56,42 @@
 	text-align: right;
 	font-size: 10px;
 }
-/* #innerBtn{ */
-/* 	margin-top: 10px; */
-/* } */
-/* #innerBtn div, */
-/* #innerBtn a { */
-/* 	display: inline-block; */
-/* 	position: relative; */
-/* 	width: 100%; */
-/* 	padding: 5px; */
-/* 	margin-bottom: 5px; */
-/* 	background-color: #eb4034; */
-/* 	color: white; */
-/* 	text-align: center; */
-/* 	border-radius: 5px; */
-/* } */
+
+
+#g-signin2 {
+	margin: 0px;
+	padding: 0px;
+}
+.abcRioButton abcRioButtonLightBlue {
+	margin: 0px;
+	padding: 0px;
+}
+#naverIdLogin {
+	background-color: black;
+	width: 400px;
+	height: 400px;
+}
+#innerBtn {
+	margin: 10px 10px 0px 10px;
+    text-align: center;
+}
+#innerBtn button {
+	width: 32%;
+    border-radius: 5px;
+    height: 35px;
+    border: 0px solid;
+/*     background-color: white; */
+    font-weight: 800;
+    border-color: white;
+}
+#googleLoginButton {
+	float: left;
+	background-color: #EA4335;
+}
+#naverLoginButton {
+	background-color: #03CF5D;
+}
+#kakaoLoginButton {
+	float: right;
+	background-color: #FCCE00;
+}

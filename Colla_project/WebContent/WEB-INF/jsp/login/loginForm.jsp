@@ -31,11 +31,20 @@
 
 <script type="text/javascript">
 $(function(){
+	$("#kakaoLoginButton").on("click", function() {
+		$("#kakao-login-btn").trigger("click");
+	});
+	
+// 	$("#naverLoginButton").on("click", function() {
+// 		$("#naverIdLogin").trigger("click");
+// 	});
+	
+	
 	$("#loginForm").on("submit", function() {
 		var emailResult = checkEmail();
 		var pwResult = checkPw();
 		if(emailResult && pwResult){
-		}else{
+		} else {
 			return false;
 		}
 	});
@@ -44,7 +53,7 @@ $(function(){
 		clientId: "kIhjMaimMjKNR7gcR2nf",
 		callbackUrl: "http://localhost:8081/Colla_project/callBackLogin",
 		isPopup: false, /* 팝업을 통한 연동처리 여부 */
-		loginButton: {color: "green", type: 3, height: 60} /* 로그인 버튼의 타입을 지정 */
+		loginButton: {color: "white", type: 1, height: 35} /* 로그인 버튼의 타입을 지정 */
 	});
 	/* 설정정보를 초기화하고 연동을 준비 */
 	naverLogin.init();
@@ -131,14 +140,12 @@ function calls() {
 			</form>
 			<div id="innerBtn">
 				<!-- 구글 -->
-				<div class="g-signin2" id="g-signin2" data-onsuccess="onSignIn"></div>
+				<button id="googleLoginButton">구글</button>
 				<!-- 네이버 -->
-				<div id="naverIdLogin"></div>
+				<button id="naverLoginButton" onclick="$('#naver_id_login_anchor').click();">네이버</button>
 				<!-- 카카오 -->
-				<div>
-					<a id="kakao-login-btn"></a>
-					<a href="http://developers.kakao.com/logout"></a>
-				</div>
+				<button id="kakaoLoginButton">카카오</button>
+
 				<span id="loginResultText">
 					<c:if test='${param.login eq "false"}'>
 						로그인 후 이용하세요.
@@ -150,6 +157,13 @@ function calls() {
 			</div>
 		</div>
 	</div>
+	<!-- 구글 -->
+	<div class="g-signin2" id="g-signin2" data-onsuccess="onSignIn" style="visibility: hidden;"></div>
+	<!-- 네이버 -->
+	<a id="naverIdLogin" style="visibility: hidden;"></a>
+	<!-- 카카오 -->
+	<a id="kakao-login-btn" style="visibility: hidden;"></a>
+	<a href="http://developers.kakao.com/logout"></a>
 	<form method="post" id="apiForm" action="login">
 		<input type="hidden" name="m_email" id="emailOfApiForm">
 		<input type="hidden" name="m_name" id="nameOfApiForm">
