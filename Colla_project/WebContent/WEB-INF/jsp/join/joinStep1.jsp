@@ -19,6 +19,8 @@
 <link rel="stylesheet" type="text/css" href="css/reset.css" />
 <link rel="stylesheet" type="text/css" href="css/base.css" />
 <link rel="stylesheet" type="text/css" href="css/headerMain.css" />
+<link rel="stylesheet" type="text/css" href="css/join.css" />
+<script src="https://kit.fontawesome.com/ac21eff7ec.js"></script>
 <script src="https://code.jquery.com/jquery-3.4.1.js"
 	integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
 	crossorigin="anonymous"></script>
@@ -58,9 +60,7 @@
 			}
 			return false;
 		})
-		$("#emailAddress").on(
-				"blur",
-				function() {
+		$("#emailAddress").on("blur", function() {
 					var emailAddress = $("#emailAddress").val();
 					if (emailAddress == "") {
 						$("#checkSentence").text("이메일을 입력해주세요.");
@@ -140,19 +140,40 @@
 </head>
 <body>
 	<%@ include file="/WEB-INF/jsp/inc/headerMain.jsp"%>
-	<form method="post" id="emailForm">
-		<input type="hidden" name="${_csrf.parameterName}"
-			value="${_csrf.token}"> EMAIL <input type="email"
-			name="emailAddress" id="emailAddress" placeholder="example@c0lla.com">
-		<span id="checkSentence"></span> <input type="submit" value="인증 코드 발송">
-	</form>
-	<!-- 구글 -->
-	<div class="g-signin2" data-onsuccess="onSignIn"></div>
-	<!-- 네이버 -->
-	<div id="naverIdLogin">네이버 계정 연동</div>
-	<!-- 카카오 -->
-	<a id="kakao-login-btn"></a>
-	<a href="http://developers.kakao.com/logout"></a>
+	
+	<div class="joinBox">
+		<div class="joinBox-Head">
+			<h3 style='font-weight: bolder; font-size: 30px'>회원가입</h3>
+			<p>
+				<i class="fas fa-circle" style="color: #DA574E"></i>&nbsp;&nbsp;
+				<i class="fas fa-circle" style="color: #DDB4AB"></i>&nbsp;&nbsp;
+				<i class="fas fa-circle" style="color: #DDB4AB"></i>
+			</p>
+		</div>
+		<div class="joinBox-Body">
+			<form method="post" id="emailForm">
+				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"> 
+				<div>
+					<h4>EMAIL</h4> 
+					<input type="email" name="emailAddress" id="emailAddress" placeholder="example@c0lla.com">
+					<span id="checkSentence"></span>
+				</div>
+				<div>
+					<input type="submit" value="인증 코드 발송">
+				</div>
+			</form>
+			<!-- 구글 -->
+			<div class="g-signin2" data-onsuccess="onSignIn"></div>
+			<!-- 네이버 -->
+			<div id="naverIdLogin">네이버 계정 연동</div>
+			<!-- 카카오 -->
+			<div>
+				<a id="kakao-login-btn"></a>
+				<a href="http://developers.kakao.com/logout"></a>
+			</div>
+		</div>
+	</div>
+	
 	<form method="post" id="apiForm" action="joinMemberAPI">
 		<input type="hidden" name="email" id="email"> 
 		<input type="hidden" name="name" id="name">

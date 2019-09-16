@@ -16,21 +16,21 @@
 <link rel="stylesheet" type="text/css" href="css/reset.css"/>
 <link rel="stylesheet" type="text/css" href="css/base.css"/>
 <link rel="stylesheet" type="text/css" href="css/headerMain.css"/>
+<link rel="stylesheet" type="text/css" href="css/animate.css"/>
+<link rel="stylesheet" type="text/css" href="css/login.css"/>
 <script src="https://code.jquery.com/jquery-3.4.1.js"
   integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
   crossorigin="anonymous"></script>
+  
 <!-- 네이버 -->
 <script type="text/javascript" src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.0.js" charset="utf-8"></script>
 <!-- 구글 -->
 <script src="https://apis.google.com/js/platform.js" async defer></script>
 <!-- 카카오 -->
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
+
 <script type="text/javascript">
 $(function(){
-	$("#g-signin2").on("click", function() {
-		
-	})
-	
 	$("#loginForm").on("submit", function() {
 		var emailResult = checkEmail();
 		var pwResult = checkPw();
@@ -107,29 +107,49 @@ function calls() {
 </head>
 <body>
 	<%@ include file="/WEB-INF/jsp/inc/headerMain.jsp" %>
-	<form action="login" method="post" id="loginForm">	
-		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
-		<input type="text" name="m_email" placeholder="이메일을 입력해주세요." id="email">
-		<span id="checkEmailText"></span>
-		<input type="password" name="m_pw" placeholder="비밀번호를 입력해주세요." id="pw">
-		<span id="checkPwText"></span>
-		<input type="submit" value="로그인">
-	</form>
-	<!-- 구글 -->
-	<div class="g-signin2" id="g-signin2" data-onsuccess="onSignIn"></div>
-	<!-- 네이버 -->
-	<div id="naverIdLogin"></div>
-	<!-- 카카오 -->
-	<a id="kakao-login-btn"></a>
-	<a href="http://developers.kakao.com/logout"></a>
-	<h3>
-		<c:if test='${param.login eq "false"}'>
-			로그인 후 이용하세요.
-		</c:if>
-		<c:if test='${param.login eq "fail"}'>
-			로그인에 실패하였습니다.
-		</c:if>
-	</h3>
+	<div id="loginBox" class="animated fadeIn">
+		<div class="loginBox-Head">
+			<h3 style='font-weight: bolder; font-size: 30px'>로그인</h3>
+			<p>SIGN IN</p>
+		</div>
+		<div class="loginBox-Body">
+			<form action="login" method="post" id="loginForm">	
+				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+				<div>
+					<h4>EMAIL</h4>
+					<input type="text" name="m_email" placeholder="이메일을 입력해주세요." id="email">
+					<span id="checkEmailText"></span>
+				</div>
+				<div>
+					<h4>PASSWORD</h4>
+					<input type="password" name="m_pw" placeholder="비밀번호를 입력해주세요." id="pw">
+					<span id="checkPwText"></span>
+				</div>
+				<div>
+					<input type="submit" value="로그인">
+				</div>
+			</form>
+			<div id="innerBtn">
+				<!-- 구글 -->
+				<div class="g-signin2" id="g-signin2" data-onsuccess="onSignIn"></div>
+				<!-- 네이버 -->
+				<div id="naverIdLogin"></div>
+				<!-- 카카오 -->
+				<div>
+					<a id="kakao-login-btn"></a>
+					<a href="http://developers.kakao.com/logout"></a>
+				</div>
+				<span id="loginResultText">
+					<c:if test='${param.login eq "false"}'>
+						로그인 후 이용하세요.
+					</c:if>
+					<c:if test='${param.login eq "fail"}'>
+						로그인에 실패하였습니다.
+					</c:if>
+				</span>
+			</div>
+		</div>
+	</div>
 	<form method="post" id="apiForm" action="login">
 		<input type="hidden" name="m_email" id="emailOfApiForm">
 		<input type="hidden" name="m_name" id="nameOfApiForm">

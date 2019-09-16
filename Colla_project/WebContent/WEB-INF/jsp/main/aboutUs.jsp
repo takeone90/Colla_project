@@ -10,33 +10,61 @@
 <link rel="stylesheet" type="text/css" href="css/headerMain.css"/>
 <link rel="stylesheet" type="text/css" href="css/footerMain.css"/>
 <link rel="stylesheet" type="text/css" href="css/main.css"/>
+<link rel="stylesheet" type="text/css" href="css/animate.css"/>
+<link rel="stylesheet" type="text/css" href="css/animationCheatSheet.css"/>
 <script src="https://code.jquery.com/jquery-3.4.1.js"
   integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
   crossorigin="anonymous"></script>
+<script>
+
+</script>
 </head>
 <body>
 	<div id="wrap">
 		<%@ include file="/WEB-INF/jsp/inc/headerMain.jsp" %>
 		<div id="aboutUsAll">
-			<section id="">
+			<section id="aboutUs-cover">
 				<div id="container">
-					<div class="head-title"> TEAM NEVER LOSE </div>
-					<div class="head-body"> Best Team In My Life <br>
-					BLAH BLAH <br>
-					BLAH BLAH BLAH BLAH BLAH BLAH BLAH BLAH </div>
-					<div class="head-caption"> 우리는 이런 팀 저런 팀 어떤 팀 </div>
+					<div id="head-all" class="animated infinite pulse">
+						<div class="head-title"> TEAM NEVER LOSE </div>
+						<div class="head-body"> Best Team In My Life <br>
+						BLAH BLAH BLAH BLAH BLAH </div>
+						<div class="head-caption"> 우리는 이런 팀 저런 팀 어떤 팀 </div>
+					</div>
 				</div>
 			</section>
+			<section id="aboutUs-member1">
 			
-			<section id="">
+				<div class="aboutUs-container"> <!-- ? -->
+					<div class="aboutUs-flip-card">
+						<div class="flip-front"><h1>이태권</h1></div>
+						<div class="flip-back"><h1>은 조장이다</h1></div>
+					</div>
+				</div>
+				
+			</section>
+			<section id="aboutUs-member2">
 				<div id="container">
-					<h1>질수없조 소개2</h1>
+					<div class="aboutUs-card">
+						<div>김미경은</div>
+						<div>은 팀원이다</div>
+					</div>
 				</div>
 			</section>
-			
-			<section id="">
+			<section id="aboutUs-member3">
 				<div id="container">
-					<h1>질수없조 소개3</h1>
+					<div class="aboutUs-card">
+						<div>김수빈은</div>
+						<div>은 팀원이다</div>
+					</div>
+				</div>
+			</section>
+			<section id="aboutUs-member4">
+				<div id="container">
+					<div class="aboutUs-card">
+						<div>박혜선은</div>
+						<div>은 팀원이다</div>
+					</div>
 				</div>
 			</section>
 		</div>
