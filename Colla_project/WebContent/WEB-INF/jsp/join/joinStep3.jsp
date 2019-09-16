@@ -8,6 +8,8 @@
 <link rel="stylesheet" type="text/css" href="css/reset.css"/>
 <link rel="stylesheet" type="text/css" href="css/base.css"/>
 <link rel="stylesheet" type="text/css" href="css/headerMain.css"/>
+<link rel="stylesheet" type="text/css" href="css/join.css" />
+<script src="https://kit.fontawesome.com/ac21eff7ec.js"></script>
 <script src="https://code.jquery.com/jquery-3.4.1.js"
   integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
   crossorigin="anonymous"></script>
@@ -69,21 +71,42 @@ function checkBox(){
 String emailAddress = (String)session.getAttribute("emailAddress");
 %>
 <%@ include file="/WEB-INF/jsp/inc/headerMain.jsp" %>
-	<form action="joinMember" method="post" id="joinMemberForm">
-		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
-		회원가입
-		EMAIL
-		<input type="email" name="email" readonly="readonly" value="${emailAddress}">
-		PASSWORD
-		<input type="password" name="pw" id="pw">
-		<span id="checkPw"></span>
-		NAME
-		<input type="text" name="name" id="name">
-		<span id="checkName"></span>
-		<input type="checkbox" id="checkbox" value="1">
-		약관에 동의합니다.
-		<span id="checkCheckBox"></span>
-		<input type="submit" value="시작하기">
-	</form>
+	<div class="joinBox">
+		<div class="joinBox-Head">
+			<h3 style='font-weight: bolder; font-size: 30px'>회원가입</h3>
+			<p>
+				<i class="fas fa-circle" style="color: #DDB4AB"></i>&nbsp;&nbsp;
+				<i class="fas fa-circle" style="color: #DDB4AB"></i>&nbsp;&nbsp;
+				<i class="fas fa-circle" style="color: #DA574E"></i>
+			</p>
+		</div>
+		<div class="joinBox-Body">
+			<form action="joinMember" method="post" id="joinMemberForm">
+				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+				<div>
+					<h4>EMAIL</h4>
+					<input type="email" name="email" readonly="readonly" value="${emailAddress}">
+				</div>
+				<div>
+					<h4>PASSWORD</h4>
+					<input type="password" name="pw" id="pw">
+					<span id="checkPw"></span>
+				</div>
+				<div>
+					<h4>NAME</h4>
+					<input type="text" name="name" id="name">
+					<span id="checkName"></span>
+				</div>
+				<div>
+					<input type="checkbox" id="checkbox" value="1">
+					COLLA에서 제공하는 서비스 약관에 동의합니다.
+					<span id="checkCheckBox"></span>
+				</div>
+				<div>
+					<input type="submit" value="시작하기">
+				</div>
+			</form>
+		</div>
+	</div>	
 </body>
 </html>

@@ -13,6 +13,8 @@ request.setAttribute("contextPath", contextPath);
 <link rel="stylesheet" type="text/css" href="css/reset.css"/>
 <link rel="stylesheet" type="text/css" href="css/base.css"/>
 <link rel="stylesheet" type="text/css" href="css/headerMain.css"/>
+<link rel="stylesheet" type="text/css" href="css/join.css" />
+<script src="https://kit.fontawesome.com/ac21eff7ec.js"></script>
 <script src="https://code.jquery.com/jquery-3.4.1.js"
   integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
   crossorigin="anonymous"></script>
@@ -41,20 +43,41 @@ $(function() {
 </head>
 <body>
 <%@ include file="/WEB-INF/jsp/inc/headerMain.jsp" %>
-	<form action="" method="post" id="verifyCodeForm">
-		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
-		회원가입
-		인증 코드 입력
-		<input type="text" name="inputVerifyCode" placeholder="인증 코드를 입력해주세요.">
-		<%-- <input type="hidden" name="emailAddress" value="${param.emailAddress}"> --%>
-		<input type="button" onclick="location.href='resendVerifyMail'" value="인증 코드 재발송">
-		<span id="checkSentence"></span>
-		<input type="submit" value="다음단계">
-	</form>
-	<h3>
-		<c:if test='${param.joinStep2 eq "false"}'>
-			인증 코드가 일치하지 않습니다.
-		</c:if>
-	</h3>
+
+	<div class="joinBox">
+		<div class="joinBox-Head">
+			<h3 style='font-weight: bolder; font-size: 30px'>회원가입</h3>
+			<p>
+				<i class="fas fa-circle" style="color: #DDB4AB"></i>&nbsp;&nbsp;
+				<i class="fas fa-circle" style="color: #DA574E"></i>&nbsp;&nbsp;
+				<i class="fas fa-circle" style="color: #DDB4AB"></i>
+			</p>
+		</div>
+		<div class="joinBox-Body">
+		
+			<form action="" method="post" id="verifyCodeForm">
+				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+				<div>
+					<h4>인증 코드 입력</h4>
+					<input type="text" name="inputVerifyCode" placeholder="인증 코드를 입력해주세요.">
+					<span id="checkSentence"></span>
+				</div>
+				<%-- <input type="hidden" name="emailAddress" value="${param.emailAddress}"> --%>
+				<div>
+					<input type="button" onclick="location.href='resendVerifyMail'" value="인증 코드 재발송">
+				</div>
+				<div>
+					<input type="submit" value="다음단계">
+				</div>
+			</form>
+			<div>
+				<span id="verifyResultText">
+					<c:if test='${param.joinStep2 eq "false"}'>
+						인증 코드가 일치하지 않습니다.
+					</c:if>
+				</span>
+			</div>
+		</div>
+	</div>	
 </body>
 </html>

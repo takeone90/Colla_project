@@ -17,16 +17,34 @@
   crossorigin="anonymous"></script>
 <script type="text/javascript">
 $(window).scroll(function() {
-	$('#tmp').each(function(){
+	$('#collaInfo-function1-ani').each(function(){
 	var imagePos = $(this).offset().top;
 	var topOfWindow = $(window).scrollTop();
-		if (imagePos < topOfWindow+200) {
-			$(this).addClass("slideUp");
+		if (imagePos < topOfWindow+500) { /* 숫자가 클수록 빨리 등장 */
+			$(this).css({visibility:"visible"});
+			$(this).addClass("animated slideInRight");
 		}
 	});
 });
-$('#tmp').click(function() {
-	$(this).addClass("slideUp");
+$(window).scroll(function() {
+	$('#collaInfo-function2-ani').each(function(){
+	var imagePos = $(this).offset().top;
+	var topOfWindow = $(window).scrollTop();
+		if (imagePos < topOfWindow+500) {
+			$(this).css({visibility:"visible"});
+			$(this).addClass("animated slideInLeft");
+		}
+	});
+});
+$(window).scroll(function() {
+	$('#collaInfo-function3-ani').each(function(){
+	var imagePos = $(this).offset().top;
+	var topOfWindow = $(window).scrollTop();
+		if (imagePos < topOfWindow+500) {
+			$(this).css({visibility:"visible"});
+			$(this).addClass("animated slideInRight");
+		}
+	});
 });
 </script>
 </head>
@@ -34,27 +52,55 @@ $('#tmp').click(function() {
 	<div id="wrap">
 		<%@ include file="/WEB-INF/jsp/inc/headerMain.jsp" %>
 		<div id="collaInfoAll">
-			<section id="">
+			<section id="collaInfo-cover">
 				<div id="container">
-					<div id="tmp" class="slideUp">
-					<div class="head-title"> COLLA </div>
-					<div class="head-body">Work.<br>
-					With Your Coworkers.<br>
-					COLLA will provide the best service.</div>
-					<div class="head-caption">COLLA에 어떤 기능들이 있는지 살펴볼까요?</div>
+					<div id="collaInfo-cover-ani" class="animated zoomIn">
+						<div class="head-title"> COLLAboration </div>
+						<div class="head-body">이제 쉽게 공유하고 협업할 수 있습니다.</div>
+						<div class="head-caption">COLLA에 어떤 기능들이 있는지 살펴볼까요?</div>
 					</div>
 				</div>
 			</section>
 			
-			<section id="">
+			<section id="collaInfo-function1">
 				<div id="container">
-					<h1>콜라 기능 소개2</h1>
+					<div class="collaInfo-functions">
+						<div id="collaInfo-function1-stable">
+							<div>그림1</div>
+						</div>
+						<div id="collaInfo-function1-ani">
+							<div class="head-title"> WorkSpace </div>
+							<div class="head-body">가볍게 워크 스페이스 생성</div>
+						</div>
+					</div>
 				</div>
 			</section>
 			
-			<section id="">
+			<section id="collaInfo-function2">
 				<div id="container">
-					<h1>콜라 기능 소개3</h1>
+					<div class="collaInfo-functions">
+						<div id="collaInfo-function2-ani">
+							<div class="head-title"> Chatting </div>
+							<div class="head-body">워크 스페이스 채팅방에서 원하는 사람들과 채팅</div>
+						</div>
+						<div id="collaInfo-function2-stable">
+							<div>그림2</div>
+						</div>
+					</div>
+				</div>
+			</section>
+			
+			<section id="collaInfo-function3">
+				<div id="container">
+					<div class="collaInfo-functions">
+						<div id="collaInfo-function3-stable">
+							<div>그림3</div>
+						</div>
+						<div id="collaInfo-function3-ani">
+							<div class="head-title"> Calendar </div>
+							<div class="head-body">팀원들(?)과 일정을 공유하고 관리</div>
+						</div>
+					</div>
 				</div>
 			</section>
 		</div>

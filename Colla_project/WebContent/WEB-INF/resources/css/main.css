@@ -2,13 +2,11 @@
 
 #welcome {
 	display: block;
-	background-color: #D3D1D2;
+	background-color: #ffffff;
 }
 #welcome section,
-#collaInfoAll section,
 #pricingAll section,
-#faqAll section,
-#aboutUsAll section {
+#faqAll section {
 	position: relative;
 	display: block;
 	overflow: hidden;
@@ -17,20 +15,58 @@
 	padding: 80px 15px 100px 15px;
 }
 #main-cover {
-	background-color: #cfcccf;
+	background-color: #ffffff;
 }
 #main-intro {
 	background-color: #EC6D63;
 }
 #main-coworker {
-	background-color: #4D4B4B;
-}
-#tmp,
-#tmp1,
-#tmp2 {
-	visibility: hidden;
+	background-color: #ffffff;
 }
 
+/* colla? */
+
+#collaInfoAll section {
+	position: relative;
+	display: block;
+	overflow: hidden;
+	height: 500px;
+	text-align: center;
+	padding: 80px 15px 100px 15px;
+}
+#collaInfo-cover,
+#collaInfo-function2 {
+	background-color: #ffffff;
+}
+#collaInfo-function1,
+#collaInfo-function3 {
+	background-color: #EC6D63;
+}
+.collaInfo-functions {
+	vertical-align: middle;
+}
+#collaInfo-function1-ani,
+#collaInfo-function2-ani,
+#collaInfo-function3-ani {
+	display: inline-block;
+	vertical-align: middle;
+}
+#collaInfo-function1-stable,
+#collaInfo-function2-stable,
+#collaInfo-function3-stable {
+	display: inline-block;
+	vertical-align: middle;
+	width: 500px;
+	height: 500px;
+	background-color: lime;
+}
+#main-intro-ani,
+#main-coworker-ani,
+#collaInfo-function1-ani,
+#collaInfo-function2-ani,
+#collaInfo-function3-ani {
+	visibility: hidden;
+}
 .head-title {
 	font-size: 60px;
     font-weight: 600;
@@ -47,6 +83,7 @@
 .head-caption {
 	padding: 15px;
 	font-size: 16px;
+	margin-bottom: 30px;
 }
 .box-inside {
     display: inline-flex;
@@ -56,6 +93,9 @@
     border-radius: 6px;
     text-align: left;
 }
+
+/* pricing */
+
 .price-each-col {
     padding: 20px;
     width: 30%;
@@ -66,7 +106,8 @@
 .price-title {
 	font-weight: 900;
     font-size: 32px;
-    margin-bottom: 6px;
+    margin-top: 5px;
+    margin-bottom: 15px;
     text-align: left;
 }
 .price-desc {
@@ -79,17 +120,9 @@
     line-height: 1.4;
 }
 .price-amount-view {
+    padding: 20px 0px 20px 0px;
     display: flex;
     align-items: flex-start;
-}
-.price-currency {
-    bottom: auto;
-    font-weight: 900;
-    font-size: 16px;
-    top: 0;
-    margin-right: 2px;
-    position: absolute;
-    line-height: 1;
 }
 .price-currency-unit {
     font-size: 14px;
@@ -103,12 +136,144 @@
     font-weight: 900;
     line-height: .75;
     text-align: center;
-    margin-left: .4em;
     color: #373839;
     display: inline-block;
 }
-.price-per {
-    color: #6e7788;
-    font-weight: 400;
-    margin-left: 6px;
+.price-unit {
+	margin-left: 5px;
+    margin-top: 20px;
+    color: gray;
+    font-size: 15px;
+}
+.price-detail {
+	margin-top: 20px;
+    margin-bottom: 10px;
+    background-color: #F5F5F5;
+    padding: 15px;
+    line-height: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 0px 0px black;
+}
+.price-check {
+	margin-right: 8px;
+    margin-top: 4px;
+}
+.price-detail-content {
+	display: inline-block;
+}
+.price-start-button {
+	width: 100%;
+    background-color: white;
+    border-color: #EC6D63;
+    border-radius: 10px;
+    padding: 10px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    color: #EC6D63;
+    font-size: 15px;
+    font-weight: 600;
+    border-style: solid;
+}
+.price-start-button:hover {
+	background-color: #EC6D63;
+	color: white;
+}
+
+/* faq */
+
+.questions {
+	width: 800px;
+	margin: 0 auto;
+}
+.question {
+	border-radius: 10px;
+	background-color: #eee;
+	color: #444;
+	cursor: pointer;
+	padding: 18px;
+	width: 100%;
+	text-align: left;
+	border: none;
+	outline: none;
+	transition: 0.4s;
+}
+.active, .question:hover {
+	background-color: #ccc;
+}
+.answer {
+	border-radius: 10px;
+	padding: 20px 18px;
+	display: none;
+	overflow: hidden;
+	transition: max-height 0.2s ease-out;
+	background-color: #EC6D63;
+}
+.question:after {
+  content: '열기';
+  font-size: 13px;
+  color: #777;
+  float: right;
+  margin-left: 5px;	
+}
+.active:after {
+  content: "닫기";
+}
+
+/* aboutUs */
+
+div {
+  -webkit-backface-visibility: hidden;
+}
+
+#aboutUs-member1,
+#aboutUs-member3 {
+	background-color: #EC6D63;	
+}
+#aboutUs-member2,
+#aboutUs-member4 {
+	background-color: #665A5A;	
+}
+#aboutUsAll section {
+	position: relative;
+	display: block;
+	overflow: hidden;
+	height: 500px;
+	text-align: center;
+	padding: 80px 15px 100px 15px;
+}
+
+/* 카드 뒤집기 */
+.aboutUs-container {
+  background-color: transparent;
+  width: 300px;
+  height: 200px;
+  border: 1px solid #f1f1f1;
+/*   perspective: 1000px; */
+}
+.aboutUs-flip-card {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;	
+}
+.aboutUs-container:hover .aboutUs-flip-card {
+  transform: rotateY(180deg);	
+}
+.flip-front, 
+.flip-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+}
+.flip-front {
+  background-color: #bbb;
+  color: black;	
+}
+.flip-back {
+  background-color: dodgerblue;
+  color: white;
+  transform: rotateY(180deg);
 }

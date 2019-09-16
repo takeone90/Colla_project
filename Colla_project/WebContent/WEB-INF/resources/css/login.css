@@ -1,0 +1,73 @@
+@charset "UTF-8";
+
+
+#loginBox {
+    top: 80px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    position: relative;
+	width: 400px;
+	border-radius: 10px;
+	padding: 30px;
+	z-index: 10;
+/* 	background-color: #EC6D63; */
+	background-image: url("../img/wave.gif");
+}
+.loginBox-Head {
+	text-align: center;
+	padding-bottom: 30px;
+}
+.loginBox-Head h3{
+	font-size: 20pt;
+	padding: 15px;
+	color: white;
+	margin-bottom: 30px;
+}
+.loginBox-Head p {
+	font-size: 10pt;
+	color: #c4c4c4; 
+}
+.loginBox-Body {
+	text-align: left;
+}
+.loginBox-Body h4 {
+	font-size: 17px;
+    font-weight: 600;
+}
+.loginBox-Body div {
+	padding: 5px;
+	margin: 0px 10px 5px 10px;
+}
+.loginBox-Body input {
+	padding: 5px;
+	margin: 8px 0px 5px 0px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	box-sizing: border-box;
+	width: 100%;
+	height: 35px;
+}
+#checkEmailText,
+#checkPwText,
+#loginResultText {
+	float: right;
+	text-align: right;
+	font-size: 10px;
+}
+/* #innerBtn{ */
+/* 	margin-top: 10px; */
+/* } */
+/* #innerBtn div, */
+/* #innerBtn a { */
+/* 	display: inline-block; */
+/* 	position: relative; */
+/* 	width: 100%; */
+/* 	padding: 5px; */
+/* 	margin-bottom: 5px; */
+/* 	background-color: #eb4034; */
+/* 	color: white; */
+/* 	text-align: center; */
+/* 	border-radius: 5px; */
+/* } */
