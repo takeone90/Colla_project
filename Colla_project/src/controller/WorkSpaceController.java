@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import commons.LoginList;
 import controller.MemberController.inner;
 import mail.MailSend;
 import model.ChatRoom;
@@ -43,6 +44,10 @@ public class WorkSpaceController {
 	private ChatRoomMemberService crmService;
 	@Autowired
 	private WorkspaceInviteService wiService;
+	
+	@Autowired
+	private LoginList loginList;
+	
 	@RequestMapping("/workspace")
 	public String showWsMain(Principal principal,HttpSession session,Model model) {
 		//Ws메인이 보여질때 시큐리티가 갖고있는 principal 정보의 userid 를 가져와서
@@ -61,6 +66,7 @@ public class WorkSpaceController {
 			wsMap.put("wsInfo", wsList.get(i));
 			wsMap.put("crList", crService.getAllChatRoomByWnumMnum(wNum, user.getNum()));
 			wsMap.put("mList", mService.getAllMemberByWnum(wNum));
+			wsMap.put("mlList", loginList.getLoginList()); //로그인한 멤버 리스트
 			workspaceList.add(wsMap);
 		}
 		model.addAttribute("workspaceList", workspaceList);

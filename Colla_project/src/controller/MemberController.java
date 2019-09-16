@@ -4,7 +4,9 @@ package controller;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.request;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,6 +15,7 @@ import javax.servlet.http.HttpSession;
 
 import org.aspectj.apache.bcel.classfile.InnerClass;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.messaging.converter.StringMessageConverter;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
@@ -24,6 +27,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.google.gson.Gson;
+
+import commons.LoginList;
 import mail.MailSend;
 import model.EmailVerify;
 import model.Member;
@@ -56,7 +62,10 @@ public class MemberController {
 	private ChatRoomMemberService crmService;
 	@Autowired
 	private SimpMessagingTemplate simpMessagingTemplate;
-	private static Map<String, Object> loginMember = new HashMap<>(); //로그인한 멤버를 담기위한 map	
+	@Autowired
+	private LoginList loginList;
+	
+	//private static Map<String, Object> loginMember = new HashMap<>(); //로그인한 멤버를 담기위한 map
 
 	@RequestMapping(value="/joinStep1", method = RequestMethod.GET)
 	public String showJoinStep1() {
@@ -198,28 +207,25 @@ public class MemberController {
 
 	// 중복 로그인 체크 (기존 사용자 로그아웃 처리)
 	@RequestMapping("/checkLoginDuplication")
-	public void checkLoginDuplication(HttpServletRequest request, HttpServletResponse response,String userEmail) throws IOException {
+	public void checkLoginDuplication(HttpServletRequest request, HttpServletResponse response,String userEmail, HttpSession session) throws IOException {
 		boolean result = true;
+		simpMessagingTemplate.setMessageConverter(new StringMessageConverter());
 		Member member = (Member)request.getSession().getAttribute("user");
-		for (String key : loginMember.keySet()) {// 로그인한 멤버가 담긴 MAP에서 해당 이메일이 있는지 확인한다
+		Map<String,Object> loginMemberList = loginList.getLoginList();
+		for (String key : loginMemberList.keySet()) {// MAP에서 해당 이메일이 있는지 확인한다
 			if (key.equals(userEmail)) {
-				result = false; // 중복으로 로그인 : false 반환, 정상 로그인 : true 반환
+				result = false; // 중복으로 로그인이면 false 반환, 정상 로그인이면 true 반환
 			}
 		}
 		if (result) { // 정상적인 로그인의 경우
-			loginMember.put(userEmail, request.getSession()); // map에 해당 멤버를 담은 뒤,
-			response.sendRedirect("workspace"); // 워크스페이스 메인으로 이동한다
-			System.out.println("정상적인 로그인 멤버 추가 후, 로그인 멤버리스트를 보여줍니다");
-			for(String key : loginMember.keySet()) {
-				System.out.println(key + " : " + loginMember.get(key));
-			}
 		} else { // 중복 로그인의 경우
-			simpMessagingTemplate.setMessageConverter(new StringMessageConverter());
 			simpMessagingTemplate.convertAndSend("/category/loginMsg/"+member.getNum(),"[result:0]"); // 기존 로그인된 유저에게 요청을 보낸다 ==> 기존 유저의 브라우저에서는 alert가 뜬 뒤, 자동 로그아웃 된다.
-			loginMember.put(userEmail, request.getSession()); // map에 해당 멤버를 담은 뒤,
-			System.out.println(request.getSession() + "님이 로그인 하셨습니다.");
-			response.sendRedirect("workspace"); //워크스페이스로 이동한다			
 		}
+		loginList.addUser(userEmail, request.getSession());
+//		String memberList = new Gson().toJson(loginList.getLoginList());
+//		simpMessagingTemplate.convertAndSend("/category/loginInfo","{\"loginMemberList\":"+memberList+"}"); 
+		simpMessagingTemplate.convertAndSend("/category/loginInfo","{\"loginMemberList\": }");
+		response.sendRedirect("workspace"); //워크스페이스로 이동한다
 	}
 	
 	//회원 탈퇴버튼
@@ -233,20 +239,36 @@ public class MemberController {
 		
 		return "redirect:main";
 	}
-
+/*
 	@RequestMapping("/dropSession") //로그아웃 성공 후, 처리
 	public String dropSession(HttpSession session,String userEmail) {
 		//loginMember.remove(session.getAttribute("userEmail"));
+		loginList.removeUser(userEmail);
 		session.invalidate();
+		
+		System.out.println("[로그아웃 후, 멤버리스트]");
+		for(String key : loginMember.keySet()) {
+			System.out.println(key + " : " + loginMember.get(key));
+		}
 		return "redirect:main";
 	}
+*/
 	@RequestMapping("/removeSession") //로그아웃 성공 후, 처리
-	public String logoutSession(HttpSession session,String userEmail) {
-		loginMember.remove(session.getAttribute("userEmail"));
-		session.invalidate();
+	public String logoutSession(HttpSession session) {
+		loginList.removeUser((String)session.getAttribute("userEmail"));
+		String memberList = new Gson().toJson(loginList.getLoginList());
+		simpMessagingTemplate.setMessageConverter(new StringMessageConverter());
+		simpMessagingTemplate.convertAndSend("/category/loginInfo","{\"loginMemberList\":"+memberList+"}"); 
 		return "redirect:main";
 	}
+	
 	/*
-	 * public Map<String, Object> getLoginMemberList(){ return loginMember; }
+	 * public List<String> SendLoginMemberList(){
+	 * System.out.println("SendLoginMemberList메소드가 실행합니다");
+	 * simpMessagingTemplate.setMessageConverter(new StringMessageConverter());
+	 * String memberList = new Gson().toJson(loginMemberList);
+	 * simpMessagingTemplate.convertAndSend("/category/loginInfo",
+	 * "{\"loginMemberList\":"+memberList+"}"); //@SendTo("/category/msg/{var2}")
+	 * //@MessageMapping("/send/{var1}/{var2}") return loginMemberList; }
 	 */
 }

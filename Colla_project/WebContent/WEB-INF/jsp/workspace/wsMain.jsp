@@ -107,6 +107,12 @@
 				}
 			});
 	}
+	
+	//참여자 목록
+	function loginMemberInfo(msgInfo){
+	
+		
+	}
 
 </script>
 </head>
@@ -144,9 +150,24 @@
 						<p>참여자 목록</p>
 						<ul>
 						<c:forEach items="${ws.mList}" var="m"><!-- workspacemember 테이블 만들고 그 테이블리스트를 여기 넣는다 -->
-						<div class="wsmRoundBox">
-							<li>${m.name}</li>
-						</div>
+							<c:forEach items="${ws.mlList}" var="ml">
+								<c:if test="${m.email eq ml.key}">
+									<c:set var="mlResult" value="1"/>			
+								</c:if>
+							</c:forEach>
+							<c:choose>
+								<c:when test="${mlResult eq 1}">
+									<div class="wsmRoundBoxOn">
+										<li>${m.name}</li>
+									</div>
+									<c:set var="mlResult" value="0"/>
+								</c:when>
+								<c:otherwise>
+									<div class="wsmRoundBox">
+										<li>${m.name}</li>
+									</div>
+								</c:otherwise>
+							</c:choose>
 						</c:forEach>
 							<div class="addBox">
 							<a href="#" class="openAddMemberModal" data-wnum="${ws.wsInfo.num}">+</a>

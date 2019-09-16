@@ -42,6 +42,12 @@ function duplicateConnect(){
 				addMsg(msgInfo);
 				$("#chatArea").scrollTop($("#chatArea")[0].scrollHeight);
 		});
+		
+		//로그인 ON/OFF표시 구독
+		stompClient.subscribe("/category/loginInfo", function(cm){
+				msgInfo = JSON.parse(cm.body);
+				loginMemberInfo(msgInfo);
+		});
 		<%-----------------------------------------------------------------------------------------------------%>
 		
 		stompClient.subscribe("/category/loginMsg/" + ${member.num},function(){
