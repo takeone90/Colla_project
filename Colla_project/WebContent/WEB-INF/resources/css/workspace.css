@@ -136,6 +136,14 @@ display : none;
 	background-color: white;
 	border-radius: 10px;
 }
+.wsmRoundBoxOn{
+	display: inline-block;
+	margin-right: 10px;
+	margin-top : 10px;
+	margin-bottom : 10px;
+	background-color: red;
+	border-radius: 10px;
+}
 .addBox{
 	display: inline-block;
 	margin-right: 10px;
