@@ -55,6 +55,8 @@ var clickedOverlay = null;
 		favoriteArea = $("#favoriteArea");
 		chatNavContent = $("#chatNavContent");
 	
+	
+		
 	//파일업로드 모달
 	$(".openFileUploadModal").on("click",function(){
 		$("#addFileModal").fadeIn(300);
@@ -93,6 +95,8 @@ var clickedOverlay = null;
 			$("#addCodeModal").fadeOut(300);
 		if($("#addLocationModal").has(e.target).length===0)
 			$("#addLocationModal").fadeOut(300);
+		if($("#memberInfoModal").has(e.target).length===0)
+			$("#memberInfoModal").fadeOut(300);
 		//return false;
 	});
 	//첨부파일Detail 숨기고 닫기
@@ -151,7 +155,8 @@ var clickedOverlay = null;
 	
 	
 	
-});//onload-function end
+});////////////////////////////////////////////////////onload-function end////////////////////////////////////////////////////////
+
 
 //네비게이션의 검색 탭 누를경우
 function showSearchChatInput(){
@@ -160,7 +165,7 @@ function showSearchChatInput(){
 	var keywordOption1 = $("<option value='1'>내용</option>");
 	var keywordOption2 = $("<option value='2'>작성자</option>");
 	var searchChat = $("<input type='text' id='keyword' placeholder='검색어'>");
-	var searchBtn = $("<button id='searchChatBtn' onclick='searchChatAndDraw();'>검색</button>");
+	var searchBtn = $("<a href='#' id='searchChatBtn' onclick='searchChatAndDraw();'>검색</button>");
 	keywordSelect.append(keywordOption1);
 	keywordSelect.append(keywordOption2);
 	searchInputDiv.append(keywordSelect);
@@ -194,11 +199,6 @@ function showSearchChatInput(){
 				$.each(searchedInfo,function(idx,item){
 					addMsg(item,"searched");
 				});
-// 				var list = cm.searchedCmList;
-// 				console.log(cm.searchedCmList);
-// 				for(var i=0;i<searchedInfo.length;i++){
-					
-// 				}
 			},
 			error : function(){
 				alert("페이징처리 에러발생");
@@ -228,8 +228,23 @@ function showMemberList(){
 			var crmList = jsonListMap.crmList;
 			//채팅방에 있는사람
 			$.each(crmList,function(idx,crmItem){
-				var profileImgTag = "<div class='profileImg'><a href='#'><img alt='프로필사진' src='/Colla_project/showProfileImg?num="+crmItem.num+"'></a></div>";
-				var crMemberLI = $("<li>"+profileImgTag+"<div class='memberNameInSlideMenu'>"+crmItem.name+"</div></li>");
+				var profileImgTag = $("<div class='profileImg'><img alt='프로필사진' src='/Colla_project/showProfileImg?num="+crmItem.num+"'></div>");
+				var memberNameInSlideMenu = $("<div class='memberNameInSlideMenu'>"+crmItem.name+"</div>");
+				var crMemberLI = $("<li></li>");
+				crMemberLI.append(profileImgTag);
+				crMemberLI.append(memberNameInSlideMenu);
+				//프로필 이미지 누르면 모달 뜨게 하기
+				profileImgTag.on("click",function(){
+					var imgTag = $("<img alt='"+crmItem.name+"님의 프로필 사진' src='${contextPath}/showProfileImg?num="+ crmItem.num+ "'>");
+					var memberProfileImgDiv = $(".memberProfileImg");
+					var memberProfileInfoDiv = $(".memberProfileInfo");
+					memberProfileImgDiv.empty();
+					memberProfileInfoDiv.empty();
+					var modalProfileInfoTag = $("<h3>이름</h3><p>"+crmItem.name+"</p>");
+					memberProfileImgDiv.append(imgTag);
+					memberProfileInfoDiv.append(modalProfileInfoTag);
+					$("#memberInfoModal").fadeIn(100);
+				});
 				crmListUL.append(crMemberLI);
 			});
 			
@@ -288,25 +303,6 @@ function showMemberList(){
 	function sendMap(placePosition){
 		stompClient.send("/client/sendMap/"+$("#userEmail").val()+"/"+$("#crNum").val(),{},placePosition);
 	}
-	
-//과거메세지 불러오기
-function loadChatFromDB(){
-	var crNum = $("#crNum").val();
-	$.ajax({
-		url : "${contextPath}/loadPastMsg",
-		data : {"crNum":crNum},
-		dataType :"json",
-		success : function(d){
-			$.each(d,function(idx,item){
-				addMsg(item);
-				chatArea.scrollTop($("#chatArea")[0].scrollHeight);
-			});
-		},
-		error : function(){
-			alert("채팅내역 불러오기 실패");
-		}
-	});
-}
 
 	//일반 메세지 보내기
 	function sendMsg(){
@@ -337,6 +333,35 @@ function loadChatFromDB(){
 	   
 	   
 	}//end favoirte()
+
+	
+	
+	//과거메세지 불러오기
+	function loadChatFromDB(){
+		var crNum = $("#crNum").val();
+		$.ajax({
+			url : "${contextPath}/loadPastMsg",
+			data : {"crNum":crNum},
+			dataType :"json",
+			success : function(d){
+				$.each(d,function(idx,item){
+					addMsg(item);
+					chatArea.scrollTop($("#chatArea")[0].scrollHeight);
+				});
+			},
+			error : function(){
+				alert("채팅내역 불러오기 실패");
+			}
+		});
+	}
+	
+	var currDate;
+	//날짜 추가하기
+	function showDateMsg(year,month,date){
+		var dateMsgDiv = $("<div class='dateMsg' align='center'>"+year+"년 "+month+"월 "+date+"일"+"</div>");
+		chatArea.append(dateMsgDiv);
+		currDate = date;
+	}
 	
 	//받은 메시지 화면에 추가
 	function addMsg(msgInfo, area){
@@ -348,12 +373,27 @@ function loadChatFromDB(){
 			msgType = "chatMsg";
 		}
 		var chatMsg = $("<div class='"+msgType+"'></div>");
-		var imgTag = "<img alt='"+msgInfo.mName+"님의 프로필 사진' src='${contextPath}/showProfileImg?num="+ msgInfo.mNum+ "'></a>";
+		var imgTag = $("<img alt='"+msgInfo.mName+"님의 프로필 사진' src='${contextPath}/showProfileImg?num="+ msgInfo.mNum+ "'>");
+		
+		//프로필 이미지 누르면 모달 뜨게 하기
+		imgTag.on("click",function(){
+			imgTag = $("<img alt='"+msgInfo.mName+"님의 프로필 사진' src='${contextPath}/showProfileImg?num="+ msgInfo.mNum+ "'>");
+			var memberProfileImgDiv = $(".memberProfileImg");
+			var memberProfileInfoDiv = $(".memberProfileInfo");
+			memberProfileImgDiv.empty();
+			memberProfileInfoDiv.empty();
+			var modalProfileInfoTag = $("<h3>이름</h3><p>"+msgInfo.mName+"</p>");
+			memberProfileImgDiv.append(imgTag);
+			memberProfileInfoDiv.append(modalProfileInfoTag);
+			$("#memberInfoModal").fadeIn(100);
+		});
+		
+		
+		
 		var favorite = "<div class='"+isFavoriteClass+"' onclick='chatFavorite(this)' value = '"+ msgInfo.cmNum +"'></div>"; //즐겨찾기 아이콘
 		var originName = getOriginName(msgInfo.cmContent);
 		var date = new Date(msgInfo.cmWriteDate);
 		var writeTime = date.getFullYear()+"-"+(Number(date.getMonth())+Number(1))+"-"+date.getDate()+" "+date.getHours()+"시"+date.getMinutes()+"분";
-
 		var contentStr;
 		var codeType;
 		if(msgInfo.cmType=='message'){
@@ -372,16 +412,21 @@ function loadChatFromDB(){
 								"</div>"+
 							 "</div>";
 		}
+		var profileImgDiv = $("<div class='profileImg'></div>");
+		profileImgDiv.append(imgTag);
 		
-		chatMsg.append("<div class='profileImg'><a href='#' class='openMemberInfo'>"+imgTag+"</a></div>");
+		chatMsg.append(profileImgDiv);
 		chatMsg.append("<div class='onlyMsgBox'><div class='name'><p>"+msgInfo.mName
 				+"<span class='date'>"+writeTime
 				+"</span></p></div>"+favorite+"<br><p class='content'>"
 				+ contentStr
 				+"</p></div>");
+		//전역변수인 currDate 와 만들려는 chatMessage의 date가 같지 않으면 날짜 띠를 생성한다
 		chatArea.append(chatMsg);
-// 		console.log(chatArea);
 		
+		if(currDate!=date.getDate() && currDate!=0){
+			showDateMsg(date.getFullYear(),Number(date.getMonth())+Number(1),date.getDate());
+		}
 		if(msgInfo.cmType.includes('code')){
 			console.log(chatArea.find("textarea:last()"));
 			var codeMsg = CodeMirror.fromTextArea( chatArea.find("textarea:last()")[0] ,{
@@ -445,7 +490,10 @@ function loadChatFromDB(){
 			}
 		}
 		
-	}
+		
+	}/////////////////////////////////////////////////////////////addMsg end////////////////////////////////////////////////////
+	
+	
 	
 	//즐겨찾기 리스트 그리기
 	function showFavoriteList(){
@@ -472,6 +520,7 @@ function loadChatFromDB(){
 		var originName= fileName.substring(idx);
 		return originName;
 	}
+	
 	
 	//////////////////////////////////////////////////////////지도//////////////////////////////////////////////////////////////////
 	function showMap(){
@@ -966,22 +1015,9 @@ function loadChatFromDB(){
 				</div>
 			</div> <!-- end modalBody -->
 		</div><!-- end addLocationModal -->
-		<%---------------------------------------------회원정보 모달 ----------------------------------------------------%>
-		<div id="memberInfoModal" class="attachModal">
-			<div class="modalHead">
-				<h3 style="font-weight: bolder; font-size: 30px">회원정보</h3>
-			</div>
-			<br><br>
-			<div class="modalBody">
-				<p>회원정보입니다</p>
-					<div class="row">
-					<p>내용~</p>
-					</div>
-					<a href="#" class="closeMemberInfo">닫기</a><br>
-			</div> <!-- end modalBody -->
-		</div><!-- end memberInfoModal -->
-		
 		
 	</div><!-- end wsBody -->
+	
 </body>
+
 </html>

@@ -53,6 +53,7 @@
 }
 #myChatList ul li.currChat{
 	background-color:#E5675A;
+	font-weight: bolder;
 }
 #myChatList ul li.currChat a{
 	color:#fff;
