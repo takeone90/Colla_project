@@ -1,5 +1,7 @@
 package controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,6 +31,7 @@ public class MainController {
 	public String showColla() {
 		return "/main/collaInfo";
 	}
+
 	@RequestMapping(value="/pricing")
 	public String showPricing() {
 		return "/main/pricing";

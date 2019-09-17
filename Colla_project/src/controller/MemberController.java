@@ -4,6 +4,7 @@ package controller;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.request;
 
 import java.io.IOException;
+import java.security.Principal;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -206,18 +207,20 @@ public class MemberController {
 				result = false; // 중복으로 로그인 : false 반환, 정상 로그인 : true 반환
 			}
 		}
+//		response.sendRedirect("workspace"); // 워크스페이스 메인으로 이동한다
 		if (result) { // 정상적인 로그인의 경우
 			loginMember.put(userEmail, request.getSession()); // map에 해당 멤버를 담은 뒤,
 			response.sendRedirect("workspace"); // 워크스페이스 메인으로 이동한다
-			System.out.println("정상적인 로그인 멤버 추가 후, 로그인 멤버리스트를 보여줍니다");
-			for(String key : loginMember.keySet()) {
-				System.out.println(key + " : " + loginMember.get(key));
-			}
+			System.out.println("정상적인 로그인");
+//			for(String key : loginMember.keySet()) {
+//				System.out.println(key + " : " + loginMember.get(key));
+//			}
 		} else { // 중복 로그인의 경우
-			simpMessagingTemplate.setMessageConverter(new StringMessageConverter());
-			simpMessagingTemplate.convertAndSend("/category/loginMsg/"+member.getNum(),"[result:0]"); // 기존 로그인된 유저에게 요청을 보낸다 ==> 기존 유저의 브라우저에서는 alert가 뜬 뒤, 자동 로그아웃 된다.
+			System.out.println("중복 로그인");
+			//범인
+//			simpMessagingTemplate.setMessageConverter(new StringMessageConverter());
+//			simpMessagingTemplate.convertAndSend("/category/loginMsg/"+member.getNum(),"[result:0]"); // 기존 로그인된 유저에게 요청을 보낸다 ==> 기존 유저의 브라우저에서는 alert가 뜬 뒤, 자동 로그아웃 된다.
 			loginMember.put(userEmail, request.getSession()); // map에 해당 멤버를 담은 뒤,
-			System.out.println(request.getSession() + "님이 로그인 하셨습니다.");
 			response.sendRedirect("workspace"); //워크스페이스로 이동한다			
 		}
 	}
