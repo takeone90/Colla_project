@@ -1,37 +1,22 @@
 package controller;
 
-
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.request;
-
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-import org.aspectj.apache.bcel.classfile.InnerClass;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
 import org.springframework.messaging.converter.StringMessageConverter;
-import org.springframework.messaging.handler.annotation.MessageMapping;
-import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.google.gson.Gson;
 
 import commons.LoginList;
 import mail.MailSend;
-import model.EmailVerify;
 import model.Member;
 import service.ChatRoomMemberService;
 import service.MemberService;
@@ -239,36 +224,13 @@ public class MemberController {
 		
 		return "redirect:main";
 	}
-/*
-	@RequestMapping("/dropSession") //로그아웃 성공 후, 처리
-	public String dropSession(HttpSession session,String userEmail) {
-		//loginMember.remove(session.getAttribute("userEmail"));
-		loginList.removeUser(userEmail);
-		session.invalidate();
-		
-		System.out.println("[로그아웃 후, 멤버리스트]");
-		for(String key : loginMember.keySet()) {
-			System.out.println(key + " : " + loginMember.get(key));
-		}
-		return "redirect:main";
-	}
-*/
 	@RequestMapping("/removeSession") //로그아웃 성공 후, 처리
 	public String logoutSession(HttpSession session) {
 		loginList.removeUser((String)session.getAttribute("userEmail"));
-		String memberList = new Gson().toJson(loginList.getLoginList());
-		simpMessagingTemplate.setMessageConverter(new StringMessageConverter());
-		simpMessagingTemplate.convertAndSend("/category/loginInfo","{\"loginMemberList\":"+memberList+"}"); 
+//		String memberList = new Gson().toJson(loginList.getLoginList());
+//		simpMessagingTemplate.setMessageConverter(new StringMessageConverter());
+//		simpMessagingTemplate.convertAndSend("/category/loginInfo","{\"loginMemberList\":"+memberList+"}"); 
 		return "redirect:main";
 	}
 	
-	/*
-	 * public List<String> SendLoginMemberList(){
-	 * System.out.println("SendLoginMemberList메소드가 실행합니다");
-	 * simpMessagingTemplate.setMessageConverter(new StringMessageConverter());
-	 * String memberList = new Gson().toJson(loginMemberList);
-	 * simpMessagingTemplate.convertAndSend("/category/loginInfo",
-	 * "{\"loginMemberList\":"+memberList+"}"); //@SendTo("/category/msg/{var2}")
-	 * //@MessageMapping("/send/{var1}/{var2}") return loginMemberList; }
-	 */
 }

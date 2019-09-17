@@ -50,6 +50,7 @@ var area=null;
 //var infowindow;
 var overlay;
 var clickedOverlay = null;
+
 	$(function(){
 		loadChatFromDB();
 		favoriteArea = $("#favoriteArea");
@@ -155,7 +156,7 @@ var clickedOverlay = null;
 	
 	
 	
-});////////////////////////////////////////////////////onload-function end////////////////////////////////////////////////////////
+});<%--------------------------------------------onload function end----------------------------------------------------%>
 
 
 //네비게이션의 검색 탭 누를경우
@@ -428,7 +429,6 @@ function showMemberList(){
 			showDateMsg(date.getFullYear(),Number(date.getMonth())+Number(1),date.getDate());
 		}
 		if(msgInfo.cmType.includes('code')){
-			console.log(chatArea.find("textarea:last()"));
 			var codeMsg = CodeMirror.fromTextArea( chatArea.find("textarea:last()")[0] ,{
 				mode : codeType,
 				theme : "gruvbox-dark",
@@ -504,7 +504,6 @@ function showMemberList(){
 			type : "post",
 			dataType :"json",
 			success : function(messageList){
-				console.log(messageList);
 				for(var i=0; i<messageList.length; i++){
 					addMsg(messageList[i], "true");
 				}

@@ -1,9 +1,7 @@
 package controller;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -12,15 +10,12 @@ import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -28,7 +23,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-import mail.MailSend;
 import model.ChatMessage;
 import model.ChatRoom;
 import model.ChatRoomMember;
@@ -195,10 +189,11 @@ public class ChatRoomController {
 	public ChatMessage sendMsg(String msg,
 			@DestinationVariable(value = "var1") String userEmail,
 			@DestinationVariable(value = "var2") String crNum) {
+//		System.out.println("일반메시지 핸들러가 받은것 = msg : "+msg+",userEmail : "+userEmail+",crNum : "+crNum);
 		Member member = mService.getMemberByEmail(userEmail);
 		int cmNum = cmService.addChatMessage(Integer.parseInt(crNum), member.getNum(), msg, "message");
 		ChatMessage cm = cmService.getChatMessageByCmNum(cmNum);
-//		System.out.println("cm :" + cm);
+
 		return cm;
 	}
 	// 코드메세지 받고 보내기
@@ -208,6 +203,7 @@ public class ChatRoomController {
 			@DestinationVariable(value="var1")String userEmail,
 			@DestinationVariable(value="var2")String crNum,
 			@DestinationVariable(value="var3")String type) {
+//		System.out.println("코드메시지 핸들러가 받은것 = code : "+code+",userEmail : "+userEmail+",crNum : "+crNum+",type : "+type);
 		Member member = mService.getMemberByEmail(userEmail);
 		if(type.equals("java")) {
 			type = "text/x-java";
@@ -226,6 +222,7 @@ public class ChatRoomController {
 			@DestinationVariable(value = "var2") String crNum,
 			@DestinationVariable(value="var3") int cmNum,
 			@DestinationVariable(value="var4")String originName) {
+//		System.out.println("파일메시지 핸들러가 받은것 = fileName : "+fileName+",userEmail : "+userEmail+",crNum : "+crNum+",cmNum : "+cmNum+",originName : "+originName);
 		ChatMessage cm = cmService.getChatMessageByCmNum(cmNum);
 		return cm;
 	}
@@ -235,6 +232,7 @@ public class ChatRoomController {
 		public ChatMessage sendMap(String addressId,
 				@DestinationVariable(value = "var1") String userEmail,
 				@DestinationVariable(value = "var2") String crNum) {
+//			System.out.println("맵메세지 핸들러가 받은것 = addressId : "+addressId+",userEmail : "+userEmail+",crNum : "+crNum);
 			Member member = mService.getMemberByEmail(userEmail);
 			int cmNum = cmService.addChatMessage(Integer.parseInt(crNum), member.getNum(), addressId, "map");
 			ChatMessage cm = cmService.getChatMessageByCmNum(cmNum);

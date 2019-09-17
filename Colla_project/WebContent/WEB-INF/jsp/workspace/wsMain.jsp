@@ -13,6 +13,7 @@
 <link rel="stylesheet" type="text/css" href="css/navWs.css"/>
 <link rel="stylesheet" type="text/css" href="css/workspace.css"/>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script> <!-- font awsome -->
 <script>
 	var wNum;
 	
@@ -65,27 +66,15 @@
 		
 		//워크스페이스 하나 숨기고 닫기
 		$(".showWsDetail").on("click",function(){
+			
+			if($(this).children().attr('class')=='fas fa-angle-down'){
+				$(this).children().attr('class','fas fa-angle-up');				
+			}else{
+				$(this).children().attr('class','fas fa-angle-down');
+			}
 			$(this).next().toggle(300);
 			return false;
 		});
-		//빈 채팅방 제거하기...
-// 		$("#removeEmptyChatRoom").on("click",function(){
-// 			$.ajax({
-// 				url : "${contextPath}/removeEmptyChatRoom",
-// 				dataType : "json",
-// 				success:function(d){
-// 					if(d.result){
-// 						alert("빈 채팅방 제거 완료");
-// 					}else{
-// 						alert("빈 채팅방이 없습니다");
-// 					}
-// 				},
-// 				error:function(){
-// 					alert("빈채팅방 제거 오류발생");
-// 				}
-// 			});
-// 			return false;
-// 		});
 		
 		
 	});// onload.function end
@@ -98,7 +87,7 @@
 				success : function(d){
 					wsMemberList.empty();
 					$.each(d,function(idx,item){
-						var str='<li><input type="checkbox" value="'+item.num+'" name="mNumList">'+item.name+'</li>';
+						var str='<label><li><input type="checkbox" value="'+item.num+'" name="mNumList">'+item.name+'</li></label>';
 							wsMemberList.append(str);
 					});
 				},
@@ -128,7 +117,8 @@
 			<c:forEach items="${workspaceList}" var="ws">
 				<li class="ws">
 					<h3>${ws.wsInfo.name}</h3>
-					<a href="#" class="showWsDetail">상세보기</a>
+					<a href="#" class="showWsDetail"><i class="fas fa-angle-down"></i></a>
+					<%---------------------------상세보기 버튼 클릭 시 펼쳐질 wsDetail--------------------%>
 					<div class="wsDetail">
 						<input type="hidden" value="${ws.num}" id="wNum">
 						<div class="wsChatList">
@@ -139,9 +129,7 @@
 									<li><a href="chatMain?crNum=${cr.crNum}">${cr.crName}</a></li>
 								</div>
 							</c:forEach>
-								<div class="addBox">
 								<a href="#" class="openChatModal" data-wnum="${ws.wsInfo.num}">+</a>
-								</div>
 							</ul>
 						</div>
 						
@@ -169,12 +157,12 @@
 								</c:otherwise>
 							</c:choose>
 						</c:forEach>
-							<div class="addBox">
 							<a href="#" class="openAddMemberModal" data-wnum="${ws.wsInfo.num}">+</a>
-							</div>
 						</ul>
 						</div>
-					</div>
+					</div><!-- wsDetail end -->
+					
+					
 					<div id="exitWs">
 						<a href="exitWs?wNum=${ws.wsInfo.num}" style="color:red">워크스페이스 나가기</a>
 					</div>
@@ -197,7 +185,7 @@
 <!-- 		<a href="#" id="removeEmptyChatRoom">빈 채팅방 제거하기</a> -->
 
 		<%------------------------------------워크스페이스 추가 모달  ---------------------------------------%>
-		<div id="addWsModal">
+		<div id="addWsModal" class="attachModal">
 			<div class="modalHead">
 				<h3>Workspace 만들기</h3>
 			</div>
@@ -218,7 +206,7 @@
 								<input type="text" placeholder="초대할멤버 이메일" name="targetUser">
 							</div>
 							<div>
-								<a href="#">멤버추가버튼</a>
+								<a href="#">+</a>
 							</div>
 						</div>
 					</div> <!-- end addWsInputWrap -->
@@ -232,7 +220,7 @@
 		</div><!-- end addWsModal -->
 		
 		<%------------------------------------채팅방 추가 모달  ---------------------------------------%>
-		<div id="addChatModal">
+		<div id="addChatModal" class="attachModal">
 			<div class="modalHead">
 				<h3>채팅방 만들기</h3>
 			</div>
@@ -264,7 +252,7 @@
 		</div><!-- end addChatModal -->
 		
 		<%------------------------------------멤버 추가 모달  ---------------------------------------%>
-		<div id="addMemberModal">
+		<div id="addMemberModal" class="attachModal">
 			<div class="modalHead">
 				<h3>Workspace 멤버 추가</h3>
 			</div>

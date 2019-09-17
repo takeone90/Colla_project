@@ -104,8 +104,6 @@ public class WorkSpaceController {
 		
 		return "redirect:workspace";
 	}
-	
-	
 	//워크스페이스에 멤버 초대하는부분
 	@RequestMapping("/inviteMember")
 	public String inviteMember(int wNum, String targetUser,HttpSession session) {
