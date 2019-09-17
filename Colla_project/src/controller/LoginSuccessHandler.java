@@ -28,8 +28,14 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
 	@Override
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
 		String userEmail = request.getParameter("m_email"); //사용자에게 입력받은 이메일을 파라미터를
+		if(request.getSession()!=null) {
+			request.getSession().invalidate();
+		}
+		System.out.println(request.getSession());
 		response.sendRedirect("checkLoginDuplication?userEmail="+userEmail); //checkLoginDuplication로 요청을 보냄(MemberContoroller)
 		request.getSession().setAttribute("userEmail", userEmail);
-		request.getSession().setAttribute("user", memberService.getMemberByEmail(userEmail));	
+		request.getSession().setAttribute("user", memberService.getMemberByEmail(userEmail));
+		
+			
 	}
 }
