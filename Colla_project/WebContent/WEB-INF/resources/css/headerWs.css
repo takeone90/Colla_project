@@ -1,5 +1,22 @@
 @charset "UTF-8";
-
+.attachModal{
+	display: none;
+	position: fixed;
+	top: 17%;
+	left: 30%;
+	width: 525px;
+	background-color: white;
+	text-align: center;
+	border-radius: 10px;
+	padding: 30px;
+	z-index: 10;
+	box-shadow: 2px 2px 5px 0.5px rgba(33, 33, 33, 0.2);
+}
+#memberInfoModal{
+	top: 20%;
+	left: 30%;
+	width: 400px;
+}
 #wsMainHeader{
 	position:fixed;
 	width:100%;
@@ -88,17 +105,18 @@ a.member-btn:hover{
 #chatRoomInfo{
 	display : inline-block;
 	position : relative;
-	padding-left: 35px;
+	padding-top : 10px;
+	padding-left: 40px;
 }
 #chatRoomInfo p{
-	font-size : 25px;
+	font-size : 20px;
 	color: #CCCBCA;
 }
 #etcBox{
 	display: table-cell;
 	position : absolute;
 	vertical-align : bottom;
-	right : 90px;
+	right : 60px;
 }
 #exitChatRoom{
 	display : none;
@@ -109,4 +127,45 @@ a.member-btn:hover{
 #exitChatRoom:hover{
 	color : #f74d3e;
 	
+}
+.profileImg:hover{
+	cursor: pointer;
+}
+.memberProfileImg{
+	margin-top : 20px;
+	margin-bottom : 10px;
+	width : 200px;
+	height : 200px;
+	border-radius: 50%;
+}
+.memberProfileImg img{
+	width : 200px;
+	height : 200px;
+	border-radius: 50%;
+}
+#memberInfoBody a{
+	display: block;
+	background-color: #403C39;
+	color : white;
+	padding : 10px;
+	border-radius: 5px;
+	width : calc(100% - 20px);
+}
+#memberInfoBody a:hover{
+	background-color: #E5675A;
+}
+.memberProfileInfo{
+	display : inline-block;
+	padding : 10px;
+	vertical-align: top;
+}
+.memberProfileInfo h3{
+	display : inline-block;
+	font-size : 17px;
+	font-weight: bolder;
+	margin-left : 15px;
+	margin-right : 15px;
+}
+.memberProfileInfo p{
+	display : inline-block;
 }

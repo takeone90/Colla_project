@@ -12,7 +12,7 @@ import model.Board;
 @Service
 public class BoardService {
 	
-	private static final int ITEMS_PER_PAGE = 3;
+	private static final int ITEMS_PER_PAGE = 13;
 	private static final int PAGE_NUM = 5;
 	
 	@Autowired

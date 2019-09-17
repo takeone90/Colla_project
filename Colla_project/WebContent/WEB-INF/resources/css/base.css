@@ -13,8 +13,17 @@ a:visited, a:link, a:focus, a:hover, a:active{
 }
 .clearFix:after{content:""; display:block; clear:both;}
 .container {overflow:hidden; position:relative;}
-.floatleft {float:left;}
+.floatleft {display:block; float:left;}
+input {
+	border: 1px solid #D1D1D1;
+	border-radius: 5px;
+	line-height:30px;
+	height:30px;
+	padding: 0 10px;
+	vertical-align: middle;
+}
 body .btn {
+	vertical-align: middle;
 	display:inline-block;
 	padding: 0 20px;
 	line-height: 30px;
@@ -23,6 +32,7 @@ body .btn {
 	background-color: #655B5A;
 	transition:background-color 0.5s;
 	border:0 none;
+	cursor: pointer;
 }
 button.btn{
 	font-family: 'Noto Sans KR';

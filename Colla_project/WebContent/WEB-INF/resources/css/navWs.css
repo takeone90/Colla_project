@@ -53,6 +53,7 @@
 }
 #myChatList ul li.currChat{
 	background-color:#E5675A;
+	font-weight: bolder;
 }
 #myChatList ul li.currChat a{
 	color:#fff;
@@ -107,6 +108,7 @@
 #workspaceSelector{
 	width : 90%;
 	padding : 5px;
+	color : white;
 	background-color: #5e5756;
 	border : none;
 	border-radius: 3px;

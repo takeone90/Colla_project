@@ -60,12 +60,30 @@ public class MypageController {
 		return "/myPage/myPageAccount";
 	}
 
+	/*
 	@RequestMapping(value = "/myPageCheckPassForm", method = RequestMethod.GET)
 	public String myPageCheckPassForm() {
 		return "/myPage/myPageCheckPass";
 	}
+	*/
+	@RequestMapping(value = "/profileImgModifyForm", method = RequestMethod.GET)
+	public String profileImgModifyForm() {
+		return "/myPage/profileImgModify";
+	}
+	@RequestMapping(value = "/nameModifyForm", method = RequestMethod.GET)
+	public String nameModifyForm() {
+		return "/myPage/nameModify";
+	}
+	@RequestMapping(value = "/pwModifyForm", method = RequestMethod.GET)
+	public String pwModifyForm() {
+		return "/myPage/pwModify";
+	}
+	@RequestMapping(value = "/phoneModifyForm", method = RequestMethod.GET)
+	public String phoneModifyForm() {
+		return "/myPage/phoneModify";
+	}
 
-	@RequestMapping(value = "/myPageModifyForm", method = RequestMethod.GET)
+	@RequestMapping(value = "/myPageModifyForm", method = RequestMethod.POST)
 	public String myPageModifyForm(Model model, HttpSession session, String checkPass) {
 		Member member = memberService.getMemberByEmail((String)session.getAttribute("userEmail"));
 		model.addAttribute("member", member); 
@@ -125,21 +143,28 @@ public class MypageController {
 	}
 
 	@RequestMapping(value = "/modifyMember", method = RequestMethod.POST)
-	public String modifyMember(Member member, HttpSession session) {
+	public String modifyMember(Member member,String type,HttpSession session) {
 		member.setNum(((Member)session.getAttribute("user")).getNum());
 		if (memberService.modifyMember(member)) {
 			session.setAttribute("user", member);
 			return "redirect:myPageMainForm";
 		} else {
-			return "redirect:myPageModifyForm";
+			return "redirect:myPageModifyForm";//에러페이지로 변경해야함
 		}
 	}
 	
-	@ResponseBody
 	@RequestMapping(value = "/modifyProfileImg", method = RequestMethod.POST)
-	public boolean modifyProfileImg(MultipartFile[] profileImg, String profileImgType, HttpSession session) {
+	public String modifyProfileImg(MultipartFile[] profileImg, String profileImgType, HttpSession session) {
+		boolean result = false;
+		System.out.println("profileImgType:" + profileImgType);
+		System.out.println("profileImg:" + profileImg);
 		Member member = memberService.getMemberByEmail((String)session.getAttribute("userEmail"));
-		return memberService.updateProfileImg(profileImg,profileImgType,member);
+		result = memberService.updateProfileImg(profileImg,profileImgType,member);
+		if(result) {
+			return "redirect:myPageMainForm";
+		}else {
+			return "redirect:myPageMainForm"; //에러 페이지로 변경
+		}
 	}
 	
 	@ResponseBody

@@ -110,23 +110,25 @@ function loadReply(){
 		type: "get",
 		dataType:"json",
 		success: function(list){
-			$("#replyBox").empty();
-			$.each(list, function(index,item){
-				let date = new Date(item.regdate);
-				let li = '<li class="clearFix">';
-				li += '<div class="replyImg"><img src="/Colla_project/showProfileImg?num='+item.mNum+'"></div>';
-				li += '<div class="replyDetail">';
-				li += '<p class="replyAuthor" data-rNum="'+item.rNum+'">';
-				li += '<span class="replyName">'+item.mName+'</span> ';
-				li += '<span class="regdate">'+date_to_str(date)+'</span>';
-				if(item.mNum == mNum){
-					li += ' <a href="javascript:void(0)" onclick="creatModifyForm(this)">수정</a>';
-					li += ' <a href="javascript:void(0)" onclick="removeReply(this)">삭제</a>';
-				}
-				li += '</p><p class="replyContent">'+item.content+'</p></div></li>';
-				$("#replyBox").append(li);
-			});
-			$("textarea[name='rContent']").val("");
+			if(list.length>0){
+				$("#replyBox").empty();
+				$.each(list, function(index,item){
+					let date = new Date(item.regdate);
+					let li = '<li class="clearFix">';
+					li += '<div class="replyImg"><img src="/Colla_project/showProfileImg?num='+item.mNum+'"></div>';
+					li += '<div class="replyDetail">';
+					li += '<p class="replyAuthor" data-rNum="'+item.rNum+'">';
+					li += '<span class="replyName">'+item.mName+'</span> ';
+					li += '<span class="regdate">'+date_to_str(date)+'</span>';
+					if(item.mNum == mNum){
+						li += ' <a href="javascript:void(0)" onclick="creatModifyForm(this)">수정</a>';
+						li += ' <a href="javascript:void(0)" onclick="removeReply(this)">삭제</a>';
+					}
+					li += '</p><p class="replyContent">'+item.content+'</p></div></li>';
+					$("#replyBox").append(li);
+				});
+				$("textarea[name='rContent']").val("");
+			}
 		},
 		error: function(){
 			alert("Ajax error");

@@ -54,6 +54,12 @@ function duplicateConnect(){
 	}); //end connect
 }// end duplicateConnect
 $(function(){
+	//회원정보 모달 닫기
+	$(".closeMemberInfo").on("click",function(){
+		$("#memberInfoModal").fadeOut(100);
+	});
+	
+	
 	duplicateConnect();
 	
 	var pageType = $("#pageType").val();
@@ -100,6 +106,18 @@ $(function(){
 		<div id="etcBox"><a href="exitChatRoom?crNum=${chatRoom.crNum}" id="exitChatRoom">채팅방 나가기</a></div>
 		<div class="main-nav"></div>
 	</div>
-	
+	<%---------------------------------------------회원정보 모달 ----------------------------------------------------%>
+		<div id="memberInfoModal" class="attachModal">
+			<div class="modalHead">
+				<h3 style="font-weight: bolder; font-size: 30px">회원정보</h3>
+			</div>
+			<br>
+			<div class="modalBody" id="memberInfoBody" align="center">
+					<div class="memberProfileImg"></div>
+					<div class="memberProfileInfo"></div>
+					<a href="#" class="closeMemberInfo">닫기</a>
+			</div> <!-- end modalBody -->
+		</div><!-- end memberInfoModal -->
+		
 		
 </div>
