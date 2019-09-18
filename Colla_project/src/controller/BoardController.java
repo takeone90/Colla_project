@@ -152,6 +152,7 @@ public class BoardController {
 					view = "redirect:modify";
 				} else if(mode.equals("delete")) {
 					if(bService.removeBoard(bNum)) {
+						fService.removeBoardFile(bNum);
 						view = "redirect:list";
 					}
 				}
@@ -184,7 +185,8 @@ public class BoardController {
 			int bNum,
 			String title,
 			String content,
-			String boardType
+			String boardType,
+			MultipartHttpServletRequest multifileReq
 			) {
 		Board board = new Board();
 		board.setbNum(bNum);
@@ -193,6 +195,11 @@ public class BoardController {
 		board.setbType(boardType);
 		
 		if(bService.modifyBoard(board)) {
+			List<MultipartFile> fList = multifileReq.getFiles("file");
+			if(fList.size() > 0) {
+				fService.removeBoardFile(bNum);
+				fileSave(board.getbNum(), fList);
+			}
 			return "redirect:/board/view?num="+bNum;
 		}
 		return "redirect:error";
@@ -225,40 +232,9 @@ public class BoardController {
 			board.setbContent(content);
 			board.setbPw(pw);
 			board.setbType(boardType);
-			if(bService.addBoard(board)) {				
-				////////////////////////////////////////// 190902 multifile upload -TK
-				
+			if(bService.addBoard(board)) {	
 				List<MultipartFile> fList = multifileReq.getFiles("file");
-				
-				for(MultipartFile mf : fList) {
-					if(mf.getSize() != 0) {
-						System.out.println("파일 크기 : "+mf.getSize());
-						String originFileName = mf.getOriginalFilename();//원본파일명
-						UUID uuid = UUID.randomUUID();
-						
-						//시스템시간(ms) + uuid + 원본파일명
-						String saveFileName = "" + System.currentTimeMillis() + uuid +"_"+ originFileName;
-						String saveFile = UPLOAD_PATH + saveFileName;
-						
-						try {
-							//서버(path)에 저장
-							mf.transferTo(new File(saveFile));
-							
-							//DB에 게시판번호, 이름 저장
-							BoardFile bf = new BoardFile();
-							bf.setbNum(board.getbNum());
-							bf.setFileName(saveFileName);						
-							fService.addFiles(bf);
-							
-						} catch(IllegalStateException e) {
-							e.printStackTrace();
-						} catch(IOException e) {
-							e.printStackTrace();
-						}
-					}			
-				}
-	////////////////////////////////////////////////////////////////////////////
-					
+				fileSave(board.getbNum(), fList);
 				return "redirect:/board/view?num="+board.getbNum();
 			}
 		}else {
@@ -271,7 +247,36 @@ public class BoardController {
 	
 	
 	
-	
+	//190902 multifile upload -TK
+	private void fileSave(int bNum, List<MultipartFile> fList) {
+		for(MultipartFile mf : fList) {
+			if(mf.getSize() != 0) {
+				System.out.println("파일 크기 : "+mf.getSize());
+				String originFileName = mf.getOriginalFilename();//원본파일명
+				UUID uuid = UUID.randomUUID();
+				
+				//시스템시간(ms) + uuid + 원본파일명
+				String saveFileName = "" + System.currentTimeMillis() + uuid +"_"+ originFileName;
+				String saveFile = UPLOAD_PATH + saveFileName;
+				
+				try {
+					//서버(path)에 저장
+					mf.transferTo(new File(saveFile));
+					
+					//DB에 게시판번호, 이름 저장
+					BoardFile bf = new BoardFile();
+					bf.setbNum(bNum);
+					bf.setFileName(saveFileName);						
+					fService.addFiles(bf);
+					
+				} catch(IllegalStateException e) {
+					e.printStackTrace();
+				} catch(IOException e) {
+					e.printStackTrace();
+				}
+			}			
+		}
+	}
 	
 	
 	

@@ -45,7 +45,7 @@
 			<h4>게시글 수정</h4>
 			<div id="boardInner">
 				<div id="inputWrap">
-					<form id="modifyForm" action="${contextPath}/board/modify" method="post">
+					<form id="modifyForm" action="${contextPath}/board/modify" method="post" enctype="multipart/form-data">
 						<div class="row">
 							<label>
 								<span>게시글 종류</span>
