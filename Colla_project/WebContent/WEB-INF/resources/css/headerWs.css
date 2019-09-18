@@ -120,7 +120,6 @@ a.member-btn:hover{
 	right : 60px;
 }
 #exitChatRoom{
-	display : none;
 	color : #f5f3f2;
 	font-size: 13px;
 	transition:color .5s;

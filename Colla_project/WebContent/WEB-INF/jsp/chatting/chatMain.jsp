@@ -849,6 +849,9 @@ function showMemberList(){
 						<li class="navInnerBtn"><label class="none-clicked"><input type="radio" name="innerBtn" value="canvas">캔버스</label></li>
 					</ul>
 				<div id="chatNavContent" align="left"></div>
+				<c:if test="${chatRoom.crIsDefault eq 0}">
+				<div id="etcBox"><a href="exitChatRoom?crNum=${chatRoom.crNum}" id="exitChatRoom">채팅방 나가기</a></div>
+				</c:if>
 				</div>
 			</div>
 			<script>
