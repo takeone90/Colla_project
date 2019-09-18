@@ -91,11 +91,11 @@
 }
 
 .content {
+	white-space:pre;
 	display: inline-block;
 	position: relative;
 	margin-top:10px;
 	text-align : left;
-	paddig: 10px;
 }
 
 .content a {
@@ -471,7 +471,7 @@ pre .CodeMirror-line{
 	right : -540px;
 	width : 600px;
 	height : calc(100% - 130px);
-	z-index: 7;
+	z-index: 1;
 	transition: All 0.2s ease;
  	 -webkit-transition: All 0.2s ease;
  	 -moz-transition: All 0.2s ease;

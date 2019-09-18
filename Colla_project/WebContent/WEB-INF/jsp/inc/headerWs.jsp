@@ -95,10 +95,7 @@ $(function(){
 <%-- 	<input type="hidden" value="${chatRoom.crNum}" id="crNum"> --%>
 <%-- 	<input type="hidden" value="${chatRoom.crIsDefault}" id="crIsDefault"> --%>
 	<div class="container">
-		<h1 id="logo">
-			<a href="${contextPath}/workspace"> <img src="${contextPath}/img/COLLA_LOGO_200px_brighten.png" />
-			</a>
-		</h1>
+		
 
 		<div id="chatRoomInfo">
 			<p>페이지 이름</p>

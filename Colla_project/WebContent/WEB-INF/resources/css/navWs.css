@@ -2,7 +2,7 @@
 
 #wsNav {
 	width:200px;
-	height:calc(100% - 70px);
+	height:100%;
 	position:fixed;
 	left:0;
 	bottom:0;

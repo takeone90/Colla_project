@@ -15,12 +15,10 @@ request.setAttribute("contextPath", contextPath);
 <link rel="stylesheet" type="text/css" href="${contextPath}/css/headerWs.css"/>
 <link rel="stylesheet" type="text/css" href="${contextPath}/css/navWs.css"/>
 <link rel="stylesheet" type="text/css" href="${contextPath}/css/calMonth.css"/>
-<style type="text/css">
-
-</style>
 <script src="https://code.jquery.com/jquery-3.4.1.js"
   integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
   crossorigin="anonymous"></script>
+<script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script> <!-- font awsome -->
 <script type="text/javascript">
 $(function() {
 	$("#yearCalendar").hide();
@@ -723,7 +721,7 @@ function nextYearYear() {
 	<input type="hidden" value="calendar" id="pageType">
 	<input type="hidden" value="${sessionScope.currWnum}" id="currWnum">
 	<input type="hidden" value="calendar" id="calendar">
-	<div id="wsBodyContainer">
+	<div id="wsBodyContainer" class="calendarContainer">
 	<div class="calHeader">
 		<div>
 		<form action="calSearchList" class="calSearch">
@@ -733,12 +731,14 @@ function nextYearYear() {
 				<option value="3">제목+내용</option>
 				<option value="4">작성자</option>
 			</select>
-			<input type="text" name="searchKeyword" placeholder="검색어를 입력해주세요.">
-			<input type="submit" value="검색">
+			<input type="text" id="searchKeyword" name="searchKeyword" placeholder="검색어를 입력해주세요."><!-- 
+		--><button type="submit" class="btn" id="searchBtn">
+				<i class="fas fa-search"></i>
+			</button>
 		</form>
 		</div>
 		<div>
-			<button type="button" id="addFormOpen">일정 추가</button>
+			<button type="button" id="addFormOpen" class="btn">일정 추가</button>
 		</div>
 		<div>
 			<label><input type="checkbox" name="calType" id="calType1" value="project" checked="checked">프로젝트</label>
@@ -746,8 +746,8 @@ function nextYearYear() {
 			<label><input type="checkbox" name="calType" id="calType3" value="event" checked="checked">행사</label>
 		</div>
 		<div style="float: right">
-			<button id="changeYearCalToMonthCal">월간</button>
-			<button id="changeMonthCalToYearCal">연간</button>
+			<button id="changeYearCalToMonthCal" class="btn">월간</button>
+			<button id="changeMonthCalToYearCal" class="btn">연간</button>
 		</div>
 	</div>	
 <!-- 월간 달력 -->
@@ -764,7 +764,7 @@ function nextYearYear() {
 			<input type="text" id="wantedYear"> 년 
 			<input type="text" id="wantedMonth"> 월 
 			<input type="text" id="wantedDate"> 일 
-			<input type="button" id="wantedCalendarButton" value="이동">	
+			<input type="button" class="btn" id="wantedCalendarButton" value="이동">	
 		</div>
 		<div id="calMonthBody"></div>
 		<!-- 일정 추가 모달 -->

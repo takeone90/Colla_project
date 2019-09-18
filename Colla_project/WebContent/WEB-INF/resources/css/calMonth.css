@@ -1,6 +1,12 @@
 @charset "UTF-8";
 
-
+#wsBodyContainer.calendarContainer{
+	width:100%; padding:0;
+}
+#monthCalendar{
+	width:90%;
+	margin:0 auto;	
+}
 td{border: 0px; padding: 0px;}
 
 /* 월 달력 */
@@ -14,7 +20,7 @@ td{border: 0px; padding: 0px;}
 }
 
 .drawMonthCalendarUpper{width: 100%; border-collapse: collapse; border: 0px; table-layout: fixed;}
-.drawMonthCalendarUpper th{height:25px; width: 150px; padding: 0px; margin: 0px; background-color: #E6E2E1; vertical-align: center;} /* 요일 */
+.drawMonthCalendarUpper th{height:25px; width: 150px; padding: 0px; margin: 0px; background-color: #E6E2E1; vertical-align: middle;} /* 요일 */
 
 .drawMonthCalDiv{position: relative;}
 
@@ -51,12 +57,8 @@ td{border: 0px; padding: 0px;}
 /* .detailModal{display: none; width: 300px; height: 300px; top: 10%; left: 10%; position: absolute; background-color: #a37f82;}  */
 /* .modifyModal{display: none; width: 300px; height: 300px; top: 10%; left: 10%; position: absolute; background-color: #a37f82;} */
 /* .detailModalYear{display: none; width: 300px; height: 300px; top: 10%; left: 10%; position: absolute; background-color: #a37f82;} */
-#wsBodyContainer input,
 #wsBodyContainer select,
 #wsBodyContainer input {
-	padding: 5px;
-	border: 1px solid #ccc;
-	border-radius: 4px;
 	box-sizing: border-box;
 }
 .calHeader {
@@ -66,7 +68,6 @@ td{border: 0px; padding: 0px;}
 	margin-bottom: 10px;
 }
 .calHeader button {
-	padding: 5px;
 	border: 0px solid #ccc;
 	border-radius: 4px;
 	box-sizing: border-box;
@@ -154,4 +155,18 @@ td{border: 0px; padding: 0px;}
 	color: white;
 	text-align: center;
 	border-radius: 5px;
+}
+
+/* 190918 TK */
+#wsBodyContainer select{
+	height: 30px;
+	border-radius:5px;
+	vertical-align: middle;
+	border: 1px solid #d1d1d1;
+}
+#searchKeyword{
+	border-radius:5px 0 0 5px;
+}
+#searchBtn{
+	border-radius:0 5px 5px 0;
 }

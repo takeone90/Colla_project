@@ -117,12 +117,31 @@ var clickedOverlay = null;
 			sendMsg();
 			chatArea.scrollTop($("#chatArea")[0].scrollHeight);
 	});
-	$("#chatInput").keydown(function(key){
-		if(key.keyCode==13){
-			sendMsg();
-			chatArea.scrollTop($("#chatArea")[0].scrollHeight);
+	
+	var shift = false;
+	$(document.body).keydown(function(key){
+		if(key.keyCode==16){
+			shift = true;
 		}
 	});
+	$(document.body).keyup(function(key){
+		if(key.keyCode==16){
+			shift = false;
+		}
+	});
+	
+	$("#chatInput").keydown(function(key){
+		if(key.keyCode==13){
+			if(!shift){
+				sendMsg();
+				chatArea.scrollTop($("#chatArea")[0].scrollHeight);
+				return false;
+			} else{
+				
+			}
+		}
+	});
+	
 	//코드업로드 버튼 눌렸을 경우
 	$(".codeUpload").on("click",function(){
 		sendCode();
@@ -309,6 +328,7 @@ function showMemberList(){
 	function sendMsg(){
 		var msg = $("#chatInput").val();
 		stompClient.send("/client/send/"+$("#userEmail").val()+"/"+$("#crNum").val(),{},msg);
+		console.log("전송한 메시지 : "+msg);
 		$("#chatInput").val("");
 	}
 	

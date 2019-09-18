@@ -28,6 +28,10 @@
 	<input type="hidden" value="${sessionScope.currWnum}" id="currWnum">
 	<input type="hidden" value="${sessionScope.wsName}" id="currWname">
 	<div id="navContainer">
+		<h1 id="logo">
+			<a href="${contextPath}/workspace"> <img src="${contextPath}/img/COLLA_LOGO_200px_brighten.png" />
+			</a>
+		</h1>
 		<div id="aboutProfile">
 			<a href="${contextPath }/myPageMainForm">
 				<img alt="나의 프로필 사진" src="${contextPath }/showProfileImg" />
