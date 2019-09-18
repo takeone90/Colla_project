@@ -50,7 +50,7 @@ body .btn:hover{
 
 /*Workspace 안의 CSS*/
 #wsMainHeader{
-	z-index: 2;
+	z-index: 1;
 }
 #wsNav{
 	z-index: 2;
@@ -62,7 +62,7 @@ body .btn:hover{
 	width:calc(100% - 200px);
 	height:calc(100% - 70px);
 	margin-left:200px;
-	padding-top:70px;
+	padding-top:71px;
 }
 #wsBodyContainer {
 	width: 90%;

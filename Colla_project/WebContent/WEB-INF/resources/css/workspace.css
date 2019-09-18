@@ -29,9 +29,6 @@
 #ws-subfunction{
 	display: none;
 }
-#chatRoomInfo{
-	display: none;
-}
 .wsDetail{
 display : none;
 }
@@ -98,7 +95,7 @@ display : none;
 .wsChatList li a{
 	padding : 8px 12px 8px 12px;
 	margin-right : 6px;
-	background-color : #3b302b;
+	background-color : #292424;
 	color : white;
 	border-radius: 30px;
 }
@@ -199,6 +196,6 @@ display : none;
 	color: #E5675A;
 }
 #wsBodyContainer .openedWs h3{
-	font-size : 18px;
+	font-size : 22px;
 	color : white;
 }

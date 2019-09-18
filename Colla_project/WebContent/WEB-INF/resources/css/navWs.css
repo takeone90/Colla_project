@@ -36,19 +36,19 @@
 	text-align:center;	
 }
 #myChatList{
-	margin: 20px 0;
+	margin: 30px 0;
 	text-align:right;
 }
 #myChatList h3{
 	font-size : 20px;
 	font-weight : bolder;
-	padding:0 30px 5px 0px;
+	padding:0 18px 5px 0px;
 }
 #myChatList ul{
 	padding-top:5px;
 }
 #myChatList ul li{
-	padding:10px 30px 10px 10px;
+	padding:10px 20px 10px 10px;
 	font-size:14px;
 }
 #myChatList ul li.currChat{
@@ -112,10 +112,18 @@
 	background-color: #5e5756;
 	border : none;
 	border-radius: 3px;
+	margin-top : 13px;
 }
 
-
-
+#wsNav #memberInfoModal{
+	color : black;
+	top: 20%;
+	left: 30%;
+	width: 400px;
+}
+.memberProfileInfo h3, .memberProfileInfo p{
+	margin-bottom:7px;
+}
 
 
 

@@ -473,10 +473,11 @@ pre .CodeMirror-line{
 
 #chatNavBox{
 	display : inline-block;
+	top : 0;
 	position : fixed;
 	right : -540px;
 	width : 600px;
-	height : calc(100% - 130px);
+	height : calc(100% - 60px);
 	z-index: 1;
 	transition: All 0.2s ease;
  	 -webkit-transition: All 0.2s ease;
@@ -676,15 +677,14 @@ input[type=radio]{
 	width : 502px;
 	height : 30px;
 	margin-left : 5px;
-	margin-bottom:31px; 
+	margin-bottom:61px; 
 	border-radius : 5px;
 	border: 1px solid #d4cbcb;
 }
 #etcBox{
-	display: table-cell;
-	position : absolute;
-	vertical-align : bottom;
-	right : 60px;
+	float: right;
+    margin-top: 13px;
+    margin-right: 23px;
 }
 #exitChatRoom{
 	color : black;
