@@ -12,18 +12,87 @@
 <link rel="stylesheet" type="text/css" href="css/main.css"/>
 <link rel="stylesheet" type="text/css" href="css/animate.css"/>
 <link rel="stylesheet" type="text/css" href="css/animationCheatSheet.css"/>
+<script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
 <script src="https://code.jquery.com/jquery-3.4.1.js"
   integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
   crossorigin="anonymous"></script>
 <script>
+// $(window).scroll(function () {
+// 	var height = $(document).scrollTop(); //현재 스크롤 위치
+// 	console.log(height);
+// 	if(height > 10 && height < 750) {
+// 		scrollMove(1);
+// 	}
+// 	if(height > 750 && height < 1430) {
+// 		scrollMove(2);
+// 	}
+// 	if(height > 1430 && height < 2110) {
+// 		scrollMove(3);
+// 	}
+// 	if(height > 2110 && height < 2790) {
+// 		scrollMove(4);
+// 	}
+// }); 
+	
+// window.onscroll = function() {scrollFunction()};
+// function scrollFunction() {
+// 	if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
 
+// 	} else {
+// 		$("#btn_page_top").css('display', 'none'); //버튼 안 보임
+// 	}
+// }
+
+// $(function() {
+// 	var scrollPosition = $("#aboutUs-member1").offset().top;
+// });
+// function scrollMove(num) {
+// 	var offset = $("#aboutUs-member"+num).offset().top; //section 위치 구하기
+// 	$("html, body").animate({scrollTop : offset}, 400); //section으로 이동
+// }
+$(function() {
+	$(".box").each(function() {
+		$(this).on("mousewheel DOMMouseScroll", function(e) {
+			e.preventDefault();
+			var delta = 0;
+			if(!event) {
+				event = window.event;
+			}
+			if(event.wheelDelta) {
+				delta = event.wheelDelta / 120;
+			} else if(event.detail) {
+				delta = -event.detail/3;
+			}
+			var moveTop = null;
+			if(delta < 0) { //위에서 아래로
+				if($(this).next() != undefined) {
+					moveTop = $(this).next().offset().top;
+				}
+			} else { //아래서 위로
+				if($(this).index() > 0) {
+					if($(this).prev() != undefined) {
+						moveTop = $(this).prev().offset().top;
+					}
+				} else  { //헤더 보이기
+					moveTop = 0;
+				}
+			}
+			$("html, body").stop().animate({
+				scrollTop: moveTop + 'px'
+			}, {
+				duration: 800, complete: function () {
+				}
+			});
+		})
+	})
+});
 </script>
 </head>
 <body>
-	<div id="wrap">
+	<div id="wrap" >
 		<%@ include file="/WEB-INF/jsp/inc/headerMain.jsp" %>
 		<div id="aboutUsAll">
-			<section id="aboutUs-cover">
+			<section id="aboutUs-cover" class="box">
 				<div id="container">
 					<div id="head-all" class="animated infinite pulse">
 						<div class="head-title"> TEAM NEVER LOSE </div>
@@ -33,7 +102,7 @@
 					</div>
 				</div>
 			</section>
-			<section id="aboutUs-member1">
+			<section id="aboutUs-member1" class="box">
 				<div class="container">
 					<div class="aboutUs-card">
 						<div class="front card">
@@ -45,7 +114,7 @@
 					</div>
 				</div>
 			</section>
-			<section id="aboutUs-member2">
+			<section id="aboutUs-member2" class="box">
 				<div id="container">
 					<div class="aboutUs-card">
 						<div>김미경은</div>
@@ -53,7 +122,7 @@
 					</div>
 				</div>
 			</section>
-			<section id="aboutUs-member3">
+			<section id="aboutUs-member3" class="box">
 				<div id="container">
 					<div class="aboutUs-card">
 						<div>김수빈은</div>
@@ -61,7 +130,7 @@
 					</div>
 				</div>
 			</section>
-			<section id="aboutUs-member4">
+			<section id="aboutUs-member4" class="box">
 				<div id="container">
 					<div class="aboutUs-card">
 						<div>박혜선은</div>

@@ -26,7 +26,7 @@
     color: #767676;	
 }
 #co-location p span:last-child {
-	display: contents;
+
 }
 #co-location p span:after {
     content: '';
@@ -39,8 +39,6 @@
     margin-top: -5px;
     background: #767676;
 }
-
-
 #f2 p {
 	font-size: 14px;
     font-weight: 300;
