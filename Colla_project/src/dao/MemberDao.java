@@ -9,7 +9,9 @@ import model.Member;
 
 public interface MemberDao {
 	public int insertMember(Member member);
-	public int updateMember(Member member);
+	public int updateMemberName(String name, String email);
+	public int updateMemberPw(String pw, String email);
+	public int updateMemberPhone(String phone, String email);
 	public int deleteMember(int num);
 	public Member selectMember(int num);
 	public Member selectMemberByEmail(String email);

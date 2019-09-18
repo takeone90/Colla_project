@@ -13,6 +13,8 @@
 <link rel="stylesheet" type="text/css" href="css/base.css"/>
 <link rel="stylesheet" type="text/css" href="css/headerWs.css"/>
 <link rel="stylesheet" type="text/css" href="css/navWs.css"/>
+<link rel="stylesheet" type="text/css" href="css/myPage.css"/>
+
 <style type="text/css">
 .toggleBG {
 	background: #CCCCCC;
@@ -114,28 +116,41 @@
 	<%@ include file="/WEB-INF/jsp/inc/navWs.jsp" %>
 	<div id="wsBody">
 	<input type="hidden" value="mypage" id="pageType">
-		<h1>알림 설정</h1>
-		워크스페이스 초대 알림
-		<div class='toggleBG' id="wsBG">
-			<button id='wsSetAlarm' class='toggleFG wsAlarm'></button>
+		<div id="wsBodyContainer">
+			<h3>마이페이지</h3>
+			<h4>회원정보 관리</h4>
+			<div class="myPageInner">
+				<div class="myPageContent">
+					<div class="myPageTitle">
+						<p class="title">데이터 및 맞춤 설정</p>
+						<p class="content">Colla 서비스를 더욱 유용하게 만드는데 도움을 주는 환경설정</p>
+					</div>
+					<div class="myPageContentRow clearFix">
+						<p class="title">워크스페이스 초대 알림</p>
+						<div class='toggleBG' id="wsBG">
+							<button id='wsSetAlarm' class='toggleFG wsAlarm'></button>
+						</div>
+					</div>
+					<div class="contentLine"></div>
+					<div class="myPageContentRow clearFix">
+						<p class="title">공지알람</p>
+						<div class='toggleBG' id="boardBG">
+							<button id='boardSetAlarm' class='toggleFG boardAlarm'></button>
+						</div>
+					</div>
+					<div class="contentLine"></div>
+					<div class="myPageContentRow clearFix">
+						<p class="title">게시글 댓글 알림</p>
+						<div class='toggleBG' id="replyBG">
+							<button id='replySetAlarm' class='toggleFG replyAlarm'></button>
+						</div>
+					</div>
+				</div>
+				<div class="row btns btnR">
+					<a href="myPageMainForm" class="btn">목록</a>
+				</div>
+			</div>
 		</div>
-	
-		공지 알림
-		<div class='toggleBG' id="boardBG">
-			<button id='boardSetAlarm' class='toggleFG boardAlarm'></button>
-		</div>
-	
-		게시글 댓글 알림
-		<div class='toggleBG' id="replyBG">
-			<button id='replySetAlarm' class='toggleFG replyAlarm'></button>
-		</div>
-			<!-- 삭제예정 start -->
-		<div>
-			<button onclick="location.href='${contextPath}/myPageCheckPassForm'">회원정보관리</button>
-			<button onclick="location.href='${contextPath}/myPageAlarmForm'">알림설정</button>
-			<button onclick="location.href='${contextPath}/myPageLicenseForm'">라이센스</button>
-		</div>
-		<!-- 삭제예정 end -->
 	</div>
 </body>
 </html>

@@ -34,7 +34,7 @@
 							<p class="title">프로필</p>
 							<p class="content">일부 정보가 Colla 서비스를 사용하는 다른 사람에게 표시될 수 있습니다.</p>
 						</div>
-						<div class="myPageContentRow clearFix" onclick="location.href='${contextPath}/profileImgModifyForm'">
+						<div class="myPageContentRow clearFix modifyRow" onclick="location.href='${contextPath}/profileImgModifyForm'">
 							<p class="title">사진</p>
 							<p class="content">사진을 추가하여 계정을 맞춤 설정합니다.</p>
 							<div id="profileImg">
@@ -42,16 +42,17 @@
 							</div>
 						</div>
 						<div class="contentLine"></div>
-						<div class="myPageContentRow clearFix" onclick="location.href='${contextPath}/nameModifyForm'">
+						<div class="myPageContentRow clearFix modifyRow" onclick="location.href='${contextPath}/nameModifyForm'">
 							<p class="title">이름</p>
 							<p class="content">${requestScope.member.name}</p>
 							<i class="fas fa-chevron-right"></i>
 						</div>
 						<div class="contentLine"></div>
-						<div class="myPageContentRow clearFix" onclick="location.href='${contextPath}/pwModifyForm'">
+						<div class="myPageContentRow clearFix modifyRow" onclick="location.href='${contextPath}/checkPassForm'">
 							<div></div>
 							<p class="title">비밀번호</p>
-							<p class="content">${requestScope.member.pw}</p>
+							<p class="content">******</p>
+							<i class="fas fa-chevron-right"></i>
 						</div>
 					</div>
 					<div class="myPageContent">
@@ -63,13 +64,14 @@
 							<p class="title">계정</p>
 							<p class="content">${requestScope.member.email}</p>
 						</div>
-						<div class="contentLine"></div>
-						<div class="myPageContentRow clearFix" onclick="location.href='${contextPath}/phoneModifyForm'">
+						<div class="contentLine"></div> 
+						<div class="myPageContentRow clearFix modifyRow" onclick="location.href='${contextPath}/phoneModifyForm'">
 							<p class="title">핸드폰 번호</p>
 							<p class="content">${requestScope.member.phone}</p>
+							<i class="fas fa-chevron-right"></i>
 						</div>
 					</div>
-					<div class="row btns">
+					<div class="row btns btnR">
 						<a href="myPageMainForm" class="btn">목록</a>
 					</div>
 				</div>
