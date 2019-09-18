@@ -22,11 +22,24 @@
 <script type="text/javascript">
 	var profileImgType = null;
 	$(function() {
+		var Img = $('.thumbNailImg');
+		if(Img.width()>Img.height()){
+			$('.thumbNailImg').attr("class","thumbNailImg landscape");
+		}else{
+			$('.thumbNailImg').attr("class","thumbNailImg portrait");
+		}
+
 		//이미지 업로드 전 미리보기
 		$("#attachImgBtn").on('change', function() {
 			if (this.files && this.files[0]) {
 				var reader = new FileReader();
 				reader.onload = function(e) {
+					var tmpImg = $('.temp_img').attr("src", e.target.result);
+					if(tmpImg.width()>tmpImg.height()){
+						$('.thumbNailImg').attr("class","thumbNailImg landscape");
+					}else{
+						$('.thumbNailImg').attr("class","thumbNailImg portrait");
+					}
 					$('.thumbNailImg').attr("src", e.target.result);
 				}
 				reader.readAsDataURL(this.files[0]);
@@ -49,6 +62,7 @@
 	<%@ include file="/WEB-INF/jsp/inc/navWs.jsp"%>
 	<div id="wsBody">
 	<input type="hidden" value="mypage" id="pageType">
+	<img src="" class="temp_img">
 		<div id="wsBodyContainer">
 			<h3>마이페이지</h3>
 			<h4>프로필 수정</h4>
@@ -56,12 +70,16 @@
 				<div class ="myPageModify">
 					<p>프로필 이미지를 변경해주세요!</p>
 					<form action="modifyProfileImg" class="profileImgForm" enctype="multipart/form-data" method="post">
-						<div id="profileImg">
-							<img alt="나의 프로필 사진" class="thumbNailImg" src="${contextPath }/showProfileImg">
+						<div class="thumbnail-wrap">
+							<div class="thumbnail">
+								<div class="centered">
+									<img alt="나의 프로필 사진" class="thumbNailImg portrait" src="${contextPath }/showProfileImg">
+								</div>
+							</div>
 						</div>
 						<div class="attachImgArea clearFix">		
 							<input type="hidden" id="profileImgType" name="profileImgType"> 
-							<input type="file" id="attachImgBtn" name="profileImg" value="사진 선택" accept="image/*" multiple>
+							<input type="file" id="attachImgBtn" name="profileImg" value="사진 선택" accept="image/*" >
 							<label for="attachImgBtn">프로필 변경</label>
 							<input type="button" id="defalutImgBtn">
 							<label for="defalutImgBtn">기본이미지 변경</label>
@@ -75,7 +93,7 @@
 				</div>
 			</div><!-- myPageInner -->
 		</div>
-
 	</div><!-- end wsBody -->
+	
 </body>
 </html>

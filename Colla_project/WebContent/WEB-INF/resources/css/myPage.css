@@ -1,108 +1,133 @@
 @charset "UTF-8";
-#deleteMember a{
+
+#deleteMember a {
 	font-weight: bolder;
 }
+
 .myPageInner {
-    width: 1280px;
-    margin: 35px auto 20px;
+	width: 1280px;
+	margin: 35px auto 20px;
 }
-.myPageInner .btnR{
+
+.myPageInner .btnR {
 	width: 838px;
 	text-align: right;
 	margin: 0 auto;
 }
 /*myPageAccount*/
-.myPageContent{
+.myPageContent {
 	width: 838px;
 	margin: 0 auto;
-	border : 1px solid #DADCE0;
+	border: 1px solid #DADCE0;
 	border-radius: 10px;
 	margin-bottom: 30px;
 }
-.myPageTitle{
+
+.myPageTitle {
 	width: 790px;
 	height: 56px;
 	padding: 24px 24px 8px;
 }
-.myPageTitle .title{
+
+.myPageTitle .title {
 	font-size: 22px;
 	font-weight: 400;
 }
-.myPageTitle .content{
+
+.myPageTitle .content {
 	font-size: 12px;
 	font-weight: 400;
 	padding-top: 20px;
 }
-.myPageContentRow{
+
+.myPageContentRow {
 	width: 790px;
 	padding: 8px 24px;
 }
-.modifyRow:hover{
+
+.modifyRow:hover {
 	background-color: #DADCE0;
 }
-.myPageContentRow > p ,.myPageContentRow > div {
+
+.myPageContentRow>p, .myPageContentRow>div {
 	display: inline-block;
 	vertical-align: middle;
 }
-.myPageContentRow > div {
-	position : relative;
+
+.myPageContentRow>div {
+	position: relative;
 }
-.myPageContentRow .title{
+
+.myPageContentRow .title {
 	width: 156px;
 	padding: 16px;
 }
-.myPageContentRow .content{
-	width: 510px;	
+
+.myPageContentRow .content {
+	width: 510px;
 }
-.myPageAccount #profileImg{
-	border-radius:50%;
-	border:2px solid #fff;
-	margin:0;
-	width:60px;
-	height:60px;
-	overflow:hidden;
+
+.myPageAccount #profileImg {
+	position: relative;
+	border-radius: 50%;
+	border: 2px solid #fff;
+	margin: 0;
+	width: 60px;
+	height: 60px;
+	display: block;
+	overflow: hidden;
 	border: 2px solid #D3CDCD;
 }
 
-.contentLine{
-	border : 0.5px solid #D3CDCD;
-		margin: 0 30px;
+.contentLine {
+	border: 0.5px solid #D3CDCD;
+	margin: 0 30px;
 }
-#profileImg img{
-	height:100%;
+
+#profileImg img {
+	width: 100%;
+}
+
+#profileImg .auto {
+	width: auto;
+	height: auto;
 }
 
 /* 회원 정보 수정*/
-.myPageInner .myPageModify{
+.myPageInner .myPageModify {
 	width: 450px;
 	margin: 0 auto;
-	border : 1px solid #DADCE0;
+	border: 1px solid #DADCE0;
 	border-radius: 10px;
 	padding: 60px;
-	
 }
-.myPageModify > p {
+
+.myPageModify>p {
 	font-size: 20px;
-	text-align : center;
-	width : 100%;
+	text-align: center;
+	width: 100%;
 	margin-bottom: 30px;
 }
+
 .myPageModify #profileImg {
-	border-radius:50%;
-	border:2px solid #fff;
+	border-radius: 50%;
+	border: 2px solid #fff;
 	margin: 0 auto 20px auto;
-	width:167px;
-	height:167px;
-	overflow:hidden;
+	width: 167px;
+	height: 167px;
+	overflow: hidden;
 	border: 2px solid #D3CDCD;
 }
-#profileModifyModal #profileImg img{
-	height:100%;
+
+#profileModifyModal #profileImg img {
+	height: 100%;
 }
-.attachImgArea{
+
+.attachImgArea {
 	width: 250px;
 }
-.attachImgArea input{
+
+.attachImgArea input {
 	display: none;
 	position: fixed;
 	top: 17%;
@@ -115,25 +140,29 @@
 	z-index: 10;
 	box-shadow: 2px 2px 10px 1px #6e6d6d;
 }
-.attachImgArea label{
-	width :110px;
-	height : 20px;
-	border : 1px solid #BFBFBF;
+
+.attachImgArea label {
+	width: 110px;
+	height: 20px;
+	border: 1px solid #BFBFBF;
 	padding-top: 8px;
 }
-.attachImgArea label[for="defalutImgBtn"]{
+
+.attachImgArea label[for="defalutImgBtn"] {
 	margin-left: 10px;
 }
-.myPageModify .btns{
+
+.myPageModify .btns {
 	width: 450px;
 	text-align: center;
-	margin: 30px auto 0px;	
+	margin: 30px auto 0px;
 }
-.myPageModify input{
+
+.myPageModify input {
 	border: 1px solid #D1D1D1;
 	border-radius: 5px;
-	line-height:30px;
-	width : 400px;
+	line-height: 30px;
+	width: 400px;
 	height: 60px;
 	padding: 0 10px;
 	margin-left: 20px;
@@ -141,38 +170,39 @@
 	text-align: center;
 }
 
-
-
-
-
-.attachModal > *{
+.attachModal>* {
 	margin: 0 auto;
 }
-.attachModal #profileImg{
+
+.attachModal #profileImg {
 	margin-bottom: 10px;
 }
+
 .attachImgArea {
 	margin: 0 auto;
 	text-align: center;
 	margin-bottom: 30px;
 }
-.attachImgArea *{
+
+.attachImgArea * {
 	float: left;
 }
 
 .attachImgArea input[type="file"], .attachImgArea input[type="button"] {
-	position: absolute; 
-	width: 1px; 
-	height: 1px; 
-	padding: 0; 
-	margin: -1px; 
-	overflow: hidden; 
-	clip:rect(0,0,0,0); 
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
 	border: 0;
 }
-#innerBtn{
+
+#innerBtn {
 	margin-top: 10px;
 }
+
 #innerBtn a {
 	display: inline-block;
 	position: relative;
@@ -184,82 +214,163 @@
 	text-align: center;
 	border-radius: 5px;
 }
-#myPageMain .myPageContent{
-	float : left;
-	width : 25%;
-	height : 600px;
+
+#myPageMain .myPageContent {
+	float: left;
+	width: 25%;
+	height: 600px;
 	margin-left: 5%;
 	border-radius: 20px;
 }
 
-.modifyPw input+input{
+.modifyPw input+input {
 	margin-top: 20px;
-	border : 1px solid red;
+	border: 1px solid red;
 }
+
 .myPageLicense {
 	padding: 30px;
 }
-.myPageLicense p{
+
+.myPageLicense p {
 	padding-bottom: 10px;
 }
-.myPageLicense span{
+
+.myPageLicense span {
 	color: #2BAE60;
 }
-.myPageLicense>a{
+
+.myPageLicense>a {
 	margin-bottom: 30px;
 }
+
 .myPageLicense {
 	text-align: center;
 }
-.myPageLicense table, th, td{
-	border : 1px solid #DADCE0;
-	width : 600px;
+
+.myPageLicense table, th, td {
+	border: 1px solid #DADCE0;
+	width: 600px;
 	margin: 20px auto;
 	padding: 20px;
 }
-.lcList{
+
+.lcList {
 	width: 620px;
 	margin: 0 auto;
 	padding: 0;
 }
-.lcList h5{
+
+.lcList h5 {
 	text-align: left;
 	padding: 0px;
 	margin: 0px;
 }
-.myPageContent{
+
+.myPageContent {
 	padding: 50px;
 }
-.myPageContent>p{
+
+.myPageContent>p {
 	text-align: center;
 	font-size: 20px;
 }
-.myPageContent>p+p{
+
+.myPageContent>p+p {
 	text-align: center;
 	font-size: 15px;
 	margin: 15px;
 }
-.myPageContent .myPageModule{
-	border : 1px solid #DADCE0;
+
+.myPageContent .myPageModule {
+	border: 1px solid #DADCE0;
 	border-radius: 10px;
 	width: 700px;
 	height: 90px;
 	padding: 30px;
 	margin: 15px auto;
 }
-.myPageContent .myPageModule > img{
+
+.myPageContent .myPageModule>img {
 	float: right;
-	height:100px;
+	height: 100px;
 }
-.myPageContent .myPageModule:hover{
+
+.myPageContent .myPageModule:hover {
 	background-color: #DADCE0;
 }
-.myPageModule .title{
+
+.myPageModule .title {
 	font-size: 20px;
 	margin-bottom: 15px;
 }
-.checkPass{
+
+.checkPass {
 	width: 422px;
 	text-align: center;
-	margin : 10px 25px;
+	margin: 10px 25px;
+}
+
+/*테스트*/
+.thumbnail-wrap {
+	display: inline-block;
+	width: 25%;
+	border-radius: 50%;
+	border: 2px solid #fff;
+	margin: 0 auto 20px auto;
+	width: 167px;
+	height: 167px;
+	overflow: hidden;
+	border: 2px solid #D3CDCD;
+}
+
+.thumbnail-wrap img {
+	display: block;
+	max-width: 100%;
+	height: auto;
+}
+
+.thumbnail {
+	position: relative;
+	padding-top: 100%;
+	overflow: hidden;
+}
+
+.thumbnail img {
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+.thumbnail .centered {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	-webkit-transform: translate(50%, 50%);
+	-ms-transform: translate(50%, 50%);
+	transform: translate(50%, 50%);
+}
+
+.thumbnail .centered img {
+	-webkit-transform: translate(-50%, -50%);
+	-ms-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+}
+
+.thumbnail img.portrait {
+	width: 100%;
+	max-width: none;
+	height: auto;
+}
+
+.thumbnail img.landscape {
+	width: auto;
+	max-width: none;
+	height: 100%;
+}
+
+.temp_img {
+	display: none;
 }
