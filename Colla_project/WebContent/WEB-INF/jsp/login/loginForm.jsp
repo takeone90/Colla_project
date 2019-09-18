@@ -35,7 +35,7 @@ $(function(){
 		var emailResult = checkEmail();
 		var pwResult = checkPw();
 		if(emailResult && pwResult){
-		}else{
+		} else {
 			return false;
 		}
 	});
@@ -44,11 +44,9 @@ $(function(){
 		clientId: "kIhjMaimMjKNR7gcR2nf",
 		callbackUrl: "http://localhost:8081/Colla_project/callBackLogin",
 		isPopup: false, /* 팝업을 통한 연동처리 여부 */
-		loginButton: {color: "green", type: 3, height: 60} /* 로그인 버튼의 타입을 지정 */
+		loginButton: {color: "green", type: 2, height: 30, width: 90} /* 로그인 버튼의 타입을 지정 */
 	});
-	/* 설정정보를 초기화하고 연동을 준비 */
-	naverLogin.init();
-	
+	naverLogin.init(); /* 설정정보를 초기화하고 연동을 준비 */
 	/* 카카오 회원가입 API */
 	Kakao.init('1f6b481e9aa9a7ae0b621fee3692c041'); 
 	Kakao.Auth.createLoginButton({ // 카카오 로그인 버튼을 생성합니다.
@@ -71,7 +69,22 @@ $(function(){
 			alert(JSON.stringify(err));
 		}
 	});
+	$("#kakaoLoginButton").on("click", function() {
+		$("#kakao-login-btn").trigger("click");
+	});
 });//end onload
+/* 구글 로그인 */
+function onSignIn(googleUser) {
+	var profile = googleUser.getBasicProfile();
+	$("#emailOfApiForm").val(profile.getEmail());
+	$("#nameOfApiForm").val(profile.getName());
+	$("#pwOfApiForm").val("googleapipw");
+	calls();
+}
+function calls() {
+	$("#apiForm").submit();
+}
+/* 이메일, 비밀번호 빈 칸 입력 시 */
 function checkEmail(){
 	var email = $("#email").val();
 	if(email == "") {
@@ -91,17 +104,6 @@ function checkPw(){
 		$("#checkPwText").text("");
 		return true;
 	}
-}
-/* 구글 로그인 */
-function onSignIn(googleUser) {
-	var profile = googleUser.getBasicProfile();
-	$("#emailOfApiForm").val(profile.getEmail());
-	$("#nameOfApiForm").val(profile.getName());
-	$("#pwOfApiForm").val("googleapipw");
-	calls();
-}
-function calls() {
-	$("#apiForm").submit();
 }
 </script>
 </head>
@@ -131,14 +133,11 @@ function calls() {
 			</form>
 			<div id="innerBtn">
 				<!-- 구글 -->
-				<div class="g-signin2" id="g-signin2" data-onsuccess="onSignIn"></div>
+				<button id="googleLoginButton">구글<span class="g-signin2" data-width="90" data-height="30" data-onsuccess="onSignIn"></span></button>
 				<!-- 네이버 -->
-				<div id="naverIdLogin"></div>
+				<button class="naverLoginButton">네이버<span id="naverIdLogin"></span></button>
 				<!-- 카카오 -->
-				<div>
-					<a id="kakao-login-btn"></a>
-					<a href="http://developers.kakao.com/logout"></a>
-				</div>
+				<button id="kakaoLoginButton">카카오<span id="kakao-login-btn"></span><span href="http://developers.kakao.com/logout"></span></button>
 				<span id="loginResultText">
 					<c:if test='${param.login eq "false"}'>
 						로그인 후 이용하세요.
@@ -150,6 +149,8 @@ function calls() {
 			</div>
 		</div>
 	</div>
+	
+	
 	<form method="post" id="apiForm" action="login">
 		<input type="hidden" name="m_email" id="emailOfApiForm">
 		<input type="hidden" name="m_name" id="nameOfApiForm">

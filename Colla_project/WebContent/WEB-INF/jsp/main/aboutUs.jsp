@@ -34,14 +34,16 @@
 				</div>
 			</section>
 			<section id="aboutUs-member1">
-			
-				<div class="aboutUs-container"> <!-- ? -->
-					<div class="aboutUs-flip-card">
-						<div class="flip-front"><h1>이태권</h1></div>
-						<div class="flip-back"><h1>은 조장이다</h1></div>
+				<div class="container">
+					<div class="aboutUs-card">
+						<div class="front card">
+						 	이태권은
+						 </div>
+						<div class="back card">
+							조장이다.
+						</div>
 					</div>
 				</div>
-				
 			</section>
 			<section id="aboutUs-member2">
 				<div id="container">
