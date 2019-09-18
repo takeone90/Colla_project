@@ -3,7 +3,65 @@
 	width:100%;
 	background-color:#D3D1D2;
 }
+#footer-all {
+	padding-top: 50px;
+	padding-bottom: 50px;
+	margin-left: 100px;
+	margin-right: 100px;
+}
+#co-logo img {
+	width: 140px;
+}
+#co-location {
+	margin: 33px 0 10px;
+}
 
+#co-location p span {
+	display: inline-block;
+    padding-right: 15px;
+    position: relative;
+    vertical-align: middle;
+    line-height: 1.9;
+    font-weight: 500;	
+    color: #767676;	
+}
+#co-location p span:last-child {
+	display: contents;
+}
+#co-location p span:after {
+    content: '';
+    display: block;
+    width: 1px;
+    height: 10px;
+    position: absolute;
+    right: 7px;
+    top: 50%;
+    margin-top: -5px;
+    background: #767676;
+}
+
+
+#f2 p {
+	font-size: 14px;
+    font-weight: 300;
+    letter-spacing: 0.025em;
+    line-height: 1.75;
+    color: #767676;	
+    display: inline-block;
+}
+#co-sns {
+/* 	display: inline-block; */
+/* 	float: right; */
+}
+#co-sns li {
+	display: inline-block;	
+}
+.fab {
+	width: 30px;
+    font-size: 30px;
+    color: #767676;	
+}
+/* 페이지 탑 이동 버튼 */
 #btn_page_top {
   display: none; /* Hidden by default */
   position: fixed; /* Fixed/sticky position */
@@ -19,7 +77,6 @@
   border-radius: 10px; /* Rounded corners */
   font-size: 18px; /* Increase font size */
 }
-
 #btn_page_top:hover {
   background-color: #CFCCCF; /* Add a dark-grey background on hover */	
 }

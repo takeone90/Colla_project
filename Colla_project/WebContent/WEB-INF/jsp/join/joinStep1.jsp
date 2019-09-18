@@ -99,7 +99,6 @@
 		naverLogin.init();
 
 		/* 카카오 회원가입 API */
-		//<![CDATA[
 		Kakao.init('1f6b481e9aa9a7ae0b621fee3692c041'); 
 		Kakao.Auth.createLoginButton({ // 카카오 로그인 버튼을 생성합니다.
 			container : '#kakao-login-btn',
@@ -121,8 +120,9 @@
 				alert(JSON.stringify(err));
 			}
 		});
-		//]]>
-
+		$("#kakaoLoginButton").on("click", function() {
+			$("#kakao-login-btn").trigger("click");
+		});
 	}); //end onload
 	/* 구글 회원가입 API */
 
@@ -162,14 +162,13 @@
 					<input type="submit" value="인증 코드 발송">
 				</div>
 			</form>
-			<!-- 구글 -->
-			<div class="g-signin2" data-onsuccess="onSignIn"></div>
-			<!-- 네이버 -->
-			<div id="naverIdLogin">네이버 계정 연동</div>
-			<!-- 카카오 -->
-			<div>
-				<a id="kakao-login-btn"></a>
-				<a href="http://developers.kakao.com/logout"></a>
+			<div id="innerBtn">
+				<!-- 구글 -->
+				<button id="googleLoginButton">구글<span class="g-signin2" data-width="90" data-height="30" data-onsuccess="onSignIn"></span></button>
+				<!-- 네이버 -->
+				<button class="naverLoginButton">네이버<span id="naverIdLogin"></span></button>
+				<!-- 카카오 -->
+				<button id="kakaoLoginButton">카카오<span id="kakao-login-btn"></span><span href="http://developers.kakao.com/logout"></span></button>
 			</div>
 		</div>
 	</div>
