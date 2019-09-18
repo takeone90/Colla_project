@@ -7,15 +7,17 @@
 	margin : 5px;
 }
 #wsBodyContainer h2{
-	font-size: 2em;
+	color : #403C39;
+	font-size: 2.5em;
 	font-weight: bolder;
 	margin-bottom: 30px;
 }
 
 #wsBodyContainer h3{
+	color : #403C39;
 	font-size: 1em;
 	font-weight: bolder;
-	margin-bottom: 30px;
+	margin-bottom: 20px;
 }
 .row{
 	margin-top : 10px;
@@ -38,72 +40,102 @@ display : none;
 	padding-left: 0px;
 }
 .ws{
-	padding : 30px;
+	border-radius: 10px;
+	padding : 30px 20px 15px 30px;
 	margin-bottom : 10px;
-	background-color: #bcc2be;
+	background-color: #D3D1D2;
 }
-.ws h3{
+#wsBodyContainer .ws h3{
 	display: inline-block;
+	color : #403C39;
 	font-weight: bolder;
+	font-size : 16px;
 }
-.ws li{
-	display: inline-block;
-	padding : 10px;
-}
+/* .ws li{ */
+/* 	display: inline-block; */
+/* 	padding : 10px; */
+/* } */
 .wsDetail p{
+	color : white;
 	font-weight: bolder;
+}
+.openedWs .showWsDetail{
+	color : white;
 }
 .showWsDetail{
+	font-size : 19px;
 	position: relative;
-	left : calc(100% - 160px);
+	float: right;
+	margin-right : 24px;
 }
 .showWsDetail:hover{
 	color: #f2452e;
 	font-weight: bolder;
 }
+
 .wsDetail{
 	padding : 10px;
 }
 #wsBodyContainer{
 	padding:30px;
 }
-#exitWs{
+.exitWs{
 	text-align: right;
+	margin-top : 20px;
 	padding-right : 20px;
 	font-size: 14px;
 }
-.crRoundBox{
+.exitWs{
+	font-size : 17px;
+}
+.wsChatList ul {
+	margin-top : 24px;
+	margin-bottom : 24px;
+}
+.wsChatList li{
 	display: inline-block;
-	margin-right: 10px;
-	margin-top : 10px;
-	margin-bottom : 10px;
-	background-color: white;
-	border-radius: 10px;
 }
-.crRoundBox:hover{
-	background-color: #f54b38;
-	font-weight: bolder;
+.wsChatList li a{
+	padding : 8px 12px 8px 12px;
+	margin-right : 6px;
+	background-color : #3b302b;
+	color : white;
+	border-radius: 30px;
 }
-.wsmRoundBox{
+.wsChatList li a:hover{
+	background-color : #E5675A;
+}
+.wsMember{
+	margin-top : 45px;
+}
+.wsMember ul{
+	margin-top : 12px;
+	margin-bottom : 24px;
+}
+.wsMember ul li{
+	text-align : center;
 	display: inline-block;
-	margin-right: 10px;
-	margin-top : 10px;
-	margin-bottom : 10px;
-	background-color: white;
-	border-radius: 10px;
+	margin-right : 6px;
+	background-color : white;
+	color : #403C39;
+	width : 60px;
+	height : 60px;
+	border-radius: 50%;
 }
-.wsmRoundBoxOn{
-	display: inline-block;
-	margin-right: 10px;
-	margin-top : 10px;
-	margin-bottom : 10px;
-	background-color: red;
-	border-radius: 10px;
+.wsMember ul li .profileImg img{
+	width : 60px;
+	height : 60px;
+	border-radius: 50%;
 }
-.wsDetail ul a[href='#']{
+.wsMember ul li p{
+	margin-top : 5px;
+	font-weight: normal;
+}
+.wsDetail ul .openChatModal{
+	background-color: white;
+	color : #B04344;
 	margin-right: 10px;
 	margin-bottom : 10px;
-	background-color: white;
 	width:10px;
 	height:10px;
 	text-align : center;
@@ -112,8 +144,61 @@ display : none;
 	border-radius: 50%;
 	font-weight: bolder;
 }
+.wsDetail ul .openChatModal:hover{
+	background-color: #E5675A;
+	color : white;
+}
+.wsDetail ul .openAddMemberModal{
+	display : block;
+	vertical-align: middle;
+	background-color: white;
+	border-radius: 50%;
+	font-weight: bolder;
+	font-size: 25px;
+	color : #B04344;
+	line-height:60px;
+}
+.wsDetail ul .openAddMemberModal:hover{
+	background-color: #E5675A;
+	color : white;
+}
+.wsDetail ul .addWsmBtnLi{
+	vertical-align: top;
+/* 	margin-bottom : 40px; */
+}
 #wsMemberList li{
 	display: inline-block;
 	padding-left : 10px;
 	padding-right : 10px;
+}
+#openWsDiv{
+	margin-top : 25px;
+}
+#openWsModal{
+	background-color: #D3D1D2;
+	color : #403C39;
+	font-weight : bolder;
+	padding : 3px 10px 3px 10px;
+	border-radius: 50%;
+}
+#openWsModal:hover{
+	background-color: #E5675A;
+	color : white;
+}
+#wsBodyContainer .openedWs h3{
+	margin-bottom : 23px;
+}
+.openedWs{
+	background-color: #403C39;
+	border-radius: 10px;
+}
+.openedWs .exitWs a{
+	color: white;
+}
+.exitWs a {
+	color: #E5675A;
+}
+#wsBodyContainer .openedWs h3{
+	font-size : 18px;
+	color : white;
 }

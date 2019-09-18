@@ -1,4 +1,4 @@
-<%@page import="org.springframework.web.context.annotation.SessionScope"%>
+<%@page import="org.springframework.web.context.request.SessionScope"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -10,6 +10,7 @@
 	function loadChatList(){
 		var currWnum = $("#currWnum").val();
 		var chatList = $(".chatList");
+		var crNum = 
 		$.ajax({
 			data : {"currWnum":currWnum},
 			url : "${contextPath}/getChatList",
@@ -18,7 +19,7 @@
 				chatList.empty();
 				$.each(d,function(idx,item){
 					var str='<li '+ ( ${sessionChatRoom.crNum} ==item.crNum?'class="currChat"':"")+'><a href="${contextPath}/chatMain?crNum='+item.crNum+'">'+item.crName+'</a></li>';
-						chatList.append(str);
+					chatList.append(str);
 				});
 			}
 		});
