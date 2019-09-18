@@ -68,7 +68,7 @@
 							<input type="hidden" name="profileImgType"><br>
 						</div>
 						<div class="row btns">
-							<button class="btn">적용</button>
+							<button class="btn">저장</button>
 							<a href="myPageAccountForm" class="btn">취소</a>
 						</div>
 					</form>

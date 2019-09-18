@@ -55,9 +55,32 @@ public class MemberService {
 		}
 		return false;
 	}
+	/*
 	public boolean modifyMember(Member member) {
 		boolean result = false;
 		if(dao.updateMember(member)>0) {
+			result = true;
+		}
+		return result;
+	}
+	*/
+	public boolean modifyMemberName(String name, String email) {
+		boolean result = false;
+		if(dao.updateMemberName(name,email)>0) {
+			result = true;
+		}
+		return result;
+	}
+	public boolean modifyMemberPw(String pw, String email) {
+		boolean result = false;
+		if(dao.updateMemberPw(pw,email)>0) {
+			result = true;
+		}
+		return result;
+	}
+	public boolean modifyMemberPhone(String phone, String email) {
+		boolean result = false;
+		if(dao.updateMemberPhone(phone,email)>0) {
 			result = true;
 		}
 		return result;

@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -74,6 +75,10 @@ public class MypageController {
 	public String nameModifyForm() {
 		return "/myPage/nameModify";
 	}
+	@RequestMapping(value = "/checkPassForm", method = RequestMethod.GET)
+	public String checkPassForm() {
+		return "/myPage/myPageCheckPass";
+	}
 	@RequestMapping(value = "/pwModifyForm", method = RequestMethod.GET)
 	public String pwModifyForm() {
 		return "/myPage/pwModify";
@@ -131,28 +136,49 @@ public class MypageController {
 		setAlarmService.modifySetAlarm(typeStr, result, member.getNum());
 	}
 
+	@RequestMapping(value = "/modifyName", method = RequestMethod.POST)
+	public String modifyName(String name, HttpSession session) {
+		System.out.println("modifyName() 들어옴!");
+		String email = (String)session.getAttribute("userEmail");
+		if(memberService.modifyMemberName(name,email)) {
+			session.setAttribute("user", memberService.getMemberByEmail(email));
+			return "redirect:myPageAccountForm";
+		}
+		return "redirect:nameModifyForm";
+	}
+	
 	@RequestMapping(value = "/myPageCheckPass", method = RequestMethod.POST)
 	public String myPageCheckPass(String pw, HttpSession session) {
 		String emailAddress = (String)session.getAttribute("userEmail");
 		boolean result = memberService.checkPass(emailAddress, pw);
 		if (result) { // 비밀번호 일치
-			return "redirect:myPageModifyForm";
+			return "redirect:pwModifyForm";
 		} else { // 비밀번호 불일치
-			return "redirect:myPageCheckPassForm?checkPass=fail";
-		}
-	}
-
-	@RequestMapping(value = "/modifyMember", method = RequestMethod.POST)
-	public String modifyMember(Member member,String type,HttpSession session) {
-		member.setNum(((Member)session.getAttribute("user")).getNum());
-		if (memberService.modifyMember(member)) {
-			session.setAttribute("user", member);
-			return "redirect:myPageMainForm";
-		} else {
-			return "redirect:myPageModifyForm";//에러페이지로 변경해야함
+			return "redirect:checkPassForm?checkPass=fail";
 		}
 	}
 	
+	@RequestMapping(value = "/modifyPw", method = RequestMethod.POST)
+	public String modifyPw(String pw, HttpSession session) {
+		String email = (String)session.getAttribute("userEmail");
+		if(memberService.modifyMemberPw(pw, email)) {
+			session.setAttribute("user", memberService.getMemberByEmail(email));
+			return "redirect:myPageAccountForm";
+		}
+		return "redirect:pwModifyForm";
+	}
+	
+	@RequestMapping(value = "/modifyPhone", method = RequestMethod.POST)
+	public String modifyPhone(String phone, HttpSession session) {
+		String email = (String)session.getAttribute("userEmail");
+		if(memberService.modifyMemberPhone(phone, email)) {
+			session.setAttribute("user", memberService.getMemberByEmail(email));
+			return "redirect:myPageAccountForm";
+		}
+		return "redirect:phoneModifyForm";
+	}
+	
+		
 	@RequestMapping(value = "/modifyProfileImg", method = RequestMethod.POST)
 	public String modifyProfileImg(MultipartFile[] profileImg, String profileImgType, HttpSession session) {
 		boolean result = false;

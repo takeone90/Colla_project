@@ -29,9 +29,18 @@
 	<input type="hidden" value="mypage" id="pageType">
 		<div id="wsBodyContainer">
 			<h3>마이페이지</h3>
-			<h4>핸드폰번호 수정</h4>
+			<h4>핸드폰 번호 수정</h4>
 			<div class="myPageInner">
-
+				<div class ="myPageModify">
+					<p>핸드폰 번호를 변경해주세요!</p>
+					<form action="modifyPhone" class="modifyPhone" enctype="multipart/form-data" method="post">
+						<input type="text" name="phone" value="${member.phone}" class="content" placeholder="핸드폰 번호를 입력해주세요">
+						<div class="row btns">
+							<button class="btn">저장</button>
+							<a href="myPageAccountForm" class="btn">취소</a>
+						</div>
+					</form>
+				</div>
 			</div><!-- myPageInner -->
 		</div>
 

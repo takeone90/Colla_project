@@ -3,11 +3,10 @@
 	font-weight: bolder;
 }
 .myPageInner {
-	position:relative;
     width: 1280px;
     margin: 35px auto 20px;
 }
-.myPageInner > div > div:last-child{
+.myPageInner .btnR{
 	width: 838px;
 	text-align: right;
 	margin: 0 auto;
@@ -38,7 +37,7 @@
 	width: 790px;
 	padding: 8px 24px;
 }
-.myPageContentRow:hover{
+.modifyRow:hover{
 	background-color: #DADCE0;
 }
 .myPageContentRow > p ,.myPageContentRow > div {
@@ -64,6 +63,7 @@
 	overflow:hidden;
 	border: 2px solid #D3CDCD;
 }
+
 .contentLine{
 	border : 0.5px solid #D3CDCD;
 		margin: 0 30px;
@@ -71,8 +71,6 @@
 #profileImg img{
 	height:100%;
 }
-
-
 
 /* 회원 정보 수정*/
 .myPageInner .myPageModify{
@@ -193,10 +191,75 @@
 	margin-left: 5%;
 	border-radius: 20px;
 }
-.myPageContent h5{
-	font-size: 25px;
-	font-weight: 600;
-	color: #403C39;
+
+.modifyPw input+input{
+	margin-top: 20px;
+	border : 1px solid red;
+}
+.myPageLicense {
+	padding: 30px;
+}
+.myPageLicense p{
+	padding-bottom: 10px;
+}
+.myPageLicense span{
+	color: #2BAE60;
+}
+.myPageLicense>a{
+	margin-bottom: 30px;
+}
+.myPageLicense {
 	text-align: center;
-	margin : 30px;
+}
+.myPageLicense table, th, td{
+	border : 1px solid #DADCE0;
+	width : 600px;
+	margin: 20px auto;
+	padding: 20px;
+}
+.lcList{
+	width: 620px;
+	margin: 0 auto;
+	padding: 0;
+}
+.lcList h5{
+	text-align: left;
+	padding: 0px;
+	margin: 0px;
+}
+.myPageContent{
+	padding: 50px;
+}
+.myPageContent>p{
+	text-align: center;
+	font-size: 20px;
+}
+.myPageContent>p+p{
+	text-align: center;
+	font-size: 15px;
+	margin: 15px;
+}
+.myPageContent .myPageModule{
+	border : 1px solid #DADCE0;
+	border-radius: 10px;
+	width: 700px;
+	height: 90px;
+	padding: 30px;
+	margin: 15px auto;
+}
+.myPageContent .myPageModule > img{
+	float: right;
+	height:100px;
+}
+.myPageContent .myPageModule:hover{
+	background-color: #DADCE0;
+}
+.myPageModule .title{
+	font-size: 20px;
+	margin-bottom: 15px;
+}
+.checkPass{
+	width: 422px;
+	text-align: center;
+	margin : 10px 25px;
 }

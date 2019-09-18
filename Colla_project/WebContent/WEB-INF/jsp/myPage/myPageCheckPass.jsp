@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+   pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,57 +8,45 @@
    String contextPath = request.getContextPath();
    request.setAttribute("contextPath", contextPath);
 %>
-<title>비밀번호 확인</title>
+<title>개인정보</title>
 <link rel="stylesheet" type="text/css" href="css/reset.css"/>
 <link rel="stylesheet" type="text/css" href="css/base.css"/>
 <link rel="stylesheet" type="text/css" href="css/headerWs.css"/>
 <link rel="stylesheet" type="text/css" href="css/navWs.css"/>
+<link rel="stylesheet" type="text/css" href="css/myPage.css"/>
 <script src="https://code.jquery.com/jquery-3.4.1.js"
-	integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
-	crossorigin="anonymous"></script>
-<style type="text/css">
-#myPageCheckPass form * {
-	display: inline-block;
-}
+   integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+   crossorigin="anonymous"></script>
+</script>
+<script type="text/javascript">
 
-#myPageCheckPass form .title {
-	width: 150px;
-	text-align: right;
-}
-
-#myPageCheckPass form .content {
-	width: 300px;
-}
-</style>
+</script>
 </head>
 <body>
 	<%@ include file="/WEB-INF/jsp/inc/headerWs.jsp"%>
-	<%@ include file="/WEB-INF/jsp/inc/navWs.jsp" %>
+	<%@ include file="/WEB-INF/jsp/inc/navWs.jsp"%>
 	<div id="wsBody">
 	<input type="hidden" value="mypage" id="pageType">
-		<h3>마이페이지</h3>
-		<h4>회원정보 관리</h4>
-		<div id="myPageCheckPass">
-			<form action="myPageCheckPass" method="post">
-				<p class="title">비밀번호 확인</p>
-				<input type="password" name="pw" class="content">
-				<button>확인</button>
-			</form>
+		<div id="wsBodyContainer">
+			<h3>마이페이지</h3>
+			<h4>비밀번호 수정</h4>
+			<div class="myPageInner">
+				<div class ="myPageModify">
+					<p>기존 비밀번호를 입력해주세요!</p>
+					<form action="myPageCheckPass" class="myPageCheckPass" enctype="multipart/form-data" method="post">
+						<input type="password" name="pw" placeholder="비밀번호" class="content">
+						<c:if test="${checkPass eq fail}">
+							<p class="checkPass">비밀번호를 확인해주세요</p>
+						</c:if>
+						<div class="row btns">
+							<button class="btn">확인</button>
+							<a href="myPageAccountForm" class="btn">취소</a>
+						</div>
+					</form>
+				</div>
+			</div><!-- myPageInner -->
 		</div>
-	</div>
 
-	<h3>
-		<c:if test='${param.checkPass eq "fail"}'>
-			비밀번호를 확인해주세요
-		</c:if>
-	</h3>
-	<!-- 삭제예정 start -->
-	<div>
-		<button onclick="location.href='${contextPath}/myPageCheckPassForm'">회원정보관리</button>
-		<button onclick="location.href='${contextPath}/myPageAlarmForm'">알림설정</button>
-		<button onclick="location.href='${contextPath}/myPageLicenseForm'">라이센스</button>
-	</div>
-	<!-- 삭제예정 end -->
-
+	</div><!-- end wsBody -->
 </body>
 </html>

@@ -31,7 +31,16 @@
 			<h3>마이페이지</h3>
 			<h4>비밀번호 수정</h4>
 			<div class="myPageInner">
-
+				<div class ="myPageModify">
+					<p>새로운 비밀번호를 입력해주세요</p>
+					<form action="modifyPw" class="modifyPw" enctype="multipart/form-data" method="post">
+						<input type="password" name="pw" placeholder="새비밀번호 재입력" class="content">
+						<div class="row btns">
+							<button class="btn">저장</button>
+							<a href="myPageAccountForm" class="btn">취소</a>
+						</div>
+					</form>
+				</div>
 			</div><!-- myPageInner -->
 		</div>
 

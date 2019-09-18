@@ -33,13 +33,10 @@
 			<div class="myPageInner">
 				<div class ="myPageModify">
 					<p>이름을 변경해주세요!</p>
-					<form action="modifyMember" class="profileImgForm" enctype="multipart/form-data" method="post">
-						<div>
-							<input type="hidden" name="type" value="memberName">
-							<input type="text" name="name" value="${member.name}" class="content">
-						</div>
+					<form action="modifyName" class="modifyName" enctype="multipart/form-data" method="post">
+						<input type="text" name="name" value="${member.name}" class="content">
 						<div class="row btns">
-							<button class="btn">적용</button>
+							<button class="btn">저장</button>
 							<a href="myPageAccountForm" class="btn">취소</a>
 						</div>
 					</form>
