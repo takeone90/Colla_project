@@ -120,6 +120,7 @@ public class MemberController {
 		String emailAddress = (String)session.getAttribute("emailAddress");
 		Thread innerTest = new Thread(new inner(emailAddress, session));
 		innerTest.start();
+		System.out.println();
 		return "redirect:joinStep2";
 	}
 	
