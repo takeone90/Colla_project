@@ -21,7 +21,7 @@
          login-processing-url="/login"
          login-page="/loginForm"/>
 <!--       <security:logout invalidate-session="true" success-handler-ref="logoutSuccessHandler"/> -->
-			<security:logout invalidate-session="true" delete-cookies="JSESSIONID"/>
+			<security:logout invalidate-session="true" delete-cookies="JSESSIONID" logout-url="/logout"/>
    </security:http>
    <security:authentication-manager>
       <security:authentication-provider
