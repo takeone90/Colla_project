@@ -8,6 +8,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			bf_seq.nextval, #{bNum}, #{fileName}
 		)
 	</insert>
+	<delete id="deleteFile" parameterType="int">
+		delete from boardfile where b_num = #{bNum}
+	</delete>
 	<select id="selectFilesByBnum" parameterType="int" resultMap="boardFileMap">
 		select * from boardfile where b_num = #{bNum}
 	</select>
