@@ -244,10 +244,15 @@ public class MemberController {
 		return "redirect:main";
 	}
 	@RequestMapping("/removeSession") //로그아웃 성공 후, 처리
-	public String logoutSession(HttpSession session,String userEmail) {
-		loginMember.remove(session.getAttribute("userEmail"));
-		session.invalidate();
-		return "redirect:main";
+	public String logoutSession(HttpSession session, String type) {
+		loginMember.remove((String)session.getAttribute("userEmail"));
+	      if(type == null) {
+	         //loginList.removeUser((String)session.getAttribute("userEmail"));
+	      }      
+	      session.invalidate();
+	      //String memberList = new Gson().toJson(loginList.getLoginList()); 
+	      //simpMessagingTemplate.convertAndSend("/category/loginInfo","{\"loginMemberList\":"+memberList+"}"); 
+	      return "redirect:main";
 	}
 	/*
 	 * public Map<String, Object> getLoginMemberList(){ return loginMember; }
