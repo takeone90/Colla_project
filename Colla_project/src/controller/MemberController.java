@@ -23,6 +23,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import mail.MailSend;
@@ -258,4 +259,10 @@ public class MemberController {
 	/*
 	 * public Map<String, Object> getLoginMemberList(){ return loginMember; }
 	 */
+	@ResponseBody
+	@RequestMapping("/getMemberInfoForProfileImg")
+	public Member getMemberInfoForProfileImg(@RequestParam("mNum")int mNum) {
+		Member member = memberService.getMember(mNum);
+		return member;
+	}
 }

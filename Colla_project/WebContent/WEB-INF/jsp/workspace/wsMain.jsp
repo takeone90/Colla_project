@@ -7,11 +7,11 @@
 <head>
 <meta charset="UTF-8">
 <title>워크스페이스</title>
-<link rel="stylesheet" type="text/css" href="css/reset.css"/>
-<link rel="stylesheet" type="text/css" href="css/base.css"/>
-<link rel="stylesheet" type="text/css" href="css/headerWs.css"/>
-<link rel="stylesheet" type="text/css" href="css/navWs.css"/>
-<link rel="stylesheet" type="text/css" href="css/workspace.css"/>
+<link rel="stylesheet" type="text/css" href="${contextPath}/css/reset.css"/>
+<link rel="stylesheet" type="text/css" href="${contextPath}/css/base.css"/>
+<link rel="stylesheet" type="text/css" href="${contextPath}/css/headerWs.css"/>
+<link rel="stylesheet" type="text/css" href="${contextPath}/css/navWs.css"/>
+<link rel="stylesheet" type="text/css" href="${contextPath}/css/workspace.css"/>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script> <!-- font awsome -->
 <script>
@@ -113,8 +113,7 @@
 	<div id="wsBody">
 		<input type="hidden" value="workspace" id="pageType">
 		<div id="wsBodyContainer"> 
-		<h2>Workspace</h2>
-		<h3>Workspace List</h3>
+		<h2>Workspace List</h2>
 		<ul>
 			<c:forEach items="${workspaceList}" var="ws">
 				<li class="ws">
@@ -149,7 +148,7 @@
 									<c:set var="mlResult" value="0"/>
 								</c:when>
 								<c:otherwise>
-										<li><div class='profileImg' align="center"><img alt='프로필사진' src='/Colla_project/showProfileImg?num='+${m.num}></div>
+										<li><div class='profileImg' align="center"><img alt='프로필사진' src='/Colla_project/showProfileImg?num='+${m.num} onclick="showProfileInfoModal(${m.num})"></div>
 										<p>${m.name}</p></li>
 								</c:otherwise>
 							</c:choose>

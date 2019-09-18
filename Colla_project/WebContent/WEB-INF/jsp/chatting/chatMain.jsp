@@ -398,15 +398,7 @@ function showMemberList(){
 		
 		//프로필 이미지 누르면 모달 뜨게 하기
 		imgTag.on("click",function(){
-			imgTag = $("<img alt='"+msgInfo.mName+"님의 프로필 사진' src='${contextPath}/showProfileImg?num="+ msgInfo.mNum+ "'>");
-			var memberProfileImgDiv = $(".memberProfileImg");
-			var memberProfileInfoDiv = $(".memberProfileInfo");
-			memberProfileImgDiv.empty();
-			memberProfileInfoDiv.empty();
-			var modalProfileInfoTag = $("<h3>이름</h3><p>"+msgInfo.mName+"</p>");
-			memberProfileImgDiv.append(imgTag);
-			memberProfileInfoDiv.append(modalProfileInfoTag);
-			$("#memberInfoModal").fadeIn(100);
+			showProfileInfoModal(msgInfo.mNum);
 		});
 		
 		
