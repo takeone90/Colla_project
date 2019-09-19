@@ -4,34 +4,35 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>FAQ</title>
 <link rel="stylesheet" type="text/css" href="css/reset.css"/>
 <link rel="stylesheet" type="text/css" href="css/base.css"/>
 <link rel="stylesheet" type="text/css" href="css/headerMain.css"/>
 <link rel="stylesheet" type="text/css" href="css/footerMain.css"/>
 <link rel="stylesheet" type="text/css" href="css/main.css"/>
+<script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
 <script src="https://code.jquery.com/jquery-3.4.1.js"
   integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
   crossorigin="anonymous"></script>
 <script>  
-
-
 $(function() {
 	var questions = document.getElementsByClassName("question");
 	var i;
 	for(i=0; i<questions.length; i++) {
 	 	questions[i].addEventListener("click", function() {
-	 		this.classList.toggle("active");
+	 		this.classList.toggle("active"); //클래스가 존재한다면 제거하고 false, 존재하지 않으면 추가하고 true
 	 		var answer = this.nextElementSibling;
-	 		if (answer.style.display === "block") {
-	 			answer.style.display = "none";
-	 		} else {
-	 		    answer.style.display = "block";
+	 		if (answer.style.maxHeight) { //닫기
+	 			answer.style.maxHeight = null;
+	 			$(this).children().css({transform:'rotate(0deg)',transition:'all 0.4s'});
+	 		} else { //열기
+	 		    answer.style.maxHeight = answer.scrollHeight+"px";
+	 		   $(this).children().css({transform:'rotate(180deg)',transition:'all 0.4s'});
 	 		}
 	 	});
 	}
 });
-
 </script>  
 </head>
 <body>
@@ -44,39 +45,27 @@ $(function() {
 					<div class="head-body"> Frequently Asked Questions <br></div>
 					<div class="head-caption"> 궁금하신 게 있으신가요? 친절하게 알려드릴게요. </div>
 					<div class="questions">
-						<button class="question">질문 1 이건 어떻게 하냐?</button>
+						<button class="question" id="tmp">질문 1 이건 어떻게 하냐?<p class="icon"><i class="fas fa-angle-down"></i></p></button>
 						<div class="answer">
-							<p>답변1...<br>어쩌구<br>어쩌구</p>
+							<p class="answerDetail">답변1...<br>어쩌구<br>어쩌구</p>
 						</div>
-						<button class="question">질문 2 저건 어떻게 하냐?</button>
+						<button class="question">질문 2 저건 어떻게 하냐?<p class="icon"><i class="fas fa-angle-down"></i></p></button>
 						<div class="answer">
-							<p>답변2...<br>어쩌구<br>어쩌구</p>
+							<p class="answerDetail">답변2...<br>어쩌구<br>어쩌구</p>
 						</div>
-						<button class="question">질문 3 이건 어떻게 하냐?</button>
+						<button class="question">질문 3 이건 어떻게 하냐?<p class="icon"><i class="fas fa-angle-down"></i></p></button>
 						<div class="answer">
-							<p>답변3...<br>어쩌구<br>어쩌구</p>
+							<p class="answerDetail">답변3...<br>어쩌구<br>어쩌구</p>
 						</div>
-						<button class="question">질문 4 저건 어떻게 하냐?</button>
+						<button class="question">질문 4 저건 어떻게 하냐?<p class="icon"><i class="fas fa-angle-down"></i></p></button>
 						<div class="answer">
-							<p>답변4...<br>어쩌구<br>어쩌구</p>
+							<p class="answerDetail">답변4...<br>어쩌구<br>어쩌구</p>
 						</div>
-						<button class="question">질문 5 이건 어떻게 하냐?</button>
+						<button class="question">질문 5 이건 어떻게 하냐?<p class="icon"><i class="fas fa-angle-down"></i></p></button>
 						<div class="answer">
-							<p>답변5...<br>어쩌구<br>어쩌구</p>
+							<p class="answerDetail">답변5...<br>어쩌구<br>어쩌구</p>
 						</div>
 					</div>
-				</div>
-			</section>
-			
-			<section id="">
-				<div id="container">
-					<h1>질의응답1</h1>
-				</div>
-			</section>
-			
-			<section id="">
-				<div id="container">
-					<h1>질의응답2</h1>
 				</div>
 			</section>
 		</div>

@@ -9,13 +9,13 @@
 window.onscroll = function() {scrollFunction()};
 function scrollFunction() {
   if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-    $("#btn_page_top").css('display', 'block');
+		$("#btn_page_top").css('display', 'block'); //버튼 보임
   } else {
-	  $("#btn_page_top").css('display', 'none');
+		$("#btn_page_top").css('display', 'none'); //버튼 안 보임
   }
 }
 function topFunction() {
-  document.documentElement.scrollTop = 0;
+	document.documentElement.scrollTop = 0;
 }
 </script>
 <div id="footer">
@@ -51,7 +51,6 @@ function topFunction() {
 				</ul>
 			</div> <!-- co-sns -->
 		</div><!-- f2 -->
-		
 	</div>
 	<button onclick="topFunction()" id="btn_page_top">TOP</button>
 </div>
