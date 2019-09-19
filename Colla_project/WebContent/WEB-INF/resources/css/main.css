@@ -368,7 +368,12 @@
 div {
   -webkit-backface-visibility: hidden;
 }
-
+#wrap {
+	height: 100%;
+}
+#aboutUsAll {
+	height: 100%;
+}
 #aboutUs-member1,
 #aboutUs-member3 {
 	background-color: #EC6D63;	
@@ -381,7 +386,7 @@ div {
 	position: relative;
 	display: block;
 	overflow: hidden;
-	height: 500px;
+	height: 100%;
 	text-align: center;
 	padding: 80px 15px 100px 15px;
 }
@@ -421,7 +426,6 @@ div {
 	z-index: 1;	
 	transform: rotateY(180deg);
 }
-
 .aboutUs-card:hover .back {
 	z-index: 2;	
 	transform: rotateY(0deg);

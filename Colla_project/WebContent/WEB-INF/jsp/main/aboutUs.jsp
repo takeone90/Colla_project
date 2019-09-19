@@ -17,39 +17,6 @@
   integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
   crossorigin="anonymous"></script>
 <script>
-// $(window).scroll(function () {
-// 	var height = $(document).scrollTop(); //현재 스크롤 위치
-// 	console.log(height);
-// 	if(height > 10 && height < 750) {
-// 		scrollMove(1);
-// 	}
-// 	if(height > 750 && height < 1430) {
-// 		scrollMove(2);
-// 	}
-// 	if(height > 1430 && height < 2110) {
-// 		scrollMove(3);
-// 	}
-// 	if(height > 2110 && height < 2790) {
-// 		scrollMove(4);
-// 	}
-// }); 
-	
-// window.onscroll = function() {scrollFunction()};
-// function scrollFunction() {
-// 	if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-
-// 	} else {
-// 		$("#btn_page_top").css('display', 'none'); //버튼 안 보임
-// 	}
-// }
-
-// $(function() {
-// 	var scrollPosition = $("#aboutUs-member1").offset().top;
-// });
-// function scrollMove(num) {
-// 	var offset = $("#aboutUs-member"+num).offset().top; //section 위치 구하기
-// 	$("html, body").animate({scrollTop : offset}, 400); //section으로 이동
-// }
 $(function() {
 	$(".box").each(function() {
 		$(this).on("mousewheel DOMMouseScroll", function(e) {
@@ -138,8 +105,9 @@ $(function() {
 					</div>
 				</div>
 			</section>
+			<div class="box"><%@ include file="/WEB-INF/jsp/inc/footerMain.jsp" %></div>
 		</div>
-		<%@ include file="/WEB-INF/jsp/inc/footerMain.jsp" %>
+		
 	</div>
 </body>
 </html>
