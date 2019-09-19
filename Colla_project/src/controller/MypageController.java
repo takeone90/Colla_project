@@ -182,19 +182,16 @@ public class MypageController {
 		return "redirect:phoneModifyForm";
 	}
 	
-
+	@ResponseBody
 	@RequestMapping(value = "/modifyProfileImg", method = RequestMethod.POST)
-	public String modifyProfileImg(MultipartFile[] profileImg, String profileImgType, HttpSession session) {
+	public boolean modifyProfileImg(MultipartFile[] croppedImage, String profileImgType, HttpSession session) {
 		boolean result = false;
 		System.out.println("profileImgType:" + profileImgType);
-		System.out.println("profileImg:" + profileImg);
+		System.out.println("profileImg:" + croppedImage);
 		Member member = memberService.getMemberByEmail((String)session.getAttribute("userEmail"));
-		result = memberService.updateProfileImg(profileImg,profileImgType,member);
-		if(result) {
-			return "redirect:myPageMainForm";
-		}else {
-			return "redirect:myPageMainForm"; //에러 페이지로 변경
-		}
+		result = memberService.updateProfileImg(croppedImage,profileImgType,member);
+		System.out.println("result : "+result);
+		return result;
 	}
 	
 	@ResponseBody

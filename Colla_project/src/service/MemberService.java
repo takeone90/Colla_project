@@ -148,12 +148,12 @@ public class MemberService {
 	}
 	public boolean updateProfileImg(MultipartFile[] profileImg, String profileImgType, Member member) {
 		String path = UPLOAD_PATH + member.getEmail();
-		if(profileImg.length != 0 || (profileImgType != null && profileImgType.equals("defaultImg,"))) {
+		if(profileImg.length != 0 || (profileImgType != null && profileImgType.equals("defaultImg"))) {
 		//1. 프로필 파일 첨부 또는 기본이미지 설정
 			String beforeFileName = member.getProfileImg();
 			File beforeFile = new File(path + "/" + beforeFileName); //db 변경 전, 기존 멤버가 가지고 있는 프로필 이미지 정보를 가져온다
 			// 1-1. 기본 이미지로 설정한 경우
-			if(profileImgType != null && profileImgType.equals("defaultImg,")) { 
+			if(profileImgType != null && profileImgType.equals("defaultImg")) { 
 				member.setProfileImg(null);
 				if(dao.insertProfileImg(member)>0) {
 					if(beforeFile.exists()) { 

@@ -43,6 +43,7 @@
 .myPageContentRow {
 	width: 790px;
 	padding: 8px 24px;
+	cursor: pointer;
 }
 
 .modifyRow:hover {
@@ -78,20 +79,16 @@
 	overflow: hidden;
 	border: 2px solid #D3CDCD;
 }
-
+.myPageAccount #profileImg img{
+	width: 100%
+}
 .contentLine {
 	border: 0.5px solid #D3CDCD;
 	margin: 0 30px;
 }
 
-#profileImg img {
-	width: 100%;
-}
 
-#profileImg .auto {
-	width: auto;
-	height: auto;
-}
+
 
 /* 회원 정보 수정*/
 .myPageInner .myPageModify {
@@ -117,6 +114,10 @@
 	height: 167px;
 	overflow: hidden;
 	border: 2px solid #D3CDCD;
+}
+.myPageModify #profileImg img {
+	width: 100%;
+	height: 100%;
 }
 
 #profileModifyModal #profileImg img {
@@ -311,66 +312,23 @@
 	margin: 10px 25px;
 }
 
-/*테스트*/
-.thumbnail-wrap {
-	display: inline-block;
-	width: 25%;
-	border-radius: 50%;
-	border: 2px solid #fff;
-	margin: 0 auto 20px auto;
-	width: 167px;
-	height: 167px;
-	overflow: hidden;
-	border: 2px solid #D3CDCD;
+
+/*profileImgModify.jsp 이미지 크롭 모달*/
+#CropImgModal > .modalBody div{
+	width: 500px;
 }
 
-.thumbnail-wrap img {
-	display: block;
-	max-width: 100%;
-	height: auto;
-}
-
-.thumbnail {
-	position: relative;
-	padding-top: 100%;
-	overflow: hidden;
-}
-
-.thumbnail img {
-	position: absolute;
-	top: 0;
-	left: 0;
-}
-
-.thumbnail .centered {
-	position: absolute;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	-webkit-transform: translate(50%, 50%);
-	-ms-transform: translate(50%, 50%);
-	transform: translate(50%, 50%);
-}
-
-.thumbnail .centered img {
-	-webkit-transform: translate(-50%, -50%);
-	-ms-transform: translate(-50%, -50%);
-	transform: translate(-50%, -50%);
-}
-
-.thumbnail img.portrait {
+#CropImgModal > .modalBody img{
 	width: 100%;
-	max-width: none;
-	height: auto;
+}
+/*크롭영역을 라운드로 보이게!*/
+.cropper-crop-box, .cropper-view-box {
+    border-radius: 50%;
 }
 
-.thumbnail img.landscape {
-	width: auto;
-	max-width: none;
-	height: 100%;
+/*
+.cropper-view-box {
+    box-shadow: 0 0 0 1px #39f;
+    outline: 0;
 }
-
-.temp_img {
-	display: none;
-}
+*/
