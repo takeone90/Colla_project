@@ -54,20 +54,13 @@ function duplicateConnect(){
 	}); //end connect
 }// end duplicateConnect
 $(function(){
-	//회원정보 모달 닫기
-	$(".closeMemberInfo").on("click",function(){
-		$("#memberInfoModal").fadeOut(100);
-	});
+	
 	
 	
 	duplicateConnect();
 	
 	var pageType = $("#pageType").val();
 	if(pageType=="chatroom"){
-		//채팅방이고 추가채팅방인 경우에만 나가기 버튼 활성화
-		if($("#crNum").val()!="" && $("#isDefault").val()=="0"){
-			$("#exitChatRoom").show();
-		}
 		//헤더에 채팅방과 워크스페이스 정보 바꾸기
 		var isDefault = $("#isDefault").val();
 		if(isDefault==1){ //기본채팅방이면
@@ -77,12 +70,10 @@ $(function(){
 		 	var crName = $("#crName").val();
 		 	$("#chatRoomInfo > p").text(crName);
 		}
-	}else if(pageType=="calendar"){
-		$("#chatRoomInfo > p").text("캘린더");
-	}else if(pageType=="board"){
-		$("#chatRoomInfo > p").text("자유게시판");
 	}else if(pageType=="workspace"){
 		$("#chatRoomInfo > p").text("워크스페이스 메인");
+	}else{
+		$("#chatRoomInfo > p").text("${sessionScope.wsName}");
 	}
 	
 	
@@ -95,26 +86,8 @@ $(function(){
 <%-- 	<input type="hidden" value="${chatRoom.crNum}" id="crNum"> --%>
 <%-- 	<input type="hidden" value="${chatRoom.crIsDefault}" id="crIsDefault"> --%>
 	<div class="container">
-		
-
 		<div id="chatRoomInfo">
 			<p>페이지 이름</p>
 		</div>
-		<div id="etcBox"><a href="exitChatRoom?crNum=${chatRoom.crNum}" id="exitChatRoom">채팅방 나가기</a></div>
-		<div class="main-nav"></div>
 	</div>
-	<%---------------------------------------------회원정보 모달 ----------------------------------------------------%>
-		<div id="memberInfoModal" class="attachModal">
-			<div class="modalHead">
-				<h3 style="font-weight: bolder; font-size: 30px">회원정보</h3>
-			</div>
-			<br>
-			<div class="modalBody" id="memberInfoBody" align="center">
-					<div class="memberProfileImg"></div>
-					<div class="memberProfileInfo"></div>
-					<a href="#" class="closeMemberInfo">닫기</a>
-			</div> <!-- end modalBody -->
-		</div><!-- end memberInfoModal -->
-		
-		
 </div>

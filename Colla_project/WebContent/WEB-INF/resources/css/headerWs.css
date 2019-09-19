@@ -11,11 +11,7 @@
 	padding: 30px;
 	box-shadow: 2px 2px 5px 0.5px rgba(33, 33, 33, 0.2);
 }
-#memberInfoModal{
-	top: 20%;
-	left: 30%;
-	width: 400px;
-}
+
 #wsMainHeader{
     position: fixed;
     width: calc(100% - 200px);
@@ -107,27 +103,11 @@ a.member-btn:hover{
 	display : inline-block;
 	position : relative;
 	padding-top : 10px;
-	padding-left: 40px;
+	padding-left: 20px;
 }
 #chatRoomInfo p{
 	font-size : 20px;
-	color: #CCCBCA;
-}
-#etcBox{
-	display: table-cell;
-	position : absolute;
-	vertical-align : bottom;
-	right : 60px;
-}
-#exitChatRoom{
-	display : none;
-	color : #f5f3f2;
-	font-size: 13px;
-	transition:color .5s;
-}
-#exitChatRoom:hover{
-	color : #f74d3e;
-	
+	color: #807d78;
 }
 .profileImg:hover{
 	cursor: pointer;

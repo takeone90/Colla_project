@@ -19,6 +19,7 @@
 <!-- 구글 API -->
 <script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script>
 <script>
+//구글 로그아웃
 function signOut() {
 	var auth2 = gapi.auth2.getAuthInstance();
 	auth2.signOut().then(function () {
@@ -42,9 +43,6 @@ $(window).scroll(function() { //(윈도우 객체)사용자가 스크롤함
 		}
 	});
 });
-// $('#main-intro-ani').click(function() {
-// 	$(this).addClass("slideUp");
-// });
 //세번째 섹션
 $(window).scroll(function() {
 	$('#main-coworker-ani').each(function(){
@@ -56,17 +54,31 @@ $(window).scroll(function() {
 		}
 	});
 });
-// $('#main-coworker-ani').click(function() {
-// 	$(this).addClass("slideUp");
-// });
-
+//클릭하면 이미지 변경
+$(function() {
+	$(".main-function-details1").on("click", function() {
+		$(".main-function-image1").css('z-index', 10);
+		$(".main-function-image2").css('z-index', 1);
+		$(".main-function-image3").css('z-index', 1);
+	});	
+	$(".main-function-details2").on("click", function() {
+		$(".main-function-image1").css('z-index', 1);
+		$(".main-function-image2").css('z-index', 10);
+		$(".main-function-image3").css('z-index', 1);
+	});	
+	$(".main-function-details3").on("click", function() {
+		$(".main-function-image1").css('z-index', 1);
+		$(".main-function-image2").css('z-index', 1);
+		$(".main-function-image3").css('z-index', 10);
+	});		
+});
 </script>
 </head>
 <body>
 	<div id="wrap">
 		<%@ include file="/WEB-INF/jsp/inc/headerMain.jsp" %>
 		<div id="welcome">
-			<section id="main-cover">
+			<section id="main-cover" class="box">
 				<div id="container">
 					<div class="head-title"><p class="animated infinite pulse">오늘도 열심히 코딩</p></div>
 					<div class="animated fadeInUp"><div class="head-body">Work Together.<br>
@@ -76,19 +88,38 @@ $(window).scroll(function() {
 				</div>
 			</section>
 			
-			<section id="main-intro">
+			<section id="main-intro" class="box">
 				<div id="container">
 					<div id="main-intro-ani">
-						<div class="head-title">콜라 장점 소개</div>
-						<div class="head-body">Work Together.<br>
-						This Is For Collaboration.<br>
-						COLLA Will Provide The Best Service.</div>
-						<div class="head-caption">질수없조는 지지 않아</div>
+						<div class="head-title">콜라 기능 소개</div>
+<!-- 						<div class="head-body"></div> -->
+<!-- 						<div class="head-caption"></div> -->
+						<div class="main-function">
+							<div class="main-function-images">
+								<div class="main-function-image1">사진1</div>
+								<div class="main-function-image2">사진2</div>
+								<div class="main-function-image3">사진3</div>
+							</div>
+							<div class="main-function-details">
+								<div class="main-function-details1">
+									<p>기능1</p>
+									<p>기능 설명1</p>
+								</div>
+								<div class="main-function-details2">
+									<p>기능2</p>
+									<p>기능 설명2</p>
+								</div>
+								<div class="main-function-details3">
+									<p>기능3</p>
+									<p>기능 설명3</p>
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>
 			</section>
 			
-			<section id="main-coworker">
+			<section id="main-coworker" class="box">
 				<div id="container">
 					<div id="main-coworker-ani">
 						<div class="head-title">협력사 로고와 이름</div>

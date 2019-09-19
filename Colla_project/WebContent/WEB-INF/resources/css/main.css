@@ -22,6 +22,59 @@
 #main-intro {
 	background-color: #EC6D63;
 }
+.main-function {
+	width: 1200px;
+    height: 700px;
+    margin: 0 auto;
+}
+.main-function-images {
+	background-color: white;
+	width: 70%;
+    height: 50%;
+    position: relative;
+    margin: 0 auto;
+}
+.main-function-images > div {
+	width: 100%;
+    height: 100%;
+}
+.main-function-image1 {
+	background-color: aqua;
+	position: relative;
+	display: inline-block;
+	z-index: 2;	
+}
+.main-function-image2 {
+	background-color: gray;
+	position: absolute;
+	display: inline-block;
+	top: 0;
+    left: 0;
+    z-index: 1;	
+}
+.main-function-image3 {
+	background-color: blue;
+	position: absolute;
+	display: inline-block;
+	top: 0;
+    left: 0;
+    z-index: 1;	
+}
+.main-function-details {
+	background-color: green;
+	width: 70%;
+    height: 30%;
+    position: relative;
+    margin: 0 auto;
+}
+.main-function-details > div {
+	width: 33%;
+    height: 100%;
+    background-color: fuchsia;	
+    display: inline-block;
+}
+
+
 #main-coworker {
 	background-color: #ffffff;
 }
@@ -87,17 +140,17 @@
 	font-size: 16px;
 	margin-bottom: 30px;
 }
-.box-inside {
+
+/* pricing */
+
+.price-box-inside {
     display: inline-flex;
     border: 1px solid #b4b4b4;
-    width: 70%;
+    width: 55%;
     min-width: 930px;
     border-radius: 6px;
     text-align: left;
 }
-
-/* pricing */
-
 .price-each-col {
     padding: 20px;
     width: 30%;
@@ -162,6 +215,7 @@
 }
 .price-detail-content {
 	display: inline-block;
+	font-size: 15px;
 }
 .price-start-button {
 	width: 100%;
@@ -204,21 +258,18 @@
 }
 .answer {
 	border-radius: 10px;
-	padding: 20px 18px;
-	display: none;
+	padding: 0 18px;
 	overflow: hidden;
+	max-height: 0;
 	transition: max-height 0.2s ease-out;
 	background-color: #EC6D63;
 }
-.question:after {
-  content: '열기';
-  font-size: 13px;
-  color: #777;
-  float: right;
-  margin-left: 5px;	
+.icon {
+	display: inline-block;
+    float: right;
 }
-.active:after {
-  content: "닫기";
+.answerDetail {
+	padding: 20px 0px;
 }
 
 /* aboutUs */

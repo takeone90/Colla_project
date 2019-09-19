@@ -21,11 +21,10 @@
 			<section id="pricing-head">
 				<div id="container">
 					<div class="head-title"> 가격 정책 </div>
-					<div class="head-body">Work.<br>
-					With Your Coworkers.<br>
-					COLLA will provide the best service.</div>
+					<div class="head-body">High Quality At A Reasonable Price.</div>
 					<div class="head-caption">오늘부터 합리적인 가격으로 COLLA를 시작해보세요.</div>
-					<div class="box-inside">
+					<div class="price-box-inside">
+					
 						<div class="price-each-col">
 							<div class="price-title">Personal</div>
 							<div class="price-desc">혼자서 사용하시겠어요?<br>탁월한 선택입니다.</div>
@@ -55,6 +54,7 @@
 								<button class="price-start-button">무료 평가판 시작</button>
 							</div>
 						</div>
+						
 						<div class="price-each-col">
 							<div class="price-title">Business</div>
 							<div class="price-desc">소규모 기업 어쩌구<br>강하게 추천합니다!</div>
@@ -84,6 +84,7 @@
 								<button class="price-start-button">무료 평가판 시작</button>
 							</div> 
 						</div>
+						
 						<div class="price-each-col">
 							<div class="price-title">Enterprise</div>
 							<div class="price-desc">대기업 어쩌구<br>더 큰 성과를 낼 수 있을 거예요!</div>
@@ -114,20 +115,7 @@
 							</div>
 						</div>
 					</div>	
-				</div>
-								
-			</section>
-			
-			<section id="">
-				<div id="container">
-					<h1>가격 정책2</h1>
-				</div>
-			</section>
-			
-			<section id="">
-				<div id="container">
-					<h1>가격 정책3</h1>
-				</div>
+				</div>		
 			</section>
 		</div>
 		<%@ include file="/WEB-INF/jsp/inc/footerMain.jsp" %>

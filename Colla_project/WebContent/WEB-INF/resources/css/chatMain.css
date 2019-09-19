@@ -22,17 +22,22 @@
 .chatMsg {
 	position: relative;
 	opacity: 1;
-	background-color: #ebe6e6;
+	background-color: white;
 	border-bottom: 0.5px solid #bdbbbb;
 	padding: 10px;
 }
-
+.chatMsg:hover{
+	background-color: #edeff0;
+}
 .myMsg {
 	position: relative;
 	opacity: 1;
-	background-color: #deeafc;
+	background-color: #d9f2fa;
 	border-bottom: 0.5px solid #bdbbbb;
 	padding: 10px;
+}
+.myMsg:hover{
+	background-color:#c3e1eb;
 }
 .dateMsg{
 	background-color: white;
@@ -64,6 +69,7 @@
 	width: 60px;
 	height: 60px;
 	border-radius: 50px;
+	border :  1px solid #bdbbbb;
 	background-color: white;
 	margin-left: 5px;
 	margin-right: 10px;
@@ -467,10 +473,11 @@ pre .CodeMirror-line{
 
 #chatNavBox{
 	display : inline-block;
+	top : 0;
 	position : fixed;
 	right : -540px;
 	width : 600px;
-	height : calc(100% - 130px);
+	height : calc(100% - 60px);
 	z-index: 1;
 	transition: All 0.2s ease;
  	 -webkit-transition: All 0.2s ease;
@@ -506,7 +513,7 @@ pre .CodeMirror-line{
 	border : 0.5px solid #dee1e3;
 	border-radius : 3px;
 	width : 95%;
-	height : calc(100% - 70px);
+	height : calc(100% - 100px);
 }
 #chatNavContent p{
 	margin-top : 10px;
@@ -670,7 +677,19 @@ input[type=radio]{
 	width : 502px;
 	height : 30px;
 	margin-left : 5px;
-	margin-bottom:31px; 
+	margin-bottom:61px; 
 	border-radius : 5px;
 	border: 1px solid #d4cbcb;
+}
+#etcBox{
+	float: right;
+    margin-top: 13px;
+    margin-right: 23px;
+}
+#exitChatRoom{
+	color : black;
+	font-size: 13px;
+	transition:color .5s;
+}#exitChatRoom:hover{
+	color : #f74d3e;
 }

@@ -1,15 +1,48 @@
-<%@page import="org.springframework.web.context.annotation.SessionScope"%>
+<%@page import="org.springframework.web.context.request.SessionScope"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:set var="contextPath" value="<%=request.getContextPath() %>"/>
 <script>
+	function showProfileInfoModal(mNum){
+			$.ajax({
+				url : "${contextPath}/getMemberInfoForProfileImg",
+				data : {"mNum":mNum},
+				dataType : "json",
+				success : function(member){
+					var imgTag = $("<img alt='님의 프로필 사진' src='${contextPath}/showProfileImg?num="+ member.num+ "'>");
+					var memberProfileImgDiv = $(".memberProfileImg");
+					var memberProfileInfoDiv = $(".memberProfileInfo");
+					memberProfileImgDiv.empty();
+					memberProfileInfoDiv.empty();
+					var modalProfileInfoTag = $("<h3>이름</h3><p>"+member.name+"</p><br><h3>이메일</h3><p>"+member.email+"</p><br><h3>연락처</h3><p>"+member.phone+"</p>");
+					memberProfileImgDiv.append(imgTag);
+					memberProfileInfoDiv.append(modalProfileInfoTag);
+				},
+				error : function(){
+					alert("프로필사진 정보 불러오기 에러발생");
+				}
+			});
+		$("#memberInfoModal").fadeIn(100);
+	}
 	$(function(){
 		loadChatList();
+		
+		//프로필 이미지 누르면 모달 뜨게 하기
+// 		$(".profileImg").on("click",function(){
+// 			showProfileInfoModal();
+// 		});
+		
+		
+		//회원정보 모달 닫기
+		$(".closeMemberInfo").on("click",function(){
+			$("#memberInfoModal").fadeOut(100);
+		});
 	});
 	function loadChatList(){
 		var currWnum = $("#currWnum").val();
 		var chatList = $(".chatList");
+		var crNum = 
 		$.ajax({
 			data : {"currWnum":currWnum},
 			url : "${contextPath}/getChatList",
@@ -18,7 +51,7 @@
 				chatList.empty();
 				$.each(d,function(idx,item){
 					var str='<li '+ ( ${sessionChatRoom.crNum} ==item.crNum?'class="currChat"':"")+'><a href="${contextPath}/chatMain?crNum='+item.crNum+'">'+item.crName+'</a></li>';
-						chatList.append(str);
+					chatList.append(str);
 				});
 			}
 		});
@@ -69,4 +102,16 @@
 		</ul>
 		</div>
 	</div>
+	<%---------------------------------------------회원정보 모달 ----------------------------------------------------%>
+		<div id="memberInfoModal" class="attachModal">
+			<div class="modalHead">
+				<h3 style="font-weight: bolder; font-size: 30px">회원정보</h3>
+			</div>
+			<br>
+			<div class="modalBody" id="memberInfoBody" align="center">
+					<div class="memberProfileImg"></div>
+					<div class="memberProfileInfo"></div>
+					<a href="#" class="closeMemberInfo">닫기</a>
+			</div> <!-- end modalBody -->
+		</div><!-- end memberInfoModal -->
 </div>

@@ -7,11 +7,11 @@
 <head>
 <meta charset="UTF-8">
 <title>워크스페이스</title>
-<link rel="stylesheet" type="text/css" href="css/reset.css"/>
-<link rel="stylesheet" type="text/css" href="css/base.css"/>
-<link rel="stylesheet" type="text/css" href="css/headerWs.css"/>
-<link rel="stylesheet" type="text/css" href="css/navWs.css"/>
-<link rel="stylesheet" type="text/css" href="css/workspace.css"/>
+<link rel="stylesheet" type="text/css" href="${contextPath}/css/reset.css"/>
+<link rel="stylesheet" type="text/css" href="${contextPath}/css/base.css"/>
+<link rel="stylesheet" type="text/css" href="${contextPath}/css/headerWs.css"/>
+<link rel="stylesheet" type="text/css" href="${contextPath}/css/navWs.css"/>
+<link rel="stylesheet" type="text/css" href="${contextPath}/css/workspace.css"/>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script> <!-- font awsome -->
 <script>
@@ -19,7 +19,7 @@
 	
 	$(function(){	
 		//WS추가 모달
-		$(".openWsModal").on("click",function(){
+		$("#openWsModal").on("click",function(){
 			$("#addWsModal").fadeIn(300);
 		});
 		$("#closeWsModal").on("click",function(){
@@ -67,11 +67,13 @@
 		//워크스페이스 하나 숨기고 닫기
 		$(".showWsDetail").on("click",function(){
 			
-			if($(this).children().attr('class')=='fas fa-angle-down'){
+			if( $(this).children().hasClass('fa-angle-down')){
+				$(this).parent().addClass('openedWs');
 				$(this).children().attr('class','fas fa-angle-up');				
 			}else{
+				$(this).parent().removeClass('openedWs');
 				$(this).children().attr('class','fas fa-angle-down');
-			}
+			}	
 			$(this).next().toggle(300);
 			return false;
 		});
@@ -111,8 +113,7 @@
 	<div id="wsBody">
 		<input type="hidden" value="workspace" id="pageType">
 		<div id="wsBodyContainer"> 
-		<h2>Workspace</h2>
-		<h3>Workspace List</h3>
+		<h2>Workspace List</h2>
 		<ul>
 			<c:forEach items="${workspaceList}" var="ws">
 				<li class="ws">
@@ -125,9 +126,7 @@
 							<p>채팅리스트</p>
 							<ul>
 							<c:forEach items="${ws.crList}" var="cr">
-								<div class="crRoundBox">
 									<li><a href="chatMain?crNum=${cr.crNum}">${cr.crName}</a></li>
-								</div>
 							</c:forEach>
 								<a href="#" class="openChatModal" data-wnum="${ws.wsInfo.num}">+</a>
 							</ul>
@@ -145,33 +144,30 @@
 							</c:forEach>
 							<c:choose>
 								<c:when test="${mlResult eq 1}">
-									<div class="wsmRoundBoxOn">
 										<li>${m.name}</li>
-									</div>
 									<c:set var="mlResult" value="0"/>
 								</c:when>
 								<c:otherwise>
-									<div class="wsmRoundBox">
-										<li>${m.name}</li>
-									</div>
+										<li><div class='profileImg' align="center"><img alt='프로필사진' src='/Colla_project/showProfileImg?num='+${m.num} onclick="showProfileInfoModal(${m.num})"></div>
+										<p>${m.name}</p></li>
 								</c:otherwise>
 							</c:choose>
 						</c:forEach>
-							<a href="#" class="openAddMemberModal" data-wnum="${ws.wsInfo.num}">+</a>
+							<li class="addWsmBtnLi"><a href="#" class="openAddMemberModal" data-wnum="${ws.wsInfo.num}">+</a></li>
 						</ul>
 						</div>
 					</div><!-- wsDetail end -->
 					
 					
-					<div id="exitWs">
-						<a href="exitWs?wNum=${ws.wsInfo.num}" style="color:red">워크스페이스 나가기</a>
+					<div class="exitWs">
+						<a href="exitWs?wNum=${ws.wsInfo.num}"><i class="fas fa-door-open"></i></a>
 					</div>
 				</li>
 			</c:forEach>
 			
 		</ul>
-		<div>
-			<button class="openWsModal">워크스페이스 추가</button>
+		<div id="openWsDiv" align="center">
+		<a href="#" id="openWsModal">+</a>
 		</div>
 		<!-- 임시로 만든 로그아웃버튼 -->
 		<div>
