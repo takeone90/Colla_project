@@ -12,10 +12,12 @@
 <link rel="stylesheet" type="text/css" href="css/main.css"/>
 <link rel="stylesheet" type="text/css" href="css/animate.css"/>
 <link rel="stylesheet" type="text/css" href="css/animationCheatSheet.css"/>
+<script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
 <script src="https://code.jquery.com/jquery-3.4.1.js"
   integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
   crossorigin="anonymous"></script>
 <script type="text/javascript">
+//두번째 섹션 animate
 $(window).scroll(function() {
 	$('#collaInfo-function1-ani').each(function(){
 	var imagePos = $(this).offset().top;
@@ -26,6 +28,7 @@ $(window).scroll(function() {
 		}
 	});
 });
+//세번째 섹션 animate
 $(window).scroll(function() {
 	$('#collaInfo-function2-ani').each(function(){
 	var imagePos = $(this).offset().top;
@@ -36,6 +39,7 @@ $(window).scroll(function() {
 		}
 	});
 });
+//네번째 섹션 animate
 $(window).scroll(function() {
 	$('#collaInfo-function3-ani').each(function(){
 	var imagePos = $(this).offset().top;
@@ -46,42 +50,99 @@ $(window).scroll(function() {
 		}
 	});
 });
+//다섯번째 섹션 animate
+$(window).scroll(function() {
+	$('#collaInfo-function4-ani').each(function(){
+	var imagePos = $(this).offset().top;
+	var topOfWindow = $(window).scrollTop();
+		if (imagePos < topOfWindow+500) {
+			$(this).css({visibility:"visible"});
+			$(this).addClass("animated slideInLeft");
+		}
+	});
+});
+//섹션 스크롤 이동
+$(function() {
+	$(".box").each(function() {
+		$(this).on("mousewheel DOMMouseScroll", function(e) {
+			e.preventDefault();
+			var delta = 0;
+			if(!event) {
+				event = window.event;
+			}
+			if(event.wheelDelta) {
+				delta = event.wheelDelta / 120;
+			} else if(event.detail) {
+				delta = -event.detail/3;
+			}
+			var moveTop = null;
+			if(delta < 0) { //위에서 아래로
+				if($(this).next() != undefined) {
+					moveTop = $(this).next().offset().top;
+				}
+			} else { //아래서 위로
+				if($(this).index() > 0) {
+					if($(this).prev() != undefined) {
+						moveTop = $(this).prev().offset().top;
+					}
+				} else  { //헤더 보이기
+					moveTop = 0;
+				}
+			}
+			$("html, body").stop().animate({
+				scrollTop: moveTop + 'px'
+			}, {
+				duration: 800, complete: function () {
+				}
+			});
+		})
+	})
+});
 </script>
 </head>
 <body>
 	<div id="wrap">
 		<%@ include file="/WEB-INF/jsp/inc/headerMain.jsp" %>
 		<div id="collaInfoAll">
-			<section id="collaInfo-cover">
+			<section id="collaInfo-cover" class="box">
 				<div id="container">
 					<div id="collaInfo-cover-ani" class="animated zoomIn">
-						<div class="head-title"> COLLAboration </div>
+						<div class="head-title"><p>COLLA</p><p>boration</p></div>
 						<div class="head-body">이제 쉽게 공유하고 협업할 수 있습니다.</div>
 						<div class="head-caption">COLLA에 어떤 기능들이 있는지 살펴볼까요?</div>
+						<div class="head-arrow"><i class="fas fa-angle-double-down"></i></div>
 					</div>
 				</div>
 			</section>
 			
-			<section id="collaInfo-function1">
+			<section id="collaInfo-function1" class="box">
 				<div id="container">
 					<div class="collaInfo-functions">
 						<div id="collaInfo-function1-stable">
 							<div>그림1</div>
 						</div>
 						<div id="collaInfo-function1-ani">
-							<div class="head-title"> WorkSpace </div>
-							<div class="head-body">가볍게 워크 스페이스 생성</div>
+							<div class="head-title">Workspace</div>
+							<div class="head-body">쉽고 빠르게 워크스페이스 생성</div>
+							<div class="head-caption">워크스페이스는 COLLA에서 정의하는 프로젝트 단위입니다.<br>
+								워크스페이스는 사용에 따라 조직이 될 수도 있고,<br> 개별 프로젝트가 될 수도 있습니다.<br>
+								이렇게 만들어진 워크스페이스마다<br> 채팅, 게시판, 일정을 따로 관리할 수 있습니다.
+							</div>
 						</div>
 					</div>
 				</div>
 			</section>
 			
-			<section id="collaInfo-function2">
+			<section id="collaInfo-function2" class="box">
 				<div id="container">
 					<div class="collaInfo-functions">
 						<div id="collaInfo-function2-ani">
-							<div class="head-title"> Chatting </div>
-							<div class="head-body">워크 스페이스 채팅방에서 원하는 사람들과 채팅</div>
+							<div class="head-title">Chatting</div>
+							<div class="head-body">멤버들과의 실시간 채팅</div>
+							<div class="head-caption">COLLA는 워크스페이스 멤버들과의 실시간 채팅 서비스를 제공합니다.<br>
+								파일, 코드, 지도를 첨부할 수 있는 제공합니다.<br>채팅방은 사용 목적에 따라 부서별, 계열사별 등 다양한<br>
+								소그룹을 묶어내고 소통할 수 있는 편리함을 제공합니다.
+							</div>
 						</div>
 						<div id="collaInfo-function2-stable">
 							<div>그림2</div>
@@ -90,21 +151,43 @@ $(window).scroll(function() {
 				</div>
 			</section>
 			
-			<section id="collaInfo-function3">
+			<section id="collaInfo-function3" class="box">
 				<div id="container">
 					<div class="collaInfo-functions">
 						<div id="collaInfo-function3-stable">
 							<div>그림3</div>
 						</div>
 						<div id="collaInfo-function3-ani">
-							<div class="head-title"> Calendar </div>
-							<div class="head-body">팀원들(?)과 일정을 공유하고 관리</div>
+							<div class="head-title">Calendar</div>
+							<div class="head-body">멤버들과 일정을 공유하고 관리</div>
+							<div class="head-caption">COLLA는 워크스페이스 멤버들과 함께 공유하고 관리할 수 있는<br>
+								공유 캘린더 기능을 제공합니다.<br>어느 채팅방에 있건 같은 워크스페이스 멤버라면<br>
+								누구든지 공유 캘린더를 이용하고 일정을 추가, 삭제, 수정할 수 있습니다.
+							</div>
 						</div>
 					</div>
 				</div>
 			</section>
+			
+			<section id="collaInfo-function4" class="box">
+				<div id="container">
+					<div class="collaInfo-functions">
+						<div id="collaInfo-function4-ani">
+							<div class="head-title">Board</div>
+							<div class="head-body">멤버들과 자유롭게 소통하는 게시판</div>
+							<div class="head-caption">COLLA는 워크스페이스 멤버들 모두가 자유롭게 소통할 수 있는 게시판을 제공합니다.<br>
+								주요사항을 공지로 상단에 띄을 수 있고,<br>파일 첨부는 물론<br>
+								동영상 스트리밍 기능 또한 제공합니다.
+							</div>
+						</div>
+						<div id="collaInfo-function4-stable">
+							<div>그림4</div>
+						</div>
+					</div>
+				</div>
+			</section>
+			<div class="box"><%@ include file="/WEB-INF/jsp/inc/footerMain.jsp" %></div>
 		</div>
-		<%@ include file="/WEB-INF/jsp/inc/footerMain.jsp" %>
 	</div>
 </body>
 </html>

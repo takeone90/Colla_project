@@ -45,4 +45,5 @@
 			</ul>
 		</div>
 	</div>
+	<div class="header-wave"><img class="header-wave-img" src="${contextPath }/img/COLLA_WAVE_PNG.png" /></div>
 </div>
