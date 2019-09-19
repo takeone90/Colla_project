@@ -71,7 +71,7 @@ $(function(){
 		 	$("#chatRoomInfo > p").text(crName);
 		}
 	}else if(pageType=="workspace"){
-		$("#chatRoomInfo > p").text("워크스페이스 메인");
+		$("#chatRoomInfo > p").text("워크스페이스");
 	}else{
 		$("#chatRoomInfo > p").text("${sessionScope.wsName}");
 	}
