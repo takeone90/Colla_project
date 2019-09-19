@@ -40,8 +40,6 @@ $(function() {
 					if($(this).prev() != undefined) {
 						moveTop = $(this).prev().offset().top;
 					}
-				} else  { //헤더 보이기
-					moveTop = 0;
 				}
 			}
 			$("html, body").stop().animate({

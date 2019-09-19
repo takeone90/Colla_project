@@ -92,13 +92,16 @@
     margin: 0 auto;
     margin-top: 30px;
 }
-.main-function-details > div {
+.main-function-details1,
+.main-function-details2,
+.main-function-details3 {
 	width: 220px;
     height: 220px;
     background-color: #4D4B4C;
     display: inline-block;
     margin: 0px 10px;
     border-radius: 50%;
+    display:  
 }
 .main-function-details1:hover {
 	background-color: #D8D8D8;
@@ -109,7 +112,7 @@
 .main-function-details3:hover {
 	background-color: #D8D8D8;
 }
-.hoverOn {
+.main-function-details > .on {
 	background-color: #EC6D63;
 }
 .main-function-details > div > div {

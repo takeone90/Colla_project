@@ -100,28 +100,25 @@ $(function() {
 		$(".main-function-image1").css('z-index', 10);
 		$(".main-function-image2").css('z-index', 1);
 		$(".main-function-image3").css('z-index', 1);
-		$(".main-function-details1").addClass('hoverOn');
-// 		$(".main-function-details1").css('background-color', '#EC6D63');
-// 		$(".main-function-details2").css('background-color', '#4D4B4C');
-// 		$(".main-function-details3").css('background-color', '#4D4B4C');
+		$(".main-function-details1").toggleClass('on');
+// 		$(".main-function-details2").toggleClass('on');
+// 		$(".main-function-details3").toggleClass('on');
 	});	
 	$(".main-function-details2").on("click", function() {
 		$(".main-function-image1").css('z-index', 1);
 		$(".main-function-image2").css('z-index', 10);
 		$(".main-function-image3").css('z-index', 1);
-		$(".main-function-details2").addClass('hoverOn');
-// 		$(".main-function-details1").css('background-color', '#4D4B4C');
-// 		$(".main-function-details2").css('background-color', '#EC6D63');
-// 		$(".main-function-details3").css('background-color', '#4D4B4C');
+// 		$(".main-function-details1").toggleClass('on');
+		$(".main-function-details2").toggleClass('on');
+// 		$(".main-function-details3").toggleClass('on');
 	});	
 	$(".main-function-details3").on("click", function() {
 		$(".main-function-image1").css('z-index', 1);
 		$(".main-function-image2").css('z-index', 1);
 		$(".main-function-image3").css('z-index', 10);
-		$(".main-function-details3").addClass('hoverOn');
-// 		$(".main-function-details1").css('background-color', '#4D4B4C');
-// 		$(".main-function-details2").css('background-color', '#4D4B4C');
-// 		$(".main-function-details3").css('background-color', '#EC6D63');
+// 		$(".main-function-details1").toggleClass('on');
+// 		$(".main-function-details2").toggleClass('on');
+		$(".main-function-details3").toggleClass('on');
 	});		
 });
 </script>
@@ -151,15 +148,15 @@ $(function() {
 								<div class="main-function-image3">사진3</div>
 							</div>
 							<div class="main-function-details">
-								<div class="main-function-details1">
-									<div><span>가볍게<br>프로젝트 생성</span></div>
-								</div>
-								<div class="main-function-details2">
-									<div><span>프로젝트 채팅방으로<br>원하는 멤버들과 채팅</span></div>
-								</div>
-								<div class="main-function-details3">
-									<div><span>멤버들과 일정을<br>공유하고 관리</span></div>
-								</div>
+								<label><input type="radio" class="main-function-details1" name="main-function-radio">
+									<span>가볍게<br>프로젝트 생성</span></label>
+
+								<label><input type="radio" class="main-function-details2" name="main-function-radio">
+									<span>프로젝트 채팅방으로<br>원하는 멤버들과 채팅</span></label>
+<!-- 								</div> -->
+								<label><input type="radio" class="main-function-details3" name="main-function-radio">
+									<span>멤버들과 일정을<br>공유하고 관리</span></label>
+<!-- 								</div> -->
 							</div>
 						</div>
 					</div>
