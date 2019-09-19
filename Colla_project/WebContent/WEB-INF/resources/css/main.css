@@ -22,6 +22,59 @@
 #main-intro {
 	background-color: #EC6D63;
 }
+.main-function {
+	width: 1200px;
+    height: 700px;
+    margin: 0 auto;
+}
+.main-function-images {
+	background-color: white;
+	width: 70%;
+    height: 50%;
+    position: relative;
+    margin: 0 auto;
+}
+.main-function-images > div {
+	width: 100%;
+    height: 100%;
+}
+.main-function-image1 {
+	background-color: aqua;
+	position: relative;
+	display: inline-block;
+	z-index: 2;	
+}
+.main-function-image2 {
+	background-color: gray;
+	position: absolute;
+	display: inline-block;
+	top: 0;
+    left: 0;
+    z-index: 1;	
+}
+.main-function-image3 {
+	background-color: blue;
+	position: absolute;
+	display: inline-block;
+	top: 0;
+    left: 0;
+    z-index: 1;	
+}
+.main-function-details {
+	background-color: green;
+	width: 70%;
+    height: 30%;
+    position: relative;
+    margin: 0 auto;
+}
+.main-function-details > div {
+	width: 33%;
+    height: 100%;
+    background-color: fuchsia;	
+    display: inline-block;
+}
+
+
 #main-coworker {
 	background-color: #ffffff;
 }
