@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+	String contextPath = request.getContextPath();
+	request.setAttribute("contextPath", contextPath);
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -51,7 +55,7 @@
 								</div>
 							</div>
 							<div>
-								<button class="price-start-button">무료 평가판 시작</button>
+								<button class="price-start-button" onclick="location.href='${contextPath}/joinStep1'">무료 평가판 시작</button>
 							</div>
 						</div>
 						
@@ -81,7 +85,7 @@
 								</div>
 							</div>
 							<div>
-								<button class="price-start-button">무료 평가판 시작</button>
+								<button class="price-start-button" onclick="location.href='${contextPath}/joinStep1'">무료 평가판 시작</button>
 							</div> 
 						</div>
 						
@@ -111,7 +115,7 @@
 								</div>
 							</div>
 							<div>
-								<button class="price-start-button">무료 평가판 시작</button>
+								<button class="price-start-button" onclick="location.href='${contextPath}/joinStep1'">무료 평가판 시작</button>
 							</div>
 						</div>
 					</div>	

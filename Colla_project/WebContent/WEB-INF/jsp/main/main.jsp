@@ -32,7 +32,7 @@ function onLoad() {
 	gapi.auth2.init();
 	});
 }
-//두번째 섹션
+//두번째 섹션 animate
 $(window).scroll(function() { //(윈도우 객체)사용자가 스크롤함
 	$('#main-intro-ani').each(function(){
 	var imagePos = $(this).offset().top; //좌표
@@ -43,7 +43,7 @@ $(window).scroll(function() { //(윈도우 객체)사용자가 스크롤함
 		}
 	});
 });
-//세번째 섹션
+//세번째 섹션 animate
 $(window).scroll(function() {
 	$('#main-coworker-ani').each(function(){
 	var imagePos = $(this).offset().top;
@@ -54,22 +54,74 @@ $(window).scroll(function() {
 		}
 	});
 });
+//섹션 스크롤 이동
+$(function() {
+	$(".box").each(function() {
+		$(this).on("mousewheel DOMMouseScroll", function(e) {
+			e.preventDefault();
+			var delta = 0;
+			if(!event) {
+				event = window.event;
+			}
+			if(event.wheelDelta) {
+				delta = event.wheelDelta / 120;
+			} else if(event.detail) {
+				delta = -event.detail/3;
+			}
+			var moveTop = null;
+			if(delta < 0) { //위에서 아래로
+				if($(this).next() != undefined) {
+					moveTop = $(this).next().offset().top;
+				}
+			} else { //아래서 위로
+				if($(this).index() > 0) {
+					if($(this).prev() != undefined) {
+						moveTop = $(this).prev().offset().top;
+					}
+				} else  { //헤더 보이기
+					moveTop = 0;
+				}
+			}
+			$("html, body").stop().animate({
+				scrollTop: moveTop + 'px'
+			}, {
+				duration: 800, complete: function () {
+				}
+			});
+		})
+	})
+
+
+	
+});
 //클릭하면 이미지 변경
 $(function() {
 	$(".main-function-details1").on("click", function() {
 		$(".main-function-image1").css('z-index', 10);
 		$(".main-function-image2").css('z-index', 1);
 		$(".main-function-image3").css('z-index', 1);
+		$(".main-function-details1").addClass('hoverOn');
+// 		$(".main-function-details1").css('background-color', '#EC6D63');
+// 		$(".main-function-details2").css('background-color', '#4D4B4C');
+// 		$(".main-function-details3").css('background-color', '#4D4B4C');
 	});	
 	$(".main-function-details2").on("click", function() {
 		$(".main-function-image1").css('z-index', 1);
 		$(".main-function-image2").css('z-index', 10);
 		$(".main-function-image3").css('z-index', 1);
+		$(".main-function-details2").addClass('hoverOn');
+// 		$(".main-function-details1").css('background-color', '#4D4B4C');
+// 		$(".main-function-details2").css('background-color', '#EC6D63');
+// 		$(".main-function-details3").css('background-color', '#4D4B4C');
 	});	
 	$(".main-function-details3").on("click", function() {
 		$(".main-function-image1").css('z-index', 1);
 		$(".main-function-image2").css('z-index', 1);
 		$(".main-function-image3").css('z-index', 10);
+		$(".main-function-details3").addClass('hoverOn');
+// 		$(".main-function-details1").css('background-color', '#4D4B4C');
+// 		$(".main-function-details2").css('background-color', '#4D4B4C');
+// 		$(".main-function-details3").css('background-color', '#EC6D63');
 	});		
 });
 </script>
@@ -80,19 +132,17 @@ $(function() {
 		<div id="welcome">
 			<section id="main-cover" class="box">
 				<div id="container">
-					<div class="head-title"><p class="animated infinite pulse">오늘도 열심히 코딩</p></div>
-					<div class="animated fadeInUp"><div class="head-body">Work Together.<br>
-					This Is For Collaboration.<br>
-					COLLA Will Provide The Best Service.</div>
-					<div class="head-caption">질수없조는 지지 않아</div></div>
+					<div class="head-body">가볍고 실속있는 협업 솔루션</div>
+					<div class="head-title"><p class="animated fadeInUp">COLLA</p></div>
+					<div class="head-caption animated fadeInUp">COLLA는 프로젝트를 중심으로<br>외부인들과 빠른 협업을 돕습니다.</div>
 				</div>
 			</section>
 			
 			<section id="main-intro" class="box">
 				<div id="container">
 					<div id="main-intro-ani">
-						<div class="head-title">콜라 기능 소개</div>
-<!-- 						<div class="head-body"></div> -->
+<!-- 						<div class="head-title"></div> -->
+						<div class="head-body">간단하게 프로젝트를 생성하고 그룹을 만드세요!</div>
 <!-- 						<div class="head-caption"></div> -->
 						<div class="main-function">
 							<div class="main-function-images">
@@ -102,16 +152,13 @@ $(function() {
 							</div>
 							<div class="main-function-details">
 								<div class="main-function-details1">
-									<p>기능1</p>
-									<p>기능 설명1</p>
+									<div><span>가볍게<br>프로젝트 생성</span></div>
 								</div>
 								<div class="main-function-details2">
-									<p>기능2</p>
-									<p>기능 설명2</p>
+									<div><span>프로젝트 채팅방으로<br>원하는 멤버들과 채팅</span></div>
 								</div>
 								<div class="main-function-details3">
-									<p>기능3</p>
-									<p>기능 설명3</p>
+									<div><span>멤버들과 일정을<br>공유하고 관리</span></div>
 								</div>
 							</div>
 						</div>
@@ -130,9 +177,10 @@ $(function() {
 					</div>
 				</div>
 			</section>
+			<div class="box"><%@ include file="/WEB-INF/jsp/inc/footerMain.jsp" %></div>
 		</div>	
 		<a href="#" onclick="signOut();">Sign out</a>
-		<%@ include file="/WEB-INF/jsp/inc/footerMain.jsp" %>
+		
 	</div>
 </body>
 </html>

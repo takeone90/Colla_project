@@ -3,7 +3,11 @@
 #header{
 	width:100%;
 	height:70px;
-	background-color:#fff;
+	background-color: #fff; /* 임시로 색깔 바꿈 */
+	position: fixed;
+  	top: 0px;
+  	left: 0px; 
+  	z-index: 99;
 }
 #header .container {
 	width:96%;
@@ -83,4 +87,12 @@ a.member-btn {
 
 a.member-btn:hover{
 	background-color:#EC6D63;
+}
+.header-wave {
+	width: 100%;
+    position: absolute;
+    z-index: 1;
+}
+.header-wave-img {
+	width: 100%;	
 }
