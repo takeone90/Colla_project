@@ -16,10 +16,10 @@
 <!-- 		<property name="username" value="colla"/> -->
 <!-- 		<property name="password" value="wlftndjqtwh19"/> -->
 <!-- 	</bean> -->
-	<!-- 히카리 dataSource -->
 	<bean id="uploadPath" class="java.lang.String">
 		<constructor-arg value="C:\temp\"></constructor-arg>
 	</bean>
+	<!-- 히카리 dataSource -->
 	<bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
 		<property name="driverClassName" value="oracle.jdbc.OracleDriver"/>
 		<property name="jdbcUrl" value="jdbc:oracle:thin:@colladb.crxlp3iv2we2.ap-northeast-1.rds.amazonaws.com:1521/ORCL"/>
