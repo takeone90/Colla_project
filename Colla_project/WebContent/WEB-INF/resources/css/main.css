@@ -92,13 +92,16 @@
     margin: 0 auto;
     margin-top: 30px;
 }
-.main-function-details > div {
+.main-function-details1,
+.main-function-details2,
+.main-function-details3 {
 	width: 220px;
     height: 220px;
     background-color: #4D4B4C;
     display: inline-block;
     margin: 0px 10px;
     border-radius: 50%;
+    display:  
 }
 .main-function-details1:hover {
 	background-color: #D8D8D8;
@@ -109,7 +112,7 @@
 .main-function-details3:hover {
 	background-color: #D8D8D8;
 }
-.hoverOn {
+.main-function-details > .on {
 	background-color: #EC6D63;
 }
 .main-function-details > div > div {
@@ -368,7 +371,12 @@
 div {
   -webkit-backface-visibility: hidden;
 }
-
+#wrap {
+	height: 100%;
+}
+#aboutUsAll {
+	height: 100%;
+}
 #aboutUs-member1,
 #aboutUs-member3 {
 	background-color: #EC6D63;	
@@ -381,7 +389,7 @@ div {
 	position: relative;
 	display: block;
 	overflow: hidden;
-	height: 500px;
+	height: 100%;
 	text-align: center;
 	padding: 80px 15px 100px 15px;
 }
@@ -421,7 +429,6 @@ div {
 	z-index: 1;	
 	transform: rotateY(180deg);
 }
-
 .aboutUs-card:hover .back {
 	z-index: 2;	
 	transform: rotateY(0deg);
