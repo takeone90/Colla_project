@@ -2,9 +2,12 @@ package controller;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.security.Principal;
+import java.util.Iterator;
 import java.util.Map;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -19,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import model.Member;
 import model.SetAlarm;
@@ -178,19 +182,16 @@ public class MypageController {
 		return "redirect:phoneModifyForm";
 	}
 	
-		
+	@ResponseBody
 	@RequestMapping(value = "/modifyProfileImg", method = RequestMethod.POST)
-	public String modifyProfileImg(MultipartFile[] profileImg, String profileImgType, HttpSession session) {
+	public boolean modifyProfileImg(MultipartFile[] croppedImage, String profileImgType, HttpSession session) {
 		boolean result = false;
 		System.out.println("profileImgType:" + profileImgType);
-		System.out.println("profileImg:" + profileImg);
+		System.out.println("profileImg:" + croppedImage);
 		Member member = memberService.getMemberByEmail((String)session.getAttribute("userEmail"));
-		result = memberService.updateProfileImg(profileImg,profileImgType,member);
-		if(result) {
-			return "redirect:myPageMainForm";
-		}else {
-			return "redirect:myPageMainForm"; //에러 페이지로 변경
-		}
+		result = memberService.updateProfileImg(croppedImage,profileImgType,member);
+		System.out.println("result : "+result);
+		return result;
 	}
 	
 	@ResponseBody

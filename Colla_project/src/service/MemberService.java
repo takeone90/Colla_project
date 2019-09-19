@@ -1,6 +1,9 @@
 package service;
 
 
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -8,10 +11,12 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import javax.imageio.ImageIO;
 import javax.mail.Session;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -23,6 +28,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.sun.mail.handlers.multipart_mixed;
 
@@ -149,7 +155,7 @@ public class MemberService {
 			// 1-1. 기본 이미지로 설정한 경우
 			if(profileImgType != null && profileImgType.equals("defaultImg")) { 
 				member.setProfileImg(null);
-				if(dao.insertProfileImg(member)>0) { 
+				if(dao.insertProfileImg(member)>0) {
 					if(beforeFile.exists()) { 
 						beforeFile.delete();
 					}
@@ -159,7 +165,7 @@ public class MemberService {
 			//1-2. 이미지를 변경한 경우	
 				String fullName = writeFile(profileImg,member);
 				member.setProfileImg(fullName);
-				if(dao.insertProfileImg(member)>0) { 
+				if(dao.insertProfileImg(member)>0) {
 					if(beforeFile.exists()) { 
 						beforeFile.delete();
 					}
@@ -194,7 +200,6 @@ public class MemberService {
 		}
 		return fullName;
 	}
-	
 	public byte[] getProfileImg(Member member,HttpServletRequest request) {
 		String path = UPLOAD_PATH + member.getEmail();
 		String profileImgName = member.getProfileImg();
