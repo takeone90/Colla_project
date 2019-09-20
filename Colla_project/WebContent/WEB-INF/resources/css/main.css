@@ -1,6 +1,17 @@
 @charset "UTF-8";
 
-/* main */
+/* -------------------- 공통 -------------------- */
+
+.head-title {
+	font-size: 72px;
+    font-weight: 500;
+    margin-bottom: 10px;
+    padding: 15px;
+    margin-top: 220px;
+    color: #4C4A4B;
+}
+
+/* -------------------- main -------------------- */
 
 #wrap {
 	height: 100%;
@@ -10,13 +21,26 @@
 	background-color: #ffffff;
 	height: 100%;
 }
-#welcome section {
+#main-cover,
+#main-intro {
 	position: relative;
 	display: block;
 	overflow: hidden;
 	height: 100%;
 	text-align: center;
 	padding: 80px 15px 100px 15px;
+}
+#main-partners {
+	position: relative;
+	display: block;
+	overflow: hidden;
+	height: 50%;
+	text-align: center;
+	padding: 80px 15px 100px 15px;	
+}
+#main-intro-ani,
+#main-partners-ani {
+	visibility: hidden;
 }
 #main-cover {
 	background-image: url("../img/Main_background.jpg");
@@ -43,33 +67,47 @@
 	background-color: #F5F5F5;
 }
 #main-intro .head-body {
-	margin-top: 8%;
-	font-weight: 300;
+	margin-top: 5%;
 }
 .main-function {
 	width: 1200px;
     height: 700px;
     margin: 0 auto;
+    padding-top: 40px;
 }
 .main-function-images {
 	background-color: white;
 	width: 70%;
-    height: 50%;
+    height: 60%;
     position: relative;
     margin: 0 auto;
 }
 .main-function-images > div {
 	width: 100%;
     height: 100%;
+    text-align: center;
+}
+.main-function-text {
+	font-weight: 300;	
+	font-size: 35px;
+	margin-bottom: 40px;
+	color: #4C4A4B;
+}
+.main-function-image1 > img {
+	height: 80%;
+}
+.main-function-image3 > img {
+	margin-left: 95px;
+	height: 100%;
 }
 .main-function-image1 {
-	background-color: aqua;
+	background-color: #F5F5F5;
 	position: relative;
 	display: inline-block;
 	z-index: 2;	
 }
 .main-function-image2 {
-	background-color: gray;
+	background-color: blue;
 	position: absolute;
 	display: inline-block;
 	top: 0;
@@ -77,7 +115,7 @@
     z-index: 1;	
 }
 .main-function-image3 {
-	background-color: blue;
+	background-color: #F5F5F5;
 	position: absolute;
 	display: inline-block;
 	top: 0;
@@ -89,7 +127,7 @@
     height: 32%;
     position: relative;
     margin: 0 auto;
-    margin-top: 30px;
+    margin-top: 40px;
 }
 .main-function-details1, /* 라디오 버튼 */
 .main-function-details2,
@@ -118,21 +156,32 @@ input[type=radio] { /* ㄹㅇ 라디오 버튼 안 보이게 */
 .main-function-details3:hover {
 	background-color: #D8D8D8;
 }
-.main-function-details > .on { /* 클릭했을 때 */
+.on { /* 클릭했을 때 */
 	background-color: #EC6D63;
 }
-#main-coworker {
-	background-color: #ffffff;
+.bold {
+	font-weight: 500;
 }
-/* .main-function-details > input { */
-/* 	width: 220px; */
-/*     height: 220px; */
-/*     background-color: #4D4B4C; */
-/*     display: inline-block; */
-/*     margin: 0px 10px; */
-/*     border-radius: 50%; */
-/* } */
-/* colla? */
+#main-partners {
+	background-color: #F5F5F5;
+}
+#main-partners .head-body {
+	margin-top: 90px;
+	margin-bottom: 0px;
+	color:  #4C4A4B;
+}
+#main-partners .head-caption {
+	color:  #4C4A4B;
+	font-weight: 100;
+}
+.partners-list {
+	margin: 0 auto;
+}
+.partner-logo {
+	display: inline-block;
+}
+
+/* -------------------- colla? -------------------- */
 
 #wrap {
 	height: 100%;
@@ -151,14 +200,14 @@ input[type=radio] { /* ㄹㅇ 라디오 버튼 안 보이게 */
 #collaInfo-cover,
 #collaInfo-function2,
 #collaInfo-function4 {
-	background-color: #ffffff;
+	background-color: #F5F5F5;
 }
 #collaInfo-function1,
 #collaInfo-function3 {
-	background-color: #EC6D63;
+	background-color: #F5F5F5;
 }
 .collaInfo-functions {
-	vertical-align: middle;
+	margin-top: 12%;
 }
 #collaInfo-function1-ani,
 #collaInfo-function2-ani,
@@ -166,6 +215,14 @@ input[type=radio] { /* ㄹㅇ 라디오 버튼 안 보이게 */
 #collaInfo-function4-ani {
 	display: inline-block;
 	vertical-align: middle;
+}
+#collaInfo-function1-ani,
+#collaInfo-function3-ani {
+	margin-left: 20px;
+}
+#collaInfo-function2-ani,
+#collaInfo-function4-ani {
+	margin-right: 20px;
 }
 #collaInfo-function1-stable,
 #collaInfo-function2-stable,
@@ -177,20 +234,19 @@ input[type=radio] { /* ㄹㅇ 라디오 버튼 안 보이게 */
 	height: 500px;
 	background-color: lime;
 }
-#main-intro-ani,
-#main-coworker-ani,
 #collaInfo-function1-ani,
 #collaInfo-function2-ani,
 #collaInfo-function3-ani,
 #collaInfo-function4-ani {
 	visibility: hidden;
 }
-.head-title {
+#collaInfoAll .head-title {
 	font-size: 72px;
     font-weight: 500;
     margin-bottom: 10px;
     padding: 15px;
-    margin-top: 120px;
+    margin-top: 220px;
+    color:  #4C4A4B;
 }
 .head-title p {
 	display: inline-block;
@@ -204,15 +260,41 @@ input[type=radio] { /* ㄹㅇ 라디오 버튼 안 보이게 */
     line-height: 1.4;
     padding: 0px 15px;
     margin-bottom: 30px;	
+    color:  #4C4A4B;
 }
 .head-caption {
 	padding: 15px;
     font-size: 20px;
     margin-bottom: 55px;
+    color:  #4C4A4B;
+    line-height: 25px;
 }
 .head-arrow {
 	font-size: 50px;
     color: gray;
+}
+.function-title {
+	font-size: 72px;
+    font-weight: 500;
+    margin-bottom: 10px;
+    padding: 15px;
+    margin-top: 70px;
+    color:  #4C4A4B;	
+}
+.function-body {
+	font-size: 30px;
+    font-weight: 400;
+    line-height: 1.4;
+    padding: 0px 15px;
+    margin-bottom: 30px;	
+    color:  #4C4A4B;	
+}
+.function-caption {
+	padding: 15px;
+    font-size: 20px;
+    margin-bottom: 55px;
+    color:  #4C4A4B;
+    line-height: 25px;	
 }
 #collaInfo-function1-ani {
 	text-align: left;
@@ -226,8 +308,20 @@ input[type=radio] { /* ㄹㅇ 라디오 버튼 안 보이게 */
 #collaInfo-function4-ani {
 	text-align: right;
 }
-/* pricing */
 
+/* -------------------- pricing -------------------- */
+
+#pricingAll .head-title {
+	margin-top: 80px;
+	color: #4C4A4B;
+}
+#pricingAll .head-body {
+	margin-bottom: 0px;
+	color: #4C4A4B;
+}
+#pricingAll .head-caption {
+	color: #4C4A4B;
+}
 #pricingAll section {
 	position: relative;
 	display: block;
@@ -235,10 +329,10 @@ input[type=radio] { /* ㄹㅇ 라디오 버튼 안 보이게 */
 	height: 890px;
 	text-align: center;
 	padding: 80px 15px 100px 15px;
+	background-color: #F5F5F5;
 }
 .price-box-inside {
     display: inline-flex;
-    border: 1px solid #b4b4b4;
     width: 55%;
     min-width: 930px;
     border-radius: 6px;
@@ -247,9 +341,10 @@ input[type=radio] { /* ㄹㅇ 라디오 버튼 안 보이게 */
 .price-each-col {
     padding: 20px;
     width: 30%;
-    border: 1px solid #b4b4b4;
+    border: 1px solid #D3D1D2;
     margin: 5px;
     border-radius: 6px;
+    background-color: white;
 }
 .price-title {
 	font-weight: 900;
@@ -328,52 +423,214 @@ input[type=radio] { /* ㄹㅇ 라디오 버튼 안 보이게 */
 	color: white;
 }
 
-/* faq */
+/* -------------------- faq -------------------- */
 
 #faqAll section {
 	position: relative;
 	display: block;
 	overflow: hidden;
-	height: 890px;
+	height: 700px;
 	text-align: center;
 	padding: 80px 15px 100px 15px;
+	background-color: #F5F5F5;
 }
-.questions {
-	width: 800px;
-	margin: 0 auto;
+#faqAll .head-title {
+	margin-top: 80px;
+	color: #4C4A4B;
+}
+#faqAll .head-body {
+	margin-bottom: 0px;
+	color: #4C4A4B;
+}
+#faqAll .head-caption {
+	color: #4C4A4B;
+}
+.FAQs {
+	width: 80%;
+    margin: 0 auto;
+	display: flex;
+}
+.FAQs-left,
+.FAQs-right {
+	width: 48%;
+    margin: 10px 5px;
+    display: inline-block;
+}
+.FAQs-left {
+	float: left;
+}
+.FAQs-right {
+	float: right;
+}
+.FAQ-box {
+	margin: 10px 0px 10px 0px;
+    padding: 20px;
+    border: 1px solid #D3D1D2;
+    border-radius: 10px;
+    height: 25px;
+    background-color: white;
 }
 .question {
-	border-radius: 10px;
-	background-color: #eee;
-	color: #444;
-	cursor: pointer;
-	padding: 18px;
-	width: 100%;
 	text-align: left;
-	border: none;
-	outline: none;
-	transition: 0.4s;
 }
-.active, .question:hover {
-	background-color: #ccc;
-}
-.answer {
-	border-radius: 10px;
-	padding: 0 18px;
-	overflow: hidden;
-	max-height: 0;
-	transition: max-height 0.2s ease-out;
-	background-color: #EC6D63;
+.question > div {
+	font-size: 20px;
+    font-weight: 999;
+    color: burlywood;
+    margin-right: 16px;
+    display: inline-block;
 }
 .icon {
 	display: inline-block;
     float: right;
+    margin-top: 4px;
 }
-.answerDetail {
-	padding: 20px 0px;
+.answer {
+	color: white;
+    display: none;
+    text-align: left;
+    margin-top: 15px;
+    margin-bottom: 10px;
+}
+.a {
+	font-size: 20px;
+    font-weight: 999;
+    color: #EC6D63;
+    margin-right: 16px;
+    margin-left: 2px;
+    display: inline-block;
+}
+.answer-detail {
+	display: inline-block;
+    color: white;
+    vertical-align: top;
+    line-height: 20px;
+    font-weight: 100;
 }
 
-/* aboutUs */
+#ask .head-caption {
+	margin-bottom: 30px;
+}
+.FAQ-email {
+    width: 50%;
+	height: 445px;
+	border-radius: 10px;
+	border: 0px solid;
+	background-color: silver;	
+	margin: 0 auto;
+    margin-bottom: 55px;
+}
+.FAQ-email-name {
+	display: inline-block;
+	padding-top: 10px;
+	margin-right: 86px;
+}
+.FAQ-email-name > input {
+	width: 120px;
+}
+.FAQ-email-receive {
+	display: inline-block;
+	padding-top: 10px;
+}
+.FAQ-email-receive > input {
+	width: 241px;
+}
+.FAQ-email-input {
+	width: 577px;
+}
+.FAQ-email-title {
+    padding: 10px;
+}
+
+.FAQ-email-name > span,
+.FAQ-email-receive > span,
+.FAQ-email-title > span,
+.FAQ-email-content > span {
+	margin-right: 14px;
+    margin-left: -14px;
+}
+.FAQ-email-content > textarea {
+	border: 1px solid #D1D1D1;
+    border-radius: 5px;
+    line-height: 30px;
+    padding: 0 10px;
+    vertical-align: middle;
+}
+.FAQ-email-button {
+	margin-top: 7px;
+}
+/* .questions-left { */
+/* 	background: #333333; */
+/* 	width: 250px; */
+/* 	margin: 100px auto 0 auto; */
+/* 	color: white;	 */
+/* } */
+/* .questions-left h3 { */
+/* 	font-size: 12px; */
+/* 	line-height: 34px; */
+/* 	padding: 0 10px; */
+/* 	cursor: pointer; */
+/* 	background: #064461;	 */
+/* } */
+/* .questions-left h3:hover { */
+/* 	text-shadow: 0 0 1px rgba(255, 255, 255, 0.7); */
+/* } */
+/* .questions-left ul ul li { */
+/* 	color: white; */
+/* 	text-decoration: none; */
+/* 	font-size: 11px; */
+/* 	line-height: 27px; */
+/* 	display: block; */
+/* 	padding: 0 15px; */
+/* 	-webkit-transition: all 0.15s; */
+/* 	-moz-transition: all 0.15s; */
+/* 	-o-transition: all 0.15s; */
+/* 	-ms-transition: all 0.15s; */
+/* 	transition: all 0.15s; */
+/* } */
+/* .questions-left ul ul li:hover { */
+/* 	background: #003545; */
+/* 	border-left: 5px solid #09c; */
+/* } */
+/* .questions-left ul ul { */
+/* 	display: none; */
+/* } */
+/* .questions-left li.active ul { */
+/* 	display: block; */
+/* } */
+/* .questions { */
+/* 	width: 800px; */
+/* 	margin: 0 auto; */
+/* } */
+/* .question { */
+/* 	border-radius: 10px; */
+/* 	background-color: #eee; */
+/* 	color: #444; */
+/* 	cursor: pointer; */
+/* 	padding: 18px; */
+/* 	width: 100%; */
+/* 	text-align: left; */
+/* 	border: none; */
+/* 	outline: none; */
+/* 	transition: 0.4s; */
+/* } */
+/* .active, .question:hover { */
+/* 	background-color: #ccc; */
+/* } */
+/* .answer { */
+/* 	border-radius: 10px; */
+/* 	padding: 0 18px; */
+/* 	overflow: hidden; */
+/* 	max-height: 0; */
+/* 	transition: max-height 0.2s ease-out; */
+/* 	background-color: #EC6D63; */
+/* } */
+
+/* .answerDetail { */
+/* 	padding: 20px 0px; */
+/* } */
+
+/* -------------------- aboutUs -------------------- */
 
 div {
   -webkit-backface-visibility: hidden;
@@ -439,8 +696,7 @@ div {
 .aboutUs-card:hover .back {
 	z-index: 2;	
 	transform: rotateY(0deg);
-}
-
+} 
 
 
 /*미경 시작*/
