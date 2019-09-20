@@ -315,11 +315,12 @@
 
 /*profileImgModify.jsp 이미지 크롭 모달*/
 #CropImgModal > .modalBody div{
-	width: 500px;
+	width : 500px;
+	height: 500px;
 }
 
 #CropImgModal > .modalBody img{
-	width: 100%;
+	height: 100%;
 }
 /*크롭영역을 라운드로 보이게!*/
 .cropper-crop-box, .cropper-view-box {

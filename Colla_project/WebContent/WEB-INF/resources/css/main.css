@@ -432,4 +432,17 @@ div {
 .aboutUs-card:hover .back {
 	z-index: 2;	
 	transform: rotateY(0deg);
-} 
+}
+
+
+
+/*미경 시작*/
+#aboutUs-cover .head-body * {
+	border: 1px solid red;
+	float: left;
+}
+#aboutUs-cover .head-body img {
+	width: 200px;
+}
+
+
