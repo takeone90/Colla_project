@@ -100,7 +100,7 @@ $(function() {
 		$(".main-function-image1").css('z-index', 10);
 		$(".main-function-image2").css('z-index', 1);
 		$(".main-function-image3").css('z-index', 1);
-		$(".main-function-details1").toggleClass('on');
+// 		$(".main-function-details1").toggleClass('on');
 // 		$(".main-function-details2").toggleClass('on');
 // 		$(".main-function-details3").toggleClass('on');
 	});	
@@ -109,7 +109,7 @@ $(function() {
 		$(".main-function-image2").css('z-index', 10);
 		$(".main-function-image3").css('z-index', 1);
 // 		$(".main-function-details1").toggleClass('on');
-		$(".main-function-details2").toggleClass('on');
+// 		$(".main-function-details2").toggleClass('on');
 // 		$(".main-function-details3").toggleClass('on');
 	});	
 	$(".main-function-details3").on("click", function() {
@@ -118,7 +118,7 @@ $(function() {
 		$(".main-function-image3").css('z-index', 10);
 // 		$(".main-function-details1").toggleClass('on');
 // 		$(".main-function-details2").toggleClass('on');
-		$(".main-function-details3").toggleClass('on');
+// 		$(".main-function-details3").toggleClass('on');
 	});		
 });
 </script>
@@ -138,9 +138,7 @@ $(function() {
 			<section id="main-intro" class="box">
 				<div id="container">
 					<div id="main-intro-ani">
-<!-- 						<div class="head-title"></div> -->
 						<div class="head-body">간단하게 프로젝트를 생성하고 그룹을 만드세요!</div>
-<!-- 						<div class="head-caption"></div> -->
 						<div class="main-function">
 							<div class="main-function-images">
 								<div class="main-function-image1">사진1</div>
@@ -148,15 +146,16 @@ $(function() {
 								<div class="main-function-image3">사진3</div>
 							</div>
 							<div class="main-function-details">
-								<label><input type="radio" class="main-function-details1" name="main-function-radio">
-									<span>가볍게<br>프로젝트 생성</span></label>
+							
+								<input type="radio" name="main-function-radio">
+								<label class="clicked"><span class="main-function-details1"><span>가볍게<br>프로젝트 생성</span></span></label>
 
-								<label><input type="radio" class="main-function-details2" name="main-function-radio">
-									<span>프로젝트 채팅방으로<br>원하는 멤버들과 채팅</span></label>
-<!-- 								</div> -->
-								<label><input type="radio" class="main-function-details3" name="main-function-radio">
-									<span>멤버들과 일정을<br>공유하고 관리</span></label>
-<!-- 								</div> -->
+								<input type="radio" name="main-function-radio">
+								<label class="none-clicked"><span class="main-function-details2"><span>프로젝트 채팅방으로<br>원하는 멤버들과 채팅</span></span></label>
+									
+								<input type="radio" name="main-function-radio">
+								<label class="none-clicked"><span class="main-function-details3"><span>멤버들과 일정을<br>공유하고 관리</span></span></label>
+									
 							</div>
 						</div>
 					</div>
