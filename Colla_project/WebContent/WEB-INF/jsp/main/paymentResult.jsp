@@ -1,16 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<c:set var="contextPath" value="<%=request.getContextPath() %>"/>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
+<%@ include file="/WEB-INF/jsp/inc/head.jsp" %>
+
 <title>Payment</title>
-<link rel="stylesheet" type="text/css" href="${contextPath}/css/reset.css"/>
-<link rel="stylesheet" type="text/css" href="${contextPath}/css/base.css"/>
 <link rel="stylesheet" type="text/css" href="${contextPath}/css/headerMain.css"/>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 </head>
 <body>

@@ -1,23 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<c:set var="contextPath" value="<%=request.getContextPath()%>"/>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
+    pageEncoding="UTF-8"%>
+<%@ include file="/WEB-INF/jsp/inc/head.jsp" %>
+
 <title>채팅 메인</title>
-<link rel="stylesheet" type="text/css" href="${contextPath}/css/reset.css"/>
-<link rel="stylesheet" type="text/css" href="${contextPath}/css/base.css"/>
 <link rel="stylesheet" type="text/css" href="${contextPath}/css/headerWs.css"/>
 <link rel="stylesheet" type="text/css" href="${contextPath}/css/navWs.css"/>
 <link rel="stylesheet" type="text/css" href="${contextPath}/css/chatMain.css"/>
 <link rel="stylesheet" type="text/css" href="${contextPath}/css/animate.css"/>
 <link rel="stylesheet" type="text/css" href="${contextPath}/css/animationCheatSheet.css"/>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script type="text/javascript" src="${contextPath}/js/stomp.js"></script>
-<script type="text/javascript" src="${contextPath}/js/sockjs.js"></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=38b5346cba2a9103101abc2c542a2d86&libraries=services"></script>
 
 <script type="text/javascript" src="lib/codemirror/lib/codemirror.js"></script>
