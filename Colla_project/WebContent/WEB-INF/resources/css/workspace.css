@@ -1,6 +1,18 @@
 @charset "UTF-8";
+#wsBodyContainer h4{
+	color : #403C39;
+	font-size : 16px;
+	margin-bottom: 10px;
+	
+}
+input {
+	height : 26px;
+}
 #wsBody .attachModal h3{
 	font-size: 23px;
+}
+.attachModal p{
+	margin-top : 17px;
 }
 #wsBody .attachModal input[type='text']{
 	width : calc(100% - 100px);
@@ -13,12 +25,6 @@
 	margin-bottom: 30px;
 }
 
-#wsBodyContainer h3{
-	color : #403C39;
-	font-size: 1em;
-	font-weight: bolder;
-	margin-bottom: 20px;
-}
 .row{
 	margin-top : 10px;
 	margin-bottom: 10px;	
@@ -192,10 +198,28 @@ display : none;
 .openedWs .exitWs a{
 	color: white;
 }
+.openedWs .exitWs a:hover{
+	color: #f2452e;
+}
 .exitWs a {
-	color: #E5675A;
+	color: #f2452e;
 }
 #wsBodyContainer .openedWs h3{
 	font-size : 22px;
 	color : white;
+}
+
+#modalBtnDiv button{
+	display: block;
+	margin-top : 6px;
+	width : 100%;
+	padding : 7px;
+	background-color : #403C39;
+	color : white;
+	border-radius : 7px;
+    border: none;
+    cursor: pointer;
+}
+#modalBtnDiv button:hover{
+	background-color : #E5675A;
 }

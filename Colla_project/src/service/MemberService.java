@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import javax.annotation.Resource;
 import javax.imageio.ImageIO;
 import javax.mail.Session;
 import javax.servlet.http.HttpServletRequest;
@@ -47,7 +48,8 @@ public class MemberService {
 	private SetAlarmDao setAlarmDao;
 	
 	//파일 저장 경로
-	private static final String UPLOAD_PATH="c:\\temp\\";
+	@Resource(name="uploadPath")
+	private String UPLOAD_PATH;
 	
 	@Transactional
 	public boolean addMember(Member member) {

@@ -1,18 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<c:set var="contextPath" value="<%=request.getContextPath()%>"/>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<link rel="stylesheet" type="text/css" href="css/reset.css" />
-<link rel="stylesheet" type="text/css" href="css/base.css" />
+    pageEncoding="UTF-8"%>
+<%@ include file="/WEB-INF/jsp/inc/head.jsp" %>
+
+<title>calSearchList</title>
 <link rel="stylesheet" type="text/css" href="css/headerWs.css" />
 <link rel="stylesheet" type="text/css" href="css/navWs.css" />
-<script src="https://code.jquery.com/jquery-3.4.1.js"
-	integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
-	crossorigin="anonymous"></script>
 <script type="text/javascript">
 	$(function() {
 // 		var type1 = $("#calType1").prop("checked");
@@ -20,7 +12,6 @@
 // 		var type3 = $("#calType3").prop("checked");
 	});
 </script>
-<title>calSearchList</title>
 </head>
 <body>
 	<%@ include file="/WEB-INF/jsp/inc/headerWs.jsp"%>

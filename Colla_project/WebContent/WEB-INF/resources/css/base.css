@@ -58,9 +58,9 @@ body .btn:hover{
 
 #wsBody{
 	position:relative;
-	z-index:1;
+	z-index:0;
 	width:calc(100% - 200px);
-	height:calc(100% - 70px);
+	height:calc(100% - 71px);
 	margin-left:200px;
 	padding-top:71px;
 }

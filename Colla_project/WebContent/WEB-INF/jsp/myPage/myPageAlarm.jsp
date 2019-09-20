@@ -1,16 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<%
-	String contextPath = request.getContextPath();
-	request.setAttribute("contextPath", contextPath);
-%>
+    pageEncoding="UTF-8"%>
+<%@ include file="/WEB-INF/jsp/inc/head.jsp" %>
+
 <title>알람설정</title>
-<link rel="stylesheet" type="text/css" href="css/reset.css"/>
-<link rel="stylesheet" type="text/css" href="css/base.css"/>
 <link rel="stylesheet" type="text/css" href="css/headerWs.css"/>
 <link rel="stylesheet" type="text/css" href="css/navWs.css"/>
 <link rel="stylesheet" type="text/css" href="css/myPage.css"/>
@@ -35,9 +27,6 @@
 }
 </style>
 
-<script src="https://code.jquery.com/jquery-3.4.1.js"
-	integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
-	crossorigin="anonymous"></script>
 <script type="text/javascript">
 	$(function() {
 		var arrayAlarm = [${wsAlarm},${boardAlarm},${replyAlarm}]; //워크스페이스, 보드, 댓글의 알림값이 배열에 저장된다 (0:알림수신x, 1:알림수신)

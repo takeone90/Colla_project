@@ -31,7 +31,7 @@ public class FileService {
 	public boolean removeBoardFile(int bNum) {
 		List<BoardFile> fList =  fDao.selectFilesByBnum(bNum);
 		for(BoardFile bf : fList) {
-			File file = new File(UPLOAD_PATH + "/" + bf.getFileName());
+			File file = new File(UPLOAD_PATH + bf.getFileName());
 			if(file.exists()) {
 				if(file.delete()) {
 					System.out.println("파일삭제 성공");

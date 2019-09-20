@@ -124,6 +124,9 @@
 .memberProfileInfo h3, .memberProfileInfo p{
 	margin-bottom:7px;
 }
+.attachModal .memberProfileInfo p{
+	margin-top : 0px;
+}
 
 
 
