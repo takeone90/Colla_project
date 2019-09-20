@@ -1,20 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
+<%@ include file="/WEB-INF/jsp/inc/head.jsp" %>
+
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>FAQ</title>
-<link rel="stylesheet" type="text/css" href="css/reset.css"/>
-<link rel="stylesheet" type="text/css" href="css/base.css"/>
 <link rel="stylesheet" type="text/css" href="css/headerMain.css"/>
 <link rel="stylesheet" type="text/css" href="css/footerMain.css"/>
 <link rel="stylesheet" type="text/css" href="css/main.css"/>
-<script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
-<script src="https://code.jquery.com/jquery-3.4.1.js"
-  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
-  crossorigin="anonymous"></script>
 <script>  
 $(function() {
 	var questions = document.getElementsByClassName("question");

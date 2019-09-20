@@ -1,19 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<c:set var="contextPath" value="<%=request.getContextPath() %>"/>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
+<%@ include file="/WEB-INF/jsp/inc/head.jsp" %>
+
 <title>Board List</title>
-<link rel="stylesheet" type="text/css" href="${contextPath}/css/reset.css"/>
-<link rel="stylesheet" type="text/css" href="${contextPath}/css/base.css"/>
 <link rel="stylesheet" type="text/css" href="${contextPath}/css/headerWs.css"/>
 <link rel="stylesheet" type="text/css" href="${contextPath}/css/navWs.css"/>
 <link rel="stylesheet" type="text/css" href="${contextPath}/css/board.css"/>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <style type="text/css">
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>

@@ -1,22 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%
-	String contextPath = request.getContextPath();
-	request.setAttribute("contextPath", contextPath);
-%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
+<%@ include file="/WEB-INF/jsp/inc/head.jsp" %>
+
 <title>pricing</title>
-<link rel="stylesheet" type="text/css" href="css/reset.css"/>
-<link rel="stylesheet" type="text/css" href="css/base.css"/>
 <link rel="stylesheet" type="text/css" href="css/headerMain.css"/>
 <link rel="stylesheet" type="text/css" href="css/footerMain.css"/>
 <link rel="stylesheet" type="text/css" href="css/main.css"/>
-<script src="https://code.jquery.com/jquery-3.4.1.js"
-  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
-  crossorigin="anonymous"></script>
 </head>
 <body>
 	<div id="wrap">
