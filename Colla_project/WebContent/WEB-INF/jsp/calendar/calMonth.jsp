@@ -40,6 +40,7 @@ $(function() {
 	});
 	//추가 모달 열기
 	$("#addFormOpen").on("click", function() {
+		$(".addModal")[0].reset();
 		$("#addForm").fadeIn(300);
 		$("#startDate").val(formatChangeHyphen(new Date())); //오늘 날짜로 고정
 	});
@@ -70,7 +71,7 @@ $(function() {
 	});
 	//추가
 	$("#addSchedule").on("click", function() {
-		var data = $("#addForm").serialize();
+		var data = $(".addModal").serialize();
 		$.ajax({
 			url: "addSchedule",
 			data: data,
@@ -105,7 +106,7 @@ $(function() {
 	});
 	//삭제
 	$("#deleteSchedule").on("click", function() {
-		var data = $("#detailForm").serialize();
+		var data = $(".detailModal").serialize();
 		$.ajax({
 			url: "removeSchedule",
 			data: data,
@@ -133,7 +134,7 @@ $(function() {
 	});
 	//수정 모달 열기
 	$("#modifyFormOpen").on("click", function() {
-		var data = $("#detailForm").serialize();
+		var data = $(".detailModal").serialize();
 		$("#detailForm").fadeOut(1);
 		$("#modifyForm").fadeIn(300);
 	});	
@@ -161,7 +162,7 @@ $(function() {
 	});
 	//수정
 	$("#modifySchedule").on("click", function() {
-		var data = $("#modifyForm").serialize();
+		var data = $(".modifyModal").serialize();
 		$.ajax({
 			url: "modifySchedule",
 			data: data,
@@ -421,15 +422,15 @@ function putContentIntoTd(a) {
 	$("#detailForm").fadeIn(300);
 	$("#detailCNum").val(a.cNum);
 	$("#modifyCNum").val(a.cNum);
-	$("#detailTitle").val(a.title);
+	$("#detailTitle").text(a.title);
 	$("#modifyTitle").val(a.title);
-	$("#detailStartDate").val(a.startDate.substring(0, 10));
+	$("#detailStartDate").text(a.startDate.substring(0, 10));
 	$("#modifyStartDate").val(a.startDate.substring(0, 10));
-	$("#detailEndDate").val(a.endDate.substring(0, 10));
+	$("#detailEndDate").text(a.endDate.substring(0, 10));
 	$("#modifyEndDate").val(a.endDate.substring(0, 10));
-	$("#detailContent").val(a.content);
+	$("#detailContent").text(a.content);
 	$("#modifyContent").val(a.content);
-	$("#detailType").val(a.type);
+	$("#detailType").text(a.type);
 	$("#modifyType").val(a.type);
 	$("#detailYearCalendar").prop("checked", changeToBoolean(a.yearCalendar));
 	$("#modifyYearCalendar").prop("checked", changeToBoolean(a.yearCalendar));
@@ -437,7 +438,7 @@ function putContentIntoTd(a) {
 	$("#modifyAnnually").prop("checked", changeToBoolean(a.annually));
 	$("#detailMonthly").prop("checked", changeToBoolean(a.monthly));
 	$("#modifyMonthly").prop("checked", changeToBoolean(a.monthly));
-	$("#detailColor").val(a.color);
+	$("#detailColor").css("backgroundColor",a.color);
 	$("#modifyColor").val(a.color);
 }
 function whichWeek(dateStr) { //달(1~12)
@@ -464,6 +465,7 @@ function trMaker(front, back, type, gap, title, color) { //앞빈칸 반복, 뒷
 	for(var l=0; l<front; l++) { 
 		let tdEtc = $("<td class='frontVacantTd'></td>");
 		tr.append(tdEtc);
+		console.log( "TEST : ", tr.parent() );
 	}	
 	if(type==1) {
 		var td = $("<td class='middleTd' colspan="+gap+"><div class='middleDiv' style='border-radius: 10px; background-color: "+color+"'>"+"&nbsp;&nbsp;"+title+"</div></td>");
@@ -789,12 +791,12 @@ function nextYearYear() {
 						<label><input type="checkbox" name="monthly" id="addMonthly" value="monthly">매월 반복</label>
 					</div>
 					<div>
-						<h4>색깔</h4>
+						<h4>색</h4>
 						<input type="color" name="color" id="addColor" value="#fffde8">
 					</div>
 					<div id="innerBtn">
-						<a href="#" id="addFormClose">닫기</a><br>
 						<a href="#" id="addSchedule">추가</a>
+						<a href="#" id="addFormClose">닫기</a><br>
 					</div>
 				</form>
 			</div>
@@ -812,36 +814,36 @@ function nextYearYear() {
 					<input type="hidden" name="mNum" id="mNum" value="${userData.mNum}">
 					<input type="hidden" name="wNum" id="wNum" value="${userData.wNum}">
 					<div>
-						<h4>일정</h4>
-						<input type="text" name="title" class="modalTitle" id="detailTitle" readonly="readonly">
+						<h4>일정 이름</h4>
+						<p class="modalTitle" id="detailTitle" >
 					</div>
 					<div>
 						<h4>기간</h4>
-						<input type="date" name="startDate" id="detailStartDate" readonly="readonly">부터 <input type="date" name="endDate" id="detailEndDate" readonly="readonly">까지
+						<p>
+							<span id="detailStartDate" ></span>부터 
+							<span id="detailEndDate" ></span>까지
+						</p>
 					</div>
 					<div>
 						<h4>내용</h4>
-						<textarea rows="1" cols="21" name="content" class="modalContent" id="detailContent" readonly="readonly"></textarea>
+						<p class="modalContent" id="detailContent"></p>
 					</div>
 					<div>
 						<h4>타입</h4>
-						<select name="type" id="detailType">
-							<option value="project">프로젝트</option>
-							<option value="vacation">휴가</option>
-							<option value="event">행사</option>
-						</select>
+						<p id="detailType">
+						</p>
 						<label><input type="checkbox" name="yearCalendar" id="detailYearCalendar" value="yearCalendar">연간 달력 표시</label>
 						<label><input type="checkbox" name="annually" id="detailAnnually" value="annually">매년 반복</label>
 						<label><input type="checkbox" name="monthly" id="detailMonthly" value="monthly">매월 반복</label>
 					</div>
 					<div>
-						<h4>색깔</h4>
-						<input type="color" name="color" id="detailColor" value="#fffde8">
+						<h4>색</h4>
+						<p id="detailColor">&nbsp;</p>
 					</div>
 					<div id="innerBtn">
-						<a href="#" id="detailFormClose">닫기</a>
-						<a href="#" id="deleteSchedule">삭제</a>
 						<a href="#" id="modifyFormOpen">수정</a>
+						<a href="#" id="deleteSchedule">삭제</a>
+						<a href="#" id="detailFormClose">닫기</a>
 					</div>
 				</form>
 			</div>
@@ -882,12 +884,12 @@ function nextYearYear() {
 						<label><input type="checkbox" name="monthly" id="modifyMonthly" value="monthly">매월 반복</label>
 					</div>
 					<div>
-						<h4>색깔</h4>
+						<h4>색</h4>
 						<input type="color" name="color" id="modifyColor" value="#fffde8">
 					</div>
 					<div id="innerBtn">
-						<a href="#" id="modifyFormClose">닫기</a>
 						<a href="#" id="modifySchedule">수정</a>
+						<a href="#" id="modifyFormClose">닫기</a>
 					</div>
 				</form>
 			</div>
@@ -938,7 +940,7 @@ function nextYearYear() {
 						<label><input type="checkbox" name="monthly" id="detailMonthlyYear" value="monthly">매월 반복</label>
 					</div>
 					<div>
-						<h4>색깔</h4>
+						<h4>색</h4>
 						<input type="color" name="color" id="detailColorYear" value="#fffde8">
 					</div>
 					<div id="innerBtn">
