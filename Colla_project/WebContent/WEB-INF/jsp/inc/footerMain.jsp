@@ -1,10 +1,4 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<c:set var="contextPath" value="<%=request.getContextPath()%>" />
-<c:set var="member" value="<%=request.getSession().getAttribute(\"user\")%>" />
-<script type="text/javascript" src="${contextPath }/js/stomp.js"></script>
-<script type="text/javascript" src="${contextPath }/js/sockjs.js"></script>
-<script src="https://kit.fontawesome.com/ac21eff7ec.js"></script>
 <script>
 window.onscroll = function() {scrollFunction()};
 function scrollFunction() {

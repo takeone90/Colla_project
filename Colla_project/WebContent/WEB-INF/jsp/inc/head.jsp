@@ -8,8 +8,8 @@
 <head>
 <meta charset="UTF-8">
 <link rel="shortcut icon" type="image/x-icon" href="${contextPath}/img/favicon1.ico"/>
-<link rel="stylesheet" type="text/css" href="css/reset.css"/>
-<link rel="stylesheet" type="text/css" href="css/base.css"/>
+<link rel="stylesheet" type="text/css" href="${contextPath}/css/reset.css"/>
+<link rel="stylesheet" type="text/css" href="${contextPath}/css/base.css"/>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script> <!-- font awsome -->
 
