@@ -71,7 +71,13 @@
 			</a>
 			<p>${member.name}님</p>
 		</div>
-		
+		<!-- 로그아웃버튼 -->
+		<div>
+			<form action="logout" method="post">
+			<input type="hidden" value="${_csrf.token}" name="${_csrf.parameterName}">
+			<input type="submit" value="로그아웃" id="logoutBtn">
+			</form>
+		</div>
 		<select name="currWorkspace" id="workspaceSelector">
 		<c:forEach items="${sessionScope.workspaceList}" var="ws">
 			<option class="wsSelectOption" value="${contextPath}/defaultChatMain?wNum=${ws.wsInfo.num}" ${sessionScope.currWnum eq ws.wsInfo.num?'selected':''}>${ws.wsInfo.name}</option>

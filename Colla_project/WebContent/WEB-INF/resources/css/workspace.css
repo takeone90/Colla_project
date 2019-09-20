@@ -6,17 +6,21 @@
 	
 }
 input {
-	height : 26px;
+	height : 30px;
 }
 #wsBody .attachModal h3{
 	font-size: 23px;
 }
 .attachModal p{
 	margin-top : 17px;
+	font-weight: 300;
+    font-size: 14px;
 }
 #wsBody .attachModal input[type='text']{
 	width : calc(100% - 100px);
 	margin : 5px;
+	margin-bottom: 10px;
+	
 }
 #wsBodyContainer h2{
 	color : #403C39;
@@ -49,10 +53,13 @@ display : none;
 	background-color: #D3D1D2;
 }
 #wsBodyContainer .ws h3{
-	display: inline-block;
+	display: contents;
+}
+#wsBodyContainer .ws h3 a{
 	color : #403C39;
 	font-weight: bolder;
 	font-size : 16px;
+	margin-bottom : 23px;
 }
 /* .ws li{ */
 /* 	display: inline-block; */
@@ -78,6 +85,7 @@ display : none;
 
 .wsDetail{
 	padding : 10px;
+	margin-top: 28px;
 }
 #wsBodyContainer{
 	padding:30px;
@@ -188,12 +196,13 @@ display : none;
 	background-color: #E5675A;
 	color : white;
 }
-#wsBodyContainer .openedWs h3{
-	margin-bottom : 23px;
-}
+
 .openedWs{
 	background-color: #403C39;
 	border-radius: 10px;
+}
+.openedWs .exitWs{
+	margin-top:0px;
 }
 .openedWs .exitWs a{
 	color: white;
@@ -204,9 +213,12 @@ display : none;
 .exitWs a {
 	color: #f2452e;
 }
-#wsBodyContainer .openedWs h3{
+#wsBodyContainer .openedWs h3 a{
 	font-size : 22px;
 	color : white;
+}
+#wsBodyContainer .openedWs h3 a:hover, #wsBodyContainer h3 a:hover{
+	color : #F2452E;
 }
 
 #modalBtnDiv button{
@@ -223,3 +235,19 @@ display : none;
 #modalBtnDiv button:hover{
 	background-color : #E5675A;
 }
+a[class="addInviteInput"]{
+	background-color: #D3D1D2;
+    color: #403C39;
+    padding: 0px 7px 0px 7px;
+    border-radius: 50%;
+    height: 100%;
+    vertical-align: middle;
+}
+
+.addInviteRoundBox{
+	width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    margin: 0 auto;
+}
+    

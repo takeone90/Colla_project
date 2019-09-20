@@ -36,6 +36,7 @@
 		
 		//WS추가 모달
 		$("#openWsModal").on("click",function(){
+			$(".addInviteMemberDiv").empty();
 			$("#addWsModal").fadeIn(300);
 		});
 		$("#closeWsModal").on("click",function(){
@@ -57,6 +58,7 @@
 		});
 		//WS Member추가 모달
 		$(".openAddMemberModal").on("click",function(){
+			$(".addInviteMemberDiv").empty();
 			wNum = $(this).attr("data-wnum");
 			$(".addWnum").val(wNum); //멤버 추가모달에 숨어있는 addWnum 부분에 wNum담기
 			$("#addMemberModal").fadeIn(300);
@@ -94,6 +96,12 @@
 			return false;
 		});
 		
+		//멤버 추가버튼의 + 눌렀을때
+		$(".addInviteInput").on("click",function(){
+			var addInviteMemberDiv = $(".addInviteMemberDiv");
+			var inputTag = $("<input type='text' placeholder='초대할멤버 이메일' name='targetUserList'>");
+			addInviteMemberDiv.append(inputTag);
+		});
 		
 	});// onload.function end
 	function thisWsMemberList(wNum){
@@ -118,13 +126,6 @@
 				}
 			});
 	}
-	
-	//참여자 목록
-	function loginMemberInfo(msgInfo){
-	
-		
-	}
-
 </script>
 </head>
 <body>
@@ -138,7 +139,7 @@
 		<ul>
 			<c:forEach items="${workspaceList}" var="ws">
 				<li class="ws">
-					<h3>${ws.wsInfo.name}</h3>
+					<h3><a href="chatMain?crNum=${ws.defaultCrNum}">${ws.wsInfo.name}</a></h3>
 					<a href="#" class="showWsDetail"><i class="fas fa-angle-down"></i></a>
 					<%---------------------------상세보기 버튼 클릭 시 펼쳐질 wsDetail--------------------%>
 					<div class="wsDetail">
@@ -191,15 +192,7 @@
 		<div id="openWsDiv" align="center">
 		<a href="#" id="openWsModal">+</a>
 		</div>
-		<!-- 임시로 만든 로그아웃버튼 -->
-		<div>
-			<form action="logout" method="post">
-			<input type="hidden" value="${_csrf.token}" name="${_csrf.parameterName}">
-			<input type="submit" value="임시 로그아웃 버튼" id="logoutBtn">
-			
-			</form>
-			
-		</div>
+		
 <!-- 		<a href="#" id="removeEmptyChatRoom">빈 채팅방 제거하기</a> -->
 
 		<%------------------------------------워크스페이스 추가 모달  ---------------------------------------%>
@@ -220,11 +213,11 @@
 						</div>
 						<div class="row">
 							<h4>멤버 초대</h4>
-							<div>
-								<input type="text" placeholder="초대할멤버 이메일" name="targetUser">
+							<div class="addInviteMemberDiv">
+								<input type="text" placeholder="초대할멤버 이메일" name="targetUserList">
 							</div>
-							<div>
-								<a href="#">+</a>
+							<div class="addInviteRoundBox" align="center">
+								<a href="#" class="addInviteInput">+</a>
 							</div>
 						</div>
 					</div> <!-- end addWsInputWrap -->
@@ -282,11 +275,12 @@
 					<div class="addMemberInputWrap">
 						<div class="row">
 							<h4>멤버 초대</h4>
-							<div>
-								<!-- wsNum을 알고있어야한다! -->
-								<input type="text" placeholder="초대할 멤버를 입력하세요" name="targetUser">
+							<div class="addInviteMemberDiv">
+								<input type="text" placeholder="초대할멤버 이메일" name="targetUserList">
 							</div>
-							
+							<div class="addInviteRoundBox" align="center">
+								<a href="#" class="addInviteInput">+</a>
+							</div>
 						</div>
 					</div> <!-- end addMemberInputWrap -->
 
