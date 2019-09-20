@@ -8,6 +8,7 @@ import java.security.Principal;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -15,9 +16,11 @@ import javax.servlet.http.HttpSession;
 import org.aspectj.apache.bcel.classfile.InnerClass;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.converter.StringMessageConverter;
+import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
+import org.springframework.messaging.simp.annotation.SubscribeMapping;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -27,6 +30,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import mail.MailSend;
+import model.ChatMessage;
 import model.EmailVerify;
 import model.Member;
 import service.ChatRoomMemberService;
@@ -57,8 +61,12 @@ public class MemberController {
 	@Autowired
 	private ChatRoomMemberService crmService;
 	@Autowired
-	private SimpMessagingTemplate simpMessagingTemplate;
-	private static Map<String, Object> loginMember = new HashMap<>(); //로그인한 멤버를 담기위한 map	
+	private SimpMessagingTemplate smt;
+
+	@Resource(name = "connectorList")
+	private Map<Object,String> connectorList;//빈으로 등록된 접속자명단(email, session)
+	
+//	private static Map<String, Object> loginMember = new HashMap<>(); //로그인한 멤버를 담기위한 map	
 
 	@RequestMapping(value="/joinStep1", method = RequestMethod.GET)
 	public String showJoinStep1() {
@@ -199,32 +207,30 @@ public class MemberController {
 		}
 	}
 
-	// 중복 로그인 체크 (기존 사용자 로그아웃 처리)
+	 //중복 로그인 체크 (기존 사용자 로그아웃 처리)
 	@RequestMapping("/checkLoginDuplication")
-	public void checkLoginDuplication(HttpServletRequest request, HttpServletResponse response,String userEmail) throws IOException {
-		boolean result = true;
-		Member member = (Member)request.getSession().getAttribute("user");
-		for (String key : loginMember.keySet()) {// 로그인한 멤버가 담긴 MAP에서 해당 이메일이 있는지 확인한다
-			if (key.equals(userEmail)) {
-				result = false; // 중복으로 로그인 : false 반환, 정상 로그인 : true 반환
-			}
+	public void checkLoginDuplication(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		HttpSession session = request.getSession();
+		String userEmail = (String)request.getSession().getAttribute("userEmail");
+		Member user = memberService.getMemberByEmail(userEmail);
+		
+		boolean isDuplicate = false;
+		System.out.println("중복체크 전 접속 중인 멤버 : "+connectorList);
+		
+		if (getKey(connectorList, userEmail) != null) {
+			isDuplicate = true; // 중복으로 로그인
 		}
-//		response.sendRedirect("workspace"); // 워크스페이스 메인으로 이동한다
-		if (result) { // 정상적인 로그인의 경우
-			loginMember.put(userEmail, request.getSession()); // map에 해당 멤버를 담은 뒤,
-			response.sendRedirect("workspace"); // 워크스페이스 메인으로 이동한다
-			System.out.println("정상적인 로그인");
-//			for(String key : loginMember.keySet()) {
-//				System.out.println(key + " : " + loginMember.get(key));
-//			}
+		
+		if (!isDuplicate) { // 정상적인 로그인의 경우
+			System.out.println("정상적인 로그인입니다.");
 		} else { // 중복 로그인의 경우
-			System.out.println("중복 로그인");
-			//범인
-//			simpMessagingTemplate.setMessageConverter(new StringMessageConverter());
-//			simpMessagingTemplate.convertAndSend("/category/loginMsg/"+member.getNum(),"[result:0]"); // 기존 로그인된 유저에게 요청을 보낸다 ==> 기존 유저의 브라우저에서는 alert가 뜬 뒤, 자동 로그아웃 된다.
-			loginMember.put(userEmail, request.getSession()); // map에 해당 멤버를 담은 뒤,
-			response.sendRedirect("workspace"); //워크스페이스로 이동한다			
+			System.out.println("중복 로그인입니다.");
+			sendLoginDuplicatedMsg(user.getNum());
 		}
+		
+		connectorList.put(request.getSession(), userEmail); // 해당 email, session 추가 또는 교체
+		System.out.println("중복체크 후 접속 중인 멤버 : "+connectorList);
+		response.sendRedirect("/workspace"); //워크스페이스로 이동한다	
 	}
 	
 	//회원 탈퇴버튼
@@ -245,17 +251,7 @@ public class MemberController {
 		session.invalidate();
 		return "redirect:main";
 	}
-	@RequestMapping("/removeSession") //로그아웃 성공 후, 처리
-	public String logoutSession(HttpSession session, String type) {
-		loginMember.remove((String)session.getAttribute("userEmail"));
-	      if(type == null) {
-	         //loginList.removeUser((String)session.getAttribute("userEmail"));
-	      }      
-	      session.invalidate();
-	      //String memberList = new Gson().toJson(loginList.getLoginList()); 
-	      //simpMessagingTemplate.convertAndSend("/category/loginInfo","{\"loginMemberList\":"+memberList+"}"); 
-	      return "redirect:main";
-	}
+	
 	/*
 	 * public Map<String, Object> getLoginMemberList(){ return loginMember; }
 	 */
@@ -264,5 +260,25 @@ public class MemberController {
 	public Member getMemberInfoForProfileImg(@RequestParam("mNum")int mNum) {
 		Member member = memberService.getMember(mNum);
 		return member;
+	}
+	
+	/* 맵에서 Value값으로  key 찾기*/
+    public static <K, V> K getKey(Map<K, V> map, V value) {
+        // 찾을 hashmap 과 주어진 단서 value
+        for (K key : map.keySet()) {
+            if (value.equals(map.get(key))) {
+                return key;
+            }
+        }
+        return null;
+    }
+
+	public String sendLoginDuplicatedMsg(
+			@DestinationVariable(value="mNum")int mNum
+			) {
+		System.out.println("중복아이디 로그아웃 메시지 전송");
+		smt.convertAndSend("/category/loginMsg/"+mNum,"duplicated");
+		
+		return "duplicated";
 	}
 }
