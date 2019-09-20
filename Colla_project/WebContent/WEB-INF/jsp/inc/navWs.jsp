@@ -4,6 +4,9 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:set var="contextPath" value="<%=request.getContextPath() %>"/>
 <script>
+	function sendAlarm(wNum,mNumTo,mNumFrom,aType,aDnum){
+		stompClient.send("/client/sendAlarm/"+wNum+"/"+mNumTo+"/"+mNumFrom+"/"+aDnum,{},aType);
+	}
 	function showProfileInfoModal(mNum){
 			$.ajax({
 				url : "${contextPath}/getMemberInfoForProfileImg",
@@ -65,6 +68,7 @@
 			<a href="${contextPath}/workspace"> <img src="${contextPath}/img/COLLA_LOGO_200px_brighten.png" />
 			</a>
 		</h1>
+		
 		<div id="aboutProfile">
 			<a href="${contextPath }/myPageMainForm">
 				<img alt="나의 프로필 사진" src="${contextPath }/showProfileImg" />

@@ -39,6 +39,13 @@ function duplicateConnect(){
 				addMsg(msgInfo);
 				$("#chatArea").scrollTop($("#chatArea")[0].scrollHeight);
 		});
+		//알림구독
+		var userNum = ${sessionScope.user.num};
+		stompClient.subscribe("/category/alarm/"+userNum, function(alarm){
+				alarmInfo = JSON.parse(alarm.body);
+// 				alert(alarmInfo.mNumFrom+"님이 보낸"+alarmInfo.aType+"알림이 도착했습니다");
+				$("#alarmOn").show();
+		});
 		<%-----------------------------------------------------------------------------------------------------%>
 		stompClient.subscribe("/category/loginMsg/" + ${member.num},function(){
 	         alert("로그인 요청 시도가 있었습니다.");
@@ -51,7 +58,18 @@ function duplicateConnect(){
 	}); //end connect
 }// end duplicateConnect
 $(function(){
-	
+	var alarmToggleVal=0;
+	$("#alarmDiv").on("click",function(){
+		$("#alarmOn").hide();
+		
+		if(alarmToggleVal==0){
+			$("#alarmInfoDiv").animate({height:"400px"},200);
+				alarmToggleVal = 1;
+		}else{
+			$("#alarmInfoDiv").animate({height:"0px"},200);
+				alarmToggleVal = 0;		
+		}
+	});
 	
 	
 	duplicateConnect();
@@ -86,5 +104,12 @@ $(function(){
 		<div id="chatRoomInfo">
 			<p>페이지 이름</p>
 		</div>
+		<div id="alarmDiv">
+			<div id="alarmOn"></div>
+			<i class="fas fa-bell"></i>
+		</div>
+	</div>
+	<div id="alarmInfoDiv">
+		
 	</div>
 </div>
