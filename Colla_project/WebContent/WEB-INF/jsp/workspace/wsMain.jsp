@@ -1,23 +1,39 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<c:set var="contextPath" value="<%=request.getContextPath()%>" />
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
+    pageEncoding="UTF-8"%>
+<%@ include file="/WEB-INF/jsp/inc/head.jsp" %>
+
 <title>워크스페이스</title>
-<link rel="stylesheet" type="text/css" href="${contextPath}/css/reset.css"/>
-<link rel="stylesheet" type="text/css" href="${contextPath}/css/base.css"/>
 <link rel="stylesheet" type="text/css" href="${contextPath}/css/headerWs.css"/>
 <link rel="stylesheet" type="text/css" href="${contextPath}/css/navWs.css"/>
 <link rel="stylesheet" type="text/css" href="${contextPath}/css/workspace.css"/>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script> <!-- font awsome -->
 <script>
 	var wNum;
 	
 	$(function(){	
+		
+		
+		$(".exitWs a").on("click",function(){
+			var thisWnum = $(this).attr("data-wnum");
+			var thisWname = $(this).attr("data-wname");
+			if(confirm(thisWname +" 워크스페이스를 나가시겠습니까?")==true){
+				$.ajax({
+// 					exitWs?wNum=${ws.wsInfo.num}
+					url : "${contextPath}/exitWs",
+					data : {"thisWnum" : thisWnum},
+					success : function(){
+						alert("워크스페이스 나가기 성공");
+						location.reload();
+					},
+					error : function(){
+						alert("워크스페이스 나가기 오류 발생");
+					}
+				});
+			}else{
+				return false;
+			}
+		});
+		
+		
 		//WS추가 모달
 		$("#openWsModal").on("click",function(){
 			$("#addWsModal").fadeIn(300);
@@ -82,6 +98,7 @@
 	});// onload.function end
 	function thisWsMemberList(wNum){
 			var wsMemberList = $("#wsMemberList");
+			var mNum = $("#mNum").val();
 			$.ajax({
 				url : "${contextPath}/thisWsMemberList",
 				data : {"wNum":wNum},
@@ -89,8 +106,11 @@
 				success : function(d){
 					wsMemberList.empty();
 					$.each(d,function(idx,item){
-						var str='<label><li><input type="checkbox" value="'+item.num+'" name="mNumList">'+item.name+'</li></label>';
-							wsMemberList.append(str);
+						if(item.num!=mNum){
+							var str='<label><li><input type="checkbox" value="'+item.num+'" name="mNumList">'+item.name+'</li></label>';
+							wsMemberList.append(str);	
+						}
+						
 					});
 				},
 				error : function(){
@@ -112,6 +132,7 @@
 	<%@ include file="/WEB-INF/jsp/inc/navWs.jsp"%>
 	<div id="wsBody">
 		<input type="hidden" value="workspace" id="pageType">
+		<input type="hidden" value="${sessionScope.user.num}" id="mNum">
 		<div id="wsBodyContainer"> 
 		<h2>Workspace List</h2>
 		<ul>
@@ -148,7 +169,7 @@
 									<c:set var="mlResult" value="0"/>
 								</c:when>
 								<c:otherwise>
-										<li><div class='profileImg' align="center"><img alt='프로필사진' src='/Colla_project/showProfileImg?num='+${m.num} onclick="showProfileInfoModal(${m.num})"></div>
+										<li><div class='profileImg' align="center"><img alt='프로필사진' src='/Colla_project/showProfileImg?num=${m.num}' onclick="showProfileInfoModal(${m.num})"></div>
 										<p>${m.name}</p></li>
 								</c:otherwise>
 							</c:choose>
@@ -160,7 +181,8 @@
 					
 					
 					<div class="exitWs">
-						<a href="exitWs?wNum=${ws.wsInfo.num}"><i class="fas fa-door-open"></i></a>
+<%-- 						<a href="exitWs?wNum=${ws.wsInfo.num}"><i class="fas fa-sign-out-alt"></i></a> --%>
+						<a href="#" data-wnum="${ws.wsInfo.num}" data-wname="${ws.wsInfo.name}"><i class="fas fa-sign-out-alt"></i></a>
 					</div>
 				</li>
 			</c:forEach>
@@ -207,7 +229,7 @@
 						</div>
 					</div> <!-- end addWsInputWrap -->
 
-					<div>
+					<div id="modalBtnDiv">
 						<button type="submit">workspace만들기</button>
 						<button id="closeWsModal">닫기</button>
 					</div>
@@ -239,7 +261,7 @@
 						</div>
 					</div> <!-- end addChatInputWrap -->
 
-					<div>
+					<div id="modalBtnDiv" align="center">
 						<button type="submit">채팅방 만들기</button>
 						<button id="closeChatModal">닫기</button>
 					</div>
@@ -268,7 +290,7 @@
 						</div>
 					</div> <!-- end addMemberInputWrap -->
 
-					<div>
+					<div id="modalBtnDiv">
 						<button type="submit">멤버 초대하기</button>
 						<button id="closeMemberModal">닫기</button>
 					</div>

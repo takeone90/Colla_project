@@ -1,23 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<% 
-String contextPath = request.getContextPath();
-request.setAttribute("contextPath", contextPath);
-%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
+<%@ include file="/WEB-INF/jsp/inc/head.jsp" %>
+
 <title>joinStep2</title>
-<link rel="stylesheet" type="text/css" href="css/reset.css"/>
-<link rel="stylesheet" type="text/css" href="css/base.css"/>
 <link rel="stylesheet" type="text/css" href="css/headerMain.css"/>
 <link rel="stylesheet" type="text/css" href="css/join.css" />
-<script src="https://kit.fontawesome.com/ac21eff7ec.js"></script>
-<script src="https://code.jquery.com/jquery-3.4.1.js"
-  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
-  crossorigin="anonymous"></script>
 <script type="text/javascript">
 $(function() {
 	$("#verifyCodeForm").on("submit", function() {

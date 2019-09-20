@@ -110,8 +110,8 @@ function loadReply(){
 		type: "get",
 		dataType:"json",
 		success: function(list){
+			$("#replyBox").empty();
 			if(list.length>0){
-				$("#replyBox").empty();
 				$.each(list, function(index,item){
 					let date = new Date(item.regdate);
 					let li = '<li class="clearFix">';

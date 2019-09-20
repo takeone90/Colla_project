@@ -139,14 +139,14 @@ public class WorkSpaceController {
 		
 	}
 	
+	@ResponseBody
 	@RequestMapping("/exitWs")
-	public String exitWs(int wNum,HttpSession session) {
+	public void exitWs(@RequestParam("thisWnum")int wNum,HttpSession session) {
 		Member member = (Member)session.getAttribute("user");
 		wsmService.removeWsMember(wNum, member.getNum());
 		//mNum과 wNum을 이용해서 모든 chatRoomMember값을 지운다
 		crmService.removeChatRoomMemberByWnumMnum(wNum, member.getNum());
 		//exit 한사람이 chatroom의 생성자일지라도 그 chatroom 은 지워지지 않는다.
-		return "redirect:workspace";
 	}
 		
 	public class inner implements Runnable {

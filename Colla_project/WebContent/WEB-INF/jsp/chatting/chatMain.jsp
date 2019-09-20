@@ -1,23 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<c:set var="contextPath" value="<%=request.getContextPath()%>"/>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
+    pageEncoding="UTF-8"%>
+<%@ include file="/WEB-INF/jsp/inc/head.jsp" %>
+
 <title>채팅 메인</title>
-<link rel="stylesheet" type="text/css" href="${contextPath}/css/reset.css"/>
-<link rel="stylesheet" type="text/css" href="${contextPath}/css/base.css"/>
 <link rel="stylesheet" type="text/css" href="${contextPath}/css/headerWs.css"/>
 <link rel="stylesheet" type="text/css" href="${contextPath}/css/navWs.css"/>
 <link rel="stylesheet" type="text/css" href="${contextPath}/css/chatMain.css"/>
 <link rel="stylesheet" type="text/css" href="${contextPath}/css/animate.css"/>
 <link rel="stylesheet" type="text/css" href="${contextPath}/css/animationCheatSheet.css"/>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script type="text/javascript" src="${contextPath}/js/stomp.js"></script>
-<script type="text/javascript" src="${contextPath}/js/sockjs.js"></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=38b5346cba2a9103101abc2c542a2d86&libraries=services"></script>
 
 <script type="text/javascript" src="lib/codemirror/lib/codemirror.js"></script>
@@ -255,15 +246,7 @@ function showMemberList(){
 				crMemberLI.append(memberNameInSlideMenu);
 				//프로필 이미지 누르면 모달 뜨게 하기
 				profileImgTag.on("click",function(){
-					var imgTag = $("<img alt='"+crmItem.name+"님의 프로필 사진' src='${contextPath}/showProfileImg?num="+ crmItem.num+ "'>");
-					var memberProfileImgDiv = $(".memberProfileImg");
-					var memberProfileInfoDiv = $(".memberProfileInfo");
-					memberProfileImgDiv.empty();
-					memberProfileInfoDiv.empty();
-					var modalProfileInfoTag = $("<h3>이름</h3><p>"+crmItem.name+"</p>");
-					memberProfileImgDiv.append(imgTag);
-					memberProfileInfoDiv.append(modalProfileInfoTag);
-					$("#memberInfoModal").fadeIn(100);
+					showProfileInfoModal(crmItem.num);
 				});
 				crmListUL.append(crMemberLI);
 			});
@@ -274,13 +257,20 @@ function showMemberList(){
 			if(isDefault==0){
 				//채팅방에 없는사람(ws멤버인사람)
 				$.each(wsmList,function(idx,item){
-					var profileImgTag = "<div class='profileImg'><a href='#'><img alt='프로필사진' src='/Colla_project/showProfileImg?num="+item.num+"'></a></div>";
-					var wsMemberLI = $("<label><li>"+profileImgTag+"<div class='memberNameInSlideMenu'><input type='checkbox' value='"+item.num+"' name='wsmList'>"+item.name+"<div class='checked-member'><i class='fas fa-check'></i><div>"+"</div></li></label>");
+					var profileImgTag = $("<div class='profileImg'><img alt='프로필사진' src='/Colla_project/showProfileImg?num="+item.num+"'></div>");
+					var wsMemberEtcTag = $("<div class='memberNameInSlideMenu'><input type='checkbox' value='"+item.num+"' name='wsmList'>"+item.name+"<div class='checked-member'><i class='fas fa-check'></i></div></div>");
+					var wsMemberLI = $("<label><li></li></label>");
+					wsMemberLI.children().append(profileImgTag);
+					wsMemberLI.children().append(wsMemberEtcTag);
+					//프로필 이미지 누르면 모달 뜨게 하기
+					profileImgTag.on("click",function(){
+						showProfileInfoModal(item.num);
+					});
 					wsmListUL.append(wsMemberLI);
 				});
 				mListDiv.append(wsmListUL);
 				wsmListUL.before("<h4>초대 가능한 워크스페이스 멤버</h4>");
-				var inviteBtn = $("<div align='center'><button type='submit'>선택한 멤버 초대하기</button></div>");
+				var inviteBtn = $("<div align='center'><button type='submit' id='inviteWsmBtn'>선택한 멤버 초대하기</button></div>");
 				inviteForm.append(inviteBtn);
 				//체크박스에 클릭된 멤버들 클래스를 다르게 줘서 색깔바꾸기
 				
