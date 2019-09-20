@@ -95,7 +95,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="selectBoardBybNum" parameterType="int" resultMap="boardMap">
-		select b_num, m_name, w_num, b_title, b_content, b_regdate, b_readCnt, b_pw, b_type
+		select b.b_num, m.m_name, b.w_num, b.b_title, b.b_content, b.b_regdate, b.b_readCnt, b.b_pw, b.b_type, m.m_num
 		from board b, member m
 		where b.b_num = #{bNum} and m.m_num=b.m_num
 	</select>
