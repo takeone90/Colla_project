@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,9 +59,11 @@ public class WorkSpaceController {
 		for(int i = 0;i<wsList.size();i++) {
 			int wNum = wsList.get(i).getNum();
 			Map<String, Object> wsMap = new HashMap<String, Object>();
+			ChatRoom defaultChatRoom = crService.getDefaultChatRoomByWnum(wNum);
 			wsMap.put("wsInfo", wsList.get(i));
 			wsMap.put("crList", crService.getAllChatRoomByWnumMnum(wNum, user.getNum()));
 			wsMap.put("mList", mService.getAllMemberByWnum(wNum));
+			wsMap.put("defaultCrNum",defaultChatRoom.getCrNum());
 			workspaceList.add(wsMap);
 		}
 		model.addAttribute("workspaceList", workspaceList);
@@ -84,29 +87,35 @@ public class WorkSpaceController {
 	
 	//워크스페이스 추가
 	@RequestMapping("/addWs")
-	public String addWs(String wsName,String targetUser,HttpSession session) {
+	public String addWs(String wsName,HttpSession session,HttpServletRequest request) {
 		//현재 로그인된 생성자를 워크스페이스에 담으면서 생성
+		String[] targetUserList = request.getParameterValues("targetUserList");
 		String userEmail = (String)session.getAttribute("userEmail");
 		Member member = mService.getMemberByEmail(userEmail);
 		int wNum = wService.addWorkspace(member.getNum(), wsName);
-		if(targetUser!="" && targetUser!=null) {
-			//targetUser들에게 초대메일 보내기 해야함
-			wiService.addWorkspaceInvite(targetUser, wNum);
-			Thread innerTest = new Thread(new inner(targetUser,wNum));
-			innerTest.start();
+		if(targetUserList!=null) {
+			for(String targetUser:targetUserList) {
+				//targetUser들에게 초대메일 보내기 해야함
+				wiService.addWorkspaceInvite(targetUser, wNum);
+				Thread innerTest = new Thread(new inner(targetUser,wNum));
+				innerTest.start();	
+			}
 		}
-		
 		return "redirect:workspace";
 	}
 	
 	
 	//워크스페이스에 멤버 초대하는부분
 	@RequestMapping("/inviteMember")
-	public String inviteMember(int wNum, String targetUser,HttpSession session) {
+	public String inviteMember(int wNum,HttpSession session,HttpServletRequest request) {
 		//ws초대 여부를 db에 담는다
-		wiService.addWorkspaceInvite(targetUser, wNum);
-		Thread innerTest = new Thread(new inner(targetUser,wNum));
-		innerTest.start();
+		String[] targetUserList = request.getParameterValues("targetUserList");
+		for(String targetUser:targetUserList) {
+			wiService.addWorkspaceInvite(targetUser, wNum);
+			System.out.println(targetUser);
+			Thread innerTest = new Thread(new inner(targetUser,wNum));
+			innerTest.start();
+		}
 		return "redirect:workspace";
 	}
 	

@@ -116,7 +116,7 @@
 }
 
 #wsNav #memberInfoModal{
-	color : black;
+	color: #403C39;
 	top: 20%;
 	left: 30%;
 	width: 400px;
@@ -127,7 +127,17 @@
 .attachModal .memberProfileInfo p{
 	margin-top : 0px;
 }
-
+#logoutBtn{
+	background-color:white;
+	border:none;
+	font-weight: bolder;
+}
+#logoutBtn:hover{
+	cursor: pointer;
+	background-color:#E5675A;
+	color:white;
+	
+}
 
 
 
