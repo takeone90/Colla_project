@@ -85,14 +85,13 @@
     z-index: 1;	
 }
 .main-function-details {
-/* 	background-color: green; */
 	width: 70%;
     height: 32%;
     position: relative;
     margin: 0 auto;
     margin-top: 30px;
 }
-.main-function-details1,
+.main-function-details1, /* 라디오 버튼 */
 .main-function-details2,
 .main-function-details3 {
 	width: 220px;
@@ -101,30 +100,38 @@
     display: inline-block;
     margin: 0px 10px;
     border-radius: 50%;
-    display:  
 }
-.main-function-details1:hover {
-	background-color: #D8D8D8;
+input[type=radio] { /* ㄹㅇ 라디오 버튼 안 보이게 */
+    display: none;
 }
-.main-function-details2:hover {
-	background-color: #D8D8D8;
-}
-.main-function-details3:hover {
-	background-color: #D8D8D8;
-}
-.main-function-details > .on {
-	background-color: #EC6D63;
-}
-.main-function-details > div > div {
+.main-function-details1 > span, /* 라디오 버튼 안 문장*/
+.main-function-details2 > span,
+.main-function-details3 > span {
 	color: white;
 	margin: 40% 0%;
     font-weight: 100;
     font-size: 21px;
+    display: block;
+}
+.main-function-details1:hover, /* 호버했을 때 */
+.main-function-details2:hover,
+.main-function-details3:hover {
+	background-color: #D8D8D8;
+}
+.main-function-details > .on { /* 클릭했을 때 */
+	background-color: #EC6D63;
 }
 #main-coworker {
 	background-color: #ffffff;
 }
-
+/* .main-function-details > input { */
+/* 	width: 220px; */
+/*     height: 220px; */
+/*     background-color: #4D4B4C; */
+/*     display: inline-block; */
+/*     margin: 0px 10px; */
+/*     border-radius: 50%; */
+/* } */
 /* colla? */
 
 #wrap {
