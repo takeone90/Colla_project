@@ -9,7 +9,6 @@
 <link rel="stylesheet" type="text/css" href="css/main.css"/>
 <link rel="stylesheet" type="text/css" href="css/animate.css"/>
 <link rel="stylesheet" type="text/css" href="css/animationCheatSheet.css"/>
-
 <!-- 구글 API -->
 <script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script>
 <script>
