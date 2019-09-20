@@ -4,7 +4,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="shortcut icon" type="image/x-icon" href="${contextPath}/img/favicon1.ico"/>
 <meta name="google-signin-client_id" content="504860758033-8nonf1fgo3sk1c4sfv2dv4n52tciijjo.apps.googleusercontent.com">
 <title>COLLA</title>
 <link rel="stylesheet" type="text/css" href="css/reset.css"/>
@@ -14,6 +13,7 @@
 <link rel="stylesheet" type="text/css" href="css/main.css"/>
 <link rel="stylesheet" type="text/css" href="css/animate.css"/>
 <link rel="stylesheet" type="text/css" href="css/animationCheatSheet.css"/>
+<link rel="shortcut icon" type="image/x-icon" href="${contextPath}/img/favicon1.ico"/>
 <script src="https://code.jquery.com/jquery-3.4.1.js"
   integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
   crossorigin="anonymous"></script>

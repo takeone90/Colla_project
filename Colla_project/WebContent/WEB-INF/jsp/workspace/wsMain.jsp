@@ -7,6 +7,8 @@
 <head>
 <meta charset="UTF-8">
 <title>워크스페이스</title>
+
+<link rel="shortcut icon" type="image/x-icon" href="${contextPath}/img/favicon1.ico"/>
 <link rel="stylesheet" type="text/css" href="${contextPath}/css/reset.css"/>
 <link rel="stylesheet" type="text/css" href="${contextPath}/css/base.css"/>
 <link rel="stylesheet" type="text/css" href="${contextPath}/css/headerWs.css"/>

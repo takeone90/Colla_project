@@ -600,7 +600,7 @@ input[type=radio]{
 	margin-top : 7px;
 	margin-bottom : 7px;
 	color : 403C39;
-	max-height : 218px;
+	max-height : 226px;
 	overflow: auto;
 /* 	background-color: blue; */
 }
@@ -695,4 +695,16 @@ input[type=radio]{
 	transition:color .5s;
 }#exitChatRoom:hover{
 	color : #f74d3e;
+}
+#inviteWsmBtn{
+	padding : 7px;
+	background-color : #403C39;
+	color : white;
+	border-radius : 7px;
+    border: none;
+    cursor: pointer;
+    margin-top: 9px;
+}
+#inviteWsmBtn:hover{
+	background-color : #E5675A;
 }
