@@ -10,6 +10,7 @@ function duplicateConnect(){
 	sock = new SockJS("${contextPath}/chat");
 	stompClient = Stomp.over(sock);
 	stompClient.connect({},function(){
+		
 		<%----------------------------------------채팅메시지 구독부분----------------------------------------------%>
 		var crNum = $("#crNum").val();
 		//일반메세지 구독
@@ -47,12 +48,10 @@ function duplicateConnect(){
 				$("#alarmOn").show();
 		});
 		<%-----------------------------------------------------------------------------------------------------%>
-		stompClient.subscribe("/category/loginMsg/" + ${member.num},function(){
-	         alert("로그인 요청 시도가 있었습니다.");
-	         $.ajax({ 
-	            url : "${contextPath}/removeSession?type=duplicationLogin"
-	         });
-	         location.href="main";
+		stompClient.subscribe("/category/loginMsg/" + ${member.num},function(data){
+			if(data.body=="duplicated"){
+		        window.location.href="/logout?type=duplicated";
+			}
 	      });// end subcribe
 		
 	}); //end connect
