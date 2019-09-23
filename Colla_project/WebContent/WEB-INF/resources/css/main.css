@@ -1,15 +1,16 @@
 @charset "UTF-8";
 
 /* main */
-
 #wrap {
 	height: 100%;
 }
+
 #welcome {
 	display: block;
 	background-color: #ffffff;
 	height: 100%;
 }
+
 #welcome section {
 	position: relative;
 	display: block;
@@ -18,109 +19,125 @@
 	text-align: center;
 	padding: 80px 15px 100px 15px;
 }
+
 #main-cover {
 	background-image: url("../img/Main_background.jpg");
 	background-size: cover;
 }
+
 #main-cover .head-body {
 	margin-top: 165px;
-    margin-bottom: 0px;
-    font-size: 25px;
-    font-weight: 200;
-    color: #DEDCDD;
+	margin-bottom: 0px;
+	font-size: 25px;
+	font-weight: 200;
+	color: #DEDCDD;
 }
+
 #main-cover .head-title {
 	font-size: 120px;
-    margin-top: 0px;
+	margin-top: 0px;
 }
+
 #main-cover .head-caption {
-    margin-top: 0px;
-    line-height: 30px;
-    font-weight: 100;
-    color: #DEDCDD;
+	margin-top: 0px;
+	line-height: 30px;
+	font-weight: 100;
+	color: #DEDCDD;
 }
-#main-intro {  
+
+#main-intro {
 	background-color: #F5F5F5;
 }
+
 #main-intro .head-body {
 	margin-top: 8%;
 	font-weight: 300;
 }
+
 .main-function {
 	width: 1200px;
-    height: 700px;
-    margin: 0 auto;
+	height: 700px;
+	margin: 0 auto;
 }
+
 .main-function-images {
 	background-color: white;
 	width: 70%;
-    height: 50%;
-    position: relative;
-    margin: 0 auto;
+	height: 50%;
+	position: relative;
+	margin: 0 auto;
 }
-.main-function-images > div {
+
+.main-function-images>div {
 	width: 100%;
-    height: 100%;
+	height: 100%;
 }
+
 .main-function-image1 {
 	background-color: aqua;
 	position: relative;
 	display: inline-block;
-	z-index: 2;	
+	z-index: 2;
 }
+
 .main-function-image2 {
 	background-color: gray;
 	position: absolute;
 	display: inline-block;
 	top: 0;
-    left: 0;
-    z-index: 1;	
+	left: 0;
+	z-index: 1;
 }
+
 .main-function-image3 {
 	background-color: blue;
 	position: absolute;
 	display: inline-block;
 	top: 0;
-    left: 0;
-    z-index: 1;	
+	left: 0;
+	z-index: 1;
 }
+
 .main-function-details {
 	width: 70%;
-    height: 32%;
-    position: relative;
-    margin: 0 auto;
-    margin-top: 30px;
+	height: 32%;
+	position: relative;
+	margin: 0 auto;
+	margin-top: 30px;
 }
-.main-function-details1, /* 라디오 버튼 */
-.main-function-details2,
-.main-function-details3 {
+
+.main-function-details1, /* 라디오 버튼 */ .main-function-details2,
+	.main-function-details3 {
 	width: 220px;
-    height: 220px;
-    background-color: #4D4B4C;
-    display: inline-block;
-    margin: 0px 10px;
-    border-radius: 50%;
+	height: 220px;
+	background-color: #4D4B4C;
+	display: inline-block;
+	margin: 0px 10px;
+	border-radius: 50%;
 }
+
 input[type=radio] { /* ㄹㅇ 라디오 버튼 안 보이게 */
-    display: none;
+	display: none;
 }
-.main-function-details1 > span, /* 라디오 버튼 안 문장*/
-.main-function-details2 > span,
-.main-function-details3 > span {
+
+.main-function-details1>span, /* 라디오 버튼 안 문장*/ .main-function-details2>span,
+	.main-function-details3>span {
 	color: white;
 	margin: 40% 0%;
-    font-weight: 100;
-    font-size: 21px;
-    display: block;
+	font-weight: 100;
+	font-size: 21px;
+	display: block;
 }
-.main-function-details1:hover, /* 호버했을 때 */
-.main-function-details2:hover,
-.main-function-details3:hover {
+
+.main-function-details1:hover, /* 호버했을 때 */ .main-function-details2:hover,
+	.main-function-details3:hover {
 	background-color: #D8D8D8;
 }
-.main-function-details > .on { /* 클릭했을 때 */
+
+.main-function-details>.on { /* 클릭했을 때 */
 	background-color: #EC6D63;
 }
+
 #main-coworker {
 	background-color: #ffffff;
 }
@@ -133,101 +150,107 @@ input[type=radio] { /* ㄹㅇ 라디오 버튼 안 보이게 */
 /*     border-radius: 50%; */
 /* } */
 /* colla? */
-
 #wrap {
 	height: 100%;
 }
+
 #collaInfoAll {
 	height: 100%;
 }
+
 #collaInfoAll section {
 	position: relative;
 	display: block;
 	overflow: hidden;
-    height: 100%;
+	height: 100%;
 	text-align: center;
 	padding: 80px 15px 100px 15px;
 }
-#collaInfo-cover,
-#collaInfo-function2,
-#collaInfo-function4 {
+
+#collaInfo-cover, #collaInfo-function2, #collaInfo-function4 {
 	background-color: #ffffff;
 }
-#collaInfo-function1,
-#collaInfo-function3 {
+
+#collaInfo-function1, #collaInfo-function3 {
 	background-color: #EC6D63;
 }
+
 .collaInfo-functions {
 	vertical-align: middle;
 }
-#collaInfo-function1-ani,
-#collaInfo-function2-ani,
-#collaInfo-function3-ani,
-#collaInfo-function4-ani {
+
+#collaInfo-function1-ani, #collaInfo-function2-ani,
+	#collaInfo-function3-ani, #collaInfo-function4-ani {
 	display: inline-block;
 	vertical-align: middle;
 }
-#collaInfo-function1-stable,
-#collaInfo-function2-stable,
-#collaInfo-function3-stable,
-#collaInfo-function4-stable {
+
+#collaInfo-function1-stable, #collaInfo-function2-stable,
+	#collaInfo-function3-stable, #collaInfo-function4-stable {
 	display: inline-block;
 	vertical-align: middle;
 	width: 500px;
 	height: 500px;
 	background-color: lime;
 }
-#main-intro-ani,
-#main-coworker-ani,
-#collaInfo-function1-ani,
-#collaInfo-function2-ani,
-#collaInfo-function3-ani,
-#collaInfo-function4-ani {
+
+#main-intro-ani, #main-coworker-ani, #collaInfo-function1-ani,
+	#collaInfo-function2-ani, #collaInfo-function3-ani,
+	#collaInfo-function4-ani {
 	visibility: hidden;
 }
+
 .head-title {
 	font-size: 72px;
-    font-weight: 500;
-    margin-bottom: 10px;
-    padding: 15px;
-    margin-top: 120px;
+	font-weight: 500;
+	margin-bottom: 10px;
+	padding: 15px;
+	margin-top: 120px;
 }
+
 .head-title p {
 	display: inline-block;
 }
+
 .head-title p:first-child {
 	color: #EC6D63;
 }
+
 .head-body {
 	font-size: 30px;
-    font-weight: 400;
-    line-height: 1.4;
-    padding: 0px 15px;
-    margin-bottom: 30px;	
+	font-weight: 400;
+	line-height: 1.4;
+	padding: 0px 15px;
+	margin-bottom: 30px;
 }
+
 .head-caption {
 	padding: 15px;
-    font-size: 20px;
-    margin-bottom: 55px;
+	font-size: 20px;
+	margin-bottom: 55px;
 }
+
 .head-arrow {
 	font-size: 50px;
-    color: gray;
+	color: gray;
 }
+
 #collaInfo-function1-ani {
 	text-align: left;
 }
+
 #collaInfo-function2-ani {
 	text-align: right;
 }
+
 #collaInfo-function3-ani {
 	text-align: left;
 }
+
 #collaInfo-function4-ani {
 	text-align: right;
 }
 /* pricing */
-
 #pricingAll section {
 	position: relative;
 	display: block;
@@ -236,100 +259,112 @@ input[type=radio] { /* ㄹㅇ 라디오 버튼 안 보이게 */
 	text-align: center;
 	padding: 80px 15px 100px 15px;
 }
+
 .price-box-inside {
-    display: inline-flex;
-    border: 1px solid #b4b4b4;
-    width: 55%;
-    min-width: 930px;
-    border-radius: 6px;
-    text-align: left;
+	display: inline-flex;
+	border: 1px solid #b4b4b4;
+	width: 55%;
+	min-width: 930px;
+	border-radius: 6px;
+	text-align: left;
 }
+
 .price-each-col {
-    padding: 20px;
-    width: 30%;
-    border: 1px solid #b4b4b4;
-    margin: 5px;
-    border-radius: 6px;
+	padding: 20px;
+	width: 30%;
+	border: 1px solid #b4b4b4;
+	margin: 5px;
+	border-radius: 6px;
 }
+
 .price-title {
 	font-weight: 900;
-    font-size: 32px;
-    margin-top: 5px;
-    margin-bottom: 15px;
-    text-align: left;
+	font-size: 32px;
+	margin-top: 5px;
+	margin-bottom: 15px;
+	text-align: left;
 }
+
 .price-desc {
-    font-size: 15px;
-    word-break: break-word;
-    word-wrap: break-word;
-    white-space: normal;
-    color: #666;
-    padding: 0;
-    line-height: 1.4;
+	font-size: 15px;
+	word-break: break-word;
+	word-wrap: break-word;
+	white-space: normal;
+	color: #666;
+	padding: 0;
+	line-height: 1.4;
 }
+
 .price-amount-view {
-    padding: 20px 0px 20px 0px;
-    display: flex;
-    align-items: flex-start;
+	padding: 20px 0px 20px 0px;
+	display: flex;
+	align-items: flex-start;
 }
+
 .price-currency-unit {
-    font-size: 14px;
-    font-weight: 700;
-    text-align: center;
-    color: #373839;
-    display: inline-block;
+	font-size: 14px;
+	font-weight: 700;
+	text-align: center;
+	color: #373839;
+	display: inline-block;
 }
+
 .price-value {
-    font-size: 48px;
-    font-weight: 900;
-    line-height: .75;
-    text-align: center;
-    color: #373839;
-    display: inline-block;
+	font-size: 48px;
+	font-weight: 900;
+	line-height: .75;
+	text-align: center;
+	color: #373839;
+	display: inline-block;
 }
+
 .price-unit {
 	margin-left: 5px;
-    margin-top: 20px;
-    color: gray;
-    font-size: 15px;
+	margin-top: 20px;
+	color: gray;
+	font-size: 15px;
 }
+
 .price-detail {
 	margin-top: 20px;
-    margin-bottom: 10px;
-    background-color: #F5F5F5;
-    padding: 15px;
-    line-height: 30px;
-    border-radius: 10px;
-    box-shadow: 0 0 0px 0px black;
+	margin-bottom: 10px;
+	background-color: #F5F5F5;
+	padding: 15px;
+	line-height: 30px;
+	border-radius: 10px;
+	box-shadow: 0 0 0px 0px black;
 }
+
 .price-check {
 	margin-right: 8px;
-    margin-top: 4px;
+	margin-top: 4px;
 }
+
 .price-detail-content {
 	display: inline-block;
 	font-size: 15px;
 }
+
 .price-start-button {
 	width: 100%;
-    background-color: white;
-    border-color: #EC6D63;
-    border-radius: 10px;
-    padding: 10px;
-    margin-top: 20px;
-    margin-bottom: 10px;
-    color: #EC6D63;
-    font-size: 15px;
-    font-weight: 600;
-    border-style: solid;
+	background-color: white;
+	border-color: #EC6D63;
+	border-radius: 10px;
+	padding: 10px;
+	margin-top: 20px;
+	margin-bottom: 10px;
+	color: #EC6D63;
+	font-size: 15px;
+	font-weight: 600;
+	border-style: solid;
 }
+
 .price-start-button:hover {
 	background-color: #EC6D63;
 	color: white;
 }
 
 /* faq */
-
 #faqAll section {
 	position: relative;
 	display: block;
@@ -338,10 +373,12 @@ input[type=radio] { /* ㄹㅇ 라디오 버튼 안 보이게 */
 	text-align: center;
 	padding: 80px 15px 100px 15px;
 }
+
 .questions {
 	width: 800px;
 	margin: 0 auto;
 }
+
 .question {
 	border-radius: 10px;
 	background-color: #eee;
@@ -354,9 +391,11 @@ input[type=radio] { /* ㄹㅇ 라디오 버튼 안 보이게 */
 	outline: none;
 	transition: 0.4s;
 }
+
 .active, .question:hover {
 	background-color: #ccc;
 }
+
 .answer {
 	border-radius: 10px;
 	padding: 0 18px;
@@ -365,33 +404,37 @@ input[type=radio] { /* ㄹㅇ 라디오 버튼 안 보이게 */
 	transition: max-height 0.2s ease-out;
 	background-color: #EC6D63;
 }
+
 .icon {
 	display: inline-block;
-    float: right;
+	float: right;
 }
+
 .answerDetail {
 	padding: 20px 0px;
 }
 
 /* aboutUs */
-
 div {
-  -webkit-backface-visibility: hidden;
+	-webkit-backface-visibility: hidden;
 }
+
 #wrap {
 	height: 100%;
 }
+
 #aboutUsAll {
 	height: 100%;
 }
-#aboutUs-member1,
-#aboutUs-member3 {
-	background-color: #EC6D63;	
+
+#aboutUs-cover, #aboutUs-history, #aboutUs-member {
+	background-color: #F5F5F5;	
 }
-#aboutUs-member2,
-#aboutUs-member4 {
-	background-color: #665A5A;	
+
+#aboutUs-member2, #aboutUs-member4 {
+	background-color: #665A5A;
 }
+
 #aboutUsAll section {
 	position: relative;
 	display: block;
@@ -401,55 +444,196 @@ div {
 	padding: 80px 15px 100px 15px;
 }
 
+/*미경 수정 시작*/
 /* 카드 뒤집기 */
-
 .aboutUs-card {
 	position: relative;
-	width: 200px;
-	height: 200px;
+	width: 250px;
+	height: 400px;
 	margin: 0 auto;
 }
+
 .card {
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  width: 100%;
-  height: 100%;
-  transition: all .5s;
-  backface-visibility: hidden;	
-  font-size: 20pt;
-  font-weight: 500;
-  vertical-align: middle;
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	width: 100%;
+	height: 100%;
+	transition: all .5s;
+	backface-visibility: hidden;
+	font-size: 20pt;
+	font-weight: 500;
+	vertical-align: middle;
 }
 .front {
 	background-color: white;
 	color: black;
 	z-index: 2;
+	overflow: hidden;
+	box-shadow: 2px 2px 5px 0.5px rgba(33, 33, 33, 0.2);
 }
 .back {
-	background-color: black;
 	color: white;
-	z-index: 1;	
+	z-index: 1;
 	transform: rotateY(-180deg);
+	box-shadow: 2px 2px 5px 0.5px rgba(33, 33, 33, 0.2);
 }
 .aboutUs-card:hover .front {
-	z-index: 1;	
+	z-index: 1;
 	transform: rotateY(180deg);
 }
 .aboutUs-card:hover .back {
-	z-index: 2;	
+	z-index: 2;
 	transform: rotateY(0deg);
 }
 
-
-
-/*미경 시작*/
-#aboutUs-cover .head-body * {
-	border: 1px solid red;
+/*회사소개*/
+#aboutUsAll .head-title {
+	font-size: 56px;
+	color: #665A5A;
+	margin-bottom: 50px;
+}
+#aboutUsAll p{
+	color: #665A5A;
+	line-height: 27px;
+}
+#aboutUs-cover .aboutUs-content-title{
+	width: 100%;
+	font-size: 27px;
+	margin-bottom: 25px;
+	font-weight: 500;
+	text-align: left;
+}
+#aboutUs-cover .head-body>div:first-child .aboutUs-content-title{
+	margin-left: 300px;
+}
+#aboutUs-cover .head-body>div {
+	width: 850px;
+	overflow: hidden;
+	margin: 0 auto;
+	margin-bottom: 80px;
+}
+#aboutUs-cover .head-body>div:first-child {
+	margin: 0 auto 90px;
+}
+#aboutUs-cover .head-body>div>* {
 	float: left;
 }
-#aboutUs-cover .head-body img {
-	width: 200px;
+#aboutUs-cover .head-body>div:first-child>img+p {
+	font-size: 16px;
+	text-align: left;
+	width: 550px;
+	margin-left: 50px;
+}
+#aboutUs-cover .head-body>div+div>p+p {
+	font-size: 16px;
+	text-align: left;
+	width: 450px;
+	margin-right: 50px;
+}
+#aboutUs-cover .head-body>div+div span {
+	display: inline-block;
+	width: 450px;
+	font-size: 18px;
+	font-weight: bold;
+	margin: 30px 0;
+	text-align: center;
+}
+#aboutUs-cover .head-body>div:first-child>img {
+	width: 250px;
+	margin-top: -1.5%;
+}
+#aboutUs-cover .head-body>div+div>img {
+	width: 350px;
+	margin-top: 2%
 }
 
-
+/*회사 연혁*/
+#aboutUs-history #aboutUs-history-ani{
+	visibility: hidden;
+}
+#aboutUs-history .head-body{
+	width: 1250px;
+	height : 500px;
+	margin: 0 auto;
+}
+#aboutUs-history .head-body > *{
+	float: left;
+}
+#aboutUs-history .head-body > img{
+	width: 55%;
+    height: 100%;
+}
+#aboutUs-history .head-body ul {
+	background-image: url("../img/history_line.png");
+	background-repeat: no-repeat;
+	background-size: 22.25px 450px;
+	background-position: 40px 25px;
+	background-color: white;
+	width: 45%;
+	height: 100%;
+}
+#aboutUs-history .head-body ul li{
+	line-height: 61.5px;
+	padding-left: 60px;
+}
+#aboutUs-history .head-body ul li p{
+	display: inline-block;
+	font-size: 20px;
+	text-align: left;
+	
+}
+#aboutUs-history .head-body ul li p:first-child{
+	color: #DA7A6F;
+	width: 120px;
+}
+#aboutUs-history .head-body ul li p:nth-child(2){
+	color: #4D4B4C;
+	width: 300px;
+}
+/*멤버 소개*/
+#aboutUs-member .head-body > div {
+	width: 1280px;
+	margin:0 auto;
+}
+#aboutUs-member .memberInfo{
+	width: 250px;
+	height : 400px;
+	float: left;
+	border-radius: 10px;
+}
+#aboutUs-member .memberInfo+.memberInfo{
+	margin-left: 93.3px;
+}
+#aboutUs-member .memberInfo .front img{
+	width: 100%;
+}
+#aboutUs-member .memberInfo .front img+p{
+	font-size: 15px;
+    color: #EC6D63;
+}
+#aboutUs-member .memberInfo .front p+p{
+	font-size: 22px;
+    font-weight: bold;
+    color: #4D4B4C;
+}
+#aboutUs-member .back{
+	background-color: #EC6D63;
+}
+#aboutUs-member .back ul li{
+	width: 160px;
+	border-radius: 10px;
+	margin: 35px auto;	
+}
+#myProgress {
+	width: 80%;
+	background-color: #ddd;
+	border-radius: 10px;
+}
+#myBar {
+	width: 1%;
+	height: 30px;
+	background-color: #4CAF50;
+	border-radius: 10px;
+}
+/*미경 수정 끝*/
