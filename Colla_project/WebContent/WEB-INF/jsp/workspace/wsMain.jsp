@@ -7,6 +7,7 @@
 <link rel="stylesheet" type="text/css" href="${contextPath}/css/navWs.css"/>
 <link rel="stylesheet" type="text/css" href="${contextPath}/css/workspace.css"/>
 <script>
+
 	var wNum;
 	
 	$(function(){	

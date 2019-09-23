@@ -239,7 +239,7 @@ function showMemberList(){
 			var crmList = jsonListMap.crmList;
 			//채팅방에 있는사람
 			$.each(crmList,function(idx,crmItem){
-				var profileImgTag = $("<div class='profileImg'><img alt='프로필사진' src='/showProfileImg?num="+crmItem.num+"'></div>");
+				var profileImgTag = $("<div class='profileImg'><img alt='프로필사진' src='${contextPath}/showProfileImg?num="+crmItem.num+"'></div>");
 				var memberNameInSlideMenu = $("<div class='memberNameInSlideMenu'>"+crmItem.name+"</div>");
 				var crMemberLI = $("<li></li>");
 				crMemberLI.append(profileImgTag);
@@ -257,7 +257,7 @@ function showMemberList(){
 			if(isDefault==0){
 				//채팅방에 없는사람(ws멤버인사람)
 				$.each(wsmList,function(idx,item){
-					var profileImgTag = $("<div class='profileImg'><img alt='프로필사진' src='/showProfileImg?num="+item.num+"'></div>");
+					var profileImgTag = $("<div class='profileImg'><img alt='프로필사진' src='${contextPath}/showProfileImg?num="+item.num+"'></div>");
 					var wsMemberEtcTag = $("<div class='memberNameInSlideMenu'><input type='checkbox' value='"+item.num+"' name='wsmList'>"+item.name+"<div class='checked-member'><i class='fas fa-check'></i></div></div>");
 					var wsMemberLI = $("<label><li></li></label>");
 					wsMemberLI.children().append(profileImgTag);
@@ -290,7 +290,7 @@ function showMemberList(){
 		error : function(){
 			alert("멤버리스트 불러오기 에러발생");
 		}
-	});
+	});//end showMemberList
 }
 	
 	//code형태 메세지 보내기

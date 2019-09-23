@@ -46,8 +46,14 @@
 	background-image: url("../img/Main_background.jpg");
 	background-size: cover;
 }
-#main-cover .head-body {
+#main-cover .head-body-up {
 	margin-top: 165px;
+    display: inline-block;
+    color: #EC6D63;
+    margin-right: 101px;
+    margin-bottom: 5px;
+}
+#main-cover .head-body-down {
     margin-bottom: 0px;
     font-size: 25px;
     font-weight: 200;
@@ -96,6 +102,10 @@
 .main-function-image1 > img {
 	height: 80%;
 }
+.main-function-image2 > img {
+	margin-left: 75px;
+    height: 82%;
+}
 .main-function-image3 > img {
 	margin-left: 95px;
 	height: 100%;
@@ -107,7 +117,7 @@
 	z-index: 2;	
 }
 .main-function-image2 {
-	background-color: blue;
+	background-color: #F5F5F5;
 	position: absolute;
 	display: inline-block;
 	top: 0;
@@ -429,7 +439,7 @@ input[type=radio] { /* ㄹㅇ 라디오 버튼 안 보이게 */
 	position: relative;
 	display: block;
 	overflow: hidden;
-	height: 700px;
+	height: 740px;
 	text-align: center;
 	padding: 80px 15px 100px 15px;
 	background-color: #F5F5F5;
@@ -507,18 +517,22 @@ input[type=radio] { /* ㄹㅇ 라디오 버튼 안 보이게 */
     line-height: 20px;
     font-weight: 100;
 }
-
+#ask .head-title {
+	margin-top: 10px;
+}
 #ask .head-caption {
 	margin-bottom: 30px;
 }
 .FAQ-email {
-    width: 50%;
+    width: 700px;
 	height: 445px;
 	border-radius: 10px;
 	border: 0px solid;
-	background-color: silver;	
+	background-color: #EFEEEE;	
 	margin: 0 auto;
     margin-bottom: 55px;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 .FAQ-email-name {
 	display: inline-block;
@@ -526,14 +540,14 @@ input[type=radio] { /* ㄹㅇ 라디오 버튼 안 보이게 */
 	margin-right: 86px;
 }
 .FAQ-email-name > input {
-	width: 120px;
+	width: 118px;
 }
 .FAQ-email-receive {
 	display: inline-block;
 	padding-top: 10px;
 }
 .FAQ-email-receive > input {
-	width: 241px;
+	width: 238px;
 }
 .FAQ-email-input {
 	width: 577px;
@@ -557,7 +571,7 @@ input[type=radio] { /* ㄹㅇ 라디오 버튼 안 보이게 */
     vertical-align: middle;
 }
 .FAQ-email-button {
-	margin-top: 7px;
+	margin-top: 12px;
 }
 /* .questions-left { */
 /* 	background: #333333; */
@@ -641,14 +655,6 @@ div {
 #aboutUsAll {
 	height: 100%;
 }
-#aboutUs-member1,
-#aboutUs-member3 {
-	background-color: #EC6D63;	
-}
-#aboutUs-member2,
-#aboutUs-member4 {
-	background-color: #665A5A;	
-}
 #aboutUsAll section {
 	position: relative;
 	display: block;
@@ -656,56 +662,201 @@ div {
 	height: 100%;
 	text-align: center;
 	padding: 80px 15px 100px 15px;
+	background-color: #F5F5F5;
 }
 
+/*미경 수정 시작*/
 /* 카드 뒤집기 */
-
 .aboutUs-card {
 	position: relative;
-	width: 200px;
-	height: 200px;
+	width: 250px;
+	height: 400px;
 	margin: 0 auto;
 }
+
 .card {
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  width: 100%;
-  height: 100%;
-  transition: all .5s;
-  backface-visibility: hidden;	
-  font-size: 20pt;
-  font-weight: 500;
-  vertical-align: middle;
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	width: 100%;
+	height: 100%;
+	transition: all .5s;
+	backface-visibility: hidden;
+	font-size: 20pt;
+	font-weight: 500;
+	vertical-align: middle;
 }
 .front {
 	background-color: white;
 	color: black;
 	z-index: 2;
+	overflow: hidden;
+	box-shadow: 2px 2px 5px 0.5px rgba(33, 33, 33, 0.2);
 }
 .back {
-	background-color: black;
 	color: white;
-	z-index: 1;	
+	z-index: 1;
 	transform: rotateY(-180deg);
+	box-shadow: 2px 2px 5px 0.5px rgba(33, 33, 33, 0.2);
 }
 .aboutUs-card:hover .front {
-	z-index: 1;	
+	z-index: 1;
 	transform: rotateY(180deg);
 }
 .aboutUs-card:hover .back {
-	z-index: 2;	
+	z-index: 2;
 	transform: rotateY(0deg);
-} 
+}
 
-
-/*미경 시작*/
-#aboutUs-cover .head-body * {
-	border: 1px solid red;
+/*회사소개*/
+#aboutUsAll .head-title {
+	font-size: 56px;
+	color: #665A5A;
+	margin-bottom: 50px;
+	margin-top: 80px;
+	padding: 15px;
+}
+#aboutUsAll p{
+	color: #665A5A;
+	line-height: 27px;
+}
+#aboutUs-cover .aboutUs-content-title{
+	width: 100%;
+	font-size: 27px;
+	margin-bottom: 25px;
+	font-weight: 500;
+	text-align: left;
+}
+#aboutUs-cover .head-body>div:first-child .aboutUs-content-title{
+	margin-left: 300px;
+}
+#aboutUs-cover .head-body>div {
+	width: 850px;
+	overflow: hidden;
+	margin: 0 auto;
+	margin-bottom: 80px;
+}
+#aboutUs-cover .head-body>div:first-child {
+	margin: 0 auto 90px;
+}
+#aboutUs-cover .head-body>div>* {
 	float: left;
 }
-#aboutUs-cover .head-body img {
-	width: 200px;
+#aboutUs-cover .head-body>div:first-child>img+p {
+	font-size: 16px;
+	text-align: left;
+	width: 550px;
+	margin-left: 50px;
+}
+#aboutUs-cover .head-body>div+div>p+p {
+	font-size: 16px;
+	text-align: left;
+	width: 450px;
+	margin-right: 50px;
+}
+#aboutUs-cover .head-body>div+div span {
+	display: inline-block;
+	width: 450px;
+	font-size: 18px;
+	font-weight: bold;
+	margin: 30px 0;
+	text-align: center;
+}
+#aboutUs-cover .head-body>div:first-child>img {
+	width: 250px;
+	margin-top: -1.5%;
+}
+#aboutUs-cover .head-body>div+div>img {
+	width: 350px;
+	margin-top: 2%
 }
 
-
+/*회사 연혁*/
+#aboutUs-history #aboutUs-history-ani{
+	visibility: hidden;
+}
+#aboutUs-history .head-body{
+	width: 1250px;
+	height : 500px;
+	margin: 0 auto;
+}
+#aboutUs-history .head-body > *{
+	float: left;
+}
+#aboutUs-history .head-body > img{
+	width: 55%;
+    height: 100%;
+}
+#aboutUs-history .head-body ul {
+	background-image: url("../img/history_line.png");
+	background-repeat: no-repeat;
+	background-size: 22.25px 450px;
+	background-position: 40px 25px;
+	background-color: white;
+	width: 45%;
+	height: 100%;
+}
+#aboutUs-history .head-body ul li{
+	line-height: 61.5px;
+	padding-left: 60px;
+}
+#aboutUs-history .head-body ul li p{
+	display: inline-block;
+	font-size: 20px;
+	text-align: left;
+	
+}
+#aboutUs-history .head-body ul li p:first-child{
+	color: #DA7A6F;
+	width: 120px;
+}
+#aboutUs-history .head-body ul li p:nth-child(2){
+	color: #4D4B4C;
+	width: 300px;
+}
+/*멤버 소개*/
+#aboutUs-member .head-body > div {
+	width: 1280px;
+	margin:0 auto;
+}
+#aboutUs-member .memberInfo{
+	width: 250px;
+	height : 400px;
+	float: left;
+	border-radius: 10px;
+}
+#aboutUs-member .memberInfo+.memberInfo{
+	margin-left: 93.3px;
+}
+#aboutUs-member .memberInfo .front img{
+	width: 100%;
+}
+#aboutUs-member .memberInfo .front img+p{
+	font-size: 15px;
+    color: #EC6D63;
+}
+#aboutUs-member .memberInfo .front p+p{
+	font-size: 22px;
+    font-weight: bold;
+    color: #4D4B4C;
+}
+#aboutUs-member .back{
+	background-color: #EC6D63;
+}
+#aboutUs-member .back ul li{
+	width: 160px;
+	border-radius: 10px;
+	margin: 35px auto;	
+}
+#myProgress {
+	width: 80%;
+	background-color: #ddd;
+	border-radius: 10px;
+}
+#myBar {
+	width: 1%;
+	height: 30px;
+	background-color: #4CAF50;
+	border-radius: 10px;
+}
+/*미경 수정 끝*/

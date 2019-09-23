@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,6 +24,7 @@ import model.Member;
 import model.Workspace;
 import model.WorkspaceInvite;
 import model.WsMember;
+import service.AlarmService;
 import service.ChatRoomMemberService;
 import service.ChatRoomService;
 import service.MemberService;
@@ -44,6 +46,10 @@ public class WorkSpaceController {
 	private ChatRoomMemberService crmService;
 	@Autowired
 	private WorkspaceInviteService wiService;
+	@Autowired
+	private SimpMessagingTemplate smt;
+	@Autowired
+	private AlarmService aService;
 	@RequestMapping("/workspace")
 	public String showWsMain(Principal principal,HttpSession session,Model model) {
 		//Ws메인이 보여질때 시큐리티가 갖고있는 principal 정보의 userid 를 가져와서
@@ -112,7 +118,6 @@ public class WorkSpaceController {
 		String[] targetUserList = request.getParameterValues("targetUserList");
 		for(String targetUser:targetUserList) {
 			wiService.addWorkspaceInvite(targetUser, wNum);
-			System.out.println(targetUser);
 			Thread innerTest = new Thread(new inner(targetUser,wNum));
 			innerTest.start();
 		}

@@ -6,6 +6,7 @@
 <link rel="stylesheet" type="text/css" href="css/headerWs.css"/>
 <link rel="stylesheet" type="text/css" href="css/navWs.css"/>
 <link rel="stylesheet" type="text/css" href="css/myPage.css"/>
+<link rel="stylesheet" type="text/css" href="css/base.css"/>
 </head>
 <body>
 	<%@ include file="/WEB-INF/jsp/inc/headerWs.jsp"%>
@@ -33,14 +34,14 @@
 						<div class="myPageContentRow clearFix modifyRow" onclick="location.href='${contextPath}/nameModifyForm'">
 							<p class="title">이름</p>
 							<p class="content">${requestScope.member.name}</p>
-							<i class="fas fa-chevron-right"></i>
+							<p><i class="fas fa-chevron-right"></i></p>
 						</div>
 						<div class="contentLine"></div>
 						<div class="myPageContentRow clearFix modifyRow" onclick="location.href='${contextPath}/checkPassForm'">
 							<div></div>
 							<p class="title">비밀번호</p>
 							<p class="content">******</p>
-							<i class="fas fa-chevron-right"></i>
+							<p><i class="fas fa-chevron-right"></i></p>
 						</div>
 					</div>
 					<div class="myPageContent">
@@ -56,7 +57,7 @@
 						<div class="myPageContentRow clearFix modifyRow" onclick="location.href='${contextPath}/phoneModifyForm'">
 							<p class="title">핸드폰 번호</p>
 							<p class="content">${requestScope.member.phone}</p>
-							<i class="fas fa-chevron-right"></i>
+							<p><i class="fas fa-chevron-right"></i></p>
 						</div>
 					</div>
 					<div class="row btns btnR">

@@ -4,9 +4,7 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:set var="contextPath" value="<%=request.getContextPath() %>"/>
 <script>
-	function sendAlarm(wNum,mNumTo,mNumFrom,aType,aDnum){
-		stompClient.send("/client/sendAlarm/"+wNum+"/"+mNumTo+"/"+mNumFrom+"/"+aDnum,{},aType);
-	}
+	
 	function showProfileInfoModal(mNum){
 			$.ajax({
 				url : "${contextPath}/getMemberInfoForProfileImg",

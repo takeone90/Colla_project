@@ -481,7 +481,7 @@ pre .CodeMirror-line{
     right: -540px;
     width: 600px;
     height: calc(100% - 131px);
-    z-index: 1;
+    z-index: 7;
     transition: All 0.2s ease;
     -webkit-transition: All 0.2s ease;
     -moz-transition: All 0.2s ease;
@@ -708,4 +708,9 @@ input[type=radio]{
 }
 #inviteWsmBtn:hover{
 	background-color : #E5675A;
+}
+.alarmInfo{
+	vertical-align: baseline;
+	margin-top: 10px;
+    margin-left: 2px;
 }

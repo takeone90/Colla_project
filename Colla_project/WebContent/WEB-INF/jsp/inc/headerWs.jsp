@@ -68,7 +68,26 @@ function duplicateConnect(){
 		var userNum = ${sessionScope.user.num};
 		stompClient.subscribe("/category/alarm/"+userNum, function(alarm){
 				alarmInfo = JSON.parse(alarm.body);
-// 				alert(alarmInfo.mNumFrom+"님이 보낸"+alarmInfo.aType+"알림이 도착했습니다");
+				
+					$.ajax({
+						url : "${contextPath}/hasAlarm",
+						data : {"mNum":userNum},
+						dataType : "json",
+						success : function(alarmList){
+							if(alarmList!=""){
+								$.each(alarmList,function(idx,alarm){
+									$("#emptyAlarmMsg").remove();
+									drawAlarmList(alarm);
+									$(".alarmInfoDiv").show();
+									$(".alarmInfo").show();
+									return false;
+								});
+							}
+						},
+						error : function(){
+							alert("알람리스트 불러오기 에러발생");
+						}
+					});
 				$("#alarmOn").show();
 		});
 		<%-----------------------------------------------------------------------------------------------------%>
@@ -82,28 +101,97 @@ function duplicateConnect(){
 		
 	}); //end connect
 }// end duplicateConnect
+
+function sendAlarm(wNum,mNumTo,mNumFrom,aType,aDnum){
+	stompClient.send("/client/sendAlarm/"+wNum+"/"+mNumTo+"/"+mNumFrom+"/"+aDnum,{},aType);
+}
+
 var hasNewAlarm;
-function alarmOn(){
-	
+function drawAlarmList(alarm){
+	var alarmType;
+	if(alarm.aType=="reply"){
+		alarmType = "댓글";
+	}else if(alarm.aType=="wInvite"){
+		alarmType = "워크스페이스 초대";
+	}else if(alarm.aType=="cInvite"){
+		alarmType = "채팅방 초대";
+	}
+	var alarmInfoArea = $("#alarmInfoArea");
+	var alarmProfileImg = $("<div class='profileImg'><img alt='프로필사진' src='${contextPath}/showProfileImg?num="+alarm.mNumFrom+"'></div>");
+	var alarmInfoDiv = $("<div class='alarmInfoDiv'></div>");
+	var date = new Date(alarm.aRegDate);
+	var alarmTime = date.getFullYear()+"-"+(Number(date.getMonth())+Number(1))+"-"+date.getDate()+" "+date.getHours()+"시"+date.getMinutes()+"분";
+	var alarmInfo = $("<div class='alarmInfo'><a class='goToURLaTag' href='${contextPath}/goToTargetURL?aNum="+alarm.aNum+"&wNum="+alarm.wNum+"&aType="+alarm.aType+"&aDnum="+alarm.aDnum+"'>"+alarm.mNameFrom+"님의 "+alarmType+"알림 </a><div class='deleteThisAlarm' onclick='deleteThisAlarm("+alarm.aNum+");'><i class='fas fa-times'></i></div></div>");
+	var alarmTimeDiv = $("<div class='alarmRegDate'>"+alarmTime+"</div>");
+	alarmInfo.append(alarmTimeDiv);
+	alarmInfoDiv.append(alarmProfileImg);
+	alarmInfoDiv.append(alarmInfo);
+	alarmInfoArea.append(alarmInfoDiv);
+	return false;
+}
+function deleteThisAlarm(aNum){
+	var userNum = ${sessionScope.user.num};
+	var alarmInfoArea = $("#alarmInfoArea");
+	$.ajax({
+		url : "${contextPath}/deleteThisAlarm",
+		data : {"aNum":aNum,"mNum":userNum},
+		dataType : "json",
+		success : function(alarmList){
+			alarmInfoArea.empty();
+			var total = alarmList.length;
+			$.each(alarmList,function(idx,alarm){
+				drawAlarmList(alarm);
+				$(".alarmInfoDiv").show();
+				$(".alarmInfo").show();
+			});
+			if(total==0){
+				var emptyAlarmMsg = $("<div id='emptyAlarmMsg' align='center'>알림이 없습니다.</div>");
+				alarmInfoArea.append(emptyAlarmMsg);
+			}
+		},
+		error : function(){
+			alert("알람 삭제 에러발생");
+		}
+	});
 }
 $(function(){
+	//화면 켜졌을때 알람 있으면 가져오기
+	var mNum = ${member.num};
+	$.ajax({
+		url : "${contextPath}/hasAlarm",
+		data : {"mNum":mNum},
+		dataType : "json",
+		success : function(alarmList){
+			if(alarmList!=""){
+				$("#alarmOn").show();
+				$.each(alarmList,function(idx,alarm){
+					drawAlarmList(alarm);
+				});
+			}else{
+				var alarmInfoArea = $("#alarmInfoArea");
+				var emptyAlarmMsg = $("<div id='emptyAlarmMsg' align='center'>알림이 없습니다.</div>");
+				alarmInfoArea.append(emptyAlarmMsg);
+			}
+		},
+		error : function(){
+			alert("알람리스트 불러오기 에러발생");
+		}
+	});
 	var alarmToggleVal=0;
 	$("#alarmDiv").on("click",function(){
 		//종을 누르면 무조건 On표시는 꺼진다
-		$("#alarmOn").hide();
-		
+// 		$("#alarmOn").hide();
+// 		$(".alarmInfo").hide();
 		//알람Info 모달이 없을때
 		if(alarmToggleVal==0){
-			$("#alarmInfoDiv").animate({height:"400px"},200);
+			$("#alarmInfoArea").slideDown();//.animate({height:"400px"},200);
 				alarmToggleVal = 1;
-				//켜지면서 mNum의 알람리스트가 나와야한다
-				$.ajax({
-					<%----%>
-				});
+// 				$(".alarmInfoDiv").show();
+// 				$(".alarmInfo").show();
 				
 		//알람Info 모달 나와있어서 눌러서 끌때
 		}else{
-			$("#alarmInfoDiv").animate({height:"0px"},200);
+			$("#alarmInfoArea").slideUp();//.animate({height:"0px"},200);
 				alarmToggleVal = 0;		
 		}
 	});
@@ -146,7 +234,7 @@ $(function(){
 			<i class="fas fa-bell"></i>
 		</div>
 	</div>
-	<div id="alarmInfoDiv">
+	<div id="alarmInfoArea">
 		
 	</div>
 </div>

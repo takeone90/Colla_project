@@ -174,16 +174,65 @@ a.member-btn:hover{
     height: 8px;
     border-radius: 50%;
 }
-#alarmInfoDiv{
+#alarmInfoArea{
 	position: fixed;
-    display: inline-block;
+    overflow-y: auto;
+    display: none;
     right: 0px;
     top: 70px;
     z-index: 0;
     width: 314px;
-    height: 0px;
+    max-height:420px;
     border-radius: 0px 0px 0px 10px;
     background-color: #fcfcfc;
-    border-bottom: 1.3px solid #bdbbbb;
-    border-left: 1.3px solid #bdbbbb;
+    border-bottom: 0.5px solid #bdbbbb;
+    border-left: 0.5px solid #bdbbbb;
+}
+.alarmInfoDiv{
+    padding: 13px;
+    border-bottom: 1px solid #eee;
+}
+.alarmInfoDiv:hover{
+	background-color: #eee;
+}
+.alarmInfoDiv .profileImg{
+	display: inline-block;
+	border : 1px solid gray;
+	border-radius:50%;
+	width : 50px;
+	height : 50px;
+}
+.alarmInfoDiv .profileImg img{
+	width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+.alarmInfo{
+	font-size: 13px;
+    display: inline-block;
+    vertical-align: text-bottom;
+    margin-bottom: 13px;
+    margin-left: 11px;
+}
+.alarmInfo a:hover{
+	color : #E5675A;
+}
+.alarmRegDate{
+	display: block;
+	margin-top: 7px;
+    font-size: 8px;
+}
+#emptyAlarmMsg{
+	padding:30px 0;
+    color: #919090;
+}
+.deleteThisAlarm{
+	display: inline-block;
+  	position: absolute;
+    right: 20px;
+	color : #87817C;
+}
+.deleteThisAlarm:hover{
+	cursor : pointer;
+	color : #f2452e;
 }
