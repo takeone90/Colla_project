@@ -23,7 +23,6 @@ public class LogoutSuccessHandler extends SimpleUrlLogoutSuccessHandler{
 	public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication)
 			throws IOException, ServletException {
 		
-		System.out.println("리스트 삭제 전 접속 중인 멤버 : "+connectorList);
 		HttpSession session = request.getSession();
 		connectorList.remove(session);
 		session.invalidate();
@@ -34,7 +33,7 @@ public class LogoutSuccessHandler extends SimpleUrlLogoutSuccessHandler{
 		} else {
 			response.sendRedirect("/main");
 		}
-		System.out.println("리스트 삭제 후 접속 중인 멤버 : "+connectorList);
+		System.out.println("로그아웃 후 접속 중인 멤버 : "+connectorList);
 		
 	}
 }

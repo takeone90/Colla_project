@@ -206,7 +206,20 @@ public class MemberController {
 			}
 		}
 	}
-
+	
+	public String sendConList(
+			@DestinationVariable(value="wNum")int wNum
+			) {
+		System.out.println("중복아이디 로그아웃 메시지 전송");
+		smt.convertAndSend("/category/loginMemberList/"+wNum,connectorList);
+		
+		return "duplicated";
+	}
+	public HttpSession deleteSessionFromConList(String email) {
+		HttpSession session = (HttpSession)getKey(connectorList, email);
+		connectorList.remove(session);
+		return session;
+	}
 	 //중복 로그인 체크 (기존 사용자 로그아웃 처리)
 	@RequestMapping("/checkLoginDuplication")
 	public String checkLoginDuplication(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -226,10 +239,10 @@ public class MemberController {
 		} else { // 중복 로그인의 경우
 			System.out.println("중복 로그인입니다.");
 			sendLoginDuplicatedMsg(user.getNum());
+			deleteSessionFromConList(userEmail);
 		}
 		
 		connectorList.put(request.getSession(), userEmail); // 해당 email, session 추가 또는 교체
-		System.out.println("중복체크 후 접속 중인 멤버 : "+connectorList);
 //		response.sendRedirect("/workspace"); //워크스페이스로 이동한다	
 		return "redirect:workspace";
 	}

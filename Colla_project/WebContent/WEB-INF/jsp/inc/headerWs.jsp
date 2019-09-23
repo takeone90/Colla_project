@@ -6,6 +6,24 @@
 var sock;
 var stompClient;
 var msgInfo;
+
+// window.onbeforeunload = function() {
+// 	$.ajax({
+// 		url : "/dropSession",
+// 		cache : "false", //캐시사용금지
+// 		method : "POST",
+// 		data : $("#frm").serialize(),
+// 		dataType: "html",
+// 		async : false, //동기화설정(비동기화사용안함)
+// 		success:function(args){   
+// 			//$("#result").html(args);      
+// 		},   
+// 		error:function(e){  
+// 			//alert(e.responseText);  
+// 		}
+// 	});
+// }
+
 function duplicateConnect(){
 	sock = new SockJS("${contextPath}/chat");
 	stompClient = Stomp.over(sock);
@@ -13,6 +31,12 @@ function duplicateConnect(){
 		
 		<%----------------------------------------채팅메시지 구독부분----------------------------------------------%>
 		var crNum = $("#crNum").val();
+		//현재 workspace 로그인중인 멤버
+		stompClient.subscribe("/category/loginMemberList/${currWnum}", function(data){
+			let mList = JSON.parse(data.body);
+			console.log(mList);
+		});
+		
 		//일반메세지 구독
 		stompClient.subscribe("/category/msg/"+crNum,function(cm){
 				msgInfo = JSON.parse(cm.body);
@@ -48,11 +72,13 @@ function duplicateConnect(){
 				$("#alarmOn").show();
 		});
 		<%-----------------------------------------------------------------------------------------------------%>
+		
+		//중복로그인알림
 		stompClient.subscribe("/category/loginMsg/" + ${member.num},function(data){
 			if(data.body=="duplicated"){
 		        window.location.href="/logout?type=duplicated";
 			}
-	      });// end subcribe
+	    });// end subcribe
 		
 	}); //end connect
 }// end duplicateConnect

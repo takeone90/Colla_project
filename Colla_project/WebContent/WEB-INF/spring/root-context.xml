@@ -21,7 +21,7 @@
 	<bean id="uploadPath" class="java.lang.String">
 		<constructor-arg value="C:\temp\"></constructor-arg>
 	</bean>
-	<util:map id="connectorList" key-type="Object" value-type="String"></util:map> 
+	<util:map id="connectorList" key-type="Object" value-type="Object"></util:map>
 	<!-- 히카리 dataSource -->
 	<bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
 		<property name="driverClassName" value="oracle.jdbc.OracleDriver"/>

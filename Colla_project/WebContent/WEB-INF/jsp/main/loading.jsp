@@ -24,7 +24,7 @@
 		var info = "${param.info}";
 		$(function(){
 			if(info == "duplicatedLogin"){
-				alert("동일한 아이디로 로그인되어 로그아웃합니다.");
+				window.alert("동일한 아이디로 로그인되어 로그아웃합니다.");
 				window.location.href="/loginForm";
 			}
 		});
