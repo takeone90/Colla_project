@@ -11,6 +11,7 @@
 	content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width=device-width" />
 <title>로그인</title>
 <link rel="stylesheet" type="text/css" href="css/headerMain.css"/>
+<link rel="stylesheet" type="text/css" href="css/footerMain.css"/>
 <link rel="stylesheet" type="text/css" href="css/animate.css"/>
 <link rel="stylesheet" type="text/css" href="css/login.css"/>
   
@@ -100,47 +101,50 @@ function checkPw(){
 </script>
 </head>
 <body>
-	<%@ include file="/WEB-INF/jsp/inc/headerMain.jsp" %>
-	<div id="loginBox" class="animated fadeIn">
-		<div class="loginBox-Head">
-			<h3 style='font-weight: bolder; font-size: 30px'>로그인</h3>
-			<p>SIGN IN</p>
-		</div>
-		<div class="loginBox-Body">
-			<form action="login" method="post" id="loginForm">	
-				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
-				<div>
-					<h4>EMAIL</h4>
-					<input type="text" name="m_email" placeholder="이메일을 입력해주세요." id="email">
-					<span id="checkEmailText"></span>
+	<div id="wrap">
+		<%@ include file="/WEB-INF/jsp/inc/headerMain.jsp" %>
+		<div id="loginBox" class="animated fadeIn">
+			<div class="loginBox-Head">
+				<h3 style='font-weight: bolder; font-size: 30px'>로그인</h3>
+				<p>SIGN IN</p>
+			</div>
+			<div class="loginBox-Body">
+				<form action="login" method="post" id="loginForm">	
+					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+					<div>
+						<h4>EMAIL</h4>
+						<input type="text" name="m_email" placeholder="이메일을 입력해주세요." id="email">
+						<span id="checkEmailText"></span>
+					</div>
+					<div>
+						<h4>PASSWORD</h4>
+						<input type="password" name="m_pw" placeholder="비밀번호를 입력해주세요." id="pw">
+						<span id="checkPwText"></span>
+					</div>
+					<div>
+						<input type="submit" value="로그인">
+					</div>
+				</form>
+				<div id="innerBtn">
+					<!-- 구글 -->
+					<button id="googleLoginButton">구글<span class="g-signin2" data-width="90" data-height="30" data-onsuccess="onSignIn"></span></button>
+					<!-- 네이버 -->
+					<button class="naverLoginButton">네이버<span id="naverIdLogin"></span></button>
+					<!-- 카카오 -->
+					<button id="kakaoLoginButton">카카오<span id="kakao-login-btn"></span><span href="http://developers.kakao.com/logout"></span></button>
+					<span id="loginResultText">
+						<c:if test='${param.login eq "false"}'>
+							로그인 후 이용하세요.
+						</c:if>
+						<c:if test='${param.login eq "fail"}'>
+							로그인에 실패하였습니다.
+						</c:if>
+					</span>
 				</div>
-				<div>
-					<h4>PASSWORD</h4>
-					<input type="password" name="m_pw" placeholder="비밀번호를 입력해주세요." id="pw">
-					<span id="checkPwText"></span>
-				</div>
-				<div>
-					<input type="submit" value="로그인">
-				</div>
-			</form>
-			<div id="innerBtn">
-				<!-- 구글 -->
-				<button id="googleLoginButton">구글<span class="g-signin2" data-width="90" data-height="30" data-onsuccess="onSignIn"></span></button>
-				<!-- 네이버 -->
-				<button class="naverLoginButton">네이버<span id="naverIdLogin"></span></button>
-				<!-- 카카오 -->
-				<button id="kakaoLoginButton">카카오<span id="kakao-login-btn"></span><span href="http://developers.kakao.com/logout"></span></button>
-				<span id="loginResultText">
-					<c:if test='${param.login eq "false"}'>
-						로그인 후 이용하세요.
-					</c:if>
-					<c:if test='${param.login eq "fail"}'>
-						로그인에 실패하였습니다.
-					</c:if>
-				</span>
 			</div>
 		</div>
-	</div>
+		<div><%@ include file="/WEB-INF/jsp/inc/footerMain.jsp" %></div>
+	</div> 
 	
 	
 	<form method="post" id="apiForm" action="login">
