@@ -209,7 +209,7 @@ public class MemberController {
 
 	 //중복 로그인 체크 (기존 사용자 로그아웃 처리)
 	@RequestMapping("/checkLoginDuplication")
-	public void checkLoginDuplication(HttpServletRequest request, HttpServletResponse response) throws IOException {
+	public String checkLoginDuplication(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		HttpSession session = request.getSession();
 		String userEmail = (String)request.getSession().getAttribute("userEmail");
 		Member user = memberService.getMemberByEmail(userEmail);
@@ -230,7 +230,8 @@ public class MemberController {
 		
 		connectorList.put(request.getSession(), userEmail); // 해당 email, session 추가 또는 교체
 		System.out.println("중복체크 후 접속 중인 멤버 : "+connectorList);
-		response.sendRedirect("/workspace"); //워크스페이스로 이동한다	
+//		response.sendRedirect("/workspace"); //워크스페이스로 이동한다	
+		return "redirect:workspace";
 	}
 	
 	//회원 탈퇴버튼

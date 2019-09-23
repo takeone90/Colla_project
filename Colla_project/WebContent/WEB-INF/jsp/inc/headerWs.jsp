@@ -56,14 +56,26 @@ function duplicateConnect(){
 		
 	}); //end connect
 }// end duplicateConnect
+var hasNewAlarm;
+function alarmOn(){
+	
+}
 $(function(){
 	var alarmToggleVal=0;
 	$("#alarmDiv").on("click",function(){
+		//종을 누르면 무조건 On표시는 꺼진다
 		$("#alarmOn").hide();
 		
+		//알람Info 모달이 없을때
 		if(alarmToggleVal==0){
 			$("#alarmInfoDiv").animate({height:"400px"},200);
 				alarmToggleVal = 1;
+				//켜지면서 mNum의 알람리스트가 나와야한다
+				$.ajax({
+					<%----%>
+				});
+				
+		//알람Info 모달 나와있어서 눌러서 끌때
 		}else{
 			$("#alarmInfoDiv").animate({height:"0px"},200);
 				alarmToggleVal = 0;		
