@@ -7,6 +7,7 @@
 <link rel="stylesheet" type="text/css" href="${contextPath}/css/navWs.css"/>
 <link rel="stylesheet" type="text/css" href="${contextPath}/css/workspace.css"/>
 <script>
+
 	var wNum;
 	
 	$(function(){	
@@ -170,7 +171,7 @@
 									<c:set var="mlResult" value="0"/>
 								</c:when>
 								<c:otherwise>
-										<li><div class='profileImg' align="center"><img alt='프로필사진' src='/Colla_project/showProfileImg?num=${m.num}' onclick="showProfileInfoModal(${m.num})"></div>
+										<li><div class='profileImg' align="center"><img alt='프로필사진' src='${contextPath}/showProfileImg?num=${m.num}' onclick="showProfileInfoModal(${m.num})"></div>
 										<p>${m.name}</p></li>
 								</c:otherwise>
 							</c:choose>

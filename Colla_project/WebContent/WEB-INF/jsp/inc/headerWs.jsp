@@ -6,6 +6,7 @@
 var sock;
 var stompClient;
 var msgInfo;
+
 function duplicateConnect(){
 	sock = new SockJS("${contextPath}/chat");
 	stompClient = Stomp.over(sock);
@@ -52,6 +53,7 @@ function duplicateConnect(){
 						success : function(alarmList){
 							if(alarmList!=""){
 								$.each(alarmList,function(idx,alarm){
+									$("#emptyAlarmMsg").remove();
 									drawAlarmList(alarm);
 									$(".alarmInfoDiv").show();
 									$(".alarmInfo").show();
@@ -74,6 +76,11 @@ function duplicateConnect(){
 		
 	}); //end connect
 }// end duplicateConnect
+
+function sendAlarm(wNum,mNumTo,mNumFrom,aType,aDnum){
+	stompClient.send("/client/sendAlarm/"+wNum+"/"+mNumTo+"/"+mNumFrom+"/"+aDnum,{},aType);
+}
+
 var hasNewAlarm;
 function drawAlarmList(alarm){
 	var alarmType;
@@ -85,29 +92,42 @@ function drawAlarmList(alarm){
 		alarmType = "채팅방 초대";
 	}
 	var alarmInfoArea = $("#alarmInfoArea");
-	var alarmProfileImg = $("<div class='profileImg'><img alt='프로필사진' src='/showProfileImg?num="+alarm.mNumFrom+"'></div>");
+	var alarmProfileImg = $("<div class='profileImg'><img alt='프로필사진' src='${contextPath}/showProfileImg?num="+alarm.mNumFrom+"'></div>");
 	var alarmInfoDiv = $("<div class='alarmInfoDiv'></div>");
 	var date = new Date(alarm.aRegDate);
 	var alarmTime = date.getFullYear()+"-"+(Number(date.getMonth())+Number(1))+"-"+date.getDate()+" "+date.getHours()+"시"+date.getMinutes()+"분";
-	var alarmInfo = $("<div class='alarmInfo'><a class='goToURLaTag' onclick='clickGoToURLaTag(this);' href='${contextPath}/goToTargetURL?wNum="+alarm.wNum+"&aType="+alarm.aType+"&aDnum="+alarm.aDnum+"'>"+alarm.mNameFrom+"님의 "+alarmType+"알림 </a></div>");
+	var alarmInfo = $("<div class='alarmInfo'><a class='goToURLaTag' href='${contextPath}/goToTargetURL?aNum="+alarm.aNum+"&wNum="+alarm.wNum+"&aType="+alarm.aType+"&aDnum="+alarm.aDnum+"'>"+alarm.mNameFrom+"님의 "+alarmType+"알림 </a><div class='deleteThisAlarm' onclick='deleteThisAlarm("+alarm.aNum+");'><i class='fas fa-times'></i></div></div>");
 	var alarmTimeDiv = $("<div class='alarmRegDate'>"+alarmTime+"</div>");
 	alarmInfo.append(alarmTimeDiv);
 	alarmInfoDiv.append(alarmProfileImg);
 	alarmInfoDiv.append(alarmInfo);
 	alarmInfoArea.append(alarmInfoDiv);
-		
-// 	$(".goToURLaTag").on("click",function(){
-// 		$(this).parent().parent().remove();
-// 		//해당 알람 여기서 지우기
-// 		alert("알람 삭제요청");
-// 	});
-		
 	return false;
 }
-function clickGoToURLaTag(e){
-	$(e).parent().parent().remove();
-	alert("알람삭제요청");
-	return false;
+function deleteThisAlarm(aNum){
+	var userNum = ${sessionScope.user.num};
+	var alarmInfoArea = $("#alarmInfoArea");
+	$.ajax({
+		url : "${contextPath}/deleteThisAlarm",
+		data : {"aNum":aNum,"mNum":userNum},
+		dataType : "json",
+		success : function(alarmList){
+			alarmInfoArea.empty();
+			var total = alarmList.length;
+			$.each(alarmList,function(idx,alarm){
+				drawAlarmList(alarm);
+				$(".alarmInfoDiv").show();
+				$(".alarmInfo").show();
+			});
+			if(total==0){
+				var emptyAlarmMsg = $("<div id='emptyAlarmMsg' align='center'>알림이 없습니다.</div>");
+				alarmInfoArea.append(emptyAlarmMsg);
+			}
+		},
+		error : function(){
+			alert("알람 삭제 에러발생");
+		}
+	});
 }
 $(function(){
 	//화면 켜졌을때 알람 있으면 가져오기
@@ -118,9 +138,14 @@ $(function(){
 		dataType : "json",
 		success : function(alarmList){
 			if(alarmList!=""){
+				$("#alarmOn").show();
 				$.each(alarmList,function(idx,alarm){
 					drawAlarmList(alarm);
 				});
+			}else{
+				var alarmInfoArea = $("#alarmInfoArea");
+				var emptyAlarmMsg = $("<div id='emptyAlarmMsg' align='center'>알림이 없습니다.</div>");
+				alarmInfoArea.append(emptyAlarmMsg);
 			}
 		},
 		error : function(){
@@ -130,18 +155,18 @@ $(function(){
 	var alarmToggleVal=0;
 	$("#alarmDiv").on("click",function(){
 		//종을 누르면 무조건 On표시는 꺼진다
-		$("#alarmOn").hide();
-		$(".alarmInfo").hide();
+// 		$("#alarmOn").hide();
+// 		$(".alarmInfo").hide();
 		//알람Info 모달이 없을때
 		if(alarmToggleVal==0){
-			$("#alarmInfoArea").animate({height:"400px"},200);
+			$("#alarmInfoArea").slideDown();//.animate({height:"400px"},200);
 				alarmToggleVal = 1;
-				$(".alarmInfoDiv").show();
-				$(".alarmInfo").show();
+// 				$(".alarmInfoDiv").show();
+// 				$(".alarmInfo").show();
 				
 		//알람Info 모달 나와있어서 눌러서 끌때
 		}else{
-			$("#alarmInfoArea").animate({height:"0px"},200);
+			$("#alarmInfoArea").slideUp();//.animate({height:"0px"},200);
 				alarmToggleVal = 0;		
 		}
 	});
