@@ -655,14 +655,6 @@ div {
 #aboutUsAll {
 	height: 100%;
 }
-#aboutUs-member1,
-#aboutUs-member3 {
-	background-color: #EC6D63;	
-}
-#aboutUs-member2,
-#aboutUs-member4 {
-	background-color: #665A5A;	
-}
 #aboutUsAll section {
 	position: relative;
 	display: block;
@@ -670,6 +662,7 @@ div {
 	height: 100%;
 	text-align: center;
 	padding: 80px 15px 100px 15px;
+	background-color: #F5F5F5;
 }
 
 /*미경 수정 시작*/
@@ -720,6 +713,8 @@ div {
 	font-size: 56px;
 	color: #665A5A;
 	margin-bottom: 50px;
+	margin-top: 80px;
+	padding: 15px;
 }
 #aboutUsAll p{
 	color: #665A5A;

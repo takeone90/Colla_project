@@ -39,42 +39,33 @@
 	font-weight: 400;
 	padding-top: 20px;
 }
-
 .myPageContentRow {
 	width: 790px;
 	padding: 8px 24px;
-	cursor: pointer;
 }
-
 .modifyRow:hover {
 	background-color: #DADCE0;
+	cursor: pointer;
 }
-
-.myPageContentRow>p, .myPageContentRow>div {
-	display: inline-block;
-	vertical-align: middle;
+.myPageContentRow > *{
+	float: left;
 }
-
-.myPageContentRow>div {
-	position: relative;
-}
-
 .myPageContentRow .title {
 	width: 156px;
-	padding: 16px;
 }
 
 .myPageContentRow .content {
 	width: 510px;
 }
+.myPageContentRow p {
+	padding: 16px;
+}
 
 .myPageAccount #profileImg {
-	position: relative;
 	border-radius: 50%;
-	border: 2px solid #fff;
 	margin: 0;
-	width: 60px;
-	height: 60px;
+	width: 56px;
+	height: 56px;
 	display: block;
 	overflow: hidden;
 	border: 2px solid #D3CDCD;
