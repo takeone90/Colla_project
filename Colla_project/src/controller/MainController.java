@@ -20,6 +20,10 @@ public class MainController {
 	@Autowired
 	private FileService fService;
 	
+	@RequestMapping("/loading")
+	public String showLoading() {
+		return "/main/loading";
+	}
 	@RequestMapping("/main")
 	public String main() {
 		return "/main/main";

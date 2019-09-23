@@ -6,10 +6,17 @@ public class Alarm {
 	private int aNum;
 	private int mNumTo;
 	private int mNumFrom;
+	private String mNameFrom;
 	private String aType;
 	private int wNum;
 	private int aDnum;
 	private Timestamp aRegDate;
+	public String getmNameFrom() {
+		return mNameFrom;
+	}
+	public void setmNameFrom(String mNameFrom) {
+		this.mNameFrom = mNameFrom;
+	}
 	public int getmNumFrom() {
 		return mNumFrom;
 	}
@@ -54,7 +61,7 @@ public class Alarm {
 	}
 	@Override
 	public String toString() {
-		return "Alarm [aNum : " + aNum + ", 받는사람 : " + mNumTo + " 보내는사람 : "+mNumFrom+", 알람 타입 : " + aType + ", 워크스페이스번호 : " + wNum + ", 알람파라미터 : " + aDnum
+		return "Alarm [aNum : " + aNum + ", 받는사람 : " + mNumTo + " 보내는사람 : "+mNameFrom+", 알람 타입 : " + aType + ", 워크스페이스번호 : " + wNum + ", 알람파라미터 : " + aDnum
 				+ ", 알람생성일 : "+aRegDate+" ]";
 	}
 	

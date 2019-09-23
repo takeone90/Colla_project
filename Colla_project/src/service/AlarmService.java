@@ -30,6 +30,13 @@ public class AlarmService {
 		}
 		return result;
 	}
+	public boolean removeAllAlarmByMnum(int mNum) {
+		boolean result = false;
+		if(aDao.deleteAllAlarmByMnum(mNum)>0) {
+			result = true;
+		}
+		return result;
+	}
 	public Alarm getAlarm(int aNum) {
 		return aDao.selectAlarm(aNum);
 	}

@@ -154,12 +154,12 @@ a.member-btn:hover{
 #alarmDiv{
 	right: 73px;
     display: inline-block;
-    top: 24px;
+    top: 27px;
     position: absolute;
-    width: 25px;
-    height: 25px;
+    width: 19px;
+    height: 19px;
     color: #87817c;
-    font-size: 23px;
+    font-size: 18px;
 }
 #alarmDiv:hover{
 	cursor: pointer;
@@ -167,14 +167,16 @@ a.member-btn:hover{
 #alarmOn{
 	display: none;
     position: absolute;
-    right: 2px;
+    top: -4px;
+    right: -2px;
     background-color: #f74b39;
-    width: 10px;
-    height: 10px;
+    width: 8px;
+    height: 8px;
     border-radius: 50%;
 }
-#alarmInfoDiv{
+#alarmInfoArea{
 	position: fixed;
+    overflow-y: auto;
     display: inline-block;
     right: 0px;
     top: 70px;
@@ -183,6 +185,35 @@ a.member-btn:hover{
     height: 0px;
     border-radius: 0px 0px 0px 10px;
     background-color: #fcfcfc;
-    border-bottom: 1.3px solid #bdbbbb;
-    border-left: 1.3px solid #bdbbbb;
+    border-bottom: 0.5px solid #bdbbbb;
+    border-left: 0.5px solid #bdbbbb;
+}
+.alarmInfoDiv{
+	display: none;
+    padding: 13px;
+    border-bottom: 1px solid #eee;
+}
+.alarmInfoDiv:hover{
+	background-color: #eee;
+}
+.alarmInfoDiv .profileImg{
+	display: inline-block;
+	border : 1px solid black;
+	border-radius:50%;
+	width : 50px;
+	height : 50px;
+}
+.alarmInfo{
+	font-size: 13px;
+    display: inline-block;
+    vertical-align: text-bottom;
+    margin-bottom: 16px;
+    margin-left: 11px;
+}
+.alarmInfo a:hover{
+	color : #E5675A;
+}
+.alarmRegDate{
+	display: inline-block;
+    font-size: 8px;
 }
