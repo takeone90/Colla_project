@@ -28,6 +28,38 @@ $(function() {
 			$(this).children(".question").children(".icon").css({transform:'rotate(0deg)',transition:'all 0.4s'}); //화살표 회전
 		}
 	})
+	//고객으로부터 이메일 받기
+	$("#FAQ-email-Form").on("submit", function(e) {
+		e.preventDefault();
+		var FAQname = $("#FAQname").val();
+		var FAQemail = $("#FAQemail").val();
+		var FAQtitle = $("#FAQtitle").val();
+		var FAQcontent = $("#FAQcontent").val();
+		if (FAQname == "" || FAQemail == "" || FAQtitle == "" || FAQcontent == "") {
+			$("#checkSentence").text("빈칸이 있습니다.");
+		} else {
+			var data = $(this).serialize();
+			console.log(data);
+			$.ajax({
+				url : "sendFAQMail",
+				data : data,
+				type : "post",
+				dataType : "json",
+				success : function(result) {
+					if (result) {
+						alert("빠른 시일 내로 답변 드리겠습니다.");
+						$("#FAQname").val("");
+						$("#FAQemail").val("");
+						$("#FAQtitle").val("");
+						$("#FAQcontent").val("");
+					} else { //이메일 중복 아님
+						alert("전송에 실패하였습니다.");
+					}
+				}
+			}); //end ajax 
+		}
+		return false;
+	})
 });
 </script>  
 </head>
@@ -140,16 +172,31 @@ $(function() {
 			</section>
 			<section id="ask">
 				<div id="container">
-					<div class="head-title"> 문의 </div>
+					<div class="head-title"> QnA </div>
 <!-- 					<div class="head-body"> Ask By Email <br></div> -->
 					<div class="head-caption"> 궁금증이 해결되시지 않으셨나요? 이메일로 답변해드리겠습니다. </div>
 					<div class="FAQ-email">
-						<form>
-							<div class="FAQ-email-name"><span>이름</span><input type="text"></div>
-							<div class="FAQ-email-receive"><span>답장 받을 이메일</span><input type="text"></div>
-							<div class="FAQ-email-title"><span>제목</span><input type="text" class="FAQ-email-input"></div>
-							<div class="FAQ-email-content"><span>내용</span><textarea rows="10" cols="80" class="FAQ-email-content"></textarea></div>
-							<div><input type="button" value="전송" class="FAQ-email-button"></div>
+						<form method="post" id="FAQ-email-Form">
+							<div class="FAQ-email-name">
+								<span>이름</span>
+								<input type="text" name="name" id="FAQname">
+							</div>
+							<div class="FAQ-email-receive">
+								<span>답장 받을 이메일</span>
+								<input type="text" name="email" id="FAQemail">
+							</div>
+							<div class="FAQ-email-title">
+								<span>제목</span>
+								<input type="text" name="title" id="FAQtitle" class="FAQ-email-input">
+							</div>
+							<div class="FAQ-email-content">
+								<span>내용</span>
+								<textarea rows="10" cols="80" name="content" id="FAQcontent" class="FAQ-email-content"></textarea>
+							</div>
+							<div>
+								<input type="submit" value="전송" class="FAQ-email-button">
+								<span id="checkSentence"></span>
+							</div>
 						</form>
 					</div>
 				</div>

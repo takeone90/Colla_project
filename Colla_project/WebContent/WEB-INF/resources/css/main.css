@@ -46,8 +46,14 @@
 	background-image: url("../img/Main_background.jpg");
 	background-size: cover;
 }
-#main-cover .head-body {
+#main-cover .head-body-up {
 	margin-top: 165px;
+    display: inline-block;
+    color: #EC6D63;
+    margin-right: 101px;
+    margin-bottom: 5px;
+}
+#main-cover .head-body-down {
     margin-bottom: 0px;
     font-size: 25px;
     font-weight: 200;
@@ -96,6 +102,10 @@
 .main-function-image1 > img {
 	height: 80%;
 }
+.main-function-image2 > img {
+	margin-left: 75px;
+    height: 82%;
+}
 .main-function-image3 > img {
 	margin-left: 95px;
 	height: 100%;
@@ -107,7 +117,7 @@
 	z-index: 2;	
 }
 .main-function-image2 {
-	background-color: blue;
+	background-color: #F5F5F5;
 	position: absolute;
 	display: inline-block;
 	top: 0;
@@ -429,7 +439,7 @@ input[type=radio] { /* ㄹㅇ 라디오 버튼 안 보이게 */
 	position: relative;
 	display: block;
 	overflow: hidden;
-	height: 700px;
+	height: 740px;
 	text-align: center;
 	padding: 80px 15px 100px 15px;
 	background-color: #F5F5F5;
@@ -507,18 +517,22 @@ input[type=radio] { /* ㄹㅇ 라디오 버튼 안 보이게 */
     line-height: 20px;
     font-weight: 100;
 }
-
+#ask .head-title {
+	margin-top: 10px;
+}
 #ask .head-caption {
 	margin-bottom: 30px;
 }
 .FAQ-email {
-    width: 50%;
+    width: 700px;
 	height: 445px;
 	border-radius: 10px;
 	border: 0px solid;
-	background-color: silver;	
+	background-color: #EFEEEE;	
 	margin: 0 auto;
     margin-bottom: 55px;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 .FAQ-email-name {
 	display: inline-block;
@@ -526,14 +540,14 @@ input[type=radio] { /* ㄹㅇ 라디오 버튼 안 보이게 */
 	margin-right: 86px;
 }
 .FAQ-email-name > input {
-	width: 120px;
+	width: 118px;
 }
 .FAQ-email-receive {
 	display: inline-block;
 	padding-top: 10px;
 }
 .FAQ-email-receive > input {
-	width: 241px;
+	width: 238px;
 }
 .FAQ-email-input {
 	width: 577px;
@@ -557,7 +571,7 @@ input[type=radio] { /* ㄹㅇ 라디오 버튼 안 보이게 */
     vertical-align: middle;
 }
 .FAQ-email-button {
-	margin-top: 7px;
+	margin-top: 12px;
 }
 /* .questions-left { */
 /* 	background: #333333; */

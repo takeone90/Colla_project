@@ -119,7 +119,8 @@ $(function() {
 		<div id="welcome">
 			<section id="main-cover" class="box">
 				<div id="container">
-					<div class="head-body animated fadeInUp">가볍고 실속있는 협업 솔루션</div>
+					<div class="head-body-up animated fadeInUp">.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.</div>
+					<div class="head-body-down animated fadeInUp">가볍고 실속있는 협업 솔루션</div>
 					<div class="head-title"><p class="animated fadeInUp">COLLA</p></div>
 					<div class="head-caption animated fadeInUp">COLLA는 프로젝트를 중심으로<br>외부인들과 빠른 협업을 돕습니다.</div>
 				</div>
@@ -136,7 +137,7 @@ $(function() {
 								<img alt="1번 기능" src="img/mainSection_1.png"></div>
 								<div class="main-function-image2">
 								<div class="main-function-text">그룹에 맞는 채팅방을 만들고 협업할 수 있습니다.</div>
-								<img alt="2번 기능" src=""></div>
+								<img alt="2번 기능" src="img/mainSection_2.png"></div>
 								<div class="main-function-image3">
 								<div class="main-function-text">쉽게 일정을 공유하고 관리할 수 있습니다.</div>
 								<img alt="3번 기능" src="img/mainSection_3.png"></div>

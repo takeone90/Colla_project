@@ -15,9 +15,9 @@ function topFunction() {
 <div id="footer">
 	<div id="footer-all">
 		<div id="f1">
-			<div id="co-logo">
-				<img src="${contextPath }/img/COLLA_LOGO_200px.png" alt="colla 로고">
-			</div>
+<!-- 			<div id="co-logo"> -->
+<%-- 				<img src="${contextPath }/img/COLLA_LOGO_200px.png" alt="colla 로고"> --%>
+<!-- 			</div> -->
 			<div id="co-location">
 				<p><span>(주)질수없조</span><span>명예이사 : 임창목</span><span>사업자등록번호 : 1990-09-17</span></p>
 				<p><span>Republic of Korea</span><span>459, Gangnam-daero, Seocho-gu, Seoul</span></p>
