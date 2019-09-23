@@ -226,6 +226,10 @@ $(function() {
 			</section>
 			<div class="box"><%@ include file="/WEB-INF/jsp/inc/footerMain.jsp" %></div>
 		</div>
+<<<<<<< HEAD
+=======
+		
+>>>>>>> refs/remotes/origin/amy
 	</div>
 </body>
 </html>
