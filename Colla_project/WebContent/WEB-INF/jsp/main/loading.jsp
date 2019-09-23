@@ -3,6 +3,21 @@
 <%@ include file="/WEB-INF/jsp/inc/head.jsp" %>
 
 <title>LOADING...</title>
+<style>
+	#loadingImg{
+		margin:0 auto;
+		width: 300px;
+		position: fixed;
+		top:35%;
+		left:50%;
+		margin-left:-150px;
+		margin-top:-225px;
+	}
+	img{
+		display:block; 
+		width:100%;
+	}
+</style>
 </head>
 <body>
 	<script>
@@ -14,8 +29,8 @@
 			}
 		});
 	</script>
-	<div>
-		<img style="display:block; width:100%;height:100%;" src="/img/loading.gif" alt="로딩이미지">
+	<div id="loadingImg">
+		<img src="/img/loading.gif" alt="로딩이미지">
 	</div>
 </body>
 </html>
