@@ -18,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -29,12 +30,14 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import mail.MailSend;
+import model.Alarm;
 import model.ChatMessage;
 import model.ChatRoom;
 import model.ChatRoomMember;
 import model.Member;
 import model.Workspace;
 import model.WsMember;
+import service.AlarmService;
 import service.ChatMessageService;
 import service.ChatRoomMemberService;
 import service.ChatRoomService;
@@ -56,6 +59,10 @@ public class ChatRoomController {
 	private WsMemberService wsmService;
 	@Autowired
 	private WorkspaceService wService;
+	@Autowired
+	private SimpMessagingTemplate smt;
+	@Autowired
+	private AlarmService aService;
 	// 전체채팅방으로 이동
 	@RequestMapping("/chatMain")
 	public String showChatMain(HttpSession session, int crNum, Model model) {
@@ -142,24 +149,29 @@ public class ChatRoomController {
 		// 현재 로그인하고 채팅방만드는 사람을 chatroom member로 넣어준다
 		Member member = (Member) session.getAttribute("user");
 		int mNum = member.getNum();
-		int crNum = crService.addChatRoom(wNum, mNum, crName);// 세션에 저장된 wNum, mNum 을가져와야한다.
+		int crNum = crService.addChatRoom(wNum, mNum, crName);
 		String[] mNumList = request.getParameterValues("mNumList");
 		if(mNumList!=null) {
 			for (String stringMnum : mNumList) {
-				// 멤버초대 체크리스트로 선택된 member들의 Num
 				int num = Integer.parseInt(stringMnum);
-				// 그 member의 num을 이용해서 chatRoomMember로 넣어준다.
 				crmService.addChatRoomMember(crNum, num, wNum);
+				int aNum = aService.addAlarm(wNum, num, member.getNum(), "cInvite", crNum);
+				smt.convertAndSend("/category/alarm/"+member.getNum(),aService.getAlarm(aNum));
 			}
 		}
 		return "redirect:chatMain?crNum="+crNum;
 	}
 	@RequestMapping("/inviteChatMember")
 	public String inviteChatMember(int crNum, int wNum, HttpSession session, HttpServletRequest request) {
+		// onclick='sendAlarm(${sessionScope.currWnum},멤버들 번호,${sessionScope.user.num},'cInvite',채팅방번호);
+		Member user = (Member)session.getAttribute("user");
+		
 		System.out.println("요청받음 crNum : "+crNum+",wNum : "+wNum);
 		for (String mNum : request.getParameterValues("wsmList")) {
 			Member member = mService.getMember(Integer.parseInt(mNum));
 			crmService.addChatRoomMember(crNum, member.getNum(), wNum);
+			int aNum = aService.addAlarm(wNum, member.getNum(), user.getNum(), "cInvite", crNum);
+			smt.convertAndSend("/category/alarm/"+member.getNum(),aService.getAlarm(aNum));
 		}
 		return "redirect:chatMain?crNum=" + crNum;
 	}

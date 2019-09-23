@@ -12,6 +12,7 @@ import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -43,7 +44,7 @@ public class NotifyController {
 		return alarmList;
 	}
 	@RequestMapping("/goToTargetURL")
-	public String goToTargetURL(int wNum,String aType,int aDnum, HttpSession session) {
+	public String goToTargetURL(int aNum,int wNum,String aType,int aDnum, HttpSession session) {
 		session.removeAttribute("currWnum");
 		session.setAttribute("currWnum", wNum);
 		session.removeAttribute("wsName");
@@ -51,7 +52,17 @@ public class NotifyController {
 		String targetURL = "";
 		if(aType.equals("reply")) {
 			targetURL = "board/view?num="+aDnum;
+		}else if(aType.equals("cInvite")) {
+			targetURL = "chatMain?crNum="+aDnum;
 		}
+		aService.removeAlarm(aNum);
 		return "redirect:"+targetURL;
+	}
+	@ResponseBody
+	@RequestMapping("/deleteThisAlarm")
+	public List<Alarm> deleteThisAlarm(@RequestParam("aNum")int aNum,@RequestParam("mNum")int mNum) {
+		aService.removeAlarm(aNum);
+		List<Alarm> alarmList = aService.getAllAlarm(mNum);
+		return alarmList;
 	}
 }
