@@ -1,35 +1,115 @@
 @charset "UTF-8";
 
-
-.joinBox {
-    top: 80px;
+#wrap {
+	height: 100%;
+	background-color: #F5F5F5;
+}
+#joinAll {
+	display: block;
+	height: 100%;
+}
+#joinAll section {
+	position: relative;
+	display: block;
+	overflow: hidden;
+	height: 750px;	
+}
+#joinBox {
+	top: 10%;
     bottom: 0;
     left: 0;
     right: 0;
     margin: auto;
     position: relative;
-	width: 400px;
+    width: 450px;
 	border-radius: 10px;
-	padding: 30px;
 	z-index: 10;
-	background-color: #EC6D63;
+	margin-top: 9%;
 }
+/* wave 코드 여기서 부터*/
+@import url(//fonts.googleapis.com/css?family=Lato:300:400);
+.header {
+  position:relative;
+  text-align:center;
+  background: linear-gradient(60deg, rgba(236, 109, 99,1) 0%, rgba(236, 109, 99,1) 100%); /* 파도 색깔 */
+  color:white;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+.inner-header {
+  height:100px;
+  width:100%;
+  margin: 0;
+  padding: 0;
+}
+.flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.waves {
+  position:relative;
+  width: 100%;
+  height:15vh;
+  margin-bottom:-7px;
+  min-height:5px; /* 파도 높이 조절 */
+  max-height:30px; /* 파도 높이 조절 */
+}
+.content {
+  position:relative;
+  text-align:center;
+  background-color: white;
+  height: 340px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+/* 파도 Animation */
+.parallax > use {
+  animation: move-forever 25s cubic-bezier(.55,.5,.45,.5) infinite;
+}
+.parallax > use:nth-child(1) {
+  animation-delay: -5s;
+  animation-duration: 7s;
+}
+.parallax > use:nth-child(2) {
+  animation-delay: -30s;
+  animation-duration: 3s;
+}
+.parallax > use:nth-child(3) {
+  animation-delay: -4s;
+  animation-duration: 5s;
+}
+.parallax > use:nth-child(4) {
+  animation-delay: -5s;
+  animation-duration: 20s;
+}
+@keyframes move-forever {
+  0% {
+   transform: translate3d(-90px,0,0);
+  }
+  100% { 
+    transform: translate3d(85px,0,0);
+  }
+}
+/* wave 코드 여기서까지*/
 .joinBox-Head {
 	text-align: center;
-	padding-bottom: 30px;
 }
 .joinBox-Head h3{
 	font-size: 20pt;
 	padding: 15px;
 	color: white;
-	margin-bottom: 30px;
 }
 .joinBox-Head p {
-	font-size: 10pt;
-	color: #c4c4c4; 
+	font-size: 5pt;
+	color: white; 
+	text-align: center;
+	padding-bottom: 2px;
 }
 .joinBox-Body {
 	text-align: left;
+	width: 355px;
 }
 .joinBox-Body h4 {
 	font-size: 17px;
@@ -39,7 +119,7 @@
 	padding: 5px;
 	margin: 0px 10px 5px 10px;
 }
-.joinBox-Body input {
+.joinBox-Body input:not(.joinFormButton) {
 	padding: 5px;
 	margin: 8px 0px 5px 0px;
 	border: 1px solid #ccc;
@@ -47,6 +127,21 @@
 	box-sizing: border-box;
 	width: 100%;
 	height: 35px;
+}
+.joinFormButton {
+	background-color: #EC6D63;
+	color: white;
+	border: 0px solid #ccc;
+	padding: 5px;
+	margin: 8px 0px 5px 0px;
+	border-radius: 4px;
+	box-sizing: border-box;
+	width: 100%;
+	height: 35px;
+	transition:background-color .5s;
+}
+.joinFormButton:hover {
+	background-color: rgba(236, 109, 99, 0.5);
 }
 #checkSentence {
 	float: right;
@@ -65,15 +160,20 @@
 	width: 32%;
     border-radius: 5px;
     height: 35px;
-    border: 0px solid;
     font-weight: 800;
-    border-color: white;
 }
 /* 구글 버튼 */
 #googleLoginButton {
 	float: left;
-	background-color: #EA4335;
+	background-color: white;
 	position: relative;
+	border: 1px solid #EA4335;
+	color: #EA4335;
+	transition:background-color .5s;
+}
+#googleLoginButton:hover {
+	background-color: #EA4335;
+	color: white;
 }
 .g-signin2 {
 	margin: 0px;
@@ -91,7 +191,14 @@
 /* 네이버 버튼 */
 .naverLoginButton {
 	position: relative;
+	background-color: white;
+	border: 1px solid #03CF5D;
+	color: #03CF5D;
+	transition:background-color .5s;
+}
+.naverLoginButton:hover {
 	background-color: #03CF5D;
+	color: white;
 }
 #naverIdLogin {
 	background-color: black;
@@ -112,8 +219,15 @@
 /* 카카오 버튼 */
 #kakaoLoginButton {
 	float: right;
-	background-color: #FCCE00;
+	background-color: white;
 	position: relative;
+	border: 1px solid #FCCE00;
+	color: #FCCE00;
+	transition:background-color .5s;
+}
+#kakaoLoginButton:hover {
+	background-color: #FCCE00;
+	color: white;
 }
 #kakaoLoginButton > span {
 	position: absolute;

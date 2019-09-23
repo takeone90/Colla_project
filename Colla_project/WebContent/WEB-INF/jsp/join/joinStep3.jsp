@@ -59,46 +59,50 @@ function checkBox(){
 </script>
 </head>
 <body>
-<%
-String emailAddress = (String)session.getAttribute("emailAddress");
-%>
-<%@ include file="/WEB-INF/jsp/inc/headerMain.jsp" %>
-	<div class="joinBox">
-		<div class="joinBox-Head">
-			<h3 style='font-weight: bolder; font-size: 30px'>회원가입</h3>
-			<p>
-				<i class="fas fa-circle" style="color: #DDB4AB"></i>&nbsp;&nbsp;
-				<i class="fas fa-circle" style="color: #DDB4AB"></i>&nbsp;&nbsp;
-				<i class="fas fa-circle" style="color: #DA574E"></i>
-			</p>
+<% String emailAddress = (String)session.getAttribute("emailAddress"); %>
+	<div id="wrap">
+	<%@ include file="/WEB-INF/jsp/inc/headerMain.jsp" %>
+		<div id="joinAll">
+			<section>
+				<div class="joinBox">
+					<div class="joinBox-Head">
+						<h3 style='font-weight: bolder; font-size: 30px'>회원가입</h3>
+						<p>
+							<i class="fas fa-circle" style="color: #DDB4AB"></i>&nbsp;&nbsp;
+							<i class="fas fa-circle" style="color: #DDB4AB"></i>&nbsp;&nbsp;
+							<i class="fas fa-circle" style="color: #DA574E"></i>
+						</p>
+					</div>
+					<div class="joinBox-Body">
+						<form action="joinMember" method="post" id="joinMemberForm">
+							<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+							<div>
+								<h4>EMAIL</h4>
+								<input type="email" name="email" readonly="readonly" value="${emailAddress}">
+							</div>
+							<div>
+								<h4>PASSWORD</h4>
+								<input type="password" name="pw" id="pw">
+								<span id="checkPw"></span>
+							</div>
+							<div>
+								<h4>NAME</h4>
+								<input type="text" name="name" id="name">
+								<span id="checkName"></span>
+							</div>
+							<div>
+								<input type="checkbox" id="checkbox" value="1">
+								COLLA에서 제공하는 서비스 약관에 동의합니다.
+								<span id="checkCheckBox"></span>
+							</div>
+							<div>
+								<input type="submit" value="시작하기">
+							</div>
+						</form>
+					</div>
+				</div>	
+			</section>
 		</div>
-		<div class="joinBox-Body">
-			<form action="joinMember" method="post" id="joinMemberForm">
-				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
-				<div>
-					<h4>EMAIL</h4>
-					<input type="email" name="email" readonly="readonly" value="${emailAddress}">
-				</div>
-				<div>
-					<h4>PASSWORD</h4>
-					<input type="password" name="pw" id="pw">
-					<span id="checkPw"></span>
-				</div>
-				<div>
-					<h4>NAME</h4>
-					<input type="text" name="name" id="name">
-					<span id="checkName"></span>
-				</div>
-				<div>
-					<input type="checkbox" id="checkbox" value="1">
-					COLLA에서 제공하는 서비스 약관에 동의합니다.
-					<span id="checkCheckBox"></span>
-				</div>
-				<div>
-					<input type="submit" value="시작하기">
-				</div>
-			</form>
-		</div>
-	</div>	
+	</div> 		
 </body>
 </html>
