@@ -58,7 +58,7 @@
 						console.log("2 ajax실행");
 						$.ajax({
 							url : "checkEmailDuplication",
-							data : data,
+							data : {"emailAddress":emailAddress},
 							type : "post",
 							dataType : "json",
 							success : function(result) {

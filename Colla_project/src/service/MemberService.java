@@ -25,6 +25,7 @@ import javax.servlet.http.HttpSession;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpRequest;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.FileCopyUtils;
@@ -46,6 +47,8 @@ public class MemberService {
 	private MemberDao dao;
 	@Autowired
 	private SetAlarmDao setAlarmDao;
+	@Autowired
+	private BCryptPasswordEncoder bcryptPasswordEncoder;
 	
 	//파일 저장 경로
 	@Resource(name="uploadPath")
@@ -53,25 +56,20 @@ public class MemberService {
 	
 	@Transactional
 	public boolean addMember(Member member) {
+		String bcryptPassword = bcryptPasswordEncoder.encode(member.getPw());
+		member.setPw(bcryptPassword);
 		if(dao.insertMember(member)>0) {
 			dao.insertAuthority(member.getNum()); //권한 추가
 			SetAlarm setAlarm = new SetAlarm();
 			setAlarm.setNum(member.getNum());
+			System.out.println("setAlarm : " + setAlarm);
 			if(setAlarmDao.insertSetAlarm(setAlarm)>0) {
 				return true;
 			}
 		}
 		return false;
 	}
-	/*
-	public boolean modifyMember(Member member) {
-		boolean result = false;
-		if(dao.updateMember(member)>0) {
-			result = true;
-		}
-		return result;
-	}
-	*/
+
 	public boolean modifyMemberName(String name, String email) {
 		boolean result = false;
 		if(dao.updateMemberName(name,email)>0) {
@@ -81,7 +79,8 @@ public class MemberService {
 	}
 	public boolean modifyMemberPw(String pw, String email) {
 		boolean result = false;
-		if(dao.updateMemberPw(pw,email)>0) {
+		String bcryptPassword = bcryptPasswordEncoder.encode(pw);
+		if(dao.updateMemberPw(bcryptPassword,email)>0) {
 			result = true;
 		}
 		return result;
@@ -143,7 +142,7 @@ public class MemberService {
 	
 	public boolean checkPass(String email, String pw) {
 		Member originMember = dao.selectMemberByEmail(email);
-		if(originMember.getPw().equals(pw)) {
+		if(bcryptPasswordEncoder.matches(pw, originMember.getPw())) {
 			return true;
 		}
 		return false;
