@@ -130,6 +130,7 @@
 	height: 35px;
 }
 .loginFormButton {
+	cursor:pointer;
 	background-color: #EC6D63;
 	color: white;
 	border: 0px solid #ccc;
@@ -161,6 +162,7 @@
     border-radius: 5px;
     height: 35px;
     font-weight: 800;
+    cursor:pointer;
 }
 /* 구글 버튼 */
 #googleLoginButton {
