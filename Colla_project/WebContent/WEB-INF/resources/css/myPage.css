@@ -73,9 +73,23 @@
 .myPageAccount #profileImg img{
 	width: 100%
 }
+.myPageContent+.myPageContent{
+	margin-bottom: 0px;
+}
+.myPageContent+p{
+	font-size: 13px;
+	width: 938px;
+	margin: 10px auto;
+	color: #665A5A;
+}
+p a.removeMember{
+	font-weight: bolder;
+	border-bottom: 1px solid #665A5A;
+	color: #665A5A;
+}
 .contentLine {
 	border: 0.5px solid #D3CDCD;
-	margin: 0 30px;
+	margin: 0 30px; 
 }
 
 
@@ -318,9 +332,21 @@
     border-radius: 50%;
 }
 
-/*
-.cropper-view-box {
-    box-shadow: 0 0 0 1px #39f;
-    outline: 0;
+/*알람 설정*/
+.toggleBG {
+	background: #CCCCCC;
+	width: 70px;
+	height: 30px;
+	border: 1px solid #CCCCCC;
+	border-radius: 15px;
 }
-*/
+
+.toggleFG {
+	background: #FFFFFF;
+	width: 30px;
+	height: 30px;
+	border: none;
+	border-radius: 15px;
+	position: relative;
+	left: 0px;
+}

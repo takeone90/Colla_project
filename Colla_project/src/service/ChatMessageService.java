@@ -84,7 +84,9 @@ public class ChatMessageService {
 		return cmDao.selectChatFavoriteList(crNum, mNum);
 	}
 	
-	
+	public int removeFavoriteByMnum(int mNum) {
+		return cmDao.deleteFavoriteByMnum(mNum);
+	}
 	
 	/////////////////////////////////메세지 검색///////////////////////////////////////////
 	private final static int NUM_OF_BOARD_PER_PAGE = 5;

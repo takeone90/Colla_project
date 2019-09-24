@@ -13,7 +13,7 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
  
 public class MailSend {
-    public void MailSend(String emailAddress, String code) {
+    public void MailSend(String emailAddress, String code,String type) {
         Properties prop = System.getProperties();
         prop.put("mail.smtp.starttls.enable", "true");
         prop.put("mail.smtp.host", "smtp.gmail.com");
@@ -22,6 +22,12 @@ public class MailSend {
         Authenticator auth = new MailAuth();
         Session session = Session.getDefaultInstance(prop, auth);
         MimeMessage msg = new MimeMessage(session);
+        String mailTitle = null;
+        if(type.equals("verifyCode")) {
+        	mailTitle = "[COLLA] 회원가입 인증코드 메일입니다";
+        }else {
+        	mailTitle = "[COLLA] 워크스페이스 초대 메일입니다";
+        }
         try {
             msg.setSentDate(new Date());
             msg.setFrom(new InternetAddress("collacolla19@gmail.com", "colla"));
@@ -43,7 +49,7 @@ public class MailSend {
             //////////////////////////////////////////////////
             InternetAddress to = new InternetAddress(emailAddress);         
             msg.setRecipient(Message.RecipientType.TO, to);            
-            msg.setSubject("인증코드 테스트", "UTF-8");
+            msg.setSubject(mailTitle, "UTF-8");
 //            msg.setText(code, "UTF-8"); 
             msg.setContent(code,"text/html;charset=UTF-8");
             Transport.send(msg);

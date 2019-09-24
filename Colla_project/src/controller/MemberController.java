@@ -23,6 +23,7 @@ import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.messaging.simp.annotation.SubscribeMapping;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -35,6 +36,7 @@ import mail.MailSend;
 import model.ChatMessage;
 import model.EmailVerify;
 import model.Member;
+import service.ChatMessageService;
 import service.ChatRoomMemberService;
 import service.MemberService;
 import service.WsMemberService; 
@@ -64,6 +66,8 @@ public class MemberController {
 	private ChatRoomMemberService crmService;
 	@Autowired
 	private SimpMessagingTemplate smt;
+	@Autowired
+	private ChatMessageService cmService;
 
 	@Resource(name = "connectorList")
 	private Map<Object,Object> connectorList;//빈으로 등록된 접속자명단(email, session)
@@ -151,20 +155,20 @@ public class MemberController {
 	
 	@RequestMapping(value="/joinMember", method = RequestMethod.POST)
 	public String joinMember(Member member,HttpSession session) {
-		System.out.println("member : "+member);
 		boolean result = memberService.addMember(member);
-		
 		String inviteUserEmail = (String)session.getAttribute("inviteUserEmail");
-		int inviteWnum = (Integer)session.getAttribute("inviteWnum");
-		
-		if(inviteUserEmail!=null && member.getEmail().equals(inviteUserEmail) && session.getAttribute("inviteWnum")!=null) {
-			//이게 차있다면 초대받은사람임
-			//wsmember로 추가
-			wsmService.addWsMember(inviteWnum, member.getNum());
-			System.out.println("초대받은사람이네요 inviteUserEmail : "+inviteUserEmail+", 초대받은wNum : "+inviteWnum);
+		System.out.println("inviteUserEmail : " + inviteUserEmail);
+		if(inviteUserEmail!=null) {
+			int inviteWnum = (Integer)session.getAttribute("inviteWnum");
+			if(member.getEmail().equals(inviteUserEmail) && session.getAttribute("inviteWnum")!=null) {
+				//이게 차있다면 초대받은사람임
+				//wsmember로 추가
+				wsmService.addWsMember(inviteWnum, member.getNum());
+				System.out.println("초대받은사람이네요 inviteUserEmail : "+inviteUserEmail+", 초대받은wNum : "+inviteWnum);
+			}
+			session.removeAttribute("InviteUserEmail");
+			session.removeAttribute("inviteWnum");
 		}
-		session.removeAttribute("InviteUserEmail");
-		session.removeAttribute("inviteWnum");
 		if(result) {
 			return "redirect:main";
 		} else {
@@ -202,7 +206,35 @@ public class MemberController {
 		public void run() {
 			MailSend ms = new MailSend();
 			String tmpCode = setCode();
-			ms.MailSend(emailAddress, tmpCode);
+			ms.MailSend(emailAddress,
+			"<body>\r\n" + 
+			"	<div style='background-color: #4D4B4C; width: 760px; margin: 50px auto'>\r\n" + 
+			"		<h1 style='background-color: white'>\r\n" + 
+			"			<a href=\"#\"><img style='width: 150px' src=\"http://localhost:8081/Colla_project/img/COLLA_LOGO_200px.png\" /></a>\r\n" + 
+			"		</h1>\r\n" + 
+			"		<div>\r\n" + 
+			"			<img style='width: 100%'src='http://localhost:8081/Colla_project/img/COLLA_WAVE_PNG.png'>\r\n" + 
+			"		</div>\r\n" + 
+			"		<div\r\n" + 
+			"			style='background-color: #4D4B4C; width: 100%; height: 500px; background-image: url(\"http://localhost:8081/Colla_project/img/Main_background.jpg\"); background-size: cover;'>\r\n" + 
+			"			<p style='font-size: 15px;color: white;text-align: center;width: 100%;padding-top: 180px;'>\r\n" + 
+			"				고객님의 이메일 인증 번호입니다 </p>\r\n" + 
+			"				<div>\r\n" + 
+			"					<div style=\"background-color: rgba(255, 255, 255,0.2);width: 180px;border-radius: 10px;margin: 10px auto;text-align:center;padding: 7px; \">\r\n" + 
+			"						<span style='color: #EB6C62;font-size: 25px;font-weight: bolder'>"+tmpCode+"</span>\r\n" + 
+			"					</div>\r\n" + 
+			"				</div> \r\n" + 
+			"		</div>\r\n" + 
+			"		<div style='width: 100%;background-color: #EFEEEE;text-align: center;font-size: 13px;padding-top: 20px;padding-bottom: 50px;'>\r\n" + 
+			"			<div style='display: inline-block; padding-right: 15px; position: relative; vertical-align: middle; line-height: 1.9; font-weight: 500; color: #767676;'>\r\n" + 
+			"				<p><span style='padding-left: 15px'>(주)질수없조</span><span style='padding-left: 15px'>명예이사 : 임창목</span><span style='padding-left: 15px'>사업자등록번호 : 1990-09-17</span></p>\r\n" + 
+			"				<p><span>Republic of Korea</span><span>459, Gangnam-daero, Seocho-gu, Seoul</span></p>\r\n" + 
+			"			</div>\r\n" + 
+			"			<div>\r\n" + 
+			"				<p style=\"font-size: 14px; font-weight: 300; letter-spacing: 0.025em; line-height: 1.75; color: #767676; display: inline-block;\">© 2019 NeverLose systems inc. All rights reserved.</p>\r\n" + 
+			"			</div>\r\n" + 
+			"		</div>\r\n" + 
+			"	</div>","verifyCode");
 			if(tmpCode != null) {
 				session.setAttribute("verifyCode", tmpCode);
 			}
@@ -276,7 +308,7 @@ public class MemberController {
 		memberService.removeMember(member.getNum()); //멤버테이블에서 해당멤버 삭제
 		crmService.removeAllChatRoomMemberByMnum(member.getNum()); //chatroom_member 테이블에서 해당 멤버가 들어간 튜플 모두 제거
 		wsmService.removeAllWsMemberByMnum(member.getNum()); //workspace_member 테이블에서 해당 멤버가 들어간 튜플 모두 제거
-		//favorite 모델에서도 m_num을 기준으로 모두 지우는거 만들어야함
+		cmService.removeFavoriteByMnum(member.getNum()); //favorite 테이블에서 해당멤버가 즐겨찾기한 튜플 모두 제거
 		
 		return "redirect:main";
 	}

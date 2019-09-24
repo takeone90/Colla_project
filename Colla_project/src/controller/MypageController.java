@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -186,11 +187,8 @@ public class MypageController {
 	@RequestMapping(value = "/modifyProfileImg", method = RequestMethod.POST)
 	public boolean modifyProfileImg(MultipartFile[] croppedImage, String profileImgType, HttpSession session) {
 		boolean result = false;
-		System.out.println("profileImgType:" + profileImgType);
-		System.out.println("profileImg:" + croppedImage);
 		Member member = memberService.getMemberByEmail((String)session.getAttribute("userEmail"));
 		result = memberService.updateProfileImg(croppedImage,profileImgType,member);
-		System.out.println("result : "+result);
 		return result;
 	}
 	
