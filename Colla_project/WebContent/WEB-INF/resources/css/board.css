@@ -31,6 +31,9 @@
 	background-color: #EAEAEA;
 	border-top: 1px solid #E0E0E0;
 }
+#boardInner #boardList #listHead > div{
+	text-align:center;
+}
 #boardInner #boardList li.noticeLi{
 	font-weight:600;
 	
@@ -54,6 +57,7 @@
 }
 #boardInner #boardList div:nth-child(2){
 	width:60%;
+	text-align:left;
 }
 #boardInner #boardList div:nth-child(3){
 	width:10%;
