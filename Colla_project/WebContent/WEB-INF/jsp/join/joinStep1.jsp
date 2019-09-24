@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/jsp/inc/head.jsp" %>
-
-
 <!-- 구글 -->
 <meta name="google-signin-client_id"
 	content="504860758033-8nonf1fgo3sk1c4sfv2dv4n52tciijjo.apps.googleusercontent.com">
@@ -11,9 +9,9 @@
 <meta name="viewport"
 	content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width=device-width" />
 <title>joinStep1</title>
-<link rel="stylesheet" type="text/css" href="css/headerMain.css" />
-<link rel="stylesheet" type="text/css" href="css/join.css" />
-
+<link rel="stylesheet" type="text/css" href="css/headerMain.css"/>
+<link rel="stylesheet" type="text/css" href="css/animate.css"/>
+<link rel="stylesheet" type="text/css" href="css/join.css"/>
 <!-- 네이버 -->
 <script type="text/javascript"
 	src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.0.js"
@@ -22,7 +20,6 @@
 <script src="https://apis.google.com/js/platform.js" async defer></script>
 <!-- 카카오 -->
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
-
 <script type="text/javascript">
 	$(function() {
 		$("#emailForm").on("submit", function(e) {
@@ -50,33 +47,34 @@
 			return false;
 		})
 		$("#emailAddress").on("blur", function() {
-					var emailAddress = $("#emailAddress").val();
-					if (emailAddress == "") {
-						$("#checkSentence").text("이메일을 입력해주세요.");
-					} else {
-						var data = $(this).parent().serialize();
-						console.log("2 ajax실행");
-						$.ajax({
-							url : "checkEmailDuplication",
-							data : data,
-							type : "post",
-							dataType : "json",
-							success : function(result) {
-								if (result) { //이메일 중복임
-									$("#checkSentence").text("이미 가입된 이메일입니다.");
-								} else {
-									$("#checkSentence").text("멋진 이메일이네요!");
-								}
-							},
-							error : function(request, status, error) {
-								alert("request:" + request + "\n" + "status:"
-										+ status + "\n" + "error:" + error
-										+ "\n");
-							}
-						}); //end ajax
+			var emailAddress = $("#emailAddress").val();
+			if (emailAddress == "") {
+				$("#checkSentence").text("이메일을 입력해주세요.");
+			} else {
+// 				var data = $(this).parent().serialize();
+				console.log("2 ajax실행");
+				$.ajax({
+					url : "checkEmailDuplication",
+					data : {"emailAddress":emailAddress},
+					type : "post",
+					dataType : "json",
+					success : function(result) {
+						if (result) { //이메일 중복임
+							$("#checkSentence").text("이미 가입된 이메일입니다.");
+						} else { //이메일 중복이 아님
+							$("#checkSentence").text("멋진 이메일이네요!");
+						}
+					},
+					error : function(request, status, error) {
+						alert("blur");
+// 						alert("request:" + request + "\n" + "status:"
+// 								+ status + "\n" + "error:" + error
+// 								+ "\n");
 					}
-					return false;
-				});
+				}); //end ajax
+			}
+			return false;
+		});
 		/* 네이버 회원가입 API */
 		var naverLogin = new naver.LoginWithNaverId({
 			clientId : "kIhjMaimMjKNR7gcR2nf",

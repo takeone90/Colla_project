@@ -64,6 +64,15 @@
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
 }
+.joinStep3-section .content {
+  position:relative;
+  text-align:center;
+  background-color: white;
+  height: 390px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;	
+}
+
 /* 파도 Animation */
 .parallax > use {
   animation: move-forever 25s cubic-bezier(.55,.5,.45,.5) infinite;
@@ -115,11 +124,14 @@
 	font-size: 17px;
     font-weight: 600;
 }
-.joinBox-Body div {
+.joinBox-Body div:not(.joinCheckbox) {
 	padding: 5px;
 	margin: 0px 10px 5px 10px;
 }
-.joinBox-Body input:not(.joinFormButton) {
+.joinCheckbox {
+	margin: 0px 10px 0px 10px;
+}
+.joinBox-Body input:not(.joinFormButton):not(.joinCheckboxInput) {
 	padding: 5px;
 	margin: 8px 0px 5px 0px;
 	border: 1px solid #ccc;
@@ -142,6 +154,9 @@
 }
 .joinFormButton:hover {
 	background-color: rgba(236, 109, 99, 0.5);
+}
+.joinCheckbox {
+	font-size: 13px;
 }
 #checkSentence {
 	float: right;

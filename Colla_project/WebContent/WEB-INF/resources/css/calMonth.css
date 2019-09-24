@@ -110,11 +110,20 @@ td {
 	margin-top: 1pt;
 }
 
-/* 연 달력 */
+/* -------------------- 연 달력 -------------------- */
+#yearCalendar {
+	width: 90%;
+    margin: 0 auto;
+}
+#yearCalendar .dateDisplay {
+	margin-top: 35px;
+}
+#calYearBody {
+	margin-top: 35px;
+}
 .drawYearCalDiv {
 	position: relative;
 }
-
 #calYearTitle {
 	font-size: 35pt;
 	color: #6b635c;
@@ -127,12 +136,14 @@ td {
 	border-collapse: collapse;
 	border: 0px;
 	table-layout: fixed;
+	
 } /* table1(클릭) */
-.drawYearCalendarForClick th {
+.drawYearCalendarForClick td {
 	height: 20px;
 	width: 150px;
 	position: relative;
 	padding: 0px;
+	border: 1px solid #bbb;
 }
 
 .drawYearCalendar {
@@ -146,18 +157,24 @@ td {
 .drawYearCalendarDate {
 	height: 15px;
 	padding: 0px;
-	background-color: #a37f82;
+	background-color: #E6E2E1;
 }
-
 .drawYearCalendar tr {
 	position: relative;
 }
 
 .drawYearCalendar th {
-	height: 20px;
+	height: 25px;
 	position: relative;
 	padding: 0px;
 	text-align: center;
+	vertical-align: middle;
+}
+.middleTdYear div {
+	border: 1px; 
+	height: 100%;
+    cursor: pointer;
+    line-height: 20px;
 }
 
 /* 모달 */
@@ -301,4 +318,87 @@ td {
 #detailForm form div > p{
 	margin-top:10px;
 	text-indent:2rem;
+}
+
+/* calSearchList */
+
+.calendarSearchList {
+	width: 90%;
+    padding: 30px 0;
+    margin: 0 auto;
+}
+.searchList {
+    background-color: #F5F5F5;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    position: relative;
+    width: 1280px;
+    margin: 35px auto 20px;
+}
+.searchList ul {
+	margin-bottom: 20px;
+}
+.searchList li {
+	line-height: 30px;
+    padding: 5px 0;
+    border-bottom: 1px solid #E0E0E0;
+}
+.searchList li:after {
+	content: "";
+    display: block;
+    clear: both;
+}
+.searchListHead {
+	background-color: #EAEAEA;
+    border-top: 1px solid #E0E0E0;	
+}
+.searchListInner {
+    border-bottom: 1px solid #E0E0E0;
+}
+.searchList div {
+	height: 100%;
+    float: left;
+    text-align: center;
+}
+.searchList div:nth-child(1) {
+	width: 20%
+}
+.searchList div:nth-child(2) {
+	width: 50%
+}
+.searchList div:nth-child(3) {
+	width: 10%
+}
+.searchList div:nth-child(4) {
+	width: 10%
+}
+.searchList div:nth-child(5) {
+	width: 10%
+}
+#navigation {
+	text-align: center;
+}
+#navigation li {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    font-size: 13px;	
+}
+#navigation a {
+	display: block;
+    text-align: center;
+    line-height: 20px;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+#navigation .prevAngle a,
+#navigation .nextAngle a {
+	color: #B7B7B7;
+}
+#navigation .currPage{
+	background-color:#E5675A;
+	color:#fff;
+	cursor:default;
 }
