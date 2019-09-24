@@ -20,13 +20,13 @@ public class MainController {
 	@Autowired
 	private FileService fService;
 	
+	@RequestMapping("/")
+	public String main() {
+		return "/main/main";
+	}
 	@RequestMapping("/loading")
 	public String showLoading() {
 		return "/main/loading";
-	}
-	@RequestMapping("/main")
-	public String main() {
-		return "/main/main";
 	}
 	@RequestMapping("/error")
 	public String error() {

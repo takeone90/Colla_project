@@ -26,6 +26,8 @@
 			if(info == "duplicatedLogin"){
 				window.alert("동일한 아이디로 로그인되어 로그아웃합니다.");
 				window.location.href="/loginForm";
+			} else {
+				window.location.href="/";
 			}
 		});
 	</script>
