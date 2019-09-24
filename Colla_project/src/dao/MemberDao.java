@@ -1,6 +1,7 @@
 package dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 
@@ -25,4 +26,6 @@ public interface MemberDao {
 	public EmailVerify selectEmailVerify(String email);
 	public int insertProfileImg(Member member);
 	public int insertAuthority(int num);
+	
+	public List<Map<Object,Object>> selectWsMemberListbyMnum(int mNum);
 }
