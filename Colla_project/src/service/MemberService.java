@@ -69,7 +69,11 @@ public class MemberService {
 		}
 		return false;
 	}
-
+  
+	public List<Map<Object,Object>> getWsMemberListbyMnum(int mNum){
+		return dao.selectWsMemberListbyMnum(mNum);
+	}
+	
 	public boolean modifyMemberName(String name, String email) {
 		boolean result = false;
 		if(dao.updateMemberName(name,email)>0) {

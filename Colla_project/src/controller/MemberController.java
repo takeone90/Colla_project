@@ -4,8 +4,10 @@ package controller;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.request;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.security.Principal;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -68,7 +70,7 @@ public class MemberController {
 	private ChatMessageService cmService;
 
 	@Resource(name = "connectorList")
-	private Map<Object,String> connectorList;//빈으로 등록된 접속자명단(email, session)
+	private Map<Object,Object> connectorList;//빈으로 등록된 접속자명단(email, session)
 	
 //	private static Map<String, Object> loginMember = new HashMap<>(); //로그인한 멤버를 담기위한 map	
 
@@ -239,43 +241,63 @@ public class MemberController {
 		}
 	}
 	
-	public String sendConList(
-			@DestinationVariable(value="wNum")int wNum
+	private String sendLoginDuplicatedMsg(
+			@DestinationVariable(value="mNum")int mNum
 			) {
 		System.out.println("중복아이디 로그아웃 메시지 전송");
-		smt.convertAndSend("/category/loginMemberList/"+wNum,connectorList);
+		smt.convertAndSend("/category/loginMsg/"+mNum,"duplicated");
 		
-		return "duplicated";
+		return "return_duplicated";
 	}
-	public HttpSession deleteSessionFromConList(String email) {
-		HttpSession session = (HttpSession)getKey(connectorList, email);
-		connectorList.remove(session);
-		return session;
+//	private HttpSession deleteSessionFromConList(String email) {
+//		HttpSession session = (HttpSession)getKey(connectorList, email);
+//		connectorList.remove(session);
+//		return session;
+//	}
+	
+	private String sendLoginUser(int mNum) {
+		// mNum이 참여중인 workspace에 참여한 멤버들 중에 로그인 중인 멤버
+		//로그인중인 멤버는 connectorList와 메일 비교,
+		List<Map<Object,Object>> uList = memberService.getWsMemberListbyMnum(mNum);
+		//Map<mnum,memail>
+		System.out.println("실시간 로그인 상태확인 - uList : " + uList);
+		for( Map<Object,Object> user : uList) {
+			int userNum = ((BigDecimal)user.get("MNUM")).intValue();
+			String userEmail = (String)user.get("MEMAIL");
+			
+			if( userNum == mNum || connectorList.get(userEmail) == null ) {
+				continue;
+			}
+			System.out.println("workspace 멤버 번호 : "+userNum+" / 메일 : " + userEmail );
+			smt.convertAndSend("/category/newLogin/"+userNum, mNum);
+		}
+		return "return_mNum";
 	}
 	 //중복 로그인 체크 (기존 사용자 로그아웃 처리)
 	@RequestMapping("/checkLoginDuplication")
-	public String checkLoginDuplication(HttpServletRequest request, HttpServletResponse response) throws IOException {
+	private String checkLoginDuplication(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		HttpSession session = request.getSession();
-		String userEmail = (String)request.getSession().getAttribute("userEmail");
+		String userEmail = (String)session.getAttribute("userEmail");
 		Member user = memberService.getMemberByEmail(userEmail);
-		
+		int mNum = user.getNum();
 		boolean isDuplicate = false;
 		System.out.println("중복체크 전 접속 중인 멤버 : "+connectorList);
 		
-		if (getKey(connectorList, userEmail) != null) {
+		if (connectorList.get(userEmail) != null) {
 			isDuplicate = true; // 중복으로 로그인
 		}
 		
 		if (!isDuplicate) { // 정상적인 로그인의 경우
 			System.out.println("정상적인 로그인입니다.");
+			sendLoginUser(mNum);
+			
 		} else { // 중복 로그인의 경우
 			System.out.println("중복 로그인입니다.");
-			sendLoginDuplicatedMsg(user.getNum());
-			deleteSessionFromConList(userEmail);
+			sendLoginDuplicatedMsg(mNum);
+//			deleteSessionFromConList(userEmail);
 		}
+		connectorList.put(userEmail, session); // 해당 email, session 추가 또는 교체
 		
-		connectorList.put(request.getSession(), userEmail); // 해당 email, session 추가 또는 교체
-//		response.sendRedirect("/workspace"); //워크스페이스로 이동한다	
 		return "redirect:workspace";
 	}
 	
@@ -319,12 +341,4 @@ public class MemberController {
         return null;
     }
 
-	public String sendLoginDuplicatedMsg(
-			@DestinationVariable(value="mNum")int mNum
-			) {
-		System.out.println("중복아이디 로그아웃 메시지 전송");
-		smt.convertAndSend("/category/loginMsg/"+mNum,"duplicated");
-		
-		return "duplicated";
-	}
 }
