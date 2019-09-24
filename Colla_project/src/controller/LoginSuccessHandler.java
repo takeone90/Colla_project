@@ -25,7 +25,7 @@ import service.MemberService;
 public class LoginSuccessHandler implements AuthenticationSuccessHandler {
 
 	@Resource(name = "connectorList")
-	private Map<Object,String> connectorList;//빈으로 등록된 접속자명단(email, session)
+	private Map<Object,Object> connectorList;//빈으로 등록된 접속자명단(email, session)
 	
 	@Override
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {

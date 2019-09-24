@@ -32,9 +32,9 @@ function duplicateConnect(){
 		<%----------------------------------------채팅메시지 구독부분----------------------------------------------%>
 		var crNum = $("#crNum").val();
 		//현재 workspace 로그인중인 멤버
-		stompClient.subscribe("/category/loginMemberList/${currWnum}", function(data){
-			let mList = JSON.parse(data.body);
-			console.log(mList);
+		stompClient.subscribe("/category/newLogin/${sessionScope.user.num}", function(data){
+			let newUser = JSON.parse(data.body);
+			console.log(newUser);
 		});
 		
 		//일반메세지 구독
