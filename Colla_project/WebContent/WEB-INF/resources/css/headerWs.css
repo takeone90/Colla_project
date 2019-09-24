@@ -181,14 +181,15 @@ a.member-btn:hover{
     right: 0px;
     top: 70px;
     z-index: 0;
-    width: 314px;
+    width: 462px;
     max-height:420px;
     border-radius: 0px 0px 0px 10px;
     background-color: #fcfcfc;
-    border-bottom: 0.5px solid #bdbbbb;
-    border-left: 0.5px solid #bdbbbb;
+    border-bottom: 0.5px solid #e7e7e7;
+    border-left: 0.5px solid #e7e7e7;
 }
 .alarmInfoDiv{
+	position: relative;
     padding: 13px;
     border-bottom: 1px solid #eee;
 }
@@ -215,7 +216,7 @@ a.member-btn:hover{
     margin-left: 11px;
 }
 .alarmInfo a:hover{
-	color : #E5675A;
+	color : #f2452e;
 }
 .alarmRegDate{
 	display: block;
@@ -229,10 +230,30 @@ a.member-btn:hover{
 .deleteThisAlarm{
 	display: inline-block;
   	position: absolute;
-    right: 20px;
+    right: 35px;
+    top: 33px;
 	color : #87817C;
 }
 .deleteThisAlarm:hover{
 	cursor : pointer;
 	color : #f2452e;
+}
+
+#inviteAcceptModal .modalBody > p{
+	margin-bottom: 16px;
+}
+#inviteAcceptModal ul{
+	margin-bottom:23px;
+}
+.attachModal h3{
+	font-size:23px;
+	color : #403C39;
+	font-weight: 900;
+}
+.attachModal h4 {
+    color: #403C39;
+    font-size: 16px;
+    margin-bottom: 10px;
+    margin-top: 15px;
+    font-weight: 700;
 }

@@ -55,6 +55,7 @@
 									<option value="anonymous">익명</option>
 								</select>
 							</label>
+							
 							<label class="floatleft">
 								<span>글 비밀번호</span>
 								<input id="pw" type="password" name="pw" placeholder="글 비밀번호를 입력해주세요">
