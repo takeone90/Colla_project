@@ -103,7 +103,9 @@ function duplicateConnect(){
 }// end duplicateConnect
 
 function sendAlarm(wNum,mNumTo,mNumFrom,aType,aDnum){
-	stompClient.send("/client/sendAlarm/"+wNum+"/"+mNumTo+"/"+mNumFrom+"/"+aDnum,{},aType);
+	if(mNumTo!=mNumFrom){
+	stompClient.send("/client/sendAlarm/"+wNum+"/"+mNumTo+"/"+mNumFrom+"/"+aDnum,{},aType);		
+	}
 }
 
 var hasNewAlarm;
@@ -111,23 +113,58 @@ function drawAlarmList(alarm){
 	var alarmType;
 	if(alarm.aType=="reply"){
 		alarmType = "댓글";
-	}else if(alarm.aType=="wInvite"){
-		alarmType = "워크스페이스 초대";
+	}else if(alarm.aType=="notice"){
+		alarmType = "공지";
 	}else if(alarm.aType=="cInvite"){
 		alarmType = "채팅방 초대";
+	}else if(alarm.aType=="wInvite"){
+		alarmType = "워크스페이스 초대";
 	}
 	var alarmInfoArea = $("#alarmInfoArea");
 	var alarmProfileImg = $("<div class='profileImg'><img alt='프로필사진' src='${contextPath}/showProfileImg?num="+alarm.mNumFrom+"'></div>");
 	var alarmInfoDiv = $("<div class='alarmInfoDiv'></div>");
 	var date = new Date(alarm.aRegDate);
 	var alarmTime = date.getFullYear()+"-"+(Number(date.getMonth())+Number(1))+"-"+date.getDate()+" "+date.getHours()+"시"+date.getMinutes()+"분";
-	var alarmInfo = $("<div class='alarmInfo'><a class='goToURLaTag' href='${contextPath}/goToTargetURL?aNum="+alarm.aNum+"&wNum="+alarm.wNum+"&aType="+alarm.aType+"&aDnum="+alarm.aDnum+"'>"+alarm.mNameFrom+"님의 "+alarmType+"알림 </a><div class='deleteThisAlarm' onclick='deleteThisAlarm("+alarm.aNum+");'><i class='fas fa-times'></i></div></div>");
+	var alarmInfo = $("<div class='alarmInfo'></div>");
+	var aTagInAlarmInfo;
+	if(alarm.aType=="wInvite"){
+		aTagInAlarmInfo = $("<a class='goToURLaTag openInviteAcceptModal' href='#' onclick='openInviteAcceptModal("+alarm.aNum+","+alarm.wNum+",\""+alarm.aType+"\","+alarm.aDnum+");'>"+alarm.mNameFrom+"님의 "+alarmType+"알림 </a>");
+	}else{
+		aTagInAlarmInfo = $("<a class='goToURLaTag' href='${contextPath}/goToTargetURL?aNum="
+				+alarm.aNum+"&wNum="+alarm.wNum+"&aType="+alarm.aType+"&aDnum="+alarm.aDnum+"'>"+alarm.mNameFrom+"님의 "+alarmType
+				+"알림 </a>");	
+	}
+	
+	alarmInfo.append(aTagInAlarmInfo);
+	var deleteThisAlarm = $("<div class='deleteThisAlarm' onclick='deleteThisAlarm("+alarm.aNum+");'><i class='fas fa-times'></i></div>");
+	alarmInfo.append(deleteThisAlarm);
 	var alarmTimeDiv = $("<div class='alarmRegDate'>"+alarmTime+"</div>");
 	alarmInfo.append(alarmTimeDiv);
+	
 	alarmInfoDiv.append(alarmProfileImg);
 	alarmInfoDiv.append(alarmInfo);
 	alarmInfoArea.append(alarmInfoDiv);
+		
 	return false;
+}
+function openInviteAcceptModal(aNum,wNum,aType,aDnum){
+	$("#inviteAcceptModal").fadeIn(100);
+	$("#iAnum").val(aNum);
+	$("#iWnum").val(wNum);
+	$("#iAtype").val(aType);
+	$("#iAdNum").val(aDnum);
+	$.ajax({
+		url : "${contextPath}/getWname",
+		data : {"wNum":wNum},
+		dataType : "json",
+		success : function(inviteInfoMap){
+// 			alert(inviteInfoMap.body);
+// 			$(".inviteWsName").val(wN);
+		},
+		error : function(){
+			alert("워크스페이스 이름 가져오기 에러발생");
+		}
+	});
 }
 function deleteThisAlarm(aNum){
 	var userNum = ${sessionScope.user.num};
@@ -147,6 +184,7 @@ function deleteThisAlarm(aNum){
 			if(total==0){
 				var emptyAlarmMsg = $("<div id='emptyAlarmMsg' align='center'>알림이 없습니다.</div>");
 				alarmInfoArea.append(emptyAlarmMsg);
+				$("#alarmOn").hide();
 			}
 		},
 		error : function(){
@@ -155,6 +193,10 @@ function deleteThisAlarm(aNum){
 	});
 }
 $(function(){
+	$("#closeInviteAcceptModal").on("click",function(){
+		$("#inviteAcceptModal").fadeOut(100);
+		return false;
+	});
 	//화면 켜졌을때 알람 있으면 가져오기
 	var mNum = ${member.num};
 	$.ajax({
@@ -179,19 +221,14 @@ $(function(){
 	});
 	var alarmToggleVal=0;
 	$("#alarmDiv").on("click",function(){
-		//종을 누르면 무조건 On표시는 꺼진다
-// 		$("#alarmOn").hide();
-// 		$(".alarmInfo").hide();
 		//알람Info 모달이 없을때
 		if(alarmToggleVal==0){
-			$("#alarmInfoArea").slideDown();//.animate({height:"400px"},200);
+			$("#alarmInfoArea").slideDown();
 				alarmToggleVal = 1;
-// 				$(".alarmInfoDiv").show();
-// 				$(".alarmInfo").show();
 				
 		//알람Info 모달 나와있어서 눌러서 끌때
 		}else{
-			$("#alarmInfoArea").slideUp();//.animate({height:"0px"},200);
+			$("#alarmInfoArea").slideUp();
 				alarmToggleVal = 0;		
 		}
 	});
@@ -237,4 +274,30 @@ $(function(){
 	<div id="alarmInfoArea">
 		
 	</div>
+	
+	<%-----------------------------------------------워크스페이스 초대 수락모달---------------------------------------------%>
+	<div id="inviteAcceptModal" class="attachModal">
+			<div class="modalHead">
+				<h3>워크스페이스 초대장</h3>
+			</div>
+<!-- 			aNum,wNum,aType,aDnum -->
+			<form action="goToTargetURL" id="inviteWsFormByModal">
+			<input type="hidden" id="iAnum" name="aNum">
+			<input type="hidden" id="iWnum" name="wNum">
+			<input type="hidden" id="iAtype" name="aType">
+			<input type="hidden" id="iAdNum" name="aDnum">
+			<div class="modalBody">
+				<p>워크스페이스에 초대합니다</p>
+				<ul>
+					<li><h4>워크스페이스 이름</h4><p class="inviteWsName">이름들어갈곳</p></li>
+					<li><h4>워크스페이스 멤버</h4><p class="inviteWsmList">멤버들 들어갈곳</p></li>
+				</ul>
+				
+			</div> <!-- end modalBody -->
+			<div id="modalBtnDiv">
+				<button type ="submit" id="acceptInvite">수락하기</button>
+				<button id="closeInviteAcceptModal">닫기</button>
+			</div>
+			</form>
+	</div><!-- end inviteAcceptModal -->
 </div>

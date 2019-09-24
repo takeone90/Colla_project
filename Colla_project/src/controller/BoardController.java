@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -29,6 +30,8 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import model.Board;
 import model.BoardFile;
+import model.Member;
+import service.AlarmService;
 import service.BoardService;
 import service.FileService;
 import service.MemberService;
@@ -48,6 +51,11 @@ public class BoardController {
 	
 	@Autowired
 	private MemberService mService;
+	
+	@Autowired
+	private SimpMessagingTemplate smt;
+	@Autowired
+	private AlarmService aService;
 	
 	@RequestMapping("/ckeditorUpload")
 	public String ckeditorUpload(
@@ -226,6 +234,7 @@ public class BoardController {
 			String usermail = principal.getName();
 			int mNum = mService.getMemberByEmail(usermail).getNum();
 			Board board = new Board();
+			Member user = (Member)session.getAttribute("user");
 			board.setbTitle(title);
 			board.setmNum(mNum);
 			board.setwNum(wNum);
@@ -235,8 +244,22 @@ public class BoardController {
 			if(bService.addBoard(board)) {	
 				List<MultipartFile> fList = multifileReq.getFiles("file");
 				fileSave(board.getbNum(), fList);
+				
+				//notice인 경우 simpmessaging
+				if(boardType.equals("notice")) {
+					List<Member> thisWsmList = mService.getAllMemberByWnum(wNum);
+					for(Member m : thisWsmList) {
+						if(m.getNum()!=user.getNum()) {
+							//나한텐 알림X
+							int aNum = aService.addAlarm(wNum, m.getNum(), user.getNum(), "notice", board.getbNum());
+							smt.convertAndSend("/category/alarm/"+m.getNum(),aService.getAlarm(aNum));								
+						}
+					}
+				}
+				
 				return "redirect:/board/view?num="+board.getbNum();
 			}
+			
 		}else {
 			//타입 설정 오류
 			return "redirct:error";
@@ -277,7 +300,6 @@ public class BoardController {
 			}			
 		}
 	}
-	
 	
 	
 	
