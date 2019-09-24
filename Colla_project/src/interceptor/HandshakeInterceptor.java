@@ -17,8 +17,9 @@ public class HandshakeInterceptor extends HttpSessionHandshakeInterceptor {
 	@Override
 	public void afterHandshake(ServerHttpRequest request, ServerHttpResponse response, WebSocketHandler wsHandler,
 			Exception ex) {
-		System.out.println("핸드쉐이크 연결되었습니다.");
-		System.out.println("접속세션 : " + connectorList);
+		System.out.println("핸드쉐이크 연결되었습니다.-----------------------------------------------------------------------");
+		System.out.println("연결세션 수 : "+ connectorList.size() +"\n접속세션 : " + connectorList);
+		System.out.println("------------------------------------------------------------------------------------------------");
 	}
 	
 }

@@ -27,13 +27,15 @@ public class LogoutSuccessHandler extends SimpleUrlLogoutSuccessHandler{
 		connectorList.remove(session);
 		session.invalidate();
 		
-		if(request.getParameter("type").equals("duplicated")) {
-			System.out.println("중복로그인되어서 기존 접속을 로그아웃합니다.");
-			response.sendRedirect("/loading?info=duplicatedLogin");
-		} else {
-			response.sendRedirect("/");
+		if(request.getParameter("type") != null) {
+			if(request.getParameter("type").equals("duplicated")) {
+				System.out.println("중복로그인되어서 기존 접속을 로그아웃합니다.");
+				response.sendRedirect("/loading?info=duplicatedLogin");
+				System.out.println("로그아웃 후 접속 중인 멤버 : "+connectorList);
+				return;
+			}
 		}
+		response.sendRedirect("/");
 		System.out.println("로그아웃 후 접속 중인 멤버 : "+connectorList);
-		
 	}
 }
