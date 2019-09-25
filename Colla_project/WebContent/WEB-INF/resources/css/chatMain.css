@@ -448,6 +448,8 @@ pre .CodeMirror-line{
 }
 #addLocationModal{
 	width: 800px;
+	top: 13%;
+    left: 41%;
 }
 .staticMap{
 	width : 200px; 

@@ -48,7 +48,7 @@ public class BoardService {
 		param.put("endNum", getEndNum(page));
 		param.put("totalPage", getTotalPage(param));
 		
-		System.out.println("type : "+param.get("type")+"\ntotalPage 갯수 : " + param.get("totalPage"));
+//		System.out.println("type : "+param.get("type")+"\ntotalPage 갯수 : " + param.get("totalPage"));
 		
 		param.put("lastStartNum", (((int) param.get("totalPage") - 1) / PAGE_NUM) * PAGE_NUM + 1);
 		bList = bDao.selectBoardListPage(param);
@@ -96,15 +96,15 @@ public class BoardService {
 
 	public int getTotalPage(Map<String, Object> param) {
 		int notice = getNoticeCnt(param);
-		System.out.println("공지사항 갯수 : "+ notice);
-		System.out.println("보드 토탈 Cnt : "+ getBoardCnt(param));
-		System.out.println(param);
+//		System.out.println("공지사항 갯수 : "+ notice);
+//		System.out.println("보드 토탈 Cnt : "+ getBoardCnt(param));
+//		System.out.println(param);
 		param.put("boardCnt", getBoardCnt(param));
 		int totalPage= (int)Math.ceil(getBoardCnt(param)/ ((double) ITEMS_PER_PAGE - notice));
 		return totalPage<=0?1:totalPage;
 	}
 	public int getNoticeCnt(Map<String, Object> param) {
-		System.out.println(param);
+//		System.out.println(param);
 		int notice = bDao.selectCountNoticeByWnum(param);
 		return notice > 10? 10: notice;
 	}

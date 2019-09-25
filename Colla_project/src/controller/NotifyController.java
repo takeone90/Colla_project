@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,10 +20,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import model.Alarm;
 import model.Member;
+import model.SetAlarm;
 import model.Workspace;
 import model.WsMember;
 import service.AlarmService;
 import service.MemberService;
+import service.SetAlarmService;
 import service.WorkspaceService;
 import service.WsMemberService;
 
@@ -36,16 +39,9 @@ public class NotifyController {
 	private MemberService mService;
 	@Autowired
 	private WsMemberService wsmService;
-	@SendTo("/category/alarm/{var2}")
-	@MessageMapping("/sendAlarm/{var1}/{var2}/{var3}/{var4}")
-	public Alarm sendAlarm(@DestinationVariable(value="var1")int wNum,
-			@DestinationVariable(value="var2")int mNumTo,
-			@DestinationVariable(value="var3")int mNumFrom,
-			@DestinationVariable(value="var4")int aDnum,String aType) {
-		int aNum = aService.addAlarm(wNum, mNumTo, mNumFrom, aType, aDnum);
-		System.out.println("받은내용 || wNum : "+wNum+", mNumTo : "+mNumTo+", mNumFrom : "+mNumFrom+", 알람 타입 : "+aType);
-		return aService.getAlarm(aNum);
-	}
+	@Autowired
+	private SetAlarmService saService;
+	
 	@ResponseBody 
 	@RequestMapping("/hasAlarm")
 	public List<Alarm> hasAlarm(@RequestParam("mNum")int mNum){
@@ -82,11 +78,22 @@ public class NotifyController {
 	}
 	
 	@ResponseBody
+	@RequestMapping("/deleteAllAlarm")
+	public boolean deleteAllAlarm(@RequestParam("mNum")int mNum) {
+		boolean result = false;
+		if(aService.removeAllAlarmByMnum(mNum)) {
+			result = true;
+		}
+		return result;
+	}
+	
+
+	
+	@ResponseBody
 	@RequestMapping(value="/getWname")
 	public Map<String,Object> getWname(@RequestParam("wNum")int wNum) {
 		Map<String, Object> inviteInfoMap = new HashMap<String, Object>();
 		Workspace ws = wService.getWorkspace(wNum);
-		String wsName = ws.getName();
 		List<WsMember> wsmList = wsmService.getAllWsMemberByWnum(wNum);
 		List<Member> realWsmList = new ArrayList<Member>();
 		for(WsMember wsm : wsmList) {
@@ -96,5 +103,12 @@ public class NotifyController {
 		inviteInfoMap.put("wName", ws.getName());
 		inviteInfoMap.put("wsmList", realWsmList);
 		return inviteInfoMap;
+	}
+	
+	@ResponseBody
+	@RequestMapping("/getSetAlarmInfo")
+	public SetAlarm getSetAlarmInfo(@RequestParam("mNum")int mNum) {
+		SetAlarm setAlarmInfo = saService.getSetAlarm(mNum);
+		return setAlarmInfo;
 	}
 }

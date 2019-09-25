@@ -79,15 +79,15 @@ var clickedOverlay = null;
 	});
 	
 	//모달 바깥쪽이 클릭되거나 다른 모달이 클릭될때 현재 모달 숨기기
-	$("#wsBody").mouseup(function(e){
+	$("#wsBody").mousedown(function(e){
 			$("#addCrMemberModal").fadeOut(300);
-		if($("#addFileModal").has(e.target).length===0)
+		if(!$("#addFileModal").is(e.target) && $("#addFileModal").has(e.target).length===0)
 			$("#addFileModal").fadeOut(300);
-		if($("#addCodeModal").has(e.target).length===0)
+		if(!$("#addCodeModal").is(e.target) && $("#addCodeModal").has(e.target).length===0)
 			$("#addCodeModal").fadeOut(300);
-		if($("#addLocationModal").has(e.target).length===0)
+		if(!$("#addLocationModal").is(e.target) && $("#addLocationModal").has(e.target).length===0)
 			$("#addLocationModal").fadeOut(300);
-		if($("#memberInfoModal").has(e.target).length===0)
+		if(!$("#memberInfoModal").is(e.target) && $("#memberInfoModal").has(e.target).length===0)
 			$("#memberInfoModal").fadeOut(300);
 		//return false;
 	});
@@ -901,7 +901,7 @@ function showMemberList(){
 		
 		
 		<%---------------------------------------------파일첨부 모달 ----------------------------------------------------%>
-		<div id="addFileModal" class="attachModal">
+		<div id="addFileModal" class="attachModal ui-widget-content">
 			<div class="modalHead">
 				<h3 style="font-weight: bolder; font-size: 30px">파일 업로드</h3>
 			</div>
@@ -930,7 +930,7 @@ function showMemberList(){
 		
 		
 		<%---------------------------------------------코드첨부 모달 ----------------------------------------------------%>
-		<div id="addCodeModal" class="attachModal">
+		<div id="addCodeModal" class="attachModal ui-widget-content">
 			<div class="modalHead" align="center">
 				<h3 style="font-weight: bolder; font-size: 30px">코드 업로드</h3>
 			</div>
@@ -979,7 +979,7 @@ function showMemberList(){
 								lineNumbers : true,
 								autoCloseTags : true
 							});
-							editor.setSize("500", "300");
+							editor.setSize("479", "300");
 						</script>
 					</div>
 					<div id="innerBtn"  align="center">
@@ -991,7 +991,7 @@ function showMemberList(){
 		
 		
 		<%---------------------------------------------지도첨부 모달 ----------------------------------------------------%>
-		<div id="addLocationModal" class="attachModal">
+		<div id="addLocationModal" class="attachModal ui-widget-content">
 			<div class="modalHead">
 				<h3 style="font-weight: bolder; font-size: 30px">지도 업로드</h3>
 			</div>

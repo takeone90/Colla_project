@@ -21,6 +21,7 @@ import controller.MemberController.inner;
 import mail.MailSend;
 import model.ChatRoom;
 import model.Member;
+import model.SetAlarm;
 import model.Workspace;
 import model.WorkspaceInvite;
 import model.WsMember;
@@ -28,6 +29,7 @@ import service.AlarmService;
 import service.ChatRoomMemberService;
 import service.ChatRoomService;
 import service.MemberService;
+import service.SetAlarmService;
 import service.WorkspaceInviteService;
 import service.WorkspaceService;
 import service.WsMemberService;
@@ -50,6 +52,8 @@ public class WorkSpaceController {
 	private SimpMessagingTemplate smt;
 	@Autowired
 	private AlarmService aService;
+	@Autowired
+	private SetAlarmService saService;
 	@RequestMapping("/workspace")
 	public String showWsMain(Principal principal,HttpSession session,Model model) {
 		//Ws메인이 보여질때 시큐리티가 갖고있는 principal 정보의 userid 를 가져와서
@@ -131,19 +135,44 @@ public class WorkSpaceController {
 		Member user = (Member)session.getAttribute("user");
 		String[] targetUserArray = request.getParameterValues("targetUserList");
 		List<Member> targetUserList = new ArrayList<Member>();
-		for(String targetUser:targetUserArray) {
-			Member tu = mService.getMemberByEmail(targetUser);
-			targetUserList.add(tu);
-			wiService.addWorkspaceInvite(targetUser, wNum);
-			Thread innerTest = new Thread(new inner(targetUser,wNum));
-			innerTest.start();
+		List<WsMember> wsmList = wsmService.getAllWsMemberByWnum(wNum);
+		List<Member> existingMemberList = new ArrayList<Member>();
+		//원래 그 워크스페이스에 있는 멤버..
+		for(WsMember wsm : wsmList) {
+			Member existMember = mService.getMember(wsm.getmNum());
+			existingMemberList.add(existMember);
 		}
-		//메일 보낸 targetUser들에게 알림보내기
+		//받아온 targetUserArray만큼 돌면서
+		for(String targetUser:targetUserArray) {
+			//targetUser한명당 existMember한명이랑 비교해서
+			boolean isExist = false;
+			for(Member existMember : existingMemberList) {
+				//현재 targetUser의 이메일이 existMember 이메일과 일치하지 않으면
+				if(targetUser.equals(existMember.getEmail())) {
+					//진짜 타겟유저인 tu를 만들고 초대메일보내고 targetUserList에 담는다
+					isExist = true;
+					break;
+				}
+			}
+			if(isExist) {
+				continue;
+			}else {
+				Member tu = mService.getMemberByEmail(targetUser);
+				wiService.addWorkspaceInvite(targetUser, wNum);
+				Thread innerTest = new Thread(new inner(targetUser,wNum));
+				innerTest.start();
+				targetUserList.add(tu);	
+			}
+		}
+		//메일 보낸 targetUserList 사람들에게 알림도 보내기
 		for(Member m : targetUserList) {
 			if(m.getNum()!=user.getNum()) {
 				//나한텐 알림X
-				int aNum = aService.addAlarm(wNum, m.getNum(), user.getNum(), "wInvite", 0);
-				smt.convertAndSend("/category/alarm/"+m.getNum(),aService.getAlarm(aNum));								
+				SetAlarm setAlarm = saService.getSetAlarm(m.getNum());
+				if(setAlarm.getWorkspace()==1) {
+					int aNum = aService.addAlarm(wNum, m.getNum(), user.getNum(), "wInvite", 0);
+					smt.convertAndSend("/category/alarm/"+m.getNum(),aService.getAlarm(aNum));
+				}
 			}
 		}
 		return "redirect:workspace";
@@ -156,7 +185,8 @@ public class WorkSpaceController {
 		Member currUser= (Member)session.getAttribute("user");
 		String userEmail = id;
 		//targetUser랑 wNum으로 ws 초대정보를 불러와야한다.
-		WorkspaceInvite wi = wiService.getWorkspaceInviteByTargetUser(userEmail,wNum);
+		List<WorkspaceInvite> wiList = wiService.getWorkspaceInviteByTargetUser(userEmail,wNum);
+		WorkspaceInvite wi = wiList.get(0);
 		if(wi!=null) {
 			if(mService.getMemberByEmail(userEmail)!=null) {
 				//회원이다.
