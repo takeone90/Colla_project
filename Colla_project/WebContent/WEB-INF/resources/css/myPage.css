@@ -9,18 +9,32 @@
 	margin: 35px auto 20px;
 }
 
-.myPageInner .btnR {
-	width: 838px;
+.btnR {
+	width: 940px;
 	text-align: right;
 	margin: 0 auto;
 }
+
+.myPageAccountRow{
+	position: relative;
+	width: 940px;
+	margin: 10px auto;
+	
+}
+
+.myPageAccountRow .btnR {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+}
+
 /*myPageAccount*/
 .myPageContent {
 	width: 838px;
 	margin: 0 auto;
 	border: 1px solid #DADCE0;
 	border-radius: 10px;
-	margin-bottom: 30px;
+	margin-bottom: 10px;
 }
 
 .myPageTitle {
@@ -76,16 +90,17 @@
 .myPageContent+.myPageContent{
 	margin-bottom: 0px;
 }
-.myPageContent+p{
+.myPageAccountRow p{
 	font-size: 13px;
 	width: 938px;
 	margin: 10px auto;
 	color: #665A5A;
 }
-p a.removeMember{
+.myPageAccountRow .removeMember{
 	font-weight: bolder;
 	border-bottom: 1px solid #665A5A;
 	color: #665A5A;
+	position: relative;
 }
 .contentLine {
 	border: 0.5px solid #D3CDCD;
@@ -339,6 +354,7 @@ p a.removeMember{
 	height: 30px;
 	border: 1px solid #CCCCCC;
 	border-radius: 15px;
+	MARGIN-TOP: 9px;
 }
 
 .toggleFG {
@@ -349,4 +365,7 @@ p a.removeMember{
 	border-radius: 15px;
 	position: relative;
 	left: 0px;
+}
+.myPageAlarmRow .content{
+	width: 467px;
 }

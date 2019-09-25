@@ -44,7 +44,7 @@
 								</div>
 							</div>
 							<div>
-								<button class="price-start-button" onclick="location.href='${contextPath}/joinStep1'">무료 평가판 시작</button>
+								<button class="price-start-button" onclick="location.href='${contextPath}/licensePrice?type=personal'">무료 평가판 시작</button>
 							</div>
 						</div>
 						
@@ -74,7 +74,7 @@
 								</div>
 							</div>
 							<div>
-								<button class="price-start-button" onclick="location.href='${contextPath}/joinStep1'">무료 평가판 시작</button>
+								<button class="price-start-button" onclick="location.href='${contextPath}/licensePrice?type=business'">무료 평가판 시작</button>
 							</div> 
 						</div>
 						
@@ -104,7 +104,7 @@
 								</div>
 							</div>
 							<div>
-								<button class="price-start-button" onclick="location.href='${contextPath}/joinStep1'">무료 평가판 시작</button>
+								<button class="price-start-button" onclick="location.href='${contextPath}/licensePrice?type=enterprise'">무료 평가판 시작</button>
 							</div>
 						</div>
 					</div>	

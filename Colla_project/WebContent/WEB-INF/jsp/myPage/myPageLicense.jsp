@@ -53,7 +53,7 @@
 					</div>
 					</div>
 					<div class="row btns btnR">
-						<a href="myPageMainForm" class="btn">목록</a>
+						<a href="myPageMainForm" class="btn"><i class="fa fa-arrow-left" aria-hidden="true"></i> 이전</a>
 					</div>
 					
 				</div><!-- myPageInner -->

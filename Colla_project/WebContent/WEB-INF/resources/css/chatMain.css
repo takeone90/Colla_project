@@ -452,17 +452,17 @@ pre .CodeMirror-line{
     left: 41%;
 }
 .staticMap{
-	width : 200px; 
+	width : 400px; 
 	height: 200px;
-	border-radius: 13px;
+	border-radius: 7px;
 	position: relative;
 	border: 1px solid #2f2f2f;
+	overflow: hidden;
 }
 .staticMapInfo{
-	width : 200px; 
+	width : 100%; 
 	height: 50px;
 	background-color : white;
-	border-radius: 0px 0px 13px 13px;
 	position: absolute;
 	top: 150px;
 }

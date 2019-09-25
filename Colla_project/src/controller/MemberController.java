@@ -39,6 +39,7 @@ import model.Member;
 import service.ChatMessageService;
 import service.ChatRoomMemberService;
 import service.MemberService;
+import service.SetAlarmService;
 import service.WsMemberService; 
 
 @Controller
@@ -68,6 +69,8 @@ public class MemberController {
 	private SimpMessagingTemplate smt;
 	@Autowired
 	private ChatMessageService cmService;
+	@Autowired
+	private SetAlarmService saService;
 
 	@Resource(name = "connectorList")
 	private Map<Object,Object> connectorList;//빈으로 등록된 접속자명단(email, session)
@@ -309,7 +312,7 @@ public class MemberController {
 		crmService.removeAllChatRoomMemberByMnum(member.getNum()); //chatroom_member 테이블에서 해당 멤버가 들어간 튜플 모두 제거
 		wsmService.removeAllWsMemberByMnum(member.getNum()); //workspace_member 테이블에서 해당 멤버가 들어간 튜플 모두 제거
 		cmService.removeFavoriteByMnum(member.getNum()); //favorite 테이블에서 해당멤버가 즐겨찾기한 튜플 모두 제거
-		
+		saService.removeSetAlarm(member.getNum());
 		return "redirect:main";
 	}
 
