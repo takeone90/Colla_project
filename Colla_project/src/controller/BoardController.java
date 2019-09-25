@@ -31,10 +31,12 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import model.Board;
 import model.BoardFile;
 import model.Member;
+import model.SetAlarm;
 import service.AlarmService;
 import service.BoardService;
 import service.FileService;
 import service.MemberService;
+import service.SetAlarmService;
 
 @Controller
 @RequestMapping("/board")
@@ -54,8 +56,12 @@ public class BoardController {
 	
 	@Autowired
 	private SimpMessagingTemplate smt;
+	
 	@Autowired
 	private AlarmService aService;
+	
+	@Autowired
+	private SetAlarmService saService;
 	
 	@RequestMapping("/ckeditorUpload")
 	public String ckeditorUpload(
@@ -251,8 +257,11 @@ public class BoardController {
 					for(Member m : thisWsmList) {
 						if(m.getNum()!=user.getNum()) {
 							//나한텐 알림X
-							int aNum = aService.addAlarm(wNum, m.getNum(), user.getNum(), "notice", board.getbNum());
-							smt.convertAndSend("/category/alarm/"+m.getNum(),aService.getAlarm(aNum));								
+							SetAlarm setAlarm = saService.getSetAlarm(m.getNum());
+							if(setAlarm.getNotice()==1) {
+								int aNum = aService.addAlarm(wNum, m.getNum(), user.getNum(), "notice", board.getbNum());
+								smt.convertAndSend("/category/alarm/"+m.getNum(),aService.getAlarm(aNum));
+							}							
 						}
 					}
 				}
@@ -274,7 +283,7 @@ public class BoardController {
 	private void fileSave(int bNum, List<MultipartFile> fList) {
 		for(MultipartFile mf : fList) {
 			if(mf.getSize() != 0) {
-				System.out.println("파일 크기 : "+mf.getSize());
+//				System.out.println("파일 크기 : "+mf.getSize());
 				String originFileName = mf.getOriginalFilename();//원본파일명
 				UUID uuid = UUID.randomUUID();
 				

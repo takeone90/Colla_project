@@ -14,7 +14,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		delete alarm where a_num=#{aNum}
 	</delete>
 	<delete id="deleteAllAlarmByMnum" parameterType="int">
-		delete alarm where m_num=#{mNum}
+		delete alarm where m_num_to=#{mNumTo}
 	</delete>
 	<select id="selectAlarm" parameterType="int" resultMap="alarmMap">
 		select * from alarm where a_num=#{aNum}

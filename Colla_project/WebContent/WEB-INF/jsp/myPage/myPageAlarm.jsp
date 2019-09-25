@@ -47,15 +47,15 @@
 	function setAlarm(type,result){
 		//type > 0:워크스페이스, 1:공지, 2:댓글
 		//result > 0:설정ON, 1:설정OFF
-		console.log("ajax입성");
+// 		console.log("ajax입성");
 		$.ajax({
 			url : "modifysetAlarm",
 			data : {"type":type,"result":result},
 			type : "get",
 			dataType : "json"
 		});
-		console.log("type : " + type);
-		console.log("result : " + result);
+// 		console.log("type : " + type);
+// 		console.log("result : " + result);
 	}
 	// 토글 버튼 이동 모션 함수
 	function toggleActionStart(toggleBtn, LR) {

@@ -72,11 +72,11 @@
 		
 		//모달 바깥쪽이 클릭되거나 다른 모달이 클릭될때 현재 모달 숨기기
 		$("#wsBody").mouseup(function(e){
-			if($("#addWsModal").has(e.target).length===0)
+			if(!$("#addWsModal").is(e.target) && $("#addWsModal").has(e.target).length===0)
 			$("#addWsModal").fadeOut(300);
-			if($("#addChatModal").has(e.target).length===0)
+			if(!$("#addChatModal").is(e.target) && $("#addChatModal").has(e.target).length===0)
 			$("#addChatModal").fadeOut(300);
-			if($("#addMemberModal").has(e.target).length===0)
+			if(!$("#addMemberModal").is(e.target) && $("#addMemberModal").has(e.target).length===0)
 			$("#addMemberModal").fadeOut(300);
 			return false;
 		});
@@ -197,7 +197,7 @@
 <!-- 		<a href="#" id="removeEmptyChatRoom">빈 채팅방 제거하기</a> -->
 
 		<%------------------------------------워크스페이스 추가 모달  ---------------------------------------%>
-		<div id="addWsModal" class="attachModal">
+		<div id="addWsModal" class="attachModal ui-widget-content">
 			<div class="modalHead">
 				<h3>Workspace 만들기</h3>
 			</div>
@@ -232,7 +232,7 @@
 		</div><!-- end addWsModal -->
 		
 		<%------------------------------------채팅방 추가 모달  ---------------------------------------%>
-		<div id="addChatModal" class="attachModal">
+		<div id="addChatModal" class="attachModal ui-widget-content">
 			<div class="modalHead">
 				<h3>채팅방 만들기</h3>
 			</div>
@@ -264,7 +264,7 @@
 		</div><!-- end addChatModal -->
 		
 		<%------------------------------------멤버 추가 모달  ---------------------------------------%>
-		<div id="addMemberModal" class="attachModal">
+		<div id="addMemberModal" class="attachModal ui-widget-content">
 			<div class="modalHead">
 				<h3>Workspace 멤버 추가</h3>
 			</div>

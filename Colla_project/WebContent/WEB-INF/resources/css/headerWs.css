@@ -1,16 +1,17 @@
 @charset "UTF-8";
 .attachModal{
 	display: none;
-	position: fixed;
-	top: 17%;
-	left: 30%;
-	width: 525px;
+    position: fixed;
+    top: 19%;
+    left: 50%;
+    width: 500px;
+    margin-left: -250px;
+    text-align: center;
 	background-color: white;
-	text-align: center;
-	z-index: 2;
-	border-radius: 10px;
-	padding: 30px;
-	box-shadow: 2px 2px 5px 0.5px rgba(33, 33, 33, 0.2);
+    z-index: 2;
+    border-radius: 10px;
+    padding: 24px;
+    box-shadow: 2px 2px 5px 0.5px rgba(33, 33, 33, 0.2);
 }
 
 #wsMainHeader{
@@ -245,10 +246,25 @@ a.member-btn:hover{
 #inviteAcceptModal ul{
 	margin-bottom:23px;
 }
+#inviteAcceptModal h4{
+	color: #403C39;
+    font-size: 14px;
+    margin-bottom: 13px;
+    margin-top: 29px;
+    font-weight: 700;	
+}
+
 .attachModal h3{
-	font-size:23px;
 	color : #403C39;
-	font-weight: 900;
+	display: inline-block;
+    font-size: 17px;
+    font-weight: bolder;
+    margin-left: 15px;
+    margin-right: 15px;
+}
+.attachModal .profileImg{
+	margin-left: 5px;
+    margin-right: 10px;
 }
 .attachModal h4 {
     color: #403C39;
@@ -256,4 +272,65 @@ a.member-btn:hover{
     margin-bottom: 10px;
     margin-top: 15px;
     font-weight: 700;
+}
+#modalBtnDiv input{
+	display: inline-block;
+	vertical-align: middle;
+    margin-top: 6px;
+    width: 20%;
+    padding: 1px;
+    background-color: #403C39;
+    color: white;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+}
+#modalBtnDiv button{
+	display: inline-block;
+	vertical-align: middle;
+    margin-top: 6px;
+    width: 28%;
+    padding: 6px;
+    background-color: #403C39;
+    color: white;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+}
+#inviteAcceptModal #modalBtnDiv button{
+	width : 21%;
+}
+#modalBtnDiv button:hover,#modalBtnDiv input:hover{
+	background-color : #E5675A;
+}
+.mLi{
+	display: inline-block;
+}
+.mLi .profileImg{
+	width : 50px;
+	height : 50px;
+	border-radius: 50%;
+}
+.attachModal .mLi p{
+	margin-top : 5px;
+}
+.mLi .profileImg img{
+	width : 50px;
+	height : 50px;
+	border-radius: 50%;
+}
+#deleteAllAlarm{
+	display: inline-block;
+    background-color: white;
+    padding: 10px;
+    width: 95.4%;
+    color: #b1b3b1;
+    font-size: 13px;
+    position: sticky;
+    bottom: 0;
+}
+#deleteAllAlarm:hover{
+	cursor : pointer;
+	background-color: #eee;
+	color : #f74b39;
 }

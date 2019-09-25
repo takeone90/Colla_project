@@ -138,4 +138,4 @@ function loadReply(){
 
 $(function(){
 	loadReply();
-})
+});
