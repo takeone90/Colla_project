@@ -254,8 +254,9 @@ public class MemberController {
 //		connectorList.remove(session);
 //		return session;
 //	}
-	
-	private String sendLoginUser(int mNum) {
+
+	@RequestMapping("/logoutSomeone")
+	public String sendLoginUser(int mNum, boolean isLogin) {
 		// mNum이 참여중인 workspace에 참여한 멤버들 중에 로그인 중인 멤버
 		//로그인중인 멤버는 connectorList와 메일 비교,
 		List<Map<Object,Object>> uList = memberService.getWsMemberListbyMnum(mNum);
@@ -268,11 +269,16 @@ public class MemberController {
 			if( userNum == mNum || connectorList.get(userEmail) == null ) {
 				continue;
 			}
-			System.out.println("workspace 멤버 번호 : "+userNum+" / 메일 : " + userEmail );
-			smt.convertAndSend("/category/newLogin/"+userNum, mNum);
+			String msg = "{\"mNum\":\""+mNum+"\",\"isLogin\":"+isLogin+"}";
+			if(isLogin) {
+				smt.convertAndSend("/category/concurrentVisitor/"+userNum, msg);
+			} else {
+				smt.convertAndSend("/category/concurrentVisitor/"+userNum, msg);
+			}
 		}
-		return "return_mNum";
+		return "redirect:/";
 	}
+	
 	 //중복 로그인 체크 (기존 사용자 로그아웃 처리)
 	@RequestMapping("/checkLoginDuplication")
 	private String checkLoginDuplication(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -289,7 +295,7 @@ public class MemberController {
 		
 		if (!isDuplicate) { // 정상적인 로그인의 경우
 			System.out.println("정상적인 로그인입니다.");
-			sendLoginUser(mNum);
+			sendLoginUser(mNum,true);
 			
 		} else { // 중복 로그인의 경우
 			System.out.println("중복 로그인입니다.");
