@@ -66,7 +66,10 @@ td {
 	border: 1px solid #bbb;
 	border-top:0;
 }
-
+.inactivation {
+	color: grey;
+	background-color: rgba(117, 154, 189, 0.1)
+} 
 .drawMonthCalendarLower {
 	height: 120px;
 	width: 100%;
@@ -85,18 +88,19 @@ td {
 	position: relative;
 	padding: 0px;
 	text-align: left;
+	padding-top: 7px;
+    padding-left: 8px;
+    padding-bottom: 5px;
 }
 
 .scheduleTr {
 	height: 20px;
 	border: 0px white;
 }
-
 .frontVacantTd {
 	margin-bottom: 1pt;
 	margin-top: 1pt;
 }
-
 .middleDiv {
 	cursor:pointer;
 	height:100%;
@@ -104,7 +108,19 @@ td {
 	line-height:20px;
 	border: 1px;
 }
-
+.complete {
+	border-radius: 10px;
+}
+.left {
+	border-bottom-left-radius: 10px; 
+	border-top-left-radius: 10px;
+}
+.right {
+	border-bottom-right-radius: 10px; 
+	border-top-right-radius: 10px; 
+}
+.full {
+}
 .backVacantTd {
 	margin-bottom: 1pt;
 	margin-top: 1pt;
@@ -116,10 +132,12 @@ td {
     margin: 0 auto;
 }
 #yearCalendar .dateDisplay {
-	margin-top: 35px;
+    text-align: center;
+    padding: 10px;
+    padding-top: 30px
 }
 #calYearBody {
-	margin-top: 35px;
+/* 	margin-top: 35px; */
 }
 .drawYearCalDiv {
 	position: relative;
@@ -127,6 +145,7 @@ td {
 #calYearTitle {
 	font-size: 35pt;
 	color: #6b635c;
+	margin: 0px 20px;
 }
 
 .drawYearCalendarForClick {
@@ -208,7 +227,9 @@ td {
 .calSearch {
 	display: inline;
 }
-
+#MonthTitle {
+	margin: 0px 20px;
+}
 .dateDisplay {
 	text-align: center;
 	padding: 10px;
@@ -218,7 +239,11 @@ td {
 	border: 0px solid #ccc;
 	box-sizing: border-box;
 	background-color: white;
-	color: orange;
+	color: burlywood;
+}
+.dateDisplay svg {
+	font-size: 20px;
+	margin-bottom: 10px;
 }
 
 .dateDisplayInput {

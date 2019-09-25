@@ -22,6 +22,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="selectAllCalendar" parameterType="int" resultMap="calendarMap">
 		select * from calendar where w_num=#{wNum}
 	</select>
+	<select id="selectAllCalendarByMonth" parameterType="map" resultMap="calendarMap">
+		select * from calendar where w_num=#{wNum}
+		and cal_start_date <![CDATA[<=]]> #{startDate}
+		and cal_end_date <![CDATA[>=]]> #{endDate}
+	</select>
 	<select id="selectAllCalendarSearched" parameterType="map" resultMap="calendarMap">
 		select rownum, cal_title, cal_content, m_name, cal_start_date, cal_end_date
 		from
