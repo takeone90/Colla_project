@@ -221,20 +221,6 @@ display : none;
 	color : #F2452E;
 }
 
-#modalBtnDiv button{
-	display: block;
-	margin-top : 6px;
-	width : 100%;
-	padding : 7px;
-	background-color : #403C39;
-	color : white;
-	border-radius : 7px;
-    border: none;
-    cursor: pointer;
-}
-#modalBtnDiv button:hover{
-	background-color : #E5675A;
-}
 a[class="addInviteInput"]{
 	background-color: #D3D1D2;
     color: #403C39;

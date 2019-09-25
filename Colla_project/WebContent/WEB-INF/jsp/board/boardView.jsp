@@ -81,7 +81,7 @@
 							<div id="inputBox">
 								<textarea rows="3" name="rContent"></textarea>
 								<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
-								<button class="btn" onclick="addReply(); sendAlarm(${sessionScope.currWnum},${board.mNum},${sessionScope.user.num},'reply',${board.bNum}); return false;">댓글 등록</button>
+								<button class="btn" onclick="addReply(); return false;">댓글 등록</button>
 							</div>
 						</form>
 					</div>

@@ -117,9 +117,8 @@
 
 #wsNav #memberInfoModal{
 	color: #403C39;
-	top: 20%;
-	left: 30%;
-	width: 400px;
+    width: 400px;
+    left : 57%;
 }
 .memberProfileInfo h3, .memberProfileInfo p{
 	margin-bottom:7px;

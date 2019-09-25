@@ -118,10 +118,10 @@ public class MemberController {
 	@RequestMapping(value="/checkEmailDuplication", method = RequestMethod.POST)
 	public boolean checkEmailDuplication(String emailAddress, HttpSession session) {		
 		if(memberService.getMemberByEmail(emailAddress) != null) {
-			return true;
+			return true; //중복O
 		} else {
 			session.setAttribute("emailAddress", emailAddress);
-			return false;
+			return false; //중복X
 		}
 	}
 
@@ -291,11 +291,11 @@ public class MemberController {
 		}
 		
 		if (!isDuplicate) { // 정상적인 로그인의 경우
-			System.out.println("정상적인 로그인입니다.");
+//			System.out.println("정상적인 로그인입니다.");
 			sendLoginUser(mNum);
 			
 		} else { // 중복 로그인의 경우
-			System.out.println("중복 로그인입니다.");
+//			System.out.println("중복 로그인입니다.");
 			sendLoginDuplicatedMsg(mNum);
 //			deleteSessionFromConList(userEmail);
 		}
