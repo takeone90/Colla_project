@@ -54,7 +54,6 @@ public class CalendarService {
 		param.put("startDate", year+"/"+month+"/"+date);
 		param.put("endDate", year+"/"+month+"/"+01);
 		List<Calendar> tmp = calendarDao.selectAllCalendarByMonth(param);
-		System.out.println("tmp : "+tmp);
 		return tmp;
 	}
 	public boolean addCalendarAnnually(Calendar calendar) {

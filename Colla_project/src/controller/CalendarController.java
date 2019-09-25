@@ -54,7 +54,6 @@ public class CalendarController {
 	@ResponseBody
 	@RequestMapping(value="/showAllCalendar", method=RequestMethod.GET)
 	public List<Calendar> showAllCalendar(HttpSession session, boolean type1, boolean type2, boolean type3, String today) {
-		System.out.println("날짜 : "+today);
 		int wNum = (int)session.getAttribute("currWnum");
 		List<Calendar> cList = calendarService.getAllCalendarByMonth(wNum, today);
 		List<Calendar> filteredCList = new ArrayList<Calendar>();
