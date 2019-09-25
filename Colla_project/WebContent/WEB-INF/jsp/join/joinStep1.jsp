@@ -47,6 +47,7 @@
 			return false;
 		})
 		$("#emailAddress").on("blur", function() {
+
 			var emailAddress = $("#emailAddress").val();
 			if (emailAddress == "") {
 				$("#checkSentence").text("이메일을 입력해주세요.");

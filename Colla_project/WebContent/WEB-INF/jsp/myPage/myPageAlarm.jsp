@@ -7,26 +7,6 @@
 <link rel="stylesheet" type="text/css" href="css/navWs.css"/>
 <link rel="stylesheet" type="text/css" href="css/myPage.css"/>
 
-<style type="text/css">
-.toggleBG {
-	background: #CCCCCC;
-	width: 70px;
-	height: 30px;
-	border: 1px solid #CCCCCC;
-	border-radius: 15px;
-}
-
-.toggleFG {
-	background: #FFFFFF;
-	width: 30px;
-	height: 30px;
-	border: none;
-	border-radius: 15px;
-	position: relative;
-	left: 0px;
-}
-</style>
-
 <script type="text/javascript">
 	$(function() {
 		var arrayAlarm = [${wsAlarm},${boardAlarm},${replyAlarm}]; //워크스페이스, 보드, 댓글의 알림값이 배열에 저장된다 (0:알림수신x, 1:알림수신)

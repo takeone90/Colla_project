@@ -26,9 +26,10 @@
       <security:logout invalidate-session="false" delete-cookies="JSESSIONID" success-handler-ref="logoutSuccessHandler"/>
 <!-- 			<security:logout invalidate-session="true" logout-url="/logout"/> -->
    </security:http>
-   <security:authentication-manager>
-      <security:authentication-provider
-      	user-service-ref="memberDetailsService">
-      </security:authentication-provider>
-   </security:authentication-manager>
+	<security:authentication-manager>
+		<security:authentication-provider
+			user-service-ref="memberDetailsService">
+<!-- 			<security:password-encoder ref="bcryptPasswordEncoder" />
+ -->		</security:authentication-provider>
+	</security:authentication-manager>
 </beans>

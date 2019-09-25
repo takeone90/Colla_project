@@ -33,9 +33,6 @@
 	</mvc:interceptors>
 	<websocket:message-broker application-destination-prefix="/client">
 		<websocket:stomp-endpoint path="/chat">
-			<websocket:handshake-interceptors>
-				<bean class="interceptor.HandshakeInterceptor"></bean>
-			</websocket:handshake-interceptors>
 			<websocket:sockjs>
 			</websocket:sockjs>
 		</websocket:stomp-endpoint>
