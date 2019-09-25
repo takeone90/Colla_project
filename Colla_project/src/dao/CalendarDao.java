@@ -11,7 +11,7 @@ public interface CalendarDao {
 	public int deleteCalendar(int cNum);
 	public Calendar selectCalendar(int cNum);
 	public List<Calendar> selectAllCalendar(int wNum);
-	public List<Calendar> selectAllCalendarByMonth();
+	public List<Calendar> selectAllCalendarByMonth(Map<String, Object> param);
 	public List<Calendar> selectAllCalendarSearched(Map<String, Object> param);
 	public int selectCalendarCount(Map<String, Object> param);
 }

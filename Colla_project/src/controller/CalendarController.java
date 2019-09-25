@@ -51,34 +51,34 @@ public class CalendarController {
 		model.addAttribute("userData", param);
 		return "/calendar/calTest";
 	}
-	
 	@ResponseBody
 	@RequestMapping(value="/showAllCalendar", method=RequestMethod.GET)
-	public List<Calendar> showAllCalendar(HttpSession session, boolean type1, boolean type2, boolean type3) {
+	public List<Calendar> showAllCalendar(HttpSession session, boolean type1, boolean type2, boolean type3, String today) {
+		System.out.println("날짜 : "+today);
 		int wNum = (int)session.getAttribute("currWnum");
-		List<Calendar> tmp = calendarService.getAllCalendar(wNum);
-		List<Calendar> tmpList = new ArrayList<Calendar>();
-		for(int i=0; i<tmp.size(); i++) {
+		List<Calendar> cList = calendarService.getAllCalendarByMonth(wNum, today);
+		List<Calendar> filteredCList = new ArrayList<Calendar>();
+		for(int i=0; i<cList.size(); i++) { //타입 걸러내기
 			if(type1) {
-				String typeTmp = tmp.get(i).getType();
+				String typeTmp = cList.get(i).getType();
 				if(typeTmp.equals("project")) {
-					tmpList.add(tmp.get(i));
+					filteredCList.add(cList.get(i));
 				}
 			}
 			if(type2) {
-				String typeTmp = tmp.get(i).getType();
+				String typeTmp = cList.get(i).getType();
 				if(typeTmp.equals("vacation")) {
-					tmpList.add(tmp.get(i));
+					filteredCList.add(cList.get(i));
 				}
 			}
 			if(type3) {
-				String typeTmp = tmp.get(i).getType();
+				String typeTmp = cList.get(i).getType();
 				if(typeTmp.equals("event")) {
-					tmpList.add(tmp.get(i));
+					filteredCList.add(cList.get(i));
 				}
 			}
 		}
-		return tmpList;
+		return filteredCList;
 	}
 	@ResponseBody
 	@RequestMapping(value="/showYearCheckedCalendar", method=RequestMethod.GET)

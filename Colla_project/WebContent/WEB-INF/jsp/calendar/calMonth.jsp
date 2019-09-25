@@ -25,16 +25,16 @@ var numOfWeekRow = 0;
 
 $(function() {
 	thisMonthCalendar(today);
-	showSchedule();
+	showSchedule(today);
 	markingOnDate(formatChange(today));
 	
 	//모달 바깥 클릭 시 모달 닫기
 	$("#wsBody").on("mouseup", function(e) {
-		if($("#addForm").has(e.target).length===0)
+		if(!$("#addForm").is(e.target) && $("#addForm").has(e.target).length===0)
 			$("#addForm").fadeOut(1);
-		if($("#detailForm").has(e.target).length===0)
+		if(!$("#detailForm").is(e.target) && $("#detailForm").has(e.target).length===0)
 			$("#detailForm").fadeOut(1);
-		if($("#modifyForm").has(e.target).length===0)
+		if(!$("#modifyForm").is(e.target) && $("#modifyForm").has(e.target).length===0)
 			$("#modifyForm").fadeOut(1);
 		return false;
 	});
@@ -82,7 +82,7 @@ $(function() {
 					alert("추가 성공");
 					$("#addForm").fadeOut(1);
 					thisMonthCalendar(today);
-					showSchedule();
+					showSchedule(today);
 					thisYearCalendar(today);
 					showYearSchedule();
 					$("#addForm").each(function() {
@@ -117,7 +117,7 @@ $(function() {
 					alert("삭제 성공");
 					$("#detailForm").fadeOut(1);
 					thisMonthCalendar(today);
-					showSchedule();
+					showSchedule(today);
 					thisYearCalendar(today);
 					showYearSchedule();
 				} else {
@@ -173,7 +173,7 @@ $(function() {
 					alert("수정 성공");
 					$("#modifyForm").fadeOut(1);
 					thisMonthCalendar(today);
-					showSchedule();
+					showSchedule(today);
 					thisYearCalendar(today);
 					showYearSchedule();
 				} else {
@@ -191,19 +191,23 @@ $(function() {
 	//타입 지정
 	$("#calType1").on("change", function() {
 		thisMonthCalendar(today);
-		showSchedule();
+		showSchedule(today);
 	});
 	$("#calType2").on("change", function() {
 		thisMonthCalendar(today);
-		showSchedule();
+		showSchedule(today);
 	});
 	$("#calType3").on("change", function() {
 		thisMonthCalendar(today);
-		showSchedule();
+		showSchedule(today);
 	});
-	//원하는 날짜로 달력 이동
+	//원하는 날짜로 달력 이동 - 월 달력
 	$("#wantedCalendarButton").on("click", function() {
 		moveToWantedCalendar($("#wantedYear").val(), $("#wantedMonth").val()-1, $("#wantedDate").val());
+	});
+	//원하는 날짜로 달력 이동 - 연 달력
+	$("#wantedCalendarButtonYear").on("click", function() {
+		moveToWantedCalendarYear($("#wantedYearYear").val(), 0, 1); //해당년도의 1월 1일로 이동
 	});
 });
 
@@ -267,14 +271,14 @@ function thisMonthCalendar(today) {
 	var calMonthBody = $("#calMonthBody"); 
 	calMonthBody.html(calendar);	
 }
-function showSchedule() {
-	console.log("월 달력 일정을 그렸습니다.");
+function showSchedule(today) {
+	console.log(today+"의 월 달력 일정을 그렸습니다.");
 	var type1 = $("#calType1").prop("checked");
 	var type2 = $("#calType2").prop("checked");
 	var type3 = $("#calType3").prop("checked");
 	$.ajax({ 
 		url:"showAllCalendar",
-		data: {"type1":type1, "type2":type2, "type3":type3},
+		data: {"type1":type1, "type2":type2, "type3":type3, "today":formatChange(new Date(today.getFullYear(), today.getMonth()+1, 0))},
 		type:"get",
 		dataType:"json",
 		success: function(allCalendar) { //모든 스케쥴을 가져옴
@@ -412,7 +416,7 @@ function formatChangeHyphen(dateOrigin) { //2019-09-04
 	return dateOrigin.getFullYear()+"-"+monthChange(dateOrigin.getMonth()+1)+"-"+dateChange(dateOrigin.getDate());
 }
 function formatChange(dateOrigin) { //20190904
-	return dateOrigin.getFullYear()+monthChange(dateOrigin.getMonth()+1)+dateChange(dateOrigin.getDate());
+	return dateOrigin.getFullYear()+String(monthChange(dateOrigin.getMonth()+1))+String(dateChange(dateOrigin.getDate()));
 }
 function clickOnDate(dateTmp) { //날짜 클릭 시 추가 모달 열기 //20190904 -> 2019-09-04
 	$("#addForm").fadeIn(300);
@@ -465,7 +469,6 @@ function trMaker(front, back, type, gap, title, color) { //앞빈칸 반복, 뒷
 	for(var l=0; l<front; l++) { 
 		let tdEtc = $("<td class='frontVacantTd'></td>");
 		tr.append(tdEtc);
-		console.log( "TEST : ", tr.parent() );
 	}	
 	if(type==1) {
 		var td = $("<td class='middleTd' colspan="+gap+"><div class='middleDiv' style='border-radius: 10px; background-color: "+color+"'>"+"&nbsp;&nbsp;"+title+"</div></td>");
@@ -486,18 +489,27 @@ function trMaker(front, back, type, gap, title, color) { //앞빈칸 반복, 뒷
 function moveToWantedCalendar(wantedYear, wantedMonth, wantedDate) {
 	today = new Date(wantedYear, wantedMonth, wantedDate);
 	thisMonthCalendar(today);
-	showSchedule();
+	showSchedule(today);
 	markingOnDate(formatChange(today));
 	$("#yearCalendar").hide();
 	$("#monthCalendar").show();	
 }
+function moveToWantedCalendarYear(wantedYear, wantedMonth, wantedDate) {
+	today = new Date(wantedYear, wantedMonth, wantedDate);
+	thisYearCalendar(today);
+	showSchedule(today);
+	$("#monthCalendar").hide();
+	$("#yearCalendar").show();
+}
 function moveMonth(today) {
+	console.log("moveMonth : "+today);
 	thisMonthCalendar(today);
-	showSchedule();
+	showSchedule(today);
 	markingOnDate(formatChange(new Date()));
 }
 function preMonth() {
 	today = new Date(today.getFullYear(), today.getMonth()-1, 1);
+	console.log("preMonth : "+today);
 	moveMonth(today);
 }
 function nextMonth() { 
@@ -744,11 +756,11 @@ function nextYearYear() {
 	<div id="monthCalendar" class="monthCalendar">
 		<div class="dateDisplay">
 			<span id="YearTitle"></span>
-			<button onclick="preYear()">작년</button>
-			<button onclick="preMonth()">이전 달</button>
+			<button onclick="preYear()"><i class="fas fa-angle-double-left"></i></button>
+			<button onclick="preMonth()"><i class="fas fa-angle-left"></i></button>
 			<span id="MonthTitle"></span>
-			<button onclick="nextMonth()">다음 달</button>
-			<button onclick="nextYear()">내년</button>
+			<button onclick="nextMonth()"><i class="fas fa-angle-right"></i></button>
+			<button onclick="nextYear()"><i class="fas fa-angle-double-right"></i></button>
 		</div>
 		<div class="dateDisplayInput">
 			<input type="text" id="wantedYear"> 년 
@@ -899,9 +911,13 @@ function nextYearYear() {
 <!-- 연간 달력 -->
 	<div id="yearCalendar" class="yearCalendar">
 		<div class="dateDisplay">
-			<button onclick="preYearYear()">작년</button>
+			<button onclick="preYearYear()"><i class="fas fa-angle-left"></i></button>
 			<span id="calYearTitle"></span>
-			<button onclick="nextYearYear()">내년</button>
+			<button onclick="nextYearYear()"><i class="fas fa-angle-right"></i></button>
+		</div>
+		<div class="dateDisplayInput">
+			<input type="text" id="wantedYearYear"> 년
+			<input type="button" class="btn" id="wantedCalendarButtonYear" value="이동">	
 		</div>
 		<div id="calYearBody"></div>
 		<!-- 일정 상세 모달 --> 
