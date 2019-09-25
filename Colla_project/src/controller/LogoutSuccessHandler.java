@@ -24,7 +24,6 @@ public class LogoutSuccessHandler extends SimpleUrlLogoutSuccessHandler{
 			throws IOException, ServletException {
 		
 		HttpSession session = request.getSession();
-		session.invalidate();
 		
 		if(request.getParameter("type") != null) {
 			if(request.getParameter("type").equals("duplicated")) {
@@ -35,6 +34,7 @@ public class LogoutSuccessHandler extends SimpleUrlLogoutSuccessHandler{
 			}
 		}
 		connectorList.remove(session.getAttribute("userEmail"));
+		session.invalidate();
 		response.sendRedirect("/");
 		System.out.println("로그아웃 후 접속 중인 멤버 : "+connectorList);
 	}
