@@ -115,10 +115,10 @@ public class MemberController {
 	@RequestMapping(value="/checkEmailDuplication", method = RequestMethod.POST)
 	public boolean checkEmailDuplication(String emailAddress, HttpSession session) {		
 		if(memberService.getMemberByEmail(emailAddress) != null) {
-			return true;
+			return true; //중복O
 		} else {
 			session.setAttribute("emailAddress", emailAddress);
-			return false;
+			return false; //중복X
 		}
 	}
 

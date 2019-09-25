@@ -644,13 +644,13 @@ function trMakerFullLineYear(month, gap, title, color, type) { //앞,중간,뒤
 	}
 	var td = "";
 	if(type == 1) {
-		td = $("<td class=\"middleTd\" colspan="+gap+"><div style=\"border: 1px; margin-bottom: 1pt; margin-top: 1pt; border-radius: 10px; background-color: "+color+"\">"+"&nbsp;&nbsp;"+title+"</div></td>");
+		td = $("<td class=\"middleTdYear\" colspan="+gap+"><div style=\"border-radius: 10px; background-color: "+color+"\">"+"&nbsp;&nbsp;"+title+"</div></td>");
 	} else if(type == 2) {
-		td = $("<td class=\"middleTd\" colspan="+gap+"><div style=\"border: 1px; margin-bottom: 1pt; margin-top: 1pt; border-bottom-left-radius: 10px; border-top-left-radius: 10px; background-color: "+color+"\">"+"&nbsp;&nbsp;"+title+"</div></td>");
+		td = $("<td class=\"middleTdYear\" colspan="+gap+"><div style=\"border-bottom-left-radius: 10px; border-top-left-radius: 10px; background-color: "+color+"\">"+"&nbsp;&nbsp;"+title+"</div></td>");
 	} else if(type == 3) {
-		td = $("<td class=\"middleTd\" colspan="+gap+"><div style=\"border: 1px; margin-bottom: 1pt; margin-top: 1pt; border-bottom-right-radius: 10px; border-top-right-radius: 10px; background-color: "+color+"\">"+"&nbsp;&nbsp;"+title+"</div></td>");
+		td = $("<td class=\"middleTdYear\" colspan="+gap+"><div style=\"border-bottom-right-radius: 10px; border-top-right-radius: 10px; background-color: "+color+"\">"+"&nbsp;&nbsp;"+title+"</div></td>");
 	} else if(type == 4) {
-		td = $("<td class=\"middleTd\" colspan="+gap+"><div style=\"border: 1px; margin-bottom: 1pt; margin-top: 1pt; background-color: "+color+"\">"+"&nbsp;&nbsp;"+title+"</div></td>");
+		td = $("<td class=\"middleTdYear\" colspan="+gap+"><div style=\"background-color: "+color+"\">"+"&nbsp;&nbsp;"+title+"</div></td>");
 	}
 	tr.append(td);
 	var numberOfTdEtc = 4-tmp-gap;
@@ -661,7 +661,7 @@ function trMakerFullLineYear(month, gap, title, color, type) { //앞,중간,뒤
 	return tr;
 }
 function markingOnDateYear(dateOrigin) {
-	$("#"+dateOrigin).css({"background-color": "#ffd6d4", "border": "1px solid #fcb4b1"});
+	$("#"+dateOrigin).css({"background-color": "#E6E2E1"});
 }
 function monthChangeYear(monthTmp) {
 	var rowNum = 0; 
@@ -711,20 +711,21 @@ function nextYearYear() {
 	<input type="hidden" value="${sessionScope.currWnum}" id="currWnum">
 	<input type="hidden" value="calendar" id="calendar">
 	<div id="wsBodyContainer" class="calendarContainer">
+	
 	<div class="calHeader">
 		<div>
-		<form action="calSearchList" class="calSearch">
-			<select name="searchType">
-				<option value="1">제목</option>
-				<option value="2">내용</option>
-				<option value="3">제목+내용</option>
-				<option value="4">작성자</option>
-			</select>
-			<input type="text" id="searchKeyword" name="searchKeyword" placeholder="검색어를 입력해주세요."><!-- 
-		--><button type="submit" class="btn" id="searchBtn">
-				<i class="fas fa-search"></i>
-			</button>
-		</form>
+			<form action="calSearchList" class="calSearch">
+				<select name="searchType">
+					<option value="1">제목</option>
+					<option value="2">내용</option>
+					<option value="3">제목+내용</option>
+					<option value="4">작성자</option>
+				</select>
+				<input type="text" id="searchKeyword" name="searchKeyword" placeholder="검색어를 입력해주세요."> 
+				<button type="submit" class="btn" id="searchBtn">
+					<i class="fas fa-search"></i>
+				</button>
+			</form>
 		</div>
 		<div>
 			<button type="button" id="addFormOpen" class="btn">일정 추가</button>
@@ -738,7 +739,7 @@ function nextYearYear() {
 			<button id="changeYearCalToMonthCal" class="btn">월간</button>
 			<button id="changeMonthCalToYearCal" class="btn">연간</button>
 		</div>
-	</div>	
+	</div><!-- calHeader 끝 -->	
 <!-- 월간 달력 -->
 	<div id="monthCalendar" class="monthCalendar">
 		<div class="dateDisplay">
