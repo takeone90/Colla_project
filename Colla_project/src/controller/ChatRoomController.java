@@ -9,6 +9,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.Resource;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -63,6 +64,10 @@ public class ChatRoomController {
 	private SimpMessagingTemplate smt;
 	@Autowired
 	private AlarmService aService;
+	
+	@Resource(name = "connectorList")
+	private Map<Object,Object> connectorList;
+	
 	// 전체채팅방으로 이동
 	@RequestMapping("/chatMain")
 	public String showChatMain(HttpSession session, int crNum, Model model) {
@@ -183,10 +188,25 @@ public class ChatRoomController {
 		//채팅방에 없는 워크스페이스 멤버 리스트
 		List<Member> wsmList = mService.getAllNotMemberByWnumCrNum(wNum,crNum);
 		//채팅방에 있는 워크스페이스 멤버 리스트
-		List<Member> crmList = mService.getAllMemberByCrNum(crNum); 
+		List<Member> crmList = mService.getAllMemberByCrNum(crNum);
+		//로그인 중인 멤버를 넣을 리스트
+		List<Integer> conList = new ArrayList<Integer>();
+
+		for( Member m : wsmList) {
+			if(connectorList.containsKey(m.getEmail())) {
+				conList.add(m.getNum());
+			}
+		}
+		for( Member m : crmList) {
+			if(connectorList.containsKey(m.getEmail())) {
+				conList.add(m.getNum());
+			}
+		}
+		
 		Map<String, Object> listMap = new HashMap<String, Object>();
 		listMap.put("wsmList", wsmList);
 		listMap.put("crmList", crmList);
+		listMap.put("conList", conList);
 		return listMap;
 	}
 	

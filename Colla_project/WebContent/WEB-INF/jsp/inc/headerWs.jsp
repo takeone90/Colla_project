@@ -28,14 +28,16 @@ function duplicateConnect(){
 	sock = new SockJS("${contextPath}/chat");
 	stompClient = Stomp.over(sock);
 	stompClient.connect({},function(){
-		
 		<%----------------------------------------채팅메시지 구독부분----------------------------------------------%>
 		var crNum = $("#crNum").val();
-		//현재 workspace 로그인중인 멤버
-		stompClient.subscribe("/category/newLogin/${sessionScope.user.num}", function(data){
-			let newUser = JSON.parse(data.body);
-			console.log(newUser);
-		});
+
+		if($("#pageType").val()=="chatroom"){
+			//현재 workspace 로그인중인 멤버
+			stompClient.subscribe("/category/concurrentVisitor/${sessionScope.user.num}", function(data){
+				let cv = JSON.parse(data.body);
+				showLoginNow(cv.mNum,cv.isLogin);
+			});
+		}
 		
 		//일반메세지 구독
 		stompClient.subscribe("/category/msg/"+crNum,function(cm){
