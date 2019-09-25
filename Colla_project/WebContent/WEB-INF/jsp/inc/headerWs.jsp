@@ -68,9 +68,20 @@ function duplicateConnect(){
 		});
 		//알림구독
 		var userNum = ${sessionScope.user.num};
-		stompClient.subscribe("/category/alarm/"+userNum, function(alarm){
-				alarmInfo = JSON.parse(alarm.body);
+		$.ajax({
+			url : "${contextPath}/getSetAlarmInfo",
+			data : {"mNum":userNum},
+			dataType : "json",
+			success : function(setAlarmInfo){
+// 				alert("워크스페이스 알림 : "+setAlarmInfo.workspace+", 공지알림 : "+setAlarmInfo.notice+", 댓글알림 : "+setAlarmInfo.reply);
 				
+			},
+			error : function(){
+				alert("알림정보가져오기 에러발생");
+			}
+		});
+		stompClient.subscribe("/category/alarm/"+userNum, function(alarm){
+					alarmInfo = JSON.parse(alarm.body);
 					$.ajax({
 						url : "${contextPath}/hasAlarm",
 						data : {"mNum":userNum},
@@ -104,11 +115,6 @@ function duplicateConnect(){
 	}); //end connect
 }// end duplicateConnect
 
-function sendAlarm(wNum,mNumTo,mNumFrom,aType,aDnum){
-	if(mNumTo!=mNumFrom){
-	stompClient.send("/client/sendAlarm/"+wNum+"/"+mNumTo+"/"+mNumFrom+"/"+aDnum,{},aType);		
-	}
-}
 
 var hasNewAlarm;
 function drawAlarmList(alarm){
@@ -146,10 +152,12 @@ function drawAlarmList(alarm){
 	alarmInfoDiv.append(alarmProfileImg);
 	alarmInfoDiv.append(alarmInfo);
 	alarmInfoArea.append(alarmInfoDiv);
-		
+	
 	return false;
 }
+
 function openInviteAcceptModal(aNum,wNum,aType,aDnum){
+	$(".inviteWsmList").empty();
 	$("#inviteAcceptModal").fadeIn(100);
 	$("#iAnum").val(aNum);
 	$("#iWnum").val(wNum);
@@ -160,14 +168,21 @@ function openInviteAcceptModal(aNum,wNum,aType,aDnum){
 		data : {"wNum":wNum},
 		dataType : "json",
 		success : function(inviteInfoMap){
-// 			alert(inviteInfoMap.body);
-// 			$(".inviteWsName").val(wN);
-		},
-		error : function(){
-			alert("워크스페이스 이름 가져오기 에러발생");
+			var wsmList = inviteInfoMap.wsmList;
+			var wName = inviteInfoMap.wName;
+			$(".inviteWsName").text("\""+wName+"\" 초대 요청을 받았습니다");
+			var inviteWsmListUL = $(".inviteWsmList");
+			
+			$.each(wsmList,function(idx,wsm){
+				var mLi = $("<li class='mLi'></li>");
+				var mLiProfile = $("<div class='profileImg' align='center'><img alt='프로필사진' src='${contextPath}/showProfileImg?num="+wsm.num+"' onclick='showProfileInfoModal(${m.num})'></div><p>"+wsm.name+"</p>");
+				mLi.append(mLiProfile);
+				inviteWsmListUL.append(mLi);
+			});
 		}
 	});
 }
+
 function deleteThisAlarm(aNum){
 	var userNum = ${sessionScope.user.num};
 	var alarmInfoArea = $("#alarmInfoArea");
@@ -194,7 +209,38 @@ function deleteThisAlarm(aNum){
 		}
 	});
 }
+function deleteAllAlarm(mNum){
+	var alarmInfoArea = $("#alarmInfoArea");
+	
+	$.ajax({
+		url : "${contextPath}/deleteAllAlarm",
+		data : {"mNum":mNum},
+		dataType : "json",
+		success : function(result){
+			if(result){
+				alert("전체 알림 삭제 완료");
+				alarmInfoArea.empty();
+				var emptyAlarmMsg = $("<div id='emptyAlarmMsg' align='center'>알림이 없습니다.</div>");
+				$("#alarmOn").hide();
+				alarmInfoArea.append(emptyAlarmMsg);	
+			}else{
+				alert("삭제할 알림이 없습니다.")
+			}
+			
+		},
+		error : function(){
+			alert("전체 알림 삭제 에러발생");
+		}
+	});
+}
 $(function(){
+	duplicateConnect();
+	$("#denyInvite").on("click",function(){
+		var aNum = $("#iAnum").val();
+		deleteThisAlarm(aNum);
+		$("#inviteAcceptModal").fadeOut(100);
+	});
+	
 	$("#closeInviteAcceptModal").on("click",function(){
 		$("#inviteAcceptModal").fadeOut(100);
 		return false;
@@ -221,22 +267,27 @@ $(function(){
 			alert("알람리스트 불러오기 에러발생");
 		}
 	});
+	
 	var alarmToggleVal=0;
 	$("#alarmDiv").on("click",function(){
 		//알람Info 모달이 없을때
 		if(alarmToggleVal==0){
+			var mNum = ${sessionScope.user.num};
+			var deleteAllBtn = $("<div id='deleteAllAlarm' onclick='deleteAllAlarm("+mNum+");' align='center'>전체 알림 삭제</div>");
+			$("#alarmInfoArea").append(deleteAllBtn);	
 			$("#alarmInfoArea").slideDown();
 				alarmToggleVal = 1;
 				
 		//알람Info 모달 나와있어서 눌러서 끌때
 		}else{
 			$("#alarmInfoArea").slideUp();
-				alarmToggleVal = 0;		
+				alarmToggleVal = 0;	
+			$("#deleteAllAlarm").remove();
 		}
 	});
 	
 	
-	duplicateConnect();
+	
 	
 	var pageType = $("#pageType").val();
 	if(pageType=="chatroom"){
@@ -255,11 +306,17 @@ $(function(){
 		$("#chatRoomInfo > p").text("${sessionScope.wsName}");
 	}
 	
-	
+	$(".modalHead").mousedown(function(){
+		$(".attachModal").draggable();
+	});
+	$(".modalHead").on("mouseup",function(){
+		$(".attachModal").draggable("destroy");
+	});
 	
 }); //onload function end
 
 </script>
+
 <div id="wsMainHeader">
 	
 <%-- 	<input type="hidden" value="${chatRoom.crNum}" id="crNum"> --%>
@@ -278,9 +335,9 @@ $(function(){
 	</div>
 	
 	<%-----------------------------------------------워크스페이스 초대 수락모달---------------------------------------------%>
-	<div id="inviteAcceptModal" class="attachModal">
+	<div id="inviteAcceptModal" class="attachModal ui-widget-content">
 			<div class="modalHead">
-				<h3>워크스페이스 초대장</h3>
+				<h3 class="inviteWsName"></h3>
 			</div>
 <!-- 			aNum,wNum,aType,aDnum -->
 			<form action="goToTargetURL" id="inviteWsFormByModal">
@@ -289,15 +346,14 @@ $(function(){
 			<input type="hidden" id="iAtype" name="aType">
 			<input type="hidden" id="iAdNum" name="aDnum">
 			<div class="modalBody">
-				<p>워크스페이스에 초대합니다</p>
-				<ul>
-					<li><h4>워크스페이스 이름</h4><p class="inviteWsName">이름들어갈곳</p></li>
-					<li><h4>워크스페이스 멤버</h4><p class="inviteWsmList">멤버들 들어갈곳</p></li>
-				</ul>
+					<h4>워크스페이스 멤버</h4>
+					<ul class="inviteWsmList"></ul>
+				
 				
 			</div> <!-- end modalBody -->
 			<div id="modalBtnDiv">
-				<button type ="submit" id="acceptInvite">수락하기</button>
+				<input type ="submit" id="acceptInvite" value="수락하기">
+				<input type ="button" id="denyInvite" onclick='location.href="#"' value="거절하기">
 				<button id="closeInviteAcceptModal">닫기</button>
 			</div>
 			</form>

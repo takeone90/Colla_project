@@ -39,6 +39,7 @@ import model.Member;
 import service.ChatMessageService;
 import service.ChatRoomMemberService;
 import service.MemberService;
+import service.SetAlarmService;
 import service.WsMemberService; 
 
 @Controller
@@ -68,6 +69,8 @@ public class MemberController {
 	private SimpMessagingTemplate smt;
 	@Autowired
 	private ChatMessageService cmService;
+	@Autowired
+	private SetAlarmService saService;
 
 	@Resource(name = "connectorList")
 	private Map<Object,Object> connectorList;//빈으로 등록된 접속자명단(email, session)
@@ -115,10 +118,10 @@ public class MemberController {
 	@RequestMapping(value="/checkEmailDuplication", method = RequestMethod.POST)
 	public boolean checkEmailDuplication(String emailAddress, HttpSession session) {		
 		if(memberService.getMemberByEmail(emailAddress) != null) {
-			return true;
+			return true; //중복O
 		} else {
 			session.setAttribute("emailAddress", emailAddress);
-			return false;
+			return false; //중복X
 		}
 	}
 
@@ -294,11 +297,10 @@ public class MemberController {
 		}
 		
 		if (!isDuplicate) { // 정상적인 로그인의 경우
-			System.out.println("정상적인 로그인입니다.");
 			sendLoginUser(mNum,true);
 			
 		} else { // 중복 로그인의 경우
-			System.out.println("중복 로그인입니다.");
+//			System.out.println("중복 로그인입니다.");
 			sendLoginDuplicatedMsg(mNum);
 //			deleteSessionFromConList(userEmail);
 		}
@@ -315,7 +317,7 @@ public class MemberController {
 		crmService.removeAllChatRoomMemberByMnum(member.getNum()); //chatroom_member 테이블에서 해당 멤버가 들어간 튜플 모두 제거
 		wsmService.removeAllWsMemberByMnum(member.getNum()); //workspace_member 테이블에서 해당 멤버가 들어간 튜플 모두 제거
 		cmService.removeFavoriteByMnum(member.getNum()); //favorite 테이블에서 해당멤버가 즐겨찾기한 튜플 모두 제거
-		
+		saService.removeSetAlarm(member.getNum());
 		return "redirect:main";
 	}
 

@@ -35,18 +35,19 @@ var searchListDiv;
 var editor;
 // 마커를 담을 배열입니다
 var markers = [];
-var ps;
-var map;
-var area=null;
+var ps = null;
+var map = null;
+var area = null;
 //var infowindow;
-var overlay;
+var overlay = null;
 var clickedOverlay = null;
+var mapContainer = null;
 
 	$(function(){
 		loadChatFromDB();
 		favoriteArea = $("#favoriteArea");
 		chatNavContent = $("#chatNavContent");
-	
+
 	
 		
 	//파일업로드 모달
@@ -70,8 +71,10 @@ var clickedOverlay = null;
 	
 	//지도업로드 모달
 	$(".openLocationModal").on("click",function(){
+		console.log("map modal show");
 		$("#addLocationModal").fadeIn(300);
-		 showMap();
+		$("#keyword").val("이태원 맛집");
+		showMap();
 	});
 	$(".closeLocationModal").on("click",function(){
 		$("#addLocationModal").fadeOut(300);
@@ -79,15 +82,15 @@ var clickedOverlay = null;
 	});
 	
 	//모달 바깥쪽이 클릭되거나 다른 모달이 클릭될때 현재 모달 숨기기
-	$("#wsBody").mouseup(function(e){
+	$("#wsBody").mousedown(function(e){
 			$("#addCrMemberModal").fadeOut(300);
-		if($("#addFileModal").has(e.target).length===0)
+		if(!$("#addFileModal").is(e.target) && $("#addFileModal").has(e.target).length===0)
 			$("#addFileModal").fadeOut(300);
-		if($("#addCodeModal").has(e.target).length===0)
+		if(!$("#addCodeModal").is(e.target) && $("#addCodeModal").has(e.target).length===0)
 			$("#addCodeModal").fadeOut(300);
-		if($("#addLocationModal").has(e.target).length===0)
+		if(!$("#addLocationModal").is(e.target) && $("#addLocationModal").has(e.target).length===0)
 			$("#addLocationModal").fadeOut(300);
-		if($("#memberInfoModal").has(e.target).length===0)
+		if(!$("#memberInfoModal").is(e.target) && $("#memberInfoModal").has(e.target).length===0)
 			$("#memberInfoModal").fadeOut(300);
 		//return false;
 	});
@@ -531,8 +534,7 @@ function showMemberList(){
 	
 	//////////////////////////////////////////////////////////지도//////////////////////////////////////////////////////////////////
 	function showMap(){
-
-		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+		mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 		    mapOption = {
 		        center: new kakao.maps.LatLng(37.566826, 126.9786567), // 지도의 중심좌표
 		        level: 3
@@ -1015,7 +1017,7 @@ function showMemberList(){
 		
 		
 		<%---------------------------------------------파일첨부 모달 ----------------------------------------------------%>
-		<div id="addFileModal" class="attachModal">
+		<div id="addFileModal" class="attachModal ui-widget-content">
 			<div class="modalHead">
 				<h3 style="font-weight: bolder; font-size: 30px">파일 업로드</h3>
 			</div>
@@ -1044,7 +1046,7 @@ function showMemberList(){
 		
 		
 		<%---------------------------------------------코드첨부 모달 ----------------------------------------------------%>
-		<div id="addCodeModal" class="attachModal">
+		<div id="addCodeModal" class="attachModal ui-widget-content">
 			<div class="modalHead" align="center">
 				<h3 style="font-weight: bolder; font-size: 30px">코드 업로드</h3>
 			</div>
@@ -1093,7 +1095,7 @@ function showMemberList(){
 								lineNumbers : true,
 								autoCloseTags : true
 							});
-							editor.setSize("500", "300");
+							editor.setSize("479", "300");
 						</script>
 					</div>
 					<div id="innerBtn"  align="center">
@@ -1105,7 +1107,7 @@ function showMemberList(){
 		
 		
 		<%---------------------------------------------지도첨부 모달 ----------------------------------------------------%>
-		<div id="addLocationModal" class="attachModal">
+		<div id="addLocationModal" class="attachModal ui-widget-content">
 			<div class="modalHead">
 				<h3 style="font-weight: bolder; font-size: 30px">지도 업로드</h3>
 			</div>

@@ -4,7 +4,8 @@
 
 <title>joinStep2</title>
 <link rel="stylesheet" type="text/css" href="css/headerMain.css"/>
-<link rel="stylesheet" type="text/css" href="css/join.css" />
+<link rel="stylesheet" type="text/css" href="css/animate.css"/>
+<link rel="stylesheet" type="text/css" href="css/join.css"/>
 <script type="text/javascript">
 $(function() {
 	$("#verifyCodeForm").on("submit", function() {

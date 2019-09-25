@@ -3,13 +3,15 @@
 <%@ include file="/WEB-INF/jsp/inc/head.jsp" %>
 
 <title>Payment</title>
-<link rel="stylesheet" type="text/css" href="${contextPath}/css/headerMain.css"/>
+<link rel="stylesheet" type="text/css" href="${contextPath }/css/headerMain.css"/>
+<link rel="stylesheet" type="text/css" href="${contextPath }/css/footerMain.css"/>
+<link rel="stylesheet" type="text/css" href="${contextPath }/css/main.css"/>
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 </head>
 <body>
 	<div id="wrap">
 		<%@ include file="/WEB-INF/jsp/inc/headerMain.jsp" %>
-		<section id="main-cover">
+		<section id="paymentAll">
 			<div id="container">
 				<h1>카카오 페이 결제가 정상적으로 완료되었습니다!</h1>
 				<p id="paymentInfo"></p>
@@ -24,7 +26,7 @@
 			</div>
 		</section>
 		
-		<%@ include file="/WEB-INF/jsp/inc/footerMain.jsp" %>
+		<div class="box"><%@ include file="/WEB-INF/jsp/inc/footerMain.jsp" %></div>
 	</div>
 </body>
 </html>

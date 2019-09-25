@@ -8,6 +8,7 @@ public class License {
 	String type;
 	Date startDate;
 	Date endDate;
+	int amount;//추가
 	public int getNum() {
 		return num;
 	}
@@ -38,9 +39,16 @@ public class License {
 	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
 	}
+	
+	public int getAmount() {
+		return amount;
+	}
+	public void setAmount(int amount) {
+		this.amount = amount;
+	}
 	@Override
 	public String toString() {
 		return "License [num=" + num + ", mNum=" + mNum + ", type=" + type + ", startDate=" + startDate + ", endDate="
-				+ endDate + "]";
+				+ endDate + ", amount=" + amount + "]";
 	}
 }

@@ -29,11 +29,8 @@ public class WorkspaceInviteService {
 		}
 		return result;
 	}
-	public void wasJoinedUs(String targetUser,int wNum) {
-		WorkspaceInvite wi = getWorkspaceInviteByTargetUser(targetUser,wNum);
-		wi.setWasJoinedUs(1);
-	}
-	public WorkspaceInvite getWorkspaceInviteByTargetUser(String targetUser,int wNum) {
+	
+	public List<WorkspaceInvite> getWorkspaceInviteByTargetUser(String targetUser,int wNum) {
 		return wiDao.selectWorkspaceInvite(targetUser,wNum);
 	}
 	public List<WorkspaceInvite> getAllWiList(){

@@ -268,7 +268,7 @@ function thisMonthCalendar(today) {
 			calendar += "</tr>";
 		}
 		
-		for(var j=0; j<7; j++) { //빈 칸
+		for(var j=0; j<7; j++) { //날짜 아래 칸
 			calendar += "<tr>";
 			calendar += "<td onclick='clickOnDate("+formatChangeHyphen(realrealStartDay3)+")'></td>";
 			realrealStartDay3.setDate(realrealStartDay3.getDate()+1);
