@@ -665,7 +665,6 @@ div {
 	background-color: #F5F5F5;
 }
 
-/*미경 수정 시작*/
 /* 카드 뒤집기 */
 .aboutUs-card {
 	position: relative;
@@ -859,4 +858,47 @@ div {
 	background-color: #4CAF50;
 	border-radius: 10px;
 }
-/*미경 수정 끝*/
+/*미경 수정 시작*/
+#paymentAll{
+	position: relative;
+	display: block;
+	overflow: hidden;
+	height: 890px;
+	text-align: center;
+	padding: 80px 15px 100px 15px;
+	background-color: #F5F5F5;
+	background-color: #d6d6d6;
+}
+#paymentAll #container{
+	width : 1280px;
+	margin: 150px auto;
+}
+
+#kakaoPayForm{
+	width: 500px;
+	height: 680px;
+	border: 1px solid black;
+}
+#kakaoPayForm > div{
+	float: left;
+	border: 1px solid black;
+}
+#kakaoPayForm div > *{
+	float: left;
+	font-weight: bolder;
+}
+#kakaoPayForm div>div:first-child{
+	width: 264px;
+	height: 90px;
+	border-right: 1px solid black;
+}
+#kakaoPayForm div>div+div{
+	width: 170px;
+	height: 90px;
+}
+
+#licenseInfo{
+	width: 270px;
+	height: 210px;
+	border: 1px solid black;
+}

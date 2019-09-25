@@ -35,9 +35,6 @@
 							<p class="content">c0lla 라이선스 구매내역을 확인할 수 있습니다.</p>
 						</div>
 					</div>
-					<div class="row btns btnR">
-						<a href="myPageMainForm" class="btn">목록</a>
-					</div>
 				</div>
 			</div>
 	</div>

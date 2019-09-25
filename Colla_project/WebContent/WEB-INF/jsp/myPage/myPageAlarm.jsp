@@ -11,12 +11,12 @@
 	$(function() {
 		var arrayAlarm = [${wsAlarm},${boardAlarm},${replyAlarm}]; //워크스페이스, 보드, 댓글의 알림값이 배열에 저장된다 (0:알림수신x, 1:알림수신)
 		for (var i = 0; i < arrayAlarm.length; i++) {
-			if (arrayAlarm[i] == 1) { //설정 ON
+			if (arrayAlarm[i] == 0) { //설정 OFF
 				$(".toggleFG:eq(" + i + ")").css('left', 0);
-				$(".toggleBG:eq(" + i + ")").css('background', '#61C3AF');
-			} else { //설정 OFF
-				$(".toggleFG:eq(" + i + ")").css('left', 40);
 				$(".toggleBG:eq(" + i + ")").css('background', '#CCCCCC');
+			} else { //설정 ON
+				$(".toggleFG:eq(" + i + ")").css('left', 40);
+				$(".toggleBG:eq(" + i + ")").css('background', '#61C3AF');
 			}
 		};		
 
@@ -26,13 +26,13 @@
 				$(".toggleBG:eq(" + i + ")").on("click", function() {
 					type = i;
 					var left = $(".toggleFG:eq(" + i + ")").css('left');
-					if (left == '40px') { //설정 ON
-						$(".toggleBG:eq(" + i + ")").css('background', '#61C3AF');
+					if (left == '40px') { //설정 OFF
+						$(".toggleBG:eq(" + i + ")").css('background', '#CCCCCC');
 						toggleActionStart($(".toggleFG:eq(" + i + ")"), 'TO_LEFT');
 						result = 1;
 						setAlarm(type,result);
-					} else if (left == '0px') { //설정 OFF
-						$(".toggleBG:eq(" + i + ")").css('background', '#CCCCCC');
+					} else if (left == '0px') { //설정 ON
+						$(".toggleBG:eq(" + i + ")").css('background', '#61C3AF');
 						toggleActionStart($(".toggleFG:eq(" + i + ")"), 'TO_RIGHT');
 						result = 0;
 						setAlarm(type,result);
@@ -94,29 +94,32 @@
 						<p class="title">데이터 및 맞춤 설정</p>
 						<p class="content">Colla 서비스를 더욱 유용하게 만드는데 도움을 주는 환경설정</p>
 					</div>
-					<div class="myPageContentRow clearFix">
+					<div class="myPageContentRow myPageAlarmRow clearFix">
 						<p class="title">워크스페이스 초대 알림</p>
+						<p class="content">워크스페이스 초대 알림을 설정해주세요</p>
 						<div class='toggleBG' id="wsBG">
 							<button id='wsSetAlarm' class='toggleFG wsAlarm'></button>
 						</div>
 					</div>
 					<div class="contentLine"></div>
-					<div class="myPageContentRow clearFix">
+					<div class="myPageContentRow myPageAlarmRow clearFix">
 						<p class="title">공지알람</p>
+						<p class="content">공지 알림을 설정해주세요</p>
 						<div class='toggleBG' id="boardBG">
 							<button id='boardSetAlarm' class='toggleFG boardAlarm'></button>
 						</div>
 					</div>
 					<div class="contentLine"></div>
-					<div class="myPageContentRow clearFix">
+					<div class="myPageContentRow myPageAlarmRow clearFix">
 						<p class="title">게시글 댓글 알림</p>
+						<p class="content">댓글 알림을 설정해주세요</p>
 						<div class='toggleBG' id="replyBG">
 							<button id='replySetAlarm' class='toggleFG replyAlarm'></button>
 						</div>
 					</div>
 				</div>
 				<div class="row btns btnR">
-					<a href="myPageMainForm" class="btn">목록</a>
+					<a href="myPageMainForm" class="btn"><i class="fa fa-arrow-left" aria-hidden="true"></i> 이전</a>
 				</div>
 			</div>
 		</div>

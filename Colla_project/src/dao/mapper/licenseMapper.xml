@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="dao.LicenseDao">
+	<insert id="insertLicense">
+		insert into license
+		values(l_seq.nextval,#{mNum},#{startDate},#{endDate},#{type})
+	</insert>
+	<delete id="deleteLicense">
+		delete license 
+		where m_num = #{mNum}
+	</delete>
 	<select id="selectLicense" resultMap="licenseMap">
 		select * from license where l_num = #{num}
 	</select>

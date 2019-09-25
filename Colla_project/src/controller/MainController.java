@@ -82,4 +82,12 @@ public class MainController {
 			ms.MailReceive(name, email, title, content);
 		}
 	}
+	@RequestMapping(value="/licensePrice")
+	public String licensePrice(HttpSession session, String type) {
+		String userEmail = (String)session.getAttribute("userEmail");
+		if(userEmail == null) {//로그인 하지 않은 사용자는
+			return "redirect:loginForm";//로그인 페이지로
+		}
+		return "redirect:payment/kakaoPay?type="+type;
+	}
 }

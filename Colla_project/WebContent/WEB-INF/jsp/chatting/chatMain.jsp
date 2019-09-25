@@ -35,18 +35,19 @@ var searchListDiv;
 var editor;
 // 마커를 담을 배열입니다
 var markers = [];
-var ps;
-var map;
-var area=null;
+var ps = null;
+var map = null;
+var area = null;
 //var infowindow;
-var overlay;
+var overlay = null;
 var clickedOverlay = null;
+var mapContainer = null;
 
 	$(function(){
 		loadChatFromDB();
 		favoriteArea = $("#favoriteArea");
 		chatNavContent = $("#chatNavContent");
-	
+
 	
 		
 	//파일업로드 모달
@@ -70,8 +71,10 @@ var clickedOverlay = null;
 	
 	//지도업로드 모달
 	$(".openLocationModal").on("click",function(){
+		console.log("map modal show");
 		$("#addLocationModal").fadeIn(300);
-		 showMap();
+		$("#keyword").val("이태원 맛집");
+		showMap();
 	});
 	$(".closeLocationModal").on("click",function(){
 		$("#addLocationModal").fadeOut(300);
@@ -79,12 +82,13 @@ var clickedOverlay = null;
 	});
 	
 	//모달 바깥쪽이 클릭되거나 다른 모달이 클릭될때 현재 모달 숨기기
-	$("#wsBody").mouseup(function(e){
+	$("#wsBody").mousedown(function(e){
 			$("#addCrMemberModal").fadeOut(300);
 		if($("#addFileModal").has(e.target).length===0)
 			$("#addFileModal").fadeOut(300);
-		if($("#addCodeModal").has(e.target).length===0)
-			$("#addCodeModal").fadeOut(300);
+		if($("#addCodeModal").has(e.target).length===0){
+			console.log("code modal hide");
+			$("#addCodeModal").fadeOut(300);}
 		if($("#addLocationModal").has(e.target).length===0)
 			$("#addLocationModal").fadeOut(300);
 		if($("#memberInfoModal").has(e.target).length===0)
@@ -525,8 +529,7 @@ function showMemberList(){
 	
 	//////////////////////////////////////////////////////////지도//////////////////////////////////////////////////////////////////
 	function showMap(){
-
-		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+		mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 		    mapOption = {
 		        center: new kakao.maps.LatLng(37.566826, 126.9786567), // 지도의 중심좌표
 		        level: 3

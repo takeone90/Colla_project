@@ -17,6 +17,13 @@ public class LicenseService {
 	@Autowired
 	LicenseDao licenseDao;
 	
+	public boolean insertLicense(License license) {
+		if(licenseDao.insertLicense(license)>0) {
+			return true;
+		}
+		return false;
+	}
+
 	public License getUseLicense(int mNum) {
 		return licenseDao.selectUseLicense(mNum);
 	}
