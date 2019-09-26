@@ -173,52 +173,32 @@ var mapContainer = null;
 
 
 //네비게이션의 검색 탭 누를경우
-function showSearchChatInput(){
-	var searchInputDiv = $("<div id='searchInput' align='center'></div>");
-	var keywordSelect = $("<select name='keywordType' id='keywordType'></select>");
-	var keywordOption1 = $("<option value='1'>내용</option>");
-	var keywordOption2 = $("<option value='2'>작성자</option>");
-	var searchChat = $("<input type='text' id='keyword' placeholder='검색어'>");
-	var searchBtn = $("<a href='#' id='searchChatBtn' onclick='searchChatAndDraw();'>검색</button>");
-	keywordSelect.append(keywordOption1);
-	keywordSelect.append(keywordOption2);
-	searchInputDiv.append(keywordSelect);
-	searchInputDiv.append(searchChat);
-	searchInputDiv.append(searchBtn);
-	chatNavContent.append(searchInputDiv);
-	searchListDiv = $("<div id='searchContent'></div>");
-	chatNavContent.append(searchListDiv);
-	var pageDiv = $("<div id='pageNav'></div>");
+// function showSearchChatInput(){
+// 	var $navSearch = $("#nav--search");
+// 	var searchInputDiv = $("<div id='searchInput' align='center'></div>");
+// 	var keywordSelect = $("<select name='keywordType' id='keywordType'></select>");
+// 	var keywordOption1 = $("<option value='1'>내용</option>");
+// 	var keywordOption2 = $("<option value='2'>작성자</option>");
+// 	var searchChat = $("<input type='text' id='keyword' placeholder='검색어'>");
+// 	var searchBtn = $("<a href='#' id='searchChatBtn' onclick='searchChatAndDraw();'>검색</button>");
+// 	keywordSelect.append(keywordOption1);
+// 	keywordSelect.append(keywordOption2);
+// 	searchInputDiv.append(keywordSelect);
+// 	searchInputDiv.append(searchChat);
+// 	searchInputDiv.append(searchBtn);
+// 	$navSearch.append(searchInputDiv);
+// 	searchListDiv = $("<div id='searchContent'></div>");
+// 	$navSearch.append(searchListDiv);
+// 	var pageDiv = $("<div id='pageNav'></div>");
 		
-	chatNavContent.append(pageDiv);
-	$("#keyword").keydown(function(key){
-		if(key.keyCode==13){
-			searchChatAndDraw();
-		}
-	})
-}
+// 	$navSearch.append(pageDiv);
+// 	$("#keyword").keydown(function(key){
+// 		if(key.keyCode==13){
+// 			searchChatAndDraw();
+// 		}
+// 	})
+// }
 
-//이 함수가 실행되면 검색된 키워드와 타입에 맞는 리스트와 페이징처리가 실행되야한다.
-	function searchChatAndDraw(){
-		searchListDiv.empty();
-		var keywordType = $("#keywordType option:selected").val();
-		var keyword = $("#keyword").val();
-		var crNum = $("#crNum").val();
-		$.ajax({
-			url : "${contextPath}/searchChatList",
-			dataType : "json",
-			data : {"crNum":crNum,"keywordType":keywordType,"keyword":keyword},
-			success : function(cm){
-				var searchedInfo = cm.searchedCmList;
-				$.each(searchedInfo,function(idx,item){
-					addMsg(item,"searched");
-				});
-			},
-			error : function(){
-				alert("페이징처리 에러발생");
-			}
-		});
-}
 
 
 //채팅방 안에 멤버리스트 보여주고 초대할수 있다
@@ -435,7 +415,7 @@ function showMemberList(){
 		chatArea.append(chatMsg);
 		
 		//전역변수인 currDate 와 만들려는 chatMessage의 date가 같지 않으면 날짜 띠를 생성한다
-		if(currDate!=date.getDate() && currDate!=0 && area != "favorite"){
+		if(currDate!=date.getDate() && currDate!=0 && !area){
 			showDateMsg(date.getFullYear(),Number(date.getMonth())+Number(1),date.getDate());
 		}
 		if(msgInfo.cmType.includes('code')){
@@ -494,9 +474,9 @@ function showMemberList(){
 			chatArea.append(chatMsg);
 		}else{
 			if(area=="favorite"){
-			chatNavContent.children("#nav--favorite").append(chatMsg[0]);				
+				chatNavContent.children("#nav--favorite").append(chatMsg[0]);				
 			}else if(area=="searched"){
-			searchListDiv.append(chatMsg[0]);	
+				searchListDiv.append(chatMsg[0]);	
 			}
 		}
 		
@@ -839,7 +819,7 @@ function showMemberList(){
 <!-- 						<li class="navInnerBtn"><label class="none-clicked"><input type="radio" name="innerBtn" value="canvas">캔버스</label></li> -->
 <!-- 					</ul> -->
 					<ul id="InnerBtns" class="clearFix">
-						<li class="navInnerBtn"><a href="#" class="btn" data-content="favorite">즐겨찾기</a></li>
+						<li class="navInnerBtn"><a href="#" class="btn active" data-content="favorite">즐겨찾기</a></li>
 						<li class="navInnerBtn"><a href="#" class="btn" data-content="memberManagement">멤버관리</a></li>
 						<li class="navInnerBtn"><a href="#" class="btn" data-content="search">검색</a></li>
 						<li class="navInnerBtn"><a href="#" class="btn" data-content="canvas">캔버스</a></li>
@@ -847,13 +827,23 @@ function showMemberList(){
 <script>
 	//채팅방 안에 멤버리스트 보여주고 초대할수 있다
 	$(function(){
+		searchListDiv = $("#searchContent");
 		showFavoriteList();
 		showMemberList();
-		$("#InnerBtns a").click(function(){
-			$(".navContent-wrap").hide();
-			let content = $(this).attr("data-content");
-			$("#nav--"+content).show();
+		//탭버튼 클릭 이벤트
+		$("#InnerBtns .navInnerBtn a.btn").click(function(){
+			if($(this).hasClass("active")){
+				return false;
+			} else {
+				$(this).parent().parent().find("a.active").removeClass("active");
+				$(this).addClass("active");
+				$(".navContent-wrap").hide();
+				let content = $(this).attr("data-content");
+				$("#nav--"+content).show();
+			}
+			return false;
 		});
+		
 	});
 	function showLoginNow(num, bool){
 		if(bool){
@@ -915,6 +905,29 @@ function showMemberList(){
 			return !$(this).prop('checked');
 		});
 	}
+	
+	//이 함수가 실행되면 검색된 키워드와 타입에 맞는 리스트와 페이징처리가 실행되야한다.
+	function searchChatAndDraw(){
+		searchListDiv.empty();
+		var keywordType = $("#keywordType option:selected").val();
+		var keyword = $("#keyword").val();
+		var crNum = $("#crNum").val();
+		$.ajax({
+			url : "${contextPath}/searchChatList",
+			dataType : "json",
+			data : {"crNum":crNum,"keywordType":keywordType,"keyword":keyword},
+			success : function(cm){
+				var searchedInfo = cm.searchedCmList;
+				$.each(searchedInfo,function(idx,item){
+					addMsg(item,"searched");
+				});
+			},
+			error : function(){
+				alert("페이징처리 에러발생");
+			}
+		});
+		return false;
+	}
 </script>
 					<div id="chatNavContent" align="left">
 						<div id="nav--favorite" class="navContent-wrap">
@@ -939,7 +952,18 @@ function showMemberList(){
 						</div>
 						
 						<div id="nav--search" class="navContent-wrap">
-						
+							<div id="searchInput" align="center">
+								<form onsubmit="searchChatAndDraw(); return false;">
+									<select name="keywordType" id="keywordType">
+										<option value="1">내용</option>
+										<option value="2">작성자</option>
+									</select>
+									<input type="text" id="keyword" placeholder="검색어를 입력해주세요">
+									<button class="btn">검색</button>
+								</form>
+							</div>
+							<div id="searchContent"></div>
+							<div id="pageNav"></div>
 						</div>
 						<div id="nav--canvas" class="navContent-wrap">
 						
@@ -962,7 +986,7 @@ function showMemberList(){
 							toggleVal = 1;
 							arrow.attr('class','fas fa-angle-double-right');
 					}else{
-						$("#chatNavBox").animate({right: -540},200);
+						$("#chatNavBox").animate({right: -550},200);
 							toggleVal = 0;		
 							arrow.attr('class','fas fa-angle-double-left');
 					}
