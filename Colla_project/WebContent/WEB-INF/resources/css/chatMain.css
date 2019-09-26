@@ -477,10 +477,9 @@ pre .CodeMirror-line{
 }   
 
 #chatNavBox{
-	display: inline-block;
     top: 71px;
     position: fixed;
-    right: -540px;
+    right: -550px;
     width: 550px;
     height: calc(100% - 131px);
     z-index: 7;
@@ -497,7 +496,7 @@ pre .CodeMirror-line{
 	text-align : center;
 	position : absolute;
 	top : 50%;
-	left:-45px;
+	left:-60px;
 	margin-top:-17.5px;
 	height : 35px;
 	width : 35px;
@@ -507,11 +506,10 @@ pre .CodeMirror-line{
 	cursor : pointer;
 	transition:color 0.2s;
 }
-#chatNav{	
+#chatNav{
 	background-color: #f2f4f5;
 	width : 100%;
 	height : 100%;
-	float: right;
 }
 #chatNavContent{
 	background-color: white;
@@ -546,13 +544,11 @@ pre .CodeMirror-line{
 	text-align: left;
 }
 .navInnerBtn{
-	background-color: #403C39;
 	width : 122px;
 	height : 40px;
 	margin-top : 8px;
 	margin-bottom : 8px;
 	margin-right : 5px;
-/* 	padding : 10px; */
 	border-radius : 5px;
 	display: inline-block;
 	color : white;
@@ -562,19 +558,18 @@ pre .CodeMirror-line{
 input[type=radio]{
 	display: none;
 }
-#InnerBtns li a.btn {
+.navInnerBtn a.btn {
 	width:100%;
 	height:100%;    
 	padding: 0;
     line-height: 36px;
 }
-#InnerBtns li a:hover{
-	transition:background-color 0.2s;
-	background-color : #e09189;
-	border-radius : 5px;
+.navInnerBtn a.btn.active{
+	background-color:#e09189;
 }
-#InnerBtns li a.active{
-	background-color : #E5675A;
+.navInnerBtn a.btn:hover{
+	transition:background-color 0.2s;
+	background-color : #000;
 	border-radius : 5px;
 }
 .clicked{
@@ -602,7 +597,7 @@ input[type=radio]{
 	padding : 10px 16px 16px 16px;
 	margin-top : 7px;
 	margin-bottom : 7px;
-	color : 403C39;
+	color : #403C39;
 	max-height : 226px;
 	overflow: auto;
 /* 	background-color: blue; */
@@ -729,4 +724,7 @@ input[type=radio]{
 }
 #navMList{
     height: calc(100% - 30px);
+}
+#wsmListUl-wrap {
+	max-height:50%;
 }
