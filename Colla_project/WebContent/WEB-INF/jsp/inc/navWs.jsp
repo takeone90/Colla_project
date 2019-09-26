@@ -109,7 +109,7 @@
 	    	</li>
 		</ul>
 		</div>
-		<div><button onclick="location.href='${contextPath}/removeMember'">탈퇴</button></div>
+		<div id="removeMemberDiv"><button onclick="location.href='${contextPath}/removeMember'">탈퇴</button></div>
 	</div>
 	<%---------------------------------------------회원정보 모달 ----------------------------------------------------%>
 		<div id="memberInfoModal" class="attachModal">

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.ProjectDao">
+	<insert id="insertProject" parameterType="project">
+		<selectKey resultType="int" keyProperty="pNum" order="BEFORE">
+			select p_seq.nextval from dual
+		</selectKey>
+		insert into project(p_num,p_name,w_num)
+		values(#{pNum},#{pName},#{wNum})
+	</insert>
+	<delete id="deleteProject" parameterType="int">
+		delete project where p_num=#{pNum}
+	</delete>
+	<update id="updateProject" parameterType="project">
+		update project set p_name=#{pName},p_progress=#{progress}
+		where p_num=#{pNum}
+	</update>
+	<select id="selectProject" parameterType="int" resultMap="pMap">
+		select * from project where p_num=#{pNum}
+	</select>
+	<select id="selectAllProjectByMnum" parameterType="int" resultMap="pMap">
+		select * from project where m_num=#{mNum}
+	</select>
+	<select id="selectAllProjectByWnum" parameterType="int" resultMap="pMap">
+		select * from project where m_num=#{wNum}
+	</select>
+	<select id="selectAllProject">
+		select * from project
+	</select>
+	<resultMap type="project" id="pMap">
+		<result column="p_num" property="pNum"/>
+		<result column="p_name" property="pName"/>
+		<result column="p_progress" property="progress"/>
+		<result column="w_num" property="wNum"/>
+		<result column="p_regdate" property="pRegDate"/>
+	</resultMap>
+</mapper>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.ProjectMemberDao">
+	<insert id="insertProjectMember" parameterType="projectMember">
+		insert into project_member(p_num,m_num)
+		values(#{pNum},#{mNum})
+	</insert>
+	<delete id="deleteProjectMember" parameterType="int">
+		delete project_member where p_num=#{pNum} and m_num=#{mNum}
+	</delete>
+	
+	<select id="selectProjectMember" parameterType="int" resultMap="pmMap">
+		select * from project_member where p_num=#{pNum} and m_num=#{mNum}
+	</select>
+	<select id="selectAllProjectMemberByPnum" parameterType="int" resultMap="pmMap">
+		select * from project_member where p_num=#{pNum}
+	</select>
+	<resultMap type="projectMember" id="pmMap">
+		<result column="p_num" property="pNum"/>
+		<result column="m_num" property="mNum"/>
+		<result column="pm_regdate" property="pmRegDate"/>
+	</resultMap>
+</mapper>
