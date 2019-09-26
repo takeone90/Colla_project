@@ -43,17 +43,19 @@
 	function loadChatList(){
 		var currWnum = $("#currWnum").val();
 		var chatList = $(".chatList");
-		var crNum = 
+		var crNum = "${sessionChatRoom.crNum}";
 		$.ajax({
 			data : {"currWnum":currWnum},
 			url : "${contextPath}/getChatList",
 			dataType :"json",
 			success : function(d){
 				chatList.empty();
-				$.each(d,function(idx,item){
-					var str='<li '+ ( ${sessionChatRoom.crNum} ==item.crNum?'class="currChat"':"")+'><a href="${contextPath}/chatMain?crNum='+item.crNum+'">'+item.crName+'</a></li>';
-					chatList.append(str);
-				});
+				if( crNum ){
+					$.each(d,function(idx,item){
+						var str='<li '+ ( crNum==item.crNum?'class="currChat"':"")+'><a href="${contextPath}/chatMain?crNum='+item.crNum+'">'+item.crName+'</a></li>';
+						chatList.append(str);
+					});
+				}
 			}
 		});
 	}
