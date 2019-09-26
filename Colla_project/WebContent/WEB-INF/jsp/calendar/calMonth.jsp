@@ -28,8 +28,10 @@ $(function() {
 	showSchedule(today);
 	markingOnDate(formatChange(today));
 	
+	
+	drag();
 	//모달 바깥 클릭 시 모달 닫기
-	$("#wsBody").on("mouseup", function(e) {
+	$("#wsBody").on("mousedown", function(e) {
 		if(!$("#addForm").is(e.target) && $("#addForm").has(e.target).length===0)
 			$("#addForm").fadeOut(1);
 		if(!$("#detailForm").is(e.target) && $("#detailForm").has(e.target).length===0)
@@ -84,7 +86,7 @@ $(function() {
 					thisMonthCalendar(today);
 					showSchedule(today);
 					thisYearCalendar(today);
-					showYearSchedule();
+					showYearSchedule(today);
 					$("#addForm").each(function() {
 						this.reset();
 					});
@@ -119,7 +121,7 @@ $(function() {
 					thisMonthCalendar(today);
 					showSchedule(today);
 					thisYearCalendar(today);
-					showYearSchedule();
+					showYearSchedule(today);
 				} else {
 					alert("삭제 실패");
 				}
@@ -175,7 +177,7 @@ $(function() {
 					thisMonthCalendar(today);
 					showSchedule(today);
 					thisYearCalendar(today);
-					showYearSchedule();
+					showYearSchedule(today);
 				} else {
 					alert("수정 실패");
 				}
@@ -210,9 +212,22 @@ $(function() {
 		moveToWantedCalendarYear($("#wantedYearYear").val(), 0, 1); //해당년도의 1월 1일로 이동
 	});
 });
-
+//드래그로 추가 모달 열기
+function drag() {
+	var startDate = 0;
+	$("th, td").on("mousedown", function() { 
+		console.log("mousedown");
+		startDate = $(this).attr("id");
+	});
+	$("th, td").on("mouseup", function() {
+		console.log("mouseup");
+		$("#addForm").fadeIn(300);
+		$("#startDate").val(startDate);	
+		$("#endDate").val($(this).attr("id"));	
+	});	
+}
 function thisMonthCalendar(today) {
-	console.log(today+"의 월 달력을 그렸습니다.");
+	console.log(formatChangeHyphen(today)+" 월 달력을 그렸습니다.");
 	//달력 상단 날짜 그리기
 	$("#YearTitle").html("<p>"+today.getFullYear()+"년<p>");
 	$("#MonthTitle").html((today.getMonth()+1)+"월");
@@ -240,10 +255,10 @@ function thisMonthCalendar(today) {
 		calendar += "<tr class='drawMonthCalendarLowerDate' id="+today.getFullYear()+"-"+month+"-"+i+">";
 		for(var j=0; j<7; j++) { //날짜 칸
 			if(today.getMonth() != realStartDate.getMonth()) { //월 일치X
-				calendar += "<th onclick='clickOnDate("+formatChange(realStartDate)+")' class='inactivation'>"+realStartDate.getDate()+"</th>";
+				calendar += "<th onclick='clickOnDate("+formatChange(realStartDate)+")' id="+formatChangeHyphen(realStartDate)+" class='inactivation'>"+realStartDate.getDate()+"</th>";
 				realStartDate.setDate(realStartDate.getDate()+1);
 			} else if(today.getMonth() == realStartDate.getMonth()) { //월 일치O
-				calendar += "<th onclick='clickOnDate("+formatChange(realStartDate)+")'>"+realStartDate.getDate()+"</th>";
+				calendar += "<th onclick='clickOnDate("+formatChange(realStartDate)+")' id="+formatChangeHyphen(realStartDate)+">"+realStartDate.getDate()+"</th>";
 				realStartDate.setDate(realStartDate.getDate()+1);	
 			}
 		}
@@ -251,10 +266,10 @@ function thisMonthCalendar(today) {
 		calendar += "</tr><tr>";
 		for(var j=0; j<7; j++) { //날짜 아래 칸
 			if(today.getMonth() != realStartDate.getMonth()) { //월 일치X
-				calendar += "<td onclick='clickOnDate("+formatChange(realStartDate)+")'></td>";
+				calendar += "<td onclick='clickOnDate("+formatChange(realStartDate)+")' id="+formatChangeHyphen(realStartDate)+"></td>";
 				realStartDate.setDate(realStartDate.getDate()+1);
 			} else if(today.getMonth() == realStartDate.getMonth()) { //월 일치O
-				calendar += "<td onclick='clickOnDate("+formatChange(realStartDate)+")'></td>";
+				calendar += "<td onclick='clickOnDate("+formatChange(realStartDate)+")' id="+formatChangeHyphen(realStartDate)+"></td>";
 				realStartDate.setDate(realStartDate.getDate()+1);
 			}
 		}
@@ -289,7 +304,8 @@ function getRealLastDate(today) {
 	return realLastDate;	
 }
 function showSchedule(today) {
-	console.log(today+"의 월 달력 일정을 그렸습니다.");
+	console.log(formatChangeHyphen(today)+" 월 달력 일정을 그렸습니다.");
+	drag();
 	var type1 = $("#calType1").prop("checked");
 	var type2 = $("#calType2").prop("checked");
 	var type3 = $("#calType3").prop("checked");
@@ -301,7 +317,6 @@ function showSchedule(today) {
 		success: function(allCalendar) { //모든 스케쥴을 가져옴
 			for(var i in allCalendar) {
 				(function(ii) {
-					console.log("일정 가져오는 중...");
 					var title = allCalendar[ii].title;
 					//시작일
 					var startDateStr = allCalendar[ii].startDate;
@@ -343,47 +358,47 @@ function showSchedule(today) {
 						var dateDiff = Math.abs(weekCountOfLastDate-weekCountOfFirstDate); //첫날 주와 막날 주 간의 주 차이
 						if(dateDiff == 0) { //줄 안 넘어가는 경우
 							var gap = Number(endDateStrDate.getTime()-startDateStrDate.getTime()) / (1000*60*60*24)+Number(1); //시작일부터 종료일까지 기간
-							var tr = trMaker(startDayOfThisSchedule, 6-endDayOfThisSchedule, 1, gap, title, color);
+							var tr = trMaker(startDateStrDate, endDateStrDate, startDayOfThisSchedule, 6-endDayOfThisSchedule, 1, gap, title, color); //앞빈칸 뒷빈칸 링크 전부 포함 
 							$("#"+trClassWhereIWantToAppend).after(tr);
 							tr.children('.middleTd').on("click", function() { putContentIntoTd(allCalendar[ii]); }); //모달 내용 입력
 							
 						} else if(dateDiff >= 1) { //줄 넘어가는 경우
 							var repeatGapFirstRow = Number(7)-Number(startDayOfThisSchedule); //첫 줄
-							var tr = trMaker(startDayOfThisSchedule, 0, 2, repeatGapFirstRow, title, color);
+							var tr = trMaker(startDateStrDate, endDateStrDate, startDayOfThisSchedule, 0, 2, repeatGapFirstRow, title, color);
 							$("#"+trClassWhereIWantToAppend).after(tr);
 							tr.children('.middleTd').on("click", function() { putContentIntoTd(allCalendar[ii]); });	
 							if(dateDiff>1) { //중간 줄
 								for(var i=weekCountOfFirstDate; i<weekCountOfLastDate-1; i++) {
-									var tr = trMaker(0, 0, 4, 7, title, color);
+									var tr = trMaker(startDateStrDate, endDateStrDate, 0, 0, 4, 7, title, color);
 									$("#"+startDateYearMonth+"-"+i).after(tr);
 									tr.children('.middleTd').on("click", function() { putContentIntoTd(allCalendar[ii]); });
 								}
 							}
 							var repeatGapLastRow = (Number(endDayOfThisSchedule)+Number(1)); //마지막 줄
-							var tr = trMaker(0, 6-endDayOfThisSchedule, 3, repeatGapLastRow, title, color);
+							var tr = trMaker(startDateStrDate, endDateStrDate, 0, 6-endDayOfThisSchedule, 3, repeatGapLastRow, title, color);
 							$("#"+trClassWhereIWantToAppendLast).after(tr);
 							tr.children('.middleTd').on("click", function() { putContentIntoTd(allCalendar[ii]); });
 						}
 					} else { //월 넘어가는 경우											
 						var repeatGapFirstRow = Number(7)-Number(startDayOfThisSchedule); //첫 줄
-						var tr = trMaker(startDayOfThisSchedule, 0, 2, repeatGapFirstRow, title, color);
+						var tr = trMaker(startDateStrDate, endDateStrDate, startDayOfThisSchedule, 0, 2, repeatGapFirstRow, title, color);
 						$("#"+trClassWhereIWantToAppend).after(tr);
 						tr.children('.middleTd').on("click", function() { putContentIntoTd(allCalendar[ii]); }); 	
 						
 						for(var i=weekCountOfFirstDate; i<=findOutNumOfWeekRow(startDateStrDate); i++) {
-							var tr = trMaker(0, 0, 4, 7, title, color);
+							var tr = trMaker(startDateStrDate, endDateStrDate, 0, 0, 4, 7, title, color);
 							var tmpid = startDateYearMonth+"-"+i;
 							$("#"+tmpid).after(tr);							
 							tr.children('.middleTd').on("click", function() { putContentIntoTd(allCalendar[ii]); });
 						}	
 						for(var i=0; i<weekCountOfLastDate-1; i++) {
-							var tr = trMaker(0, 0, 4, 7, title, color);
+							var tr = trMaker(startDateStrDate, endDateStrDate, 0, 0, 4, 7, title, color);
 							$("#"+endDateYearMonth+"-"+i).after(tr);							
 							tr.children('.middleTd').on("click", function() { putContentIntoTd(allCalendar[ii]); });
 						}	
 						
 						var repeatGapLastRow = (Number(endDayOfThisSchedule)+Number(1)); //마지막 줄
-						var tr = trMaker(0, 6-endDayOfThisSchedule, 3, repeatGapLastRow, title, color);
+						var tr = trMaker(startDateStrDate, endDateStrDate, 0, 6-endDayOfThisSchedule, 3, repeatGapLastRow, title, color);
 						$("#"+trClassWhereIWantToAppendLast).after(tr);
 						tr.children('.middleTd').on("click", function() { putContentIntoTd(allCalendar[ii]); });
 					}					
@@ -417,9 +432,13 @@ function formatChangeHyphen(dateOrigin) { //2019-09-04
 function formatChange(dateOrigin) { //20190904
 	return dateOrigin.getFullYear()+String(monthChange(dateOrigin.getMonth()+1))+String(dateChange(dateOrigin.getDate()));
 }
-function clickOnDate(dateTmp) { //날짜 클릭 시 추가 모달 열기 //20190904 -> 2019-09-04
+function formatChangeSimple(dateOrigin) { //20190904 -> 2019-09-04
+	return String(dateOrigin).substring(0, 4)+"-"+String(dateOrigin).substring(4, 6)+"-"+String(dateOrigin).substring(6, 8);
+}
+function clickOnDate(dateOrigin) { //날짜 클릭 시 추가 모달 열기
 	$("#addForm").fadeIn(300);
-	$("#startDate").val(String(dateTmp).substring(0, 4)+"-"+String(dateTmp).substring(4, 6)+"-"+String(dateTmp).substring(6, 8));	
+	$("#startDate").val(formatChangeSimple(dateOrigin));	
+	$("#endDate").val(formatChangeSimple(dateOrigin));	
 }
 function putContentIntoTd(a) {
 	$("#detailForm").fadeIn(300);
@@ -444,6 +463,11 @@ function putContentIntoTd(a) {
 	$("#detailColor").css("backgroundColor",a.color);
 	$("#modifyColor").val(a.color);
 }
+function putContentIntoVacantTd(startDate, endDate) { //2019-09-26
+	$("#addForm").fadeIn(300);
+	$("#startDate").val(formatChangeSimple(startDate));
+	$("#endDate").val(formatChangeSimple(endDate));	
+}
 function whichWeek(dateStr) { //달(1~12) //달이 다를 경우..
 	var dateStrDate = new Date(dateStr);
 	var dateYMD = dateStr.substring(0, 10);
@@ -452,7 +476,7 @@ function whichWeek(dateStr) { //달(1~12) //달이 다를 경우..
 	var dateDate = dateStr.substring(8, 10);
 	var firstDateOfDate = new Date(dateYear, dateMonth-1, 1); //종료일이 있는 월의 첫날 구하기
 	var firstDayOfDate = firstDateOfDate.getDay(); //종료일 첫날 요일 구하기
-	var weekCount = Math.ceil((Number(firstDayOfDate)+Number(dateDate))/7); //종료일이 몇 번째 주인지 구하기(0~5)
+	var weekCount = Math.ceil((Number(firstDayOfDate)+Number(dateDate))/7); //종료일이 몇 번째 주인지 구하기
 	return weekCount;
 }
 function findOutNumOfWeekRow(thisDay) {
@@ -463,11 +487,13 @@ function findOutNumOfWeekRow(thisDay) {
 	var numOfWeekRow = Math.ceil((lastDayDate+firstDayOfWeek)/7);
 	return numOfWeekRow;
 }
-function trMaker(front, back, type, gap, title, color) { //앞빈칸 반복, 뒷빈칸 반복, 중간칸 종류, 중간칸 너비, 제목, 색깔 
+function trMaker(startDate, endDate, front, back, type, gap, title, color) { //시작일, 종료일, 앞빈칸 반복, 뒷빈칸 반복, 중간칸 종류, 중간칸 너비, 제목, 색깔 
 	var tr = $("<tr class='scheduleTr'>");
+	startDate.setDate(startDate.getDate()-startDate.getDay());
 	for(var l=0; l<front; l++) { 
-		let tdEtc = $("<td class='frontVacantTd'></td>");
+		let tdEtc = $("<td class='frontVacantTd' onclick='putContentIntoVacantTd("+formatChange(startDate)+", "+formatChange(startDate)+")' id="+formatChangeHyphen(startDate)+"></td>");
 		tr.append(tdEtc);
+		startDate.setDate(startDate.getDate()+1);
 	}	
 	if(type==1) {
 		var td = $("<td class='middleTd' colspan="+gap+"><div class='middleDiv complete' style='background-color: "+color+"'>"+"&nbsp;&nbsp;"+title+"</div></td>");
@@ -480,7 +506,8 @@ function trMaker(front, back, type, gap, title, color) { //앞빈칸 반복, 뒷
 	}
 	tr.append(td);
 	for(var l=0; l<back; l++) {
-		let tdEtc = $("<td class='backVacantTd'></td>");
+		endDate.setDate(endDate.getDate()+1);
+		let tdEtc = $("<td class='backVacantTd' onclick='putContentIntoVacantTd("+formatChange(endDate)+", "+formatChange(endDate)+")' id="+formatChangeHyphen(endDate)+"></td>");
 		tr.append(tdEtc);
 	}
 	return tr;
@@ -501,14 +528,12 @@ function moveToWantedCalendarYear(wantedYear, wantedMonth, wantedDate) {
 	$("#yearCalendar").show();
 }
 function moveMonth(today) {
-	console.log("moveMonth : "+today);
 	thisMonthCalendar(today);
 	showSchedule(today);
 	markingOnDate(formatChange(new Date()));
 }
 function preMonth() {
 	today = new Date(today.getFullYear(), today.getMonth()-1, 1);
-	console.log("preMonth : "+today);
 	moveMonth(today);
 }
 function nextMonth() { 
@@ -526,7 +551,7 @@ function nextYear() {
 //----------------------------------------------------------------------------연간 달력
 $(function() {
 	thisYearCalendar(today);
-	showYearSchedule();
+	showYearSchedule(today);
 	markingOnDateYear(formatChange(today).substring(0, 6));
 	//상세 모달 닫기
 	$("#detailFormYearClose").on("click", function() {
@@ -535,19 +560,19 @@ $(function() {
 	//타입 변경
 	$("#calType1").on("change", function() {
 		thisYearCalendar(today);
-		showYearSchedule();
+		showYearSchedule(today);
 	});
 	$("#calType2").on("change", function() {
 		thisYearCalendar(today);
-		showYearSchedule();
+		showYearSchedule(today);
 	});
 	$("#calType3").on("change", function() {
 		thisYearCalendar(today);
-		showYearSchedule();
+		showYearSchedule(today);
 	});
 });
 function thisYearCalendar(today) {
-	console.log(today+"의 연 달력을 그렸습니다.");
+	console.log(formatChangeHyphen(today)+" 연 달력을 그렸습니다.");
 	//달력 상단 날짜 그리기
 	var year = today.getFullYear();
 	$("#calYearTitle").html(year+"년");
@@ -590,8 +615,8 @@ function thisYearCalendar(today) {
 	var calYearBody = $("#calYearBody");
 	calYearBody.html(calendar);
 } //for문 끝
-function showYearSchedule() {
-	console.log("연 달력 일정을 그렸습니다.");
+function showYearSchedule(today) {
+	console.log(formatChangeHyphen(today)+" 연 달력 일정을 그렸습니다.");
 	var type1 = $("#calType1").prop("checked");
 	var type2 = $("#calType2").prop("checked");
 	var type3 = $("#calType3").prop("checked");
@@ -655,13 +680,13 @@ function trMakerFullLineYear(month, gap, title, color, type) { //앞,중간,뒤
 	}
 	var td = "";
 	if(type == 1) {
-		td = $("<td class=\"middleTdYear\" colspan="+gap+"><div style=\"border-radius: 10px; background-color: "+color+"\">"+"&nbsp;&nbsp;"+title+"</div></td>");
+		td = $("<td colspan="+gap+"><div class=\"middleTdYear complete\" style=\"background-color: "+color+"\">"+"&nbsp;&nbsp;"+title+"</div></td>");
 	} else if(type == 2) {
-		td = $("<td class=\"middleTdYear\" colspan="+gap+"><div style=\"border-bottom-left-radius: 10px; border-top-left-radius: 10px; background-color: "+color+"\">"+"&nbsp;&nbsp;"+title+"</div></td>");
+		td = $("<td colspan="+gap+"><div class=\"middleTdYear left\" style=\"background-color: "+color+"\">"+"&nbsp;&nbsp;"+title+"</div></td>");
 	} else if(type == 3) {
-		td = $("<td class=\"middleTdYear\" colspan="+gap+"><div style=\"border-bottom-right-radius: 10px; border-top-right-radius: 10px; background-color: "+color+"\">"+"&nbsp;&nbsp;"+title+"</div></td>");
+		td = $("<td colspan="+gap+"><div class=\"middleTdYear right\" style=\"background-color: "+color+"\">"+"&nbsp;&nbsp;"+title+"</div></td>");
 	} else if(type == 4) {
-		td = $("<td class=\"middleTdYear\" colspan="+gap+"><div style=\"background-color: "+color+"\">"+"&nbsp;&nbsp;"+title+"</div></td>");
+		td = $("<td colspan="+gap+"><div class=\"middleTdYear full\" style=\"background-color: "+color+"\">"+"&nbsp;&nbsp;"+title+"</div></td>");
 	}
 	tr.append(td);
 	var numberOfTdEtc = 4-tmp-gap;
@@ -702,13 +727,13 @@ var realToday = new Date();
 function preYearYear() {
 	today = new Date(today.getFullYear(), today.getMonth()-12);
 	thisYearCalendar(today);
-	showYearSchedule();
+	showYearSchedule(today);
 	markingOnDateYear(formatChange(realToday).substring(0, 6));
 }
 function nextYearYear() {
 	today = new Date(today.getFullYear(), today.getMonth()+12);
 	thisYearCalendar(today);
-	showYearSchedule();
+	showYearSchedule(today);
 	markingOnDateYear(formatChange(realToday).substring(0, 6));
 }
 </script>
@@ -752,7 +777,7 @@ function nextYearYear() {
 		</div>
 	</div><!-- calHeader 끝 -->	
 <!-- 월간 달력 -->
-	<div id="monthCalendar" class="monthCalendar">
+	<div id="monthCalendar" class="monthCalendar no-drag">
 		<div class="dateDisplay">
 			<span id="YearTitle"></span>
 			<button onclick="preYear()"><i class="fas fa-angle-double-left"></i></button>
@@ -769,7 +794,7 @@ function nextYearYear() {
 		</div>
 		<div id="calMonthBody"></div>
 		<!-- 일정 추가 모달 -->
-		<div id="addForm" class="attachModal">
+		<div id="addForm" class="attachModal ui-widget-content">
 			<div class="modalHead">
 				<h3 style='font-weight: bolder; font-size: 30px'>일정 추가</h3>
 				<p>일정을 추가하고 멤버들과 공유하세요.</p>
@@ -814,7 +839,7 @@ function nextYearYear() {
 			</div>
 		</div>
 		<!-- 일정 상세 모달 -->
-		<div id="detailForm" class="attachModal">
+		<div id="detailForm" class="attachModal ui-widget-content">
 			<div class="modalHead">
 				<h3 style='font-weight: bolder; font-size: 30px'>일정 상세</h3>
 				<p>일정을 자세하게 보여드릴게요.</p>
@@ -861,7 +886,7 @@ function nextYearYear() {
 			</div>
 		</div>
 		<!-- 일정 수정 모달 -->
-		<div id="modifyForm" class="attachModal">
+		<div id="modifyForm" class="attachModal ui-widget-content">
 			<div class="modalHead">
 				<h3 style='font-weight: bolder; font-size: 30px'>일정 수정</h3>
 				<p>일정을 조금 바꿔볼까요?</p>
@@ -920,7 +945,7 @@ function nextYearYear() {
 		</div>
 		<div id="calYearBody"></div>
 		<!-- 일정 상세 모달 --> 
-		<div id="detailFormYear" class="attachModal">
+		<div id="detailFormYear" class="attachModal ui-widget-content">
 			<div class="modalHead">
 				<h3 style='font-weight: bolder; font-size: 30px'>일정 상세</h3>
 				<p>일정을 자세하게 보여드릴게요.</p>
