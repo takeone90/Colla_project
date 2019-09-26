@@ -718,6 +718,40 @@ var mapContainer = null;
 		return false;
 	}
 
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.5.0/styles/androidstudio.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.5.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+</head>
+<body>
+<%@ include file="/WEB-INF/jsp/inc/headerWs.jsp" %>
+<%@ include file="/WEB-INF/jsp/inc/navWs.jsp" %>
+	<div id="wsBody">
+		<input type="hidden" value="chatroom" id="pageType">
+		<input type="hidden" value="${chatRoom.crIsDefault}" id="isDefault">
+		<input type="hidden" value="${chatRoom.crName}" id="crName">
+		<input type="hidden" value="${sessionScope.user.name}" id="userName">
+		<input type="hidden" value="${sessionScope.user.email}" id="userEmail">
+		<input type="hidden" value="${chatRoom.crNum}" id="crNum">
+		<input type="hidden" value="${wNum}" name="wNum" id="wNum">
+		<div class="chatArea">
+			
+			<div class="chat" id="chatArea">
+			<div id="chatNavBox">
+				<div id="openChatNavBox" class="animated bounceInRight"><i class="fas fa-angle-double-left"></i></div><!-- 슬라이드 메뉴 열 수 있는 띠 -->
+				<div id="chatNav" align="center">
+<!-- 					<ul id="InnerBtns"> -->
+<!-- 						<li class="navInnerBtn"><label class="clicked"><input type="radio" name="innerBtn" value="favorite" checked>즐겨찾기</label></li> -->
+<!-- 						<li class="navInnerBtn"><label class="none-clicked"><input type="radio" name="innerBtn" value="memberManagement">멤버관리</label></li> -->
+<!-- 						<li class="navInnerBtn"><label class="none-clicked"><input type="radio" name="innerBtn" value="search">검색</label></li> -->
+<!-- 						<li class="navInnerBtn"><label class="none-clicked"><input type="radio" name="innerBtn" value="canvas">캔버스</label></li> -->
+<!-- 					</ul> -->
+					<ul id="InnerBtns" class="clearFix">
+						<li class="navInnerBtn"><a href="#" class="btn active" data-content="favorite">즐겨찾기</a></li>
+						<li class="navInnerBtn"><a href="#" class="btn" data-content="memberManagement">멤버관리</a></li>
+						<li class="navInnerBtn"><a href="#" class="btn" data-content="search">검색</a></li>
+						<li class="navInnerBtn"><a href="#" class="btn" data-content="canvas">일정관리</a></li>
+					</ul>
+<script>
 	//채팅방 안에 멤버리스트 보여주고 초대할수 있다
 	function showLoginNow(num, bool){
 		if(bool){
