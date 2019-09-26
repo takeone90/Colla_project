@@ -822,7 +822,7 @@ function showMemberList(){
 						<li class="navInnerBtn"><a href="#" class="btn active" data-content="favorite">즐겨찾기</a></li>
 						<li class="navInnerBtn"><a href="#" class="btn" data-content="memberManagement">멤버관리</a></li>
 						<li class="navInnerBtn"><a href="#" class="btn" data-content="search">검색</a></li>
-						<li class="navInnerBtn"><a href="#" class="btn" data-content="canvas">캔버스</a></li>
+						<li class="navInnerBtn"><a href="#" class="btn" data-content="canvas">일정관리</a></li>
 					</ul>
 <script>
 	//채팅방 안에 멤버리스트 보여주고 초대할수 있다
