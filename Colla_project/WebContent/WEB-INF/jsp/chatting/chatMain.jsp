@@ -104,7 +104,6 @@ var mapContainer = null;
 	$(".openLocationModal").on("click",function(){
 		console.log("map modal show");
 		$("#addLocationModal").fadeIn(300);
-		$("#keyword").val("이태원 맛집");
 		showMap();
 	});
 	$(".closeLocationModal").on("click",function(){
@@ -388,7 +387,6 @@ var mapContainer = null;
 			if( area == 'favorite' ){
 				mapArea = document.getElementById("nav--favorite");
 			}
-			console.log(mapArea);
 			var staticMapContainer;
 			var positionArr = (msgInfo.cmContent).split("_");   
 			var staticMapmarkerPosition = new kakao.maps.LatLng(positionArr[1], positionArr[0]); 
@@ -464,13 +462,11 @@ var mapContainer = null;
 			zIndex:1
 			}); */
 
-		// 키워드로 장소를 검색합니다
-		searchPlaces();
 		
 	}
 	// 키워드 검색을 요청하는 함수입니다
 	function searchPlaces() {
-	    var keyword = document.getElementById('keyword').value;
+	    var keyword = document.getElementById('mapKeyword').value;
 
 	    if (!keyword.replace(/^\s+|\s+$/g, '')) {
 	        alert('키워드를 입력해주세요!');
@@ -998,7 +994,7 @@ var mapContainer = null;
 						<div class="option">
 							<div>
 								<form onsubmit="searchPlaces(); return false;">
-									키워드 : <input type="text" value="이태원 맛집" id="keyword" size="15">
+									키워드 : <input type="text" id="mapKeyword" size="15">
 									<button type="submit">검색하기</button>
 								</form>
 							</div>
