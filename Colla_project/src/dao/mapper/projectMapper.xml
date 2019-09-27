@@ -27,7 +27,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from project where m_num=#{mNum}
 	</select>
 	<select id="selectAllProjectByWnum" parameterType="int" resultMap="pMap">
-		select * from project where m_num=#{wNum}
+		select * from project where w_num=#{wNum}
 	</select>
 	<select id="selectAllProject">
 		select * from project
