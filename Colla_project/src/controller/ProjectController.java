@@ -28,15 +28,15 @@ public class ProjectController {
 	private WorkspaceService wService;
 	
 	@RequestMapping("/projectMain") //projectMain으로 이동
-	public String showProjectMain(HttpSession session, int crNum, int wNum) {
+	public String showProjectMain(HttpSession session, int wNum) {
 		
 		List<Project> pList = pService.getAllProjectByWnum(wNum);
 		
 		Workspace ws = wService.getWorkspace(wNum);
-		ChatRoom chatRoom = crService.getChatRoomByCrNum(crNum);
+//		ChatRoom chatRoom = crService.getChatRoomByCrNum(crNum);
 		session.setAttribute("wsName", ws.getName());
 		session.setAttribute("currWnum", wNum);
-		session.setAttribute("sessionChatRoom", chatRoom);		
+//		session.setAttribute("sessionChatRoom", chatRoom);		
 		return "/project/projectMain";
 	}
 	
