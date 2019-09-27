@@ -1,0 +1,68 @@
+@charset "UTF-8";
+#wsBodyContainer h2{
+	color : #403C39;
+	font-size: 2.5em;
+	font-weight: bolder;
+	margin-bottom: 30px;
+}
+#wsBodyContainer .project h3 {
+    color: #403C39;
+    font-size: 23px;
+    font-weight: 800;
+}
+.project{
+	width: calc(100% - 58px);
+    border: 1px solid black;
+    padding: 21px;
+}
+.project h3{
+	display: inline-block;
+}
+.projectDetail{
+	margin-top: 13px;
+	margin-bottom: 8px;
+}
+.projectInnerBtnBox{
+	margin-left:10px;
+	display: inline-block;
+}
+.projectInnerBtnBox a{
+	margin-left:5px;
+}
+.progress{
+	background-color: cornflowerblue;
+    padding: 5px;
+    margin-bottom: 10px;
+}
+.projectMember{
+	background-color: cornflowerblue;
+    padding: 5px;
+}
+.projectMember ul{
+	margin-left:10px;
+}
+.projectMember li{
+	display: inline-block;
+	margin-right:10px;
+}
+#addProjectBtn{
+	position: absolute;
+    top: 135px;
+    right: 9%;
+    width: 10%;
+    padding: 6px;
+    background-color: #403C39;
+    color: white;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+}
+#addProjectBtn:hover{
+	background-color: #E5675A;
+}
+#addProjectModal p{
+	margin-top: 10px;
+}
+#addPj-Date{
+	margin-bottom : 12px;
+}

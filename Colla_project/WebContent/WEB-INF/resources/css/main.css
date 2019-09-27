@@ -1,28 +1,27 @@
 @charset "UTF-8";
 
 /* -------------------- 공통 -------------------- */
-
 .head-title {
 	font-size: 72px;
-    font-weight: 500;
-    margin-bottom: 10px;
-    padding: 15px;
-    margin-top: 220px;
-    color: #4C4A4B;
+	font-weight: 500;
+	margin-bottom: 10px;
+	padding: 15px;
+	margin-top: 220px;
+	color: #4C4A4B;
 }
 
 /* -------------------- main -------------------- */
-
 #wrap {
 	height: 100%;
 }
+
 #welcome {
 	display: block;
 	background-color: #ffffff;
 	height: 100%;
 }
-#main-cover,
-#main-intro {
+
+#main-cover, #main-intro {
 	position: relative;
 	display: block;
 	overflow: hidden;
@@ -30,308 +29,348 @@
 	text-align: center;
 	padding: 80px 15px 100px 15px;
 }
+
 #main-partners {
 	position: relative;
 	display: block;
 	overflow: hidden;
 	height: 50%;
 	text-align: center;
-	padding: 80px 15px 100px 15px;	
+	padding: 80px 15px 100px 15px;
 }
-#main-intro-ani,
-#main-partners-ani {
+
+#main-intro-ani, #main-partners-ani {
 	visibility: hidden;
 }
+
 #main-cover {
 	background-image: url("../img/Main_background.jpg");
 	background-size: cover;
 }
+
 #main-cover .head-body-up {
 	margin-top: 165px;
-    display: inline-block;
-    color: #EC6D63;
-    margin-right: 101px;
-    margin-bottom: 5px;
+	display: inline-block;
+	color: #EC6D63;
+	margin-right: 101px;
+	margin-bottom: 5px;
 }
+
 #main-cover .head-body-down {
-    margin-bottom: 0px;
-    font-size: 25px;
-    font-weight: 200;
-    color: #DEDCDD;
+	margin-bottom: 0px;
+	font-size: 25px;
+	font-weight: 200;
+	color: #DEDCDD;
 }
+
 #main-cover .head-title {
 	font-size: 120px;
-    margin-top: 0px;
+	margin-top: 0px;
 }
+
 #main-cover .head-caption {
-    margin-top: 0px;
-    line-height: 30px;
-    font-weight: 100;
-    color: #DEDCDD;
+	margin-top: 0px;
+	line-height: 30px;
+	font-weight: 100;
+	color: #DEDCDD;
 }
-#main-intro {  
+
+#main-intro {
 	background-color: #F5F5F5;
 }
+
 #main-intro .head-body {
 	margin-top: 5%;
 }
+
 .main-function {
 	width: 1200px;
-    height: 700px;
-    margin: 0 auto;
-    padding-top: 40px;
+	height: 700px;
+	margin: 0 auto;
+	padding-top: 40px;
 }
+
 .main-function-images {
 	background-color: white;
 	width: 70%;
-    height: 60%;
-    position: relative;
-    margin: 0 auto;
+	height: 60%;
+	position: relative;
+	margin: 0 auto;
 }
-.main-function-images > div {
+
+.main-function-images>div {
 	width: 100%;
-    height: 100%;
-    text-align: center;
+	height: 100%;
+	text-align: center;
 }
+
 .main-function-text {
-	font-weight: 300;	
+	font-weight: 300;
 	font-size: 35px;
 	margin-bottom: 40px;
 	color: #4C4A4B;
 }
-.main-function-image1 > img {
+
+.main-function-image1>img {
 	height: 80%;
 }
-.main-function-image2 > img {
+
+.main-function-image2>img {
 	margin-left: 75px;
-    height: 82%;
+	height: 82%;
 }
-.main-function-image3 > img {
+
+.main-function-image3>img {
 	margin-left: 95px;
 	height: 100%;
 }
+
 .main-function-image1 {
 	background-color: #F5F5F5;
 	position: relative;
 	display: inline-block;
-	z-index: 2;	
+	z-index: 2;
 }
+
 .main-function-image2 {
 	background-color: #F5F5F5;
 	position: absolute;
 	display: inline-block;
 	top: 0;
-    left: 0;
-    z-index: 1;	
+	left: 0;
+	z-index: 1;
 }
+
 .main-function-image3 {
 	background-color: #F5F5F5;
 	position: absolute;
 	display: inline-block;
 	top: 0;
-    left: 0;
-    z-index: 1;	
+	left: 0;
+	z-index: 1;
 }
+
 .main-function-details {
 	width: 70%;
-    height: 32%;
-    position: relative;
-    margin: 0 auto;
-    margin-top: 40px;
+	height: 32%;
+	position: relative;
+	margin: 0 auto;
+	margin-top: 40px;
 }
-.main-function-details1, /* 라디오 버튼 */
-.main-function-details2,
-.main-function-details3 {
+
+.main-function-details1, /* 라디오 버튼 */ .main-function-details2,
+	.main-function-details3 {
 	width: 220px;
-    height: 220px;
-    background-color: #4D4B4C;
-    display: inline-block;
-    margin: 0px 10px;
-    border-radius: 50%;
+	height: 220px;
+	background-color: #4D4B4C;
+	display: inline-block;
+	margin: 0px 10px;
+	border-radius: 50%;
 }
+
 input[type=radio] { /* ㄹㅇ 라디오 버튼 안 보이게 */
-    display: none;
+	display: none;
 }
-.main-function-details1 > span, /* 라디오 버튼 안 문장*/
-.main-function-details2 > span,
-.main-function-details3 > span {
+
+.main-function-details1>span, /* 라디오 버튼 안 문장*/ .main-function-details2>span,
+	.main-function-details3>span {
 	color: white;
 	margin: 40% 0%;
-    font-weight: 100;
-    font-size: 21px;
-    display: block;
+	font-weight: 100;
+	font-size: 21px;
+	display: block;
 }
-.main-function-details1:hover, /* 호버했을 때 */
-.main-function-details2:hover,
-.main-function-details3:hover {
+
+.main-function-details1:hover, /* 호버했을 때 */ .main-function-details2:hover,
+	.main-function-details3:hover {
 	background-color: #D8D8D8;
 }
+
 .on { /* 클릭했을 때 */
 	background-color: #EC6D63;
 }
+
 .bold {
 	font-weight: 500;
 }
+
 #main-partners {
 	background-color: #F5F5F5;
 }
+
 #main-partners .head-body {
 	margin-top: 90px;
 	margin-bottom: 0px;
-	color:  #4C4A4B;
+	color: #4C4A4B;
 }
+
 #main-partners .head-caption {
-	color:  #4C4A4B;
+	color: #4C4A4B;
 	font-weight: 100;
 }
+
 .partners-list {
 	margin: 0 auto;
 }
+
 .partner-logo {
 	display: inline-block;
 }
 
 /* -------------------- colla? -------------------- */
-
 #wrap {
 	height: 100%;
 }
+
 #collaInfoAll {
 	height: 100%;
 }
+
 #collaInfoAll section {
 	position: relative;
 	display: block;
 	overflow: hidden;
-    height: 100%;
+	height: 100%;
 	text-align: center;
 	padding: 80px 15px 100px 15px;
 }
-#collaInfo-cover,
-#collaInfo-function2,
-#collaInfo-function4 {
+
+#collaInfo-cover, #collaInfo-function2, #collaInfo-function4 {
 	background-color: #F5F5F5;
 }
-#collaInfo-function1,
-#collaInfo-function3 {
+
+#collaInfo-function1, #collaInfo-function3 {
 	background-color: #F5F5F5;
 }
+
 .collaInfo-functions {
 	margin-top: 12%;
 }
-#collaInfo-function1-ani,
-#collaInfo-function2-ani,
-#collaInfo-function3-ani,
-#collaInfo-function4-ani {
+
+#collaInfo-function1-ani, #collaInfo-function2-ani,
+	#collaInfo-function3-ani, #collaInfo-function4-ani {
 	display: inline-block;
 	vertical-align: middle;
 }
-#collaInfo-function1-ani,
-#collaInfo-function3-ani {
+
+#collaInfo-function1-ani, #collaInfo-function3-ani {
 	margin-left: 20px;
 }
-#collaInfo-function2-ani,
-#collaInfo-function4-ani {
+
+#collaInfo-function2-ani, #collaInfo-function4-ani {
 	margin-right: 20px;
 }
-#collaInfo-function1-stable,
-#collaInfo-function2-stable,
-#collaInfo-function3-stable,
-#collaInfo-function4-stable {
+
+#collaInfo-function1-stable, #collaInfo-function2-stable,
+	#collaInfo-function3-stable, #collaInfo-function4-stable {
 	display: inline-block;
 	vertical-align: middle;
 	width: 500px;
 	height: 500px;
 	background-color: lime;
 }
-#collaInfo-function1-ani,
-#collaInfo-function2-ani,
-#collaInfo-function3-ani,
-#collaInfo-function4-ani {
+
+#collaInfo-function1-ani, #collaInfo-function2-ani,
+	#collaInfo-function3-ani, #collaInfo-function4-ani {
 	visibility: hidden;
 }
+
 #collaInfoAll .head-title {
 	font-size: 72px;
-    font-weight: 500;
-    margin-bottom: 10px;
-    padding: 15px;
-    margin-top: 220px;
-    color:  #4C4A4B;
+	font-weight: 500;
+	margin-bottom: 10px;
+	padding: 15px;
+	margin-top: 220px;
+	color: #4C4A4B;
 }
+
 .head-title p {
 	display: inline-block;
 }
+
 .head-title p:first-child {
 	color: #EC6D63;
 }
+
 .head-body {
 	font-size: 30px;
-    font-weight: 400;
-    line-height: 1.4;
-    padding: 0px 15px;
-    margin-bottom: 30px;	
-    color:  #4C4A4B;
+	font-weight: 400;
+	line-height: 1.4;
+	padding: 0px 15px;
+	margin-bottom: 30px;
+	color: #4C4A4B;
 }
+
 .head-caption {
 	padding: 15px;
-    font-size: 20px;
-    margin-bottom: 55px;
-    color:  #4C4A4B;
-    line-height: 25px;
+	font-size: 20px;
+	margin-bottom: 55px;
+	color: #4C4A4B;
+	line-height: 25px;
 }
+
 .head-arrow {
 	font-size: 50px;
-    color: gray;
+	color: gray;
 }
+
 .function-title {
 	font-size: 72px;
-    font-weight: 500;
-    margin-bottom: 10px;
-    padding: 15px;
-    margin-top: 70px;
-    color:  #4C4A4B;	
+	font-weight: 500;
+	margin-bottom: 10px;
+	padding: 15px;
+	margin-top: 70px;
+	color: #4C4A4B;
 }
+
 .function-body {
 	font-size: 30px;
-    font-weight: 400;
-    line-height: 1.4;
-    padding: 0px 15px;
-    margin-bottom: 30px;	
-    color:  #4C4A4B;	
+	font-weight: 400;
+	line-height: 1.4;
+	padding: 0px 15px;
+	margin-bottom: 30px;
+	color: #4C4A4B;
 }
+
 .function-caption {
 	padding: 15px;
-    font-size: 20px;
-    margin-bottom: 55px;
-    color:  #4C4A4B;
-    line-height: 25px;	
+	font-size: 20px;
+	margin-bottom: 55px;
+	color: #4C4A4B;
+	line-height: 25px;
 }
+
 #collaInfo-function1-ani {
 	text-align: left;
 }
+
 #collaInfo-function2-ani {
 	text-align: right;
 }
+
 #collaInfo-function3-ani {
 	text-align: left;
 }
+
 #collaInfo-function4-ani {
 	text-align: right;
 }
 
 /* -------------------- pricing -------------------- */
-
 #pricingAll .head-title {
 	margin-top: 80px;
 	color: #4C4A4B;
 }
+
 #pricingAll .head-body {
 	margin-bottom: 0px;
 	color: #4C4A4B;
 }
+
 #pricingAll .head-caption {
 	color: #4C4A4B;
 }
+
 #pricingAll section {
 	position: relative;
 	display: block;
@@ -341,100 +380,112 @@ input[type=radio] { /* ㄹㅇ 라디오 버튼 안 보이게 */
 	padding: 80px 15px 100px 15px;
 	background-color: #F5F5F5;
 }
+
 .price-box-inside {
-    display: inline-flex;
-    width: 55%;
-    min-width: 930px;
-    border-radius: 6px;
-    text-align: left;
+	display: inline-flex;
+	width: 55%;
+	min-width: 930px;
+	border-radius: 6px;
+	text-align: left;
 }
+
 .price-each-col {
-    padding: 20px;
-    width: 30%;
-    border: 1px solid #D3D1D2;
-    margin: 5px;
-    border-radius: 6px;
-    background-color: white;
+	padding: 20px;
+	width: 30%;
+	border: 1px solid #D3D1D2;
+	margin: 5px;
+	border-radius: 6px;
+	background-color: white;
 }
+
 .price-title {
 	font-weight: 900;
-    font-size: 32px;
-    margin-top: 5px;
-    margin-bottom: 15px;
-    text-align: left;
+	font-size: 32px;
+	margin-top: 5px;
+	margin-bottom: 15px;
+	text-align: left;
 }
+
 .price-desc {
-    font-size: 15px;
-    word-break: break-word;
-    word-wrap: break-word;
-    white-space: normal;
-    color: #666;
-    padding: 0;
-    line-height: 1.4;
+	font-size: 15px;
+	word-break: break-word;
+	word-wrap: break-word;
+	white-space: normal;
+	color: #666;
+	padding: 0;
+	line-height: 1.4;
 }
+
 .price-amount-view {
-    padding: 20px 0px 20px 0px;
-    display: flex;
-    align-items: flex-start;
+	padding: 20px 0px 20px 0px;
+	display: flex;
+	align-items: flex-start;
 }
+
 .price-currency-unit {
-    font-size: 14px;
-    font-weight: 700;
-    text-align: center;
-    color: #373839;
-    display: inline-block;
+	font-size: 14px;
+	font-weight: 700;
+	text-align: center;
+	color: #373839;
+	display: inline-block;
 }
+
 .price-value {
-    font-size: 48px;
-    font-weight: 900;
-    line-height: .75;
-    text-align: center;
-    color: #373839;
-    display: inline-block;
+	font-size: 48px;
+	font-weight: 900;
+	line-height: .75;
+	text-align: center;
+	color: #373839;
+	display: inline-block;
 }
+
 .price-unit {
 	margin-left: 5px;
-    margin-top: 20px;
-    color: gray;
-    font-size: 15px;
+	margin-top: 20px;
+	color: gray;
+	font-size: 15px;
 }
+
 .price-detail {
 	margin-top: 20px;
-    margin-bottom: 10px;
-    background-color: #F5F5F5;
-    padding: 15px;
-    line-height: 30px;
-    border-radius: 10px;
-    box-shadow: 0 0 0px 0px black;
+	margin-bottom: 10px;
+	background-color: #F5F5F5;
+	padding: 15px;
+	line-height: 30px;
+	border-radius: 10px;
+	box-shadow: 0 0 0px 0px black;
 }
+
 .price-check {
 	margin-right: 8px;
-    margin-top: 4px;
+	margin-top: 4px;
 }
+
 .price-detail-content {
 	display: inline-block;
 	font-size: 15px;
 }
+
 .price-start-button {
 	width: 100%;
-    background-color: white;
-    border-color: #EC6D63;
-    border-radius: 10px;
-    padding: 10px;
-    margin-top: 20px;
-    margin-bottom: 10px;
-    color: #EC6D63;
-    font-size: 15px;
-    font-weight: 600;
-    border-style: solid;
+	background-color: white;
+	border-color: #EC6D63;
+	border-radius: 10px;
+	padding: 10px;
+	margin-top: 20px;
+	margin-bottom: 10px;
+	color: #EC6D63;
+	font-size: 15px;
+	font-weight: 600;
+	border-style: solid;
 }
+
 .price-start-button:hover {
 	background-color: #EC6D63;
 	color: white;
 }
 
 /* -------------------- faq -------------------- */
-
 #faqAll section {
 	position: relative;
 	display: block;
@@ -444,132 +495,154 @@ input[type=radio] { /* ㄹㅇ 라디오 버튼 안 보이게 */
 	padding: 80px 15px 100px 15px;
 	background-color: #F5F5F5;
 }
+
 #faqAll .head-title {
 	margin-top: 80px;
 	color: #4C4A4B;
 }
+
 #faqAll .head-body {
 	margin-bottom: 0px;
 	color: #4C4A4B;
 }
+
 #faqAll .head-caption {
 	color: #4C4A4B;
 }
+
 .FAQs {
 	width: 80%;
-    margin: 0 auto;
+	margin: 0 auto;
 	display: flex;
 }
-.FAQs-left,
-.FAQs-right {
+
+.FAQs-left, .FAQs-right {
 	width: 48%;
-    margin: 10px 5px;
-    display: inline-block;
+	margin: 10px 5px;
+	display: inline-block;
 }
+
 .FAQs-left {
 	float: left;
 }
+
 .FAQs-right {
 	float: right;
 }
+
 .FAQ-box {
 	margin: 10px 0px 10px 0px;
-    padding: 20px;
-    border: 1px solid #D3D1D2;
-    border-radius: 10px;
-    height: 25px;
-    background-color: white;
+	padding: 20px;
+	border: 1px solid #D3D1D2;
+	border-radius: 10px;
+	height: 25px;
+	background-color: white;
 }
+
 .question {
 	text-align: left;
 }
-.question > div {
+
+.question>div {
 	font-size: 20px;
-    font-weight: 999;
-    color: burlywood;
-    margin-right: 16px;
-    display: inline-block;
+	font-weight: 999;
+	color: burlywood;
+	margin-right: 16px;
+	display: inline-block;
 }
+
 .icon {
 	display: inline-block;
-    float: right;
-    margin-top: 4px;
+	float: right;
+	margin-top: 4px;
 }
+
 .answer {
 	color: white;
-    display: none;
-    text-align: left;
-    margin-top: 15px;
-    margin-bottom: 10px;
+	display: none;
+	text-align: left;
+	margin-top: 15px;
+	margin-bottom: 10px;
 }
+
 .a {
 	font-size: 20px;
-    font-weight: 999;
-    color: #EC6D63;
-    margin-right: 16px;
-    margin-left: 2px;
-    display: inline-block;
+	font-weight: 999;
+	color: #EC6D63;
+	margin-right: 16px;
+	margin-left: 2px;
+	display: inline-block;
 }
+
 .answer-detail {
 	display: inline-block;
-    color: white;
-    vertical-align: top;
-    line-height: 20px;
-    font-weight: 100;
+	color: white;
+	vertical-align: top;
+	line-height: 20px;
+	font-weight: 100;
 }
+
 #ask .head-title {
 	margin-top: 10px;
 }
+
 #ask .head-caption {
 	margin-bottom: 30px;
 }
+
 .FAQ-email {
-    width: 700px;
+	width: 700px;
 	height: 445px;
 	border-radius: 10px;
 	border: 0px solid;
-	background-color: #EFEEEE;	
+	background-color: #EFEEEE;
 	margin: 0 auto;
-    margin-bottom: 55px;
-    padding-top: 10px;
-    padding-bottom: 10px;
+	margin-bottom: 55px;
+	padding-top: 10px;
+	padding-bottom: 10px;
 }
+
 .FAQ-email-name {
 	display: inline-block;
 	padding-top: 10px;
 	margin-right: 86px;
 }
-.FAQ-email-name > input {
+
+.FAQ-email-name>input {
 	width: 118px;
 }
+
 .FAQ-email-receive {
 	display: inline-block;
 	padding-top: 10px;
 }
-.FAQ-email-receive > input {
+
+.FAQ-email-receive>input {
 	width: 238px;
 }
+
 .FAQ-email-input {
 	width: 577px;
 }
+
 .FAQ-email-title {
-    padding: 10px;
+	padding: 10px;
 }
 
-.FAQ-email-name > span,
-.FAQ-email-receive > span,
-.FAQ-email-title > span,
-.FAQ-email-content > span {
+.FAQ-email-name>span, .FAQ-email-receive>span, .FAQ-email-title>span,
+	.FAQ-email-content>span {
 	margin-right: 14px;
-    margin-left: -14px;
+	margin-left: -14px;
 }
-.FAQ-email-content > textarea {
+
+.FAQ-email-content>textarea {
 	border: 1px solid #D1D1D1;
-    border-radius: 5px;
-    line-height: 30px;
-    padding: 0 10px;
-    vertical-align: middle;
+	border-radius: 5px;
+	line-height: 30px;
+	padding: 0 10px;
+	vertical-align: middle;
 }
+
 .FAQ-email-button {
 	margin-top: 12px;
 }
@@ -645,16 +718,18 @@ input[type=radio] { /* ㄹㅇ 라디오 버튼 안 보이게 */
 /* } */
 
 /* -------------------- aboutUs -------------------- */
-
 div {
-  -webkit-backface-visibility: hidden;
+	-webkit-backface-visibility: hidden;
 }
+
 #wrap {
 	height: 100%;
 }
+
 #aboutUsAll {
 	height: 100%;
 }
+
 #aboutUsAll section {
 	position: relative;
 	display: block;
@@ -685,6 +760,7 @@ div {
 	font-weight: 500;
 	vertical-align: middle;
 }
+
 .front {
 	background-color: white;
 	color: black;
@@ -692,16 +768,19 @@ div {
 	overflow: hidden;
 	box-shadow: 2px 2px 5px 0.5px rgba(33, 33, 33, 0.2);
 }
+
 .back {
 	color: white;
 	z-index: 1;
 	transform: rotateY(-180deg);
 	box-shadow: 2px 2px 5px 0.5px rgba(33, 33, 33, 0.2);
 }
+
 .aboutUs-card:hover .front {
 	z-index: 1;
 	transform: rotateY(180deg);
 }
+
 .aboutUs-card:hover .back {
 	z-index: 2;
 	transform: rotateY(0deg);
@@ -715,44 +794,53 @@ div {
 	margin-top: 80px;
 	padding: 15px;
 }
-#aboutUsAll p{
+
+#aboutUsAll p {
 	color: #665A5A;
 	line-height: 27px;
 }
-#aboutUs-cover .aboutUs-content-title{
+
+#aboutUs-cover .aboutUs-content-title {
 	width: 100%;
 	font-size: 27px;
 	margin-bottom: 25px;
 	font-weight: 500;
 	text-align: left;
 }
-#aboutUs-cover .head-body>div:first-child .aboutUs-content-title{
+
+#aboutUs-cover .head-body>div:first-child .aboutUs-content-title {
 	margin-left: 300px;
 }
+
 #aboutUs-cover .head-body>div {
 	width: 850px;
 	overflow: hidden;
 	margin: 0 auto;
 	margin-bottom: 80px;
 }
+
 #aboutUs-cover .head-body>div:first-child {
 	margin: 0 auto 90px;
 }
+
 #aboutUs-cover .head-body>div>* {
 	float: left;
 }
+
 #aboutUs-cover .head-body>div:first-child>img+p {
 	font-size: 16px;
 	text-align: left;
 	width: 550px;
 	margin-left: 50px;
 }
+
 #aboutUs-cover .head-body>div+div>p+p {
 	font-size: 16px;
 	text-align: left;
 	width: 450px;
 	margin-right: 50px;
 }
+
 #aboutUs-cover .head-body>div+div span {
 	display: inline-block;
 	width: 450px;
@@ -761,31 +849,37 @@ div {
 	margin: 30px 0;
 	text-align: center;
 }
+
 #aboutUs-cover .head-body>div:first-child>img {
 	width: 250px;
 	margin-top: -1.5%;
 }
+
 #aboutUs-cover .head-body>div+div>img {
 	width: 350px;
 	margin-top: 2%
 }
 
 /*회사 연혁*/
-#aboutUs-history #aboutUs-history-ani{
+#aboutUs-history #aboutUs-history-ani {
 	visibility: hidden;
 }
-#aboutUs-history .head-body{
+
+#aboutUs-history .head-body {
 	width: 1250px;
-	height : 500px;
+	height: 500px;
 	margin: 0 auto;
 }
-#aboutUs-history .head-body > *{
+
+#aboutUs-history .head-body>* {
 	float: left;
 }
-#aboutUs-history .head-body > img{
+
+#aboutUs-history .head-body>img {
 	width: 55%;
-    height: 100%;
+	height: 100%;
 }
+
 #aboutUs-history .head-body ul {
 	background-image: url("../img/history_line.png");
 	background-repeat: no-repeat;
@@ -795,63 +889,75 @@ div {
 	width: 45%;
 	height: 100%;
 }
-#aboutUs-history .head-body ul li{
+
+#aboutUs-history .head-body ul li {
 	line-height: 61.5px;
 	padding-left: 60px;
 }
-#aboutUs-history .head-body ul li p{
+
+#aboutUs-history .head-body ul li p {
 	display: inline-block;
 	font-size: 20px;
 	text-align: left;
-	
 }
-#aboutUs-history .head-body ul li p:first-child{
+
+#aboutUs-history .head-body ul li p:first-child {
 	color: #DA7A6F;
 	width: 120px;
 }
-#aboutUs-history .head-body ul li p:nth-child(2){
+
+#aboutUs-history .head-body ul li p:nth-child(2) {
 	color: #4D4B4C;
 	width: 300px;
 }
 /*멤버 소개*/
-#aboutUs-member .head-body > div {
+#aboutUs-member .head-body>div {
 	width: 1280px;
-	margin:0 auto;
+	margin: 0 auto;
 }
-#aboutUs-member .memberInfo{
+
+#aboutUs-member .memberInfo {
 	width: 250px;
-	height : 400px;
+	height: 400px;
 	float: left;
 	border-radius: 10px;
 }
-#aboutUs-member .memberInfo+.memberInfo{
+
+#aboutUs-member .memberInfo+.memberInfo {
 	margin-left: 93.3px;
 }
-#aboutUs-member .memberInfo .front img{
+
+#aboutUs-member .memberInfo .front img {
 	width: 100%;
 }
-#aboutUs-member .memberInfo .front img+p{
+
+#aboutUs-member .memberInfo .front img+p {
 	font-size: 15px;
-    color: #EC6D63;
+	color: #EC6D63;
 }
-#aboutUs-member .memberInfo .front p+p{
+
+#aboutUs-member .memberInfo .front p+p {
 	font-size: 22px;
-    font-weight: bold;
-    color: #4D4B4C;
+	font-weight: bold;
+	color: #4D4B4C;
 }
-#aboutUs-member .back{
+
+#aboutUs-member .back {
 	background-color: #EC6D63;
 }
-#aboutUs-member .back ul li{
+
+#aboutUs-member .back ul li {
 	width: 160px;
 	border-radius: 10px;
-	margin: 35px auto;	
+	margin: 35px auto;
 }
+
 #myProgress {
 	width: 80%;
 	background-color: #ddd;
 	border-radius: 10px;
 }
+
 #myBar {
 	width: 1%;
 	height: 30px;
@@ -859,46 +965,205 @@ div {
 	border-radius: 10px;
 }
 /*미경 수정 시작*/
-#paymentAll{
+/*결제 페이지*/
+#paymentAll, #paymentResult {
 	position: relative;
 	display: block;
 	overflow: hidden;
 	height: 890px;
-	text-align: center;
 	padding: 80px 15px 100px 15px;
 	background-color: #F5F5F5;
 	background-color: #d6d6d6;
 }
-#paymentAll #container{
-	width : 1280px;
-	margin: 150px auto;
+
+#paymentAll * {
+	color: #665A5A;
 }
 
-#kakaoPayForm{
-	width: 500px;
-	height: 680px;
-	border: 1px solid black;
+#paymentAll #container {
+	width: 920px;
+	margin: 80px auto
 }
-#kakaoPayForm > div{
+
+#kakaoPayForm, .infoArea {
 	float: left;
-	border: 1px solid black;
 }
-#kakaoPayForm div > *{
-	float: left;
+
+#paymentAll h1 {
+	font-size: 30px;
+	font-weight: bolder;
+	text-align: center;
+	padding-bottom: 30px;
+}
+
+#kakaoPayForm {
+	width: 438px;
+	height: 660px;
+	padding: 0 50px;
+	background-color: white;
+	box-shadow: 2px 2px 5px 0.5px rgba(33, 33, 33, 0.2);
+}
+
+#kakaoPayForm h4 {
+	font-size: 20px; font-weight : bolder;
+	text-align: left;
+	margin-top: 45px;
 	font-weight: bolder;
 }
-#kakaoPayForm div>div:first-child{
-	width: 264px;
-	height: 90px;
-	border-right: 1px solid black;
-}
-#kakaoPayForm div>div+div{
-	width: 170px;
-	height: 90px;
+
+#kakaoPayForm select {
+	width: 268px;
+	padding: 10px;
+	font-size: 15px;
+	font-weight: bolder;
+	border-radius: 6px;
+	margin-top: 10px;
 }
 
-#licenseInfo{
+#kakaoPayForm div>div:first-child {
+	width: 264px;
+	border-right: 1px solid black;
+	color: #EC6D63;
+	padding: 35px 0px;
+}
+
+#kakaoPayForm div>div+div {
+	width: 170px;
+	padding: 45px 0px;
+}
+
+#kakaoPayForm p {
+	margin: 18px 0 8px;
+	font-size: 15px;
+}
+
+#kakaoPayForm p span {
+	font-size: 12px;
+}
+
+#kakaoPayForm input[type='date'] {
+	text-align: left
+}
+#phone+h4{
+	margin-bottom: 8px;
+}
+#kakaoPayForm input[type='radio'] {
+	display: inline;
+	width: 15px;
+	height: 23px;
+	background-color: red;
+}
+#kakaoPayForm label img{
+	height: 25.5px;
+	vertical-align: middle;
+}
+#checkbox {
+	padding: 0px;
+	margin: 0px;
+}
+
+.infoArea {
+	position: relative;
+}
+
+.licenseInfo {
+	position: absolute;
+}
+
+.licenseInfo {
 	width: 270px;
-	height: 210px;
-	border: 1px solid black;
+	background-color: white;
+	box-shadow: 2px 2px 5px 0.5px rgba(33, 33, 33, 0.2);
+	margin-left: 30px;
+	padding: 25px;
+	overflow: hidden;
+	visibility: hidden;
+}
+
+.licenseInfo>* {
+	float: left;
+}
+
+.licenseInfo h5 {
+	font-size: 25px;
+	font-weight: bolder;
+	padding: 0px 10px 20px;
+	width: 115px;
+}
+
+.licenseInfo h5+h5 {
+	color: #EC6D63;
+	text-align: right;
+}
+
+.licenseInfo ul {
+	border-top: 1px dotted black;
+	width: 100%
+}
+
+.licenseInfo ul li {
+	padding: 10px;
+}
+
+.paymentCheckbox {
+	margin-top: 32px;
+}
+
+#paymentBtn {
+	width: 100%;
+	background-color: white;
+	border-color: #EC6D63;
+	border-radius: 10px;
+	padding: 10px;
+	margin-top: 6px;
+	margin-bottom: 10px;
+	color: #EC6D63;
+	font-size: 15px;
+	font-weight: 600;
+	border-style: solid;
+}
+
+#paymentBtn:hover {
+	background-color: #EC6D63;
+	color: white;
+}
+.paymentResult {
+	text-align: center;
+}
+.fa-gift{
+	font-size: 114px;
+}
+.fa-gift+h1{
+	font-size: 24px;
+    /* font-weight: bolder; */
+    text-align: center;
+    padding-bottom: 30px;
+    line-height: 30px;
+}
+.paymentSuccessInfo {
+    width: 392px;
+    height: 153px;
+    padding: 69px;
+    background-color: white;
+    box-shadow: 2px 2px 5px 0.5px rgba(33, 33, 33, 0.2);
+    margin: 0 auto;
+}
+#paymentResult * {
+	color: #665A5A;
+}
+
+#paymentResult #container {
+	width: 538px;
+	margin: 80px auto
+}
+.paymentSuccessInfo p{
+	font-size: 17px;
+    line-height: 30px;
+}
+.paymentContent{
+	float: left;
+	text-align: left;
+}
+.paymentContent+.paymentContent{
+	margin-left: 50px;
 }

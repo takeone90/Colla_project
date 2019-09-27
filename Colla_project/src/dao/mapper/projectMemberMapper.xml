@@ -20,6 +20,5 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<resultMap type="projectMember" id="pmMap">
 		<result column="p_num" property="pNum"/>
 		<result column="m_num" property="mNum"/>
-		<result column="pm_regdate" property="pmRegDate"/>
 	</resultMap>
 </mapper>

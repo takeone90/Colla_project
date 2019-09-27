@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/jsp/inc/head.jsp" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
 <title>Payment</title>
 <link rel="stylesheet" type="text/css" href="${contextPath }/css/headerMain.css"/>
@@ -8,25 +9,40 @@
 <link rel="stylesheet" type="text/css" href="${contextPath }/css/main.css"/>
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 </head>
+
+<script>
+
+</script>
 <body>
 	<div id="wrap">
 		<%@ include file="/WEB-INF/jsp/inc/headerMain.jsp" %>
-		<section id="paymentAll">
-			<div id="container">
-				<h1>카카오 페이 결제가 정상적으로 완료되었습니다!</h1>
-				<p id="paymentInfo"></p>
-				<div>
-					<p>결제일시 : ${param.approved_at }</p>
-					<p>주문번호 : ${param.partner_order_id }</p>
-					<p>상품명 : ${param.item_name}</p>
-					<p>결제금액 : ${param.total }</p>
-					<p>결제방법 : ${param.payment_method_type}</p>
-				
+		<div>
+			<section id="paymentResult" class="paymentResult">
+				<div id="container" class="clearFix">
+					<i class="fa fa-gift" aria-hidden="true"></i>
+					<h1>정상적으로 완료되었습니다!<br>
+					아래 주문 정보를 다시 한번 확인해주세요.</h1>
+					<div class="paymentSuccessInfo clearFix">
+						<div class="paymentContent">
+							<p>결제일시</p>
+							<p>주문번호</p>
+							<p>상품명</p>
+							<p>결제금액</p>
+							<p>결제방법</p>
+						</div>
+						<div class="paymentContent">
+							<%-- <fmt:formatDate value="${param.approved_at }"/> --%>
+							<p>${param.approved_at }</p>
+							<p>${param.partner_order_id }</p>
+							<p>${param.item_name}</p>
+							<p>${param.total }</p>
+							<p>${param.payment_method_type}</p>
+						</div>
+					</div>
 				</div>
-			</div>
-		</section>
-		
-		<div class="box"><%@ include file="/WEB-INF/jsp/inc/footerMain.jsp" %></div>
+			</section>
+			<div class="box"><%@ include file="/WEB-INF/jsp/inc/footerMain.jsp" %></div>
+		</div>
 	</div>
 </body>
 </html>

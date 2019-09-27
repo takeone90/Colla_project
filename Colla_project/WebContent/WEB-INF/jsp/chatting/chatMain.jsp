@@ -197,6 +197,25 @@ var mapContainer = null;
 		});
 	});
 	
+  
+		searchListDiv = $("#searchContent");
+		showFavoriteList();
+		showMemberList();
+		$("#nav--memberManagement").show();
+		//탭버튼 클릭 이벤트
+		$("#InnerBtns .navInnerBtn a.btn").click(function(){
+			if($(this).hasClass("active")){
+				return false;
+			} else {
+				$(this).parent().parent().find("a.active").removeClass("active");
+				$(this).addClass("active");
+				$(".navContent-wrap").hide();
+				let content = $(this).attr("data-content");
+				$("#nav--"+content).show();
+			}
+			return false;
+		});
+    
 	
 	
 });<%--------------------------------------------onload function end----------------------------------------------------%>
@@ -714,7 +733,6 @@ var mapContainer = null;
 		return false;
 	}
 
-	//채팅방 안에 멤버리스트 보여주고 초대할수 있다
 	function showLoginNow(num, bool){
 		if(bool){
 			$("#navMList").find("div[data-num='"+num+"']").css({borderColor : "#E5675A"});
@@ -826,10 +844,10 @@ var mapContainer = null;
 				<div id="openChatNavBox" class="animated bounceInRight"><i class="fas fa-angle-double-left"></i></div><!-- 슬라이드 메뉴 열 수 있는 띠 -->
 				<div id="chatNav" align="center">
 					<ul id="InnerBtns" class="clearFix">
-						<li class="navInnerBtn"><a href="#" class="btn active" data-content="favorite">즐겨찾기</a></li>
-						<li class="navInnerBtn"><a href="#" class="btn" data-content="memberManagement">멤버관리</a></li>
-						<li class="navInnerBtn"><a href="#" class="btn" data-content="search">검색</a></li>
-						<li class="navInnerBtn"><a href="#" class="btn" data-content="canvas">캔버스</a></li>
+						<li class="navInnerBtn"><a href="#" class="btn active" data-content="memberManagement">멤버관리</a></li>
+						<li class="navInnerBtn"><a href="#" class="btn" data-content="canvas">일정관리</a></li>
+						<li class="navInnerBtn"><a href="#" class="btn" data-content="favorite">즐겨찾기</a></li>
+						<li class="navInnerBtn"><a href="#" class="btn" data-content="search">채팅검색</a></li>
 					</ul>
 					<div id="chatNavContent" align="left">
 						<div id="nav--favorite" class="navContent-wrap">
@@ -865,7 +883,7 @@ var mapContainer = null;
 								</form>
 							</div>
 							<div id="searchContent"></div>
-							<div id="pageNav"></div>
+<!-- 							<div id="pageNav"></div> -->
 						</div>
 						<div id="nav--canvas" class="navContent-wrap">
 						

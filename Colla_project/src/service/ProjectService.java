@@ -1,5 +1,6 @@
 package service;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,11 +13,16 @@ import model.Project;
 public class ProjectService {
 	@Autowired
 	private ProjectDao pDao;
-	public int addProject(String pName,int wNum) {
+	public int addProject(String pName,int wNum,String pDetail,Date pStartDate,Date pEndDate,int crNum,int mNum) {
 		int pNum = 0;
 		Project project = new Project();
 		project.setpName(pName);
 		project.setwNum(wNum);
+		project.setCrNum(crNum);
+		project.setmNum(mNum);
+		project.setpDetail(pDetail);
+		project.setpEndDate(pEndDate);
+		project.setpStartDate(pStartDate);
 		if(pDao.insertProject(project)>0) {
 			pNum = project.getpNum();
 		}
@@ -38,6 +44,9 @@ public class ProjectService {
 	}
 	public Project getProject(int pNum) {
 		return pDao.selectProject(pNum);
+	}
+	public Project getProjectByCrNum(int crNum) {
+		return pDao.selectProjectByCrNum(crNum);
 	}
 	public List<Project> getAllProjectByMnum(int mNum){
 		return pDao.selectAllProjectByMnum(mNum);

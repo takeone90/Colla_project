@@ -18,27 +18,24 @@
 <!-- 		<property name="username" value="colla"/> -->
 <!-- 		<property name="password" value="wlftndjqtwh19"/> -->
 <!-- 	</bean> -->
-	
 	<bean id="uploadPath" class="java.lang.String">
 		<constructor-arg value="C:\temp\"></constructor-arg>
 	</bean>
-	
-	<util:map id="connectorList" key-type="String" value-type="Object"></util:map>
+	<util:map id="connectorList" key-type="String" value-type="Object"></util:map>  
 	<context:component-scan base-package="service"></context:component-scan>
-	
 	<!-- 히카리 dataSource -->
-	<bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
-		<property name="driverClassName" value="oracle.jdbc.OracleDriver"/>
-		<property name="jdbcUrl" value="jdbc:oracle:thin:@colladb.crxlp3iv2we2.ap-northeast-1.rds.amazonaws.com:1521/ORCL"/>
-		<property name="username" value="colla"/>
-		<property name="password" value="wlftndjqtwh19"/>
-	</bean>
-	<bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource" destroy-method="close">
-		<constructor-arg ref="hikariConfig"/>
+<!-- 	<bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig"> -->
 <!-- 		<property name="driverClassName" value="oracle.jdbc.OracleDriver"/> -->
 <!-- 		<property name="jdbcUrl" value="jdbc:oracle:thin:@colladb.crxlp3iv2we2.ap-northeast-1.rds.amazonaws.com:1521/ORCL"/> -->
 <!-- 		<property name="username" value="colla"/> -->
 <!-- 		<property name="password" value="wlftndjqtwh19"/> -->
+<!-- 	</bean> -->
+	<bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource" destroy-method="close">
+		<property name="driverClassName" value="oracle.jdbc.OracleDriver"/>
+		<property name="jdbcUrl" value="jdbc:oracle:thin:@colladb.crxlp3iv2we2.ap-northeast-1.rds.amazonaws.com:1521/ORCL"/>
+		<property name="username" value="colla"/>
+		<property name="password" value="wlftndjqtwh19"/>
+<!-- 		<constructor-arg ref="hikariConfig"/> -->
 	</bean>
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource"/>
@@ -101,6 +98,10 @@
 		<property name="sqlSessionFactory" ref="sqlSessionFactory"/>
 		<property name="mapperInterface" value="dao.AlarmDao"/>
 	</bean>
+	<bean id="paymentDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+		<property name="mapperInterface" value="dao.PaymentDao"/>
+  </bean>
 	<bean id="projectDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
 		<property name="sqlSessionFactory" ref="sqlSessionFactory"/>
 		<property name="mapperInterface" value="dao.ProjectDao"/>
@@ -113,13 +114,11 @@
 		<property name="sqlSessionFactory" ref="sqlSessionFactory"/>
 		<property name="mapperInterface" value="dao.TodoDao"/>
 	</bean>
-	
 	<bean id ="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name="dataSource" ref="dataSource"/>
-	</bean>	
+	</bean>
 	<tx:annotation-driven transaction-manager="txManager"/>
 	<!-- Multifile upload -->
-	
 	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 		<property name="maxUploadSize" value="5242880"></property> <!-- 5MB -->
 		<property name="maxInMemorySize" value="1048576"></property> <!-- 1MB -->

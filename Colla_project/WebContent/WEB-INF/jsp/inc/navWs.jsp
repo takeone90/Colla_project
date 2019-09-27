@@ -28,13 +28,6 @@
 	}
 	$(function(){
 		loadChatList();
-		
-		//프로필 이미지 누르면 모달 뜨게 하기
-// 		$(".profileImg").on("click",function(){
-// 			showProfileInfoModal();
-// 		});
-		
-		
 		//회원정보 모달 닫기
 		$(".closeMemberInfo").on("click",function(){
 			$("#memberInfoModal").fadeOut(100);
@@ -52,12 +45,15 @@
 				chatList.empty();
 				if( crNum ){
 					$.each(d,function(idx,item){
-						var str='<li '+ ( crNum==item.crNum?'class="currChat"':"")+'><a href="${contextPath}/chatMain?crNum='+item.crNum+'">'+item.crName+'</a></li>';
-						chatList.append(str);
+						var str='<li '+ ( crNum ==item.crNum?'class="currChat"':"")+' onclick="goToChatRoom('+item.crNum+')">'+item.crName+'</li>';
+					chatList.append(str);
 					});
 				}
 			}
 		});
+	}
+	function goToChatRoom(crNum){
+		location.href="${contextPath}/chatMain?crNum="+crNum;
 	}
 </script>
 <div id="wsNav">
@@ -94,22 +90,33 @@
 			});
 		</script>
 		<div id="myChatList">
-			<h3>
-				My Chats
-			</h3>
+		<script>
+			$(function(){
+				var myChatOpen = 1;
+				$("#myChatList h3").on("click",function(){
+					$(".chatList").toggle();
+				});
+			});
+			
+		</script>
+			<h3>Chat <i class="fas fa-angle-down"></i></h3>
 			<ul class="chatList">
 			</ul>
 		</div>
-		<div id="subfunction" align="center">
-		<hr>
-		<ul id="ws-subfunction" class="clearFix">
-			<li>
-				<a href="${contextPath}/calMonth">Calendar</a>
-			</li>
-			<li>
-				<a href="${contextPath}/board/list">Board</a>
-	    	</li>
-		</ul>
+		<div id="projectDiv">
+			<h3>
+				<a href="projectMain?wNum=${sessionScope.currWnum}">Project</a>
+			</h3>
+		</div>
+		<div id="boardDiv">
+			<h3>
+				<a href="${contextPath}/board/list?wNum=${sessionScope.currWnum}">Board</a>
+			</h3>
+		</div>
+		<div id="calendarDiv">
+			<h3>
+				<a href="${contextPath}/calMonth?wNum=${sessionScope.currWnum}">Calendar</a>
+			</h3>
 		</div>
 		<div id="removeMemberDiv"><button onclick="location.href='${contextPath}/removeMember'">탈퇴</button></div>
 	</div>
