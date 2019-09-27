@@ -21,6 +21,4 @@ public class ProjectMember {
 	public String toString() {
 		return "ProjectMember [pNum=" + pNum + ", mNum=" + mNum + "]";
 	}
-	
-	
 }

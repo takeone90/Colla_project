@@ -6,13 +6,26 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import dao.ChatRoomDao;
+import dao.ChatRoomMemberDao;
 import dao.ProjectDao;
+import dao.ProjectMemberDao;
+import model.ChatRoom;
+import model.ChatRoomMember;
 import model.Project;
+import model.ProjectMember;
 
 @Service
 public class ProjectService {
 	@Autowired
 	private ProjectDao pDao;
+	@Autowired
+	private ProjectMemberDao pmDao;
+	@Autowired
+	private ChatRoomDao crDao;
+	@Autowired
+	private ChatRoomMemberDao crmDao;
+	
 	public int addProject(String pName,int wNum,String pDetail,Date pStartDate,Date pEndDate,int crNum,int mNum) {
 		int pNum = 0;
 		Project project = new Project();
@@ -23,11 +36,26 @@ public class ProjectService {
 		project.setpDetail(pDetail);
 		project.setpEndDate(pEndDate);
 		project.setpStartDate(pStartDate);
-		if(pDao.insertProject(project)>0) {
+		if(pDao.insertProject(project)>0) { //프로젝트 멤버 추가
 			pNum = project.getpNum();
-		}
+			ProjectMember pm = new ProjectMember();
+			pm.setmNum(mNum);
+			pm.setpNum(pNum);
+			pmDao.insertProjectMember(pm);
+		} // 프로젝트 추가 끝
+		ChatRoom chatRoom = new ChatRoom();
+		chatRoom.setCrName(pName); //프로젝트 이름 = 채팅방 이름
+		chatRoom.setmNum(mNum);
+		chatRoom.setwNum(wNum);
+		if(crDao.insertChatRoom(chatRoom)>0) { //프로젝트 멤버를 채팅방 멤버 추가?..
+			ChatRoomMember crm = new ChatRoomMember();
+			crm.setCrNum(crNum);
+			crm.setwNum(wNum);
+			crmDao.insertChatRoomMember(crm);
+		} // 채팅방 추가 끝
 		return pNum;
 	}
+	
 	public boolean removeProject(int pNum) {
 		boolean result = false;
 		if(pDao.deleteProject(pNum)>0) {
