@@ -309,30 +309,60 @@ td {
 .dateDiv div {
 	display: inline-block;
 }
+.dateDiv {
+	display: inline-block;
+    width: 55%;
+}
+.checkboxDiv input {
+	display: none;
+}
+.checkboxbtn {
+	font-family: 'Noto Sans KR';
+    font-size: 1rem;
+    height: 2rem;
+    font-weight: 400;
+    vertical-align: middle;
+    display: inline-block;
+    /* padding: 0 20px; */
+    line-height: 30px;
+    color: #fff;
+    border-radius: 5px;
+    background-color: #655B5A;
+    transition: background-color 0.5s;
+    border: 0 none;
+    cursor: pointer;
+}
 .titleDiv {
     width: 60%;
+    margin-right: 20px;
+}
+.selectDiv {
+	margin-right: 20px;
 }
 .dateDiv div {
-/* 	width: 45%; */
+    width: 44%;
 }
 .dateDiv input {
-/* 	width: 60%; */
+	width: 100%;
 }
 .dateDiv span {
-/* 	margin-right: 10px; */
+	margin: 7px;
+    font-weight: 900;
 }
 .checkboxDiv {
+	width: 44%;
 }
 .checkboxDiv input {
 	margin: 0px 5px 0px 0px;
 }
 .checkboxDiv label {
-	margin-left: 10px;
+	margin-left: 3px;
 }
 .colorDiv img {
 	display: none;
 }
 .colorDiv input {
+	padding: 0px;
 	cursor: pointer;
 }
 .modalTitle {
@@ -343,15 +373,15 @@ td {
 }
 
 #innerBtn {
-	margin-top: 10px;
+	margin-top: 25px;
+	text-align: center;
 }
 
 #innerBtn a {
 	display: inline-block;
 	position: relative;
-	width: 100%;
-	padding: 5px;
-	margin-bottom: 5px;
+	width: 30%;
+    padding: 10px 0px;
 	background-color: #eb4034;
 	color: white;
 	text-align: center;

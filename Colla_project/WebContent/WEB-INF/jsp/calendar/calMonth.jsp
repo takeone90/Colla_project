@@ -1,11 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/jsp/inc/head.jsp" %>
-
+	
 <title>calMonth</title>
 <link rel="stylesheet" type="text/css" href="${contextPath}/css/headerWs.css"/>
 <link rel="stylesheet" type="text/css" href="${contextPath}/css/navWs.css"/>
 <link rel="stylesheet" type="text/css" href="${contextPath}/css/calMonth.css"/>
+  
 <script type="text/javascript">
 $(function() {
 	$("#yearCalendar").hide();
@@ -827,10 +828,11 @@ function nextYearYear() {
 						<span>~</span>
 						<div><input type="date" name="endDate" id="endDate"></div>
 					</div>
-					<div class="checkboxDiv">
-						<label><input type="checkbox" name="yearCalendar" id="addYearCalendar" value="yearCalendar">연간 달력 표시</label> 
-						<label><input type="checkbox" name="annually" id="addAnnually" value="annually">매년 반복</label>
-						<label><input type="checkbox" name="monthly" id="addMonthly" value="monthly">매월 반복</label>
+
+					<div class="checkboxDiv btn-group-toggle" data-toggle="buttons">
+						<label class="checkboxbtn"><input type="checkbox" name="yearCalendar" id="addYearCalendar" value="yearCalendar">연간 달력</label> 
+						<label class="checkboxbtn"><input type="checkbox" name="annually" id="annually" value="annually">매년 반복</label>
+						<label class="checkboxbtn"><input type="checkbox" name="monthly" id="addMonthly" value="monthly">매월 반복</label>
 					</div>
 					<div>
 						<h4>내용</h4>
