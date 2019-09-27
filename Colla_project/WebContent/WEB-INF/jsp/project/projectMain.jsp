@@ -22,7 +22,7 @@
 			return false;
 		});
 		
-		$("#exitProject").on("click",function(){
+		$(".exitProject").on("click",function(){
 			if(confirm("프로젝트를 나가시겠습니까?")==true){
 				alert("프로젝트 나가기 성공")
 // 				$.ajax({
@@ -59,31 +59,35 @@
 		<button id="addProjectBtn">프로젝트 추가</button>
 			<div id="projectArea">
 				
-				
+				<c:forEach items="${projectList}" var="pl">
+					<!-- 반복 -->
 				<div class="project">
-					<h3>프로젝트 이름</h3>
+					<h3>${pl.pInfo.pName}</h3>
 					<div class="projectInnerBtnBox">
 						<a href="#">채팅방</a>
-						<!-- todoMain?pNum=1&tdNum=1 이런 요청으로 가야함 -->
+						<!-- todoMain?pNum=1 이런 요청으로 가야함 -->
 						<a href="todoMain">Todo리스트</a>
 						<a href="#" onclick='openModifyProjectModal();'>수정</a>
-						<a href="#" id="exitProject">나가기</a>
+						<a href="#" class="exitProject">나가기</a>
 					</div>
-					<div class="projectDetail">프로젝트 설명~</div>
-					<div class="progress">프로젝트 진척률
-						<div class="projectDate">프로젝트 기간</div>
+					<div class="projectDetail">${pl.pInfo.pDetail}</div>
+					<div class="progress">${pl.pInfo.progress}
+						<div class="projectDate">${pl.pInfo.pStartDate} ~ ${pl.pInfo.pEndDate}</div>
 					</div>
 					
 					<div class="projectMember">
 						<p>참여자 목록</p>
 						<ul>
-							<li>아무개1</li>
-							<li>아무개2</li>
-							<li>아무개3</li>
+						<c:forEach items="${pl.pmList}" var="pm">
+							<li>${pm.mNum}</li>
+						</c:forEach>
+							
 						</ul>
 					</div>
 					
-				</div>
+				</div><!-- 반복 종료 -->
+				</c:forEach>
+				
 				
 				
 			</div><!-- end projectArea -->

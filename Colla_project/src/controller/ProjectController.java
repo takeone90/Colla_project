@@ -48,6 +48,7 @@ public class ProjectController {
 			pMap.put("pmList", pmList); //프로젝트 소속 멤버
 			projectList.add(pMap);
 		}
+		
 		model.addAttribute("projectList", projectList);
 		
 		Workspace ws = wService.getWorkspace(wNum);
