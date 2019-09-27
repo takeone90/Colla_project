@@ -51,30 +51,29 @@
     padding: 6px 0px 6px 0px;
     text-align: right;
 }
-#myChatList h3:hover,#projectDiv h3:hover{
+#myChatList h3:hover{
 	cursor: pointer;
 	color :	#E5675A; 
 }
-#boardDiv a:hover,#calendarDiv a:hover{
+#boardDiv a:hover,#calendarDiv a:hover,#projectDiv a:hover{
 	color: #E5675A;
 }
-#myChatList h3,#projectDiv h3{
+#myChatList h3{
 	display : inline-block;
 	font-size : 20px;
 	font-weight : bolder;
 	padding:0 8px 5px 0px;
 }
-#boardDiv h3,#calendarDiv h3{
+#boardDiv h3,#calendarDiv h3,#projectDiv h3{
 	font-size : 20px;
 	font-weight : bolder;
 	padding:0 25px 5px 0px;
 }
-#myChatList h3 svg,#projectDiv h3 svg{
+#myChatList h3 svg{
 	font-size : 15px;
 }
 #myChatList ul{
     padding-top: 5px;
-    min-height: 118px;
 }
 #myChatList ul li{
 	padding:10px 20px 10px 10px;
@@ -99,18 +98,7 @@
 #myChatList ul li.currChat:hover{
 	background-color: #ed7b6f;
 }
-#projectDiv li{
-	padding: 10px 22px 10px 0px;
-    font-size: 13px;
-}
-#projectDiv li:hover{
-	background-color : #4f4a4a;
-	cursor : pointer;
-}
 
-#projectList{
-	display: none;
-}
 .wsSelectOption{
 	background-color: #403C39;
 	padding : 5px;

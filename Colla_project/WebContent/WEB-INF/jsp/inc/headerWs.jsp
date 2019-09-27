@@ -302,6 +302,8 @@ $(function(){
 		}
 	}else if(pageType=="workspace"){
 		$("#chatRoomInfo > p").text("워크스페이스");
+	}else if(pageType=="project"){
+		$("#chatRoomInfo > p").text("프로젝트");
 	}else{
 		$("#chatRoomInfo > p").text("${sessionScope.wsName}");
 	}

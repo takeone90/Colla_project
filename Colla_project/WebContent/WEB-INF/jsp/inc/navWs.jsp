@@ -28,13 +28,6 @@
 	}
 	$(function(){
 		loadChatList();
-		
-		//프로필 이미지 누르면 모달 뜨게 하기
-// 		$(".profileImg").on("click",function(){
-// 			showProfileInfoModal();
-// 		});
-		
-		
 		//회원정보 모달 닫기
 		$(".closeMemberInfo").on("click",function(){
 			$("#memberInfoModal").fadeOut(100);
@@ -103,9 +96,6 @@
 				$("#myChatList h3").on("click",function(){
 					$(".chatList").toggle();
 				});
-				$("#projectDiv h3").on("click",function(){
-					$("#projectList").toggle();
-				});
 			});
 			
 		</script>
@@ -115,13 +105,8 @@
 		</div>
 		<div id="projectDiv">
 			<h3>
-				Project <i class="fas fa-angle-down"></i>
+				<a href="projectMain?wNum=${sessionScope.currWnum}">Project</a>
 			</h3>
-			<ul id="projectList">
-				<li class="project">더미1</li>
-				<li class="project">더미2</li>
-				<li class="project">더미3</li>
-			</ul>
 		</div>
 		<div id="boardDiv">
 			<h3>
