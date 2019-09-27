@@ -2,7 +2,10 @@
 package service;
 
 import java.net.URI;
+import java.util.Date;
+import java.util.Random;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -11,15 +14,20 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
+import dao.PaymentDao;
 import model.License;
+import model.Payment;
 import model.kakaoPay.KakaoPayApprovalVO;
 import model.kakaoPay.KakaoPayReadyVO;
 
 @Service
 public class PaymentService {
+	
+	@Autowired
+	private PaymentDao paymentDao;
 
 	private static final String HOST = "https://kapi.kakao.com";
-	private static final String COLLAPATH = "http://localhost:8081/Colla_project";
+	private static final String COLLAPATH = "http://localhost:8081";
 
 	private KakaoPayReadyVO kakaoPayReadyVO;
 	private KakaoPayApprovalVO kakaoPayApprovalVO;
@@ -34,7 +42,7 @@ public class PaymentService {
 
 		MultiValueMap<String, String> params = new LinkedMultiValueMap<String, String>();
 		params.add("cid", "TC0ONETIME");
-		params.add("partner_order_id", "1001");
+		//params.add("partner_order_id", new Date() + getRandomNumber());
 		params.add("partner_user_id", "admin");
 		params.add("item_name", "[COLLA]" + license.getType());
 		params.add("quantity", "1");
@@ -86,6 +94,23 @@ public class PaymentService {
 			e.printStackTrace();
 		}
 		return null;
+	}
+	public boolean addPaymentInfo(Payment payment) {
+		if(paymentDao.insertPayment(payment)>0) {
+			return true;
+		}
+		return false;
+	}
+	public String getRandomNumber() {
+		Random random = new Random(System.currentTimeMillis());
+		int numberLength = 7;
+		int range = (int)Math.pow(10,numberLength);
+		int trim = (int)Math.pow(10,numberLength-1);
+		int result = random.nextInt(range)+trim;
+		if(result>range) {
+			result = result - trim;
+		}
+		return String.valueOf(result);
 	}
 
 }
