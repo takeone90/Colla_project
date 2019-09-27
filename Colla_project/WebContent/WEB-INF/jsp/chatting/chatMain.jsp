@@ -855,17 +855,19 @@ var mapContainer = null;
 						<div id="nav--memberManagement" class="navContent-wrap">
 							<form action="inviteChatMember" id="inviteForm">
 								<p class="navInfoMsg">워크스페이스의 멤버를 채팅방에 추가할 수 있습니다.</p>
-								<h4>채팅방 참여자</h4>
 								<div id="navMList">
 									<input type="hidden" class="addCrNum" name="crNum" value="${chatRoom.crNum }" />
 									<input type="hidden" id="wNum" name="wNum" value="${wNum }" />
-									<ul id='crmListUL' class='isntDefault'></ul>
+									<div id="crmListUL-wrap">
+										<h4>채팅방 참여자</h4>
+										<ul id='crmListUL' class='isntDefault'></ul>
+									</div>
 									<div id="wsmListUl-wrap" style="${chatRoom.crIsDefault==1?'display:none':''}">
 										<h4>초대 가능한 워크스페이스 멤버</h4>
 										<ul id='wsmListUL'></ul>
-										<div align='center'>
-											<button type='submit' id='inviteWsmBtn'>선택한 멤버 초대하기</button>
-										</div>
+									</div>
+									<div align='center'>
+										<button type='submit' id='inviteWsmBtn'>선택한 멤버 초대하기</button>
 									</div>
 								</div>
 							</form>							
