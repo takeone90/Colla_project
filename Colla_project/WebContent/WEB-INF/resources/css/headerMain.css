@@ -29,7 +29,7 @@
 }
 #header nav {  
 	position:relative;
-	width:calc(100% - 300px);
+	width:calc(100% - 600px);
 	height:100%;
 	float:left;
 }
@@ -54,7 +54,7 @@
 	color:#EC6D63;
 }
 #member-nav{
-	width:150px;
+	float:right;
 	height:100%;
 }
 #member-nav ul{
@@ -62,18 +62,11 @@
 	height:100%;
 }
 #member-nav ul li {
-	float:left;
-	width:46%;
-	height:100%;
-	margin-left:4%;
-	text-align:center;
-	position:relative;
+	margin-top: 10px;
+	display:inline-block;
 }
 
 #member-nav ul li .member-btn{
-	position:absolute;
-	bottom:0;
-	right:0;
 }
 a.member-btn {
 	display:block;
