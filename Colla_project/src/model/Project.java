@@ -79,6 +79,4 @@ public class Project {
 				+ ", pRegDate=" + pRegDate + ", pDetail=" + pDetail + ", pStartDate=" + pStartDate + ", pEndDate="
 				+ pEndDate + ", crNum=" + crNum + ", mNum=" + mNum + "]";
 	}
-	
-	
 }

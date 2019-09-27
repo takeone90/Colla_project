@@ -87,7 +87,4 @@ public class Todo {
 				+ tdEndDate + ", isComplete=" + isComplete + ", completeDate=" + completeDate + ", priority=" + priority
 				+ "]";
 	}
-	
-	
-	
 }
