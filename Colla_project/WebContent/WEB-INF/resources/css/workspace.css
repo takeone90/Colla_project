@@ -33,7 +33,7 @@ input {
 	margin-top : 10px;
 	margin-bottom: 10px;	
 }
-#myChatList{
+#myChatList,#projectDiv,#boardDiv,#calendarDiv{
 	display: none;
 }
 #ws-subfunction{

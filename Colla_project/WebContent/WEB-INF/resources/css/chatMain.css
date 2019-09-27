@@ -456,7 +456,7 @@ pre .CodeMirror-line{
 	height: 200px;
 	border-radius: 7px;
 	position: relative;
-	border: 1px solid #2f2f2f;
+	border: 1px solid #d6d6d6;
 	overflow: hidden;
 }
 .staticMapInfo{
@@ -468,12 +468,12 @@ pre .CodeMirror-line{
 }
 .placeName{
 	font-size: 13px;
-	padding: 5px;
+	padding: 8px;
 }
 .placeAddr{
 	font-size: 11px;
 	color : #A6A6A6;
-	padding-left: 5px;
+	padding-left: 8px;
 }   
 
 #chatNavBox{
@@ -522,9 +522,9 @@ pre .CodeMirror-line{
 
 /************************ TKLEE **************************/
 #chatNavContent .navContent-wrap{
-	height:100%;
+	height:96%;
 }
-#chatNavContent .navContent-wrap:not(:first-child){ display:none; }
+#chatNavContent .navContent-wrap{ display:none; }
 
 #chatNavContent .navInfoMsg{
 	text-align : center;
@@ -648,7 +648,7 @@ input[type=radio]{
 	width : 98%;
 	border-radius : 5px;
 	margin-left : 1%;
-	height : calc(100% - 190px);
+	height : calc(100% - 56px);
 	background-color: #f7f3f0;
 	align-self: center;
 	border: 1px solid #d4cbcb;
@@ -703,7 +703,8 @@ input[type=radio]{
 	border-radius : 7px;
     border: none;
     cursor: pointer;
-    margin-top: 9px;
+    margin-top: -7px;
+    margin-bottom: 18px;
 }
 #inviteWsmBtn:hover{
 	background-color : #E5675A;

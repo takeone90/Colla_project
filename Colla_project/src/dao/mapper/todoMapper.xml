@@ -7,17 +7,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<selectKey resultType="int" keyProperty="tdNum" order="BEFORE">
 			select td_seq.nextval from dual
 		</selectKey>
-		insert into todo(td_num,td_content,p_num,m_num,td_deadLine,td_completedate)
-		values(#{tdNum},#{tdContent},#{pNum},#{mNum},#{deadLine},#{completeDate})
+		insert into todo(td_num,td_title,td_content,p_num,m_num_to,m_num_from,td_startdate,td_enddate,td_completedate)
+		values(#{tdNum},#{tdTitle},#{tdContent},#{pNum},#{mNumTo},#{mNumFrom},#{tdStartDate},#{tdEndDate},#{completeDate})
 	</insert>
 	<delete id="deleteTodo" parameterType="int">
 		delete todo where td_num=#{tdNum}
 	</delete>
 	<update id="updateTodo" parameterType="todo">
 		update todo set td_content=#{tdContent},
+						td_title=#{tdTitle},
+						m_num_to=#{mNumTo},
+						m_num_from=#{mNumFrom},
 						td_isComplete=#{isComplete},
 						td_priority=#{priority},
-						td_deadline=#{deadLine},
+						td_Enddate=#{tdEndDate},
 						td_completedate=#{completeDate}
 		where td_num=#{tdNum}
 	</update>
@@ -32,12 +35,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	<resultMap type="todo" id="tdMap">
 		<result column="td_num" property="tdNum"/>
+		<result column="td_title" property="tdTitle"/>
 		<result column="td_content" property="tdContent"/>
 		<result column="p_num" property="pNum"/>
-		<result column="m_num" property="mNum"/>
+		<result column="m_num_to" property="mNumTo"/>
+		<result column="m_num_from" property="mNumFrom"/>
 		<result column="td_iscomplete" property="isComplete"/>
 		<result column="td_priority" property="priority"/>
-		<result column="td_deadline" property="deadLine"/>
+		<result column="td_startdate" property="tdStartDate"/>
+		<result column="td_enddate" property="tdEndDate"/>
 		<result column="td_completedate" property="completeDate"/>
 	</resultMap>
 </mapper>
+
