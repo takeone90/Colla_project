@@ -43,6 +43,7 @@ $(function() {
 		$(".addModal")[0].reset();
 		$("#addForm").fadeIn(300);
 		$("#startDate").val(formatChangeHyphen(new Date())); //오늘 날짜로 고정
+		$("#endDate").val(formatChangeHyphen(new Date())); //오늘 날짜로 고정
 	});
 	//추가 모달 닫기
 	$("#addFormClose").on("click", function() {
@@ -803,31 +804,37 @@ function nextYearYear() {
 					<input type="hidden" name="mNum" id="mNum" value="${userData.mNum}">
 					<input type="hidden" name="wNum" id="wNum" value="${userData.wNum}">
 					<div>
-						<h4>일정</h4>
-						<input type="text" name="title" class="modalTitle" id="title">
-					</div>
-					<div>
-						<h4>기간</h4>
-						<span><input type="date" name="startDate" id="startDate">부터</span> <span><input type="date" name="endDate" id="endDate">까지</span>
-					</div>
-					<div>
-						<h4>내용</h4>
-						<textarea rows="1" cols="21" name="content" class="modalContent" id="content"></textarea>
-					</div>
-					<div>
-						<h4>타입</h4>
-						<select name="type">
-							<option value="project">프로젝트</option>
-							<option value="vacation">휴가</option>
-							<option value="event">행사</option>
+						<div class="titleDiv">
+							<h4>일정</h4>
+							<input type="text" name="title" class="modalTitle" id="title">
+						</div>
+						<div class="selectDiv">
+							<h4>타입</h4>
+							<select name="type">
+								<option value="project">프로젝트</option>
+								<option value="vacation">휴가</option>
+								<option value="event">행사</option>
 							</select>
+						</div>
+						<div class="colorDiv">
+							<h4>색</h4>
+							<input type="color" name="color" id="addColor" value="#fff">
+						</div>
+					</div>
+					<div class="dateDiv">
+						<h4>기간</h4>
+						<div><input type="date" name="startDate" id="startDate"></div>
+						<span>~</span>
+						<div><input type="date" name="endDate" id="endDate"></div>
+					</div>
+					<div class="checkboxDiv">
 						<label><input type="checkbox" name="yearCalendar" id="addYearCalendar" value="yearCalendar">연간 달력 표시</label> 
 						<label><input type="checkbox" name="annually" id="addAnnually" value="annually">매년 반복</label>
 						<label><input type="checkbox" name="monthly" id="addMonthly" value="monthly">매월 반복</label>
 					</div>
 					<div>
-						<h4>색</h4>
-						<input type="color" name="color" id="addColor" value="#fffde8">
+						<h4>내용</h4>
+						<textarea rows="3" cols="21" name="content" class="modalContent" id="content"></textarea>
 					</div>
 					<div id="innerBtn">
 						<a href="#" id="addSchedule">추가</a>
