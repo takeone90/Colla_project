@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.PaymentDao">
+	<insert id="insertPayment" parameterType="payment">
+		insert into payment
+		values(pm_seq.nextval,#{item},#{amount},#{date},#{mNum},#{phone},#{name},#{orderId})
+	</insert>
+	<resultMap type="payment" id="paymentMap">
+		<result column="pm_num" property="num"/>
+		<result column="pm_item" property="item"/>
+		<result column="pm_amount" property="amount"/>
+		<result column="pm_date" property="date"/>
+		<result column="m_num" property="mNum"/>
+		<result column="pm_phone" property="phone"/>
+		<result column="pm_name" property="name"/>
+		<result column="pm_order_id" property="orderId"/>
+	</resultMap>
+</mapper>
