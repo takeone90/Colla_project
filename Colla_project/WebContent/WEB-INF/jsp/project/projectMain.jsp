@@ -66,7 +66,7 @@
 					<div class="projectInnerBtnBox">
 						<a href="#">채팅방</a>
 						<!-- todoMain?pNum=1 이런 요청으로 가야함 -->
-						<a href="todoMain">Todo리스트</a>
+						<a href="todoMain?pNum=${pl.pInfo.pNum}">Todo리스트</a>
 						<a href="#" onclick='openModifyProjectModal();'>수정</a>
 						<a href="#" class="exitProject">나가기</a>
 					</div>
@@ -100,8 +100,8 @@
 			</div>
 			<div class="modalBody">
 				<p>프로젝트를 만들고 멤버를 초대하세요</p>
-<!-- 				<form action="addWs" method="post"> -->
-<%-- 					<input type="hidden" value="${_csrf.token}" name="${_csrf.parameterName}"> --%>
+				<form action="addProject" method="post">
+					<input type="hidden" value="${_csrf.token}" name="${_csrf.parameterName}">
 					<div class="addPjInputWrap">
 						<div class="row">
 							<h4>프로젝트 이름</h4>
@@ -139,7 +139,7 @@
 						<button type="submit">Project만들기</button>
 						<button id="closePjModal">닫기</button>
 					</div>
-<!-- 				</form> -->
+				</form>
 			</div> <!-- end modalBody -->
 		</div><!-- end addProjectModal -->
 		<%------------------------------------프로젝트 수정 모달  ---------------------------------------%>

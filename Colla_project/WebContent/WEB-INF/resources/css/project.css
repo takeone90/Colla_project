@@ -13,6 +13,7 @@
 .project{
 	width: calc(100% - 58px);
     border: 1px solid black;
+    margin-bottom: 10px;
     padding: 21px;
 }
 .project h3{
