@@ -715,7 +715,11 @@ input[type=radio]{
     margin-left: 2px;
 }
 
-
+.content .chatHyperlink {
+	color:blue;
+	text-decoration:underline;
+	font-style : italic;
+}
 #nav--memberManagement .profileImg{
 	border: 3px solid #fff;
 }
