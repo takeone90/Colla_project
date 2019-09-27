@@ -27,8 +27,6 @@ $(function() {
 	thisMonthCalendar(today);
 	showSchedule(today);
 	markingOnDate(formatChange(today));
-	
-	
 	drag();
 	//모달 바깥 클릭 시 모달 닫기
 	$("#wsBody").on("mousedown", function(e) {
