@@ -798,7 +798,12 @@ var mapContainer = null;
 	function searchChatAndDraw(){
 		searchListDiv.empty();
 		var keywordType = $("#keywordType option:selected").val();
-		var keyword = $("#keyword").val();
+		var keyword = $("#keyword").val().trim();
+		if(!keyword){
+			$("#keyword").val("");
+			alert("검색어를 입력해주세요");
+			return false;
+		}
 		var crNum = $("#crNum").val();
 		$.ajax({
 			url : "${contextPath}/searchChatList",
