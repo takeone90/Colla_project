@@ -7,6 +7,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.Part;
@@ -151,5 +153,16 @@ public class ChatMessageService {
 		result.put("totalPage", getTotalPage(param));
 		return result;
 	}
-	
+
+	public String hyperlinkTransfer(String str) {
+        String regex = "([\\p{Alnum}]+)://([a-z0-9.\\-&/%=?:@#$(),.+;~\\_]+)";
+       // www 형식으로만 있는 부분까지 포함
+        String strHTML = str.replace(" www.", "<a href=\"http://www/\">http://www</a>."); 
+ 
+        Pattern p = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
+        Matcher m = p.matcher(strHTML);
+        String setLink = m.replaceAll(
+         "<a class='chatHyperlink' href='http://$2' target='_blank' title='http://$2'>http://$2</a>");
+        return setLink;
+	}
 }

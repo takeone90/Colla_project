@@ -228,8 +228,12 @@ public class ChatRoomController {
 			@DestinationVariable(value = "var1") String userEmail,
 			@DestinationVariable(value = "var2") String crNum) {
 		Member member = mService.getMemberByEmail(userEmail);
+		msg = cmService.hyperlinkTransfer(msg);
+		System.out.println("링크변환 : "+ msg);
+		
 		int cmNum = cmService.addChatMessage(Integer.parseInt(crNum), member.getNum(), msg, "message");
 		ChatMessage cm = cmService.getChatMessageByCmNum(cmNum);
+		
 		return cm;
 	}
 	// 코드메세지 받고 보내기
