@@ -23,10 +23,7 @@ public class TodoController {
 	@RequestMapping("/todoMain") //todoMain으로 이동
 	public String showTodoMain(int pNum, Model model) {
 		List<Todo> tList = tService.getAllTodoByPnum(pNum);
-		System.out.println("tList : "+tList);
-//		List<Map<String, Object>> todoList = new ArrayList<Map<String,Object>>();
-		
-		model.addAttribute("tList", tList);
+		model.addAttribute("tList", tList); //todo 리스트 입니다...
 		return "/project/todoMain";
 	}
 	
