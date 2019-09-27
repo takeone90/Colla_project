@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,17 +39,13 @@ public class ProjectController {
 	@RequestMapping("/projectMain") //projectMain으로 이동
 	public String showProjectMain(HttpSession session, int wNum, Model model) {
 		List<Project> pList = pService.getAllProjectByWnum(wNum); //프로젝트 리스트를 가져온다..
-		System.out.println("pList : "+pList);
 		List<Map<String, Object>> projectList = new ArrayList<Map<String,Object>>();
 		for(int i=0; i<pList.size(); i++) { //프로젝트 리스트를 돌면서..
 			int pNum = pList.get(i).getpNum();
-			System.out.println("pNum : "+pNum);
 			List<ProjectMember> pmList = pmService.getAllProjectMemberByPnum(pNum); // 각각의 프로젝트에 속한 멤버 가져오기
-			System.out.println("pmList : "+pmList);
 			Map<String, Object> pMap = new HashMap<String, Object>();
-			pMap.put("pmInfo", pList.get(i)); //프로젝트 정보 
+			pMap.put("pInfo", pList.get(i)); //프로젝트 정보 
 			pMap.put("pmList", pmList); //프로젝트 소속 멤버
-			System.out.println("pMap : "+pMap);
 			projectList.add(pMap);
 		}
 		model.addAttribute("projectList", projectList);
@@ -65,8 +62,17 @@ public class ProjectController {
 	
 	@ResponseBody
 	@RequestMapping(value="/addProject", method = RequestMethod.POST)
-	public int addProject(String pName, int wNum, String pDetail, Date pStartDate, Date pEndDate, int crNum, int mNum) {
-		int pNum = pService.addProject(pName, wNum, pDetail, pStartDate, pEndDate, crNum, mNum);
+	public int addProject(String pName, int wNum, String pDetail, Date pStartDate, Date pEndDate, int crNum, int mNum, HttpServletRequest request) {
+		int pNum = pService.addProject(pName, wNum, pDetail, pStartDate, pEndDate, crNum, mNum); //프로젝트 추가 & 채팅방 추가
+		//프로젝트 멤버 추가
+		String[] mNumList = request.getParameterValues("mNumList");
+		if(mNumList != null) {
+			for(String stringMnum : mNumList) {
+				int num = Integer.parseInt(stringMnum);
+				pmService.addProjectMember(pNum, num);
+			}
+		}
+		
 		return pNum;
 	}
 	@ResponseBody
