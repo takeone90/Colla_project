@@ -733,7 +733,6 @@ var mapContainer = null;
 		return false;
 	}
 
-<script>
 	function showLoginNow(num, bool){
 		if(bool){
 			$("#navMList").find("div[data-num='"+num+"']").css({borderColor : "#E5675A"});
