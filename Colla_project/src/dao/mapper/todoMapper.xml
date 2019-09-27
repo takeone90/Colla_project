@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.TodoDao">
+	<insert id="insertTodo" parameterType="todo">
+		<selectKey resultType="int" keyProperty="tdNum" order="BEFORE">
+			select td_seq.nextval from dual
+		</selectKey>
+		insert into todo(td_num,td_title,td_content,p_num,m_num_to,m_num_from,td_startdate,td_enddate,td_completedate)
+		values(#{tdNum},#{tdTitle},#{tdContent},#{pNum},#{mNumTo},#{mNumFrom},#{tdStartDate},#{tdEndDate},#{completeDate})
+	</insert>
+	<delete id="deleteTodo" parameterType="int">
+		delete todo where td_num=#{tdNum}
+	</delete>
+	<update id="updateTodo" parameterType="todo">
+		update todo set td_content=#{tdContent},
+						td_title=#{tdTitle},
+						m_num_to=#{mNumTo},
+						m_num_from=#{mNumFrom},
+						td_isComplete=#{isComplete},
+						td_priority=#{priority},
+						td_Enddate=#{tdEndDate},
+						td_completedate=#{completeDate}
+		where td_num=#{tdNum}
+	</update>
+	<select id="selectTodo" parameterType="int" resultMap="tdMap">
+		select * from todo where td_num=#{tdNum}
+	</select>
+	<select id="selectAllTodoByPnum" parameterType="int" resultMap="tdMap">
+		select * from todo where p_num=#{pNum}
+	</select>
+	<select id="selectAllTodoByMnum" parameterType="int" resultMap="tdMap">
+		select * from todo where m_num=#{mNum}
+	</select>
+	<resultMap type="todo" id="tdMap">
+		<result column="td_num" property="tdNum"/>
+		<result column="td_title" property="tdTitle"/>
+		<result column="td_content" property="tdContent"/>
+		<result column="p_num" property="pNum"/>
+		<result column="m_num_to" property="mNumTo"/>
+		<result column="m_num_from" property="mNumFrom"/>
+		<result column="td_iscomplete" property="isComplete"/>
+		<result column="td_priority" property="priority"/>
+		<result column="td_startdate" property="tdStartDate"/>
+		<result column="td_enddate" property="tdEndDate"/>
+		<result column="td_completedate" property="completeDate"/>
+	</resultMap>
+</mapper>
+

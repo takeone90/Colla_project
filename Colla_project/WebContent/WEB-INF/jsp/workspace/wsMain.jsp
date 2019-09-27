@@ -141,10 +141,14 @@
 			<c:forEach items="${workspaceList}" var="ws">
 				<li class="ws">
 					<h3><a href="chatMain?crNum=${ws.defaultCrNum}">${ws.wsInfo.name}</a></h3>
+					<h3 class="subService"><a href="projectMain?wNum=${ws.wsInfo.num}">Project</a></h3>
+					<h3 class="subService"><a href="board/list?wNum=${ws.wsInfo.num}">Board</a></h3>
+					<h3 class="subService"><a href="calMonth?wNum=${ws.wsInfo.num}">Calendar</a></h3>
 					<a href="#" class="showWsDetail"><i class="fas fa-angle-down"></i></a>
 					<%---------------------------상세보기 버튼 클릭 시 펼쳐질 wsDetail--------------------%>
 					<div class="wsDetail">
 						<input type="hidden" value="${ws.num}" id="wNum">
+						
 						<div class="wsChatList">
 							<p>채팅리스트</p>
 							<ul>

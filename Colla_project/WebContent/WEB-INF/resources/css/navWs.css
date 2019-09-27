@@ -32,20 +32,49 @@
 	width:100%;
 }
 #aboutProfile p {
-	margin:10px 0;
-	text-align:center;	
+    margin: 10px 0px 3px 0px;
+    text-align: center;
+}
+#boardDiv a,#calendarDiv a,#projectDiv a{
+	color : white;
 }
 #myChatList{
-	margin: 30px 0;
-	text-align:right;
+	margin: 30px 0 6px;
+    FONT-VARIANT: JIS04;
+    text-align: right;
 }
-#myChatList h3{
+/* .chatList{ */
+/* 	display: none; */
+/* } */
+#boardDiv,#calendarDiv,#projectDiv{
+	margin: 0px 0;
+    padding: 6px 0px 6px 0px;
+    text-align: right;
+}
+#myChatList h3:hover,#projectDiv h3:hover{
+	cursor: pointer;
+	color :	#E5675A; 
+}
+#boardDiv a:hover,#calendarDiv a:hover{
+	color: #E5675A;
+}
+#myChatList h3,#projectDiv h3{
+	display : inline-block;
 	font-size : 20px;
 	font-weight : bolder;
-	padding:0 18px 5px 0px;
+	padding:0 8px 5px 0px;
+}
+#boardDiv h3,#calendarDiv h3{
+	font-size : 20px;
+	font-weight : bolder;
+	padding:0 25px 5px 0px;
+}
+#myChatList h3 svg,#projectDiv h3 svg{
+	font-size : 15px;
 }
 #myChatList ul{
-	padding-top:5px;
+    padding-top: 5px;
+    min-height: 118px;
 }
 #myChatList ul li{
 	padding:10px 20px 10px 10px;
@@ -55,51 +84,33 @@
 	background-color:#E5675A;
 	font-weight: bolder;
 }
-#myChatList ul li.currChat a{
+
+#myChatList ul li.currChat{
 	color:#fff;
 }
-#myChatList ul li a{
+#myChatList ul li{
 	transition:color 0.2s;
 	color:#CCCBCA;
 }
-#myChatList ul li a:hover{
-	color:#fff;
+#myChatList ul li:hover{
+	background-color : #4f4a4a;
+	cursor : pointer;
 }
-#subfunction{
-	width : 100%;
-	display: block;
-	position : absolute;
-	bottom: 0;
+#myChatList ul li.currChat:hover{
+	background-color: #ed7b6f;
 }
-#subfunction hr{
-	border: 0.5px solid #756f6e;
-	width : 80%;
+#projectDiv li{
+	padding: 10px 22px 10px 0px;
+    font-size: 13px;
 }
-#ws-subfunction{
-	
-	padding-top:10px;
-	margin-bottom: 50px;
-}
-#ws-subfunction li{
-	float:left;
-	width:50%;
-}
-#ws-subfunction li a{
-	transition:background-color 0.2s;
-	display:table-cell;
-	vertical-align : middle;
-	border-radius:5px;
-	width:85px;
-	height : 38px;
-	background-color:#888;
-	color:#fff;
-	font-size:14px;
-	
-}
-#ws-subfunction li a:hover{
-	background-color:#E5675A;
+#projectDiv li:hover{
+	background-color : #4f4a4a;
+	cursor : pointer;
 }
 
+#projectList{
+	display: none;
+}
 .wsSelectOption{
 	background-color: #403C39;
 	padding : 5px;
@@ -112,7 +123,7 @@
 	background-color: #5e5756;
 	border : none;
 	border-radius: 3px;
-	margin-top : 13px;
+	margin-top : 23px;
 }
 
 #wsNav #memberInfoModal{
@@ -127,17 +138,26 @@
 	margin-top : 0px;
 }
 #logoutBtn{
-	background-color:white;
-	border:none;
-	font-weight: bolder;
+	background-color: transparent;
+	line-height: 0px;
+	padding :0px;
+    height: 12px;
+    width : 46px;
+    color: #E5675A;
+    border: none;
+    font-size: 11px;
+    font-weight: bolder;
 }
 #logoutBtn:hover{
 	cursor: pointer;
-	background-color:#E5675A;
+	transition:color 0.2s;
 	color:white;
 	
 }
 
+#removeMemberDiv{
+	display: none;
+}
 
 
 
