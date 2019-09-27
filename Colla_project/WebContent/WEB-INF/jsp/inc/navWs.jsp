@@ -43,12 +43,10 @@
 			dataType :"json",
 			success : function(d){
 				chatList.empty();
-				if( crNum ){
-					$.each(d,function(idx,item){
-						var str='<li '+ ( crNum ==item.crNum?'class="currChat"':"")+' onclick="goToChatRoom('+item.crNum+')">'+item.crName+'</li>';
+				$.each(d,function(idx,item){
+					var str='<li '+ ( crNum ==item.crNum?'class="currChat"':"")+' onclick="goToChatRoom('+item.crNum+')">'+item.crName+'</li>';
 					chatList.append(str);
-					});
-				}
+				});
 			}
 		});
 	}
