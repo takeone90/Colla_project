@@ -125,12 +125,12 @@
 		</div>
 		<div id="boardDiv">
 			<h3>
-				<a href="${contextPath}/board/list">Board</a>
+				<a href="${contextPath}/board/list?wNum=${sessionScope.currWnum}">Board</a>
 			</h3>
 		</div>
 		<div id="calendarDiv">
 			<h3>
-				<a href="${contextPath}/calMonth">Calendar</a>
+				<a href="${contextPath}/calMonth?wNum=${sessionScope.currWnum}">Calendar</a>
 			</h3>
 		</div>
 		<div id="removeMemberDiv"><button onclick="location.href='${contextPath}/removeMember'">탈퇴</button></div>

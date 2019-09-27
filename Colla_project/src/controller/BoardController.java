@@ -97,9 +97,14 @@ public class BoardController {
 			Model model,
 			@RequestParam(value="page", defaultValue="1") int page,
 			@RequestParam(value="keywordType", defaultValue = "0") int type,
-			@RequestParam(value="keyword", required = false) String keyword
+			@RequestParam(value="keyword", required = false) String keyword,
+			@RequestParam(value="wNum", required = false)int wNum
 			) {
-		int wNum = (int)session.getAttribute("currWnum");
+//		if(session.getAttribute("currWnum")!=null) {
+//			System.out.println("세션이 물고있음 : "+(int)session.getAttribute("currWnum"));
+//			wNum = (String)session.getAttribute("currWnum");
+//		}
+//		int intWnum = Integer.parseInt(wNum);
 		Map<String, Object> param = new HashMap<String, Object>();
 		if(page<=0) {
 			page=1;
@@ -273,7 +278,7 @@ public class BoardController {
 			//타입 설정 오류
 			return "redirct:error";
 		}
-		return "redirect:/board/list";
+		return "redirect:/board/list?wNum="+wNum;
 	}
 	
 	

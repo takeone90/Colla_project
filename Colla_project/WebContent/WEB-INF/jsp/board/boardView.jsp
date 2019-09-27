@@ -67,7 +67,7 @@
 					<div class="row btns">
 						<a href="checkPass?mode=modify&bNum=${board.bNum }" class="btn">수정</a>
 						<a href="checkPass?mode=delete&bNum=${board.bNum }" class="btn">삭제</a>
-						<a href="list?page=${listInf.page}&keyword=${listInf.keyword}&keywordType=${listInf.type}" class="btn">목록</a>
+						<a href="list?page=${listInf.page}&keyword=${listInf.keyword}&keywordType=${listInf.type}&wNum=${sessionScope.currWnum}" class="btn">목록</a>
 					</div>
 				</div>
 				<div id="boardReply">
