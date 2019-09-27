@@ -54,7 +54,7 @@
 				<ul id=pagination>
 					<li>
 						<c:if test="${listInf.page >=6 }">
-						<a href="list?page=1&keywordType=${listInf.type }&keyword=${listInf.keyword}" id="firstPage" class="pagingIcon">
+						<a href="list?page=1&keywordType=${listInf.type }&keyword=${listInf.keyword}&wNum=${sessionScope.currWnum}" id="firstPage" class="pagingIcon">
 						</c:if>
 						<c:if test="${listInf.page <6 }">
 						<a href="javascript:void(0)" id="firstPage" class="disable pagingIcon">
@@ -65,7 +65,7 @@
 					
 					<li>
 						<c:if test="${listInf.page >=6 }">
-						<a href="list?page=${listInf.startNum-1 }&keywordType=${listInf.type }&keyword=${listInf.keyword}" id="prevPage" class="pagingIcon">
+						<a href="list?page=${listInf.startNum-1 }&keywordType=${listInf.type }&keyword=${listInf.keyword}&wNum=${sessionScope.currWnum}" id="prevPage" class="pagingIcon">
 						</c:if>
 						<c:if test="${listInf.page <6 }">
 						<a href="javascript:void(0)" id="prevPage" class="disable pagingIcon">
@@ -77,7 +77,7 @@
 						<c:forEach var="i" begin="${listInf.startNum }" end="${listInf.endNum }">
 						<c:if test="${i<=listInf.totalPage }">
 							<li>
-								<a href="list?page=${i}&keywordType=${listInf.type}&keyword=${listInf.keyword}" ${listInf.page==i?'class=\"currPage\" onclick=\"return false;\"':'' }>${i}</a>
+								<a href="list?page=${i}&keywordType=${listInf.type}&keyword=${listInf.keyword}&wNum=${sessionScope.currWnum}" ${listInf.page==i?'class=\"currPage\" onclick=\"return false;\"':'' }>${i}</a>
 							</li>
 						</c:if>
 						</c:forEach>	
@@ -88,7 +88,7 @@
 						</c:if>
 						
 						<c:if test="${listInf.page < (listInf.totalPage - ((listInf.totalPage-1)%5))}">
-						<a href="list?page=${listInf.endNum+1}&keywordType=${listInf.type }&keyword=${listInf.keyword}" id="nextPage" class="pagingIcon">
+						<a href="list?page=${listInf.endNum+1}&keywordType=${listInf.type }&keyword=${listInf.keyword}&wNum=${sessionScope.currWnum}" id="nextPage" class="pagingIcon">
 						</c:if>
 							<i class="fas fa-angle-right"></i>
 						</a>
@@ -99,7 +99,7 @@
 						<a href="javascript:void(0)" id="lastPage" class="disable pagingIcon">
 						</c:if>
 						<c:if test="${listInf.page < (listInf.totalPage - ((listInf.totalPage-1)%5))}">
-						<a href="list?page=${listInf.totalPage }&keywordType=${listInf.type }&keyword=${listInf.keyword}" id="lastPage" class="pagingIcon">
+						<a href="list?page=${listInf.totalPage }&keywordType=${listInf.type }&keyword=${listInf.keyword}&wNum=${sessionScope.currWnum}" id="lastPage" class="pagingIcon">
 						</c:if>
 							<i class="fas fa-angle-double-right"></i>
 						</a>

@@ -60,6 +60,16 @@ display : none;
 	font-weight: bolder;
 	font-size : 16px;
 	margin-bottom : 23px;
+	padding-right : 9px;
+}
+#wsBodyContainer .ws .subService a{
+	font-size: 12px;
+	font-weight: normal;
+    color: white;
+    padding-right: 6px;
+}
+#wsBodyContainer .ws .subService a:hover{
+	color : #f2452e;
 }
 /* .ws li{ */
 /* 	display: inline-block; */
