@@ -1,0 +1,47 @@
+@charset "UTF-8";
+#wsBodyContainer h2{
+	color : #403C39;
+	font-size: 2.5em;
+	font-weight: bolder;
+	margin-bottom: 30px;
+}
+#wsBodyContainer h3{
+	color: #403C39;
+    font-size: 21px;
+    font-weight: 500;
+}
+#wsBodyContainer h4{
+	color: black;
+    font-size: 18px;
+    font-weight: 700;
+    margin-top:0px;
+}
+#addTodo{
+	display: inline-block;
+    position: absolute;
+    top: 135px;
+    right: 9%;
+    width: 10%;
+    padding: 6px;
+    background-color: #403C39;
+    color: white;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+}
+#addTodo:hover{
+	background-color: #E5675A;
+}
+.todo{
+	background-color : white;
+	border : 1px solid black;
+	padding : 10px;
+	margin-bottom: 5px;
+	
+}
+#currProjectProgress{
+	margin-bottom: 20px;
+}
+.tdDate p{
+	display: inline-block;
+}

@@ -60,9 +60,9 @@
 #addProjectBtn:hover{
 	background-color: #E5675A;
 }
-#addProjectModal p{
+#addProjectModal p,#modifyProjectModal p{
 	margin-top: 10px;
 }
-#addPj-Date{
+#addPj-Date,#modifyPj-Date{
 	margin-bottom : 12px;
 }
