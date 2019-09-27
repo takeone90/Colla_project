@@ -1,6 +1,6 @@
 package service;
 
-import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,12 +13,15 @@ import model.Todo;
 public class TodoService {
 	@Autowired
 	private TodoDao tdDao;
-	public int addTodo(String tdContent,int pNum,int mNum,Timestamp deadLine,Timestamp completeDate) {
+	public int addTodo(String tdTitle, String tdContent,int pNum,int mNumTo,int mNumFrom,Date tdStartDate,Date tdEndDate,Date completeDate) {
 		int tdNum = 0;
 		Todo todo = new Todo();
 		todo.setCompleteDate(completeDate);
-		todo.setDeadLine(deadLine);
-		todo.setmNum(mNum);
+		todo.setmNumFrom(mNumFrom);
+		todo.setmNumTo(mNumTo);
+		todo.setTdEndDate(tdEndDate);
+		todo.setTdStartDate(tdStartDate);
+		todo.setTdTitle(tdTitle);
 		todo.setpNum(pNum);
 		todo.setTdContent(tdContent);
 		if(tdDao.insertTodo(todo)>0) {

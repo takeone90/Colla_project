@@ -51,11 +51,14 @@
 			success : function(d){
 				chatList.empty();
 				$.each(d,function(idx,item){
-					var str='<li '+ ( ${sessionChatRoom.crNum} ==item.crNum?'class="currChat"':"")+'><a href="${contextPath}/chatMain?crNum='+item.crNum+'">'+item.crName+'</a></li>';
+					var str='<li '+ ( ${sessionChatRoom.crNum} ==item.crNum?'class="currChat"':"")+' onclick="goToChatRoom('+item.crNum+')">'+item.crName+'</li>';
 					chatList.append(str);
 				});
 			}
 		});
+	}
+	function goToChatRoom(crNum){
+		location.href="${contextPath}/chatMain?crNum="+crNum;
 	}
 </script>
 <div id="wsNav">
@@ -92,22 +95,41 @@
 			});
 		</script>
 		<div id="myChatList">
-			<h3>
-				My Chats
-			</h3>
+		<script>
+			$(function(){
+				var myChatOpen = 1;
+				$("#myChatList h3").on("click",function(){
+					$(".chatList").toggle();
+				});
+				$("#projectDiv h3").on("click",function(){
+					$("#projectList").toggle();
+				});
+			});
+			
+		</script>
+			<h3>Chat <i class="fas fa-angle-down"></i></h3>
 			<ul class="chatList">
 			</ul>
 		</div>
-		<div id="subfunction" align="center">
-		<hr>
-		<ul id="ws-subfunction" class="clearFix">
-			<li>
-				<a href="${contextPath}/calMonth">Calendar</a>
-			</li>
-			<li>
+		<div id="projectDiv">
+			<h3>
+				Project <i class="fas fa-angle-down"></i>
+			</h3>
+			<ul id="projectList">
+				<li class="project">더미1</li>
+				<li class="project">더미2</li>
+				<li class="project">더미3</li>
+			</ul>
+		</div>
+		<div id="boardDiv">
+			<h3>
 				<a href="${contextPath}/board/list">Board</a>
-	    	</li>
-		</ul>
+			</h3>
+		</div>
+		<div id="calendarDiv">
+			<h3>
+				<a href="${contextPath}/calMonth">Calendar</a>
+			</h3>
 		</div>
 		<div id="removeMemberDiv"><button onclick="location.href='${contextPath}/removeMember'">탈퇴</button></div>
 	</div>

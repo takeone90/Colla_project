@@ -8,6 +8,11 @@ public class Project {
 	private int progress;
 	private int wNum;
 	private Date pRegDate;
+	private String pDetail;
+	private Date pStartDate;
+	private Date pEndDate;
+	private int crNum;
+	private int mNum;
 	public int getpNum() {
 		return pNum;
 	}
@@ -38,10 +43,42 @@ public class Project {
 	public void setpRegDate(Date pRegDate) {
 		this.pRegDate = pRegDate;
 	}
+	public String getpDetail() {
+		return pDetail;
+	}
+	public void setpDetail(String pDetail) {
+		this.pDetail = pDetail;
+	}
+	public Date getpStartDate() {
+		return pStartDate;
+	}
+	public void setpStartDate(Date pStartDate) {
+		this.pStartDate = pStartDate;
+	}
+	public Date getpEndDate() {
+		return pEndDate;
+	}
+	public void setpEndDate(Date pEndDate) {
+		this.pEndDate = pEndDate;
+	}
+	public int getCrNum() {
+		return crNum;
+	}
+	public void setCrNum(int crNum) {
+		this.crNum = crNum;
+	}
+	public int getmNum() {
+		return mNum;
+	}
+	public void setmNum(int mNum) {
+		this.mNum = mNum;
+	}
 	@Override
 	public String toString() {
-		return "프로젝트 정보 [pNum : " + pNum + ", 프로젝트이름 : " + pName + ", 진행률 : " + progress + ", 워크스페이스 번호 : " + wNum
-				+ ", 프로젝트 등록일 : " + pRegDate + "]";
+		return "Project [pNum=" + pNum + ", pName=" + pName + ", progress=" + progress + ", wNum=" + wNum
+				+ ", pRegDate=" + pRegDate + ", pDetail=" + pDetail + ", pStartDate=" + pStartDate + ", pEndDate="
+				+ pEndDate + ", crNum=" + crNum + ", mNum=" + mNum + "]";
 	}
+	
 	
 }

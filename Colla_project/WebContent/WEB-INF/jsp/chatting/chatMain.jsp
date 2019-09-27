@@ -819,10 +819,10 @@ function showMemberList(){
 <!-- 						<li class="navInnerBtn"><label class="none-clicked"><input type="radio" name="innerBtn" value="canvas">캔버스</label></li> -->
 <!-- 					</ul> -->
 					<ul id="InnerBtns" class="clearFix">
-						<li class="navInnerBtn"><a href="#" class="btn active" data-content="favorite">즐겨찾기</a></li>
-						<li class="navInnerBtn"><a href="#" class="btn" data-content="memberManagement">멤버관리</a></li>
-						<li class="navInnerBtn"><a href="#" class="btn" data-content="search">검색</a></li>
+						<li class="navInnerBtn"><a href="#" class="btn active" data-content="memberManagement">멤버관리</a></li>
 						<li class="navInnerBtn"><a href="#" class="btn" data-content="canvas">일정관리</a></li>
+						<li class="navInnerBtn"><a href="#" class="btn" data-content="favorite">즐겨찾기</a></li>
+						<li class="navInnerBtn"><a href="#" class="btn" data-content="search">채팅검색</a></li>
 					</ul>
 <script>
 	//채팅방 안에 멤버리스트 보여주고 초대할수 있다
@@ -830,6 +830,7 @@ function showMemberList(){
 		searchListDiv = $("#searchContent");
 		showFavoriteList();
 		showMemberList();
+		$("#nav--memberManagement").show();
 		//탭버튼 클릭 이벤트
 		$("#InnerBtns .navInnerBtn a.btn").click(function(){
 			if($(this).hasClass("active")){
@@ -963,7 +964,7 @@ function showMemberList(){
 								</form>
 							</div>
 							<div id="searchContent"></div>
-							<div id="pageNav"></div>
+<!-- 							<div id="pageNav"></div> -->
 						</div>
 						<div id="nav--canvas" class="navContent-wrap">
 						
