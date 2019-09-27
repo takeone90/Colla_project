@@ -583,11 +583,10 @@ input[type=radio]{
 	background-color : #403C39;
 }
 #crmListUL{
-	padding : 10px 16px 16px 16px;
-	margin-top : 7px;
+	width:100%;
 	color : #403C39;
-	max-height : 50%;
-	overflow: auto;
+	max-height : 40%;
+	border:1px solid red;
 }
 #chatNavContent .isDefault{
 	max-height : 440px;
@@ -598,9 +597,8 @@ input[type=radio]{
 	margin-top : 7px;
 	margin-bottom : 7px;
 	color : #403C39;
-	max-height : 226px;
+	height : 100%;
 	overflow: auto;
-/* 	background-color: blue; */
 }
 #wsmListUL li:hover{
 	cursor: pointer;
@@ -728,8 +726,10 @@ input[type=radio]{
 	padding: 30px 0px;
 }
 #navMList{
+	width: calc(100% - 20px);
     height: calc(100% - 30px);
+    padding:0 10px;
 }
 #wsmListUl-wrap {
-	max-height:50%;
+	height:40%;
 }
