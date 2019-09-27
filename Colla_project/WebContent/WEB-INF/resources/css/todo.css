@@ -45,3 +45,14 @@
 .tdDate p{
 	display: inline-block;
 }
+.todoInnerBtn button{
+    width: 6%;
+    padding: 6px;
+    background-color: #fafafa;
+    border-radius: 4px;
+    border: 0.5px solid #d4d4d4;
+    cursor: pointer;
+}
+.todoInnerBtn button:hover{
+	background-color: #e6e6e6;
+}
