@@ -23,14 +23,18 @@
 	</bean>
 	<util:map id="connectorList" key-type="String" value-type="Object"></util:map>
 	<!-- 히카리 dataSource -->
-	<bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
+<!-- 	<bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig"> -->
+<!-- 		<property name="driverClassName" value="oracle.jdbc.OracleDriver"/> -->
+<!-- 		<property name="jdbcUrl" value="jdbc:oracle:thin:@colladb.crxlp3iv2we2.ap-northeast-1.rds.amazonaws.com:1521/ORCL"/> -->
+<!-- 		<property name="username" value="colla"/> -->
+<!-- 		<property name="password" value="wlftndjqtwh19"/> -->
+<!-- 	</bean> -->
+	<bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource" destroy-method="close">
 		<property name="driverClassName" value="oracle.jdbc.OracleDriver"/>
 		<property name="jdbcUrl" value="jdbc:oracle:thin:@colladb.crxlp3iv2we2.ap-northeast-1.rds.amazonaws.com:1521/ORCL"/>
 		<property name="username" value="colla"/>
 		<property name="password" value="wlftndjqtwh19"/>
-	</bean>
-	<bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource" destroy-method="close">
-		<constructor-arg ref="hikariConfig"/>
+<!-- 		<constructor-arg ref="hikariConfig"/> -->
 	</bean>
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource"/>
@@ -93,6 +97,10 @@
 		<property name="sqlSessionFactory" ref="sqlSessionFactory"/>
 		<property name="mapperInterface" value="dao.AlarmDao"/>
 	</bean>
+	<bean id="paymentDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+		<property name="mapperInterface" value="dao.PaymentDao"/>
+  </bean>
 	<bean id="projectDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
 		<property name="sqlSessionFactory" ref="sqlSessionFactory"/>
 		<property name="mapperInterface" value="dao.ProjectDao"/>

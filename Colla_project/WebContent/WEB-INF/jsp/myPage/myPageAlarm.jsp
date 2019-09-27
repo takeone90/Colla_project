@@ -29,12 +29,12 @@
 					if (left == '40px') { //설정 OFF
 						$(".toggleBG:eq(" + i + ")").css('background', '#CCCCCC');
 						toggleActionStart($(".toggleFG:eq(" + i + ")"), 'TO_LEFT');
-						result = 1;
+						result = 0;
 						setAlarm(type,result);
 					} else if (left == '0px') { //설정 ON
 						$(".toggleBG:eq(" + i + ")").css('background', '#61C3AF');
 						toggleActionStart($(".toggleFG:eq(" + i + ")"), 'TO_RIGHT');
-						result = 0;
+						result = 1;
 						setAlarm(type,result);
 					}
 				});
