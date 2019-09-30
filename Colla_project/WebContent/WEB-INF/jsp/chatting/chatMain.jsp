@@ -304,13 +304,20 @@ var mapContainer = null;
 	
 	//받은 메시지 화면에 추가
 	function addMsg(msgInfo, area){
+		
 		var msgType;
+		
+		//즐겨찾기되어있는지 체크
 		var isFavoriteClass=(msgInfo.isFavorite == 0)?"chatFavorite":"chatFavorite on";
+		
+		//내가 쓴건지, 다른사람이 쓴건지 체크
 		if(msgInfo.mName == $("#userName").val()){
 			msgType="myMsg";
 		} else {
 			msgType = "chatMsg";
 		}
+		
+		//메시지 div 생성
 		var chatMsg = $("<div class='"+msgType+"'></div>");
 		var imgTag = $("<img alt='"+msgInfo.mName+"님의 프로필 사진' src='${contextPath}/showProfileImg?num="+ msgInfo.mNum+ "'>");
 		
@@ -318,8 +325,6 @@ var mapContainer = null;
 		imgTag.on("click",function(){
 			showProfileInfoModal(msgInfo.mNum);
 		});
-		
-		
 		
 		var favorite = "<div class='"+isFavoriteClass+"' onclick='chatFavorite(this)' value = '"+ msgInfo.cmNum +"'></div>"; //즐겨찾기 아이콘
 		var originName = getOriginName(msgInfo.cmContent);
@@ -352,14 +357,31 @@ var mapContainer = null;
 				+"</span></p></div>"+favorite+"<br><p class='content'>"
 				+ contentStr
 				+"</p></div>");
-		chatArea.append(chatMsg);
 		
 		//전역변수인 currDate 와 만들려는 chatMessage의 date가 같지 않으면 날짜 띠를 생성한다
 		if(currDate!=date.getDate() && currDate!=0 && !area){
 			showDateMsg(date.getFullYear(),Number(date.getMonth())+Number(1),date.getDate());
 		}
+
+		
+		if(!area){
+			chatArea.append(chatMsg);
+		}else{
+			if(area=="favorite"){
+				chatNavContent.children("#nav--favorite").append(chatMsg[0]);				
+			}else if(area=="search"){
+				searchListDiv.append(chatMsg[0]);	
+			}
+		}
+
 		if(msgInfo.cmType.includes('code')){
-			var codeMsg = CodeMirror.fromTextArea( chatArea.find("textarea:last()")[0] ,{
+			var codeBox;
+			if(area == "favorite"){
+				codeBox = $("#nav--favorite");
+			}else{
+				codeBox = chatArea;
+			}
+			var codeMsg = CodeMirror.fromTextArea( codeBox.find("textarea:last")[0],{
 				mode : codeType,
 				theme : "gruvbox-dark",
 				lineNumbers : true,
@@ -386,17 +408,7 @@ var mapContainer = null;
 			}
 			codeMsg.setSize("100%", height);
 		}
-
 		
-		if(!area){
-			chatArea.append(chatMsg);
-		}else{
-			if(area=="favorite"){
-				chatNavContent.children("#nav--favorite").append(chatMsg[0]);				
-			}else if(area=="search"){
-				searchListDiv.append(chatMsg[0]);	
-			}
-		}
 		//static Map
 		if(msgInfo.cmType == 'map'){
 			var mapArea = document.getElementById("chatArea");
@@ -850,7 +862,7 @@ var mapContainer = null;
 						<li class="navInnerBtn"><a href="#" class="btn" data-content="search">채팅검색</a></li>
 					</ul>
 					<div id="chatNavContent" align="left">
-						<div id="nav--favorite" class="navContent-wrap">
+						<div id="nav--favorite" class="navContent-wrap collaScroll">
 						</div>
 						<div id="nav--memberManagement" class="navContent-wrap">
 							<form action="inviteChatMember" id="inviteForm">
@@ -884,7 +896,7 @@ var mapContainer = null;
 									<button class="btn">검색</button>
 								</form>
 							</div>
-							<div id="searchContent"></div>
+							<div id="searchContent" class="collaScroll"></div>
 <!-- 							<div id="pageNav"></div> -->
 						</div>
 						<div id="nav--canvas" class="navContent-wrap">
