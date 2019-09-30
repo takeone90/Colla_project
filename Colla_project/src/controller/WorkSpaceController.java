@@ -237,13 +237,13 @@ public class WorkSpaceController {
 					"<body>\r\n" + 
 					"	<div style='background-color: #4D4B4C; width: 760px; margin: 50px auto'>\r\n" + 
 					"		<h1 style='background-color: white'>\r\n" + 
-					"			<a href=\"#\"><img style='width: 150px' src=\"http://localhost:8081/Colla_project/img/COLLA_LOGO_200px.png\" /></a>\r\n" + 
+					"			<a href=\"#\"><img style='width: 150px' src='http://www.c0lla.com/img/COLLA_LOGO_200px.png' /></a>\r\n" + 
 					"		</h1>\r\n" + 
 					"		<div>\r\n" + 
-					"			<img style='width: 100%'src='http://localhost:8081/Colla_project/img/COLLA_WAVE_PNG.png'>\r\n" + 
+					"			<img style='width: 100%'src='http://www.c0lla.com/img/COLLA_WAVE_PNG.png'>\r\n" + 
 					"		</div>\r\n" + 
 					"		<div\r\n" + 
-					"			style='background-color: #4D4B4C; width: 100%; height: 500px; background-image: url(\"http://localhost:8081/Colla_project/img/Main_background.jpg\"); background-size: cover;'>\r\n" + 
+					"			style='background-color: #4D4B4C; width: 100%; height: 500px; background-image: url(\"http://www.c0lla.com/img/Main_background.jpg\"); background-size: cover;'>\r\n" + 
 					"			<p style='font-size: 15px;color: white;text-align: center;width: 100%;padding-top: 180px;'>\r\n" + 
 					"				워크스페이스 초대를 수락하려면 아래 버튼을 누르세요 </p>\r\n" + 
 					"				<div>\r\n" + 

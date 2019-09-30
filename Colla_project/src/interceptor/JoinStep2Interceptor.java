@@ -1,4 +1,4 @@
-package controller;
+package interceptor;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,6 +15,7 @@ import service.MemberService;
 public class JoinStep2Interceptor extends HandlerInterceptorAdapter {
 	@Autowired
 	private MemberService service;
+	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		HttpSession session = request.getSession();

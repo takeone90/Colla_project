@@ -26,7 +26,8 @@
 			e.preventDefault();
 			var emailAddress = $("#emailAddress").val();
 			if (emailAddress == "") {
-				$("#checkSentence").text("필수 정보입니다.");
+				$("#checkSentence").attr("class","checkSentenceRed");
+				$("#checkSentence").text("이메일을 입력해주세요.");
 			} else {
 				console.log("1 ajax실행");
 				var data = $(this).serialize();
@@ -50,6 +51,7 @@
 
 			var emailAddress = $("#emailAddress").val();
 			if (emailAddress == "") {
+				$("#checkSentence").attr("class","checkSentenceRed");
 				$("#checkSentence").text("이메일을 입력해주세요.");
 			} else {
 // 				var data = $(this).parent().serialize();
@@ -61,8 +63,10 @@
 					dataType : "json",
 					success : function(result) {
 						if (result) { //이메일 중복임
+							$("#checkSentence").attr("class","");
 							$("#checkSentence").text("이미 가입된 이메일입니다.");
 						} else { //이메일 중복이 아님
+							$("#checkSentence").attr("class","");
 							$("#checkSentence").text("멋진 이메일이네요!");
 						}
 					},

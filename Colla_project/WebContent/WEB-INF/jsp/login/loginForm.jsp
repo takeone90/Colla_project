@@ -27,6 +27,7 @@ $(function(){
 		var pwResult = checkPw();
 		if(emailResult && pwResult){
 		} else {
+			$("#loginResultText").text("");
 			return false;
 		}
 	});
@@ -150,8 +151,19 @@ function checkPw(){
 									<input type="password" name="m_pw" placeholder="비밀번호를 입력해주세요." id="pw">
 									<span id="checkPwText"></span>
 								</div>
+								<span id="loginResultText">
+									<c:if test='${param.login eq "false"}'>
+										로그인 후 이용하세요.
+									</c:if>
+									<c:if test='${param.login eq "fail"}'>
+										아이디 또는 비밀번호를 다시 확인해주세요.
+									</c:if>
+								</span>
 								<div>
 									<input type="submit" value="로그인" class="loginFormButton">
+								</div>
+								<div>
+									<input type="button" value="회원가입" class="loginFormButton" onclick="location.href='${contextPath}/joinStep1'">
 								</div>
 							</form>
 							<div id="innerBtn">
@@ -161,14 +173,6 @@ function checkPw(){
 								<button class="naverLoginButton">네이버<span id="naverIdLogin"></span></button>
 								<!-- 카카오 -->
 								<button id="kakaoLoginButton">카카오<span id="kakao-login-btn"></span><span href="http://developers.kakao.com/logout"></span></button>
-								<span id="loginResultText">
-									<c:if test='${param.login eq "false"}'>
-										로그인 후 이용하세요.
-									</c:if>
-									<c:if test='${param.login eq "fail"}'>
-										로그인에 실패하였습니다.
-									</c:if>
-								</span>
 							</div>
 						</div>
 					</div><!--Content ends-->
