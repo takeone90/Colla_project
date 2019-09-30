@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import model.Todo;
@@ -22,6 +23,7 @@ public class TodoController {
 	
 	@RequestMapping("/todoMain") //todoMain으로 이동
 	public String showTodoMain(int pNum, Model model) {
+//		System.out.println("todoMain요청받음 // pNum : "+pNum);
 		List<Todo> tList = tService.getAllTodoByPnum(pNum);
 		model.addAttribute("tList", tList); //todo 리스트 입니다...
 		return "/project/todoMain";
@@ -64,5 +66,17 @@ public class TodoController {
 	public List<Todo> getAllTodoByMnum(int mNum) {
 		List<Todo> todoList = tService.getAllTodoByMnum(mNum);
 		return todoList;
+	}
+	@ResponseBody
+	@RequestMapping("/toggleComplete")
+	public int toggleComplete(@RequestParam("tdNum")int tdNum) {
+		Todo todo = tService.getTodo(tdNum);
+		if(todo.getIsComplete()==0) {
+			todo.setIsComplete(1);
+		}else {
+			todo.setIsComplete(0);
+		}
+		tService.modifyTodo(todo);
+		return todo.getIsComplete();
 	}
 }
