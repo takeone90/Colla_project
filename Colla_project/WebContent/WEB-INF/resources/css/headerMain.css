@@ -4,7 +4,7 @@
 	width:100%;
 	height:120px;
 	background-color: #fff; /* 임시로 색깔 바꿈 */
-	background:url("../img/COLLA_header_wave.png") no-repeat 100% 100%;
+	background:url("../img/COLLA_header_wave.png") no-repeat 0 0/100% 100%;
 	position: fixed;
   	top: 0px;
   	left: 0px; 
