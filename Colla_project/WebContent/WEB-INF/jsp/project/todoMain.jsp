@@ -8,8 +8,12 @@
 <title>Todo List</title>
 <script>
 	$(function(){
-		$("#todoList").sortable();
 		$("#todoList").disableSelection();
+		$("#todoList").sortable();
+// 		var sortedIDs = $("#todoList").sortable("toArray"); 
+// 		alert(sortedIDs);
+		
+		
 		
 		$("#addTodo").on("click",function(){
 			$("#addTodoModal").fadeIn(300);
