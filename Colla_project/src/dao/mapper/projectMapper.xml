@@ -10,6 +10,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		insert into project(p_num,p_name,w_num,p_detail,p_startdate,p_enddate,cr_num,m_num)
 		values(#{pNum},#{pName},#{wNum},#{pDetail},#{pStartDate},#{pEndDate},#{crNum},#{mNum})
 	</insert>
+	<update id="updateChatRoomPnum" parameterType="int">
+		update chatroom set p_num=#{pNum} where cr_num=#{crNum}
+	</update>
+	
 	<delete id="deleteProject" parameterType="int">
 		delete project where p_num=#{pNum}
 	</delete>

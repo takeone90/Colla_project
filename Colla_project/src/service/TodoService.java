@@ -14,17 +14,16 @@ import model.Todo;
 public class TodoService {
 	@Autowired
 	private TodoDao tdDao;
-	public int addTodo(String tdTitle, String tdContent,int pNum,int mNumTo,int mNumFrom,Date tdStartDate,Date tdEndDate,Date completeDate) {
+	public int addTodo(String tdTitle, String tdContent, int pNum, int mNumTo, int mNumFrom, Date tdStartDate, Date tdEndDate) {
 		int tdNum = 0;
 		Todo todo = new Todo();
-		todo.setCompleteDate(completeDate);
-		todo.setmNumFrom(mNumFrom);
-		todo.setmNumTo(mNumTo);
-		todo.setTdEndDate(tdEndDate);
-		todo.setTdStartDate(tdStartDate);
 		todo.setTdTitle(tdTitle);
-		todo.setpNum(pNum);
 		todo.setTdContent(tdContent);
+		todo.setpNum(pNum);
+		todo.setmNumTo(mNumTo);
+		todo.setmNumFrom(mNumFrom);
+		todo.setTdStartDate(tdStartDate);
+		todo.setTdEndDate(tdEndDate);
 		if(tdDao.insertTodo(todo)>0) {
 			tdNum = todo.getTdNum();
 		}
