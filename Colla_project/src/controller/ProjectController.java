@@ -105,7 +105,6 @@ public class ProjectController {
 		SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd");
 		Date encStartDate = dt.parse(startDate);
 		Date encEndDate = dt.parse(endDate);
-		
 		boolean result = pService.modifyProject(pNum, pName, pDetail, encStartDate, encEndDate, mNum); //프로젝트 수정 & 채팅방 수정
 		System.out.println("수정 결과 : "+result);
 		return result;

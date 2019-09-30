@@ -159,8 +159,9 @@
 			</div>
 			<div class="modalBody">
 				<p>프로젝트를 수정합니다</p>
-<!-- 				<form action="addWs" method="post"> -->
-<%-- 					<input type="hidden" value="${_csrf.token}" name="${_csrf.parameterName}"> --%>
+				<form action="modifyProject" method="post">
+					<input type="hidden" value="${_csrf.token}" name="${_csrf.parameterName}">
+					<input type="hidden" name="pNum" class="pNum">
 					<div class="modifyPjInputWrap">
 						<div class="row">
 							<h4>프로젝트 이름</h4>
@@ -189,7 +190,7 @@
 						<button type="submit">Project만들기</button>
 						<button id="closeModifyPjModal">닫기</button>
 					</div>
-<!-- 				</form> -->
+				</form>
 			</div> <!-- end modalBody -->
 		</div><!-- end modifyProjectModal -->
 		

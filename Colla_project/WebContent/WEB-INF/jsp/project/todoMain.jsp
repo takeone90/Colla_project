@@ -38,6 +38,8 @@
 			return false;
 		});
 		$(".modifyTodoModalOpen").on("click",function(){
+// 			alert($(this).attr("data-tdNum"));
+			$(".tdNum").val($(this).attr("data-tdNum"));
 			$("#modifyTodoModal").fadeIn(300);
 		});
 		$("#closeModifyTodoModal").on("click",function(){
@@ -116,8 +118,8 @@
 						</p>
 					</div>
 					<div class="todoInnerBtn" align="right">
-						<button class="modifyTodoModalOpen">수정</button>
-						<button>삭제</button>
+						<button class="modifyTodoModalOpen" data-tdNum="${td.tdNum}">수정</button>
+						<button onclick="location.href='removeTodo?tdNum=${td.tdNum}'">삭제</button>
 					</div>
 			</li><%--end todo --%>
 				</c:forEach>
@@ -156,7 +158,7 @@
 						<div class="row">
 							<h4>할 일 멤버</h4>
 							<div class="addTodoMemberDiv">
-								<input type="text" placeholder="작업할 프로젝트 멤버" name="todoMemberList" style="width:465px">
+								<input type="text" placeholder="작업할 프로젝트 멤버" name="mNumTo" style="width:465px">
 							</div>
 							<div class="addTodoRoundBox" align="center">
 								<a href="#" class="addTodoInput">+</a>
@@ -185,8 +187,9 @@
 			</div>
 			<div class="modalBody">
 				<p>일정을 수정합니다</p>
-<!-- 				<form action="addWs" method="post"> -->
-<%-- 					<input type="hidden" value="${_csrf.token}" name="${_csrf.parameterName}"> --%>
+				<form action="modifyTodo" method="post">
+					<input type="hidden" value="${_csrf.token}" name="${_csrf.parameterName}">
+					<input type="hidden" name="tdNum" class="tdNum">
 					<div class="modifyTodoInputWrap">
 						<div class="row">
 							<h4>할 일 이름</h4>
@@ -207,13 +210,21 @@
 								<input type="date" name="endDate" placeholder="종료일을 입력하세요">
 							</div>
 						</div>
+						<div class="row">
+							<h4>할 일 멤버</h4>
+							<div class="addTodoMemberDiv">
+								<input type="text" placeholder="작업할 프로젝트 멤버" name="mNumTo" style="width:465px">
+							</div>
+							<div class="addTodoRoundBox" align="center">
+							</div>
+						</div>
 					</div> <!-- end addWsInputWrap -->
 
 					<div id="modalBtnDiv">
 						<button type="submit">할 일 수정하기</button>
 						<button id="closeModifyTodoModal">닫기</button>
 					</div>
-<!-- 				</form> -->
+				</form>
 			</div> <!-- end modalBody -->
 		</div><!-- end modifyTodoModal -->
 </body>
