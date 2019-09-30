@@ -44,7 +44,6 @@
 					<li><a href="${contextPath}/joinStep1" class="btn">Join us</a></li>
 				</c:otherwise>
 			</c:choose>
-				
 			</ul>
 		</div>
 	</div>
