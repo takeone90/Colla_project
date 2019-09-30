@@ -9,6 +9,9 @@
 	height : 100%;
 }
 /*************************** 채팅 스크롤 바 ******************************/
+.collaScroll {
+	overflow-x:hidden;
+}
 .collaScroll::-webkit-scrollbar { width: 10px; } /* 스크롤 바 */
 .collaScroll::-webkit-scrollbar-track { background-color:#E6D6D5; } /* 스크롤 바 밑의 배경 */
 .collaScroll::-webkit-scrollbar-thumb { background: #DB857C; border-radius:5px; } /* 실질적 스크롤 바 */
@@ -108,7 +111,7 @@
 }
 
 .content {
-	white-space:pre;
+	white-space:pre-wrap;
 	display: inline-block;
 	position: relative;
 	margin-top:10px;
@@ -531,6 +534,7 @@ pre .CodeMirror-line{
 /************************ TKLEE **************************/
 #chatNavContent .navContent-wrap{
 	height:100%;
+	overflow-x:hidden;
 }
 #chatNavContent .navContent-wrap{ display:none; }
 
@@ -635,7 +639,7 @@ input[type=radio]{
 	width : 98%;
 	border-radius : 5px;
 	margin-left : 1%;
-	height : calc(100% - 56px);
+	height : calc(100% - 80px);
 	background-color: #f7f3f0;
 	align-self: center;
 	border: 1px solid #d4cbcb;
