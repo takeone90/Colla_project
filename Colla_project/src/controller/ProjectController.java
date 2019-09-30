@@ -65,7 +65,7 @@ public class ProjectController {
 	//-------------------------------------------------------------------------------CRUD 
 	
 	@RequestMapping(value="/addProject", method = RequestMethod.POST)
-	public String addProject(String pName, int wNum, String pDetail, String startDate, String endDate, HttpSession session, HttpServletRequest request) {
+	public String addProject(String pName, int wNum, String pDetail, Date startDate, Date endDate, HttpSession session, HttpServletRequest request) {
 		Member member = (Member)session.getAttribute("user");
 		int mNum = member.getNum();
 		int pNum = pService.addProject(pName, wNum, pDetail, startDate, endDate, mNum); //프로젝트 추가 & 채팅방 추가
@@ -92,7 +92,7 @@ public class ProjectController {
 	}
 	@ResponseBody
 	@RequestMapping(value="/modifyProject", method = RequestMethod.POST)
-	public boolean modifyProject(int pNum, String pName, String pDetail, String startDate, String endDate, HttpSession session) {
+	public boolean modifyProject(int pNum, String pName, String pDetail, Date startDate, Date endDate, HttpSession session) {
 		System.out.println("modifyProject!");
 		Member member = (Member)session.getAttribute("user");
 		int mNum = member.getNum();

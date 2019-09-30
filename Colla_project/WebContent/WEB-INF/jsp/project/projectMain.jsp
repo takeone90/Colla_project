@@ -72,7 +72,17 @@
 					</div>
 					<div class="projectDetail">${pl.pInfo.pDetail}</div>
 					<div class="progress">진척률 : ${pl.pInfo.progress}
-						<div class="projectDate">${pl.pInfo.pStartDate} ~ ${pl.pInfo.pEndDate}</div>
+						<div class="projectDate">
+<%-- 						${pl.pInfo.pStartDate} ~ ${pl.pInfo.pEndDate} --%>
+						<p>
+						<fmt:formatDate value="${pl.pInfo.pStartDate}" pattern="yyyy.MM.dd" />
+				        <fmt:formatDate value="${pl.pInfo.pStartDate}" pattern="E"/>요일 
+						</p>&nbsp;&nbsp;&nbsp;~&nbsp;&nbsp;&nbsp;
+						<p>
+						<fmt:formatDate value="${pl.pInfo.pEndDate}" pattern="yyyy.MM.dd" />
+				        <fmt:formatDate value="${pl.pInfo.pEndDate}" pattern="E"/>요일 
+						</p>
+						</div>
 					</div>
 					
 					<div class="projectMember">

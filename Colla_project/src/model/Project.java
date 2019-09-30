@@ -9,8 +9,8 @@ public class Project {
 	private int wNum;
 	private Date pRegDate;
 	private String pDetail;
-	private String pStartDate;
-	private String pEndDate;
+	private Date pStartDate;
+	private Date pEndDate;
 	private int crNum;
 	private int mNum;
 	public int getpNum() {
@@ -49,16 +49,17 @@ public class Project {
 	public void setpDetail(String pDetail) {
 		this.pDetail = pDetail;
 	}
-	public String getpStartDate() {
+	
+	public Date getpStartDate() {
 		return pStartDate;
 	}
-	public void setpStartDate(String pStartDate) {
+	public void setpStartDate(Date pStartDate) {
 		this.pStartDate = pStartDate;
 	}
-	public String getpEndDate() {
+	public Date getpEndDate() {
 		return pEndDate;
 	}
-	public void setpEndDate(String pEndDate) {
+	public void setpEndDate(Date pEndDate) {
 		this.pEndDate = pEndDate;
 	}
 	public int getCrNum() {
