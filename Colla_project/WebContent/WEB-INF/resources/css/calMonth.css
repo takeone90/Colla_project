@@ -316,6 +316,9 @@ td {
 .checkboxDiv input {
 	display: none;
 }
+.tmp {
+	padding: 0.25em 0.em;
+}
 .checkboxbtn {
 /* 	font-family: 'Noto Sans KR'; */
 /*     font-size: 1rem; */

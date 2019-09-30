@@ -1,12 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/jsp/inc/head.jsp" %>
-	
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>calMonth</title>
 <link rel="stylesheet" type="text/css" href="${contextPath}/css/headerWs.css"/>
 <link rel="stylesheet" type="text/css" href="${contextPath}/css/navWs.css"/>
 <link rel="stylesheet" type="text/css" href="${contextPath}/css/calMonth.css"/>
-  
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script type="text/javascript">
 $(function() {
 	$("#yearCalendar").hide();
@@ -25,13 +28,11 @@ var date = new Date();
 var numOfWeekRow = 0;
 
 $(function() {
-	
-
 	$( ".tmp" ).checkboxradio({
-		icon: true
+		icon: false
 	});
 	
-    $( "#datepicker" ).datepicker({
+    $( ".datepicker" ).datepicker({
         changeMonth: true,
         changeYear: true
     });
@@ -39,17 +40,18 @@ $(function() {
 	thisMonthCalendar(today);
 	showSchedule(today);
 	markingOnDate(formatChange(today));
-	drag();
+// 	drag();
+	
 	//모달 바깥 클릭 시 모달 닫기
-	$("#wsBody").on("mousedown", function(e) {
-		if(!$("#addForm").is(e.target) && $("#addForm").has(e.target).length===0)
-			$("#addForm").fadeOut(1);
-		if(!$("#detailForm").is(e.target) && $("#detailForm").has(e.target).length===0)
-			$("#detailForm").fadeOut(1);
-		if(!$("#modifyForm").is(e.target) && $("#modifyForm").has(e.target).length===0)
-			$("#modifyForm").fadeOut(1);
-		return false;
-	});
+// 	$("#wsBody").on("mousedown", function(e) {
+// 		if(!$("#addForm").is(e.target) && $("#addForm").has(e.target).length===0)
+// 			$("#addForm").fadeOut(1);
+// 		if(!$("#detailForm").is(e.target) && $("#detailForm").has(e.target).length===0)
+// 			$("#detailForm").fadeOut(1);
+// 		if(!$("#modifyForm").is(e.target) && $("#modifyForm").has(e.target).length===0)
+// 			$("#modifyForm").fadeOut(1);
+// 		return false;
+// 	});
 	//추가 모달 열기
 	$("#addFormOpen").on("click", function() {
 		$(".addModal")[0].reset();
@@ -835,24 +837,24 @@ function nextYearYear() {
 					</div>
 					<div class="dateDiv">
 						<h4>기간</h4>
-						<div><input type="date" name="startDate" id="startDate" class="datepicker"></div>
+						<div><p><input type="text" name="startDate" id="startDate" class="datepicker"></p></div>
 						<span>~</span>
-						<div><input type="date" name="endDate" id="endDate"></div>
+						<div><p><input type="text" name="endDate" id="endDate" class="datepicker"></p></div>
 					</div>
 
 					<div class="checkboxDiv btn-group-toggle" data-toggle="buttons">
 						<label for="checkbox-1" class="checkboxbtn">
-							<input type="checkbox" name="yearCalendar" id="addYearCalendar" value="yearCalendar" class="tmp">연간 달력
+							<input type="checkbox" name="yearCalendar" id="checkbox-1" value="yearCalendar" class="tmp">연간 달력
 						</label> 
 						<label for="checkbox-2" class="checkboxbtn">
-							<input type="checkbox" name="annually" id="addAnnually" value="annually" class="tmp">매년 반복
+							<input type="checkbox" name="annually" id="checkbox-2" value="annually" class="tmp">매년 반복
 						</label>
 						<label for="checkbox-3" class="checkboxbtn">
-							<input type="checkbox" name="monthly" id="addMonthly" value="monthly" class="tmp">매월 반복
+							<input type="checkbox" name="monthly" id="checkbox-3" value="monthly" class="tmp">매월 반복
 						</label>
 					</div>
 					
-					
+<!-- 					//name="checkbox-1" id="checkbox-1" -->
 					<div>
 						<h4>내용</h4>
 						<textarea rows="3" cols="21" name="content" class="modalContent" id="content"></textarea>

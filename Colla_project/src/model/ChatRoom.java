@@ -7,6 +7,7 @@ public class ChatRoom {
 	private int crNum;
 	private int mNum;
 	private int wNum;
+	private int pNum;
 	private String crName;
 	private Date crRegDate;
 	private int crIsDefault;
@@ -33,6 +34,12 @@ public class ChatRoom {
 	}
 	public void setwNum(int wNum) {
 		this.wNum = wNum;
+	}
+	public int getpNum() {
+		return pNum;
+	}
+	public void setpNum(int pNum) {
+		this.pNum = pNum;
 	}
 	public String getCrName() {
 		return crName;
