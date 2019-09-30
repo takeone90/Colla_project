@@ -197,10 +197,7 @@ var mapContainer = null;
 		});
 	});
 	
-  
 		searchListDiv = $("#searchContent");
-		showFavoriteList();
-		showMemberList();
 		$("#nav--memberManagement").show();
 		//탭버튼 클릭 이벤트
 		$("#InnerBtns .navInnerBtn a.btn").click(function(){
@@ -768,8 +765,6 @@ var mapContainer = null;
 					wsmListUL.append(wsmLi);
 				});
 				
-				chatNavContent.children("#nav--memberManagement").append(inviteForm);
-				
 				if(conList.length > 0){	//표시해야할 접속자가 1 넘을 경우
 					$.each(conList, function(idx,item){
 						showLoginNow(item,true);
@@ -849,7 +844,7 @@ var mapContainer = null;
 						<li class="navInnerBtn"><a href="#" class="btn" data-content="favorite">즐겨찾기</a></li>
 						<li class="navInnerBtn"><a href="#" class="btn" data-content="search">채팅검색</a></li>
 					</ul>
-					<div id="chatNavContent" class="collaScroll" align="left">
+					<div id="chatNavContent" align="left">
 						<div id="nav--favorite" class="navContent-wrap">
 						</div>
 						<div id="nav--memberManagement" class="navContent-wrap">
@@ -858,12 +853,12 @@ var mapContainer = null;
 								<div id="navMList">
 									<input type="hidden" class="addCrNum" name="crNum" value="${chatRoom.crNum }" />
 									<input type="hidden" id="wNum" name="wNum" value="${wNum }" />
-									<div id="crmListUL-wrap">
-										<h4>채팅방 참여자</h4>
+									<h4>채팅방 참여자</h4>
+									<div id="crmListUL-wrap" class="listUL-wrap collaScroll">
 										<ul id='crmListUL' class='isntDefault'></ul>
 									</div>
-									<div id="wsmListUl-wrap" style="${chatRoom.crIsDefault==1?'display:none':''}">
-										<h4>초대 가능한 워크스페이스 멤버</h4>
+									<h4>초대 가능한 워크스페이스 멤버</h4>
+									<div id="wsmListUl-wrap" class="listUL-wrap collaScroll" style="${chatRoom.crIsDefault==1?'display:none':''}">
 										<ul id='wsmListUL'></ul>
 									</div>
 									<div align='center'>
