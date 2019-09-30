@@ -1005,10 +1005,11 @@ div {
 }
 
 #kakaoPayForm h4 {
-	font-size: 20px; font-weight : bolder;
+	font-size: 20px; 
+	font-weight : bolder;
 	text-align: left;
 	margin-top: 45px;
-	font-weight: bolder;
+	margin-bottom: 6px;
 }
 
 #kakaoPayForm select {
@@ -1044,8 +1045,11 @@ div {
 	font-size: 12px;
 	color : red;
 }
-.joinCheckboxInput{
+#kakaoPayForm .joinCheckboxInput{
 	height: 17px;
+}
+#kakaoPayForm #checkDateText{
+	
 }
 
 #kakaoPayForm input[type='date'] {

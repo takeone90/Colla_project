@@ -19,15 +19,32 @@
 		$("#endDate").val(tmpEndDate.toISOString().substring(0,10));
 		$("#startDate").on("change",function(){//시작일이 변경되면 종료일도 자동으로 변경한다
 			var tmpDate = new Date($("#startDate").val());
+			if(tmpDate < new Date()){
+				$("#checkDateText").text("시작일을 오늘 이후로 설정해주세요");
+			}else{
+				$("#checkDateText").text("");
+			}
 			var tmpMonth = tmpDate.getMonth();
 			tmpDate.setMonth(tmpMonth+1);
 			$("#endDate").val(tmpDate.toISOString().substring(0,10));
 		});//end startDate change
+		//선택한 타입에 따른 라이선스 정보 보여주기
 		showInfo();
 		$("#typeSelect").on("change",function(){
 			showInfo();
-			
 		})
+		//
+		$("#name").on("blur", function() {
+			nameReg();
+		});
+		$("#phone").on("blur", function() {
+			phoneReg();
+		});
+		$("#checkbox").on("change", function() {
+			checkBox();
+		});
+		
+		
 	});//end onload
 	
 
@@ -112,6 +129,7 @@ function nameReg() {
 		$("#checkNameText").text("이름을 입력해주세요.");
 		return false;
 	}else {
+		$("#checkNameText").text("");
 		return true;
 	}
 }
@@ -122,7 +140,8 @@ function phoneReg() {
 		$("#checkPhoneText").text("핸드폰번호를 입력해주세요.");
 		return false;
 	}else {
-			return true;
+		$("#checkPhoneText").text("");
+		return true;
 	}
 }
 
@@ -132,6 +151,7 @@ function checkBox() {
 		$("#checkboxText").text("이용약관은 필수입니다.");
 		return false;
 	}else {
+		$("#checkboxText").text("");
 		return true;
 	}
 }
@@ -155,7 +175,7 @@ function checkBox() {
 						</select>
 						<p>라이센스 이용기간을 설정해주세요<span> (시작일 기준으로 30일  자동 설정됩니다)</span></p>
 						<input type="date" id="startDate" name="startDate"> ~ <input type="date" id="endDate" name="endDate" readonly="readonly">
-						
+						<br><span id="checkDateText" class="checkText"></span>
 						<h4>주문자 정보</h4>
 						<p>이름 <span id="checkNameText" class="checkText"></span></p>
 						<input type="text" id="name" name="name" value="${name}">

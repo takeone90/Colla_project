@@ -8,6 +8,16 @@
 <link rel="stylesheet" type="text/css" href="css/myPage.css"/>
 <link rel="stylesheet" type="text/css" href="css/base.css"/>
 </head>
+<script>
+function removeMember(){
+	var result = confirm("정말 탈퇴하시겠습니까?");
+	if(result){
+		location.href="${contextPath}/removeMember"
+	}else{
+		return false;
+	}
+}
+</script>
 <body>
 	<%@ include file="/WEB-INF/jsp/inc/headerWs.jsp"%>
 	<%@ include file="/WEB-INF/jsp/inc/navWs.jsp"%>
@@ -61,10 +71,11 @@
 						</div>
 					</div>
 					<div class="myPageAccountRow">
-						<p>COLLA를 더 이상 이용하지 않는다면 <a href="removeMember" class="removeMember"> 탈퇴하기</a></p>
+						
 						<div class="row btns btnR">
 							<a href="myPageMainForm" class="btn"><i class="fa fa-arrow-left" aria-hidden="true"></i> 이전</a>
 						</div>
+						<p>COLLA를 더 이상 이용하지 않는다면 <a href="javascript:removeMember()" class="removeMember"> 탈퇴하기</a></p>
 					</div>
 				</div>
 			</div><!-- myPageInner -->

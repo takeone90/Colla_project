@@ -155,17 +155,21 @@
 .joinFormButton:hover {
 	background-color: rgba(236, 109, 99, 0.5);
 }
-.joinCheckbox {
+.joinCheckbox, 
+#verifyResultTex,
+#checkSentence,
+#checkPw,
+#checkName,
+#checkCheckBox {
 	font-size: 13px;
 }
-#checkSentence {
-	float: right;
-	font-size: 10px;
+.checkSentenceRed{
+	color : red;
 }
-#verifyResultText {
-	float: left;
-	font-size: 10px;	
+.joinCheckbox #checkbox{
+	height: 15px;	
 }
+
 /* 로그인 버튼 */
 #innerBtn {
 	margin: 10px 10px 0px 10px;

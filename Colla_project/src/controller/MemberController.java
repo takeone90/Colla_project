@@ -106,7 +106,7 @@ public class MemberController {
 	@RequestMapping(value="/joinMemberAPI", method = RequestMethod.POST) // API 회원가입
 	public String joinMemberAPI(Member member) {
 		memberService.addMember(member);
-		return "redirect:main";
+		return "redirect:/";
 	}
 	
 	@RequestMapping(value="/callBackLogin", method = RequestMethod.GET) // 네이버 API 로그인	
@@ -173,7 +173,7 @@ public class MemberController {
 			session.removeAttribute("inviteWnum");
 		}
 		if(result) {
-			return "redirect:main";
+			return "redirect:/";
 		} else {
 			return "/join/joinStep3"; //실패 시 어디로 갈지는 정의 필요
 		}
@@ -201,9 +201,11 @@ public class MemberController {
 	public class inner implements Runnable {
 		String emailAddress;
 		HttpSession session;
+		HttpServletRequest request;
 		public inner(String emailAddress, HttpSession session) {
 			this.emailAddress = emailAddress;
 			this.session = session;
+			this.request = request;
 		}
 		@Override
 		public void run() {
@@ -213,13 +215,13 @@ public class MemberController {
 			"<body>\r\n" + 
 			"	<div style='background-color: #4D4B4C; width: 760px; margin: 50px auto'>\r\n" + 
 			"		<h1 style='background-color: white'>\r\n" + 
-			"			<a href=\"#\"><img style='width: 150px' src=\"http://localhost:8081/Colla_project/img/COLLA_LOGO_200px.png\" /></a>\r\n" + 
+			"			<a href=\"#\"><img style='width: 150px' src='http://www.c0lla.com/img/COLLA_LOGO_200px.png' /></a>\r\n" + 
 			"		</h1>\r\n" + 
 			"		<div>\r\n" + 
-			"			<img style='width: 100%'src='http://localhost:8081/Colla_project/img/COLLA_WAVE_PNG.png'>\r\n" + 
+			"			<img style='width: 100%'src='http://www.c0lla.com/img/COLLA_WAVE_PNG.png'>\r\n" + 
 			"		</div>\r\n" + 
 			"		<div\r\n" + 
-			"			style='background-color: #4D4B4C; width: 100%; height: 500px; background-image: url(\"http://localhost:8081/Colla_project/img/Main_background.jpg\"); background-size: cover;'>\r\n" + 
+			"			style='background-color: #4D4B4C; width: 100%; height: 500px; background-image: url(\"http://www.c0lla.com/img/Main_background.jpg\"); background-size: cover;'>\r\n" + 
 			"			<p style='font-size: 15px;color: white;text-align: center;width: 100%;padding-top: 180px;'>\r\n" + 
 			"				고객님의 이메일 인증 번호입니다 </p>\r\n" + 
 			"				<div>\r\n" + 
@@ -318,14 +320,14 @@ public class MemberController {
 		wsmService.removeAllWsMemberByMnum(member.getNum()); //workspace_member 테이블에서 해당 멤버가 들어간 튜플 모두 제거
 		cmService.removeFavoriteByMnum(member.getNum()); //favorite 테이블에서 해당멤버가 즐겨찾기한 튜플 모두 제거
 		saService.removeSetAlarm(member.getNum());
-		return "redirect:main";
+		return "redirect:/";
 	}
 
 	@RequestMapping("/dropSession") //로그아웃 성공 후, 처리
 	public String dropSession(HttpSession session,String userEmail) {
 		//loginMember.remove(session.getAttribute("userEmail"));
 		session.invalidate();
-		return "redirect:main";
+		return "redirect:/";
 	}
 	
 	/*
