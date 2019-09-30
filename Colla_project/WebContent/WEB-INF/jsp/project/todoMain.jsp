@@ -51,15 +51,26 @@
 		$.ajax({
 			url : "${contextPath}/toggleComplete",
 			data : {"tdNum":tdNum},
-			success : function(e){
-				if(e==1){
-					isCompleteDiv.css("backgroundColor","#E5675A");
+			dataType : "json",
+			success : function(completeAndProgress){
+				var isComplete = completeAndProgress.isComplete;
+				var progress = completeAndProgress.progress;
+				if(isComplete==1){
+					isCompleteDiv.css("backgroundColor","#E5675A");//눌러서 바뀐색깔임. 완료한 경우
+					
 				}else{
 					isCompleteDiv.css("backgroundColor","#ebebeb");
 				}
+				$("#progressBar").text(progress);
 			}
 		});
 	}
+// 	function calcProgress(pNum){
+// 		$.ajax({
+// 			url : "${contextPath}/updateProgress",
+			
+// 		});
+// 	}
 </script>
 </head>
 <body>
@@ -74,7 +85,7 @@
 		<button id="addTodo">할 일 추가</button>
 		<div id="todoArea">
 			<div id="currProjectProgress" align="center">
-				현재 프로젝트 전체 진행률 ~~
+				진행률 : <p id="progressBar">${progress}</p>
 			</div>
 			
 			<ul id="todoList">
@@ -127,8 +138,8 @@
 			</div>
 			<div class="modalBody">
 				<p>Todo를 만들고 프로젝트 일정을 세분화 하세요</p>
-<!-- 				<form action="addWs" method="post"> -->
-<%-- 					<input type="hidden" value="${_csrf.token}" name="${_csrf.parameterName}"> --%>
+				<form action="addTodo" method="post">
+					<input type="hidden" value="${_csrf.token}" name="${_csrf.parameterName}">
 					<div class="addPjInputWrap">
 						<div class="row">
 							<h4>작업 이름</h4>
@@ -164,7 +175,7 @@
 						<button type="submit">할 일 추가</button>
 						<button id="closeTodoModal">닫기</button>
 					</div>
-<!-- 				</form> -->
+				</form>
 			</div> <!-- end modalBody -->
 		</div><!-- end addTodoModal -->
 		<%------------------------------------프로젝트 수정 모달  ---------------------------------------%>

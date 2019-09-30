@@ -5,6 +5,14 @@ import java.util.Date;
 public class ProjectMember {
 	private int pNum;
 	private int mNum;
+	private String mName;
+	
+	public String getmName() {
+		return mName;
+	}
+	public void setmName(String mName) {
+		this.mName = mName;
+	}
 	public int getpNum() {
 		return pNum;
 	}
