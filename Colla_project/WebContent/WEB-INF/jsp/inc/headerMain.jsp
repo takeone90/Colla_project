@@ -34,16 +34,18 @@
 		</nav>
 		<div id="member-nav" class="floatleft">
 			<ul>
-				<li><a href="${contextPath}/loginForm" class="member-btn">Login</a></li>
-				<li><a href="${contextPath}/joinStep1" class="member-btn">Join us</a></li>
-				<!-- 				<li> -->
-				<!-- 					<a href="#" class="member-btn">Workspace로 이동</a> -->
-				<!-- 				</li> -->
-				<!-- 				<li> -->
-				<!-- 					<a href="#" class="member-btn">LOGOUT</a> -->
-				<!-- 				</li> -->
+			<c:choose>
+				<c:when test="${sessionScope.user != null }">
+					<li><a href="${contextPath}/workspace" class="btn">Workspace</a></li>
+					<li><a href="${contextPath}/logout" class="btn">Logout</a></li>
+				</c:when>
+				<c:otherwise>
+					<li><a href="${contextPath}/loginForm" class="btn">Login</a></li>
+					<li><a href="${contextPath}/joinStep1" class="btn">Join us</a></li>
+				</c:otherwise>
+			</c:choose>
+				
 			</ul>
 		</div>
 	</div>
-	<div class="header-wave"><img class="header-wave-img" src="${contextPath }/img/COLLA_WAVE_PNG.png" /></div>
 </div>

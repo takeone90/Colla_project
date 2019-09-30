@@ -849,7 +849,7 @@ var mapContainer = null;
 						<li class="navInnerBtn"><a href="#" class="btn" data-content="favorite">즐겨찾기</a></li>
 						<li class="navInnerBtn"><a href="#" class="btn" data-content="search">채팅검색</a></li>
 					</ul>
-					<div id="chatNavContent" align="left">
+					<div id="chatNavContent" class="collaScroll" align="left">
 						<div id="nav--favorite" class="navContent-wrap">
 						</div>
 						<div id="nav--memberManagement" class="navContent-wrap">
@@ -898,7 +898,7 @@ var mapContainer = null;
 					</c:if>
 				</div>
 			</div>
-			<div class="chat" id="chatArea">
+			<div class="chat collaScroll" id="chatArea">
 			</div>
 			<div class="attachDetail">
 				<div class="attach"><a href="#" class="openFileUploadModal">파일첨부</a></div>
