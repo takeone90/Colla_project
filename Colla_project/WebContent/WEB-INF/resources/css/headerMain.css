@@ -2,8 +2,9 @@
 
 #header{
 	width:100%;
-	height:70px;
+	height:120px;
 	background-color: #fff; /* 임시로 색깔 바꿈 */
+	background:url("../img/COLLA_header_wave.png") no-repeat 100% 100%;
 	position: fixed;
   	top: 0px;
   	left: 0px; 
@@ -80,12 +81,4 @@ a.member-btn {
 
 a.member-btn:hover{
 	background-color:#EC6D63;
-}
-.header-wave {
-	width: 100%;
-    position: absolute;
-    z-index: 1;
-}
-.header-wave-img {
-	width: 100%;	
 }
