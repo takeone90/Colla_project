@@ -17,11 +17,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		update todo set td_content=#{tdContent},
 						td_title=#{tdTitle},
 						m_num_to=#{mNumTo},
-						m_num_from=#{mNumFrom},
 						td_isComplete=#{isComplete},
 						td_priority=#{priority},
-						td_Enddate=#{tdEndDate},
-						td_completedate=#{completeDate}
+						td_Startdate=#{tdStartDate},
+						td_Enddate=#{tdEndDate}
 		where td_num=#{tdNum}
 	</update>
 	<select id="selectTodo" parameterType="int" resultMap="tdMap">
