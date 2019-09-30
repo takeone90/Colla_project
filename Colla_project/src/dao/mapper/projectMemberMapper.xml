@@ -15,10 +15,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from project_member where p_num=#{pNum} and m_num=#{mNum}
 	</select>
 	<select id="selectAllProjectMemberByPnum" parameterType="int" resultMap="pmMap">
-		select * from project_member where p_num=#{pNum}
+		select pm.*,m.m_name from project_member pm,member m where p_num=#{pNum} and pm.m_num=m.m_num
 	</select>
 	<resultMap type="projectMember" id="pmMap">
 		<result column="p_num" property="pNum"/>
 		<result column="m_num" property="mNum"/>
+		<result column="m_name" property="mName"/>
 	</resultMap>
 </mapper>

@@ -25,19 +25,10 @@ public class test {
 	private TodoService tdService;
 	@Test
 	public void serviceTest() {
-//		int currDate = 0;
-//		for(ChatMessage cm : cmService.getAllChatMessageByCrNum(1, 1)) {
-//			Date cmDate = cm.getCmWriteDate();
-//			int date = cmDate.getDate();
-//			if(currDate!=date) {
-//				int year = cmDate.getYear()+1900;
-//				int month = ((Integer)cmDate.getMonth()+1);
-//				System.out.println("<"+year+"년 "+month+"월 "+cmDate.getDate()+"일>");
-//				currDate = date;				
-//			}
-//			System.out.println(cm);
-//		}
-		List<Todo> tdList = tdService.getAllTodoByPnum(2);
-		System.out.println(tdList);
+		int a=2;
+		int b=3;
+		double c = ((double)a/b*100);
+		
+		System.out.println(Math.round(c*10)/10.0);
 	}
 }
