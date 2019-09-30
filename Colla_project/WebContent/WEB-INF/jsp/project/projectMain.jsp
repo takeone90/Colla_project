@@ -71,7 +71,7 @@
 						<a href="#" class="exitProject">나가기</a>
 					</div>
 					<div class="projectDetail">${pl.pInfo.pDetail}</div>
-					<div class="progress">${pl.pInfo.progress}
+					<div class="progress">진척률 : ${pl.pInfo.progress}
 						<div class="projectDate">${pl.pInfo.pStartDate} ~ ${pl.pInfo.pEndDate}</div>
 					</div>
 					
