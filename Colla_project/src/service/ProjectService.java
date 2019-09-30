@@ -26,33 +26,36 @@ public class ProjectService {
 	@Autowired
 	private ChatRoomMemberDao crmDao;
 	
-	public int addProject(String pName,int wNum,String pDetail,Date pStartDate,Date pEndDate,int crNum,int mNum) {
-		int pNum = 0;
-		Project project = new Project();
-		project.setpName(pName);
-		project.setwNum(wNum);
-		project.setCrNum(crNum);
-		project.setmNum(mNum);
-		project.setpDetail(pDetail);
-		project.setpEndDate(pEndDate);
-		project.setpStartDate(pStartDate);
-		if(pDao.insertProject(project)>0) { //프로젝트 멤버 추가
-			pNum = project.getpNum();
-			ProjectMember pm = new ProjectMember();
-			pm.setpNum(pNum);
-			pm.setmNum(mNum);
-			pmDao.insertProjectMember(pm);
-		} // 프로젝트 추가 끝
+	public int addProject(String pName,int wNum,String pDetail,String pStartDate,String pEndDate,int mNum) {
 		ChatRoom chatRoom = new ChatRoom();
 		chatRoom.setCrName(pName); //프로젝트 이름 = 채팅방 이름
 		chatRoom.setmNum(mNum);
 		chatRoom.setwNum(wNum);
 		if(crDao.insertChatRoom(chatRoom)>0) { //프로젝트 멤버를 채팅방 멤버 추가..
 			ChatRoomMember crm = new ChatRoomMember();
-			crm.setCrNum(crNum);
+			crm.setCrNum(chatRoom.getCrNum());
 			crm.setwNum(wNum);
 			crmDao.insertChatRoomMember(crm);
+			
 		} // 채팅방 추가 끝
+		// 채팅방을 먼저 추가하고 그 채팅방의 crNum을 가져온다. 
+		int pNum = 0;
+		Project project = new Project();
+		project.setpName(pName);
+		project.setwNum(wNum);
+		project.setCrNum(chatRoom.getCrNum());
+		project.setmNum(mNum);
+		project.setpDetail(pDetail);
+		project.setpEndDate(pEndDate);
+		project.setpStartDate(pStartDate);
+		if(pDao.insertProject(project)>0) { //프로젝트 멤버 추가
+			pNum = project.getpNum();
+			chatRoom.setpNum(pNum); //채팅방에 pNum 넣어주기
+			ProjectMember pm = new ProjectMember();
+			pm.setpNum(pNum);
+			pm.setmNum(mNum);
+			pmDao.insertProjectMember(pm);
+		} // 프로젝트 추가 끝
 		return pNum;
 	}
 	
@@ -85,6 +88,5 @@ public class ProjectService {
 	public List<Project> getAllProject(){
 		return pDao.selectAllProject();
 	}
-		
 }
 

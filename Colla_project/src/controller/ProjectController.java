@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import model.ChatRoom;
+import model.Member;
 import model.Project;
 import model.ProjectMember;
 import model.Workspace;
@@ -48,9 +49,7 @@ public class ProjectController {
 			pMap.put("pmList", pmList); //프로젝트 소속 멤버
 			projectList.add(pMap);
 		}
-		
 		model.addAttribute("projectList", projectList);
-		
 		Workspace ws = wService.getWorkspace(wNum);
 //		ChatRoom chatRoom = crService.getChatRoomByCrNum(crNum);
 		session.setAttribute("wsName", ws.getName());
@@ -61,21 +60,23 @@ public class ProjectController {
 	
 	//-------------------------------------------------------------------------------CRUD 
 	
-	@ResponseBody
 	@RequestMapping(value="/addProject", method = RequestMethod.POST)
-	public int addProject(String pName, int wNum, String pDetail, Date pStartDate, Date pEndDate, int crNum, int mNum, HttpServletRequest request) {
-		int pNum = pService.addProject(pName, wNum, pDetail, pStartDate, pEndDate, crNum, mNum); //프로젝트 추가 & 채팅방 추가
+	public String addProject(String pName, int wNum, String pDetail, String startDate, String endDate, HttpSession session, HttpServletRequest request) {
+		Member member = (Member)session.getAttribute("user");
+		int mNum = member.getNum();
+		int pNum = pService.addProject(pName, wNum, pDetail, startDate, endDate, mNum); //프로젝트 추가 & 채팅방 추가
 		//프로젝트 멤버 추가
 		String[] mNumList = request.getParameterValues("mNumList");
+		System.out.println("mNumList ? "+mNumList);
 		if(mNumList != null) {
 			for(String stringMnum : mNumList) {
 				int num = Integer.parseInt(stringMnum);
 				pmService.addProjectMember(pNum, num);
 			}
 		}
-		
-		return pNum;
+		return "redirect:projectMain?wNum="+wNum;
 	}
+	
 	@ResponseBody
 	@RequestMapping(value="/removeProject", method = RequestMethod.POST)
 	public boolean removeProject(int pNum) {
@@ -85,6 +86,7 @@ public class ProjectController {
 	@ResponseBody
 	@RequestMapping(value="/modifyProject", method = RequestMethod.POST)
 	public boolean modifyProject(Project project) {
+		System.out.println("modifyProject : "+project);
 		boolean result = pService.modifyProject(project);
 		return result;
 	}
