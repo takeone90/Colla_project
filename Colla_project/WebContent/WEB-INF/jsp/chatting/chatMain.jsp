@@ -757,13 +757,18 @@ var mapContainer = null;
 					crmListUL.append(crmLi);
 				});
 				
+				if(wsmList.length <= 0){
+					$("#emptyInvite").text("가 없습니다.");
+					$("#inviteWsmBtn").remove();
+				}else{
 				//채팅방에 없는사람(ws멤버인사람)
-				$.each(wsmList,function(idx,item){
-					let wsmLi = "<li onclick='inviteMemberChecker(this);'>";
-					wsmLi += "<div class='profileImg' data-num='"+item.num+"' onclick='showProfileInfoModal("+item.num+")'><img alt='프로필사진' src='${contextPath}/showProfileImg?num="+item.num+"'></div>";
-					wsmLi += "<div class='memberNameInSlideMenu'><input type='checkbox' value='"+item.num+"' name='wsmList'>"+item.name+"<div class='checked-member'><i class='fas fa-check'></i></div></div></li>";
-					wsmListUL.append(wsmLi);
-				});
+					$.each(wsmList,function(idx,item){
+						let wsmLi = "<li onclick='inviteMemberChecker(this);'>";
+						wsmLi += "<div class='profileImg' data-num='"+item.num+"' onclick='showProfileInfoModal("+item.num+")'><img alt='프로필사진' src='${contextPath}/showProfileImg?num="+item.num+"'></div>";
+						wsmLi += "<div class='memberNameInSlideMenu'><input type='checkbox' value='"+item.num+"' name='wsmList'>"+item.name+"<div class='checked-member'><i class='fas fa-check'></i></div></div></li>";
+						wsmListUL.append(wsmLi);
+					});
+				}
 				
 				if(conList.length > 0){	//표시해야할 접속자가 1 넘을 경우
 					$.each(conList, function(idx,item){
@@ -849,7 +854,6 @@ var mapContainer = null;
 						</div>
 						<div id="nav--memberManagement" class="navContent-wrap">
 							<form action="inviteChatMember" id="inviteForm">
-								<p class="navInfoMsg">워크스페이스의 멤버를 채팅방에 추가할 수 있습니다.</p>
 								<div id="navMList">
 									<input type="hidden" class="addCrNum" name="crNum" value="${chatRoom.crNum }" />
 									<input type="hidden" id="wNum" name="wNum" value="${wNum }" />
@@ -857,7 +861,8 @@ var mapContainer = null;
 									<div id="crmListUL-wrap" class="listUL-wrap collaScroll">
 										<ul id='crmListUL' class='isntDefault'></ul>
 									</div>
-									<h4>초대 가능한 워크스페이스 멤버</h4>
+<!-- 									<p class="navInfoMsg">워크스페이스의 멤버를 채팅방에 추가할 수 있습니다.</p> -->
+									<h4>초대 가능한 워크스페이스 멤버<span id="emptyInvite"></span></h4>
 									<div id="wsmListUl-wrap" class="listUL-wrap collaScroll" style="${chatRoom.crIsDefault==1?'display:none':''}">
 										<ul id='wsmListUL'></ul>
 									</div>
