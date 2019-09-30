@@ -25,6 +25,17 @@ var date = new Date();
 var numOfWeekRow = 0;
 
 $(function() {
+	
+
+	$( ".tmp" ).checkboxradio({
+		icon: true
+	});
+	
+    $( "#datepicker" ).datepicker({
+        changeMonth: true,
+        changeYear: true
+    });
+
 	thisMonthCalendar(today);
 	showSchedule(today);
 	markingOnDate(formatChange(today));
@@ -819,21 +830,29 @@ function nextYearYear() {
 						</div>
 						<div class="colorDiv">
 							<h4>색</h4>
-							<input type="color" name="color" id="addColor" value="#fff">
+							<input type="color" name="color" id="addColor" value="#ffffff">
 						</div>
 					</div>
 					<div class="dateDiv">
 						<h4>기간</h4>
-						<div><input type="date" name="startDate" id="startDate"></div>
+						<div><input type="date" name="startDate" id="startDate" class="datepicker"></div>
 						<span>~</span>
 						<div><input type="date" name="endDate" id="endDate"></div>
 					</div>
 
 					<div class="checkboxDiv btn-group-toggle" data-toggle="buttons">
-						<label class="checkboxbtn"><input type="checkbox" name="yearCalendar" id="addYearCalendar" value="yearCalendar">연간 달력</label> 
-						<label class="checkboxbtn"><input type="checkbox" name="annually" id="annually" value="annually">매년 반복</label>
-						<label class="checkboxbtn"><input type="checkbox" name="monthly" id="addMonthly" value="monthly">매월 반복</label>
+						<label for="checkbox-1" class="checkboxbtn">
+							<input type="checkbox" name="yearCalendar" id="addYearCalendar" value="yearCalendar" class="tmp">연간 달력
+						</label> 
+						<label for="checkbox-2" class="checkboxbtn">
+							<input type="checkbox" name="annually" id="addAnnually" value="annually" class="tmp">매년 반복
+						</label>
+						<label for="checkbox-3" class="checkboxbtn">
+							<input type="checkbox" name="monthly" id="addMonthly" value="monthly" class="tmp">매월 반복
+						</label>
 					</div>
+					
+					
 					<div>
 						<h4>내용</h4>
 						<textarea rows="3" cols="21" name="content" class="modalContent" id="content"></textarea>
