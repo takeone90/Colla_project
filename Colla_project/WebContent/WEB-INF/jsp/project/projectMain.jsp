@@ -24,26 +24,26 @@
 		
 		$(".exitProject").on("click",function(){
 			if(confirm("프로젝트를 나가시겠습니까?")==true){
-				alert("프로젝트 나가기 성공")
-// 				$.ajax({
-// 					url : "${contextPath}/exitWs",
-// 					data : {"thisWnum" : thisWnum},
-// 					success : function(){
-// 						alert("프로젝트 나가기 성공");
-// 						location.reload();
-// 					},
-// 					error : function(){
-// 						alert("프로젝트 나가기 오류 발생");
-// 					}
-// 				});
+				$.ajax({
+					url : "exitProject",
+					data : {"pNum" : $(this).attr("data-pNum")},
+					dataType : "json",
+					success : function(result){
+						alert("프로젝트 나가기 성공");
+						location.reload();
+					},
+					error: function(request, status, error) {
+						alert("프로젝트 나가기 실패");
+					}
+				});
 			}else{
 				return false;
 			}
 		});
-		
 	});<%--onload-function end--%>
 	function openModifyProjectModal(){
-		$("#modifyProjectModal").fadeIn(300);
+		$(".pNum").val($(this).attr("data-pNum"));
+		$("#modifyProjectModal").fadeIn(300);			
 	}
 </script>
 </head>
@@ -58,7 +58,6 @@
 	
 		<button id="addProjectBtn">프로젝트 추가</button>
 			<div id="projectArea">
-				
 				<c:forEach items="${projectList}" var="pl">
 					<!-- 반복 -->
 				<div class="project">
@@ -67,8 +66,8 @@
 						<a href="#">채팅방</a>
 						<!-- todoMain?pNum=1 이런 요청으로 가야함 -->
 						<a href="todoMain?pNum=${pl.pInfo.pNum}">Todo리스트</a>
-						<a href="#" onclick='openModifyProjectModal();'>수정</a>
-						<a href="#" class="exitProject">나가기</a>
+						<a href="#" onclick='openModifyProjectModal();' data-pNum="${pl.pInfo.pNum}">수정</a>
+						<a href="#" class="exitProject" data-pNum="${pl.pInfo.pNum}">나가기</a>
 					</div>
 					<div class="projectDetail">${pl.pInfo.pDetail}</div>
 					<div class="progress">진척률 : ${pl.pInfo.progress}
@@ -90,15 +89,12 @@
 						<ul>
 						<c:forEach items="${pl.pmList}" var="pm">
 							<li>${pm.mName}</li>
-						</c:forEach>
-							
+						</c:forEach>	
 						</ul>
 					</div>
 					
 				</div><!-- 반복 종료 -->
 				</c:forEach>
-				
-				
 				
 			</div><!-- end projectArea -->
 		</div><!-- end wsBodyContainer -->
@@ -117,7 +113,6 @@
 							<h4>프로젝트 이름</h4>
 							<div>
 								<input type="hidden" value="${sessionScope.currWnum}" name="wNum">
-								
 								<input type="text" placeholder="project이름" name="pName" style="width:465px">
 							</div>
 						</div>
@@ -144,7 +139,6 @@
 							</div>
 						</div>
 					</div> <!-- end addWsInputWrap -->
-
 					<div id="modalBtnDiv">
 						<button type="submit">Project만들기</button>
 						<button id="closePjModal">닫기</button>

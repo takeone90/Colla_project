@@ -33,13 +33,11 @@ public class TodoController {
 	
 	@RequestMapping("/todoMain") //todoMain으로 이동
 	public String showTodoMain(HttpSession session, int pNum, Model model) {
-//		System.out.println("todoMain요청받음 // pNum : "+pNum);
 		List<Todo> tList = tService.getAllTodoByPnum(pNum);
 		model.addAttribute("tList", tList); //todo 리스트 입니다...
 		model.addAttribute("pNum", pNum);
 		session.setAttribute("pNum", pNum);
 		model.addAttribute("progress",pService.getProject(pNum).getProgress());
-
 		return "/project/todoMain";
 	}
 	
@@ -47,32 +45,28 @@ public class TodoController {
 	
 	@RequestMapping(value="/addTodo", method = RequestMethod.POST)
 	public String addTodo(String tdTitle, String tdContent, int mNumTo, String startDate, String endDate, HttpSession session) throws ParseException {
-		System.out.println("addTodo 실행!");
 		int pNum = (int)session.getAttribute("pNum");
 		Member member = (Member)session.getAttribute("user");
 		int mNumFrom = member.getNum(); //일 시킨 사람
 		SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd");
 		Date encStartDate = dt.parse(startDate);
 		Date encEndDate = dt.parse(endDate);
-		int tdNum = tService.addTodo(tdTitle, tdContent, pNum, mNumTo, mNumFrom, encStartDate, encEndDate);
-		System.out.println("tdNum : "+tdNum);
+		tService.addTodo(tdTitle, tdContent, pNum, mNumTo, mNumFrom, encStartDate, encEndDate);
 		return "redirect:todoMain?pNum="+pNum;
 	}
 	@RequestMapping(value="/removeTodo")
 	public String removeTodo(int tdNum, HttpSession session) {
-		boolean result = tService.removeTodo(tdNum);
+		tService.removeTodo(tdNum);
 		int pNum = (int)session.getAttribute("pNum");
 		return "redirect:todoMain?pNum="+pNum;
 	}
 	@RequestMapping(value="/modifyTodo", method = RequestMethod.POST)
 	public String modifyTodo(int tdNum, String tdTitle, String tdContent, int mNumTo, String startDate, String endDate, HttpSession session) throws ParseException {
-		System.out.println("modifyTodo 실행!");
-		System.out.println("tdNum : "+tdNum);
 		int pNum = (int)session.getAttribute("pNum");
 		SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd");
 		Date encStartDate = dt.parse(startDate);
-		Date encEndDate = dt.parse(endDate);	
-		Todo todo = new Todo();
+		Date encEndDate = dt.parse(endDate);
+		Todo todo = tService.getTodo(tdNum);
 		todo.setTdNum(tdNum);
 		todo.setTdTitle(tdTitle);
 		todo.setTdContent(tdContent);
@@ -80,7 +74,6 @@ public class TodoController {
 		todo.setTdStartDate(encStartDate);
 		todo.setTdEndDate(encEndDate);
 		boolean result = tService.modifyTodo(todo);
-		System.out.println("result : "+result);
 		return "redirect:todoMain?pNum="+pNum;
 	}
 	@ResponseBody
@@ -101,6 +94,9 @@ public class TodoController {
 		List<Todo> todoList = tService.getAllTodoByMnum(mNum);
 		return todoList;
 	}
+	
+	//-------------------------------------------------------------------------------CRUD 끝
+	
 	@ResponseBody
 	@RequestMapping("/toggleComplete")
 	public Map<String, Object> toggleComplete(@RequestParam("tdNum")int tdNum) {

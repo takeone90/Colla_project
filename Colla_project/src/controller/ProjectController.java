@@ -75,10 +75,9 @@ public class ProjectController {
 		Date encStartDate = dt.parse(startDate);
 		Date encEndDate = dt.parse(endDate);
 		int pNum = pService.addProject(pName, wNum, pDetail, encStartDate, encEndDate, mNum); //프로젝트 추가 & 채팅방 추가
-		//프로젝트 멤버 추가
 		String[] targetUserList = request.getParameterValues("targetUserList"); //추후 수정 필요?
 		System.out.println("targetUserList ? "+targetUserList);
-		if(targetUserList != null) {
+		if(targetUserList != null) { //프로젝트 멤버 추가
 			for(String stringMnum : targetUserList) {
 				int num = Integer.parseInt(stringMnum);
 				pmService.addProjectMember(pNum, num);
@@ -87,13 +86,10 @@ public class ProjectController {
 		return "redirect:projectMain?wNum="+wNum;
 	}
 	@ResponseBody
-	@RequestMapping(value="/exitProject", method = RequestMethod.POST) //이름 바꿈
+	@RequestMapping(value="/exitProject") //이름 바꿈
 	public boolean exitProject(int pNum, HttpSession session) {
-		System.out.println("exitProject!");
-		System.out.println("pNum : "+pNum);
 		Member member = (Member)session.getAttribute("user");
 		boolean result = pmService.removeProjectMember(pNum, member.getNum()); //프로젝트에서 나감 & 채팅방에서 나감
-		System.out.println("퇴장 결과 : "+result);
 		return result;
 	}
 	@ResponseBody
