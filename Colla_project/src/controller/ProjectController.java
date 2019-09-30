@@ -14,13 +14,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import model.ChatRoom;
+import model.ChatRoomMember;
 import model.Member;
 import model.Project;
 import model.ProjectMember;
 import model.Workspace;
+import service.ChatRoomMemberService;
 import service.ChatRoomService;
 import service.ProjectMemberService;
 import service.ProjectService;
@@ -34,6 +37,7 @@ public class ProjectController {
 	private ProjectMemberService pmService;
 	@Autowired
 	private ChatRoomService crService;
+	private ChatRoomMemberService crmService;
 	@Autowired
 	private WorkspaceService wService;
 	
@@ -66,28 +70,34 @@ public class ProjectController {
 		int mNum = member.getNum();
 		int pNum = pService.addProject(pName, wNum, pDetail, startDate, endDate, mNum); //프로젝트 추가 & 채팅방 추가
 		//프로젝트 멤버 추가
-		String[] mNumList = request.getParameterValues("mNumList");
-		System.out.println("mNumList ? "+mNumList);
-		if(mNumList != null) {
-			for(String stringMnum : mNumList) {
+		String[] targetUserList = request.getParameterValues("targetUserList"); //추후 수정 필요?
+		System.out.println("targetUserList ? "+targetUserList);
+		if(targetUserList != null) {
+			for(String stringMnum : targetUserList) {
 				int num = Integer.parseInt(stringMnum);
 				pmService.addProjectMember(pNum, num);
 			}
 		}
 		return "redirect:projectMain?wNum="+wNum;
 	}
-	
 	@ResponseBody
-	@RequestMapping(value="/removeProject", method = RequestMethod.POST)
-	public boolean removeProject(int pNum) {
-		boolean result = pService.removeProject(pNum);
+	@RequestMapping(value="/exitProject", method = RequestMethod.POST) //이름 바꿈
+	public boolean exitProject(int pNum, HttpSession session) {
+		System.out.println("exitProject!");
+		System.out.println("pNum : "+pNum);
+		Member member = (Member)session.getAttribute("user");
+		boolean result = pmService.removeProjectMember(pNum, member.getNum()); //프로젝트에서 나감 & 채팅방에서 나감
+		System.out.println("퇴장 결과 : "+result);
 		return result;
 	}
 	@ResponseBody
 	@RequestMapping(value="/modifyProject", method = RequestMethod.POST)
-	public boolean modifyProject(Project project) {
-		System.out.println("modifyProject : "+project);
-		boolean result = pService.modifyProject(project);
+	public boolean modifyProject(int pNum, String pName, String pDetail, String startDate, String endDate, HttpSession session) {
+		System.out.println("modifyProject!");
+		Member member = (Member)session.getAttribute("user");
+		int mNum = member.getNum();
+		boolean result = pService.modifyProject(pNum, pName, pDetail, startDate, endDate, mNum); //프로젝트 수정 & 채팅방 수정
+		System.out.println("수정 결과 : "+result);
 		return result;
 	}
 	@ResponseBody
