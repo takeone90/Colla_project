@@ -58,11 +58,11 @@ public class TodoController {
 		System.out.println("tdNum : "+tdNum);
 		return "redirect:todoMain?pNum="+pNum;
 	}
-	@ResponseBody
-	@RequestMapping(value="/removeTodo", method = RequestMethod.POST)
-	public boolean removeTodo(int tdNum) {
+	@RequestMapping(value="/removeTodo")
+	public String removeTodo(int tdNum, HttpSession session) {
 		boolean result = tService.removeTodo(tdNum);
-		return result;
+		int pNum = (int)session.getAttribute("pNum");
+		return "redirect:todoMain?pNum="+pNum;
 	}
 	@RequestMapping(value="/modifyTodo", method = RequestMethod.POST)
 	public String modifyTodo(int tdNum, String tdTitle, String tdContent, int mNumTo, String startDate, String endDate, HttpSession session) throws ParseException {
