@@ -33,17 +33,33 @@
 	background-color: #E5675A;
 }
 .todo{
-	background-color : white;
-	border : 1px solid black;
-	padding : 10px;
-	margin-bottom: 5px;
+	background-color: white;
+    border: 1px solid #d1d1d1;
+    border-radius: 8px;
+    padding: 10px;
+    margin-bottom: 5px;
 	
 }
 #currProjectProgress{
 	margin-bottom: 20px;
 }
+.tdDate{
+    position: absolute;
+    left: calc(100% - 588px);
+    font-size: 13px;
+}
 .tdDate p{
 	display: inline-block;
+}
+
+
+.tdInfo{
+	margin-left: 20px;
+    margin-top: 5px;
+    margin-bottom: 8px;
+}
+.tdInfo h4{
+	margin-bottom:10px;
 }
 .todoInnerBtn button{
     width: 6%;
@@ -58,8 +74,9 @@
 }
 .isComplete{
 	cursor: pointer;
-    width: 20px;
-    height: 20px;
+    width: 15px;
+    height: 15px;
     border-radius: 50%;
     display: inline-block;
+    border: 1px solid #9e9d9d;
 }

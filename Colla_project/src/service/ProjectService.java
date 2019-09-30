@@ -113,5 +113,9 @@ public class ProjectService {
 	public List<Project> getAllProject(){
 		return pDao.selectAllProject();
 	}
+	public int calcProgress(int successCount,int allCount) {
+		int progress = (successCount/allCount)*100;
+		return progress;
+	}
 }
 

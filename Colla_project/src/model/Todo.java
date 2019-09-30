@@ -7,6 +7,7 @@ public class Todo {
 	private String tdTitle;
 	private String tdContent;
 	private int pNum;
+	private String mName;
 	private int mNumTo;
 	private int mNumFrom;
 	private Date tdStartDate;
@@ -14,6 +15,13 @@ public class Todo {
 	private int isComplete;
 	private Date completeDate;
 	private int priority;
+	
+	public String getmName() {
+		return mName;
+	}
+	public void setmName(String mName) {
+		this.mName = mName;
+	}
 	public int getTdNum() {
 		return tdNum;
 	}
@@ -83,8 +91,9 @@ public class Todo {
 	@Override
 	public String toString() {
 		return "Todo [tdNum=" + tdNum + ", tdTitle=" + tdTitle + ", tdContent=" + tdContent + ", pNum=" + pNum
-				+ ", mNumTo=" + mNumTo + ", mNumFrom=" + mNumFrom + ", tdStartDate=" + tdStartDate + ", tdEndDate="
-				+ tdEndDate + ", isComplete=" + isComplete + ", completeDate=" + completeDate + ", priority=" + priority
-				+ "]";
+				+ ", mName=" + mName + ", mNumTo=" + mNumTo + ", mNumFrom=" + mNumFrom + ", tdStartDate=" + tdStartDate
+				+ ", tdEndDate=" + tdEndDate + ", isComplete=" + isComplete + ", completeDate=" + completeDate
+				+ ", priority=" + priority + "]";
 	}
+	
 }

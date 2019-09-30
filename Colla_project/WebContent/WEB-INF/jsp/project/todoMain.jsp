@@ -12,14 +12,22 @@
 		$("#todoList").sortable({
 				update: function(event, ui) {
 	            var result = $(this).sortable('toArray');
-// 		            $.ajax({
-// 		            	data : {},
-// 		            });
+	            var pNum = $("#pNum").val();
+		            $.ajax({
+		            	url : "${contextPath}/resortingTodo",
+		            	data : {"priorityArray":result,"pNum":pNum},
+		            	success : function(){
+// 		            		alert("데이터보내기 성공");
+		            	},
+		            	error : function(){
+		            		alert("정렬 에러발생");
+		            	}
+		            });
 	            }
 		});
 		
-		$(".isComplete[data-isComplete=1]").attr("style","background-color:blue");
-		$(".isComplete[data-isComplete=0]").attr("style","background-color:gray");
+		$(".isComplete[data-isComplete=1]").attr("style","background-color:#E5675A");
+		$(".isComplete[data-isComplete=0]").attr("style","background-color:#ebebeb");
 		
 		
 		$("#addTodo").on("click",function(){
@@ -39,16 +47,15 @@
 	});<%--onload function end--%>
 	
 	function checkComplete(tdNum){
-		var isCompleteDiv = $(".isComplete [data-tdNum="+tdNum+"]");
-		console.log(isCompleteDiv);
+		var isCompleteDiv = $(".isComplete[data-tdNum="+tdNum+"]");
 		$.ajax({
 			url : "${contextPath}/toggleComplete",
 			data : {"tdNum":tdNum},
 			success : function(e){
 				if(e==1){
-					isCompleteDiv.attr("style","background-color:gray");
+					isCompleteDiv.css("backgroundColor","#E5675A");
 				}else{
-					isCompleteDiv.attr("style","background-color:blue");
+					isCompleteDiv.css("backgroundColor","#ebebeb");
 				}
 			}
 		});
@@ -61,6 +68,7 @@
 	<div id="wsBody">
 		<input type="hidden" value="todoList" id="pageType">
 		<input type="hidden" value="${sessionScope.user.num}" id="mNum">
+		<input type="hidden" value="${pNum}" id="pNum">
 		<div id="wsBodyContainer"> 
 		<h2>[프로젝트 이름] Todo List</h2>
 		<button id="addTodo">할 일 추가</button>
@@ -80,7 +88,7 @@
 						<h4>${td.tdTitle}</h4>
 						<p>${td.tdContent}</p>
 						<div class="tdMemberInfo">
-							<p>${td.mNumTo}</p>
+							<p>책임자 : ${td.mName}</p>
 						</div>
 					</div>
 <!-- 					<div class="tdPriority"> -->
