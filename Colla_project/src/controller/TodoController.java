@@ -1,9 +1,13 @@
 package controller;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import model.Member;
 import model.Todo;
 import service.ProjectService;
 import service.TodoService;
@@ -23,22 +28,31 @@ public class TodoController {
 	private TodoService tService;
 	@Autowired
 	private ProjectService pService;
+	
 	@RequestMapping("/todoMain") //todoMain으로 이동
-	public String showTodoMain(int pNum, Model model) {
+	public String showTodoMain(HttpSession session, int pNum, Model model) {
 //		System.out.println("todoMain요청받음 // pNum : "+pNum);
 		List<Todo> tList = tService.getAllTodoByPnum(pNum);
 		model.addAttribute("tList", tList); //todo 리스트 입니다...
-		model.addAttribute("pNum",pNum);
+		model.addAttribute("pNum", pNum);
+		session.setAttribute("pNum", pNum);
 		return "/project/todoMain";
 	}
 	
 	//-------------------------------------------------------------------------------CRUD
 	
-	@ResponseBody
 	@RequestMapping(value="/addTodo", method = RequestMethod.POST)
-	public int addTodo(String tdTitle, String tdContent, int pNum, int mNumTo, int mNumFrom, Date tdStartDate, Date tdEndDate, Date completeDate) {
-		int tdNum = tService.addTodo(tdTitle, tdContent, pNum, mNumTo, mNumFrom, tdStartDate, tdEndDate, completeDate);
-		return tdNum;
+	public String addTodo(String tdTitle, String tdContent, int mNumTo, String startDate, String endDate, HttpSession session) throws ParseException {
+		System.out.println("addTodo 실행!");
+		int pNum = (int)session.getAttribute("pNum");
+		Member member = (Member)session.getAttribute("user");
+		int mNumFrom = member.getNum(); //일 시킨 사람
+		SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd");
+		Date encStartDate = dt.parse(startDate);
+		Date encEndDate = dt.parse(endDate);
+		int tdNum = tService.addTodo(tdTitle, tdContent, pNum, mNumTo, mNumFrom, encStartDate, encEndDate);
+		System.out.println("tdNum : "+tdNum);
+		return "redirect:todoMain?pNum="+pNum;
 	}
 	@ResponseBody
 	@RequestMapping(value="/removeTodo", method = RequestMethod.POST)
@@ -46,11 +60,24 @@ public class TodoController {
 		boolean result = tService.removeTodo(tdNum);
 		return result;
 	}
-	@ResponseBody
 	@RequestMapping(value="/modifyTodo", method = RequestMethod.POST)
-	public boolean modifyTodo(Todo todo) {
+	public String modifyTodo(int tdNum, String tdTitle, String tdContent, int mNumTo, String startDate, String endDate, HttpSession session) throws ParseException {
+		System.out.println("modifyTodo 실행!");
+		System.out.println("tdNum : "+tdNum);
+		int pNum = (int)session.getAttribute("pNum");
+		SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd");
+		Date encStartDate = dt.parse(startDate);
+		Date encEndDate = dt.parse(endDate);	
+		Todo todo = new Todo();
+		todo.setTdNum(tdNum);
+		todo.setTdTitle(tdTitle);
+		todo.setTdContent(tdContent);
+		todo.setmNumTo(mNumTo);
+		todo.setTdStartDate(encStartDate);
+		todo.setTdEndDate(encEndDate);
 		boolean result = tService.modifyTodo(todo);
-		return result;
+		System.out.println("result : "+result);
+		return "redirect:todoMain?pNum="+pNum;
 	}
 	@ResponseBody
 	@RequestMapping(value="/getTodo", method = RequestMethod.POST)
@@ -93,6 +120,5 @@ public class TodoController {
 			todo.setPriority(priorityArray.get(i));
 			tService.modifyTodo(todo);
 		}
-		
 	}
 }

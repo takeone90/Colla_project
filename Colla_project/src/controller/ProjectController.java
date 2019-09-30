@@ -1,5 +1,7 @@
 package controller;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -37,6 +39,7 @@ public class ProjectController {
 	private ProjectMemberService pmService;
 	@Autowired
 	private ChatRoomService crService;
+	@Autowired
 	private ChatRoomMemberService crmService;
 	@Autowired
 	private WorkspaceService wService;
@@ -65,10 +68,13 @@ public class ProjectController {
 	//-------------------------------------------------------------------------------CRUD 
 	
 	@RequestMapping(value="/addProject", method = RequestMethod.POST)
-	public String addProject(String pName, int wNum, String pDetail, Date startDate, Date endDate, HttpSession session, HttpServletRequest request) {
+	public String addProject(String pName, int wNum, String pDetail, String startDate, String endDate, HttpSession session, HttpServletRequest request) throws ParseException {
 		Member member = (Member)session.getAttribute("user");
 		int mNum = member.getNum();
-		int pNum = pService.addProject(pName, wNum, pDetail, startDate, endDate, mNum); //프로젝트 추가 & 채팅방 추가
+		SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd");
+		Date encStartDate = dt.parse(startDate);
+		Date encEndDate = dt.parse(endDate);
+		int pNum = pService.addProject(pName, wNum, pDetail, encStartDate, encEndDate, mNum); //프로젝트 추가 & 채팅방 추가
 		//프로젝트 멤버 추가
 		String[] targetUserList = request.getParameterValues("targetUserList"); //추후 수정 필요?
 		System.out.println("targetUserList ? "+targetUserList);
@@ -92,11 +98,15 @@ public class ProjectController {
 	}
 	@ResponseBody
 	@RequestMapping(value="/modifyProject", method = RequestMethod.POST)
-	public boolean modifyProject(int pNum, String pName, String pDetail, Date startDate, Date endDate, HttpSession session) {
+	public boolean modifyProject(int pNum, String pName, String pDetail, String startDate, String endDate, HttpSession session) throws ParseException {
 		System.out.println("modifyProject!");
 		Member member = (Member)session.getAttribute("user");
 		int mNum = member.getNum();
-		boolean result = pService.modifyProject(pNum, pName, pDetail, startDate, endDate, mNum); //프로젝트 수정 & 채팅방 수정
+		SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd");
+		Date encStartDate = dt.parse(startDate);
+		Date encEndDate = dt.parse(endDate);
+		
+		boolean result = pService.modifyProject(pNum, pName, pDetail, encStartDate, encEndDate, mNum); //프로젝트 수정 & 채팅방 수정
 		System.out.println("수정 결과 : "+result);
 		return result;
 	}
