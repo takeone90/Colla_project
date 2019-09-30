@@ -14,18 +14,21 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import model.Todo;
+import service.ProjectService;
 import service.TodoService;
 
 @Controller
 public class TodoController {
 	@Autowired
 	private TodoService tService;
-	
+	@Autowired
+	private ProjectService pService;
 	@RequestMapping("/todoMain") //todoMain으로 이동
 	public String showTodoMain(int pNum, Model model) {
 //		System.out.println("todoMain요청받음 // pNum : "+pNum);
 		List<Todo> tList = tService.getAllTodoByPnum(pNum);
 		model.addAttribute("tList", tList); //todo 리스트 입니다...
+		model.addAttribute("pNum",pNum);
 		return "/project/todoMain";
 	}
 	
@@ -77,6 +80,19 @@ public class TodoController {
 			todo.setIsComplete(0);
 		}
 		tService.modifyTodo(todo);
+		
 		return todo.getIsComplete();
+	}
+	@ResponseBody
+	@RequestMapping("/resortingTodo")
+	public void resortingTodo(@RequestParam(value="priorityArray[]")List<Integer> priorityArray,@RequestParam("pNum")int pNum){
+//		System.out.println(priorityArray);
+		List<Todo> todoList = tService.getAllTodoByPnum(pNum);
+		for(int i=0;i<todoList.size();i++) {
+			Todo todo = todoList.get(i);
+			todo.setPriority(priorityArray.get(i));
+			tService.modifyTodo(todo);
+		}
+		
 	}
 }
