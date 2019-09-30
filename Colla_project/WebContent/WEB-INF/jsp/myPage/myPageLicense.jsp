@@ -22,7 +22,7 @@
 							<c:choose>
 								<c:when test="${useLicense.endDate eq null }">
 									<p><b>${member.name}님</b>, 라이선스 업그레이드를 통해 더 많은 서비스를 받아보세요</p>
-									<a href="myPageAccountForm" class="btn">라이선스 보러가기</a>
+									<a href="${contextPath}/pricing" class="btn">라이선스 보러가기</a>
 								</c:when>
 								<c:otherwise>
 									<p>
@@ -33,7 +33,7 @@
 									<div class="lcList">
 										<h5>결제 내역</h5>
 										<table>
-											<tr>
+										<tr>
 												<td>라이선스 종류</td>
 												<td>결제일</td>
 												<td>만료일</td>

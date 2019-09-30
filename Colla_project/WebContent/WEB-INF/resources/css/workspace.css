@@ -47,9 +47,9 @@ display : none;
 	padding-left: 0px;
 }
 .ws{
-	border-radius: 10px;
+	border-radius: 6px;
 	padding : 30px 20px 15px 30px;
-	margin-bottom : 10px;
+	margin-bottom : 5px;
 	background-color: #D3D1D2;
 }
 #wsBodyContainer .ws h3{
@@ -209,7 +209,7 @@ display : none;
 
 .openedWs{
 	background-color: #403C39;
-	border-radius: 10px;
+	border-radius: 6px;
 }
 .openedWs .exitWs{
 	margin-top:0px;

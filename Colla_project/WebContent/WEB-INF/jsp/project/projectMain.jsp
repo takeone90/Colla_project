@@ -89,7 +89,7 @@
 						<p>참여자 목록</p>
 						<ul>
 						<c:forEach items="${pl.pmList}" var="pm">
-							<li>${pm.mNum}</li>
+							<li>${pm.mName}</li>
 						</c:forEach>
 							
 						</ul>

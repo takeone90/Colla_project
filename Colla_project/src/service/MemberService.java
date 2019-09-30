@@ -49,6 +49,7 @@ public class MemberService {
 	private MemberDao dao;
 	@Autowired
 	private SetAlarmDao setAlarmDao;
+	
 	@Autowired
 	private BCryptPasswordEncoder bcryptPasswordEncoder;
 	
