@@ -26,7 +26,7 @@ public class ProjectService {
 	@Autowired
 	private ChatRoomMemberDao crmDao;
 	
-	public int addProject(String pName,int wNum,String pDetail,String pStartDate,String pEndDate,int mNum) {
+	public int addProject(String pName,int wNum,String pDetail,Date pStartDate,Date pEndDate,int mNum) {
 		ChatRoom chatRoom = new ChatRoom();
 		chatRoom.setCrName(pName); //프로젝트 이름 = 채팅방 이름
 		chatRoom.setmNum(mNum);
@@ -73,7 +73,7 @@ public class ProjectService {
 		}
 		return false;
 	}
-	public boolean modifyProject(int pNum, String pName, String pDetail, String pStartDate, String pEndDate, int mNum) {
+	public boolean modifyProject(int pNum, String pName, String pDetail, Date pStartDate, Date pEndDate, int mNum) {
 		Project project = new Project();
 		project.setpNum(pNum);
 		project.setpName(pName);
