@@ -14,7 +14,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		delete project where p_num=#{pNum}
 	</delete>
 	<update id="updateProject" parameterType="project">
-		update project set p_name=#{pName},p_progress=#{progress},p_enddate=#{pEndDate}
+		update project set p_name=#{pName},p_detail=#{pDetail},p_progress=#{progress},p_startdate=#{pStartDate},p_enddate=#{pEndDate},m_num=#{mNum}
 		where p_num=#{pNum}
 	</update>
 	<select id="selectProject" parameterType="int" resultMap="pMap">

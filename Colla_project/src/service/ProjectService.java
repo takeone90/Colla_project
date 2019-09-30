@@ -60,18 +60,43 @@ public class ProjectService {
 	}
 	
 	public boolean removeProject(int pNum) {
-		boolean result = false;
+		boolean result1 = false;
 		if(pDao.deleteProject(pNum)>0) {
-			result = true;
+			result1 = true;
 		}
-		return result;
+		boolean result2 = false;
+		if(crmDao.deleteChatRoomMemberByCrNumMnum(pDao.selectProject(pNum).getCrNum(), pDao.selectProject(pNum).getmNum())>0) {
+			result2 = true;
+		}
+		if(result1 && result2) {
+			return true;
+		}
+		return false;
 	}
-	public boolean modifyProject(Project project) {
-		boolean result = false;
+	public boolean modifyProject(int pNum, String pName, String pDetail, String pStartDate, String pEndDate, int mNum) {
+		Project project = new Project();
+		project.setpNum(pNum);
+		project.setpName(pName);
+		project.setpDetail(pDetail);
+		project.setpEndDate(pEndDate);
+		project.setpStartDate(pStartDate);	
+		project.setmNum(mNum);
+		boolean result1 = false;
 		if(pDao.updateProject(project)>0) {
-			result = true;
+			result1 = true;
 		}
-		return result;
+		//채팅방 이름 바꾸기
+		ChatRoom chatRoom = new ChatRoom();
+		chatRoom.setCrNum(project.getCrNum());
+		chatRoom.setCrName(pName);
+		boolean result2 = false;
+		if(crDao.updateChatRoom(chatRoom)>0) {
+			result2 = true;
+		}
+		if(result1 && result2) {
+			return true;
+		}
+		return false;
 	}
 	public Project getProject(int pNum) {
 		return pDao.selectProject(pNum);

@@ -106,7 +106,7 @@
 						<div class="row">
 							<h4>프로젝트 이름</h4>
 							<div>
-<%-- 								<input type="hidden" value="${sessionScope.currWnum}" name="wNum"> --%>
+								<input type="hidden" value="${sessionScope.currWnum}" name="wNum">
 								
 								<input type="text" placeholder="project이름" name="pName" style="width:465px">
 							</div>
