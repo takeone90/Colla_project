@@ -9,10 +9,17 @@
 <script>
 	$(function(){
 		$("#todoList").disableSelection();
-		$("#todoList").sortable();
-// 		var sortedIDs = $("#todoList").sortable("toArray"); 
-// 		alert(sortedIDs);
+		$("#todoList").sortable({
+				update: function(event, ui) {
+	            var result = $(this).sortable('toArray');
+// 		            $.ajax({
+// 		            	data : {},
+// 		            });
+	            }
+		});
 		
+		$(".isComplete[data-isComplete=1]").attr("style","background-color:blue");
+		$(".isComplete[data-isComplete=0]").attr("style","background-color:gray");
 		
 		
 		$("#addTodo").on("click",function(){
@@ -29,7 +36,23 @@
 			$("#modifyTodoModal").fadeOut(300);
 			return false;
 		});
-	});
+	});<%--onload function end--%>
+	
+	function checkComplete(tdNum){
+		var isCompleteDiv = $(".isComplete [data-tdNum="+tdNum+"]");
+		console.log(isCompleteDiv);
+		$.ajax({
+			url : "${contextPath}/toggleComplete",
+			data : {"tdNum":tdNum},
+			success : function(e){
+				if(e==1){
+					isCompleteDiv.attr("style","background-color:gray");
+				}else{
+					isCompleteDiv.attr("style","background-color:blue");
+				}
+			}
+		});
+	}
 </script>
 </head>
 <body>
@@ -48,51 +71,39 @@
 			
 			<ul id="todoList">
 				<!-- 아래는 반복적으로 생긴다 -->
-			<li class="todo">
-					<div class="isComplete">
-						할일 완료 여부
+				<c:forEach items="${tList}" var="td" varStatus="s">
+					<li class="todo" id="${s.index}">
+					<div class="isComplete" data-tdNum="${td.tdNum}" data-isComplete="${td.isComplete}"onclick="checkComplete(${td.tdNum});">
+						<input type="hidden" value="${td.isComplete}">
 					</div>
 					<div class="tdInfo">
-						<h4>할일 제목(tdTitle)</h4>
-						<p>할 일 내용(tdContent)</p>
+						<h4>${td.tdTitle}</h4>
+						<p>${td.tdContent}</p>
 						<div class="tdMemberInfo">
-							<p>일할 사람</p>
+							<p>${td.mNumTo}</p>
 						</div>
 					</div>
 <!-- 					<div class="tdPriority"> -->
 <!-- 					</div> -->
 					<div class="tdDate">
-						시작일 : <p>2019년 8월</p>
-						종료일 : <p>2019년 10월</p>
+						<p>
+						<fmt:formatDate value="${td.tdStartDate}" pattern="yyyy.MM.dd" />
+				        <fmt:formatDate value="${td.tdStartDate}" pattern="E"/>요일 
+						</p>&nbsp;&nbsp;&nbsp;~&nbsp;&nbsp;&nbsp;
+						
+						<p>
+						<fmt:formatDate value="${td.tdEndDate}" pattern="yyyy.MM.dd" />
+				        <fmt:formatDate value="${td.tdEndDate}" pattern="E"/>요일 
+						</p>
 					</div>
 					<div class="todoInnerBtn" align="right">
 						<button class="modifyTodoModalOpen">수정</button>
 						<button>삭제</button>
 					</div>
-			</li><%--end project --%>
+			</li><%--end todo --%>
+				</c:forEach>
 			
-			<li class="todo">
-					<div class="isComplete">
-						할일 완료 여부
-					</div>
-					<div class="tdInfo">
-						<h4>할일 제목(tdTitle)</h4>
-						<p>할 일 내용(tdContent)</p>
-						<div class="tdMemberInfo">
-							<p>일할 사람</p>
-						</div>
-					</div>
-<!-- 					<div class="tdPriority"> -->
-<!-- 					</div> -->
-					<div class="tdDate">
-						시작일 : <p>2019년 8월</p>
-						종료일 : <p>2019년 10월</p>
-					</div>
-					<div class="todoInnerBtn" align="right">
-						<button class="modifyTodoModalOpen">수정</button>
-						<button>삭제</button>
-					</div>
-			</li><%--end project --%>
+			
 			
 			</ul>
 			

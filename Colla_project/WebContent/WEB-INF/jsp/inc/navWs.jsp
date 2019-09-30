@@ -27,7 +27,11 @@
 		$("#memberInfoModal").fadeIn(100);
 	}
 	$(function(){
-		loadChatList();
+		if($("#pageType").val()=="chatroom"){
+			loadChatList();
+		}
+		
+		
 		//회원정보 모달 닫기
 		$(".closeMemberInfo").on("click",function(){
 			$("#memberInfoModal").fadeOut(100);
