@@ -1040,6 +1040,13 @@ div {
 #kakaoPayForm p span {
 	font-size: 12px;
 }
+#kakaoPayForm .checkText{
+	font-size: 12px;
+	color : red;
+}
+.joinCheckboxInput{
+	height: 17px;
+}
 
 #kakaoPayForm input[type='date'] {
 	text-align: left

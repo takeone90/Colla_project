@@ -30,19 +30,7 @@
 		})
 	});//end onload
 	
-		var msg = "${param.msg}";
-		if(msg=="cancel" || msg == "fail"){
-			window.close();
-		}
-		function dataFunction(info){
-			$("#total").val(info.amount.total);
-			$("#partner_order_id").val(info.partner_order_id);
-			$("#approved_at").val(info.approved_at);
-			$("#item_name").val(info.item_name);
-			$("#payment_method_type").val(info.payment_method_type);
-			$("#resultForm").submit();
-			
-		}
+
 		/* 
 		$("#kakaoPayForm").on("submit"(function(){
 			var tmpCheckBox = checkBox();
@@ -64,47 +52,90 @@
 			return false;
 		});
 		 */
-		 
- 		function openNewWin(){
-			frm = document.getElementById("kakaoPayForm");
-			var data = $(this).serialize();
-			window.open('', 'viewer', 'width=450, height=600');
-			frm.action = "${contextPath }/payment/kakaoPay";
-			frm.data = data;
-			frm.target = "viewer";
-			frm.method = "post";
-			frm.submit();
- 		}
+var msg = "${param.msg}";
+if(msg=="cancel" || msg == "fail"){
+	window.close();
+}
 
-		 // 선택한 라이선스에 따라 다른 정보 보여주기
-		function showInfo(){
-			var tmpType = $("#typeSelect").val();
-			if(tmpType == 'Personal'){
-				$("#amount").val(10000);
-				$(".personalInfo").css({visibility:"visible"});
-				$(".businessInfo").css({visibility:"hidden"});
-				$(".enterpriseInfo").css({visibility:"hidden"});
-			}else if(tmpType == 'Business'){
-				$("#amount").val(50000);
-				$(".businessInfo").css({visibility:"visible"});
-				$(".personalInfo").css({visibility:"hidden"});
-				$(".enterpriseInfo").css({visibility:"hidden"});
-			}else if(tmpType == 'Enterprise'){
-				$("#amount").val(100000);
-				$(".enterpriseInfo").css({visibility:"visible"});
-				$(".personalInfo").css({visibility:"hidden"});
-				$(".businessInfo").css({visibility:"hidden"});
-			}
-		}
-		// 이용약관 체크
-		function checkBox(){
-			var result = $("#checkbox").is(":checked");
-			if(!result) {
-				return false;
-			} else {
-				return true;
-			}
-		}
+function dataFunction(info){
+	$("#total").val(info.amount.total);
+	$("#partner_order_id").val(info.partner_order_id);
+	$("#approved_at").val(info.approved_at);
+	$("#item_name").val(info.item_name);
+	$("#payment_method_type").val(info.payment_method_type);
+	$("#resultForm").submit();		
+}
+			
+function openNewWin(){
+	var nameResult = nameReg();
+	var phoneResult = phoneReg();
+	var checkBoxResult = checkBox();
+	if(nameResult&&phoneResult&&checkBoxResult){
+		frm = document.getElementById("kakaoPayForm");
+		var data = $(this).serialize();
+		window.open('', 'viewer', 'width=450, height=600');
+		frm.action = "${contextPath }/payment/kakaoPay";
+		frm.data = data;
+		frm.target = "viewer";
+		frm.method = "post";
+		frm.submit();	
+	}else{
+		return false;
+	}	
+}
+
+//선택한 라이선스에 따라 정보 보여주기
+function showInfo(){
+	var tmpType = $("#typeSelect").val();
+	if(tmpType == 'Personal'){
+		$("#amount").val(10000);
+		$(".personalInfo").css({visibility:"visible"});
+		$(".businessInfo").css({visibility:"hidden"});
+		$(".enterpriseInfo").css({visibility:"hidden"});
+	}else if(tmpType == 'Business'){
+		$("#amount").val(50000);
+		$(".businessInfo").css({visibility:"visible"});
+		$(".personalInfo").css({visibility:"hidden"});
+		$(".enterpriseInfo").css({visibility:"hidden"});
+	}else if(tmpType == 'Enterprise'){
+		$("#amount").val(100000);
+		$(".enterpriseInfo").css({visibility:"visible"});
+		$(".personalInfo").css({visibility:"hidden"});
+		$(".businessInfo").css({visibility:"hidden"});
+	}
+}
+
+//이름, 핸드폰번호, 이용약관 빈칸 입력시	 
+function nameReg() {
+	var name = $("#name").val();
+	if (name == "") {
+		$("#checkNameText").text("이름을 입력해주세요.");
+		return false;
+	}else {
+		return true;
+	}
+}
+
+function phoneReg() {
+	var phone = $("#phone").val();
+	if (phone == "") {
+		$("#checkPhoneText").text("핸드폰번호를 입력해주세요.");
+		return false;
+	}else {
+			return true;
+	}
+}
+
+function checkBox() {
+	var result = $("#checkbox").is(":checked");
+	if (!result) {
+		$("#checkboxText").text("이용약관은 필수입니다.");
+		return false;
+	}else {
+		return true;
+	}
+}
+
 </script>
 <body>
 	<div id="wrap">
@@ -113,7 +144,7 @@
 			<section id="paymentAll">
 				<div id="container" class="clearFix">
 					<h1>COLLA 서비스를 이용해보세요</h1>
-					<form id="kakaoPayForm" onsubmit="openNewWin()">
+					<form id="kakaoPayForm" onsubmit="return false;">
 						<input type="hidden" name="mNum" value="${mNum }">
 						<input type="hidden" name="amount" id="amount">
 						<h4>라이선스 정보</h4>
@@ -126,21 +157,21 @@
 						<input type="date" id="startDate" name="startDate"> ~ <input type="date" id="endDate" name="endDate" readonly="readonly">
 						
 						<h4>주문자 정보</h4>
-						<p>이름</p>
+						<p>이름 <span id="checkNameText" class="checkText"></span></p>
 						<input type="text" id="name" name="name" value="${name}">
-						<p>핸드폰번호
-							<span>(정확한 정보로 등록되어있는지 확인해주세요.)</span></p>
+						<p>핸드폰번호 <span id="checkPhoneText" class="checkText"></span></p>
 						<input type="text" id="phone" name="phone" value="${phone}">
+						<span id="checkPhoneText"></span>
 						<h4>결제 정보</h4>
 						<input type="radio" name="payment" value="kakaoPay" id="kakaoPay" checked="checked">
 						<label for="kakaoPay"><img src="${contextPath }/img/kakao_payment.png"></label>
 						<input type="radio" name="payment" value="naverPay" id="naverPay">
 						<label for="naverPay"><img src="${contextPath }/img/naver_payment.png"></label>
 						<div class="paymentCheckbox">
-							<input type="checkbox" id="checkbox" value="1" class="joinCheckboxInput"> COLLA에서 제공하는 서비스 약관에 동의합니다.
-							<br><span id="checkboxText"></span>
+							<input type="checkbox" id="checkbox" value="1" class="joinCheckboxInput">COLLA에서 제공하는 서비스 약관에 동의합니다.
+							<span id="checkboxText" class="checkText"></span>
 						</div>
-						<button id="paymentBtn">결제하기</button>
+						<button id="paymentBtn" onclick="openNewWin()">결제하기</button>
 					</form>
 					<div class="infoArea">
 						<div class="licenseInfo personalInfo" class="clearFix">
