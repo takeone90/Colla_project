@@ -9,7 +9,10 @@ function scrollFunction() {
   }
 }
 function topFunction() {
-	document.documentElement.scrollTop = 0;
+// 	document.documentElement.scrollTop = 0;
+	$("html").animate({
+		scrollTop : 0
+	}, 500);
 }
 </script>
 <div id="footer">
