@@ -1,68 +1,102 @@
 @charset "UTF-8";
-#wsBodyContainer h2{
-	color : #403C39;
+
+#wsBodyContainer h2 {
+	color: #403C39;
 	font-size: 2.5em;
 	font-weight: bolder;
 	margin-bottom: 30px;
 }
+
 #wsBodyContainer .project h3 {
-    color: #403C39;
-    font-size: 23px;
-    font-weight: 800;
+	color: #403C39;
+	font-size: 23px;
+	font-weight: 800;
 }
-.project{
+
+.project {
 	width: calc(100% - 58px);
-    border-bottom: 1px solid #dedede;
-    padding: 15px 21px 15px 21px;
+	border-bottom: 1px solid #dedede;
+	padding: 15px 21px 15px 21px;
 }
-.project h3{
+
+.project h3 {
 	display: inline-block;
 }
-.projectDetail{
+
+.projectDetail {
 	margin-top: 13px;
 	margin-bottom: 8px;
 }
-.projectInnerBtnBox{
-	margin-left:10px;
+
+.projectInnerBtnBox {
+	margin-left: 10px;
 	display: inline-block;
 }
-.projectInnerBtnBox a{
-	margin-left:5px;
+
+.projectInnerBtnBox a {
+	margin-left: 5px;
 }
-.progress{
-	background-color: cornflowerblue;
-    padding: 5px;
-    margin-bottom: 10px;
+
+.progress-member {
+	border: 1px solid #eee;
+	padding: 5px;
+	margin-bottom: 5px;
 }
-.projectMember{
-	background-color: cornflowerblue;
-    padding: 5px;
-}
-.projectMember ul{
-	margin-left:10px;
-}
-.projectMember li{
+
+.progress {
 	display: inline-block;
-	margin-right:10px;
+	vertical-align: top;
 }
-#addProjectBtn{
+
+.projectMember {
+	padding: 5px;
+	display: inline-block;
+	position: relative;
+	left: calc(100% - 428px);
+}
+
+.projectMember ul {
+	margin-left: 10px;
+}
+
+.projectMember li {
+	display: inline-block;
+	margin-right: 10px;
+}
+
+#addProjectBtn {
 	position: absolute;
-    top: 135px;
-    right: 9%;
-    width: 10%;
-    padding: 6px;
-    background-color: #403C39;
-    color: white;
-    border-radius: 4px;
-    border: none;
-    cursor: pointer;
+	top: 135px;
+	right: 9%;
+	width: 10%;
+	padding: 6px;
+	background-color: #403C39;
+	color: white;
+	border-radius: 4px;
+	border: none;
+	cursor: pointer;
 }
-#addProjectBtn:hover{
+
+#addProjectBtn:hover {
 	background-color: #E5675A;
 }
-#addProjectModal p,#modifyProjectModal p{
+
+#addProjectModal p, #modifyProjectModal p {
 	margin-top: 10px;
 }
-#addPj-Date,#modifyPj-Date{
-	margin-bottom : 12px;
+
+#addPj-Date, #modifyPj-Date {
+	margin-bottom: 12px;
+}
+
+.projectDate p {
+	display: inline-block;
+	margin-top: 9px;
+	font-size: 11px;
+}
+
+.profileImg img {
+	width: 60px;
+	height: 60px;
+	border-radius: 50%;
 }
