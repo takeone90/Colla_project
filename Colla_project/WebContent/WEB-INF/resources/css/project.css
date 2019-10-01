@@ -61,7 +61,9 @@
     display: inline-block;
     position: relative;
 }
-
+.projectMember p{
+	font-size: 12px;
+}
 .projectMember ul {
 	margin-left: 10px;
 }

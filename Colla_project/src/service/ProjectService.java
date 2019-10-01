@@ -112,7 +112,6 @@ public class ProjectService {
 		return pDao.selectAllProject();
 	}
 	public double calcProgress(int pNum,int completeCount,int allCount) {
-//		System.out.println("완료 개수 : "+completeCount+", 전체개수 : "+allCount);
 		double result = ((double)completeCount/allCount*100);
 		double calcProgress = Math.round(result*10)/10.0;
 		Project p = pDao.selectProject(pNum);
