@@ -159,12 +159,27 @@
 						</div>
 						<div class="row">
 							<h4>할 일 멤버</h4>
-							<div class="addTodoMemberDiv">
-								<input type="text" placeholder="작업할 프로젝트 멤버" name="mNumTo" style="width:465px">
-							</div>
-							<div class="addTodoRoundBox" align="center">
-								<a href="#" class="addTodoInput">+</a>
-							</div>
+							<ul class="selectTodoMemberUL">
+							<c:forEach items="${pmList}" var="pm">
+								<li onclick="checkTodoMember(this);">
+								<div class='profileImg' align="center">
+								<img alt='프로필사진' src='${contextPath}/showProfileImg?num=${pm.mNum}'>
+								</div>
+								<p style="text-align:center;">${pm.mName}</p>
+								<input type="radio" value="${pm.mNum}" name="mNum" style="display:none;">
+								</li>
+								<script>
+									function checkTodoMember(tag){
+										let $checkInput = $(tag).find("input[type='radio']");
+										$checkInput.prop('checked',function(){
+											$(".selectTodoMemberUL li").removeClass("checkedLI");
+											$checkInput.prop('checked', true);
+											$(tag).addClass("checkedLI");
+										});
+									}
+								</script>
+							</c:forEach>
+							</ul>
 						</div>
 						<div class="row">
 							<h4>할 일 기간</h4>

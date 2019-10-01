@@ -16,11 +16,16 @@
 			$("#addProjectModal").fadeOut(300);
 			return false;
 		});
+		$(".modifyProject").on("click", function() {
+			$(".pNum").val($(this).attr("data-pNum"));
+			$("#modifyProjectModal").fadeIn(300);	
+		});
 		$("#closeModifyPjModal").on("click",function(){
 			$("#modifyProjectModal").fadeOut(300);
 			return false;
 		});
 		$(".addMemberBtn").on("click",function(){
+			$(".invitePnum").val($(this).attr("data-pNum"));
 			$("#addMemberModal").fadeIn(300);
 		});
 		$("#closeMemberModal").on("click",function(){
@@ -46,10 +51,7 @@
 				return false;
 			}
 		});
-		$(".modifyProject").on("click", function() {
-			$(".pNum").val($(this).attr("data-pNum"));
-			$("#modifyProjectModal").fadeIn(300);	
-		});
+		
 	});<%--onload-function end--%>
 </script>
 </head>
@@ -225,21 +227,27 @@
 			</div>
 			<div class="modalBody">
 				<p>프로젝트에 멤버를 초대하세요</p>
-				<form action="inviteMember" method="post">
+				<form action="inviteProject" method="post">
+					<input type="hidden" name="wNum" value="${sessionScope.currWnum}">
 					<input type="hidden" class="invitePnum" name="pNum">
 					<input type="hidden" value="${_csrf.token}" name="${_csrf.parameterName}">
-					<div class="addMemberInputWrap">
-						<div class="row">
+					
+					<div class="row">
 							<h4>멤버 초대</h4>
-							<div class="addInviteMemberDiv">
-								<input type="text" placeholder="초대할멤버 이메일" name="targetUserList">
-							</div>
-							<div class="addInviteRoundBox" align="center">
-								<a href="#" class="addInviteInput">+</a>
-							</div>
+							<ul class="addInviteMemberUL">
+							<c:forEach items="${wsmList}" var="wsm">
+								<c:if test="${wsm.mNum ne sessionScope.user.num}">
+								<li onclick="checkInvitePjMember(this);">
+								<div class='profileImg' align="center">
+								<img alt='프로필사진' src='${contextPath}/showProfileImg?num=${wsm.mNum}'>
+								</div>
+								<p style="text-align:center;">${wsm.mName}</p>
+								<input type="checkbox" value="${wsm.mNum}" name="mNumListForInvitePj" style="display:none;">
+								</li>
+								</c:if>
+							</c:forEach>
+							</ul>
 						</div>
-					</div> <!-- end addMemberInputWrap -->
-
 					<div id="modalBtnDiv">
 						<button type="submit">멤버 초대하기</button>
 						<button id="closeMemberModal">닫기</button>

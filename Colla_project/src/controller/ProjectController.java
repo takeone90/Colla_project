@@ -86,6 +86,20 @@ public class ProjectController {
 		}
 		return "redirect:projectMain?wNum="+wNum;
 	}
+	
+	@RequestMapping(value="/inviteProject",method=RequestMethod.POST)
+	public String inviteProject(int pNum,int wNum,HttpServletRequest request) {
+		System.out.println("inviteProjet 동작");
+		String[] mNumListForInvitePj = request.getParameterValues("mNumListForInvitePj"); 
+		if(mNumListForInvitePj != null) { //프로젝트 멤버 추가
+			for(String stringMnum : mNumListForInvitePj) {
+				int num = Integer.parseInt(stringMnum);
+				pmService.addProjectMember(pNum, num);
+			}
+		}
+		return "redirect:projectMain?wNum="+wNum;
+	}
+	
 	@ResponseBody
 	@RequestMapping(value="/exitProject")
 	public boolean exitProject(int pNum, HttpSession session) {
