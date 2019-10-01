@@ -194,7 +194,7 @@ $(function() {
 								<textarea rows="10" cols="80" name="content" id="FAQcontent" class="FAQ-email-content"></textarea>
 							</div>
 							<div>
-								<input type="submit" value="전송" class="FAQ-email-button">
+								<input type="submit" value="전송" class="FAQ-email-button btn">
 								<span id="checkSentence"></span>
 							</div>
 						</form>

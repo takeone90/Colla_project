@@ -21,6 +21,9 @@
 			});
 			
 			$("#writeForm").submit(function(){
+				var boardContent = $("#cke_content iframe").contents().find("body").text().trim();
+				var contentByteLength = getByteLength(boardContent);
+				
 				if( !$("#pw").val().trim() ){
 					alert("글을 수정하고 삭제할 때 사용하실\n비밀번호를 입력해주세요.");
 					$("#pw").focus().val("");
@@ -33,9 +36,20 @@
 					alert("내용을 입력해주세요.");
 					$("#cke_content iframe").contents().find("body").focus().val("");
 					return false;
+				} else if(contentByteLength>4000){
+					alert("내용을 4000byte 이하로 입력해주세요");
+					$("#cke_content iframe").contents().find("body").focus().val("");
+					return false;
 				}
 			});
 		});
+
+	//String byte 계산하기
+	function getByteLength(s,byteVal,i,c){
+	    for(byteVal=i=0;c=s.charCodeAt(i++);byteVal+=c>>11?3:c>>7?2:1);
+	    return byteVal;
+	}
+		
 	</script>
 	<div id="wsBody">
 	<input type="hidden" value="board" id="pageType">

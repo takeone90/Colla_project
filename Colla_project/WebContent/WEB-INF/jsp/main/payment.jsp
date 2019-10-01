@@ -74,10 +74,10 @@ if(msg=="cancel" || msg == "fail"){
 	window.close();
 }
 
-function dataFunction(info){
+function dataFunction(info,tmpDateStr){
 	$("#total").val(info.amount.total);
 	$("#partner_order_id").val(info.partner_order_id);
-	$("#approved_at").val(info.approved_at);
+	$("#approved_at").val(tmpDateStr);
 	$("#item_name").val(info.item_name);
 	$("#payment_method_type").val(info.payment_method_type);
 	$("#resultForm").submit();		

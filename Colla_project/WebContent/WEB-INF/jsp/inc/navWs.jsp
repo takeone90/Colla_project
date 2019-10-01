@@ -120,7 +120,12 @@
 				<a href="${contextPath}/calMonth?wNum=${sessionScope.currWnum}">Calendar</a>
 			</h3>
 		</div>
-		<div id="removeMemberDiv"><button onclick="location.href='${contextPath}/removeMember'">탈퇴</button></div>
+		<div id="mainDiv">
+			<h3>
+				<a href="${contextPath}/"><i class="fas fa-arrow-left"></i> Main</a>
+			</h3>
+		</div>
+		
 	</div>
 	<%---------------------------------------------회원정보 모달 ----------------------------------------------------%>
 		<div id="memberInfoModal" class="attachModal">

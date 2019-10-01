@@ -3,6 +3,9 @@
 <%@ include file="/WEB-INF/jsp/inc/head.jsp" %>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>calMonth</title>
+    <link rel="stylesheet" href="bootstrap.css"/>
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="awesome-bootstrap-checkbox.css"/>
 <link rel="stylesheet" type="text/css" href="${contextPath}/css/headerWs.css"/>
 <link rel="stylesheet" type="text/css" href="${contextPath}/css/navWs.css"/>
 <link rel="stylesheet" type="text/css" href="${contextPath}/css/calMonth.css"/>
@@ -216,10 +219,8 @@ $(function() {
 	$("#wantedCalendarButtonYear").on("click", function() {
 		moveToWantedCalendarYear($("#wantedYearYear").val(), 0, 1); //해당년도의 1월 1일로 이동
 	});
-	$( ".tmp" ).checkboxradio({
-		icon: false
-	});
     $( ".datepicker" ).datepicker({
+    	dateFormat: 'yy-mm-dd',
         changeMonth: true,
         changeYear: true
     });
@@ -466,14 +467,15 @@ function putContentIntoTd(a) {
 	$("#modifyContent").val(a.content);
 	$("#detailType").text(a.type);
 	$("#modifyType").val(a.type);
-// 	$("#detailYearCalendar").prop("checked", changeToBoolean(a.yearCalendar));
+	$("#detailYearCalendar").prop("checked", changeToBoolean(a.yearCalendar));
 	$("#modifyYearCalendar").prop("checked", changeToBoolean(a.yearCalendar));
-// 	$("#detailAnnually").prop("checked", changeToBoolean(a.annually));
+	$("#detailAnnually").prop("checked", changeToBoolean(a.annually));
 	$("#modifyAnnually").prop("checked", changeToBoolean(a.annually));
-// 	$("#detailMonthly").prop("checked", changeToBoolean(a.monthly));
+	$("#detailMonthly").prop("checked", changeToBoolean(a.monthly));
 	$("#modifyMonthly").prop("checked", changeToBoolean(a.monthly));
 	$("#detailColor").css("backgroundColor", a.color);
 	$("#modifyColor").val(a.color);
+	
 }
 function putContentIntoVacantTd(startDate, endDate) { //2019-09-26
 	$("#addForm").fadeIn(300);
@@ -778,11 +780,15 @@ function nextYearYear() {
 		<div>
 			<button type="button" id="addFormOpen" class="btn">일정 추가</button>
 		</div>
-		<div>
-			<label><input type="checkbox" name="calType" id="calType1" value="project" checked="checked">프로젝트</label>
-			<label><input type="checkbox" name="calType" id="calType2" value="vacation" checked="checked">휴가</label>
-			<label><input type="checkbox" name="calType" id="calType3" value="event" checked="checked">행사</label>
+		<div class="headerCheckboxDiv">
+			<input type="checkbox" name="calType" id="calType1" value="project" checked="checked" class="styled">
+			<label for="calType1">프로젝트</label>		
+			<input type="checkbox" name="calType" id="calType2" value="vacation" checked="checked" class="styled">
+			<label for="calType2">휴가</label>		
+			<input type="checkbox" name="calType" id="calType3" value="event" checked="checked" class="styled">
+			<label for="calType3">행사</label>
 		</div>
+		
 		<div style="float: right">
 			<button id="changeYearCalToMonthCal" class="btn">월간</button>
 			<button id="changeMonthCalToYearCal" class="btn">연간</button>
@@ -840,16 +846,13 @@ function nextYearYear() {
 						<span>~</span>
 						<div><input type="text" name="endDate" id="endDate" class="datepicker"></div>
 					</div>
-					<div class="checkboxDiv btn-group-toggle" data-toggle="buttons">
-						<label for="checkbox-1" class="checkboxbtn">
-							<input type="checkbox" name="yearCalendar" id="checkbox-1" value="yearCalendar" class="tmp">연간 달력
-						</label> 
-						<label for="checkbox-2" class="checkboxbtn">
-							<input type="checkbox" name="annually" id="checkbox-2" value="annually" class="tmp">매년 반복
-						</label>
-						<label for="checkbox-3" class="checkboxbtn">
-							<input type="checkbox" name="monthly" id="checkbox-3" value="monthly" class="tmp">매월 반복
-						</label>
+					<div class="checkboxDiv">
+						<input type="checkbox" name="yearCalendar" id="addYearCalendar" value="yearCalendar">
+						<label class="checkboxbtn" for="addYearCalendar">연간 달력</label> 	
+						<input type="checkbox" name="annually" id="addAnnually" value="annually">
+						<label class="checkboxbtn" for="addAnnually">매년 반복</label>				
+						<input type="checkbox" name="monthly" id="addMonthly" value="monthly">
+						<label class="checkboxbtn" for="addMonthly">매월 반복</label>
 					</div>
 					<div>
 						<h4>내용</h4>
@@ -893,10 +896,12 @@ function nextYearYear() {
 						</p>
 					</div>
 					<div class="checkboxDiv">
-						<p id="detailType"></p>
-<!-- 						<label><input type="checkbox" name="yearCalendar" id="detailYearCalendar" value="yearCalendar">연간 달력 표시</label> -->
-<!-- 						<label><input type="checkbox" name="annually" id="detailAnnually" value="annually">매년 반복</label> -->
-<!-- 						<label><input type="checkbox" name="monthly" id="detailMonthly" value="monthly">매월 반복</label>		 -->
+						<input type="checkbox" name="yearCalendar" id="detailYearCalendar" value="yearCalendar" onclick="return false;">
+						<label class="checkboxbtn" for="detailYearCalendar">연간 달력</label> 	
+						<input type="checkbox" name="annually" id="detailAnnually" value="annually" onclick="return false;">
+						<label class="checkboxbtn" for="detailAnnually">매년 반복</label>				
+						<input type="checkbox" name="monthly" id="detailMonthly" value="monthly" onclick="return false;">
+						<label class="checkboxbtn" for="detailMonthly">매월 반복</label>
 					</div>						
 					<div>
 						<h4>내용</h4>
@@ -947,16 +952,13 @@ function nextYearYear() {
 						<span>~</span>
 						<div><input type="text" name="endDate" id="modifyEndDate" class="datepicker"></div>
 					</div>
-					<div>
-						<label>
-							<input type="checkbox" name="yearCalendar" id="modifyYearCalendar" value="yearCalendar">연간 달력 표시
-						</label>
-						<label>
-							<input type="checkbox" name="annually" id="modifyAnnually" value="annually">매년 반복
-						</label>
-						<label>
-							<input type="checkbox" name="monthly" id="modifyMonthly" value="monthly">매월 반복
-						</label>
+					<div class="checkboxDiv">
+						<input type="checkbox" name="yearCalendar" id="modifyYearCalendar" value="yearCalendar">
+						<label class="checkboxbtn" for="modifyYearCalendar">연간 달력</label> 	
+						<input type="checkbox" name="annually" id="modifyAnnually" value="annually">
+						<label class="checkboxbtn" for="modifyAnnually">매년 반복</label>				
+						<input type="checkbox" name="monthly" id="modifyMonthly" value="monthly">
+						<label class="checkboxbtn" for="modifyMonthly">매월 반복</label>
 					</div>
 					<div>
 						<h4>내용</h4>

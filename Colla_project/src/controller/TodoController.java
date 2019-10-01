@@ -44,7 +44,7 @@ public class TodoController {
 		model.addAttribute("pmList", pmList);
 		model.addAttribute("pNum", pNum);
 		session.setAttribute("pNum", pNum);
-		model.addAttribute("progress",pService.getProject(pNum).getProgress());
+		model.addAttribute("progress", pService.getProject(pNum).getProgress());
 		return "/project/todoMain";
 	}
 	
@@ -81,6 +81,7 @@ public class TodoController {
 		todo.setTdStartDate(encStartDate);
 		todo.setTdEndDate(encEndDate);
 		tService.modifyTodo(todo);
+		
 		return "redirect:todoMain?pNum="+pNum;
 	}
 	@ResponseBody

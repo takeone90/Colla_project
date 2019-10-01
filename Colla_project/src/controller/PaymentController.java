@@ -67,7 +67,7 @@ public class PaymentController {
 	public String kakaoPaySuccess(@RequestParam("pg_token") String pg_token, Model model) {
 		System.out.println("kakaoPay Success, pg_token : " + pg_token);
 		licenseService.insertLicense(license);
-		JSONObject json = new JSONObject(pService.kakaoPayInfo(pg_token));
+		JSONObject json = new JSONObject(pService.kakaoPayInfo(pg_token,license));
 		model.addAttribute("info", json);
 		return "/main/kakaoPaySuccess";
 	}

@@ -11,6 +11,7 @@ public class Payment {
 	String phone;
 	String name;
 	String orderId;
+	String paymentMethod;
 	public int getNum() {
 		return num;
 	}
@@ -58,5 +59,11 @@ public class Payment {
 	}
 	public void setOrderId(String orderId) {
 		this.orderId = orderId;
+	}
+	public String getPaymentMethod() {
+		return paymentMethod;
+	}
+	public void setPaymentMethod(String paymentMethod) {
+		this.paymentMethod = paymentMethod;
 	}
 }
