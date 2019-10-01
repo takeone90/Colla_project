@@ -21,7 +21,7 @@
 			<div class="myPageInner">
 				<div class ="myPageModify">
 					<p>핸드폰 번호를 변경해주세요!</p>
-					<form action="modifyPhone" class="modifyPhone" enctype="multipart/form-data" method="post">
+					<form action="modifyPhone" class="modifyPhone" method="post">
 						<input type="text" name="phone" value="${member.phone}" class="content" placeholder="핸드폰 번호를 입력해주세요">
 						<div class="row btns">
 							<button class="btn">저장</button>

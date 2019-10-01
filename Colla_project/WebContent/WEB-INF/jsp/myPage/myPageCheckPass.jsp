@@ -18,7 +18,7 @@
 			<div class="myPageInner">
 				<div class ="myPageModify">
 					<p>기존 비밀번호를 입력해주세요!</p>
-					<form action="myPageCheckPass" class="myPageCheckPass" enctype="multipart/form-data" method="post">
+					<form action="myPageCheckPass" class="myPageCheckPass" method="post">
 						<input type="password" name="pw" placeholder="비밀번호" class="content">
 						<c:if test="${checkPass eq fail}">
 							<p class="checkPass">비밀번호를 확인해주세요</p>
