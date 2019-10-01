@@ -86,30 +86,13 @@ $(function() {
 });
 //클릭하면 이미지 변경
 $(function() {
-	$(".main-function-details1").on("click", function() {
-		$(".main-function-image1").css('z-index', 10);
-		$(".main-function-image2").css('z-index', 1);
-		$(".main-function-image3").css('z-index', 1);
-		$(this).toggleClass('on');
-		$(".main-function-details2").removeClass('on');
-		$(".main-function-details3").removeClass('on');
+	$(".main-function-details > div.floatleft").on("click", function() {
+		var idx = $(this).index();
+		$(".main-function-images > div").hide();
+		$(".main-function-images > div:eq("+idx+")").show();
+		$(".main-function-details > div").removeClass('on');
+		$(this).addClass('on');
 	});
-	$(".main-function-details2").on("click", function() {
-		$(".main-function-image1").css('z-index', 1);
-		$(".main-function-image2").css('z-index', 10);
-		$(".main-function-image3").css('z-index', 1);
-		$(".main-function-details1").removeClass('on');
-		$(this).toggleClass('on');
-		$(".main-function-details3").removeClass('on');
-	});	
-	$(".main-function-details3").on("click", function() {
-		$(".main-function-image1").css('z-index', 1);
-		$(".main-function-image2").css('z-index', 1);
-		$(".main-function-image3").css('z-index', 10);
-		$(".main-function-details1").removeClass('on');
-		$(".main-function-details2").removeClass('on');
-		$(this).toggleClass('on');
-	});		
 });
 </script>
 </head>
@@ -118,7 +101,7 @@ $(function() {
 		<%@ include file="/WEB-INF/jsp/inc/headerMain.jsp" %>
 		<div id="welcome">
 			<section id="main-cover" class="box">
-				<div id="container">
+				<div class="container">
 					<div class="head-body-up animated fadeInUp">.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.</div>
 					<div class="head-body-down animated fadeInUp">가볍고 실속있는 협업 솔루션</div>
 					<div class="head-title"><p class="animated fadeInUp">COLLA</p></div>
@@ -127,31 +110,41 @@ $(function() {
 			</section>
 			
 			<section id="main-intro" class="box">
-				<div id="container">
+				<div class="container">
 					<div id="main-intro-ani">
-						<div class="head-body"></div>
 						<div class="main-function">
 							<div class="main-function-images">
-								<div class="main-function-image1">
-								<div class="main-function-text">간단하게 프로젝트를 생성하고 그룹을 만드세요.</div>
-								<img alt="1번 기능" src="img/mainSection_1.png"></div>
-								<div class="main-function-image2">
-								<div class="main-function-text">그룹에 맞는 채팅방을 만들고 협업할 수 있습니다.</div>
-								<img alt="2번 기능" src="img/mainSection_2.png"></div>
-								<div class="main-function-image3">
-								<div class="main-function-text">쉽게 일정을 공유하고 관리할 수 있습니다.</div>
-								<img alt="3번 기능" src="img/mainSection_3.png"></div>
+								<div class="main-function-image">
+									<p class="main-function-text">간단하게 프로젝트를 생성하고 그룹을 만드세요.</p>
+									<img alt="1번 기능" src="img/mainSection_1.png">
+								</div>
+								<div class="main-function-image">
+									<p class="main-function-text">그룹에 맞는 채팅방을 만들고 소통하며 협업하세요.</p>
+									<img alt="2번 기능" src="img/mainSection_2.png">
+								</div>
+								<div class="main-function-image">
+									<p class="main-function-text">멤버들과 쉽게 일정을 공유하고 관리하세요.</p>
+									<img alt="3번 기능" src="img/mainSection_3.png">
+								</div>
 							</div>
-							<div class="main-function-details">
-								<label class="clicked"><input type="radio" name="main-function-radio" id="radio1" value="1">
-								<span class="main-function-details1 on"><span>가볍게<br><span class="bold">프로젝트</span> 생성</span></span></label>
+							<div class="main-function-details clearFix">
+								<div  class="floatleft on">
+									<p>
+										가볍게<br><span class="bold">프로젝트</span> 생성
+									</p>
+								</div>
 
-								<label class="none-clicked"><input type="radio" name="main-function-radio" id="radio2" value="2">
-								<span class="main-function-details2"><span>프로젝트 <span class="bold">채팅방</span>으로<br>원하는 멤버들과 채팅</span></span></label>
+								<div class="floatleft">
+									<p>
+										프로젝트<span class="bold">채팅방</span>으로<br>원하는 멤버들과 채팅
+									</p>
+								</div>
 									
-								<label class="none-clicked"><input type="radio" name="main-function-radio" id="radio3" value="3">
-								<span class="main-function-details3"><span>멤버들과 <span class="bold">일정</span>을<br>공유하고 관리</span></span></label>
-									
+								<div class="floatleft">
+									<p>
+										멤버들과 <span class="bold">일정</span>을<br>공유하고 관리
+									</p>
+								</div>
 							</div>
 						</div>
 					</div>
