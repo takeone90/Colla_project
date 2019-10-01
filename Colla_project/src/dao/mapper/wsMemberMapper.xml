@@ -24,7 +24,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where cr.cr_num=#{crNum} and cr.w_num=wsm.w_num
 	</select>
 	<select id="selectAllWsMemberByWnum" resultMap="wsMemberMap" parameterType="int">
-		select * from workspace_member where w_num=#{wNum}
+		select wsm.*,m.m_name from workspace_member wsm,member m where wsm.m_num=m.m_num and wsm.w_num=#{wNum}
 	</select>
 	<select id="selectAllMnumByWnum" resultType="int" parameterType="int">
 		select m_num from workspace_member where w_num=#{wNum}
@@ -33,6 +33,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select w_num from workspace_member where m_num=#{mNum} order by w_num asc
 	</select>
 	<resultMap type="wsMember" id="wsMemberMap">
+		<result column="m_name" property="mName"/>
 		<result column="wm_num" property="wmNum"/>
 		<result column="m_num" property="mNum"/>
 		<result column="w_num" property="wNum"/>
