@@ -813,5 +813,66 @@ function nextYearYear() {
 			<!-- 연간 달력 삭제 -->
 		</div>
 	</div>
+	
+					<form class="addModal">
+					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+					<input type="hidden" name="mNum" id="mNum" value="${userData.mNum}">
+					<input type="hidden" name="wNum" id="wNum" value="${userData.wNum}">
+					<div>
+						<div class="titleDiv">
+							<h4>일정</h4>
+							<input type="text" name="title" class="modalTitle" id="title">
+						</div>
+						<div class="selectDiv">
+							<h4>타입</h4>
+							<select name="type">
+								<option value="project">프로젝트</option>
+								<option value="vacation">휴가</option>
+								<option value="event">행사</option>
+							</select>
+						</div>
+						<div class="colorDiv">
+							<h4>색</h4>
+							<input type="color" name="color" id="addColor" value="#ffffff">
+						</div>
+					</div>
+					
+					<div class="dateDiv">
+						<h4>기간</h4>
+						<div><p><input type="text" name="startDate" id="startDate" class="datepicker"></p></div>
+						<span>~</span>
+						<div><p><input type="text" name="endDate" id="endDate" class="datepicker"></p></div>
+					</div>
+
+					<div class="checkboxDiv btn-group-toggle" data-toggle="buttons">
+						<label for="checkbox-1" class="checkboxbtn">
+							<input type="checkbox" name="yearCalendar" id="checkbox-1" value="yearCalendar" class="tmp">연간 달력
+						</label> 
+						<label for="checkbox-2" class="checkboxbtn">
+							<input type="checkbox" name="annually" id="checkbox-2" value="annually" class="tmp">매년 반복
+						</label>
+						<label for="checkbox-3" class="checkboxbtn">
+							<input type="checkbox" name="monthly" id="checkbox-3" value="monthly" class="tmp">매월 반복
+						</label>
+					</div>
+					<div>
+						<h4>내용</h4>
+						<textarea rows="3" cols="21" name="content" class="modalContent" id="content"></textarea>
+					</div>
+					<div id="innerBtn">
+						<a href="#" id="addSchedule">추가</a>
+						<a href="#" id="addFormClose">닫기</a><br>
+					</div>
+				</form>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 </body>
 </html>
