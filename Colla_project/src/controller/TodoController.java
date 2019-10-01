@@ -66,7 +66,7 @@ public class TodoController {
 		return "redirect:todoMain?pNum="+pNum;
 	}
 	@RequestMapping(value="/modifyTodo", method = RequestMethod.POST)
-	public String modifyTodo(int tdNum, String tdTitle, String tdContent, int mNumTo, String startDate, String endDate, HttpSession session) throws ParseException {
+	public String modifyTodo(int tdNum, String tdTitle, String tdContent, int mNum, String startDate, String endDate, HttpSession session) throws ParseException {
 		int pNum = (int)session.getAttribute("pNum");
 		SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd");
 		Date encStartDate = dt.parse(startDate);
@@ -75,7 +75,7 @@ public class TodoController {
 		todo.setTdNum(tdNum);
 		todo.setTdTitle(tdTitle);
 		todo.setTdContent(tdContent);
-		todo.setmNumTo(mNumTo);
+		todo.setmNumTo(mNum);
 		todo.setTdStartDate(encStartDate);
 		todo.setTdEndDate(encEndDate);
 		tService.modifyTodo(todo);

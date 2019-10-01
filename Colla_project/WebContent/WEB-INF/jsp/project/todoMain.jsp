@@ -227,14 +227,20 @@
 								<input type="date" name="endDate" placeholder="종료일을 입력하세요">
 							</div>
 						</div>
-						<div class="row">
+							<div class="row">
 							<h4>할 일 멤버</h4>
-							<div class="addTodoMemberDiv">
-								<input type="text" placeholder="작업할 프로젝트 멤버" name="mNumTo" style="width:465px">
+								<ul class="selectTodoMemberUL">
+								<c:forEach items="${pmList}" var="pm">
+									<li onclick="checkTodoMember(this);">
+									<div class='profileImg' align="center">
+									<img alt='프로필사진' src='${contextPath}/showProfileImg?num=${pm.mNum}'>
+									</div>
+									<p style="text-align:center;">${pm.mName}</p>
+									<input type="radio" value="${pm.mNum}" name="mNum" style="display:none;">
+									</li>
+								</c:forEach>
+								</ul>
 							</div>
-							<div class="addTodoRoundBox" align="center">
-							</div>
-						</div>
 					</div> <!-- end addWsInputWrap -->
 
 					<div id="modalBtnDiv">
