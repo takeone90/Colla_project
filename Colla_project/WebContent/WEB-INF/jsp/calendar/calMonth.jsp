@@ -239,7 +239,7 @@ function drag() {
 	});	
 }
 function thisMonthCalendar(today) {
-	console.log(formatChangeHyphen(today)+" 월 달력을 그렸습니다.");
+	console.log(today+" 월 달력을 그렸습니다.");
 	//달력 상단 날짜 그리기
 	$("#YearTitle").html("<p>"+today.getFullYear()+"년<p>");
 	$("#MonthTitle").html((today.getMonth()+1)+"월");
