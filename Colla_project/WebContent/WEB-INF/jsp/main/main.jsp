@@ -144,7 +144,7 @@ $(function() {
 							</div>
 							<div class="main-function-details">
 								<label class="clicked"><input type="radio" name="main-function-radio" id="radio1" value="1">
-								<span class="main-function-details1"><span>가볍게<br><span class="bold">프로젝트</span> 생성</span></span></label>
+								<span class="main-function-details1 on"><span>가볍게<br><span class="bold">프로젝트</span> 생성</span></span></label>
 
 								<label class="none-clicked"><input type="radio" name="main-function-radio" id="radio2" value="2">
 								<span class="main-function-details2"><span>프로젝트 <span class="bold">채팅방</span>으로<br>원하는 멤버들과 채팅</span></span></label>
