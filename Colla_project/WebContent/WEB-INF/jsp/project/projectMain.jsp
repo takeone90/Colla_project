@@ -24,10 +24,7 @@
 			$("#modifyProjectModal").fadeOut(300);
 			return false;
 		});
-		$(".addMemberBtn").on("click",function(){
-			$(".invitePnum").val($(this).attr("data-pNum"));
-			$("#addMemberModal").fadeIn(300);
-		});
+		
 		$("#closeMemberModal").on("click",function(){
 			$("#addMemberModal").fadeOut(300);
 			return false;
@@ -71,10 +68,10 @@
 				<div class="project">
 					<h3>${pl.pInfo.pName}</h3>
 					<div class="projectInnerBtnBox">
+						<a href="todoMain?pNum=${pl.pInfo.pNum}" class="todoListATag">Todo리스트</a>
 						<a href="#">채팅방</a>
 						<!-- todoMain?pNum=1 이런 요청으로 가야함 -->
-						<a href="todoMain?pNum=${pl.pInfo.pNum}">Todo리스트</a>
-						<a href="#" class="modifyProject" data-pNum="${pl.pInfo.pNum}">수정</a>
+						<a href="#" class="modifyProject" data-pNum="${pl.pInfo.pNum}">수정하기</a>
 						<a href="#" class="addMemberBtn" data-pNum="${pl.pInfo.pNum}">초대하기</a>
 						<a href="#" class="exitProject" data-pNum="${pl.pInfo.pNum}">나가기</a>
 					</div>
@@ -90,7 +87,7 @@
 						</div>
 					<div class="projectDetail">${pl.pInfo.pDetail}</div>
 					
-					<div class="progress-member"><div class="progress">진행률 : <progress id="progressBar" value="${pl.pInfo.progress}" max="100"></progress></div>
+					<div class="progress-member"><div class="progress">진행률  <progress id="progressBar" value="${pl.pInfo.progress}" max="100" style="width:300px;"></progress></div>
 						<div class="projectMember">
 						<ul>
 						<c:forEach items="${pl.pmList}" var="pm">
@@ -172,7 +169,7 @@
 						</div>
 					</div> <!-- end addWsInputWrap -->
 					<div id="modalBtnDiv">
-						<button type="submit">Project만들기</button>
+						<button type="submit">프로젝트 만들기</button>
 						<button id="closePjModal">닫기</button>
 					</div>
 				</form>
@@ -212,7 +209,7 @@
 					</div> <!-- end addWsInputWrap -->
 
 					<div id="modalBtnDiv">
-						<button type="submit">Project만들기</button>
+						<button type="submit">프로젝트 수정하기</button>
 						<button id="closeModifyPjModal">닫기</button>
 					</div>
 				</form>
@@ -234,19 +231,56 @@
 					
 					<div class="row">
 							<h4>멤버 초대</h4>
-							<ul class="addInviteMemberUL">
-							<c:forEach items="${wsmList}" var="wsm">
-								<c:if test="${wsm.mNum ne sessionScope.user.num}">
-								<li onclick="checkInvitePjMember(this);">
-								<div class='profileImg' align="center">
-								<img alt='프로필사진' src='${contextPath}/showProfileImg?num=${wsm.mNum}'>
-								</div>
-								<p style="text-align:center;">${wsm.mName}</p>
-								<input type="checkbox" value="${wsm.mNum}" name="mNumListForInvitePj" style="display:none;">
-								</li>
-								</c:if>
-							</c:forEach>
+							<ul class="addMemberUL">
+							
+<%-- 							<c:forEach items="${wsmList}" var="wsm"> --%>
+<%-- 								<c:if test="${wsm.mNum ne sessionScope.user.num}"> --%>
+<!-- 								<li onclick="checkInvitePjMember(this);"> -->
+<!-- 								<div class='profileImg' align='center'> -->
+<%-- 								<img alt='프로필사진' src='${contextPath}/showProfileImg?num=${wsm.mNum}'> --%>
+<!-- 								</div> -->
+<%-- 								<p style="text-align:center;">${wsm.mName}</p> --%>
+<%-- 								<input type="checkbox" value="${wsm.mNum}" name="mNumListForInvitePj" style="display:none;"> --%>
+<!-- 								</li> -->
+<%-- 								</c:if> --%>
+<%-- 							</c:forEach> --%>
 							</ul>
+							<script>
+								$(function(){
+									$(".addMemberBtn").on("click",function(){
+										$(".invitePnum").val($(this).attr("data-pNum"));
+										var addMemberUL = $(".addMemberUL");
+										addMemberUL.empty();
+										var pNum = $(this).attr("data-pNum");
+										$.ajax({
+											url : "${contextPath}/getPmList",
+											data : {"pNum":pNum},
+											dataType : "json",
+											success : function(jsonPmList){
+												$.each(jsonPmList,function(idx,item){
+													var wsmList = item;
+													
+													var inviteMemberLI = $("<li onclick='checkInvitePjMember(this);'></li>");
+													var profileImgTag = $("<div class='profileImg' align='center'><img alt='프로필사진' src='${contextPath}/showProfileImg?num="+wsmList.mNum+"'></div>");
+													inviteMemberLI.append(profileImgTag);
+													var memberNameTag = $("<p style='text-align:center;'>"+wsmList.mName+"</p>");
+													var checkboxInputTag = $("<input type='checkbox' value='"+wsmList.mNum+"' name='mNumListForInvitePj' style='display:none;'>");
+													inviteMemberLI.append(memberNameTag);
+													inviteMemberLI.append(checkboxInputTag);
+													addMemberUL.append(inviteMemberLI);
+													
+												});
+												return false;
+											},
+											error : function(){
+												alert("pmList불러오기 에러발생");
+											}
+											
+										});
+										$("#addMemberModal").fadeIn(300);
+									});
+								});
+							</script>
 						</div>
 					<div id="modalBtnDiv">
 						<button type="submit">멤버 초대하기</button>

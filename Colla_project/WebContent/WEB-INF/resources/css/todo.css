@@ -1,4 +1,8 @@
 @charset "UTF-8";
+.attachModal h3{
+	font-size:23px;
+	font-weight: 700;
+}
 #wsBodyContainer h2{
 	color : #403C39;
 	font-size: 2.5em;
@@ -19,7 +23,7 @@
 #addTodo{
 	display: inline-block;
     position: absolute;
-    top: 135px;
+    top: 172px;
     left: calc(100% - 172px);
     width: 97px;
     padding: 6px;
@@ -38,16 +42,20 @@
     border-radius: 8px;
     padding: 10px;
     margin-bottom: 5px;
-	
+	height : 111px;
+}
+.todo:hover{
+	background-color: #f5f5f5;
 }
 #currProjectProgress{
+	margin-top : 10px;
 	margin-bottom: 20px;
 }
 .tdDate{
+    display: inline-block;
     position: relative;
-    top: -91px;
-    left: calc(100% - 541px);
     font-size: 13px;
+    left: 36%;
 }
 .tdDate p{
 	display: inline-block;
@@ -62,8 +70,26 @@
 .tdInfo h4{
 	margin-bottom:10px;
 }
+.tdMemberInfo{
+	display:inline-block; 
+	
+}
+.tdInfo-titleContent{
+	display: inline-block;
+    margin-left: 16px;
+    vertical-align: top;
+    margin-top: 13px;
+}
+.todoInnerBtn{
+	display: inline-block;
+    position: relative;
+    left: calc(100% - 123px);
+    bottom: 27px;
+
+}
+    
 .todoInnerBtn button{
-    width: 6%;
+    width: 60px;
     padding: 6px;
     background-color: #fafafa;
     border-radius: 4px;
@@ -79,23 +105,26 @@
     height: 15px;
     border-radius: 50%;
     display: inline-block;
-    border: 1px solid #9e9d9d;
 }
 #backToProjectMain{
 	display: inline-block;
     position: absolute;
-    top: 135px;
+    top: 172px;
     left: calc(100% - 296px);
     width: 120px;
     padding: 6px;
-    background-color: #403C39;
-    color: white;
+    background-color: white;
+    color: black;
     border-radius: 4px;
-    border: none;
+    border: 1px solid #dddd;
     cursor: pointer;
 }
 #backToProjectMain:hover{
-	background-color: #E5675A;
+	background-color: #eee;
+}
+.tdInfo .profileImg img{
+	width: 60px;
+    height: 60px;
 }
 .attachModal .profileImg {
 	margin-right : 5px;
@@ -113,10 +142,10 @@
     border-radius: 5px;
 }
 .checkedLI{
-	background-color: #d2f0c9;
+	background-color: #bce2eb;
 }
 .selectTodoMemberUL .checkedLI:hover{
-	background-color: #d2f0c9;
+	background-color: #bce2eb;
 }
 .selectTodoMemberUL li:hover{
 	cursor: pointer;
@@ -125,7 +154,24 @@
 .selectTodoMemberUL li:checkbox{
 	display: none;
 }
-addTodoModal .selectTodoMemberUL p{
-	    font-size: 12px;
+#addTodoModal .selectTodoMemberUL p,#modifyTodoModal .selectTodoMemberUL p{
+	font-size: 12px;
 	margin-top:5px;
+}
+progress {
+  border: none;
+  height: 20px;
+  background: white;
+  border-radius: 4px;
+}
+
+progress::-webkit-progress-value {
+  background: #E5675A;
+  border-radius: 4px 0px 0px 4px;
+}
+
+progress::-webkit-progress-bar {
+  background: white;
+  border-radius: 4px;
+  border:1px solid #cf8e82;
 }
