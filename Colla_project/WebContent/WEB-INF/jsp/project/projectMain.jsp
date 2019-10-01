@@ -40,11 +40,11 @@
 				return false;
 			}
 		});
+		$(".modifyProject").on("click", function() {
+			$(".pNum").val($(this).attr("data-pNum"));
+			$("#modifyProjectModal").fadeIn(300);	
+		});
 	});<%--onload-function end--%>
-	function openModifyProjectModal(){
-		$(".pNum").val($(this).attr("data-pNum"));
-		$("#modifyProjectModal").fadeIn(300);			
-	}
 </script>
 </head>
 <body>
@@ -66,7 +66,7 @@
 						<a href="#">채팅방</a>
 						<!-- todoMain?pNum=1 이런 요청으로 가야함 -->
 						<a href="todoMain?pNum=${pl.pInfo.pNum}">Todo리스트</a>
-						<a href="#" onclick='openModifyProjectModal();' data-pNum="${pl.pInfo.pNum}">수정</a>
+						<a href="#" class="modifyProject" data-pNum="${pl.pInfo.pNum}">수정</a>
 						<a href="#" class="exitProject" data-pNum="${pl.pInfo.pNum}">나가기</a>
 					</div>
 					<div class="projectDetail">${pl.pInfo.pDetail}</div>
@@ -160,8 +160,7 @@
 						<div class="row">
 							<h4>프로젝트 이름</h4>
 							<div>
-<%-- 								<input type="hidden" value="${sessionScope.currWnum}" name="wNum"> --%>
-								
+								<input type="hidden" value="${sessionScope.currWnum}" name="wNum">
 								<input type="text" placeholder="project이름" name="pName" style="width:465px">
 							</div>
 						</div>

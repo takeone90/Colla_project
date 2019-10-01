@@ -11,7 +11,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		values(#{crNum},#{wNum},#{mNum},#{crName},#{crIsDefault})
 	</insert>
 	<update id="updateChatRoom" parameterType="chatRoom"><!-- chatroom수정은 이름만 바꾸게 -->
-		update chatroom cr_name=#{crName} where cr_num=#{crNum}
+		update chatroom set cr_name=#{crName} where cr_num=#{crNum}
 	</update>
 	<delete id="deleteChatRoom" parameterType="int">
 		delete chatroom where cr_num=#{crNum}
