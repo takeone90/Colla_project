@@ -92,18 +92,19 @@ public class ProjectController {
 		boolean result = pmService.removeProjectMember(pNum, member.getNum()); //프로젝트에서 나감 & 채팅방에서 나감
 		return result;
 	}
-	@ResponseBody
+
 	@RequestMapping(value="/modifyProject", method = RequestMethod.POST)
-	public boolean modifyProject(int pNum, String pName, String pDetail, String startDate, String endDate, HttpSession session) throws ParseException {
-		System.out.println("modifyProject!");
+	public String modifyProject(int wNum, int pNum, String pName, String pDetail, String startDate, String endDate, HttpSession session) throws ParseException {
 		Member member = (Member)session.getAttribute("user");
 		int mNum = member.getNum();
 		SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd");
+		
 		Date encStartDate = dt.parse(startDate);
 		Date encEndDate = dt.parse(endDate);
 		boolean result = pService.modifyProject(pNum, pName, pDetail, encStartDate, encEndDate, mNum); //프로젝트 수정 & 채팅방 수정
 		System.out.println("수정 결과 : "+result);
-		return result;
+		return "redirect:projectMain?wNum="+wNum;
+		//pNum 받아오기 
 	}
 	@ResponseBody
 	@RequestMapping(value="/getProject", method = RequestMethod.POST)

@@ -81,14 +81,17 @@ public class ProjectService {
 		project.setmNum(mNum);
 		boolean result1 = false;
 		if(pDao.updateProject(project)>0) {
+			System.out.println("프로젝트 수정 완료");
 			result1 = true;
 		}
 		//채팅방 이름 바꾸기
 		ChatRoom chatRoom = new ChatRoom();
-		chatRoom.setCrNum(project.getCrNum());
+		System.out.println(pDao.selectProject(pNum).getCrNum());
+		chatRoom.setCrNum(pDao.selectProject(pNum).getCrNum());
 		chatRoom.setCrName(pName);
 		boolean result2 = false;
 		if(crDao.updateChatRoom(chatRoom)>0) {
+			System.out.println("프로젝트와 연결된 채팅방 수정 완료");
 			result2 = true;
 		}
 		if(result1 && result2) {
