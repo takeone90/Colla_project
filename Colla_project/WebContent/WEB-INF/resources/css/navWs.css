@@ -14,7 +14,6 @@
 	margin:0 auto;
 	height:100%;
 	text-align:center;
-	position: relative;
 }
 #aboutProfile{
 	margin-top:30px;
@@ -73,7 +72,7 @@
 #mainDiv{
     text-align: right;
     position: absolute;
-    top: 915px;
+    bottom: 10px;
     left: 15px;
     color: white;
     
