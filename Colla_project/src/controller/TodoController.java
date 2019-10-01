@@ -38,7 +38,7 @@ public class TodoController {
 	public String showTodoMain(HttpSession session, int pNum, Model model) {
 		List<Todo> tList = tService.getAllTodoByPnum(pNum);
 		List<ProjectMember> pmList =  pmService.getAllProjectMemberByPnum(pNum);
-		model.addAttribute("tList", tList); //todo 리스트 입니다...
+		model.addAttribute("tList", tList); //todo 리스트
 		model.addAttribute("pmList", pmList);
 		model.addAttribute("pNum", pNum);
 		session.setAttribute("pNum", pNum);

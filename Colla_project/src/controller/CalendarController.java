@@ -32,15 +32,14 @@ public class CalendarController {
 	
 	@RequestMapping(value="/calMonth", method = RequestMethod.GET)
 	public String showCalMonth(HttpSession session, Model model, int wNum) {
-//		int wNum = (int)session.getAttribute("currWnum");
 		int mNum = ((Member)session.getAttribute("user")).getNum();
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("wNum", wNum);
 		param.put("mNum", mNum);
 		model.addAttribute("userData", param);
+		session.setAttribute("currWnum", wNum);
 		return "/calendar/calMonth";
 	}
-	
 	@RequestMapping(value="/calTest", method = RequestMethod.GET)
 	public String showCalTest(HttpSession session, Model model) {
 		int wNum = (int)session.getAttribute("currWnum");
