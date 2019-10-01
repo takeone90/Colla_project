@@ -21,7 +21,7 @@
 			<div class="myPageInner">
 				<div class ="myPageModify">
 					<p>이름을 변경해주세요!</p>
-					<form action="modifyName" class="modifyName" enctype="multipart/form-data" method="post">
+					<form action="modifyName" class="modifyName" method="post">
 						<input type="text" name="name" value="${member.name}" class="content">
 						<div class="row btns">
 							<button class="btn">저장</button>
