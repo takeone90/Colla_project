@@ -27,7 +27,7 @@
 		});
 		
 		$(".isComplete[data-isComplete=1]").attr("style","background-color:#E5675A");
-		$(".isComplete[data-isComplete=0]").attr("style","background-color:#ebebeb");
+		$(".isComplete[data-isComplete=0]").attr("style","background-color:#e0e0e0");
 		
 		
 		$("#addTodo").on("click",function(){
@@ -67,12 +67,6 @@
 			}
 		});
 	}
-// 	function calcProgress(pNum){
-// 		$.ajax({
-// 			url : "${contextPath}/updateProgress",
-			
-// 		});
-// 	}
 </script>
 </head>
 <body>
@@ -84,12 +78,12 @@
 		<input type="hidden" value="${pNum}" id="pNum">
 		<input type="hidden" value="${sessionScope.currWnum}" id="currWnum">
 		<div id="wsBodyContainer"> 
-		<h2>[프로젝트 이름] Todo List</h2>
+		<h2 style="display:inline-block;">${pName} </h2><h3 style="display:inline-block;margin-left:14px;">Todo List</h3>
 		<button id="backToProjectMain" onclick="location.href='projectMain?wNum=${sessionScope.currWnum}'">프로젝트 메인</button>
 		<button id="addTodo">할 일 추가</button>
 		<div id="todoArea">
-			<div id="currProjectProgress" align="center">
-				진행률 : <progress id="progressBar" value="${progress}" max="100"></progress>
+			<div id="currProjectProgress" align="left">
+				진행률  <progress id="progressBar" value="${progress}" max="100" style="width:71%;"></progress>
 			</div>
 			
 			<ul id="todoList">
@@ -99,15 +93,6 @@
 					<div class="isComplete" data-tdNum="${td.tdNum}" data-isComplete="${td.isComplete}"onclick="checkComplete(${td.tdNum});">
 						<input type="hidden" value="${td.isComplete}">
 					</div>
-					<div class="tdInfo">
-						<h4>${td.tdTitle}</h4>
-						<p>${td.tdContent}</p>
-						<div class="tdMemberInfo">
-							<p>책임자 : ${td.mName}</p>
-						</div>
-					</div>
-<!-- 					<div class="tdPriority"> -->
-<!-- 					</div> -->
 					<div class="tdDate">
 						<p>
 						<fmt:formatDate value="${td.tdStartDate}" pattern="yyyy.MM.dd" />
@@ -119,6 +104,22 @@
 				        <fmt:formatDate value="${td.tdEndDate}" pattern="E"/>요일 
 						</p>
 					</div>
+					<div class="tdInfo">
+						
+						<div class="tdMemberInfo">
+							<div class='profileImg' align="center">
+								<img alt='프로필사진' src='${contextPath}/showProfileImg?num=${td.mNumTo}'>
+							</div>
+							<p style="text-align:center;">${td.mName}</p>
+						</div>
+						<div class="tdInfo-titleContent">
+							<h4>${td.tdTitle}</h4>
+							<p>${td.tdContent}</p>
+						</div>
+					</div>
+<!-- 					<div class="tdPriority"> -->
+<!-- 					</div> -->
+					
 					<div class="todoInnerBtn" align="right">
 						<button class="modifyTodoModalOpen" data-tdNum="${td.tdNum}">수정</button>
 						<button onclick="location.href='removeTodo?tdNum=${td.tdNum}'">삭제</button>
@@ -141,7 +142,7 @@
 				<h3>할 일 추가</h3>
 			</div>
 			<div class="modalBody">
-				<p>Todo를 만들고 프로젝트 일정을 세분화 하세요</p>
+				<p style="margin-top:16px;font-size:13px;">Todo를 만들고 프로젝트 일정을 세분화 하세요</p>
 				<form action="addTodo" method="post">
 					<input type="hidden" value="${_csrf.token}" name="${_csrf.parameterName}">
 					<div class="addPjInputWrap">
@@ -203,7 +204,7 @@
 				<h3>일정 수정하기</h3>
 			</div>
 			<div class="modalBody">
-				<p>일정을 수정합니다</p>
+				<p style="margin-top:16px;font-size:13px;">일정을 수정합니다</p>
 				<form action="modifyTodo" method="post">
 					<input type="hidden" value="${_csrf.token}" name="${_csrf.parameterName}">
 					<input type="hidden" name="tdNum" class="tdNum">

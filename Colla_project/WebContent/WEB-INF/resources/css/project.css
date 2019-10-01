@@ -41,12 +41,21 @@
     padding: 2px 10px 2px 10px;
     margin-left: -1px;
 }
+.projectInnerBtnBox .todoListATag{
+	color: #E56052;
+    font-weight: 600;
+    border-color: #E56052;
+}
+.projectInnerBtnBox .todoListATag:hover{
+	background-color: white;
+	color : #c93628;
+}
 .projectInnerBtnBox a:hover{
 	background-color: #eee;
 }
 .progress-member {
 	border: 1px solid #eee;
-	padding: 5px;
+	padding: 10px;
 	margin-bottom: 5px;
 }
 
@@ -56,7 +65,7 @@
 }
 
 .projectMember {
-	margin-left: 86px;
+	margin-left: 35px;
     padding: 5px;
     display: inline-block;
     position: relative;
@@ -98,6 +107,9 @@
 	margin-bottom: 12px;
 }
 
+.projectDate{
+	margin-top:5px;
+}
 .projectDate p {
 	display: inline-block;
 	margin-top: 9px;
@@ -112,29 +124,49 @@
     height: 40px;
     border-radius: 50%;
 }
-.addInviteMemberUL input{
+.addInviteMemberUL input, .addMemberUL input{
 	height : 13px;
 }
-.addInviteMemberUL li{
+.addInviteMemberUL li, .addMemberUL li{
 	padding-top: 7px;
     padding-bottom: 7px;
 	display: inline-block;
     border-radius: 5px;
 }
+.addInviteMemberUL p,.addMemberUL p{
+	font-size:12px;
+}
 .checkedLI{
-	background-color: #d2f0c9;
+	background-color: #bce2eb;
 }
-.addInviteMemberUL .checkedLI:hover{
-	background-color: #d2f0c9;
+.addInviteMemberUL .checkedLI:hover,.addMemberUL .checkedLI:hover{
+	background-color: #bce2eb;
 }
-.addInviteMemberUL li:hover{
+.addInviteMemberUL li:hover,.addMemberUL li:hover{
 	cursor: pointer;
 	background-color: #eee;
 }
-.addInviteMemberUL li:checkbox{
+.addInviteMemberUL li:checkbox,.addMemberUL li:checkbox{
 	display: none;
 }
-#addProjectModal .addInviteMemberUL p{
+#addProjectModal .addInviteMemberUL p,#addMemberModal .addMemberUL p{
 	    font-size: 12px;
 	margin-top:5px;
+}
+progress {
+  border: none;
+  height: 20px;
+  background: white;
+  border-radius: 4px;
+}
+
+progress::-webkit-progress-value {
+  background: #E5675A;
+  border-radius: 4px 0px 0px 4px;
+}
+
+progress::-webkit-progress-bar {
+  background: white;
+  border-radius: 4px;
+  border:1px solid #cf8e82;
 }

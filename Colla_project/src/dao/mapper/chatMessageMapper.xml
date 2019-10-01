@@ -86,7 +86,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select cm.cm_num  ,cm.cr_num,cm.m_num,cm.cm_content,cm.cm_write_date,m.m_name,cm.cm_type,m.m_profileimg,f.f_num
 		from chat_message cm, member m, favorite f 
 		where cm.m_num=m.m_num and cm.cr_num=#{param1} and cm.cm_num = f.cm_num and f.m_num=#{param2}
-		order by cm.cm_write_date asc
+		order by f.f_num desc
 	</select>
 	<delete id="deleteFavoriteByMnum">
 		delete

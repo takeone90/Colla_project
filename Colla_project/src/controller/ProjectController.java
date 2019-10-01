@@ -16,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import model.Member;
@@ -58,6 +59,7 @@ public class ProjectController {
 		}
 		
 		List<WsMember> wsmList = wsmService.getAllWsMemberByWnum(wNum);
+		
 		model.addAttribute("wsmList", wsmList);
 		model.addAttribute("projectList", projectList);
 		Workspace ws = wService.getWorkspace(wNum);
@@ -147,5 +149,21 @@ public class ProjectController {
 	public List<Project> getAllProject() {
 		List<Project> projectList = pService.getAllProject();
 		return projectList;
+	}
+	@ResponseBody
+	@RequestMapping("/getPmList")
+	public List<WsMember> getPmList(@RequestParam("pNum")int pNum){
+		Project pj = pService.getProject(pNum);
+		int wNum = pj.getwNum();
+		List<WsMember> wsmList = wsmService.getAllWsMemberByWnum(wNum);
+		List<ProjectMember> pmList = pmService.getAllProjectMemberByPnum(pNum);
+		for(int i=0;i<pmList.size();i++) {
+			for(int j=0;j<wsmList.size();j++) {
+				if(pmList.get(i).getmNum()==wsmList.get(j).getmNum()) {
+					wsmList.remove(j);
+				}
+			}
+		}
+		return wsmList;
 	}
 }
