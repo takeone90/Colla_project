@@ -10,24 +10,27 @@
 </head>
 <script>
 	function showPaymentPage(type) {
-		$.ajax({
-			url : "${contextPath}/licensePrice",
-			success : function(result) {
-				if(result){//로그인한 경우
-					location.href="${contextPath}/payment/kakaoPay?type="+type;
-				}else{//로그인 하지 않은 경우
-					var tmpResult = confirm("로그인 후 사용 가능한 서비스 입니다. 로그인 하시겠습니까?");
-					if(tmpResult){
-						location.href="${contextPath}/loginForm";	
-					}
-				}
+		var user = $("#user").val();
+		var userLicense = $("#userLicense").val();
+		if(!user){
+			var tmpResult = confirm("로그인 후 사용 가능한 서비스 입니다. 로그인 하시겠습니까?");
+			if(tmpResult){
+				location.href="${contextPath}/loginForm";	
 			}
-		});
+		}else{
+			if(userLicense){
+				alert("사용중인 라이선스가 있어 구매가 불가능합니다.");
+			}else{
+				location.href="${contextPath}/payment/kakaoPay?type="+type;				
+			}
+		}
 	}
 </script>
 <body>
 	<div id="wrap">
 		<%@ include file="/WEB-INF/jsp/inc/headerMain.jsp"%>
+		<input type="hidden" id="user" value="${sessionScope.user}">
+		<input type="hidden" id="userLicense" value="${sessionScope.userLicense}">
 		<div id="pricingAll">
 			<section id="pricing-head">
 				<div id="container">
@@ -35,7 +38,6 @@
 					<div class="head-body">High Quality At A Reasonable Price.</div>
 					<div class="head-caption">오늘부터 합리적인 가격으로 COLLA를 시작해보세요.</div>
 					<div class="price-box-inside">
-
 						<div class="price-each-col">
 							<div class="price-title">Personal</div>
 							<div class="price-desc">

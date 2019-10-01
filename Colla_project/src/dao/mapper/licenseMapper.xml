@@ -3,7 +3,7 @@
 <mapper namespace="dao.LicenseDao">
 	<insert id="insertLicense">
 		insert into license
-		values(l_seq.nextval,#{mNum},#{startDate},#{endDate},#{type})
+		values(l_seq.nextval,#{mNum},#{startDate},#{endDate},#{type},#{orderId})
 	</insert>
 	<delete id="deleteLicense">
 		delete license 
@@ -29,5 +29,6 @@
 		<result property="type" column="l_type"/>
 		<result property="startDate" column="l_start_date"/>
 		<result property="endDate" column="l_end_date"/>
+		<result property="orderId" column="pm_order_id"/>
 	</resultMap>
 </mapper>

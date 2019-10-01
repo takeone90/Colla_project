@@ -42,6 +42,7 @@ var area = null;
 var overlay = null;
 var clickedOverlay = null;
 var mapContainer = null;
+var staticMap = null;
 
 	$(function(){
 		loadChatFromDB();
@@ -62,6 +63,9 @@ var mapContainer = null;
 				$(".navContent-wrap").hide();
 				let content = $(this).attr("data-content");
 				$("#nav--"+content).show();
+				if(content == 'favorite'){
+					showFavoriteList();					
+				}
 			}
 			return false;
 		});
@@ -77,7 +81,7 @@ var mapContainer = null;
 			}else{
 				$("#chatNavBox").animate({right: -550},200);
 					toggleVal = 0;		
-					arrow.attr('class','fas fa-angle-double-left');
+					arrow.attr('class','fas fa-angle-double-left');		
 			}
 		});
 		
@@ -198,22 +202,8 @@ var mapContainer = null;
 	});
 	
 		searchListDiv = $("#searchContent");
-		$("#nav--memberManagement").show();
-		//탭버튼 클릭 이벤트
-		$("#InnerBtns .navInnerBtn a.btn").click(function(){
-			if($(this).hasClass("active")){
-				return false;
-			} else {
-				$(this).parent().parent().find("a.active").removeClass("active");
-				$(this).addClass("active");
-				$(".navContent-wrap").hide();
-				let content = $(this).attr("data-content");
-				$("#nav--"+content).show();
-			}
-			return false;
-		});
-    
-	
+		$("#nav--memberManagement").show();	
+		//미경 : 동일한 이벤트가 들어가 있어서 삭제 함 / 혹시라도 문제 생기면 추가하세용!!==> $("#InnerBtns .navInnerBtn a.btn").click(function()
 	
 });<%--------------------------------------------onload function end----------------------------------------------------%>
 
@@ -221,12 +211,17 @@ var mapContainer = null;
 	//code형태 메세지 보내기
 	function sendCode(){
 		var code = editor.getValue();
- 		//alert("userEmail :"+$("#userEmail").val()+", crNum : "+$("#crNum").val()+", code : "+code+", type : "+type);
-		if(type.includes('/')){
-			type = 'java';
+		var codeByteLength = getByteLength(code);
+		if(codeByteLength<=4000){
+	 		//alert("userEmail :"+$("#userEmail").val()+", crNum : "+$("#crNum").val()+", code : "+code+", type : "+type);
+			if(type.includes('/')){
+				type = 'java';
+			}
+			stompClient.send("/client/sendCode/"+$("#userEmail").val()+"/"+$("#crNum").val()+"/"+type,{},code);
+			$("#addCodeModal").fadeOut(300);			
+		}else{
+			alert("4000byte 이하로 입력해주세요.");
 		}
-		stompClient.send("/client/sendCode/"+$("#userEmail").val()+"/"+$("#crNum").val()+"/"+type,{},code);
-		$("#addCodeModal").fadeOut(300);
 	}
 
 	//파일형태 메세지 보내기
@@ -242,9 +237,21 @@ var mapContainer = null;
 	//일반 메세지 보내기
 	function sendMsg(){
 		var msg = $("#chatInput").val();
-		stompClient.send("/client/send/"+$("#userEmail").val()+"/"+$("#crNum").val(),{},msg);
-		console.log("전송한 메시지 : "+msg);
-		$("#chatInput").val("");
+		var msgByteLength = getByteLength(msg);
+		if(msgByteLength<=4000){
+			stompClient.send("/client/send/"+$("#userEmail").val()+"/"+$("#crNum").val(),{},msg);
+			console.log("전송한 메시지 : "+msg);
+			$("#chatInput").val("");	
+		}else{
+			alert("4000byte 이하로 입력해주세요.");
+			//$("#chatInput").val("");
+		}
+	}
+	
+	//String byte 계산하기
+	function getByteLength(s,byteVal,i,c){
+	    for(byteVal=i=0;c=s.charCodeAt(i++);byteVal+=c>>11?3:c>>7?2:1);
+	    return byteVal;
 	}
 	
 	//즐겨찾기 등록,해제
@@ -433,7 +440,7 @@ var mapContainer = null;
 			//"#placeAddr"+msgInfo.cmNum
 			$("#placeName"+msgInfo.cmNum).text(positionArr[2]);
 			$("#placeAddr"+msgInfo.cmNum).text(positionArr[3]);
-			var staticMap = new kakao.maps.StaticMap(staticMapContainer, staticMapOption);
+			staticMap = new kakao.maps.StaticMap(staticMapContainer, staticMapOption);
 		}
 		
 		

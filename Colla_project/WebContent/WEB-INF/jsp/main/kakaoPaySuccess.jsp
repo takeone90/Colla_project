@@ -3,6 +3,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="contextPath" value="<%=request.getContextPath() %>"/>
 <script>
-	window.opener.dataFunction(${info});
+	window.opener.dataFunction(${info},"${tmpDateStr}");
 	window.close();
 </script>

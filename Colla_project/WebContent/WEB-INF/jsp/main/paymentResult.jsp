@@ -37,12 +37,7 @@
 							<p>결제방법</p>
 						</div>
 						<div class="paymentContent">
-							<c:set var="test" value="${param.approved_at }"></c:set>
-							<input type ="hidden" id="test" value="${param.approved_at }"/>
-<%-- 							<fmt:parseDate type = "both" var = "dateString" value="${param.approved_at }"></fmt:parseDate>
-							<fmt:formatDate value="${dateString }" pattern="yyyy.MM.dd HH:mm:ss"/> --%>
-
-							<p id="test">${param.approved_at }</p>
+							<p>${param.approved_at }</p>
 							<p>${param.partner_order_id }</p>
 							<p>${param.item_name}</p>
 							<p>${param.total }</p>
