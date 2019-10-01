@@ -39,8 +39,8 @@
 					<label><input type="checkbox" name="calType" id="calType2" value="vacation" checked="checked">휴가</label>
 					<label><input type="checkbox" name="calType" id="calType3" value="event" checked="checked">행사</label>
 				</div>
-				<div style="float: right">
-					<button onclick="location.href='${contextPath}/calMonth'" class="btn">달력 전체보기</button>
+				<div class="headerChangeCal">
+					<button onclick="location.href='${contextPath}/calMonth?wNum=${sessionScope.currWnum}'" class="btn">달력 전체보기</button>
 				</div>
 			</div><!-- calHeader 끝 -->
 			

@@ -219,11 +219,10 @@ td {
 
 .calHeader {
 	background-color: #f5f5f5;
-	padding: 10px;
+	padding: 10px 20px;
 	vertical-align: middle;
 	margin-bottom: 10px;
 }
-
 .calHeader button {
 	border: 0px solid #ccc;
 	border-radius: 4px;
@@ -231,13 +230,14 @@ td {
 	background-color: #57504a;
 	color: white;
 }
-
 .calHeader div {
 	display: inline;
 }
-
 .calSearch {
 	display: inline;
+}
+.headerChangeCal {
+	float: right;
 }
 #MonthTitle {
 	margin: 0px 20px;

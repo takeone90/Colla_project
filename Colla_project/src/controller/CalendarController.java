@@ -195,6 +195,7 @@ public class CalendarController {
 		Map<String, Object> result = calendarService.getAllCalendarSearched(tmp);
 		model.addAllAttributes(result);
 		session.setAttribute("calInfo", tmp);
+		session.setAttribute("currWnum", wNum);
 		return "/calendar/calSearchList";
 	}			
 }
