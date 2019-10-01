@@ -20,7 +20,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import model.Member;
 import model.Project;
+import model.ProjectMember;
 import model.Todo;
+import service.ProjectMemberService;
 import service.ProjectService;
 import service.TodoService;
 
@@ -30,11 +32,14 @@ public class TodoController {
 	private TodoService tService;
 	@Autowired
 	private ProjectService pService;
-	
+	@Autowired
+	private ProjectMemberService pmService;
 	@RequestMapping("/todoMain") //todoMain으로 이동
 	public String showTodoMain(HttpSession session, int pNum, Model model) {
 		List<Todo> tList = tService.getAllTodoByPnum(pNum);
-		model.addAttribute("tList", tList); //todo 리스트
+		List<ProjectMember> pmList =  pmService.getAllProjectMemberByPnum(pNum);
+		model.addAttribute("tList", tList); //todo 리스트 입니다...
+		model.addAttribute("pmList", pmList);
 		model.addAttribute("pNum", pNum);
 		session.setAttribute("pNum", pNum);
 		model.addAttribute("progress",pService.getProject(pNum).getProgress());
@@ -44,14 +49,14 @@ public class TodoController {
 	//-------------------------------------------------------------------------------CRUD
 	
 	@RequestMapping(value="/addTodo", method = RequestMethod.POST)
-	public String addTodo(String tdTitle, String tdContent, int mNumTo, String startDate, String endDate, HttpSession session) throws ParseException {
+	public String addTodo(String tdTitle, String tdContent, int mNum, String startDate, String endDate, HttpSession session) throws ParseException {
 		int pNum = (int)session.getAttribute("pNum");
 		Member member = (Member)session.getAttribute("user");
 		int mNumFrom = member.getNum(); //일 시킨 사람
 		SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd");
 		Date encStartDate = dt.parse(startDate);
 		Date encEndDate = dt.parse(endDate);
-		tService.addTodo(tdTitle, tdContent, pNum, mNumTo, mNumFrom, encStartDate, encEndDate);
+		tService.addTodo(tdTitle, tdContent, pNum, mNum, mNumFrom, encStartDate, encEndDate);
 		return "redirect:todoMain?pNum="+pNum;
 	}
 	@RequestMapping(value="/removeTodo")

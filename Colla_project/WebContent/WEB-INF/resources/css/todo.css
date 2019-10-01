@@ -97,3 +97,35 @@
 #backToProjectMain:hover{
 	background-color: #E5675A;
 }
+.attachModal .profileImg {
+	margin-right : 5px;
+}
+.profileImg img {
+	width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.selectTodoMemberUL li{
+	padding-top: 7px;
+    padding-bottom: 7px;
+	display: inline-block;
+    border-radius: 5px;
+}
+.checkedLI{
+	background-color: #d2f0c9;
+}
+.selectTodoMemberUL .checkedLI:hover{
+	background-color: #d2f0c9;
+}
+.selectTodoMemberUL li:hover{
+	cursor: pointer;
+	background-color: #eee;
+}
+.selectTodoMemberUL li:checkbox{
+	display: none;
+}
+addTodoModal .selectTodoMemberUL p{
+	    font-size: 12px;
+	margin-top:5px;
+}

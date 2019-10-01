@@ -76,8 +76,7 @@ public class ProjectController {
 		Date encStartDate = dt.parse(startDate);
 		Date encEndDate = dt.parse(endDate);
 		int pNum = pService.addProject(pName, wNum, pDetail, encStartDate, encEndDate, mNum); //프로젝트 추가 & 채팅방 추가
-		String[] mNumListForInvitePj = request.getParameterValues("mNumListForInvitePj"); //추후 수정 필요?
-		System.out.println("mNumListForInvitePj ? "+mNumListForInvitePj);
+		String[] mNumListForInvitePj = request.getParameterValues("mNumListForInvitePj"); 
 		if(mNumListForInvitePj != null) { //프로젝트 멤버 추가
 			for(String stringMnum : mNumListForInvitePj) {
 				int num = Integer.parseInt(stringMnum);
@@ -86,6 +85,20 @@ public class ProjectController {
 		}
 		return "redirect:projectMain?wNum="+wNum;
 	}
+	
+	@RequestMapping(value="/inviteProject",method=RequestMethod.POST)
+	public String inviteProject(int pNum,int wNum,HttpServletRequest request) {
+		System.out.println("inviteProjet 동작");
+		String[] mNumListForInvitePj = request.getParameterValues("mNumListForInvitePj"); 
+		if(mNumListForInvitePj != null) { //프로젝트 멤버 추가
+			for(String stringMnum : mNumListForInvitePj) {
+				int num = Integer.parseInt(stringMnum);
+				pmService.addProjectMember(pNum, num);
+			}
+		}
+		return "redirect:projectMain?wNum="+wNum;
+	}
+	
 	@ResponseBody
 	@RequestMapping(value="/exitProject")
 	public boolean exitProject(int pNum, HttpSession session) {
