@@ -16,11 +16,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import model.ChatRoom;
-import model.ChatRoomMember;
 import model.Member;
 import model.Project;
 import model.ProjectMember;
@@ -64,10 +61,8 @@ public class ProjectController {
 		model.addAttribute("wsmList",wsmList);
 		model.addAttribute("projectList", projectList);
 		Workspace ws = wService.getWorkspace(wNum);
-//		ChatRoom chatRoom = crService.getChatRoomByCrNum(crNum);
 		session.setAttribute("wsName", ws.getName());
 		session.setAttribute("currWnum", wNum);
-//		session.setAttribute("sessionChatRoom", chatRoom);		
 		return "/project/projectMain";
 	}
 	
@@ -105,25 +100,21 @@ public class ProjectController {
 	}
 	
 	@ResponseBody
-	@RequestMapping(value="/exitProject") //이름 바꿈
+	@RequestMapping(value="/exitProject")
 	public boolean exitProject(int pNum, HttpSession session) {
 		Member member = (Member)session.getAttribute("user");
 		boolean result = pmService.removeProjectMember(pNum, member.getNum()); //프로젝트에서 나감 & 채팅방에서 나감
 		return result;
 	}
-
 	@RequestMapping(value="/modifyProject", method = RequestMethod.POST)
 	public String modifyProject(int wNum, int pNum, String pName, String pDetail, String startDate, String endDate, HttpSession session) throws ParseException {
 		Member member = (Member)session.getAttribute("user");
 		int mNum = member.getNum();
 		SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd");
-		
 		Date encStartDate = dt.parse(startDate);
 		Date encEndDate = dt.parse(endDate);
-		boolean result = pService.modifyProject(pNum, pName, pDetail, encStartDate, encEndDate, mNum); //프로젝트 수정 & 채팅방 수정
-		System.out.println("수정 결과 : "+result);
+		pService.modifyProject(pNum, pName, pDetail, encStartDate, encEndDate, mNum); //프로젝트 수정 & 채팅방 수정
 		return "redirect:projectMain?wNum="+wNum;
-		//pNum 받아오기 
 	}
 	@ResponseBody
 	@RequestMapping(value="/getProject", method = RequestMethod.POST)

@@ -78,7 +78,7 @@ public class TodoController {
 		todo.setmNumTo(mNumTo);
 		todo.setTdStartDate(encStartDate);
 		todo.setTdEndDate(encEndDate);
-		boolean result = tService.modifyTodo(todo);
+		tService.modifyTodo(todo);
 		return "redirect:todoMain?pNum="+pNum;
 	}
 	@ResponseBody

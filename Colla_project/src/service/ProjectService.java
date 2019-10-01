@@ -28,37 +28,35 @@ public class ProjectService {
 	
 	public int addProject(String pName,int wNum,String pDetail,Date pStartDate,Date pEndDate,int mNum) {
 		ChatRoom chatRoom = new ChatRoom();
+		chatRoom.setwNum(wNum);
 		chatRoom.setCrName(pName); //프로젝트 이름 = 채팅방 이름
 		chatRoom.setmNum(mNum);
-		chatRoom.setwNum(wNum);
-		if(crDao.insertChatRoom(chatRoom)>0) { //프로젝트 멤버를 채팅방 멤버 추가..
+		if(crDao.insertChatRoom(chatRoom)>0) { //프로젝트 멤버를 채팅방 멤버 추가
 			ChatRoomMember crm = new ChatRoomMember();
-			crm.setmNum(mNum);
-			crm.setCrNum(chatRoom.getCrNum());
 			crm.setwNum(wNum);
-			crmDao.insertChatRoomMember(crm);	
+			crm.setCrNum(chatRoom.getCrNum());
+			crm.setmNum(mNum);
+			crmDao.insertChatRoomMember(crm); //프로젝트 만든 사람을.. 채팅방 멤버에 추가	
 		} // 채팅방 추가 끝
-		// 채팅방을 먼저 추가하고 그 채팅방의 crNum을 가져온다. 
 		int pNum = 0;
 		Project project = new Project();
-		project.setpName(pName);
 		project.setwNum(wNum);
 		project.setCrNum(chatRoom.getCrNum());
 		project.setmNum(mNum);
+		project.setpName(pName);
 		project.setpDetail(pDetail);
-		project.setpEndDate(pEndDate);
 		project.setpStartDate(pStartDate);
+		project.setpEndDate(pEndDate);
 		if(pDao.insertProject(project)>0) { //프로젝트 멤버 추가
 			pNum = project.getpNum();
-			pDao.updateChatRoomPnum(project.getpNum(), project.getCrNum()); //채팅방에 pNum 넣어주기
+			pDao.updateChatRoomPnum(pNum, project.getCrNum()); //채팅방에 pNum 넣어주기
 			ProjectMember pm = new ProjectMember();
 			pm.setpNum(pNum);
-			pm.setmNum(mNum);
-			pmDao.insertProjectMember(pm);
+			pm.setmNum(mNum); 
+			pmDao.insertProjectMember(pm); //프로젝트 만든 사람을.. 프로젝트 멤버에 추가
 		} // 프로젝트 추가 끝
 		return pNum;
 	}
-	
 	public boolean removeProject(int pNum) {
 		boolean result1 = false;
 		if(pDao.deleteProject(pNum)>0) {
@@ -74,8 +72,7 @@ public class ProjectService {
 		return false;
 	}
 	public boolean modifyProject(int pNum, String pName, String pDetail, Date pStartDate, Date pEndDate, int mNum) {
-		Project project = new Project();
-		project.setpNum(pNum);
+		Project project = pDao.selectProject(pNum);
 		project.setpName(pName);
 		project.setpDetail(pDetail);
 		project.setpEndDate(pEndDate);
@@ -83,7 +80,6 @@ public class ProjectService {
 		project.setmNum(mNum);
 		boolean result1 = false;
 		if(pDao.updateProject(project)>0) {
-			System.out.println("프로젝트 수정 완료");
 			result1 = true;
 		}
 		//채팅방 이름 바꾸기
@@ -93,7 +89,6 @@ public class ProjectService {
 		chatRoom.setCrName(pName);
 		boolean result2 = false;
 		if(crDao.updateChatRoom(chatRoom)>0) {
-			System.out.println("프로젝트와 연결된 채팅방 수정 완료");
 			result2 = true;
 		}
 		if(result1 && result2) {
