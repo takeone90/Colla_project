@@ -34,7 +34,7 @@ public class TodoController {
 	@RequestMapping("/todoMain") //todoMain으로 이동
 	public String showTodoMain(HttpSession session, int pNum, Model model) {
 		List<Todo> tList = tService.getAllTodoByPnum(pNum);
-		model.addAttribute("tList", tList); //todo 리스트 입니다...
+		model.addAttribute("tList", tList); //todo 리스트
 		model.addAttribute("pNum", pNum);
 		session.setAttribute("pNum", pNum);
 		model.addAttribute("progress",pService.getProject(pNum).getProgress());
@@ -73,7 +73,7 @@ public class TodoController {
 		todo.setmNumTo(mNumTo);
 		todo.setTdStartDate(encStartDate);
 		todo.setTdEndDate(encEndDate);
-		boolean result = tService.modifyTodo(todo);
+		tService.modifyTodo(todo);
 		return "redirect:todoMain?pNum="+pNum;
 	}
 	@ResponseBody
