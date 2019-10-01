@@ -33,6 +33,7 @@ public class ProjectService {
 		chatRoom.setwNum(wNum);
 		if(crDao.insertChatRoom(chatRoom)>0) { //프로젝트 멤버를 채팅방 멤버 추가..
 			ChatRoomMember crm = new ChatRoomMember();
+			crm.setmNum(mNum);
 			crm.setCrNum(chatRoom.getCrNum());
 			crm.setwNum(wNum);
 			crmDao.insertChatRoomMember(crm);	
@@ -48,6 +49,7 @@ public class ProjectService {
 		project.setpEndDate(pEndDate);
 		project.setpStartDate(pStartDate);
 		if(pDao.insertProject(project)>0) { //프로젝트 멤버 추가
+			pNum = project.getpNum();
 			pDao.updateChatRoomPnum(project.getpNum(), project.getCrNum()); //채팅방에 pNum 넣어주기
 			ProjectMember pm = new ProjectMember();
 			pm.setpNum(pNum);

@@ -69,10 +69,7 @@
 						<a href="#" class="modifyProject" data-pNum="${pl.pInfo.pNum}">수정</a>
 						<a href="#" class="exitProject" data-pNum="${pl.pInfo.pNum}">나가기</a>
 					</div>
-					<div class="projectDetail">${pl.pInfo.pDetail}</div>
-					<div class="progress">진척률 : ${pl.pInfo.progress}
-						<div class="projectDate">
-<%-- 						${pl.pInfo.pStartDate} ~ ${pl.pInfo.pEndDate} --%>
+					<div class="projectDate">
 						<p>
 						<fmt:formatDate value="${pl.pInfo.pStartDate}" pattern="yyyy.MM.dd" />
 				        <fmt:formatDate value="${pl.pInfo.pStartDate}" pattern="E"/>요일 
@@ -82,16 +79,21 @@
 				        <fmt:formatDate value="${pl.pInfo.pEndDate}" pattern="E"/>요일 
 						</p>
 						</div>
-					</div>
+					<div class="projectDetail">${pl.pInfo.pDetail}</div>
 					
-					<div class="projectMember">
+					<div class="progress-member"><div class="progress">진행률 : <progress id="progressBar" value="${pl.pInfo.progress}" max="100"></progress></div>
+						<div class="projectMember">
 						<p>참여자 목록</p>
 						<ul>
 						<c:forEach items="${pl.pmList}" var="pm">
-							<li>${pm.mName}</li>
+							<li><div class='profileImg' align="center"><img alt='프로필사진' src='${contextPath}/showProfileImg?num=${pm.mNum}' onclick="showProfileInfoModal(${pm.mNum})"></div>
+							<p style="text-align:center;">${pm.mName}</p></li>
 						</c:forEach>	
 						</ul>
+						</div>
 					</div>
+					
+					
 					
 				</div><!-- 반복 종료 -->
 				</c:forEach>

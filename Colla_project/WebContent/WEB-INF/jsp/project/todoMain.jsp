@@ -63,7 +63,7 @@
 				}else{
 					isCompleteDiv.css("backgroundColor","#ebebeb");
 				}
-				$("#progressBar").text(progress);
+				$("#progressBar").val(progress);
 			}
 		});
 	}
@@ -82,12 +82,14 @@
 		<input type="hidden" value="todoList" id="pageType">
 		<input type="hidden" value="${sessionScope.user.num}" id="mNum">
 		<input type="hidden" value="${pNum}" id="pNum">
+		<input type="hidden" value="${sessionScope.currWnum}" id="currWnum">
 		<div id="wsBodyContainer"> 
 		<h2>[프로젝트 이름] Todo List</h2>
+		<button id="backToProjectMain" onclick="location.href='projectMain?wNum=${sessionScope.currWnum}'">프로젝트 메인</button>
 		<button id="addTodo">할 일 추가</button>
 		<div id="todoArea">
 			<div id="currProjectProgress" align="center">
-				진행률 : <p id="progressBar">${progress}</p>
+				진행률 : <progress id="progressBar" value="${progress}" max="100"></progress>
 			</div>
 			
 			<ul id="todoList">
