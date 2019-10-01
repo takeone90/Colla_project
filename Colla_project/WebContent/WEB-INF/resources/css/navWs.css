@@ -43,19 +43,19 @@
     FONT-VARIANT: JIS04;
     text-align: right;
 }
-/* .chatList{ */
-/* 	display: none; */
-/* } */
+.chatList{
+	display: none;
+}
 #boardDiv,#calendarDiv,#projectDiv{
 	margin: 0px 0;
     padding: 6px 0px 6px 0px;
     text-align: right;
 }
-#myChatList h3:hover{
+#myChatList h3:hover,#projectDiv:hover{
 	cursor: pointer;
 	color :	#E5675A; 
 }
-#boardDiv a:hover,#calendarDiv a:hover,#projectDiv a:hover{
+#boardDiv a:hover,#calendarDiv a:hover{
 	color: #E5675A;
 }
 #myChatList h3{
@@ -64,10 +64,15 @@
 	font-weight : bolder;
 	padding:0 8px 5px 0px;
 }
-#boardDiv h3,#calendarDiv h3,#projectDiv h3{
+#boardDiv h3,#calendarDiv h3{
 	font-size : 20px;
 	font-weight : bolder;
 	padding:0 25px 5px 0px;
+}
+#projectDiv h3{
+	font-size : 20px;
+	font-weight : bolder;
+    padding: 0 8px 5px 0px;
 }
 #mainDiv{
     text-align: right;
@@ -81,9 +86,10 @@
 	font-size: 16px;
     color: white;
 }
-#myChatList h3 svg{
+#myChatList h3 svg, #projectDiv h3 svg{
 	font-size : 15px;
 }
+
 #myChatList ul{
     padding-top: 5px;
 }
@@ -104,7 +110,7 @@
 	color:#CCCBCA;
 }
 #myChatList ul li:hover{
-	background-color : #4f4a4a;
+	background-color : #194661;
 	cursor : pointer;
 }
 #myChatList ul li.currChat:hover{

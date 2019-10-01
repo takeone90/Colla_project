@@ -27,11 +27,10 @@
 		$("#memberInfoModal").fadeIn(100);
 	}
 	$(function(){
+		loadChatList();
 		if($("#pageType").val()=="chatroom"){
-			loadChatList();
+			$(".chatList").show();
 		}
-		
-		
 		//회원정보 모달 닫기
 		$(".closeMemberInfo").on("click",function(){
 			$("#memberInfoModal").fadeOut(100);
@@ -51,6 +50,21 @@
 					var str='<li '+ ( crNum ==item.crNum?'class="currChat"':"")+' onclick="goToChatRoom('+item.crNum+')">'+item.crName+'</li>';
 					chatList.append(str);
 				});
+			}
+		});
+	}
+	function loadProjectList(){
+		var currWnum = $("#currWnum").val();
+		var projectList = $("#projectList");
+		$.ajax({
+			data : {"wNum":currWnum},
+			url : "${contextPath}/getAllProjectByWnum",
+			dataType : "json",
+			success : function(pjList){
+				
+			},
+			error : function(){
+				alert("불러오기 에러발생");
 			}
 		});
 	}
@@ -94,7 +108,6 @@
 		<div id="myChatList">
 		<script>
 			$(function(){
-				var myChatOpen = 1;
 				$("#myChatList h3").on("click",function(){
 					$(".chatList").toggle();
 				});
@@ -107,8 +120,12 @@
 		</div>
 		<div id="projectDiv">
 			<h3>
-				<a href="projectMain?wNum=${sessionScope.currWnum}">Project</a>
+<%-- 				<a href="projectMain?wNum=${sessionScope.currWnum}">Project</a> --%>
+				Project
+				<i class="fas fa-angle-down"></i>
 			</h3>
+			<ul id="projectList">
+			</ul>
 		</div>
 		<div id="boardDiv">
 			<h3>

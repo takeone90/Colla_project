@@ -138,9 +138,10 @@ public class ProjectController {
 		List<Project> projectList = pService.getAllProjectByMnum(mNum);
 		return projectList;
 	}
+	
 	@ResponseBody
 	@RequestMapping(value="/getAllProjectByWnum", method = RequestMethod.POST)
-	public List<Project> getAllProjectByWnum(int wNum) {
+	public List<Project> getAllProjectByWnum(@RequestParam("wNum")int wNum) {
 		List<Project> projectList = pService.getAllProjectByWnum(wNum);
 		return projectList;
 	}
