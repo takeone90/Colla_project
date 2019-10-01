@@ -20,8 +20,8 @@
 	display: inline-block;
     position: absolute;
     top: 135px;
-    right: 9%;
-    width: 10%;
+    left: calc(100% - 172px);
+    width: 97px;
     padding: 6px;
     background-color: #403C39;
     color: white;
@@ -80,4 +80,52 @@
     border-radius: 50%;
     display: inline-block;
     border: 1px solid #9e9d9d;
+}
+#backToProjectMain{
+	display: inline-block;
+    position: absolute;
+    top: 135px;
+    left: calc(100% - 296px);
+    width: 120px;
+    padding: 6px;
+    background-color: #403C39;
+    color: white;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+}
+#backToProjectMain:hover{
+	background-color: #E5675A;
+}
+.attachModal .profileImg {
+	margin-right : 5px;
+}
+.profileImg img {
+	width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.selectTodoMemberUL li{
+	padding-top: 7px;
+    padding-bottom: 7px;
+	display: inline-block;
+    border-radius: 5px;
+}
+.checkedLI{
+	background-color: #d2f0c9;
+}
+.selectTodoMemberUL .checkedLI:hover{
+	background-color: #d2f0c9;
+}
+.selectTodoMemberUL li:hover{
+	cursor: pointer;
+	background-color: #eee;
+}
+.selectTodoMemberUL li:checkbox{
+	display: none;
+}
+addTodoModal .selectTodoMemberUL p{
+	    font-size: 12px;
+	margin-top:5px;
 }

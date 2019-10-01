@@ -5,7 +5,7 @@ import java.util.Date;
 public class Project {
 	private int pNum;
 	private String pName;
-	private int progress;
+	private double progress;
 	private int wNum;
 	private Date pRegDate;
 	private String pDetail;
@@ -25,10 +25,11 @@ public class Project {
 	public void setpName(String pName) {
 		this.pName = pName;
 	}
-	public int getProgress() {
+	
+	public double getProgress() {
 		return progress;
 	}
-	public void setProgress(int progress) {
+	public void setProgress(double progress) {
 		this.progress = progress;
 	}
 	public int getwNum() {

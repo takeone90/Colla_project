@@ -38,6 +38,8 @@
 			return false;
 		});
 		$(".modifyTodoModalOpen").on("click",function(){
+// 			alert($(this).attr("data-tdNum"));
+			$(".tdNum").val($(this).attr("data-tdNum"));
 			$("#modifyTodoModal").fadeIn(300);
 		});
 		$("#closeModifyTodoModal").on("click",function(){
@@ -51,15 +53,26 @@
 		$.ajax({
 			url : "${contextPath}/toggleComplete",
 			data : {"tdNum":tdNum},
-			success : function(e){
-				if(e==1){
-					isCompleteDiv.css("backgroundColor","#E5675A");
+			dataType : "json",
+			success : function(completeAndProgress){
+				var isComplete = completeAndProgress.isComplete;
+				var progress = completeAndProgress.progress;
+				if(isComplete==1){
+					isCompleteDiv.css("backgroundColor","#E5675A");//눌러서 바뀐색깔임. 완료한 경우
+					
 				}else{
 					isCompleteDiv.css("backgroundColor","#ebebeb");
 				}
+				$("#progressBar").val(progress);
 			}
 		});
 	}
+// 	function calcProgress(pNum){
+// 		$.ajax({
+// 			url : "${contextPath}/updateProgress",
+			
+// 		});
+// 	}
 </script>
 </head>
 <body>
@@ -69,12 +82,14 @@
 		<input type="hidden" value="todoList" id="pageType">
 		<input type="hidden" value="${sessionScope.user.num}" id="mNum">
 		<input type="hidden" value="${pNum}" id="pNum">
+		<input type="hidden" value="${sessionScope.currWnum}" id="currWnum">
 		<div id="wsBodyContainer"> 
 		<h2>[프로젝트 이름] Todo List</h2>
+		<button id="backToProjectMain" onclick="location.href='projectMain?wNum=${sessionScope.currWnum}'">프로젝트 메인</button>
 		<button id="addTodo">할 일 추가</button>
 		<div id="todoArea">
 			<div id="currProjectProgress" align="center">
-				현재 프로젝트 전체 진행률 ~~
+				진행률 : <progress id="progressBar" value="${progress}" max="100"></progress>
 			</div>
 			
 			<ul id="todoList">
@@ -105,8 +120,8 @@
 						</p>
 					</div>
 					<div class="todoInnerBtn" align="right">
-						<button class="modifyTodoModalOpen">수정</button>
-						<button>삭제</button>
+						<button class="modifyTodoModalOpen" data-tdNum="${td.tdNum}">수정</button>
+						<button onclick="location.href='removeTodo?tdNum=${td.tdNum}'">삭제</button>
 					</div>
 			</li><%--end todo --%>
 				</c:forEach>
@@ -127,8 +142,8 @@
 			</div>
 			<div class="modalBody">
 				<p>Todo를 만들고 프로젝트 일정을 세분화 하세요</p>
-<!-- 				<form action="addWs" method="post"> -->
-<%-- 					<input type="hidden" value="${_csrf.token}" name="${_csrf.parameterName}"> --%>
+				<form action="addTodo" method="post">
+					<input type="hidden" value="${_csrf.token}" name="${_csrf.parameterName}">
 					<div class="addPjInputWrap">
 						<div class="row">
 							<h4>작업 이름</h4>
@@ -144,12 +159,27 @@
 						</div>
 						<div class="row">
 							<h4>할 일 멤버</h4>
-							<div class="addTodoMemberDiv">
-								<input type="text" placeholder="작업할 프로젝트 멤버" name="todoMemberList" style="width:465px">
-							</div>
-							<div class="addTodoRoundBox" align="center">
-								<a href="#" class="addTodoInput">+</a>
-							</div>
+							<ul class="selectTodoMemberUL">
+							<c:forEach items="${pmList}" var="pm">
+								<li onclick="checkTodoMember(this);">
+								<div class='profileImg' align="center">
+								<img alt='프로필사진' src='${contextPath}/showProfileImg?num=${pm.mNum}'>
+								</div>
+								<p style="text-align:center;">${pm.mName}</p>
+								<input type="radio" value="${pm.mNum}" name="mNum" style="display:none;">
+								</li>
+								<script>
+									function checkTodoMember(tag){
+										let $checkInput = $(tag).find("input[type='radio']");
+										$checkInput.prop('checked',function(){
+											$(".selectTodoMemberUL li").removeClass("checkedLI");
+											$checkInput.prop('checked', true);
+											$(tag).addClass("checkedLI");
+										});
+									}
+								</script>
+							</c:forEach>
+							</ul>
 						</div>
 						<div class="row">
 							<h4>할 일 기간</h4>
@@ -164,7 +194,7 @@
 						<button type="submit">할 일 추가</button>
 						<button id="closeTodoModal">닫기</button>
 					</div>
-<!-- 				</form> -->
+				</form>
 			</div> <!-- end modalBody -->
 		</div><!-- end addTodoModal -->
 		<%------------------------------------프로젝트 수정 모달  ---------------------------------------%>
@@ -174,8 +204,9 @@
 			</div>
 			<div class="modalBody">
 				<p>일정을 수정합니다</p>
-<!-- 				<form action="addWs" method="post"> -->
-<%-- 					<input type="hidden" value="${_csrf.token}" name="${_csrf.parameterName}"> --%>
+				<form action="modifyTodo" method="post">
+					<input type="hidden" value="${_csrf.token}" name="${_csrf.parameterName}">
+					<input type="hidden" name="tdNum" class="tdNum">
 					<div class="modifyTodoInputWrap">
 						<div class="row">
 							<h4>할 일 이름</h4>
@@ -196,13 +227,27 @@
 								<input type="date" name="endDate" placeholder="종료일을 입력하세요">
 							</div>
 						</div>
+							<div class="row">
+							<h4>할 일 멤버</h4>
+								<ul class="selectTodoMemberUL">
+								<c:forEach items="${pmList}" var="pm">
+									<li onclick="checkTodoMember(this);">
+									<div class='profileImg' align="center">
+									<img alt='프로필사진' src='${contextPath}/showProfileImg?num=${pm.mNum}'>
+									</div>
+									<p style="text-align:center;">${pm.mName}</p>
+									<input type="radio" value="${pm.mNum}" name="mNum" style="display:none;">
+									</li>
+								</c:forEach>
+								</ul>
+							</div>
 					</div> <!-- end addWsInputWrap -->
 
 					<div id="modalBtnDiv">
 						<button type="submit">할 일 수정하기</button>
 						<button id="closeModifyTodoModal">닫기</button>
 					</div>
-<!-- 				</form> -->
+				</form>
 			</div> <!-- end modalBody -->
 		</div><!-- end modifyTodoModal -->
 </body>

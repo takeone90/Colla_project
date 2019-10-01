@@ -8,7 +8,60 @@
 			<a href="${contextPath}/"> <img src="${contextPath }/img/COLLA_LOGO_200px.png" />
 			</a>
 		</h1>
-		<nav class="floatleft">
+		<div id="m-gnb">
+			<div class="gnbBtn">
+				<a href="#"></a>
+				<ul>
+					<li></li>
+					<li></li>
+					<li></li>
+				</ul>
+			</div>
+			<script type="text/javascript">
+				$(function(){
+					$("#m-gnb .gnbBtn a").click(function(){
+						$(this).next("ul").toggleClass("active");
+						$("#m-gnb .gnbUl").toggleClass("active");
+						return false;
+					});
+				});
+			</script>
+			<ul class="gnbUl">
+				<li>
+					<h2>
+						<a href="${contextPath}/collaInfo"> COLLA? </a>
+					</h2>
+				</li><!-- 
+			 --><li>
+					<h2>
+						<a href="${contextPath}/pricing"> PRICING </a>
+					</h2>
+				</li><!-- 
+			 --><li>
+					<h2>
+						<a href="${contextPath}/faq"> FAQ </a>
+					</h2>
+				</li><!-- 
+			 --><li>
+					<h2>
+						<a href="${contextPath}/aboutUs"> ABOUT US </a>
+					</h2>
+				</li>
+				<li class="memberBtn">
+					<c:choose>
+						<c:when test="${sessionScope.user != null }">
+							<a href="${contextPath}/workspace" class="btn">Workspace</a>
+							<a href="${contextPath}/logout" class="btn">Logout</a>
+						</c:when>
+						<c:otherwise>
+							<a href="${contextPath}/loginForm" class="btn">Login</a>
+							<a href="${contextPath}/joinStep1" class="btn">Join us</a>
+						</c:otherwise>
+					</c:choose>
+				</li>
+			</ul>
+		</div>
+		<nav id="gnb" class="floatleft">
 			<ul>
 				<li>
 					<h2>

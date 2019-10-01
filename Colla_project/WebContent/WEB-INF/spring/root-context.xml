@@ -18,6 +18,7 @@
 <!-- 		<property name="username" value="colla"/> -->
 <!-- 		<property name="password" value="wlftndjqtwh19"/> -->
 <!-- 	</bean> -->
+	<bean id = "bcryptPasswordEncoder" class ="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"></bean>
 	<bean id="uploadPath" class="java.lang.String">
 		<constructor-arg value="C:\temp\"></constructor-arg>
 	</bean>

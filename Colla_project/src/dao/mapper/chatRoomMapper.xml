@@ -11,7 +11,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		values(#{crNum},#{wNum},#{mNum},#{crName},#{crIsDefault})
 	</insert>
 	<update id="updateChatRoom" parameterType="chatRoom"><!-- chatroom수정은 이름만 바꾸게 -->
-		update chatroom cr_name=#{crName} where cr_num=#{crNum}
+		update chatroom set cr_name=#{crName} where cr_num=#{crNum}
 	</update>
 	<delete id="deleteChatRoom" parameterType="int">
 		delete chatroom where cr_num=#{crNum}
@@ -37,13 +37,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from chatroom where w_num=#{wNum}
 	</select>
 	<select id="selectAllChatRoomByWnumMnum" resultMap="chatRoomMap">
-		select cr.w_num,cr.cr_num,cr.m_num,cr.cr_name,cr.cr_regdate,cr.cr_isdefault
+		select cr.w_num,cr.cr_num,cr.m_num,cr.cr_name,cr.cr_regdate,cr.cr_isdefault,cr.p_num
 		from chatroom cr,chatroom_member crm,member m
 		where cr.w_num=#{wNum} and cr.cr_num=crm.cr_num and crm.m_num=m.m_num and m.m_num=#{mNum}
 		order by cr.cr_num asc
 	</select>
 	<resultMap type="chatRoom" id="chatRoomMap">
 		<result column="cr_num" property="crNum"/>
+		<result column="p_num" property="pNum"/>
 		<result column="m_num" property="mNum"/>
 		<result column="w_num" property="wNum"/>
 		<result column="cr_name" property="crName"/>

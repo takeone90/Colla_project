@@ -10,6 +10,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		insert into project(p_num,p_name,w_num,p_detail,p_startdate,p_enddate,cr_num,m_num)
 		values(#{pNum},#{pName},#{wNum},#{pDetail},#{pStartDate},#{pEndDate},#{crNum},#{mNum})
 	</insert>
+	<update id="updateChatRoomPnum" parameterType="int">
+		update chatroom set p_num=#{pNum} where cr_num=#{crNum}
+	</update>
+	
 	<delete id="deleteProject" parameterType="int">
 		delete project where p_num=#{pNum}
 	</delete>
@@ -27,7 +31,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from project where m_num=#{mNum}
 	</select>
 	<select id="selectAllProjectByWnum" parameterType="int" resultMap="pMap">
-		select * from project where w_num=#{wNum}
+		select * from project where w_num=#{wNum} order by p_startdate asc
 	</select>
 	<select id="selectAllProject">
 		select * from project

@@ -1,69 +1,140 @@
 @charset "UTF-8";
-#wsBodyContainer h2{
-	color : #403C39;
+
+#wsBodyContainer h2 {
+	color: #403C39;
 	font-size: 2.5em;
 	font-weight: bolder;
 	margin-bottom: 30px;
 }
+
 #wsBodyContainer .project h3 {
-    color: #403C39;
-    font-size: 23px;
-    font-weight: 800;
+	color: #403C39;
+	font-size: 23px;
+	font-weight: 800;
 }
-.project{
+
+.project {
 	width: calc(100% - 58px);
-    border-bottom : 1px solid #dedede;
-    margin-bottom: 10px;
-    padding: 21px;
+	border-bottom: 1px solid #dedede;
+	padding: 15px 21px 15px 21px;
 }
-.project h3{
+
+.project h3 {
 	display: inline-block;
 }
-.projectDetail{
+
+.projectDetail {
 	margin-top: 13px;
 	margin-bottom: 8px;
 }
-.projectInnerBtnBox{
-	margin-left:10px;
+
+.projectInnerBtnBox {
+	margin-left: 10px;
 	display: inline-block;
 }
-.projectInnerBtnBox a{
-	margin-left:5px;
+
+.projectInnerBtnBox a {
+	font-size: 12px;
+    background-color: white;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+    padding: 2px 10px 2px 10px;
+    margin-left: -1px;
 }
-.progress{
-	background-color: cornflowerblue;
-    padding: 5px;
-    margin-bottom: 10px;
+.projectInnerBtnBox a:hover{
+	background-color: #eee;
 }
-.projectMember{
-	background-color: cornflowerblue;
-    padding: 5px;
+.progress-member {
+	border: 1px solid #eee;
+	padding: 5px;
+	margin-bottom: 5px;
 }
-.projectMember ul{
-	margin-left:10px;
-}
-.projectMember li{
+
+.progress {
 	display: inline-block;
-	margin-right:10px;
+	vertical-align: top;
 }
-#addProjectBtn{
+
+.projectMember {
+	margin-left: 86px;
+    padding: 5px;
+    display: inline-block;
+    position: relative;
+}
+.projectMember p{
+	font-size: 12px;
+}
+.projectMember ul {
+	margin-left: 10px;
+}
+
+.projectMember li {
+	display: inline-block;
+	margin-right: 10px;
+}
+
+#addProjectBtn {
 	position: absolute;
-    top: 135px;
-    right: 9%;
-    width: 10%;
-    padding: 6px;
-    background-color: #403C39;
-    color: white;
-    border-radius: 4px;
-    border: none;
-    cursor: pointer;
+	top: 135px;
+	right: 9%;
+	width: 120px;
+	padding: 6px;
+	background-color: #403C39;
+	color: white;
+	border-radius: 4px;
+	border: none;
+	cursor: pointer;
 }
-#addProjectBtn:hover{
+
+#addProjectBtn:hover {
 	background-color: #E5675A;
 }
-#addProjectModal p,#modifyProjectModal p{
+
+#addProjectModal p, #modifyProjectModal p {
 	margin-top: 10px;
 }
-#addPj-Date,#modifyPj-Date{
-	margin-bottom : 12px;
+
+#addPj-Date, #modifyPj-Date {
+	margin-bottom: 12px;
+}
+
+.projectDate p {
+	display: inline-block;
+	margin-top: 9px;
+	font-size: 11px;
+}
+
+.attachModal .profileImg {
+	margin-right : 5px;
+}
+.profileImg img {
+	width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+.addInviteMemberUL input{
+	height : 13px;
+}
+.addInviteMemberUL li{
+	padding-top: 7px;
+    padding-bottom: 7px;
+	display: inline-block;
+    border-radius: 5px;
+}
+.checkedLI{
+	background-color: #d2f0c9;
+}
+.addInviteMemberUL .checkedLI:hover{
+	background-color: #d2f0c9;
+}
+.addInviteMemberUL li:hover{
+	cursor: pointer;
+	background-color: #eee;
+}
+.addInviteMemberUL li:checkbox{
+	display: none;
+}
+#addProjectModal .addInviteMemberUL p{
+	    font-size: 12px;
+	margin-top:5px;
 }
