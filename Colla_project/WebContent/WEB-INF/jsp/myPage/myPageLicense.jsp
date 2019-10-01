@@ -28,8 +28,7 @@
 									<p>
 										<b>${member.name}님</b>의 라이선스는 <span>${useLicense.endDate }</span> 종료 예정입니다
 									</p>
-									<a href="myPageAccountForm" class="btn">라이선스 연장</a>
-									<a href="myPageAccountForm" class="btn">라이선스 변경</a>
+									<a href="${contextPath }/pricing" class="btn">라이선스 보러가기</a>
 									<div class="lcList">
 										<h5>결제 내역</h5>
 										<table>

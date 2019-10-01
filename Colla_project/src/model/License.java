@@ -9,6 +9,7 @@ public class License {
 	Date startDate;
 	Date endDate;
 	int amount;//추가
+	String orderId;
 	public int getNum() {
 		return num;
 	}
@@ -50,5 +51,11 @@ public class License {
 	public String toString() {
 		return "License [num=" + num + ", mNum=" + mNum + ", type=" + type + ", startDate=" + startDate + ", endDate="
 				+ endDate + ", amount=" + amount + "]";
+	}
+	public String getOrderId() {
+		return orderId;
+	}
+	public void setOrderId(String orderId) {
+		this.orderId = orderId;
 	}
 }

@@ -12,13 +12,18 @@ import org.springframework.web.servlet.View;
 import controller.MemberController.inner;
 import mail.MailReceive;
 import mail.MailSend;
+import model.License;
+import model.Member;
 import service.FileService;
+import service.LicenseService;
 
 @Controller
 public class MainController {
 	
 	@Autowired
 	private FileService fService;
+	@Autowired
+	private LicenseService licenseService;
 	
 	@RequestMapping("/")
 	public String main() {
@@ -42,7 +47,13 @@ public class MainController {
 	}
 
 	@RequestMapping(value="/pricing")
-	public String showPricing() {
+	public String showPricing(HttpSession session) {
+		License useLicense = null;
+		Member member = (Member) session.getAttribute("user");
+		if(member != null) {
+			useLicense = (License)licenseService.getUseLicense(member.getNum());
+		}
+		session.setAttribute("userLicense", useLicense);
 		return "/main/pricing";
 	}
 	@RequestMapping(value="/faq")

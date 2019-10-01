@@ -5,7 +5,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="dao.PaymentDao">
 	<insert id="insertPayment" parameterType="payment">
 		insert into payment
-		values(pm_seq.nextval,#{item},#{amount},#{date},#{mNum},#{phone},#{name},#{orderId})
+		values(pm_seq.nextval,#{item},#{amount},#{date},#{mNum},#{phone},#{name},#{orderId},#{paymentMethod})
 	</insert>
 	<resultMap type="payment" id="paymentMap">
 		<result column="pm_num" property="num"/>
@@ -16,5 +16,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="pm_phone" property="phone"/>
 		<result column="pm_name" property="name"/>
 		<result column="pm_order_id" property="orderId"/>
+		<result column="pm_method" property="paymentMethod"/>
 	</resultMap>
 </mapper>
