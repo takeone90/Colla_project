@@ -10,7 +10,6 @@
 	$(function(){
 		//Project추가 모달
 		$("#addProjectBtn").on("click",function(){
-//	 		$(".addWnum").val(wNum); //멤버 추가모달에 숨어있는 addWnum 부분에 wNum담기
 			$("#addProjectModal").fadeIn(300);
 		});
 		$("#closePjModal").on("click",function(){
@@ -19,6 +18,13 @@
 		});
 		$("#closeModifyPjModal").on("click",function(){
 			$("#modifyProjectModal").fadeOut(300);
+			return false;
+		});
+		$(".addMemberBtn").on("click",function(){
+			$("#addMemberModal").fadeIn(300);
+		});
+		$("#closeMemberModal").on("click",function(){
+			$("#addMemberModal").fadeOut(300);
 			return false;
 		});
 		
@@ -67,6 +73,7 @@
 						<!-- todoMain?pNum=1 이런 요청으로 가야함 -->
 						<a href="todoMain?pNum=${pl.pInfo.pNum}">Todo리스트</a>
 						<a href="#" class="modifyProject" data-pNum="${pl.pInfo.pNum}">수정</a>
+						<a href="#" class="addMemberBtn" data-pNum="${pl.pInfo.pNum}">초대하기</a>
 						<a href="#" class="exitProject" data-pNum="${pl.pInfo.pNum}">나가기</a>
 					</div>
 					<div class="projectDate">
@@ -83,7 +90,6 @@
 					
 					<div class="progress-member"><div class="progress">진행률 : <progress id="progressBar" value="${pl.pInfo.progress}" max="100"></progress></div>
 						<div class="projectMember">
-						<p>참여자 목록</p>
 						<ul>
 						<c:forEach items="${pl.pmList}" var="pm">
 							<li><div class='profileImg' align="center"><img alt='프로필사진' src='${contextPath}/showProfileImg?num=${pm.mNum}' onclick="showProfileInfoModal(${pm.mNum})"></div>
@@ -126,12 +132,34 @@
 						</div>
 						<div class="row">
 							<h4>멤버 초대</h4>
-							<div class="addInviteMemberDiv">
-								<input type="text" placeholder="초대할멤버 이메일" name="targetUserList" style="width:465px">
-							</div>
-							<div class="addInviteRoundBox" align="center">
-								<a href="#" class="addInviteInput">+</a>
-							</div>
+							<ul class="addInviteMemberUL">
+							<c:forEach items="${wsmList}" var="wsm">
+								<c:if test="${wsm.mNum ne sessionScope.user.num}">
+								<li onclick="checkInvitePjMember(this);">
+								<div class='profileImg' align="center">
+								<img alt='프로필사진' src='${contextPath}/showProfileImg?num=${wsm.mNum}'>
+								</div>
+								<p style="text-align:center;">${wsm.mName}</p>
+								<input type="checkbox" value="${wsm.mNum}" name="mNumListForInvitePj" style="display:none;">
+								</li>
+								<script>
+									function checkInvitePjMember(tag){
+										let $checkInput = $(tag).find("input[name='mNumListForInvitePj']");
+										$checkInput.prop('checked',function(){
+											if($checkInput.is(":checked")){
+												$(tag).removeClass("checkedLI");
+											} else{
+												$(tag).addClass("checkedLI");
+											}			
+											return !$(this).prop('checked');
+										});
+									}
+								</script>
+								</c:if>
+							</c:forEach>
+							
+							
+							</ul>
 						</div>
 						<div class="row">
 							<h4>프로젝트 기간</h4>
@@ -188,6 +216,37 @@
 				</form>
 			</div> <!-- end modalBody -->
 		</div><!-- end modifyProjectModal -->
+		
+		
+		<%------------------------------------멤버 추가 모달  ---------------------------------------%>
+		<div id="addMemberModal" class="attachModal ui-widget-content">
+			<div class="modalHead">
+				<h3>프로젝트 멤버 추가</h3>
+			</div>
+			<div class="modalBody">
+				<p>프로젝트에 멤버를 초대하세요</p>
+				<form action="inviteMember" method="post">
+					<input type="hidden" class="invitePnum" name="pNum">
+					<input type="hidden" value="${_csrf.token}" name="${_csrf.parameterName}">
+					<div class="addMemberInputWrap">
+						<div class="row">
+							<h4>멤버 초대</h4>
+							<div class="addInviteMemberDiv">
+								<input type="text" placeholder="초대할멤버 이메일" name="targetUserList">
+							</div>
+							<div class="addInviteRoundBox" align="center">
+								<a href="#" class="addInviteInput">+</a>
+							</div>
+						</div>
+					</div> <!-- end addMemberInputWrap -->
+
+					<div id="modalBtnDiv">
+						<button type="submit">멤버 초대하기</button>
+						<button id="closeMemberModal">닫기</button>
+					</div>
+				</form>
+			</div> <!-- end modalBody -->
+		</div><!-- end addMemberModal -->
 		
 		
 	</div><!-- end wsBody -->

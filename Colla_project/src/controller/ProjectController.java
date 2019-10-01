@@ -25,11 +25,13 @@ import model.Member;
 import model.Project;
 import model.ProjectMember;
 import model.Workspace;
+import model.WsMember;
 import service.ChatRoomMemberService;
 import service.ChatRoomService;
 import service.ProjectMemberService;
 import service.ProjectService;
 import service.WorkspaceService;
+import service.WsMemberService;
 
 @Controller
 public class ProjectController {
@@ -43,7 +45,8 @@ public class ProjectController {
 	private ChatRoomMemberService crmService;
 	@Autowired
 	private WorkspaceService wService;
-	
+	@Autowired
+	private WsMemberService wsmService;
 	@RequestMapping("/projectMain") //projectMain으로 이동
 	public String showProjectMain(HttpSession session, int wNum, Model model) {
 		List<Project> pList = pService.getAllProjectByWnum(wNum); //프로젝트 리스트를 가져온다..
@@ -56,6 +59,9 @@ public class ProjectController {
 			pMap.put("pmList", pmList); //프로젝트 소속 멤버
 			projectList.add(pMap);
 		}
+		
+		List<WsMember> wsmList = wsmService.getAllWsMemberByWnum(wNum);
+		model.addAttribute("wsmList",wsmList);
 		model.addAttribute("projectList", projectList);
 		Workspace ws = wService.getWorkspace(wNum);
 //		ChatRoom chatRoom = crService.getChatRoomByCrNum(crNum);
@@ -75,10 +81,10 @@ public class ProjectController {
 		Date encStartDate = dt.parse(startDate);
 		Date encEndDate = dt.parse(endDate);
 		int pNum = pService.addProject(pName, wNum, pDetail, encStartDate, encEndDate, mNum); //프로젝트 추가 & 채팅방 추가
-		String[] targetUserList = request.getParameterValues("targetUserList"); //추후 수정 필요?
-		System.out.println("targetUserList ? "+targetUserList);
-		if(targetUserList != null) { //프로젝트 멤버 추가
-			for(String stringMnum : targetUserList) {
+		String[] mNumListForInvitePj = request.getParameterValues("mNumListForInvitePj"); //추후 수정 필요?
+		System.out.println("mNumListForInvitePj ? "+mNumListForInvitePj);
+		if(mNumListForInvitePj != null) { //프로젝트 멤버 추가
+			for(String stringMnum : mNumListForInvitePj) {
 				int num = Integer.parseInt(stringMnum);
 				pmService.addProjectMember(pNum, num);
 			}
