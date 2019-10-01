@@ -58,7 +58,7 @@ public class ProjectController {
 		}
 		
 		List<WsMember> wsmList = wsmService.getAllWsMemberByWnum(wNum);
-		model.addAttribute("wsmList",wsmList);
+		model.addAttribute("wsmList", wsmList);
 		model.addAttribute("projectList", projectList);
 		Workspace ws = wService.getWorkspace(wNum);
 		session.setAttribute("wsName", ws.getName());
@@ -77,10 +77,11 @@ public class ProjectController {
 		Date encEndDate = dt.parse(endDate);
 		int pNum = pService.addProject(pName, wNum, pDetail, encStartDate, encEndDate, mNum); //프로젝트 추가 & 채팅방 추가
 		String[] mNumListForInvitePj = request.getParameterValues("mNumListForInvitePj"); 
-		if(mNumListForInvitePj != null) { //프로젝트 멤버 추가
+		if(mNumListForInvitePj != null) { //프로젝트 초대 멤버 추가
 			for(String stringMnum : mNumListForInvitePj) {
 				int num = Integer.parseInt(stringMnum);
-				pmService.addProjectMember(pNum, num);
+				pmService.addProjectMember(pNum, num); //프로젝트에 초대 멤버들 추가 
+				crmService.addChatRoomMember(pService.getProject(pNum).getCrNum(), num, wNum); //채팅방에 초대 멤버들 추가
 			}
 		}
 		return "redirect:projectMain?wNum="+wNum;
@@ -103,7 +104,8 @@ public class ProjectController {
 	@RequestMapping(value="/exitProject")
 	public boolean exitProject(int pNum, HttpSession session) {
 		Member member = (Member)session.getAttribute("user");
-		boolean result = pmService.removeProjectMember(pNum, member.getNum()); //프로젝트에서 나감 & 채팅방에서 나감
+		boolean result = pmService.removeProjectMember(pNum, member.getNum()); //프로젝트에서 나감 
+//		result = crmService.removeChatRoomMemberByCrNumMnum(pService.getProject(pNum).getCrNum(), member.getNum()); //채팅방에서 나감
 		return result;
 	}
 	@RequestMapping(value="/modifyProject", method = RequestMethod.POST)

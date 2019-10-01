@@ -62,13 +62,13 @@ public class ProjectService {
 		if(pDao.deleteProject(pNum)>0) {
 			result1 = true;
 		}
-		boolean result2 = false;
-		if(crmDao.deleteChatRoomMemberByCrNumMnum(pDao.selectProject(pNum).getCrNum(), pDao.selectProject(pNum).getmNum())>0) {
-			result2 = true;
-		}
-		if(result1 && result2) {
-			return true;
-		}
+//		boolean result2 = false;
+//		if(crmDao.deleteChatRoomMemberByCrNumMnum(pDao.selectProject(pNum).getCrNum(), pDao.selectProject(pNum).getmNum())>0) {
+//			result2 = true;
+//		}
+//		if(result1 && result2) {
+//			return true;
+//		}
 		return false;
 	}
 	public boolean modifyProject(int pNum, String pName, String pDetail, Date pStartDate, Date pEndDate, int mNum) {
