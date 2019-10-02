@@ -1,14 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/jsp/inc/head.jsp" %>
-
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>채팅 메인</title>
 <link rel="stylesheet" type="text/css" href="${contextPath}/css/headerWs.css"/>
 <link rel="stylesheet" type="text/css" href="${contextPath}/css/navWs.css"/>
 <link rel="stylesheet" type="text/css" href="${contextPath}/css/chatMain.css"/>
 <link rel="stylesheet" type="text/css" href="${contextPath}/css/animate.css"/>
 <link rel="stylesheet" type="text/css" href="${contextPath}/css/animationCheatSheet.css"/>
-
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=38b5346cba2a9103101abc2c542a2d86&libraries=services"></script>
 
 <script type="text/javascript" src="lib/codemirror/lib/codemirror.js"></script>
@@ -906,6 +906,7 @@ var staticMap = null;
 							<div id="searchContent" class="collaScroll"></div>
 <!-- 							<div id="pageNav"></div> -->
 						</div>
+						
 						<div id="nav--canvas" class="navContent-wrap">
 							<div id="addForm" class="ui-widget-content">
 								<div class="modalHead">
@@ -915,8 +916,8 @@ var staticMap = null;
 								<div class="modalBody">
 									<form class="addModal">
 										<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
-										<input type="hidden" name="mNum" id="mNum" value="${userData.mNum}">
-										<input type="hidden" name="wNum" id="wNum" value="${userData.wNum}">
+										<input type="hidden" name="mNum" id="mNum" value="${sessionScope.user.num}">
+										<input type="hidden" name="wNum" id="wNum" value="${wNum}">
 										<div>
 											<div class="titleDiv">
 												<h4>일정</h4>
@@ -965,12 +966,40 @@ var staticMap = null;
 										</div>
 									</form>
 								</div>
-							</div>
-											
+							</div>			
 						</div>
-					
+ 						<script type="text/javascript"><!-- 191002 혜선 추가 -->
+							$(function() {
+								$("#addSchedule").on("click", function() {
+									var data = $(".addModal").serialize();
+									console.log(data);
+									$.ajax({
+										url: "addSchedule",
+										data: data,
+										type: "post",
+										dataType: "json",
+										success: function(result) {
+											if(result) {
+												alert("일정 추가했습니다.");
+												$(".addModal").each(function() {
+													this.reset();
+												});
+											} else {
+												alert("일정 추가 실패했습니다.");
+											}
+										}
+									});
+									return false;
+								});	
+							    $( ".datepicker" ).datepicker({
+							    	dateFormat: 'yy-mm-dd',
+							        changeMonth: true,
+							        changeYear: true
+							    });
+							});									
+						</script>
 					</div>
-				
+	
 					<c:if test="${chatRoom.crIsDefault eq 0}">
 					<div id="etcBox"><a href="exitChatRoom?crNum=${chatRoom.crNum}" id="exitChatRoom">채팅방 나가기</a></div>
 					</c:if>

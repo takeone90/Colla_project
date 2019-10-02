@@ -58,7 +58,7 @@ td {
 	position: relative;
 }
 .drawMonthCalendarLowerForClick {
-	height: 120px;
+	height: 100%;
 	width: 100%;
 	position: absolute;
 	border-collapse: collapse;
@@ -128,17 +128,20 @@ td {
 	border: 1px;
 }
 .complete {
-/* 	border-radius: 10px; */
 	font-size: 12px;
     padding-left: 3px;
+    margin-left: 10px;
+    margin-right: 10px;
 }
 .left {
-	border-bottom-left-radius: 10px; 
-	border-top-left-radius: 10px;
+	font-size: 12px;
+    padding-left: 3px;
+    margin-left: 10px;
 }
 .right {
-	border-bottom-right-radius: 10px; 
-	border-top-right-radius: 10px; 
+	font-size: 12px;
+    padding-left: 3px;
+    margin-right: 10px;
 }
 .full {
 }
