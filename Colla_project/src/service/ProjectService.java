@@ -37,31 +37,13 @@ public class ProjectService {
 		chatRoom.setwNum(wNum);
 		chatRoom.setCrName(pName); //프로젝트 이름 = 채팅방 이름
 		chatRoom.setmNum(mNum);
-		if(crDao.insertChatRoom(chatRoom)>0) { //프로젝트 멤버를 채팅방 멤버 추가
+		if(crDao.insertChatRoom(chatRoom)>0) {
 			ChatRoomMember crm = new ChatRoomMember();
 			crm.setwNum(wNum);
 			crm.setCrNum(chatRoom.getCrNum());
 			crm.setmNum(mNum);
-			crmDao.insertChatRoomMember(crm); //프로젝트 만든 사람을.. 채팅방 멤버에 추가	
+			crmDao.insertChatRoomMember(crm); //프로젝트 만든 사람을 채팅방 멤버로 추가	
 		} // 채팅방 추가 끝
-		int pNum = 0;
-		Project project = new Project();
-		
-		project.setwNum(wNum);
-		project.setCrNum(chatRoom.getCrNum());
-		project.setmNum(mNum);
-		project.setpName(pName);
-		project.setpDetail(pDetail);
-		project.setpStartDate(pStartDate);
-		project.setpEndDate(pEndDate);
-		if(pDao.insertProject(project)>0) { //프로젝트 멤버 추가
-			pNum = project.getpNum();
-			pDao.updateChatRoomPnum(pNum, project.getCrNum()); //채팅방에 pNum 넣어주기
-			ProjectMember pm = new ProjectMember();
-			pm.setpNum(pNum);
-			pm.setmNum(mNum); 
-			pmDao.insertProjectMember(pm); //프로젝트 만든 사람을.. 프로젝트 멤버에 추가
-		} // 프로젝트 추가 끝
 		Calendar calendar = new Calendar();
 		SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd");
 		calendar.setTitle(pName);
@@ -75,7 +57,25 @@ public class ProjectService {
 		calendar.setMonthly("0");
 		calendar.setAnnually("0");
 		calendar.setColor(getRandomColor()); //랜덤 컬러
-		cService.addCalendar(calendar);
+		cService.addCalendar(calendar); //캘린더 추가 끝
+		int pNum = 0;
+		Project project = new Project();
+		project.setwNum(wNum);
+		project.setCrNum(chatRoom.getCrNum());
+		project.setCalNum(calendar.getcNum());
+		project.setmNum(mNum);
+		project.setpName(pName);
+		project.setpDetail(pDetail);
+		project.setpStartDate(pStartDate);
+		project.setpEndDate(pEndDate);
+		if(pDao.insertProject(project)>0) { //프로젝트 멤버 추가
+			pNum = project.getpNum();
+			pDao.updateChatRoomPnum(pNum, project.getCrNum()); //채팅방에 pNum 넣어주기
+			ProjectMember pm = new ProjectMember();
+			pm.setpNum(pNum);
+			pm.setmNum(mNum); 
+			pmDao.insertProjectMember(pm); //프로젝트 만든 사람을.. 프로젝트 멤버에 추가
+		} // 프로젝트 추가 끝
 		return pNum;
 	}
 	public boolean removeProject(int pNum) {
@@ -90,7 +90,7 @@ public class ProjectService {
 //		if(result1 && result2) {
 //			return true;
 //		}
-		return false;
+		return result1;
 	}
 	public boolean modifyProject(int pNum, String pName, String pDetail, Date pStartDate, Date pEndDate, int mNum) {
 		Project project = pDao.selectProject(pNum);
@@ -105,20 +105,20 @@ public class ProjectService {
 		}
 		//채팅방 이름 바꾸기
 		ChatRoom chatRoom = crDao.selectChatRoom(project.getCrNum());
-//		chatRoom.setCrNum(pDao.selectProject(pNum).getCrNum());
 		chatRoom.setCrName(pName);
 		boolean result2 = false;
 		if(crDao.updateChatRoom(chatRoom)>0) {
 			result2 = true;
 		}
 		//캘린더 수정
-//		Calendar calendar = cService.getCalendar();
-//		SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd");
-//		calendar.setTitle(pName);
-//		calendar.setContent(pDetail);
-//		calendar.setStartDate(dt.format(pStartDate)); //Date -> String
-//		calendar.setEndDate(dt.format(pEndDate));
-//		project.setmNum(mNum);
+		Calendar calendar = cService.getCalendar(project.getCalNum());
+		SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd");
+		calendar.setTitle(pName);
+		calendar.setContent(pDetail);
+		calendar.setStartDate(dt.format(pStartDate)); //Date -> String
+		calendar.setEndDate(dt.format(pEndDate));
+		calendar.setmNum(mNum);
+		cService.modifyCalendar(calendar);
 		if(result1 && result2) {
 			return true;
 		}
