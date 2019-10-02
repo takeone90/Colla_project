@@ -73,7 +73,11 @@
 			success : function(d){
 				chatList.empty();
 				$.each(d,function(idx,item){
-					var str='<li '+ ( crNum ==item.crNum?'class="currChat"':"")+' onclick="goToChatRoom('+item.crNum+')">'+item.crName+'</li>';
+					if(item.pNum==0){
+					var str='<li '+ ( crNum ==item.crNum?'class="currChat"':"")+' onclick="goToChatRoom('+item.crNum+')">'+item.crName+'</li>';						
+					}else{
+					var str='<li '+ ( crNum ==item.crNum?'class="currChat"':"")+' onclick="goToChatRoom('+item.crNum+')"><i class="fab fa-product-hunt"></i> '+item.crName+'</li>';
+					}
 					chatList.append(str);
 				});
 			}
@@ -93,7 +97,7 @@
 			dataType : "json",
 			success : function(pjList){
 				projectList.empty();
-				var defaultStr = $("<li id='projectMainLI' onclick='location.href=\"projectMain?wNum="+currWnum+"\"'>프로젝트 메인</li>");
+				var defaultStr = $("<li id='projectMainLI' onclick='location.href=\"${contextPath}/projectMain?wNum="+currWnum+"\"'>프로젝트 메인</li>");
 				projectList.append(defaultStr);
 				$.each(pjList,function(idx,item){
 					if(pNum!=""){

@@ -127,6 +127,10 @@ function drawAlarmList(alarm){
 		alarmType = "채팅방 초대";
 	}else if(alarm.aType=="wInvite"){
 		alarmType = "워크스페이스 초대";
+	}else if(alarm.aType=="pInvite"){
+		alarmType = "프로젝트 초대";
+	}else if(alarm.aType=="todo"){
+		alarmType = "할 일 생성";
 	}
 	var alarmInfoArea = $("#alarmInfoArea");
 	var alarmProfileImg = $("<div class='profileImg'><img alt='프로필사진' src='${contextPath}/showProfileImg?num="+alarm.mNumFrom+"'></div>");
@@ -303,11 +307,12 @@ $(function(){
 	}else if(pageType=="workspace"){
 		$("#chatRoomInfo > p").text("워크스페이스");
 	}else if(pageType=="project"){
-		$("#chatRoomInfo > p").text("프로젝트");
+		var wName = "${sessionScope.currWname}";
+		$("#chatRoomInfo > p").text(wName+" 프로젝트");
 	}else if(pageType=="todoList"){
 		$("#chatRoomInfo > p").text("todoList");
 	}else{
-		$("#chatRoomInfo > p").text("${sessionScope.wsName}");
+		$("#chatRoomInfo > p").text("${sessionScope.currWname}");
 	}
 	
 	$(".modalHead").mousedown(function(){
