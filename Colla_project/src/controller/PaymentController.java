@@ -1,6 +1,7 @@
 
 package controller;
 
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -17,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import model.License;
 import model.Member;
+import model.Payment;
+import model.kakaoPay.KakaoPayApprovalVO;
 import service.LicenseService;
 import service.PaymentService;
 
@@ -35,10 +38,11 @@ public class PaymentController {
 	@Autowired
 	private LicenseService licenseService;
 	private License license;
+	private Member member;
 	
 	@RequestMapping(value="/kakaoPay" ,method = RequestMethod.GET)
 	public String kakaoPayGet(String type, HttpSession session, Model model) {
-		Member member = (Member)session.getAttribute("user");
+		member = (Member)session.getAttribute("user");
 		int mNum = member.getNum();
 		int amount = 0;
 		if(type.equals("personal")){ //라이센스에 따른 금액을 셋팅한뒤
@@ -58,17 +62,34 @@ public class PaymentController {
 	}
 	
 	@RequestMapping(value="/kakaoPay" ,method = RequestMethod.POST)
-	public String kakaoPay(HttpServletRequest req, License license) {
+	public String kakaoPay(HttpServletRequest req, License license, Member member) {
 		this.license = license;
+		this.member = member;
 		return "redirect:"+ pService.kakaoPayReady(license);
 	}
 	
 	@RequestMapping("/kakaoPaySuccess")
 	public String kakaoPaySuccess(@RequestParam("pg_token") String pg_token, Model model) {
 		System.out.println("kakaoPay Success, pg_token : " + pg_token);
+		KakaoPayApprovalVO payInfo = pService.kakaoPayInfo(pg_token,license);
+		Payment payment = new Payment();
+		payment.setAmount(payInfo.getAmount().getTotal());
+		payment.setDate(payInfo.getApproved_at());
+		payment.setItem(payInfo.getItem_name());
+		payment.setName(member.getName());
+		payment.setOrderId(payInfo.getPartner_order_id());	
+		payment.setPaymentMethod("kakaoPay");
+		payment.setPhone(member.getPhone());
+		payment.setmNum(member.getNum());
+		license.setOrderId(payInfo.getPartner_order_id());
+		license.setmNum(member.getNum());
 		licenseService.insertLicense(license);
-		JSONObject json = new JSONObject(pService.kakaoPayInfo(pg_token,license));
+		pService.addPaymentInfo(payment);
+		JSONObject json = new JSONObject(payInfo);
 		model.addAttribute("info", json);
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+		String dateStr = dateFormat.format(payInfo.getApproved_at());
+		model.addAttribute("DateStr", dateStr);
 		return "/main/kakaoPaySuccess";
 	}
 	

@@ -8,26 +8,46 @@
 <link rel="stylesheet" type="text/css" href="${contextPath }/css/footerMain.css"/>
 <link rel="stylesheet" type="text/css" href="${contextPath }/css/main.css"/>
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 </head>
 
 <script>
+	var tmpToday = null;
 	$(function(){
 		$("#startDate").val(new Date().toISOString().substring(0,10)); //시작일을 오늘날짜로 셋팅
-		var tmpEndDate = new Date($("#startDate").val());
-		var tmpEndMonth = tmpEndDate.getMonth();
-		tmpEndDate.setMonth(tmpEndMonth+1);
-		$("#endDate").val(tmpEndDate.toISOString().substring(0,10));
-		$("#startDate").on("change",function(){//시작일이 변경되면 종료일도 자동으로 변경한다
-			var tmpDate = new Date($("#startDate").val());
-			if(tmpDate < new Date()){
+		var tmpEndDate = new Date($("#startDate").val()); //시작일을 기준으로
+		var tmpEndDateVal = tmpEndDate.getDate(); //날짜를 받아오고
+		tmpEndDate.setDate(tmpEndDateVal+30);//+30일 한 값을 다시 셋팅 해준 뒤 
+		$("#endDate").val(tmpEndDate.toISOString().substring(0,10)); //종료일 영역에 셋팅 해준다
+		tmpToday = new Date().setHours(0,0,0,0); //시작일과 비교할 오늘날짜 셋팅
+		
+		//시작일이 변경되면 종료일도 자동으로 변경한다
+		$("#startDate").on("change",function(){
+			var changeDate = new Date($("#startDate").val());
+			var tmpDate = new Date(changeDate).setHours(0,0,0,0);//비교할 데이터값 셋팅
+
+			if(tmpDate < tmpToday){
 				$("#checkDateText").text("시작일을 오늘 이후로 설정해주세요");
 			}else{
 				$("#checkDateText").text("");
 			}
-			var tmpMonth = tmpDate.getMonth();
-			tmpDate.setMonth(tmpMonth+1);
-			$("#endDate").val(tmpDate.toISOString().substring(0,10));
-		});//end startDate change
+			changeDate.setDate(changeDate.getDate()+30);
+			$("#endDate").val(changeDate.toISOString().substring(0,10));
+		});
+		
+		//종료일이 변경되면 시작일도 자동으로 변경한다
+		$("#endDate").on("change",function(){
+			var changeDate = new Date($("#endDate").val());
+			changeDate.setDate(changeDate.getDate()-30);
+			$("#startDate").val(changeDate.toISOString().substring(0,10));
+			var tmpDate = new Date($("#startDate").val()).setHours(0,0,0,0);
+			if(tmpDate < tmpToday){
+				$("#checkDateText").text("시작일을 오늘 이후로 설정해주세요");
+			}else{
+				$("#checkDateText").text("");
+			}
+		});
+		
 		//선택한 타입에 따른 라이선스 정보 보여주기
 		showInfo();
 		$("#typeSelect").on("change",function(){
@@ -43,32 +63,14 @@
 		$("#checkbox").on("change", function() {
 			checkBox();
 		});
-		
+	    $( ".datepicker" ).datepicker({
+	    	dateFormat: 'yy-mm-dd',
+	        changeMonth: true,
+	        changeYear: true
+	    });
 		
 	});//end onload
-	
 
-		/* 
-		$("#kakaoPayForm").on("submit"(function(){
-			var tmpCheckBox = checkBox();
-			if(true){
-				alert("약관 동의는 필수 입니다.");
-				$("#checkboxText").text("약관 동의는 필수입니다.");
-				return false;
-			}
-// 			else{
-// 				frm = document.getElementById("kakaoPayForm");
-// 				var data = $(this).serialize();
-// 				window.open('', 'viewer', 'width=450, height=600');
-// 				frm.action = "${contextPath }/payment/kakaoPay";
-// 				frm.data = data;
-// 				frm.target = "viewer";
-// 				frm.method = "post";
-// 				frm.submit();
-// 			}
-			return false;
-		});
-		 */
 var msg = "${param.msg}";
 if(msg=="cancel" || msg == "fail"){
 	window.close();
@@ -87,7 +89,8 @@ function openNewWin(){
 	var nameResult = nameReg();
 	var phoneResult = phoneReg();
 	var checkBoxResult = checkBox();
-	if(nameResult&&phoneResult&&checkBoxResult){
+	var startDateResult = startDateCheck();
+	if(nameResult&&phoneResult&&checkBoxResult&&startDateResult){
 		frm = document.getElementById("kakaoPayForm");
 		var data = $(this).serialize();
 		window.open('', 'viewer', 'width=450, height=600');
@@ -156,6 +159,17 @@ function checkBox() {
 	}
 }
 
+//시작일이 오늘 이전인 경우  체크
+function startDateCheck(){
+	var startDate = new Date($("#startDate").val());
+	var tmpDate = new Date(startDate).setHours(0,0,0,0);
+	if(tmpDate < tmpToday){
+		return false;
+	}else{
+		return true;
+	}
+}
+
 </script>
 <body>
 	<div id="wrap">
@@ -165,7 +179,7 @@ function checkBox() {
 				<div id="container" class="clearFix">
 					<h1>COLLA 서비스를 이용해보세요</h1>
 					<form id="kakaoPayForm" onsubmit="return false;">
-						<input type="hidden" name="mNum" value="${mNum }">
+						<input type="hidden" name="num" value="${mNum }">
 						<input type="hidden" name="amount" id="amount">
 						<h4>라이선스 정보</h4>
 						<select id="typeSelect" name="type">
@@ -174,13 +188,13 @@ function checkBox() {
 							<option value="Enterprise" <c:if test="${type eq 'Enterprise'}">selected="selected"</c:if>>Enterprise</option>
 						</select>
 						<p>라이센스 이용기간을 설정해주세요<span> (시작일 기준으로 30일  자동 설정됩니다)</span></p>
-						<input type="date" id="startDate" name="startDate"> ~ <input type="date" id="endDate" name="endDate" readonly="readonly">
+						<input type="text" id="startDate" name="startDate" class="datepicker"> ~ <input type="text" id="endDate" name="endDate" class="datepicker">
 						<br><span id="checkDateText" class="checkText"></span>
 						<h4>주문자 정보</h4>
 						<p>이름 <span id="checkNameText" class="checkText"></span></p>
-						<input type="text" id="name" name="name" value="${name}">
+						<input type="text" id="name" name="name" value="${member.name}">
 						<p>핸드폰번호 <span id="checkPhoneText" class="checkText"></span></p>
-						<input type="text" id="phone" name="phone" value="${phone}">
+						<input type="text" id="phone" name="phone" value="${member.phone}">
 						<span id="checkPhoneText"></span>
 						<h4>결제 정보</h4>
 						<input type="radio" name="payment" value="kakaoPay" id="kakaoPay" checked="checked">

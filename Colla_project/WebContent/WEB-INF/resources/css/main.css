@@ -1111,38 +1111,32 @@ div {
 	font-size: 114px;
 }
 .fa-gift+h1{
-	font-size: 24px;
-    /* font-weight: bolder; */
+    font-size: 20px;
     text-align: center;
-    padding-bottom: 30px;
-    line-height: 30px;
-}
-.paymentSuccessInfo {
-    width: 392px;
-    height: 153px;
-    padding: 69px;
-    background-color: white;
-    box-shadow: 2px 2px 5px 0.5px rgba(33, 33, 33, 0.2);
-    margin: 0 auto;
+    padding: 30px;
+    line-height: 35px;
 }
 #paymentResult * {
 	color: #665A5A;
 }
-
 #paymentResult #container {
 	width: 538px;
 	margin: 80px auto
 }
-.paymentSuccessInfo p{
-	font-size: 17px;
-    line-height: 30px;
+.paymentSuccessInfo {
+   	width: 380px;
+    height: 200px;
+    padding: 45px;
+    background-color: white;
+    box-shadow: 2px 2px 5px 0.5px rgba(33, 33, 33, 0.2);
+    margin: 0 auto;
 }
-.paymentContent{
-	float: left;
-	text-align: left;
-}
-.paymentContent+.paymentContent{
-	margin-left: 50px;
+.paymentSuccessInfo div p{
+    float: left;
+    width: 50%;
+    font-size: 17px;
+    line-height: 40px;
+    text-align: left;
 }
 
 /* responsible */
