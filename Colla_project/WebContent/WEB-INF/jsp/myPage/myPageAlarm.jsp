@@ -9,7 +9,7 @@
 
 <script type="text/javascript">
 	$(function() {
-		var arrayAlarm = [${wsAlarm},${boardAlarm},${replyAlarm}]; //워크스페이스, 보드, 댓글의 알림값이 배열에 저장된다 (0:알림수신x, 1:알림수신)
+		var arrayAlarm = [${setAlarm.workspace},${setAlarm.notice},${setAlarm.reply},${setAlarm.projectInvite},${setAlarm.todo}]; //워크스페이스, 보드, 댓글의 알림값이 배열에 저장된다 (0:알림수신x, 1:알림수신)
 		for (var i = 0; i < arrayAlarm.length; i++) {
 			if (arrayAlarm[i] == 0) { //설정 OFF
 				$(".toggleFG:eq(" + i + ")").css('left', 0);
@@ -21,9 +21,10 @@
 		};		
 
 		//토글 버튼 클릭 시  on/off
-		for (var m = 0; m < 3; m++) {
+		for (var m = 0; m < 5; m++) {
 			(function(i){
 				$(".toggleBG:eq(" + i + ")").on("click", function() {
+					console.log("선택한 알람 :  " + i)
 					type = i;
 					var left = $(".toggleFG:eq(" + i + ")").css('left');
 					if (left == '40px') { //설정 OFF
@@ -117,6 +118,21 @@
 							<button id='replySetAlarm' class='toggleFG replyAlarm'></button>
 						</div>
 					</div>
+					<div class="myPageContentRow myPageAlarmRow clearFix">
+						<p class="title">프로젝트 초대 알림</p>
+						<p class="content">프로젝트 초대 알림을 설정해주세요</p>
+						<div class='toggleBG' id="replyBG">
+							<button class='toggleFG replyAlarm'></button>
+						</div>
+					</div>
+					<div class="myPageContentRow myPageAlarmRow clearFix">
+						<p class="title">todo 알림</p>
+						<p class="content">todo 알림을 설정해주세요</p>
+						<div class='toggleBG' id="replyBG">
+							<button class='toggleFG replyAlarm'></button>
+						</div>
+					</div>
+					
 				</div>
 				<div class="row btns btnR">
 					<a href="myPageMainForm" class="btn"><i class="fa fa-arrow-left" aria-hidden="true"></i> 이전</a>

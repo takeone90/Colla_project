@@ -111,6 +111,9 @@ public class ProjectService {
 	public List<Project> getAllProject(){
 		return pDao.selectAllProject();
 	}
+	public List<Project> getAllProjectByMnumWnum(int mNum,int wNum){
+		return pDao.selectAllProjectByMnumWnum(mNum, wNum);
+	}
 	public double calcProgress(int pNum,int completeCount,int allCount) {
 		double result = ((double)completeCount/allCount*100);
 		double calcProgress = Math.round(result*10)/10.0;

@@ -33,6 +33,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="selectAllProjectByWnum" parameterType="int" resultMap="pMap">
 		select * from project where w_num=#{wNum} order by p_startdate asc
 	</select>
+	<select id="selectAllProjectByMnumWnum" resultMap="pMap">
+		select p.* from project p,project_member pm where p.p_num=pm.p_num and p.w_num=#{wNum} and pm.m_num=#{mNum}
+		order by p.p_startdate asc
+	</select>
 	<select id="selectAllProject">
 		select * from project
 	</select>

@@ -85,7 +85,6 @@
 		
 		//워크스페이스 하나 숨기고 닫기
 		$(".showWsDetail").on("click",function(){
-			
 			if( $(this).children().hasClass('fa-angle-down')){
 				$(this).parent().addClass('openedWs');
 				$(this).children().attr('class','fas fa-angle-up');				

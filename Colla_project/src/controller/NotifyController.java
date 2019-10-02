@@ -64,7 +64,11 @@ public class NotifyController {
 			targetURL = "chatMain?crNum="+aDnum;
 		}else if(aType.equals("wInvite")) {
 			targetURL = "addMember?id="+member.getEmail()+"&wNum="+wNum;
-		}
+		}else if(aType.equals("pInvite")) {
+			targetURL = "projectMain?wNum="+aDnum;
+		}else if(aType.equals("todo")) {
+			targetURL = "todoMain?pNum="+aDnum;
+		} 
 		
 		aService.removeAlarm(aNum);			
 		return "redirect:"+targetURL;

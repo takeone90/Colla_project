@@ -8,9 +8,9 @@
 <link rel="stylesheet" type="text/css" href="css/calMonth.css"/>
 <script type="text/javascript">
 	$(function() {
-// 		var type1 = $("#calType1").prop("checked");
-// 		var type2 = $("#calType2").prop("checked");
-// 		var type3 = $("#calType3").prop("checked");
+		var type1 = $("#calType1").prop("checked");
+		var type2 = $("#calType2").prop("checked");
+		var type3 = $("#calType3").prop("checked");
 	});
 </script>
 </head>
@@ -34,13 +34,16 @@
 						</button>
 					</form>
 				</div>
-				<div>
-					<label><input type="checkbox" name="calType" id="calType1" value="project" checked="checked">프로젝트</label>
-					<label><input type="checkbox" name="calType" id="calType2" value="vacation" checked="checked">휴가</label>
-					<label><input type="checkbox" name="calType" id="calType3" value="event" checked="checked">행사</label>
+				<div class="headerCheckboxDiv">
+					<input type="checkbox" name="calType" id="calType1" value="project" checked="checked">
+					<label for="calType1">프로젝트</label>		
+					<input type="checkbox" name="calType" id="calType2" value="vacation" checked="checked">
+					<label for="calType2">휴가</label>		
+					<input type="checkbox" name="calType" id="calType3" value="event" checked="checked">
+					<label for="calType3">행사</label>
 				</div>
-				<div style="float: right">
-					<button onclick="location.href='${contextPath}/calMonth'" class="btn">달력 전체보기</button>
+				<div class="headerChangeCal">
+					<button onclick="location.href='${contextPath}/calMonth?wNum=${sessionScope.currWnum}'" class="btn">달력 전체보기</button>
 				</div>
 			</div><!-- calHeader 끝 -->
 			

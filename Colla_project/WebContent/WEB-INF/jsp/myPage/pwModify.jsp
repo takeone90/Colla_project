@@ -7,7 +7,9 @@
 <link rel="stylesheet" type="text/css" href="css/navWs.css"/>
 <link rel="stylesheet" type="text/css" href="css/myPage.css"/>
 <script type="text/javascript">
-
+	$(function(){
+		$("input[name='pw']").focus().val("");
+	})//end onload function
 </script>
 </head>
 <body>
@@ -21,7 +23,7 @@
 			<div class="myPageInner">
 				<div class ="myPageModify">
 					<p>새로운 비밀번호를 입력해주세요</p>
-					<form action="modifyPw" class="modifyPw" enctype="multipart/form-data" method="post">
+					<form action="modifyPw" class="modifyPw" method="post">
 						<input type="password" name="pw" placeholder="새비밀번호 재입력" class="content">
 						<div class="row btns">
 							<button class="btn">저장</button>

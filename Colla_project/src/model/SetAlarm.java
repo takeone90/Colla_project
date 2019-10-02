@@ -5,6 +5,8 @@ public class SetAlarm {
 	int workspace;
 	int notice;
 	int reply;
+	int projectInvite;
+	int todo;
 	public int getNum() {
 		return num;
 	}
@@ -32,5 +34,17 @@ public class SetAlarm {
 	@Override
 	public String toString() {
 		return "SetAlarm [num=" + num + ", workspace=" + workspace + ", notice=" + notice + ", reply=" + reply + "]";
+	}
+	public int getProjectInvite() {
+		return projectInvite;
+	}
+	public void setProjectInvite(int projectInvite) {
+		this.projectInvite = projectInvite;
+	}
+	public int getTodo() {
+		return todo;
+	}
+	public void setTodo(int todo) {
+		this.todo = todo;
 	}
 }

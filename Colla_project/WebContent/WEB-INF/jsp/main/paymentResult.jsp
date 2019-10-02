@@ -16,6 +16,12 @@
 </head>
 
 <script>
+$(function(){
+	//결제 금액 세자리마다 콤마 찍기
+	var itemAmountVal = $("#itemAmount").text();
+	var itemAmount = itemAmountVal.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+	$("#itemAmount").text(itemAmount);
+})//end onload function
 
 </script>
 <body>
@@ -29,25 +35,31 @@
 						정상적으로 완료되었습니다!<br> 아래 주문 정보를 다시 한번 확인해주세요.
 					</h1>
 					<div class="paymentSuccessInfo clearFix">
-						<div class="paymentContent">
-							<p>결제일시</p>
+						<div>
 							<p>주문번호</p>
-							<p>상품명</p>
-							<p>결제금액</p>
-							<p>결제방법</p>
-						</div>
-						<div class="paymentContent">
-							<p>${param.approved_at }</p>
 							<p>${param.partner_order_id }</p>
+						</div>
+						<div>
+							<p>결제일</p>
+							<p>${param.approved_at }</p>
+						</div>
+
+						<div>
+							<p>상품명</p>
 							<p>${param.item_name}</p>
-							<p>${param.total }</p>
+						</div>
+						<div>
+							<p>결제금액</p>
+							<p><span id="itemAmount">${param.total }</span> 원</p>
+						</div>
+						<div>
+							<p>결제방법</p>
 							<p>${param.payment_method_type}</p>
 						</div>
-					</div>
+					</div><!-- end paymentSuccessInfo -->
 				</div>
 			</section>
-			<div class="box"><%@ include
-					file="/WEB-INF/jsp/inc/footerMain.jsp"%></div>
+			<div class="box"><%@ include file="/WEB-INF/jsp/inc/footerMain.jsp"%></div>
 		</div>
 	</div>
 </body>

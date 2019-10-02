@@ -21,21 +21,25 @@
 						<div class="myPageLicense">
 							<c:choose>
 								<c:when test="${useLicense.endDate eq null }">
-									<p><b>${member.name}님</b>, 라이선스 업그레이드를 통해 더 많은 서비스를 받아보세요</p>
+									<p><b>${member.name}님</b>, 라이선스 업그레이드를 통해 더 많은 서비스를 받아보세요.</p>
 									<a href="${contextPath}/pricing" class="btn">라이선스 보러가기</a>
 								</c:when>
 								<c:otherwise>
 									<p>
-										<b>${member.name}님</b>의 라이선스는 <span>${useLicense.endDate }</span> 종료 예정입니다
+										<b>${member.name}</b>님, 현재 <span>${useLicense.type }</span>을 이용중입니다.<br>해당 라이선스는 ${useLicense.endDate }</b> 종료 예정입니다.
 									</p>
 									<a href="${contextPath }/pricing" class="btn">라이선스 보러가기</a>
 									<div class="lcList">
 										<h5>결제 내역</h5>
 										<table>
-										<tr>
-												<td>라이선스 종류</td>
-												<td>결제일</td>
-												<td>만료일</td>
+											<tr>
+												<td>주문번호</td>
+												<td>상품명</td>
+												<td>시작일</td>
+												<td>종료일</td>
+												<td>결제 일시</td>
+												<td>결제 금액</td>
+												<td>결제 수단</td>
 											</tr>
 											<c:forEach items="${licenseList }" var="license">
 												<tr>

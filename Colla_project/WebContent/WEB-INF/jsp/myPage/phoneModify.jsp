@@ -7,7 +7,10 @@
 <link rel="stylesheet" type="text/css" href="css/navWs.css"/>
 <link rel="stylesheet" type="text/css" href="css/myPage.css"/>
 <script type="text/javascript">
-
+	$(function(){
+		var phone = $("#phone").val();
+		$("#phone").focus().val("").val(phone);
+	})//end onload function
 </script>
 </head>
 <body>
@@ -21,8 +24,8 @@
 			<div class="myPageInner">
 				<div class ="myPageModify">
 					<p>핸드폰 번호를 변경해주세요!</p>
-					<form action="modifyPhone" class="modifyPhone" enctype="multipart/form-data" method="post">
-						<input type="text" name="phone" value="${member.phone}" class="content" placeholder="핸드폰 번호를 입력해주세요">
+					<form action="modifyPhone" class="modifyPhone" method="post">
+						<input type="text" name="phone" id="phone" value="${member.phone}" class="content" placeholder="핸드폰 번호를 입력해주세요">
 						<div class="row btns">
 							<button class="btn">저장</button>
 							<a href="myPageAccountForm" class="btn">취소</a>

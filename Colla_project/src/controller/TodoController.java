@@ -11,6 +11,7 @@ import java.util.Map;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,8 +23,10 @@ import model.Member;
 import model.Project;
 import model.ProjectMember;
 import model.Todo;
+import service.AlarmService;
 import service.ProjectMemberService;
 import service.ProjectService;
+import service.SetAlarmService;
 import service.TodoService;
 
 @Controller
@@ -34,6 +37,13 @@ public class TodoController {
 	private ProjectService pService;
 	@Autowired
 	private ProjectMemberService pmService;
+	@Autowired
+	private SimpMessagingTemplate smt;
+	@Autowired
+	private AlarmService aService;
+	@Autowired
+	private SetAlarmService saService;
+	
 	@RequestMapping("/todoMain") //todoMain으로 이동
 	public String showTodoMain(HttpSession session, int pNum, Model model) {
 		List<Todo> tList = tService.getAllTodoByPnum(pNum);
@@ -53,12 +63,19 @@ public class TodoController {
 	@RequestMapping(value="/addTodo", method = RequestMethod.POST)
 	public String addTodo(String tdTitle, String tdContent, int mNum, String startDate, String endDate, HttpSession session) throws ParseException {
 		int pNum = (int)session.getAttribute("pNum");
+		Project pj = pService.getProject(pNum);
+		int wNum = pj.getwNum();
 		Member member = (Member)session.getAttribute("user");
 		int mNumFrom = member.getNum(); //일 시킨 사람
 		SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd");
 		Date encStartDate = dt.parse(startDate);
 		Date encEndDate = dt.parse(endDate);
 		tService.addTodo(tdTitle, tdContent, pNum, mNum, mNumFrom, encStartDate, encEndDate);
+		if(mNumFrom!=mNum) {
+			//내가 나한테 일시키면 알람X
+			int aNum = aService.addAlarm(wNum, mNum, mNumFrom, "todo", pNum);
+			smt.convertAndSend("/category/alarm/"+mNum,aService.getAlarm(aNum));								
+		}
 		return "redirect:todoMain?pNum="+pNum;
 	}
 	@RequestMapping(value="/removeTodo")
@@ -70,6 +87,7 @@ public class TodoController {
 	@RequestMapping(value="/modifyTodo", method = RequestMethod.POST)
 	public String modifyTodo(int tdNum, String tdTitle, String tdContent, int mNum, String startDate, String endDate, HttpSession session) throws ParseException {
 		int pNum = (int)session.getAttribute("pNum");
+		Project pj = pService.getProject(pNum);
 		SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd");
 		Date encStartDate = dt.parse(startDate);
 		Date encEndDate = dt.parse(endDate);
@@ -81,7 +99,11 @@ public class TodoController {
 		todo.setTdStartDate(encStartDate);
 		todo.setTdEndDate(encEndDate);
 		tService.modifyTodo(todo);
-		
+		if(todo.getmNumFrom()!=mNum) {
+			//내가 나한테 일시키면 알람X
+			int aNum = aService.addAlarm(pj.getwNum(), mNum, todo.getmNumFrom(), "todo", pNum);
+			smt.convertAndSend("/category/alarm/"+mNum,aService.getAlarm(aNum));								
+		}
 		return "redirect:todoMain?pNum="+pNum;
 	}
 	@ResponseBody
@@ -128,7 +150,6 @@ public class TodoController {
 		int todoListSize = todoList.size();
 		
 		double progress = pService.calcProgress(pNum, completeCount, todoListSize);
-//		System.out.println("progress : " + progress);
 		completeAndProgress.put("isComplete", todo.getIsComplete());
 		completeAndProgress.put("progress", progress);
 		return completeAndProgress;
@@ -136,7 +157,7 @@ public class TodoController {
 	@ResponseBody
 	@RequestMapping("/resortingTodo")
 	public void resortingTodo(@RequestParam(value="priorityArray[]")List<Integer> priorityArray,@RequestParam("pNum")int pNum){
-		System.out.println(priorityArray);
+//		System.out.println(priorityArray);
 		List<Todo> todoList = tService.getAllTodoByPnum(pNum);
 		for(int i=0;i<todoList.size();i++) {
 			Todo todo = todoList.get(i);
@@ -144,8 +165,4 @@ public class TodoController {
 			tService.modifyTodo(todo);
 		}
 	}
-//	@RequestMapping
-//	public int updateProgress() {
-//		return 0;
-//	}
 }
