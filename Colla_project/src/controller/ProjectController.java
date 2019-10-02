@@ -140,10 +140,9 @@ public class ProjectController {
 	}
 	
 	@ResponseBody
-	@RequestMapping(value="/getAllProjectByWnum", method = RequestMethod.POST)
-	public List<Project> getAllProjectByWnum(@RequestParam("wNum")int wNum) {
-		List<Project> projectList = pService.getAllProjectByWnum(wNum);
-		return projectList;
+	@RequestMapping(value="/getAllProjectByMnumWnum")
+	public List<Project> getAllProjectByWnum(@RequestParam("mNum")int mNum,@RequestParam("wNum")int wNum) {
+		return pService.getAllProjectByMnumWnum(mNum, wNum);
 	}
 	@ResponseBody
 	@RequestMapping(value="/getAllProject", method = RequestMethod.POST)

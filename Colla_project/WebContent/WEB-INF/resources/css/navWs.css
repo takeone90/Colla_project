@@ -38,12 +38,15 @@
 #boardDiv a,#calendarDiv a,#projectDiv a{
 	color : white;
 }
+#boardDiv a[class=currPointer],#calendarDiv a[class=currPointer]{
+	color: #E5675A;
+}
 #myChatList{
 	margin: 30px 0 6px;
     FONT-VARIANT: JIS04;
     text-align: right;
 }
-.chatList{
+.chatList,#projectList{
 	display: none;
 }
 #boardDiv,#calendarDiv,#projectDiv{
@@ -51,7 +54,7 @@
     padding: 6px 0px 6px 0px;
     text-align: right;
 }
-#myChatList h3:hover,#projectDiv:hover{
+#myChatList h3:hover,#projectDiv h3:hover{
 	cursor: pointer;
 	color :	#E5675A; 
 }
@@ -74,6 +77,10 @@
 	font-weight : bolder;
     padding: 0 8px 5px 0px;
 }
+/* #projectDiv ul #projectMainLI{ */
+/* 	color: #E5675A; */
+/*     font-weight: 600; */
+/* } */
 #mainDiv{
     text-align: right;
     position: absolute;
@@ -90,30 +97,25 @@
 	font-size : 15px;
 }
 
-#myChatList ul{
+#myChatList ul,#projectDiv h3{
     padding-top: 5px;
 }
-#myChatList ul li{
+#myChatList ul li,#projectDiv ul li{
+	transition:color 0.2s;
+	color:#CCCBCA;
 	padding:10px 20px 10px 10px;
 	font-size:14px;
 }
-#myChatList ul li.currChat{
+#myChatList ul li.currChat, #projectDiv ul li.currProject{
 	background-color:#E5675A;
 	font-weight: bolder;
-}
-
-#myChatList ul li.currChat{
 	color:#fff;
 }
-#myChatList ul li{
-	transition:color 0.2s;
-	color:#CCCBCA;
-}
-#myChatList ul li:hover{
+#myChatList ul li:hover,#projectDiv ul li:hover{
 	background-color : #194661;
 	cursor : pointer;
 }
-#myChatList ul li.currChat:hover{
+#myChatList ul li.currChat:hover,#projectDiv ul li.currProject:hover{
 	background-color: #ed7b6f;
 }
 
@@ -164,7 +166,9 @@
 #removeMemberDiv{
 	display: none;
 }
-
+.currPointer{
+	color : #E5675A;
+}
 
 
 
