@@ -190,6 +190,10 @@
 	font-size: 15px;
 	text-align: center;
 }
+.myPageModify #checkPwSentence{
+	margin: 10px 20px;
+    color: red;
+}
 
 .attachModal>* {
 	margin: 0 auto;

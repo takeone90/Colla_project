@@ -7,7 +7,9 @@
 <link rel="stylesheet" type="text/css" href="css/navWs.css"/>
 <link rel="stylesheet" type="text/css" href="css/myPage.css"/>
 <script type="text/javascript">
-
+	$(function(){
+		$("input[name='pw']").focus().val("");
+	})//end onload function
 </script>
 </head>
 <body>

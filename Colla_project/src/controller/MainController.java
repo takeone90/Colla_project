@@ -53,6 +53,7 @@ public class MainController {
 		if(member != null) {
 			useLicense = (License)licenseService.getUseLicense(member.getNum());
 		}
+		session.setAttribute("member", member);
 		session.setAttribute("userLicense", useLicense);
 		return "/main/pricing";
 	}

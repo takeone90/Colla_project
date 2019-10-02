@@ -10,7 +10,7 @@
 </head>
 <script>
 function removeMember(){
-	var result = confirm("정말 탈퇴하시겠습니까?");
+	var result = confirm("탈퇴하시겠습니까?");
 	if(result){
 		location.href="${contextPath}/removeMember"
 	}else{

@@ -18,10 +18,10 @@
 		where l_end_date >= sysdate and m_num = #{mNum}
 	</select>
 	<select id="selectAllLicense" resultMap="licenseMap">
-		select * 
-		from license
-		where m_num = #{num}
-		order by l_end_date desc
+		select p.pm_order_id,l.l_type, l.l_start_date, l.l_end_date, p.pm_date,p.pm_amount, pm_method
+		from license l, payment p
+		where l.m_num = 297 and l.pm_order_id = p.pm_order_id
+		order by p.pm_date desc
 	</select>
 	<resultMap type="license" id="licenseMap">
 		<result property="num" column="l_num"/>

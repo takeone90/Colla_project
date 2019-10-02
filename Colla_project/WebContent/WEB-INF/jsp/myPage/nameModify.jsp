@@ -7,7 +7,10 @@
 <link rel="stylesheet" type="text/css" href="css/navWs.css"/>
 <link rel="stylesheet" type="text/css" href="css/myPage.css"/>
 <script type="text/javascript">
-
+	$(function(){
+		var name = $("#name").val();
+		$("#name").focus().val("").val(name);
+	})//end onload function
 </script>
 </head>
 <body>
@@ -22,7 +25,7 @@
 				<div class ="myPageModify">
 					<p>이름을 변경해주세요!</p>
 					<form action="modifyName" class="modifyName" method="post">
-						<input type="text" name="name" value="${member.name}" class="content">
+						<input type="text" name="name" id="name" value="${member.name}" class="content">
 						<div class="row btns">
 							<button class="btn">저장</button>
 							<a href="myPageAccountForm" class="btn">취소</a>
