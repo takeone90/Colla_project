@@ -777,11 +777,11 @@ function nextYearYear() {
 			<button type="button" id="addFormOpen" class="btn">일정 추가</button>
 		</div>
 		<div class="headerCheckboxDiv">
-			<input type="checkbox" name="calType" id="calType1" value="project" checked="checked" class="styled">
+			<input type="checkbox" name="calType" id="calType1" value="project" checked="checked">
 			<label for="calType1">프로젝트</label>		
-			<input type="checkbox" name="calType" id="calType2" value="vacation" checked="checked" class="styled">
+			<input type="checkbox" name="calType" id="calType2" value="vacation" checked="checked">
 			<label for="calType2">휴가</label>		
-			<input type="checkbox" name="calType" id="calType3" value="event" checked="checked" class="styled">
+			<input type="checkbox" name="calType" id="calType3" value="event" checked="checked">
 			<label for="calType3">행사</label>
 		</div>
 		<div class="headerChangeCal">
