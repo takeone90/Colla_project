@@ -27,10 +27,36 @@
 		$("#memberInfoModal").fadeIn(100);
 	}
 	$(function(){
-		loadChatList();
-		if($("#pageType").val()=="chatroom"){
-			$(".chatList").show();
+		if($("#pageType").val()!="workspace"){
+			loadChatList();
+			loadProjectList();	
 		}
+		
+		var pageType = $("#pageType").val();
+		if(pageType=="chatroom"){
+			$(".chatList").show();
+			$("#myChatList h3").addClass("currPointer");
+			$("#projectDiv h3").removeClass("currPointer");
+			$("#boardDiv h3 a").removeClass("currPointer");
+			$("#calendarDiv h3 a").removeClass("currPointer");
+		}else if(pageType=="project" || pageType=="todoList"){
+			$("#projectList").show();
+			$("#projectDiv h3").addClass("currPointer");
+			$("#myChatList h3").removeClass("currPointer");
+			$("#boardDiv h3 a").removeClass("currPointer");
+			$("#calendarDiv h3 a").removeClass("currPointer");
+		}else if(pageType=="board"){
+			$("#boardDiv h3 a").addClass("currPointer");
+			$("#projectDiv h3").removeClass("currPointer");
+			$("#myChatList h3").removeClass("currPointer");
+			$("#calendarDiv h3 a").removeClass("currPointer");
+		}else if(pageType=="calendar"){
+			$("#calendarDiv h3 a").addClass("currPointer");
+			$("#projectDiv h3").removeClass("currPointer");
+			$("#boardDiv h3 a").removeClass("currPointer");
+			$("#myChatList h3").removeClass("currPointer");
+		}
+		
 		//회원정보 모달 닫기
 		$(".closeMemberInfo").on("click",function(){
 			$("#memberInfoModal").fadeOut(100);
@@ -55,18 +81,29 @@
 	}
 	function loadProjectList(){
 		var currWnum = $("#currWnum").val();
+		var mNum = ${sessionScope.user.num};
+		var pNum = ${sessionScope.pNum};
 		var projectList = $("#projectList");
 		$.ajax({
-			data : {"wNum":currWnum},
-			url : "${contextPath}/getAllProjectByWnum",
+			data : {"mNum":mNum,"wNum":currWnum},
+			url : "${contextPath}/getAllProjectByMnumWnum",
 			dataType : "json",
 			success : function(pjList){
-				
+				projectList.empty();
+				var defaultStr = $("<li id='projectMainLI' onclick='location.href=\"projectMain?wNum="+currWnum+"\"'>프로젝트 메인</li>");
+				projectList.append(defaultStr);
+				$.each(pjList,function(idx,item){
+					var str='<li '+ ( pNum ==item.pNum?'class="currProject"':"")+' onclick="goToProject('+item.pNum+')">'+item.pName+'</li>';
+					projectList.append(str);
+				});
 			},
 			error : function(){
 				alert("불러오기 에러발생");
 			}
 		});
+	}
+	function goToProject(pNum){
+		location.href="${contextPath}/todoMain?pNum="+pNum;
 	}
 	function goToChatRoom(crNum){
 		location.href="${contextPath}/chatMain?crNum="+crNum;
@@ -111,6 +148,9 @@
 				$("#myChatList h3").on("click",function(){
 					$(".chatList").toggle();
 				});
+				$("#projectDiv h3").on("click",function(){
+					$("#projectList").toggle();
+				})
 			});
 			
 		</script>
