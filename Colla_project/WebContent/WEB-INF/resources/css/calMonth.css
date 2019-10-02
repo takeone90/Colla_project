@@ -149,9 +149,9 @@ td {
 
 /* -------------------- 연 달력 -------------------- */
 #yearCalendar {
-	width: 90%;
+	width: 100%;
     margin: 0 auto;
-    max-width: 1028px;
+    max-width: 1400px;
 }
 #yearCalendar .dateDisplay {
     text-align: center;
@@ -169,15 +169,14 @@ td {
 	color: #6b635c;
 	margin: 0px 20px;
 }
-
 .drawYearCalendarForClick {
-	height: 120px;
+	height: 200px;
 	width: 100%;
 	position: absolute;
 	border-collapse: collapse;
 	border: 0px;
-	
-} /* table1(클릭) */
+} 
+/* table1(클릭) */
 .drawYearCalendarForClick td {
 	height: 20px;
 	width: 150px;
@@ -187,7 +186,7 @@ td {
 }
 
 .drawYearCalendar {
-	height: 120px;
+	height: 200px;
 	width: 100%;
 	position: relative;
 	border-collapse: collapse;
