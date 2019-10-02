@@ -82,7 +82,10 @@
 	function loadProjectList(){
 		var currWnum = $("#currWnum").val();
 		var mNum = ${sessionScope.user.num};
-		var pNum = ${sessionScope.pNum};
+		var pNum;
+		if("${sessionScope.pNum}"!=""){
+			pNum = "${sessionScope.pNum}";
+		}
 		var projectList = $("#projectList");
 		$.ajax({
 			data : {"mNum":mNum,"wNum":currWnum},
@@ -93,7 +96,11 @@
 				var defaultStr = $("<li id='projectMainLI' onclick='location.href=\"projectMain?wNum="+currWnum+"\"'>프로젝트 메인</li>");
 				projectList.append(defaultStr);
 				$.each(pjList,function(idx,item){
-					var str='<li '+ ( pNum ==item.pNum?'class="currProject"':"")+' onclick="goToProject('+item.pNum+')">'+item.pName+'</li>';
+					if(pNum!=""){
+					var str='<li '+ ( pNum ==item.pNum?'class="currProject"':"")+' onclick="goToProject('+item.pNum+')">'+item.pName+'</li>';						
+					}else{
+					var str='<li onclick="goToProject('+item.pNum+')">'+item.pName+'</li>';	
+					}
 					projectList.append(str);
 				});
 			},
