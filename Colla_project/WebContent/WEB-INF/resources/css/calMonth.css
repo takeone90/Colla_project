@@ -15,9 +15,9 @@
 	padding: 0;
 }
 #monthCalendar {
-	width: 90%;
-	margin: 0 auto;
-	max-width: 1028px;
+	width: 95%;
+    margin: 0 auto;
+    max-width: 1500px;
 }
 #calMonthBody{
 	background-color: #fff;
@@ -32,8 +32,9 @@ td {
 	color: #6b635c;
 }
 #MonthTitle {
-	font-size: 35pt;
-	color: #6b635c;
+	font-size: 31pt;
+    color: #32444f;
+    font-weight: 200;
 }
 .drawMonthCalendarUpper {
 	width: 100%;
@@ -41,12 +42,16 @@ td {
 	border: 0px;
 }
 .drawMonthCalendarUpper th {
-	height: 25px;
-	width: 150px;
-	padding: 0px;
-	margin: 0px;
-	background-color: #E6E2E1;
-	vertical-align: middle;
+	height: 35px;
+    font-size: 14px;
+    width: 150px;
+    padding: 0px;
+    margin: 0px;
+    color: #10344a;
+    font-weight: 500;
+    border-bottom: 0.5px solid #9b9fb0;
+    background-color: #e6e9eb;
+    vertical-align: middle;
 } 
 /* 요일 */
 .drawMonthCalDiv {
@@ -89,13 +94,15 @@ td {
 }
 .drawMonthCalendarLower th {
 	height: 20px;
-	width: 150px;
-	position: relative;
-	padding: 0px;
-	text-align: left;
-	padding-top: 7px;
+    width: 150px;
+    position: relative;
+    padding: 0px;
+    text-align: left;
+    padding-top: 10px;
     padding-left: 8px;
     padding-bottom: 5px;
+    color: #294557;
+    font-weight: 300;
 }
 /* .frontVacantTd, */
 /* .backVacantTd { */
@@ -121,7 +128,9 @@ td {
 	border: 1px;
 }
 .complete {
-	border-radius: 10px;
+/* 	border-radius: 10px; */
+	font-size: 12px;
+    padding-left: 3px;
 }
 .left {
 	border-bottom-left-radius: 10px; 
@@ -250,7 +259,10 @@ td {
 	border: 0px solid #ccc;
 	box-sizing: border-box;
 	background-color: white;
-	color: burlywood;
+	color: #5d829e;
+}
+.dateDisplay button:hover{
+	cursor: pointer;
 }
 .dateDisplay svg {
 	font-size: 20px;
@@ -259,6 +271,15 @@ td {
 .dateDisplayInput {
 	text-align: center;
 	padding: 10px;
+}
+.dateDisplayInput input[type="text"] {
+    width: 62px;
+    text-align: right;
+    height: 22px;
+    border-radius: 3px;
+}
+.dateDisplayInput input{
+	margin-left: 11px;
 }
 .attachModal {
 	display: none;

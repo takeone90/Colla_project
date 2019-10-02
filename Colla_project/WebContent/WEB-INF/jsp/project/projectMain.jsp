@@ -110,7 +110,7 @@
 				<h3>프로젝트 만들기</h3>
 			</div>
 			<div class="modalBody">
-				<p>프로젝트를 만들고 멤버를 초대하세요</p>
+				<p style="margin-bottom: 26px;">프로젝트를 만들고 멤버를 초대하세요</p>
 				<form action="addProject" method="post">
 					<input type="hidden" value="${_csrf.token}" name="${_csrf.parameterName}">
 					<div class="addPjInputWrap">
@@ -125,6 +125,13 @@
 							<h4>프로젝트 내용</h4>
 							<div>								
 								<input type="text" placeholder="어떤 project인가요?" name="pDetail" style="width:465px">
+							</div>
+						</div>
+						<div class="row">
+							<h4>프로젝트 기간</h4>
+							<div id="addPj-Date">
+								<input type="date" name="startDate" placeholder="시작일을 입력하세요"> ~ 
+								<input type="date" name="endDate" placeholder="종료일을 입력하세요">
 							</div>
 						</div>
 						<div class="row">
@@ -158,13 +165,7 @@
 							
 							</ul>
 						</div>
-						<div class="row">
-							<h4>프로젝트 기간</h4>
-							<div id="addPj-Date">
-								<input type="date" name="startDate" placeholder="시작일을 입력하세요"> ~ 
-								<input type="date" name="endDate" placeholder="종료일을 입력하세요">
-							</div>
-						</div>
+						
 					</div> <!-- end addWsInputWrap -->
 					<div id="modalBtnDiv">
 						<button type="submit">프로젝트 만들기</button>
