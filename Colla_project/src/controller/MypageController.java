@@ -143,7 +143,7 @@ public class MypageController {
 
 	@RequestMapping(value = "/modifyName", method = RequestMethod.POST)
 	public String modifyName(String name, HttpSession session) {
-		System.out.println("modifyName() 들어옴!");
+//		System.out.println("modifyName() 들어옴!");
 		String email = (String)session.getAttribute("userEmail");
 		if(memberService.modifyMemberName(name,email)) {
 			session.setAttribute("user", memberService.getMemberByEmail(email));

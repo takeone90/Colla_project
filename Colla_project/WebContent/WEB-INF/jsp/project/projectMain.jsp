@@ -230,18 +230,6 @@
 					<div class="row">
 							<h4>멤버 초대</h4>
 							<ul class="addMemberUL">
-							
-<%-- 							<c:forEach items="${wsmList}" var="wsm"> --%>
-<%-- 								<c:if test="${wsm.mNum ne sessionScope.user.num}"> --%>
-<!-- 								<li onclick="checkInvitePjMember(this);"> -->
-<!-- 								<div class='profileImg' align='center'> -->
-<%-- 								<img alt='프로필사진' src='${contextPath}/showProfileImg?num=${wsm.mNum}'> --%>
-<!-- 								</div> -->
-<%-- 								<p style="text-align:center;">${wsm.mName}</p> --%>
-<%-- 								<input type="checkbox" value="${wsm.mNum}" name="mNumListForInvitePj" style="display:none;"> --%>
-<!-- 								</li> -->
-<%-- 								</c:if> --%>
-<%-- 							</c:forEach> --%>
 							</ul>
 							<script>
 								$(function(){

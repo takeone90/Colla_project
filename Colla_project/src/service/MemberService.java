@@ -65,7 +65,7 @@ public class MemberService {
 			dao.insertAuthority(member.getNum()); //권한 추가
 			SetAlarm setAlarm = new SetAlarm();
 			setAlarm.setNum(member.getNum());
-			System.out.println("setAlarm : " + setAlarm);
+//			System.out.println("setAlarm : " + setAlarm);
 			if(setAlarmDao.insertSetAlarm(setAlarm)>0) {
 				return true;
 			}
