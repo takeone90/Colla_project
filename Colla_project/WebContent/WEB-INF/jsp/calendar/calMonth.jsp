@@ -472,7 +472,6 @@ function putContentIntoTd(a) {
 	$("#modifyMonthly").prop("checked", changeToBoolean(a.monthly));
 	$("#detailColor").css("backgroundColor", a.color);
 	$("#modifyColor").val(a.color);
-	
 }
 function putContentIntoVacantTd(startDate, endDate) { //2019-09-26
 	$("#addForm").fadeIn(300);
@@ -724,11 +723,11 @@ function monthChangeYear(monthTmp) {
 function putContentIntoTdYear(a) {
 	$("#detailFormYear").fadeIn(300);
 	$("#detailCNumYear").val(a.cNum);
-	$("#detailTitleYear").val(a.title);
-	$("#detailStartDateYear").val(a.startDate.substring(0, 10));
-	$("#detailEndDateYear").val(a.endDate.substring(0, 10));
-	$("#detailContentYear").val(a.content);
-	$("#detailTypeYear").val(a.type);
+	$("#detailTitleYear").text(a.title);
+	$("#detailStartDateYear").text(a.startDate.substring(0, 10));
+	$("#detailEndDateYear").text(a.endDate.substring(0, 10));
+	$("#detailContentYear").text(a.content);
+	$("#detailTypeYear").text(a.type);
 	$("#detailYearCalendarYear").prop("checked", changeToBoolean(a.yearCalendar));
 	$("#detailAnnuallyYear").prop("checked", changeToBoolean(a.annually));
 	$("#detailMonthlyYear").prop("checked", changeToBoolean(a.monthly));	
@@ -996,84 +995,37 @@ function nextYearYear() {
 					<div>
 						<div class="titleDiv">
 							<h4>일정</h4>
-							<input type="text" name="title" class="modalTitle" id="detailTitleYear" readonly="readonly">
+							<p class="modalTitle" id="detailTitleYear"></p>
 						</div>
 						<div class="selectDiv">
 							<h4>종류</h4>
-							<select name="type" id="detailTypeYear">
-								<option value="project">프로젝트</option>
-								<option value="vacation">휴가</option>
-								<option value="event">행사</option>
-							</select>
+							<p id="detailTypeYear"></p>
 						</div>
 					</div>
 					<div class="dateDiv">
 						<h4>기간</h4>
-						<input type="date" name="startDate" id="detailStartDateYear" readonly="readonly">
-						<span>~</span>
-						<input type="date" name="endDate" id="detailEndDateYear" readonly="readonly">
+						<p>
+							<span id="detailStartDateYear"></span>
+							<span>~</span>
+							<span id="detailEndDateYear"></span>
+						</p>
 					</div>
 					<div class="checkboxDiv">
 						<input type="checkbox" name="yearCalendar" id="detailYearCalendarYear" value="yearCalendar" onclick="return false;">
-						<label>연간 달력 표시</label>
+						<label class="checkboxbtn" for="detailYearCalendarYear">연간 달력</label>
 						<input type="checkbox" name="annually" id="detailAnnuallyYear" value="annually" onclick="return false;">
-						<label>매년 반복</label>
+						<label class="checkboxbtn" for="detailAnnuallyYear">매년 반복</label>
 						<input type="checkbox" name="monthly" id="detailMonthlyYear" value="monthly" onclick="return false;">
-						<label>매월 반복</label>
+						<label class="checkboxbtn" for="detailMonthlyYear">매월 반복</label>
 					</div>
 					<div>
 						<h4>내용</h4>
-						<textarea rows="1" cols="21" name="content" class="modalContent" id="detailContentYear" readonly="readonly"></textarea>
+						<p class="modalContent" id="detailContentYear"></p>
 					</div>
 					<div id="innerBtn">
 						<a href="#" id="detailFormYearClose">닫기</a>
 					</div>
-				</form>
-				
-				
-<!-- 				<form class="detailModal"> -->
-<%-- 					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">  --%>
-<!-- 					<input type="hidden" name="cNum" id="detailCNum"> -->
-<%-- 					<input type="hidden" name="mNum" id="mNum" value="${userData.mNum}"> --%>
-<%-- 					<input type="hidden" name="wNum" id="wNum" value="${userData.wNum}"> --%>
-<!-- 					<div> -->
-<!-- 						<div class="titleDiv">						 -->
-<!-- 							<h4>일정</h4> -->
-<!-- 							<p class="modalTitle" id="detailTitle"></p> -->
-<!-- 						</div> -->
-<!-- 						<div class="selectDiv"> -->
-<!-- 							<h4>종류</h4> -->
-<!-- 							<p id="detailType"></p> -->
-<!-- 						</div> -->
-<!-- 					</div> -->
-<!-- 					<div class="dateDiv"> -->
-<!-- 						<h4>기간</h4> -->
-<!-- 						<p> -->
-<!-- 							<span id="detailStartDate"></span> -->
-<!-- 							<span>~</span> -->
-<!-- 							<span id="detailEndDate"></span> -->
-<!-- 						</p> -->
-<!-- 					</div> -->
-<!-- 					<div class="checkboxDiv"> -->
-<!-- 						<input type="checkbox" name="yearCalendar" id="detailYearCalendar" value="yearCalendar" onclick="return false;"> -->
-<!-- 						<label class="checkboxbtn" for="detailYearCalendar">연간 달력</label> 	 -->
-<!-- 						<input type="checkbox" name="annually" id="detailAnnually" value="annually" onclick="return false;"> -->
-<!-- 						<label class="checkboxbtn" for="detailAnnually">매년 반복</label>				 -->
-<!-- 						<input type="checkbox" name="monthly" id="detailMonthly" value="monthly" onclick="return false;"> -->
-<!-- 						<label class="checkboxbtn" for="detailMonthly">매월 반복</label> -->
-<!-- 					</div>						 -->
-<!-- 					<div> -->
-<!-- 						<h4>내용</h4> -->
-<!-- 						<p class="modalContent" id="detailContent"></p> -->
-<!-- 					</div> -->
-<!-- 					<div id="innerBtn"> -->
-<!-- 						<a href="#" id="modifyFormOpen">수정</a> -->
-<!-- 						<a href="#" id="deleteSchedule">삭제</a> -->
-<!-- 						<a href="#" id="detailFormClose">닫기</a> -->
-<!-- 					</div> -->
-<!-- 				</form> -->
-				
-				
+				</form>				
 			</div>
 		</div>
 	</div>	

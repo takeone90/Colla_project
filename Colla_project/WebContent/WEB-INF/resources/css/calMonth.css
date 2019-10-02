@@ -360,7 +360,8 @@ td {
 .selectDiv {
 	margin-right: 20px;
 }
-#detailForm .selectDiv {	
+#detailForm .selectDiv, 
+#detailFormYear .selectDiv {	
 	width: 100px;
 } 
 .dateDiv div {
@@ -373,7 +374,6 @@ td {
 	margin: 7px;
     font-weight: 500;
 }
-
 .colorDiv img {
 	display: none;
 }
@@ -387,12 +387,10 @@ td {
 .modalContent {
 	width: 100%;
 }
-
 #innerBtn {
 	margin-top: 25px;
 	text-align: center;
 }
-
 #innerBtn a {
 	display: inline-block;
 	position: relative;
@@ -420,7 +418,8 @@ td {
 #searchBtn {
 	border-radius: 0 5px 5px 0;
 }
-#detailForm form div > p {
+#detailForm form div > p,
+#detailFormYear form div > p {
 	padding-top: 10px;
     padding-bottom: 10px;
     background-color: rgba(209, 205, 205, 0.5);

@@ -68,7 +68,7 @@
 							<c:if test="${sessionScope.user.num eq tmp.mNum}">
 								<div class="projectInnerBtnBox">
 									<a href="todoMain?pNum=${pl.pInfo.pNum}" class="todoListATag">Todo리스트</a>
-									<a href="#">채팅방</a>
+									<a href="chatMain?crNum=${pl.pInfo.crNum}">채팅방</a>
 									<!-- todoMain?pNum=1 이런 요청으로 가야함 -->
 									<a href="#" class="modifyProject" data-pNum="${pl.pInfo.pNum}">수정하기</a>
 									<a href="#" class="addMemberBtn" data-pNum="${pl.pInfo.pNum}">초대하기</a>
