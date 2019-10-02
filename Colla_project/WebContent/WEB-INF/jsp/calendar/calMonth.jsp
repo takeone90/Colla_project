@@ -239,7 +239,7 @@ function drag() {
 function thisMonthCalendar(today) {
 	console.log(formatChangeHyphen(today)+" 월 달력을 그렸습니다.");
 	//달력 상단 날짜 그리기
-	$("#YearTitle").html("<p>"+today.getFullYear()+"년<p>");
+	$("#YearTitle").html("<p style='font-size: 17px; margin-bottom: 6px;'>"+today.getFullYear()+"<p>");
 	$("#MonthTitle").html((today.getMonth()+1)+"월");
 	//달력 상단 요일 그리기
 	var month = monthChange(today.getMonth()+1);
@@ -426,7 +426,7 @@ function changeToBoolean(param) {
 	return param;
 }
 function markingOnDate(dateOrigin) {
-	$("#"+dateOrigin).css({"background-color": "#E6E2E1"});
+	$("#"+dateOrigin).css({"background-color": "#f5f5f5"});
 }
 function dateChange(d) {
 	if(d<10) { return "0"+d; }
