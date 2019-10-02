@@ -38,24 +38,27 @@
 #boardDiv a,#calendarDiv a,#projectDiv a{
 	color : white;
 }
+#boardDiv a[class=currPointer],#calendarDiv a[class=currPointer]{
+	color: #E5675A;
+}
 #myChatList{
 	margin: 30px 0 6px;
     FONT-VARIANT: JIS04;
     text-align: right;
 }
-/* .chatList{ */
-/* 	display: none; */
-/* } */
+.chatList,#projectList{
+	display: none;
+}
 #boardDiv,#calendarDiv,#projectDiv{
 	margin: 0px 0;
     padding: 6px 0px 6px 0px;
     text-align: right;
 }
-#myChatList h3:hover{
+#myChatList h3:hover,#projectDiv h3:hover{
 	cursor: pointer;
 	color :	#E5675A; 
 }
-#boardDiv a:hover,#calendarDiv a:hover,#projectDiv a:hover{
+#boardDiv a:hover,#calendarDiv a:hover{
 	color: #E5675A;
 }
 #myChatList h3{
@@ -64,11 +67,20 @@
 	font-weight : bolder;
 	padding:0 8px 5px 0px;
 }
-#boardDiv h3,#calendarDiv h3,#projectDiv h3{
+#boardDiv h3,#calendarDiv h3{
 	font-size : 20px;
 	font-weight : bolder;
 	padding:0 25px 5px 0px;
 }
+#projectDiv h3{
+	font-size : 20px;
+	font-weight : bolder;
+    padding: 0 8px 5px 0px;
+}
+/* #projectDiv ul #projectMainLI{ */
+/* 	color: #E5675A; */
+/*     font-weight: 600; */
+/* } */
 #mainDiv{
     text-align: right;
     position: absolute;
@@ -81,33 +93,29 @@
 	font-size: 16px;
     color: white;
 }
-#myChatList h3 svg{
+#myChatList h3 svg, #projectDiv h3 svg{
 	font-size : 15px;
 }
-#myChatList ul{
+
+#myChatList ul,#projectDiv h3{
     padding-top: 5px;
 }
-#myChatList ul li{
+#myChatList ul li,#projectDiv ul li{
+	transition:color 0.2s;
+	color:#CCCBCA;
 	padding:10px 20px 10px 10px;
 	font-size:14px;
 }
-#myChatList ul li.currChat{
+#myChatList ul li.currChat, #projectDiv ul li.currProject{
 	background-color:#E5675A;
 	font-weight: bolder;
-}
-
-#myChatList ul li.currChat{
 	color:#fff;
 }
-#myChatList ul li{
-	transition:color 0.2s;
-	color:#CCCBCA;
-}
-#myChatList ul li:hover{
-	background-color : #4f4a4a;
+#myChatList ul li:hover,#projectDiv ul li:hover{
+	background-color : #194661;
 	cursor : pointer;
 }
-#myChatList ul li.currChat:hover{
+#myChatList ul li.currChat:hover,#projectDiv ul li.currProject:hover{
 	background-color: #ed7b6f;
 }
 
@@ -158,7 +166,9 @@
 #removeMemberDiv{
 	display: none;
 }
-
+.currPointer{
+	color : #E5675A;
+}
 
 
 

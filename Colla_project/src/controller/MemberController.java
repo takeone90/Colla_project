@@ -138,7 +138,6 @@ public class MemberController {
 		String emailAddress = (String)session.getAttribute("emailAddress");
 		Thread innerTest = new Thread(new inner(emailAddress, session));
 		innerTest.start();
-		System.out.println();
 		return "redirect:joinStep2";
 	}
 	
@@ -160,14 +159,14 @@ public class MemberController {
 	public String joinMember(Member member,HttpSession session) {
 		boolean result = memberService.addMember(member);
 		String inviteUserEmail = (String)session.getAttribute("inviteUserEmail");
-		System.out.println("inviteUserEmail : " + inviteUserEmail);
+//		System.out.println("inviteUserEmail : " + inviteUserEmail);
 		if(inviteUserEmail!=null) {
 			int inviteWnum = (Integer)session.getAttribute("inviteWnum");
 			if(member.getEmail().equals(inviteUserEmail) && session.getAttribute("inviteWnum")!=null) {
 				//이게 차있다면 초대받은사람임
 				//wsmember로 추가
 				wsmService.addWsMember(inviteWnum, member.getNum());
-				System.out.println("초대받은사람이네요 inviteUserEmail : "+inviteUserEmail+", 초대받은wNum : "+inviteWnum);
+//				System.out.println("초대받은사람이네요 inviteUserEmail : "+inviteUserEmail+", 초대받은wNum : "+inviteWnum);
 			}
 			session.removeAttribute("InviteUserEmail");
 			session.removeAttribute("inviteWnum");
@@ -249,7 +248,7 @@ public class MemberController {
 	private String sendLoginDuplicatedMsg(
 			@DestinationVariable(value="mNum")int mNum
 			) {
-		System.out.println("중복아이디 로그아웃 메시지 전송");
+//		System.out.println("중복아이디 로그아웃 메시지 전송");
 		smt.convertAndSend("/category/loginMsg/"+mNum,"duplicated");
 		
 		return "return_duplicated";
@@ -266,7 +265,7 @@ public class MemberController {
 		//로그인중인 멤버는 connectorList와 메일 비교,
 		List<Map<Object,Object>> uList = memberService.getWsMemberListbyMnum(mNum);
 		//Map<mnum,memail>
-		System.out.println("실시간 로그인 상태확인 - uList : " + uList);
+//		System.out.println("실시간 로그인 상태확인 - uList : " + uList);
 		for( Map<Object,Object> user : uList) {
 			int userNum = ((BigDecimal)user.get("MNUM")).intValue();
 			String userEmail = (String)user.get("MEMAIL");
@@ -292,7 +291,7 @@ public class MemberController {
 		Member user = memberService.getMemberByEmail(userEmail);
 		int mNum = user.getNum();
 		boolean isDuplicate = false;
-		System.out.println("중복체크 전 접속 중인 멤버 : "+connectorList);
+//		System.out.println("중복체크 전 접속 중인 멤버 : "+connectorList);
 		
 		if (connectorList.get(userEmail) != null) {
 			isDuplicate = true; // 중복으로 로그인

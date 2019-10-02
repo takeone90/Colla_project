@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,10 +25,13 @@ import model.Project;
 import model.ProjectMember;
 import model.Workspace;
 import model.WsMember;
+import service.AlarmService;
 import service.ChatRoomMemberService;
 import service.ChatRoomService;
+import service.MemberService;
 import service.ProjectMemberService;
 import service.ProjectService;
+import service.SetAlarmService;
 import service.WorkspaceService;
 import service.WsMemberService;
 
@@ -45,6 +49,14 @@ public class ProjectController {
 	private WorkspaceService wService;
 	@Autowired
 	private WsMemberService wsmService;
+	@Autowired
+	private SimpMessagingTemplate smt;
+	@Autowired
+	private AlarmService aService;
+	@Autowired
+	private SetAlarmService saService;
+	@Autowired
+	private MemberService mService;
 	@RequestMapping("/projectMain") //projectMain으로 이동
 	public String showProjectMain(HttpSession session, int wNum, Model model) {
 		List<Project> pList = pService.getAllProjectByWnum(wNum); //프로젝트 리스트를 가져온다..
@@ -63,8 +75,8 @@ public class ProjectController {
 		model.addAttribute("wsmList", wsmList);
 		model.addAttribute("projectList", projectList);
 		Workspace ws = wService.getWorkspace(wNum);
-		session.setAttribute("wsName", ws.getName());
 		session.setAttribute("currWnum", wNum);
+		session.setAttribute("currWname", ws.getName());
 		return "/project/projectMain";
 	}
 	
@@ -78,25 +90,45 @@ public class ProjectController {
 		Date encStartDate = dt.parse(startDate);
 		Date encEndDate = dt.parse(endDate);
 		int pNum = pService.addProject(pName, wNum, pDetail, encStartDate, encEndDate, mNum); //프로젝트 추가 & 채팅방 추가
-		String[] mNumListForInvitePj = request.getParameterValues("mNumListForInvitePj"); 
+		String[] mNumListForInvitePj = request.getParameterValues("mNumListForInvitePj");
+		List<Member> alarmTargetMemberList = new ArrayList<Member>();
 		if(mNumListForInvitePj != null) { //프로젝트 초대 멤버 추가
 			for(String stringMnum : mNumListForInvitePj) {
 				int num = Integer.parseInt(stringMnum);
+				Member inviteMember = mService.getMember(num);
+				alarmTargetMemberList.add(inviteMember);
 				pmService.addProjectMember(pNum, num); //프로젝트에 초대 멤버들 추가 
 				crmService.addChatRoomMember(pService.getProject(pNum).getCrNum(), num, wNum); //채팅방에 초대 멤버들 추가
+			}
+		}
+		for(Member m : alarmTargetMemberList) {
+			if(m.getNum()!=member.getNum()) {
+				//나한텐 알림X
+				int aNum = aService.addAlarm(wNum, m.getNum(), member.getNum(), "pInvite", wNum);
+				smt.convertAndSend("/category/alarm/"+m.getNum(),aService.getAlarm(aNum));								
 			}
 		}
 		return "redirect:projectMain?wNum="+wNum;
 	}
 	
 	@RequestMapping(value="/inviteProject",method=RequestMethod.POST)
-	public String inviteProject(int pNum,int wNum,HttpServletRequest request) {
-		System.out.println("inviteProjet 동작");
-		String[] mNumListForInvitePj = request.getParameterValues("mNumListForInvitePj"); 
+	public String inviteProject(int pNum,int wNum,HttpServletRequest request,HttpSession session) {
+		Member member = (Member)session.getAttribute("user");
+		String[] mNumListForInvitePj = request.getParameterValues("mNumListForInvitePj");
+		List<Member> alarmTargetMemberList = new ArrayList<Member>();
 		if(mNumListForInvitePj != null) { //프로젝트 멤버 추가
 			for(String stringMnum : mNumListForInvitePj) {
 				int num = Integer.parseInt(stringMnum);
+				Member inviteMember = mService.getMember(num);
+				alarmTargetMemberList.add(inviteMember);
 				pmService.addProjectMember(pNum, num);
+			}
+		}
+		for(Member m : alarmTargetMemberList) {
+			if(m.getNum()!=member.getNum()) {
+				//나한텐 알림X
+				int aNum = aService.addAlarm(wNum, m.getNum(), member.getNum(), "pInvite", wNum);
+				smt.convertAndSend("/category/alarm/"+m.getNum(),aService.getAlarm(aNum));								
 			}
 		}
 		return "redirect:projectMain?wNum="+wNum;
@@ -138,11 +170,11 @@ public class ProjectController {
 		List<Project> projectList = pService.getAllProjectByMnum(mNum);
 		return projectList;
 	}
+	
 	@ResponseBody
-	@RequestMapping(value="/getAllProjectByWnum", method = RequestMethod.POST)
-	public List<Project> getAllProjectByWnum(int wNum) {
-		List<Project> projectList = pService.getAllProjectByWnum(wNum);
-		return projectList;
+	@RequestMapping(value="/getAllProjectByMnumWnum")
+	public List<Project> getAllProjectByWnum(@RequestParam("mNum")int mNum,@RequestParam("wNum")int wNum) {
+		return pService.getAllProjectByMnumWnum(mNum, wNum);
 	}
 	@ResponseBody
 	@RequestMapping(value="/getAllProject", method = RequestMethod.POST)

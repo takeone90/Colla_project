@@ -3,9 +3,6 @@
 <%@ include file="/WEB-INF/jsp/inc/head.jsp" %>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>calMonth</title>
-    <link rel="stylesheet" href="bootstrap.css"/>
-    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="awesome-bootstrap-checkbox.css"/>
 <link rel="stylesheet" type="text/css" href="${contextPath}/css/headerWs.css"/>
 <link rel="stylesheet" type="text/css" href="${contextPath}/css/navWs.css"/>
 <link rel="stylesheet" type="text/css" href="${contextPath}/css/calMonth.css"/>
@@ -475,7 +472,6 @@ function putContentIntoTd(a) {
 	$("#modifyMonthly").prop("checked", changeToBoolean(a.monthly));
 	$("#detailColor").css("backgroundColor", a.color);
 	$("#modifyColor").val(a.color);
-	
 }
 function putContentIntoVacantTd(startDate, endDate) { //2019-09-26
 	$("#addForm").fadeIn(300);
@@ -660,20 +656,20 @@ function showYearSchedule(today) {
 						var dateNumber = startDateYear+"-"+sMonthRow;
 						var tr = trMakerFullLineYear(startDateMonth, (endDateMonth-startDateMonth)+1, title, color, 1);
 						$("#"+dateNumber).after(tr);
-						tr.children('.middleTd').on("click", function() {
+						tr.children('.middleTdYear').on("click", function() {
 							putContentIntoTdYear(allYearSchedule[ii]);
 						})
 					} else {
 						var sDateNumber = startDateYear+"-"+sMonthRow; //첫줄
 						var tr = trMakerFullLineYear(startDateMonth, (endDateMonth-startDateMonth), title, color, 2);
 						$("#"+sDateNumber).after(tr);
-						tr.children('.middleTd').on("click", function() {
+						tr.children('.middleTdYear').on("click", function() {
 							putContentIntoTdYear(allYearSchedule[ii]);
 						})
 						var eDateNumber = endDateYear+"-"+eMonthRow; //막줄
 						var tr = trMakerFullLineYear(endDateMonth, (endDateMonth-startDateMonth), title, color, 3);
 						$("#"+eDateNumber).after(tr);
-						tr.children('.middleTd').on("click", function() {
+						tr.children('.middleTdYear').on("click", function() {
 							putContentIntoTdYear(allYearSchedule[ii]);
 						})		
 					}
@@ -683,29 +679,29 @@ function showYearSchedule(today) {
 	});
 }
 function trMakerFullLineYear(month, gap, title, color, type) { //앞,중간,뒤
-	var tr = $("<tr style=\"border: 0px white;\" height=\"20\">");
+	var tr = $("<tr style='border: 0px white;' height='20'>");
 	var tmp = ((month%4)-1); //0, 1, 2, -1 	
 	if(tmp == -1) {	
 		tmp = 3; 
 	} //0, 1, 2, 3
 	for(var l=0; l<tmp; l++) { //빈 칸
-		let tdEtc = $("<td colspan=\"1\"; style=\"margin-bottom: 1pt; margin-top: 1pt;\"></td>");
+		let tdEtc = $("<td colspan='1'; style='margin-bottom: 1pt; margin-top: 1pt;'></td>");
 		tr.append(tdEtc);
 	}
 	var td = "";
 	if(type == 1) {
-		td = $("<td colspan="+gap+"><div class=\"middleTdYear complete\" style=\"background-color: "+color+"\">"+"&nbsp;&nbsp;"+title+"</div></td>");
+		td = $("<td class='middleTdYear' colspan="+gap+"><div class='middleDivYear complete' style=\"background-color: "+color+"\">"+"&nbsp;&nbsp;"+title+"</div></td>");
 	} else if(type == 2) {
-		td = $("<td colspan="+gap+"><div class=\"middleTdYear left\" style=\"background-color: "+color+"\">"+"&nbsp;&nbsp;"+title+"</div></td>");
+		td = $("<td class='middleTdYear' colspan="+gap+"><div class='middleDivYear left' style=\"background-color: "+color+"\">"+"&nbsp;&nbsp;"+title+"</div></td>");
 	} else if(type == 3) {
-		td = $("<td colspan="+gap+"><div class=\"middleTdYear right\" style=\"background-color: "+color+"\">"+"&nbsp;&nbsp;"+title+"</div></td>");
+		td = $("<td class='middleTdYear' colspan="+gap+"><div class='middleDivYear right' style=\"background-color: "+color+"\">"+"&nbsp;&nbsp;"+title+"</div></td>");
 	} else if(type == 4) {
-		td = $("<td colspan="+gap+"><div class=\"middleTdYear full\" style=\"background-color: "+color+"\">"+"&nbsp;&nbsp;"+title+"</div></td>");
+		td = $("<td class='middleTdYear' colspan="+gap+"><div class='middleDivYear full' style=\"background-color: "+color+"\">"+"&nbsp;&nbsp;"+title+"</div></td>");
 	}
 	tr.append(td);
 	var numberOfTdEtc = 4-tmp-gap;
 	for(var l=0; l<numberOfTdEtc; l++) {
-		let tdEtc = $("<td colspan=\"1\"; style=\"margin-bottom: 1pt; margin-top: 1pt;\"></td>");
+		let tdEtc = $("<td colspan='1'; style='margin-bottom: 1pt; margin-top: 1pt;'></td>");
 		tr.append(tdEtc);
 	}
 	return tr;
@@ -727,11 +723,11 @@ function monthChangeYear(monthTmp) {
 function putContentIntoTdYear(a) {
 	$("#detailFormYear").fadeIn(300);
 	$("#detailCNumYear").val(a.cNum);
-	$("#detailTitleYear").val(a.title);
-	$("#detailStartDateYear").val(a.startDate.substring(0, 10));
-	$("#detailEndDateYear").val(a.endDate.substring(0, 10));
-	$("#detailContentYear").val(a.content);
-	$("#detailTypeYear").val(a.type);
+	$("#detailTitleYear").text(a.title);
+	$("#detailStartDateYear").text(a.startDate.substring(0, 10));
+	$("#detailEndDateYear").text(a.endDate.substring(0, 10));
+	$("#detailContentYear").text(a.content);
+	$("#detailTypeYear").text(a.type);
 	$("#detailYearCalendarYear").prop("checked", changeToBoolean(a.yearCalendar));
 	$("#detailAnnuallyYear").prop("checked", changeToBoolean(a.annually));
 	$("#detailMonthlyYear").prop("checked", changeToBoolean(a.monthly));	
@@ -781,15 +777,14 @@ function nextYearYear() {
 			<button type="button" id="addFormOpen" class="btn">일정 추가</button>
 		</div>
 		<div class="headerCheckboxDiv">
-			<input type="checkbox" name="calType" id="calType1" value="project" checked="checked" class="styled">
+			<input type="checkbox" name="calType" id="calType1" value="project" checked="checked">
 			<label for="calType1">프로젝트</label>		
-			<input type="checkbox" name="calType" id="calType2" value="vacation" checked="checked" class="styled">
+			<input type="checkbox" name="calType" id="calType2" value="vacation" checked="checked">
 			<label for="calType2">휴가</label>		
-			<input type="checkbox" name="calType" id="calType3" value="event" checked="checked" class="styled">
+			<input type="checkbox" name="calType" id="calType3" value="event" checked="checked">
 			<label for="calType3">행사</label>
 		</div>
-		
-		<div style="float: right">
+		<div class="headerChangeCal">
 			<button id="changeYearCalToMonthCal" class="btn">월간</button>
 			<button id="changeMonthCalToYearCal" class="btn">연간</button>
 		</div>
@@ -997,38 +992,40 @@ function nextYearYear() {
 					<input type="hidden" name="cNum" id="detailCNumYear">
 					<input type="hidden" name="mNum" id="mNum" value="${userData.mNum}">
 					<input type="hidden" name="wNum" id="wNum" value="${userData.wNum}">
-					
 					<div>
-						<h4>일정</h4>
-						<input type="text" name="title" class="modalTitle" id="detailTitleYear" readonly="readonly">
+						<div class="titleDiv">
+							<h4>일정</h4>
+							<p class="modalTitle" id="detailTitleYear"></p>
+						</div>
+						<div class="selectDiv">
+							<h4>종류</h4>
+							<p id="detailTypeYear"></p>
+						</div>
 					</div>
-					<div>
+					<div class="dateDiv">
 						<h4>기간</h4>
-						<input type="date" name="startDate" id="detailStartDateYear" readonly="readonly">부터 <input type="date" name="endDate" id="detailEndDateYear" readonly="readonly">까지
+						<p>
+							<span id="detailStartDateYear"></span>
+							<span>~</span>
+							<span id="detailEndDateYear"></span>
+						</p>
+					</div>
+					<div class="checkboxDiv">
+						<input type="checkbox" name="yearCalendar" id="detailYearCalendarYear" value="yearCalendar" onclick="return false;">
+						<label class="checkboxbtn" for="detailYearCalendarYear">연간 달력</label>
+						<input type="checkbox" name="annually" id="detailAnnuallyYear" value="annually" onclick="return false;">
+						<label class="checkboxbtn" for="detailAnnuallyYear">매년 반복</label>
+						<input type="checkbox" name="monthly" id="detailMonthlyYear" value="monthly" onclick="return false;">
+						<label class="checkboxbtn" for="detailMonthlyYear">매월 반복</label>
 					</div>
 					<div>
 						<h4>내용</h4>
-						<textarea rows="1" cols="21" name="content" class="modalContent" id="detailContentYear" readonly="readonly"></textarea>
-					</div>
-					<div>
-						<h4>종류</h4>
-						<select name="type" id="detailTypeYear">
-							<option value="project">프로젝트</option>
-							<option value="vacation">휴가</option>
-							<option value="event">행사</option>
-						</select>
-						<label><input type="checkbox" name="yearCalendar" id="detailYearCalendarYear" value="yearCalendar">연간 달력 표시</label>
-						<label><input type="checkbox" name="annually" id="detailAnnuallyYear" value="annually">매년 반복</label>
-						<label><input type="checkbox" name="monthly" id="detailMonthlyYear" value="monthly">매월 반복</label>
-					</div>
-					<div>
-						<h4>색</h4>
-						<input type="color" name="color" id="detailColorYear" value="#fffde8">
+						<p class="modalContent" id="detailContentYear"></p>
 					</div>
 					<div id="innerBtn">
 						<a href="#" id="detailFormYearClose">닫기</a>
 					</div>
-				</form>
+				</form>				
 			</div>
 		</div>
 	</div>	

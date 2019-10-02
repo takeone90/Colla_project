@@ -69,7 +69,7 @@ public class MainController {
 	@ResponseBody
 	@RequestMapping(value="/sendFAQMail", method = RequestMethod.POST)
 	public boolean sendFAQMail(HttpSession session, String name, String email, String title, String content) {
-		System.out.println(name+"이 메일을 보냈음");
+//		System.out.println(name+"이 메일을 보냈음");
 		Thread innerTest = new Thread(new inner(name, email, title, content, session));
 		innerTest.start();
 		return true;

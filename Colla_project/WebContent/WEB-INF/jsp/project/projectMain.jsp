@@ -24,12 +24,10 @@
 			$("#modifyProjectModal").fadeOut(300);
 			return false;
 		});
-		
 		$("#closeMemberModal").on("click",function(){
 			$("#addMemberModal").fadeOut(300);
 			return false;
 		});
-		
 		$(".exitProject").on("click",function(){
 			if(confirm("프로젝트를 나가시겠습니까?")==true){
 				$.ajax({
@@ -48,7 +46,6 @@
 				return false;
 			}
 		});
-		
 	});<%--onload-function end--%>
 </script>
 </head>
@@ -65,44 +62,45 @@
 			<div id="projectArea">
 				<c:forEach items="${projectList}" var="pl">
 					<!-- 반복 -->
-				<div class="project">
-					<h3>${pl.pInfo.pName}</h3>
-					<div class="projectInnerBtnBox">
-						<a href="todoMain?pNum=${pl.pInfo.pNum}" class="todoListATag">Todo리스트</a>
-						<a href="#">채팅방</a>
-						<!-- todoMain?pNum=1 이런 요청으로 가야함 -->
-						<a href="#" class="modifyProject" data-pNum="${pl.pInfo.pNum}">수정하기</a>
-						<a href="#" class="addMemberBtn" data-pNum="${pl.pInfo.pNum}">초대하기</a>
-						<a href="#" class="exitProject" data-pNum="${pl.pInfo.pNum}">나가기</a>
-					</div>
-					<div class="projectDate">
-						<p>
-						<fmt:formatDate value="${pl.pInfo.pStartDate}" pattern="yyyy.MM.dd" />
-				        <fmt:formatDate value="${pl.pInfo.pStartDate}" pattern="E"/>요일 
-						</p>&nbsp;&nbsp;&nbsp;~&nbsp;&nbsp;&nbsp;
-						<p>
-						<fmt:formatDate value="${pl.pInfo.pEndDate}" pattern="yyyy.MM.dd" />
-				        <fmt:formatDate value="${pl.pInfo.pEndDate}" pattern="E"/>요일 
-						</p>
+					<div class="project">
+						<h3>${pl.pInfo.pName}</h3>
+						<c:forEach var="tmp" items="${pl.pmList}">
+							<c:if test="${sessionScope.user.num eq tmp.mNum}">
+								<div class="projectInnerBtnBox">
+									<a href="todoMain?pNum=${pl.pInfo.pNum}" class="todoListATag">Todo리스트</a>
+									<a href="chatMain?crNum=${pl.pInfo.crNum}">채팅방</a>
+									<!-- todoMain?pNum=1 이런 요청으로 가야함 -->
+									<a href="#" class="modifyProject" data-pNum="${pl.pInfo.pNum}">수정하기</a>
+									<a href="#" class="addMemberBtn" data-pNum="${pl.pInfo.pNum}">초대하기</a>
+									<a href="#" class="exitProject" data-pNum="${pl.pInfo.pNum}">나가기</a>
+								</div>
+							</c:if>
+						</c:forEach>
+						<div class="projectDate">
+							<p>
+							<fmt:formatDate value="${pl.pInfo.pStartDate}" pattern="yyyy.MM.dd" />
+					        <fmt:formatDate value="${pl.pInfo.pStartDate}" pattern="E"/>요일 
+							</p>&nbsp;&nbsp;&nbsp;~&nbsp;&nbsp;&nbsp;
+							<p>
+							<fmt:formatDate value="${pl.pInfo.pEndDate}" pattern="yyyy.MM.dd" />
+					        <fmt:formatDate value="${pl.pInfo.pEndDate}" pattern="E"/>요일 
+							</p>
+							</div>
+						<div class="projectDetail">${pl.pInfo.pDetail}</div>
+						
+						<div class="progress-member"><div class="progress">진행률  <progress id="progressBar" value="${pl.pInfo.progress}" max="100" style="width:300px;"></progress></div>
+							<div class="projectMember">
+								<ul>
+									<c:forEach items="${pl.pmList}" var="pm">
+										<li><div class='profileImg' align="center"><img alt='프로필사진' src='${contextPath}/showProfileImg?num=${pm.mNum}' onclick="showProfileInfoModal(${pm.mNum})"></div>
+										<p style="text-align:center;">${pm.mName}</p></li>
+									</c:forEach>	
+								</ul>
+							</div>
 						</div>
-					<div class="projectDetail">${pl.pInfo.pDetail}</div>
-					
-					<div class="progress-member"><div class="progress">진행률  <progress id="progressBar" value="${pl.pInfo.progress}" max="100" style="width:300px;"></progress></div>
-						<div class="projectMember">
-						<ul>
-						<c:forEach items="${pl.pmList}" var="pm">
-							<li><div class='profileImg' align="center"><img alt='프로필사진' src='${contextPath}/showProfileImg?num=${pm.mNum}' onclick="showProfileInfoModal(${pm.mNum})"></div>
-							<p style="text-align:center;">${pm.mName}</p></li>
-						</c:forEach>	
-						</ul>
-						</div>
 					</div>
-					
-					
-					
-				</div><!-- 반복 종료 -->
+					<!-- 반복 종료 -->
 				</c:forEach>
-				
 			</div><!-- end projectArea -->
 		</div><!-- end wsBodyContainer -->
 		
@@ -232,18 +230,6 @@
 					<div class="row">
 							<h4>멤버 초대</h4>
 							<ul class="addMemberUL">
-							
-<%-- 							<c:forEach items="${wsmList}" var="wsm"> --%>
-<%-- 								<c:if test="${wsm.mNum ne sessionScope.user.num}"> --%>
-<!-- 								<li onclick="checkInvitePjMember(this);"> -->
-<!-- 								<div class='profileImg' align='center'> -->
-<%-- 								<img alt='프로필사진' src='${contextPath}/showProfileImg?num=${wsm.mNum}'> --%>
-<!-- 								</div> -->
-<%-- 								<p style="text-align:center;">${wsm.mName}</p> --%>
-<%-- 								<input type="checkbox" value="${wsm.mNum}" name="mNumListForInvitePj" style="display:none;"> --%>
-<!-- 								</li> -->
-<%-- 								</c:if> --%>
-<%-- 							</c:forEach> --%>
 							</ul>
 							<script>
 								$(function(){
