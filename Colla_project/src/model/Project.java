@@ -13,6 +13,14 @@ public class Project {
 	private Date pEndDate;
 	private int crNum;
 	private int mNum;
+	private int calNum;
+	
+	public int getCalNum() {
+		return calNum;
+	}
+	public void setCalNum(int calNum) {
+		this.calNum = calNum;
+	}
 	public int getpNum() {
 		return pNum;
 	}
@@ -79,6 +87,6 @@ public class Project {
 	public String toString() {
 		return "Project [pNum=" + pNum + ", pName=" + pName + ", progress=" + progress + ", wNum=" + wNum
 				+ ", pRegDate=" + pRegDate + ", pDetail=" + pDetail + ", pStartDate=" + pStartDate + ", pEndDate="
-				+ pEndDate + ", crNum=" + crNum + ", mNum=" + mNum + "]";
+				+ pEndDate + ", crNum=" + crNum + ", mNum=" + mNum + ",calNum : "+calNum+"]";
 	}
 }

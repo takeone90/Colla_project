@@ -40,6 +40,7 @@ public class ProjectService {
 		} // 채팅방 추가 끝
 		int pNum = 0;
 		Project project = new Project();
+		
 		project.setwNum(wNum);
 		project.setCrNum(chatRoom.getCrNum());
 		project.setmNum(mNum);
