@@ -1,11 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ include file="/WEB-INF/jsp/inc/head.jsp" %>
-
+   pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<%
+   String contextPath = request.getContextPath();
+   request.setAttribute("contextPath", contextPath);
+%>
 <title>개인정보</title>
+<link rel="stylesheet" type="text/css" href="css/reset.css"/>
+<link rel="stylesheet" type="text/css" href="css/base.css"/>
 <link rel="stylesheet" type="text/css" href="css/headerWs.css"/>
 <link rel="stylesheet" type="text/css" href="css/navWs.css"/>
 <link rel="stylesheet" type="text/css" href="css/myPage.css"/>
+<script src="https://code.jquery.com/jquery-3.4.1.js"
+   integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+   crossorigin="anonymous">
+</script>
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.5/cropper.css"/>
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.5/cropper.min.css"/>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.5/cropper.js"></script>
@@ -18,49 +30,51 @@
 	var roundedCanvas = null;
 	var roundImg = null;
 	var profileImgType = null;
+	var cropImg = null;
 	$(function() {		
-		//이미지 크롭 모달 닫기
-		$(".closeCropImgModal").on("click",function(){
-			$("#CropImgModal").fadeOut(300);
-			return false;
-		});
-
 		//이미지 크롭 모달 보여주기
-		 $("#attachImgBtn").on('change', function() { // 첨부파일이 변경되면
+		 $("#attachImgBtn").on('change', function() { //첨부파일이 변경되면
 			 if (this.files && this.files[0]) {
 					var reader = new FileReader();
 					reader.onload = function(e) {
 						$("#CropImgModal").fadeIn(300); // 이미지 크롭 모달창을 띄운다
 						$('#cropImg').attr("src", e.target.result); // 모달의 이미지영역에 선택한 이미지를 노출하고
-						var cropImg = document.getElementById('cropImg');
+						cropImg = document.getElementById('cropImg');
 						croppable = false;
 						cropper = new Cropper(cropImg,{ //모달의 이미지 영역에 크로퍼 객체를 생성 하고, 옵션을 설정한다 
 							 viewMode: 1,
-							 aspectRatio : 1,
-							 ready:function(){
-								 croppable = true; // 모달창이 켜졌다면, 해당 값은 true가 된다
-							 }
+							 aspectRatio : 1
 						});
-						
 					}
 					reader.readAsDataURL(this.files[0]);
-					//$("#profileImgType").val("profileImgType");
+					cropper.destroy();//크롭이미지 선택 영역 초기화
 				}// end if	
 		 	});//end change
 				
 		//크롭 모달창에서 [확인] 선택시 
 		$(".cropImgBtn").on('click',function(){
 			$("#profileImgType").attr("value","profileImgType");			
-			if(!croppable){
-				return; //선택한 영역이 없다면 return
-			}
-			
 			croppedCanvas = cropper.getCroppedCanvas(); //해당 이미지를 저장하기 위한 객체를 생성한다
 			roundedCanvas = getRoundedCanvas(croppedCanvas); //선택한 영역의 좌표값을  roundedCanvas에 넣어준다
 			$('.thumbNailImg').attr('src',roundedCanvas.toDataURL()); // 가져온 이미지 데이터를 썸네일 이미지에 뿌려준다
+			$("#attachImgBtn").val("");//첨부파일 초기화
 			$("#CropImgModal").fadeOut(300);//해당 모달 창을 닫는다
 			return false;
-		});		 
+		});
+		 	
+		//이미지 크롭 모달 닫기
+		$(".closeCropImgModal").on("click",function(){
+			$("#attachImgBtn").val("");//첨부파일 초기화
+			$("#CropImgModal").fadeOut(300);
+			return false;
+		});
+		 		
+		//모달 바깥쪽이 클릭되거나 다른 모달이 클릭될때 현재 모달 숨기기
+		$("#wsBody").mousedown(function(e){
+			if(!$("#CropImgModal").is(e.target) && $("#CropImgModal").has(e.target).length===0)
+				$("#CropImgModal").fadeOut(300);
+			//return false;
+		});
 
 		//기본이미지로 변경
 		$("#defalutImgBtn").on("click", function() {
@@ -68,7 +82,7 @@
 			$("#profileImgType").attr("value","defaultImg");
 		});
 		
-		//"btn imgUpload"
+		//[적용] 선택시 (실제 db에 적용됨)
 		$(".profileImgForm").on("submit", function(){
 			profileImgType = $("#profileImgType").val();
 			var formData = new FormData();
