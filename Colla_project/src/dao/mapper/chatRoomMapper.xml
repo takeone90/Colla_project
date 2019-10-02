@@ -16,10 +16,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<delete id="deleteChatRoom" parameterType="int">
 		delete chatroom where cr_num=#{crNum}
 	</delete>
-<!-- 	<delete id="deleteEmptyChatRoom"> -->
-<!-- 		delete from chatroom cr where ( -->
-<!-- 		select count(*) from chatroom_member crm where crm.cr_num=cr.cr_num)=0 -->
-<!-- 	</delete> -->
+	<delete id="deleteEmptyChatRoom">
+		delete from chatroom cr where (
+		select count(*) from chatroom_member crm where crm.cr_num=cr.cr_num)=0
+	</delete>
+	<delete id="deleteAllChatRoomByWnum" parameterType="int">
+		delete chatroom where w_num=#{wNum}
+	</delete>
 	<select id="selectChatRoom" parameterType="int" resultMap="chatRoomMap">
 		select * from chatroom where cr_num=#{crNum}
 	</select>

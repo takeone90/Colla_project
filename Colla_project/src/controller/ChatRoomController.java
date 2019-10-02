@@ -313,6 +313,8 @@ public class ChatRoomController {
 	public String exitChatRoom(int crNum,HttpSession session){
 		Member user = (Member)session.getAttribute("user");
 		crmService.removeChatRoomMemberByCrNumMnum(crNum, user.getNum());
+		
+		
 		return "redirect:workspace";
 	}
 

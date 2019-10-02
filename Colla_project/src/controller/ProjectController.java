@@ -32,6 +32,7 @@ import service.MemberService;
 import service.ProjectMemberService;
 import service.ProjectService;
 import service.SetAlarmService;
+import service.TodoService;
 import service.WorkspaceService;
 import service.WsMemberService;
 
@@ -57,6 +58,8 @@ public class ProjectController {
 	private SetAlarmService saService;
 	@Autowired
 	private MemberService mService;
+	@Autowired
+	private TodoService tService;
 	@RequestMapping("/projectMain") //projectMain으로 이동
 	public String showProjectMain(HttpSession session, int wNum, Model model) {
 		List<Project> pList = pService.getAllProjectByWnum(wNum); //프로젝트 리스트를 가져온다..
@@ -139,7 +142,12 @@ public class ProjectController {
 	public boolean exitProject(int pNum, HttpSession session) {
 		Member member = (Member)session.getAttribute("user");
 		boolean result = pmService.removeProjectMember(pNum, member.getNum()); //프로젝트에서 나감 
-//		result = crmService.removeChatRoomMemberByCrNumMnum(pService.getProject(pNum).getCrNum(), member.getNum()); //채팅방에서 나감
+		crmService.removeChatRoomMemberByCrNumMnum(pService.getProject(pNum).getCrNum(), member.getNum()); //채팅방에서 나감
+		if(pmService.getAllProjectMemberByPnum(pNum).isEmpty()) {
+			System.out.println("해당 프로젝트에 멤버가 없는게 확인됐으므로 모든 td리스트 지웁니다");
+			tService.removeAllTodoByPnum(pNum);
+		}
+		pService.removeEmptyProject();
 		return result;
 	}
 	@RequestMapping(value="/modifyProject", method = RequestMethod.POST)

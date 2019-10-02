@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import dao.ChatRoomDao;
 import dao.ChatRoomMemberDao;
 import model.ChatRoomMember;
 
@@ -12,6 +13,8 @@ import model.ChatRoomMember;
 public class ChatRoomMemberService {
 	@Autowired
 	private ChatRoomMemberDao crmDao;
+	@Autowired
+	private ChatRoomDao crDao;
 	public boolean addChatRoomMember(int crNum,int mNum,int wNum) {//workspace만들었을때, chatroom만들었을때, chatroom 초대됐을때 
 		boolean result = false;
 		ChatRoomMember crm = new ChatRoomMember();
@@ -41,6 +44,7 @@ public class ChatRoomMemberService {
 		boolean result = false;
 		if(crmDao.deleteAllChatRoomMemberByMnum(mNum)>0) {
 			result = true;
+			crDao.deleteEmptyChatRoom();
 		}
 		return result;
 	}
@@ -48,6 +52,8 @@ public class ChatRoomMemberService {
 		boolean result= false;
 		if(crmDao.deleteChatRoomMemberByWnumMnum(wNum, mNum)>0) {
 			result = true;
+			crDao.deleteEmptyChatRoom();
+			
 		}
 		return result;
 	}
@@ -55,6 +61,9 @@ public class ChatRoomMemberService {
 		boolean result = false;
 		if(crmDao.deleteChatRoomMemberByCrNumMnum(crNum, mNum)>0) {
 			result = true;
+			//사람없는 채팅방 지우기 실행
+			crDao.deleteEmptyChatRoom();
+			System.out.println("사람없는 채팅방 지우기 성공");
 		}
 		return result;
 	}
