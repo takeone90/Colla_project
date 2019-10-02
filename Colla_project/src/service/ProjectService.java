@@ -1,7 +1,10 @@
 package service;
 
+import java.awt.Color;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,6 +13,7 @@ import dao.ChatRoomDao;
 import dao.ChatRoomMemberDao;
 import dao.ProjectDao;
 import dao.ProjectMemberDao;
+import model.Calendar;
 import model.ChatRoom;
 import model.ChatRoomMember;
 import model.Project;
@@ -25,6 +29,8 @@ public class ProjectService {
 	private ChatRoomDao crDao;
 	@Autowired
 	private ChatRoomMemberDao crmDao;
+	@Autowired
+	private CalendarService cService;
 	
 	public int addProject(String pName,int wNum,String pDetail,Date pStartDate,Date pEndDate,int mNum) {
 		ChatRoom chatRoom = new ChatRoom();
@@ -55,6 +61,20 @@ public class ProjectService {
 			pm.setmNum(mNum); 
 			pmDao.insertProjectMember(pm); //프로젝트 만든 사람을.. 프로젝트 멤버에 추가
 		} // 프로젝트 추가 끝
+		Calendar calendar = new Calendar();
+		SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd");
+		calendar.setTitle(pName);
+		calendar.setContent(pDetail);
+		calendar.setStartDate(dt.format(pStartDate)); //Date -> String
+		calendar.setEndDate(dt.format(pEndDate));
+		calendar.setmNum(mNum);
+		calendar.setwNum(wNum);
+		calendar.setType("project");
+		calendar.setYearCalendar("0");
+		calendar.setMonthly("0");
+		calendar.setAnnually("0");
+		calendar.setColor(getRandomColor()); //랜덤 컬러
+		cService.addCalendar(calendar);
 		return pNum;
 	}
 	public boolean removeProject(int pNum) {
@@ -83,14 +103,21 @@ public class ProjectService {
 			result1 = true;
 		}
 		//채팅방 이름 바꾸기
-		ChatRoom chatRoom = new ChatRoom();
-		System.out.println(pDao.selectProject(pNum).getCrNum());
-		chatRoom.setCrNum(pDao.selectProject(pNum).getCrNum());
+		ChatRoom chatRoom = crDao.selectChatRoom(project.getCrNum());
+//		chatRoom.setCrNum(pDao.selectProject(pNum).getCrNum());
 		chatRoom.setCrName(pName);
 		boolean result2 = false;
 		if(crDao.updateChatRoom(chatRoom)>0) {
 			result2 = true;
 		}
+		//캘린더 수정
+//		Calendar calendar = cService.getCalendar();
+//		SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd");
+//		calendar.setTitle(pName);
+//		calendar.setContent(pDetail);
+//		calendar.setStartDate(dt.format(pStartDate)); //Date -> String
+//		calendar.setEndDate(dt.format(pEndDate));
+//		project.setmNum(mNum);
 		if(result1 && result2) {
 			return true;
 		}
@@ -122,5 +149,13 @@ public class ProjectService {
 		pDao.updateProject(p);
 		return calcProgress;
 	}
+	public static String getRandomColor() {
+        String[] letters = {"0","1","2","3","4","5","6","7","8","9","A","B","C","D","E","F"};
+        String color = "#";
+        for (int i = 0; i < 6; i++ ) {
+           color += letters[(int) Math.round(Math.random() * 15)];
+        }
+        return color;
+   }
 }
 
