@@ -92,6 +92,20 @@ public class ProjectService {
 //		}
 		return result1;
 	}
+	public boolean removeEmptyProject(){
+		boolean result = false;
+		if(pDao.deleteEmptyProject()>0) {
+			result = true;
+		}
+		return result;
+	}
+	public boolean removeAllProjectByWnum(int wNum) {
+		boolean result = false;
+		if(pDao.deleteAllProjectByWnum(wNum)>0) {
+			result = true;
+		}
+		return result;
+	}
 	public boolean modifyProject(int pNum, String pName, String pDetail, Date pStartDate, Date pEndDate, int mNum) {
 		Project project = pDao.selectProject(pNum);
 		project.setpName(pName);

@@ -36,6 +36,13 @@ public class TodoService {
 		}
 		return result;
 	}
+	public boolean removeAllTodoByPnum(int pNum) {
+		boolean result= false;
+		if(tdDao.deleteAllTodoByPnum(pNum)>0) {
+			result = true;
+		}
+		return result;
+	}
 	public boolean modifyTodo(Todo todo) {
 		boolean result = false;
 		if(tdDao.updateTodo(todo)>0) {

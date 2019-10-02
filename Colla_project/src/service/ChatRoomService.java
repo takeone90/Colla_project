@@ -47,13 +47,20 @@ public class ChatRoomService {
 		}
 		return result;
 	}
-//	public boolean removeEmptyChatRoom() {
-//		boolean result = false;
-//		if(crDao.deleteEmptyChatRoom()>0) {
-//			result = true;
-//		}
-//		return result;
-//	}
+	public boolean removeEmptyChatRoom() {
+		boolean result = false;
+		if(crDao.deleteEmptyChatRoom()>0) {
+			result = true;
+		}
+		return result;
+	}
+	public boolean removeAllChatRoomByWnum(int wNum) {
+		boolean result = false;
+		if(crDao.deleteAllChatRoomByWnum(wNum)>0) {
+			result =true;
+		}
+		return result;
+	}
 	public ChatRoom getChatRoomByCrNum(int crNum) {
 		return crDao.selectChatRoom(crNum);
 	}
