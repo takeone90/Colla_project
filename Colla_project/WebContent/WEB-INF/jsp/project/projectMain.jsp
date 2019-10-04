@@ -9,7 +9,7 @@
 <script>
 	$(function(){
 		//Project추가 모달
-		$("#addProjectBtn").on("click",function(){
+		$("#addProjectDiv").on("click",function(){
 			$("#addProjectModal").fadeIn(300);
 		});
 		$("#closePjModal").on("click",function(){
@@ -17,7 +17,17 @@
 			return false;
 		});
 		$(".modifyProject").on("click", function() {
-			$(".pNum").val($(this).attr("data-pNum"));
+			var pNum = $(this).attr("data-pNum");
+			$(".pNum").val(pNum);
+			$.ajax({
+				url : "${contextPath}/getProject",
+				data : {"pNum":pNum},
+				dataType : "json",
+				success : function(project){
+					$("#pjName").val(project.pName);
+					$("#pjDetail").val(project.pDetail);
+				}
+			});
 			$("#modifyProjectModal").fadeIn(300);	
 		});
 		$("#closeModifyPjModal").on("click",function(){
@@ -57,8 +67,8 @@
 		<input type="hidden" value="${sessionScope.user.num}" id="mNum">
 		<div id="wsBodyContainer"> 
 		<h2>Project List</h2>
-	
-		<button id="addProjectBtn">프로젝트 추가</button>
+		<div id="addProjectDiv" align="center">프로젝트 추가</div>
+<!-- 		<button id="addProjectBtn">프로젝트 추가</button> -->
 			<div id="projectArea">
 				<c:forEach items="${projectList}" var="pl">
 					<!-- 반복 -->
@@ -189,13 +199,13 @@
 							<h4>프로젝트 이름</h4>
 							<div>
 								<input type="hidden" value="${sessionScope.currWnum}" name="wNum">
-								<input type="text" placeholder="project이름" name="pName" style="width:465px">
+								<input type="text" placeholder="project이름" name="pName" style="width:465px" id="pjName">
 							</div>
 						</div>
 						<div class="row">
 							<h4>프로젝트 내용</h4>
 							<div>								
-								<input type="text" placeholder="어떤 project인가요?" name="pDetail" style="width:465px">
+								<input type="text" placeholder="어떤 project인가요?" name="pDetail" style="width:465px" id="pjDetail">
 							</div>
 						</div>
 						<div class="row">

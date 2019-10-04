@@ -16,7 +16,7 @@
 					var memberProfileInfoDiv = $(".memberProfileInfo");
 					memberProfileImgDiv.empty();
 					memberProfileInfoDiv.empty();
-					var modalProfileInfoTag = $("<h3>이름</h3><p>"+member.name+"</p><br><h3>이메일</h3><p>"+member.email+"</p><br><h3>연락처</h3><p>"+member.phone+"</p>");
+					var modalProfileInfoTag = $("<h4>이름</h4><p>"+member.name+"</p><br><h4>이메일</h4><p>"+member.email+"</p><br><h4>연락처</h4><p>"+member.phone+"</p>");
 					memberProfileImgDiv.append(imgTag);
 					memberProfileInfoDiv.append(modalProfileInfoTag);
 				},
@@ -107,9 +107,6 @@
 					}
 					projectList.append(str);
 				});
-			},
-			error : function(){
-				alert("불러오기 에러발생");
 			}
 		});
 	}
@@ -191,7 +188,7 @@
 		</div>
 		<div id="mainDiv">
 			<h3>
-				<a href="${contextPath}/"><i class="fas fa-arrow-left"></i> Main</a>
+				<a href="${contextPath}/"><i class="fas fa-angle-left"></i> Main</a>
 			</h3>
 		</div>
 		

@@ -159,10 +159,10 @@ public class ProjectController {
 		return "redirect:projectMain?wNum="+wNum;
 	}
 	@ResponseBody
-	@RequestMapping(value="/getProject", method = RequestMethod.POST)
-	public Project getProject(int pNum) {
-		Project projectTmp = pService.getProject(pNum);
-		return projectTmp;
+	@RequestMapping("/getProject")
+	public Project getProject(@RequestParam("pNum")int pNum) {
+		Project project = pService.getProject(pNum);
+		return project;
 	}
 	@ResponseBody
 	@RequestMapping(value="/getProjectByCrNum", method = RequestMethod.POST)

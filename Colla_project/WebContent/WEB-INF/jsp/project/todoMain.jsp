@@ -20,7 +20,7 @@
 // 		            		alert("데이터보내기 성공");
 		            	},
 		            	error : function(){
-		            		alert("정렬 에러발생");
+// 		            		alert("정렬 에러발생");
 		            	}
 		            });
 	            }
@@ -39,7 +39,17 @@
 		});
 		$(".modifyTodoModalOpen").on("click",function(){
 // 			alert($(this).attr("data-tdNum"));
-			$(".tdNum").val($(this).attr("data-tdNum"));
+			var tdNum = $(this).attr("data-tdNum");
+			$(".tdNum").val(tdNum);
+			$.ajax({
+				url :"${contextPath}/getTodo",
+				data : {"tdNum":tdNum},
+				dataType : "json",
+				success : function(td){
+					$("#tdTitle").val(td.tdTitle);
+					$("#tdContent").val(td.tdContent);
+				}
+			});
 			$("#modifyTodoModal").fadeIn(300);
 		});
 		$("#closeModifyTodoModal").on("click",function(){
@@ -88,6 +98,9 @@
 			
 			<ul id="todoList">
 				<!-- 아래는 반복적으로 생긴다 -->
+				<c:if test="${empty tList}">
+					<li style="text-align: center; margin-top: 136px; color: #9c9998;">할 일 추가 버튼으로 Todo를 추가하세요.</li>
+				</c:if>
 				<c:forEach items="${tList}" var="td" varStatus="s">
 					<li class="todo" id="${s.index}">
 					<div class="isComplete" data-tdNum="${td.tdNum}" data-isComplete="${td.isComplete}"onclick="checkComplete(${td.tdNum});">
@@ -124,7 +137,7 @@
 						<button class="modifyTodoModalOpen" data-tdNum="${td.tdNum}">수정</button>
 						<button onclick="location.href='removeTodo?tdNum=${td.tdNum}'">삭제</button>
 					</div>
-			</li><%--end todo --%>
+					</li><%--end todo --%>
 				</c:forEach>
 			
 			
@@ -212,13 +225,13 @@
 						<div class="row">
 							<h4>할 일 이름</h4>
 							<div>
-								<input type="text" placeholder="할 일 이름" name="tdTitle" style="width:465px">
+								<input type="text" placeholder="할 일 이름" name="tdTitle" style="width:465px" id="tdTitle">
 							</div>
 						</div>
 						<div class="row">
 							<h4>할 일 내용</h4>
 							<div>								
-								<input type="text" placeholder="무슨 일을 해야하나요?" name="tdContent" style="width:465px">
+								<input type="text" placeholder="무슨 일을 해야하나요?" name="tdContent" style="width:465px" id="tdContent">
 							</div>
 						</div>
 						<div class="row">

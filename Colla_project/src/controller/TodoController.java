@@ -107,10 +107,10 @@ public class TodoController {
 		return "redirect:todoMain?pNum="+pNum;
 	}
 	@ResponseBody
-	@RequestMapping(value="/getTodo", method = RequestMethod.POST)
-	public Todo getTodo(int tdNum) {
-		Todo todoTmp = tService.getTodo(tdNum);
-		return todoTmp;
+	@RequestMapping("/getTodo")
+	public Todo getTodo(@RequestParam("tdNum")int tdNum) {
+		Todo todo = tService.getTodo(tdNum);
+		return todo;
 	}
 	@ResponseBody
 	@RequestMapping(value="/getAllTodoByPnum", method = RequestMethod.POST)

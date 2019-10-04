@@ -78,9 +78,9 @@
   background-color: #EC6D63; /* Set a background color */
   color: white; /* Text color */
   cursor: pointer; /* Add a mouse pointer on hover */
-  padding: 15px; /* Some padding */
-  border-radius: 10px; /* Rounded corners */
-  font-size: 18px; /* Increase font size */
+  padding: 8px 12px 8px 12px;
+  border-radius: 4px;
+  font-size: 13px;
 }
 #btn_page_top:hover {
   background-color: #CFCCCF; /* Add a dark-grey background on hover */	
