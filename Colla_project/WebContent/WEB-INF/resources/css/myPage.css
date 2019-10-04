@@ -321,28 +321,31 @@
 	border: 1px solid #DADCE0;
 	border-radius: 6px;
 	width: 700px;
-	height: 90px;
-	padding: 30px;
+	height: 130px;
+	padding: 10px;
 	margin: 15px auto;
 	position: relative;
 	cursor: pointer;
 }
 
 .myPageContent .myPageModule>img {
-	height: 100px;
+	height: 88%;
     position: absolute;
-    right: 55px;
+    right: 35px;
 }
 
 .myPageContent .myPageModule:hover {
 	background-color: #DADCE0;
 }
-
+.myPageModule .title, .content {
+	margin: 20px 15px 0px;
+}
 .myPageModule .title {
 	font-size: 20px;
-	margin-bottom: 15px;
 }
-
+.myPageModule .title, .myPageModule .content {
+	margin: 20px 15px 0px;
+}
 .checkPass {
 	width: 422px;
 	text-align: center;
