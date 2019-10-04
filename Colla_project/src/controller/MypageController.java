@@ -66,10 +66,6 @@ public class MypageController {
 		return "/myPage/myPageAccount";
 	}
 
-	/*
-	 * @RequestMapping(value = "/myPageCheckPassForm", method = RequestMethod.GET)
-	 * public String myPageCheckPassForm() { return "/myPage/myPageCheckPass"; }
-	 */
 	@RequestMapping(value = "/profileImgModifyForm", method = RequestMethod.GET)
 	public String profileImgModifyForm() {
 		return "/myPage/profileImgModify";
@@ -110,7 +106,7 @@ public class MypageController {
 		Member member = memberService.getMemberByEmail((String) session.getAttribute("userEmail"));
 		model.addAttribute("member", member);
 		model.addAttribute("useLicense", licenseService.getUseLicense(member.getNum()));
-		
+
 		model.addAttribute("licenseList", licenseService.getLicenseList(member.getNum()));
 		return "/myPage/myPageLicense";
 	}
@@ -146,24 +142,24 @@ public class MypageController {
 
 	@RequestMapping(value = "/modifyName", method = RequestMethod.POST)
 	public String modifyName(String name, HttpSession session) {
-		String email = (String)session.getAttribute("userEmail");
-		if(memberService.modifyMemberName(name,email)) {
+		String email = (String) session.getAttribute("userEmail");
+		if (memberService.modifyMemberName(name, email)) {
 			session.setAttribute("user", memberService.getMemberByEmail(email));
 			return "redirect:myPageAccountForm";
 		}
 		return "redirect:nameModifyForm";
 	}
-	
+
 	@ResponseBody
 	@RequestMapping(value = "/myPageCheckPass", method = RequestMethod.POST)
 	public boolean myPageCheckPass(String pw, HttpSession session) {
 		String emailAddress = (String) session.getAttribute("userEmail");
 		boolean result = memberService.checkPass(emailAddress, pw);
 		if (result) { // 비밀번호 일치
-			//return "redirect:pwModifyForm";
+			// return "redirect:pwModifyForm";
 			return true;
 		} else { // 비밀번호 불일치
-			//return "redirect:checkPassForm?checkPass=fail";
+			// return "redirect:checkPassForm?checkPass=fail";
 			return false;
 		}
 	}

@@ -43,9 +43,13 @@
 											</tr>
 											<c:forEach items="${licenseList }" var="license">
 												<tr>
-													<td>${license.type }</td>
-													<td>${license.startDate }</td>
-													<td>${license.endDate }</td>
+													<td>${licenseList.ORDERID }</td>
+													<td>${licenseList.STARTDATE }</td>
+													<td>${licenseList.PAYDATE }</td>
+													<td>${licenseList.AMOUNT }</td>
+													<td>${licenseList.TYPE }</td>
+													<td>${licenseList.ENDDATE }</td>
+													<td>${licenseList.PAYMETHOD }</td>
 												</tr>
 											</c:forEach>
 										</table>

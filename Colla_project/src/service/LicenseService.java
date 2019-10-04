@@ -28,7 +28,7 @@ public class LicenseService {
 		return licenseDao.selectUseLicense(mNum);
 	}
 	
-	public List<License> getLicenseList(int mNum){
+	public List<Map<String,Object>> getLicenseList(int mNum){
 		System.out.println(licenseDao.selectAllLicense(mNum));
 		return licenseDao.selectAllLicense(mNum);
 	}
