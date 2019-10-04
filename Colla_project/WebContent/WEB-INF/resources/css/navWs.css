@@ -1,4 +1,7 @@
 @charset "UTF-8";
+.attachModal[id="memberInfoModal"] h3{
+	margin-top: 14px;
+}
 .attachModal h4{
 	display: inline-block;
 }

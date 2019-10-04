@@ -315,10 +315,10 @@ $(function(){
 		$("#chatRoomInfo > p").text("${sessionScope.currWname}");
 	}
 	
-	$(".modalHead").mousedown(function(){
+	$(".header").mousedown(function(){
 		$(".attachModal").draggable();
 	});
-	$(".modalHead").on("mouseup",function(){
+	$(".header").on("mouseup",function(){
 		$(".attachModal").draggable("destroy");
 	});
 	
