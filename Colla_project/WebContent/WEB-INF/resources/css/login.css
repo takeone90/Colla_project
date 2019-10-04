@@ -31,7 +31,7 @@
 .header {
   position:relative;
   text-align:center;
-  background: linear-gradient(60deg, rgba(236, 109, 99,1) 0%, rgba(236, 109, 99,1) 100%); /* 파도 색깔 */
+  background: linear-gradient(60deg, rgba(236, 109, 99, 1) 0%, rgba(236, 109, 99, 1) 100%); /* 파도 색깔 */
   color:white;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
