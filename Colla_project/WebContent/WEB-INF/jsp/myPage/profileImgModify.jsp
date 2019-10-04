@@ -150,7 +150,7 @@
 			<h3>마이페이지</h3>
 			<h4>프로필 수정</h4>
 			<div class="myPageInner">
-				<div class ="myPageModify">
+				<div class ="myPageModify profileModify">
 					<p>프로필 이미지를 변경해주세요!</p>	
 					<form class="profileImgForm" enctype="multipart/form-data" method="post">
 						<div id="profileImg">
@@ -161,7 +161,7 @@
 							<input type="file" id="attachImgBtn" name="profileImg" value="사진 선택" accept="image/*" multiple>
 							<label for="attachImgBtn">프로필 변경</label>
 							<input type="button" id="defalutImgBtn">
-							<label for="defalutImgBtn">기본이미지 변경</label>
+							<label for="defalutImgBtn">기본이미지</label>
 						</div>
 						<div class="row btns">
 							<button class="btn imgUpload" >적용</button>
@@ -172,7 +172,7 @@
 			</div><!-- myPageInner -->
 		</div>
 		<%---------------------------------------------프로필 이미지 크롭 모달 ----------------------------------------------------%>
-		<div id="CropImgModal" class="attachModal">
+		<div id="CropImgModal" class="attachModal ui-widget-content">
 			<div class="modalHead">
 				<h3 style="font-weight: bolder; font-size: 30px">프로필 이미지 선택</h3>
 			</div>
@@ -183,7 +183,7 @@
 						<img src="" id="cropImg">
 					</div>
 					<div id="innerBtn">
-						<a href="#" class="cropImgBtn">확인</a><br> 
+						<a href="#" class="cropImgBtn">확인</a>
 						<a href="#" class="closeCropImgModal">닫기</a>
 					</div>
 				</form>

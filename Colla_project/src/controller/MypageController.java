@@ -106,7 +106,6 @@ public class MypageController {
 		Member member = memberService.getMemberByEmail((String) session.getAttribute("userEmail"));
 		model.addAttribute("member", member);
 		model.addAttribute("useLicense", licenseService.getUseLicense(member.getNum()));
-
 		model.addAttribute("licenseList", licenseService.getLicenseList(member.getNum()));
 		return "/myPage/myPageLicense";
 	}
