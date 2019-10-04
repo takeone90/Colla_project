@@ -133,7 +133,8 @@
 			<a href="${contextPath }/myPageMainForm">
 				<img alt="나의 프로필 사진" src="${contextPath }/showProfileImg" />
 			</a>
-			<p>${member.name}님</p>
+			<a href="${contextPath }/myPageMainForm"><p>${member.name}님</p></a>
+			<%-- <p>${member.name}님</p> --%>
 		</div>
 		<!-- 로그아웃버튼 -->
 		<div>

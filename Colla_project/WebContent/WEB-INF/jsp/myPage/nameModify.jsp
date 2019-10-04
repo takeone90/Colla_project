@@ -22,7 +22,7 @@
 			<h3>마이페이지</h3>
 			<h4>이름 수정</h4>
 			<div class="myPageInner">
-				<div class ="myPageModify">
+				<div class ="myPageModify nameModify">
 					<p>이름을 변경해주세요!</p>
 					<form action="modifyName" class="modifyName" method="post">
 						<input type="text" name="name" id="name" value="${member.name}" class="content">
