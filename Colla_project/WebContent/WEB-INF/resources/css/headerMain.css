@@ -30,6 +30,7 @@
 }
 #header nav {  
 	position:relative;
+	margin-left : 64px;
 	width:calc(100% - 600px);
 	height:100%;
 	float:left;

@@ -1,7 +1,8 @@
 @charset "UTF-8";
 .attachModal h3{
-	font-size:23px;
-	font-weight: 700;
+	font-size: 25px;
+    font-weight: 700;
+    color: white;
 }
 #wsBodyContainer h2{
 	color : #403C39;
