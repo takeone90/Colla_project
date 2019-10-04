@@ -359,6 +359,7 @@ td {
 .checkboxDiv label {
     margin-left: 2px;
     padding: 0px 4px;
+    font-size: 12px;
 }
 .checkboxbtn {
     font-size: 1rem;
