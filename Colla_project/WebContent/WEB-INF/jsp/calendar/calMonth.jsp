@@ -902,11 +902,15 @@ function nextYearYear() {
 						<h4>내용</h4>
 						<p class="modalContent" id="detailContent"></p>
 					</div>
-					<div id="innerBtn">
-						<a href="#" id="modifyFormOpen">수정</a>
-						<a href="#" id="deleteSchedule">삭제</a>
-						<a href="#" id="detailFormClose">닫기</a>
-					</div>
+					<c:set var="type" value="$('#detailType')"></c:set>
+					<c:if test="${#type ne 'project'}"> <!-- type이 project가 아닐 경우.. -->					
+						<div id="innerBtn">
+							<a href="#" id="modifyFormOpen">수정</a>
+							<a href="#" id="deleteSchedule">삭제</a>
+							<a href="#" id="detailFormClose">닫기</a>
+						</div>
+					</c:if>
+					
 				</form>
 			</div>
 		</div>
