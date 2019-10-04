@@ -77,6 +77,7 @@ public class WorkSpaceController {
 			Map<String, Object> wsMap = new HashMap<String, Object>();
 			ChatRoom defaultChatRoom = crService.getDefaultChatRoomByWnum(wNum);
 			wsMap.put("wsInfo", wsList.get(i));
+			wsMap.put("pjList",pService.getAllProjectByMnumWnum(user.getNum(), wNum));
 			wsMap.put("crList", crService.getAllChatRoomByWnumMnum(wNum, user.getNum()));
 			wsMap.put("mList", mService.getAllMemberByWnum(wNum));
 			wsMap.put("defaultCrNum",defaultChatRoom.getCrNum());

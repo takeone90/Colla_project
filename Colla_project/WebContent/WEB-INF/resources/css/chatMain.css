@@ -36,26 +36,26 @@
 	position: relative;
 	opacity: 1;
 	background-color: white;
-	border-bottom: 0.5px solid #bdbbbb;
+	border-bottom: 0.5px solid #dedcdc;
 	padding: 10px;
 }
 .chatMsg:hover{
-	background-color: #edeff0;
+	background-color: #fafafa;
 }
 .myMsg {
 	position: relative;
-	opacity: 1;
-	background-color: #d9f2fa;
-	border-bottom: 0.5px solid #bdbbbb;
-	padding: 10px;
+    opacity: 1;
+    background-color: #f0f2fa;
+    border-bottom: 0.5px solid #dadef0;
+    padding: 10px;
 }
 .myMsg:hover{
-	background-color:#c3e1eb;
+	background-color:#e9eaf2;
 }
 .dateMsg{
 	background-color: white;
 	color : #abaaa9;
-	border-bottom: 0.5px solid #bdbbbb;
+	border-bottom: 0.5px solid #e8e8e8;
 	padding: 10px;
 }
 .chat {
@@ -79,10 +79,9 @@
 	display: inline-block;
 	position : relative;
 	top : 0px;
-	width: 40px;
-	height: 40px;
+	width: 44px;
+    height: 44px;
 	border-radius: 50%;
-	border :  1px solid #bdbbbb;
 	background-color: white;
 	margin-left: 5px;
 	margin-right: 10px;
@@ -191,24 +190,29 @@
 }
 #innerBtn a {
 	display: inline-block;
-	position: relative;
-	width: calc(100% - 26px);
-	padding: 7px;
-	margin-bottom: 5px;
-	background-color: #403C39;
-	color: white;
-	text-align: center;
-	border-radius: 5px;
+    position: relative;
+    width: calc(100% - 384px);
+    padding: 7px;
+    font-weight: 300;
+    font-size: 14px;
+    margin-bottom: 0px;
+    background-color: white;
+    color: #454443;
+    border: 1px solid #bab8b6;
+    text-align: center;
+    margin-right: 5px;
+    border-radius: 3px;
 }
 #innerBtn a:hover{
+	color : white;
 	background-color: #E5675A;
 }
 
 .chatFavorite {
 	display: inline-block;
 	position: relative; 
-	width : 18px;
-	height: 18px;
+	width : 16px;
+	height: 16px;
 	background-image: url("../img/favorite.png");
 	background-size: contain;
 	margin-left: 10px;
@@ -218,8 +222,8 @@
 .chatFavorite.on {
 	display: inline-block;
 	position: relative;
-	width: 18px;
-	height: 18px;
+	width: 16px;
+	height: 16px;
 	background-image: url("../img/favorite_on.png");
 	background-size: contain;
 	margin-left: 10px;
@@ -576,6 +580,8 @@ input[type=radio]{
 	height:100%;    
 	padding: 0;
     line-height: 36px;
+        font-size: 14px;
+    font-weight: 300;
 }
 .navInnerBtn a.btn.active{
 	background-color:#e09189;
@@ -737,4 +743,10 @@ input[type=radio]{
 }
 .listUL-wrap ul li:last-child{
 	margin-bottom:0;
+}
+#codeType{
+	width: 104px;
+    height: 28px;
+    border-radius: 6px;
+    padding: 4px;
 }

@@ -1,5 +1,15 @@
 @charset "UTF-8";
-
+.attachModal h4{
+	display: inline-block;
+}
+.attachModal .memberProfileInfo h4{
+	margin-bottom: 0px;
+    margin-top: 2px;
+    margin-right: 12px;
+}
+.attachModal .memberProfileImg{
+	    margin-top: 0px;
+}
 #wsNav {
 	width:200px;
 	height:100%;
@@ -16,13 +26,13 @@
 	text-align:center;
 }
 #aboutProfile{
-	margin-top:30px;
+	margin-top:20px;
 }
 
 #aboutProfile  a{
 	display:block;
 	border-radius:50%;
-	border:2px solid #fff;
+	border:3px solid #fff;
 	margin:0 auto;
 	width:96px;
 	height:96px;
@@ -84,14 +94,15 @@
 #mainDiv{
     text-align: right;
     position: absolute;
-    bottom: 10px;
-    left: 15px;
-    color: white;
-    
+    bottom: 25px;
+    left: 28px;
 }
 #mainDiv a{
 	font-size: 16px;
     color: white;
+}
+#mainDiv a:hover{
+	color : #E5675A;
 }
 #myChatList h3 svg, #projectDiv h3 svg{
 	font-size : 15px;
@@ -125,13 +136,16 @@
 	color : white;
 }
 #workspaceSelector{
-	width : 90%;
-	padding : 5px;
-	color : white;
-	background-color: #5D829E;
-	border : none;
-	border-radius: 3px;
-	margin-top : 23px;
+	width: 90%;
+    padding: 7px;
+    flex-flow: wrap-reverse;
+    font-size: 13px;
+    font-weight: 300;
+    color: white;
+    background-color: #5D829E;
+    border: none;
+    border-radius: 3px;
+    margin-top: 23px;
 }
 
 #wsNav #memberInfoModal{

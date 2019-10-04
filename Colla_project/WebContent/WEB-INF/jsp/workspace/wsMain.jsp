@@ -37,7 +37,7 @@
 		
 		//WS추가 모달
 		$("#openWsModal").on("click",function(){
-			$(".addInviteMemberDiv").empty();
+// 			$(".addInviteMemberDiv").empty();
 			$("#addWsModal").fadeIn(300);
 		});
 		$("#closeWsModal").on("click",function(){
@@ -59,7 +59,7 @@
 		});
 		//WS Member추가 모달
 		$(".openAddMemberModal").on("click",function(){
-			$(".addInviteMemberDiv").empty();
+// 			$(".addInviteMemberDiv").empty();
 			wNum = $(this).attr("data-wnum");
 			$(".addWnum").val(wNum); //멤버 추가모달에 숨어있는 addWnum 부분에 wNum담기
 			$("#addMemberModal").fadeIn(300);
@@ -101,6 +101,11 @@
 			var addInviteMemberDiv = $(".addInviteMemberDiv");
 			var inputTag = $("<input type='text' placeholder='초대할멤버 이메일' name='targetUserList'>");
 			addInviteMemberDiv.append(inputTag);
+		});
+		$(".removeInviteInput").on("click",function(){
+			var addInviteMemberDiv = $(".addInviteMemberDiv");
+			var lastInputTag = addInviteMemberDiv.find("input:last");
+			lastInputTag.remove();
 		});
 		
 	});// onload.function end
@@ -148,11 +153,26 @@
 					<div class="wsDetail">
 						<input type="hidden" value="${ws.num}" id="wNum">
 						
+						<div class="wsPjList">
+							<p>프로젝트</p>
+							<ul>
+							<c:forEach items="${ws.pjList}" var="pj">
+									<li><a href="todoMain?pNum=${pj.pNum}">${pj.pName}</a></li>
+							</c:forEach>
+							</ul>
+						</div>
+						
 						<div class="wsChatList">
 							<p>채팅리스트</p>
 							<ul>
 							<c:forEach items="${ws.crList}" var="cr">
+								<c:if test="${cr.pNum ne 0}">
+									<li><a href="chatMain?crNum=${cr.crNum}"><i class="fab fa-product-hunt"></i> ${cr.crName}</a></li>
+								</c:if>
+								<c:if test="${cr.pNum eq 0}">
 									<li><a href="chatMain?crNum=${cr.crNum}">${cr.crName}</a></li>
+								</c:if>
+									
 							</c:forEach>
 								<a href="#" class="openChatModal" data-wnum="${ws.wsInfo.num}">+</a>
 							</ul>
@@ -220,14 +240,15 @@
 							<div class="addInviteMemberDiv">
 								<input type="text" placeholder="초대할멤버 이메일" name="targetUserList">
 							</div>
-							<div class="addInviteRoundBox" align="center">
-								<a href="#" class="addInviteInput">+</a>
+							<div class="inviteRoundBox" align="center">
+								<a href="#" class="addInviteInput">추가</a>
+								<a href="#" class="removeInviteInput">삭제</a>
 							</div>
 						</div>
 					</div> <!-- end addWsInputWrap -->
 
 					<div id="modalBtnDiv">
-						<button type="submit">workspace만들기</button>
+						<button type="submit">생성</button>
 						<button id="closeWsModal">닫기</button>
 					</div>
 				</form>
@@ -282,8 +303,9 @@
 							<div class="addInviteMemberDiv">
 								<input type="text" placeholder="초대할멤버 이메일" name="targetUserList">
 							</div>
-							<div class="addInviteRoundBox" align="center">
-								<a href="#" class="addInviteInput">+</a>
+							<div class="inviteRoundBox" align="center">
+								<a href="#" class="addInviteInput">추가</a>
+								<a href="#" class="removeInviteInput">삭제</a>
 							</div>
 						</div>
 					</div> <!-- end addMemberInputWrap -->

@@ -74,9 +74,20 @@
 	display:inline-block; 
 	
 }
+.tdMemberInfo p{
+	margin-top: 3px;
+    text-align: center;
+    font-size: 13px;
+    font-weight: 500;
+    color: #544f4d;
+}
+#wsBodyContainer .tdInfo-titleContent h4{
+	color : #454241;
+}
 .tdInfo-titleContent{
 	display: inline-block;
     margin-left: 16px;
+    color: #454241;
     vertical-align: top;
     margin-top: 13px;
 }

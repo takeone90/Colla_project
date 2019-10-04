@@ -336,7 +336,11 @@ var staticMap = null;
 		var favorite = "<div class='"+isFavoriteClass+"' onclick='chatFavorite(this)' value = '"+ msgInfo.cmNum +"'></div>"; //즐겨찾기 아이콘
 		var originName = getOriginName(msgInfo.cmContent);
 		var date = new Date(msgInfo.cmWriteDate);
-		var writeTime = date.getFullYear()+"-"+(Number(date.getMonth())+Number(1))+"-"+date.getDate()+" "+date.getHours()+"시"+date.getMinutes()+"분";
+		if(area=="favorite"){
+		var writeTime = date.getFullYear()+"년 "+(Number(date.getMonth())+Number(1))+"월 "+date.getDate()+"일 "+date.getHours()+"시 "+date.getMinutes()+"분";			
+		}else{
+		var writeTime = date.getHours()+"시 "+date.getMinutes()+"분";			
+		}
 		var contentStr;
 		var codeType;
 		if(msgInfo.cmType=='message'){
@@ -1043,7 +1047,7 @@ var staticMap = null;
 					</div> <!-- end addFileInputWrap -->
 
 					<div id="innerBtn">
-						<a href="#" class="fileUploadBtn">업로드</a><br> 
+						<a href="#" class="fileUploadBtn">업로드</a>
 						<a href="#" class="closeFileModal">닫기</a>
 					</div>
 				</form>
@@ -1105,8 +1109,8 @@ var staticMap = null;
 						</script>
 					</div>
 					<div id="innerBtn"  align="center">
-					<a href="#" class="codeUpload">업로드</a><br> 
-					<a href="#" class="closeCodeModal">닫기</a><br>
+					<a href="#" class="codeUpload">업로드</a>
+					<a href="#" class="closeCodeModal">닫기</a>
 					</div>
 			</div> <!-- end modalBody -->
 		</div><!-- end addCodeModal -->
