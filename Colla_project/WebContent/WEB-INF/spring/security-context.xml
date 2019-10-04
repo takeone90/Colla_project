@@ -29,7 +29,7 @@
 	<security:authentication-manager>
 		<security:authentication-provider
 			user-service-ref="memberDetailsService">
-<!-- 			<security:password-encoder ref="bcryptPasswordEncoder" />
- -->		</security:authentication-provider>
+			<security:password-encoder ref="bcryptPasswordEncoder" />
+		</security:authentication-provider>
 	</security:authentication-manager>
 </beans>

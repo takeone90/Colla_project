@@ -17,10 +17,10 @@
 		from license 
 		where l_end_date >= sysdate and m_num = #{mNum}
 	</select>
-	<select id="selectAllLicense" resultMap="licenseMap">
-		select p.pm_order_id,l.l_type, l.l_start_date, l.l_end_date, p.pm_date,p.pm_amount, pm_method
+	<select id="selectAllLicense" resultType="map">
+		select p.pm_order_id as orderId,l.l_type as type, l.l_start_date as startDate, l.l_end_date as endDate, p.pm_date as payDate,p.pm_amount as amount, pm_method as payMethod
 		from license l, payment p
-		where l.m_num = 297 and l.pm_order_id = p.pm_order_id
+		where l.m_num = #{param1} and l.pm_order_id = p.pm_order_id
 		order by p.pm_date desc
 	</select>
 	<resultMap type="license" id="licenseMap">
