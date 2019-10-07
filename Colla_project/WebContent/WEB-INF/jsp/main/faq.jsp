@@ -80,7 +80,9 @@ $(function() {
 								</div> <!-- 제목 -->
 								<div class="answer">
 									<div class="a">A</div>
-									<div class="answer-detail">채팅방 오른쪽에 있는 슬라이드 메뉴를 열어서 즐겨찾기,<br>멤버관리, 검색 등 다양한 기능을 사용하실 수 있습니다.</div>
+									<div class="answer-detail" style="width: 478px;">
+									채팅방 오른쪽에 있는 슬라이드 메뉴를 열어서 즐겨찾기,멤버관리, 검색 등 다양한 기능을 사용하실 수 있습니다.
+									</div>
 								</div> <!-- 내용 -->
 							</div>
 							<div class="FAQ-box"> <!-- 질문 1개 -->
@@ -89,7 +91,9 @@ $(function() {
 								</div> <!-- 제목 -->
 								<div class="answer">
 									<div class="a">A</div>
-									<div class="answer-detail">채팅방 오른쪽에 있는 슬라이드 메뉴를 열어서 즐겨찾기,<br>멤버관리, 검색 등 다양한 기능을<br>사용하실 수 있습니다.</div>
+									<div class="answer-detail" style="width: 478px;">
+									채팅방 오른쪽에 있는 슬라이드 메뉴를 열어서 즐겨찾기,멤버관리, 검색 등 다양한 기능을 사용하실 수 있습니다.
+									</div>
 								</div> <!-- 내용 -->
 							</div>
 							<div class="FAQ-box"> <!-- 질문 1개 -->
@@ -98,7 +102,9 @@ $(function() {
 								</div> <!-- 제목 -->
 								<div class="answer">
 									<div class="a">A</div>
-									<div class="answer-detail">채팅방 오른쪽에 있는 슬라이드 메뉴를 열어서 즐겨찾기,<br>멤버관리, 검색 등 다양한 기능을<br>사용하실<br>수 있습니다.</div> <!-- 내용 -->
+									<div class="answer-detail" style="width: 478px;">
+									채팅방 오른쪽에 있는 슬라이드 메뉴를 열어서 즐겨찾기,멤버관리, 검색 등 다양한 기능을 사용하실 수 있습니다.
+									</div>
 								</div> <!-- 내용 -->
 							</div>
 							<div class="FAQ-box"> <!-- 질문 1개 -->
@@ -107,7 +113,9 @@ $(function() {
 								</div> <!-- 제목 -->
 								<div class="answer">
 									<div class="a">A</div>
-									<div class="answer-detail">채팅방 오른쪽에 있는 슬라이드 메뉴를 열어서 즐겨찾기,<br>멤버관리, 검색 등 다양한 기능을 사용하실 수 있습니다.</div> <!-- 내용 -->
+									<div class="answer-detail" style="width: 478px;">
+									채팅방 오른쪽에 있는 슬라이드 메뉴를 열어서 즐겨찾기,멤버관리, 검색 등 다양한 기능을 사용하실 수 있습니다.
+									</div>
 								</div> <!-- 내용 -->
 							</div>
 							<div class="FAQ-box"> <!-- 질문 1개 -->
@@ -116,7 +124,9 @@ $(function() {
 								</div> <!-- 제목 -->
 								<div class="answer">
 									<div class="a">A</div>
-									<div class="answer-detail">채팅방 오른쪽에 있는 슬라이드 메뉴를 열어서 즐겨찾기,<br>멤버관리, 검색 등 다양한 기능을 사용하실 수 있습니다.</div> <!-- 내용 -->
+									<div class="answer-detail" style="width: 478px;">
+									채팅방 오른쪽에 있는 슬라이드 메뉴를 열어서 즐겨찾기,멤버관리, 검색 등 다양한 기능을 사용하실 수 있습니다.
+									</div>
 								</div> <!-- 내용 -->
 							</div>
 						</div>
@@ -127,44 +137,54 @@ $(function() {
 								</div> <!-- 제목 -->
 								<div class="answer">
 									<div class="a">A</div>
-									<div class="answer-detail">채팅방 오른쪽에 있는 슬라이드 메뉴를 열어서 즐겨찾기,<br>멤버관리, 검색 등 다양한 기능을 사용하실 수 있습니다.</div>
-								</div> <!-- 내용 -->
+									<div class="answer-detail" style="width: 478px;">
+									채팅방 오른쪽에 있는 슬라이드 메뉴를 열어서 즐겨찾기,멤버관리, 검색 등 다양한 기능을 사용하실 수 있습니다.
+									</div>
+								</div> 
 							</div>
-							<div class="FAQ-box"> <!-- 질문 1개 -->
+							<div class="FAQ-box"> 
 								<div class="question">
 									<div>Q</div>라이선스를 중간에 환불받을 수 있나요?<p class="icon"><i class="fas fa-angle-down"></i></p>
-								</div> <!-- 제목 -->
+								</div> 
 								<div class="answer">
 									<div class="a">A</div>
-									<div class="answer-detail">채팅방 오른쪽에 있는 슬라이드 메뉴를 열어서 즐겨찾기,<br>멤버관리, 검색 등 다양한 기능을<br>사용하실 수 있습니다.</div>
-								</div> <!-- 내용 -->
+									<div class="answer-detail" style="width: 478px;">
+									채팅방 오른쪽에 있는 슬라이드 메뉴를 열어서 즐겨찾기,멤버관리, 검색 등 다양한 기능을 사용하실 수 있습니다.
+									</div>
+								</div> 
 							</div>
-							<div class="FAQ-box"> <!-- 질문 1개 -->
+							<div class="FAQ-box"> 
 								<div class="question">
 									<div>Q</div>잘못 결제한 라이선스를 취소할 수 있나요?<p class="icon"><i class="fas fa-angle-down"></i></p>
-								</div> <!-- 제목 -->
+								</div> 
 								<div class="answer">
 									<div class="a">A</div>
-									<div class="answer-detail">채팅방 오른쪽에 있는 슬라이드 메뉴를 열어서 즐겨찾기,<br>멤버관리, 검색 등 다양한 기능을<br>사용하실<br>수 있습니다.</div> <!-- 내용 -->
-								</div> <!-- 내용 -->
+									<div class="answer-detail" style="width: 478px;">
+									채팅방 오른쪽에 있는 슬라이드 메뉴를 열어서 즐겨찾기,멤버관리, 검색 등 다양한 기능을 사용하실 수 있습니다.
+									</div>
+								</div> 
 							</div>
-							<div class="FAQ-box"> <!-- 질문 1개 -->
+							<div class="FAQ-box"> 
 								<div class="question">
 									<div>Q</div>한 계정으로 여러 대 PC에서 사용이 가능한가요?<p class="icon"><i class="fas fa-angle-down"></i></p>
-								</div> <!-- 제목 -->
+								</div> 
 								<div class="answer">
 									<div class="a">A</div>
-									<div class="answer-detail">채팅방 오른쪽에 있는 슬라이드 메뉴를 열어서 즐겨찾기,<br>멤버관리, 검색 등 다양한 기능을 사용하실 수 있습니다.</div> <!-- 내용 -->
-								</div> <!-- 내용 -->
+									<div class="answer-detail" style="width: 478px;">
+									채팅방 오른쪽에 있는 슬라이드 메뉴를 열어서 즐겨찾기,멤버관리, 검색 등 다양한 기능을 사용하실 수 있습니다.
+									</div>
+								</div> 
 							</div>
-							<div class="FAQ-box"> <!-- 질문 1개 -->
+							<div class="FAQ-box"> 
 								<div class="question">
 									<div>Q</div>워크스페이스에 멤버를 초대하려면 어떻게 하나요?<p class="icon"><i class="fas fa-angle-down"></i></p>
-								</div> <!-- 제목 -->
+								</div> 
 								<div class="answer">
 									<div class="a">A</div>
-									<div class="answer-detail">채팅방 오른쪽에 있는 슬라이드 메뉴를 열어서 즐겨찾기,<br>멤버관리, 검색 등 다양한 기능을 사용하실 수 있습니다.</div> <!-- 내용 -->
-								</div> <!-- 내용 -->
+									<div class="answer-detail" style="width: 478px;">
+									채팅방 오른쪽에 있는 슬라이드 메뉴를 열어서 즐겨찾기,멤버관리, 검색 등 다양한 기능을 사용하실 수 있습니다.
+									</div>
+								</div> 
 							</div>
 						</div>
 					</div>

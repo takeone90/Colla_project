@@ -174,7 +174,7 @@ public class TodoController {
 		System.out.println("사용자가 변경한 순서  : " + priorityArray);
 		for(int i=0;i<todoList.size();i++) {
 			Todo todo = todoList.get(i);
-			System.out.println();
+//			System.out.println();
 			int tdNum = todo.getTdNum();
 			int tdindex = priorityArray.indexOf(tdNum);
 			todo.setPriority(tdindex);

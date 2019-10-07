@@ -204,6 +204,7 @@ public class WorkSpaceController {
 		List<WorkspaceInvite> wiList = wiService.getWorkspaceInviteByTargetUser(userEmail,wNum);
 		WorkspaceInvite wi = wiList.get(0);
 		if(wi!=null) {
+			System.out.println("여기 진입");
 			if(mService.getMemberByEmail(userEmail)!=null) {
 				//회원이다.
 				Member member = mService.getMemberByEmail(userEmail);
@@ -217,6 +218,7 @@ public class WorkSpaceController {
 				}
 			}else {
 				//비회원이다
+				System.out.println("여기 진입");
 				session.setAttribute("inviteUserEmail", userEmail);
 				session.setAttribute("inviteWnum", wNum);
 				wiService.removeWorkspaceInvite(userEmail, wNum);
@@ -275,7 +277,7 @@ public class WorkSpaceController {
 					"				워크스페이스 초대를 수락하려면 아래 버튼을 누르세요 </p>\r\n" + 
 					"				<div>\r\n" + 
 					"					<div style=\"background-color: rgba(255, 255, 255,0.2);width: 120px;border-radius: 10px;margin: 10px auto;text-align:center;\">\r\n" + 
-					"						<a  style='color: #EB6C62;font-size: 18px;font-weight: bolder; line-height: 40.5px; text-decoration:none; display: block;' href='http://localhost:8081/Colla_project/addMember?id="+emailAddress+"&wNum="+wNum+"'> 초대 수락</a>\r\n" + 
+					"						<a  style='color: #EB6C62;font-size: 18px;font-weight: bolder; line-height: 40.5px; text-decoration:none; display: block;' href='http://localhost:8081/addMember?id="+emailAddress+"&wNum="+wNum+"'> 초대 수락</a>\r\n" + 
 					"					</div>\r\n" + 
 					"				</div> \r\n" + 
 					"		</div>\r\n" + 
