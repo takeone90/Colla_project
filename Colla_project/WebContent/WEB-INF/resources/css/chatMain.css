@@ -644,8 +644,11 @@ input[type=radio]{
     margin-left: 7px;
 }
 #searchInput{
-	margin-top : 20px;
-	margin-bottom : 10px;
+	width:98%;
+	margin:20px 1% 10px;
+}
+#searchInput * {
+	vertical-align:middle;
 }
 #searchContent{
 	width : 98%;
@@ -668,10 +671,13 @@ input[type=radio]{
 }
 #keywordType{
 	padding : 5px;
+	border: 1px solid #D1D1D1;
+    border-radius: 5px;
+    line-height: 30px;
+    height: 30px;
 }
 #keyword{
-	width : 65%;
-	padding : 5px;
+	width : 60%;
 	margin-left : 5px;
 	margin-right : 5px;
 	border-radius: 5px;
@@ -755,7 +761,7 @@ input[type=radio]{
 #addForm{
 	padding: 20px;
 	width: calc(100% - 40px);
-	height: calc(100% - 40px);
+	height: calc(100% - 42px);
 }
 #addForm .modalHead h3 { 
 	font-size:25px ;

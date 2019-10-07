@@ -911,7 +911,7 @@ var staticMap = null;
 <!-- 							<div id="pageNav"></div> -->
 						</div>
 						<div id="nav--schedule" class="navContent-wrap">
-							<div id="addForm" class="ui-widget-content">
+							<div id="addForm">
 								<div class="modalHead">
 									<h3>일정 추가</h3>
 									<p>채팅방에서 일정을 추가하실 수 있습니다.<br/>추가한 일정은 Calendar에서 확인 가능합니다.</p>
