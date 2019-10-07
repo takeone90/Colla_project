@@ -111,6 +111,11 @@ function duplicateConnect(){
 		        window.location.href="/logout?type=duplicated";
 			}
 	    });// end subcribe
+	    
+	  	//system 문구 출력
+		stompClient.subscribe("/category/systemMsg/"+crNum,function(data){
+			alert("data.body : " + data.body);
+	    });// end subcribe
 		
 	}); //end connect
 }// end duplicateConnect
