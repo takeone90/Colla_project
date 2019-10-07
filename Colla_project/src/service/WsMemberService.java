@@ -74,5 +74,8 @@ public class WsMemberService {
 	public List<WsMember> getAllWsMemberByWnum(int wNum){
 		return dao.selectAllWsMemberByWnum(wNum);
 	}
+	public ChatRoom getDefaultChatRoomByWnum(int wNum) {
+		return crDao.selectDefaultChatRoomByWnum(wNum);
+	}
 	
 }

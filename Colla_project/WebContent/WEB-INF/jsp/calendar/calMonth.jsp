@@ -830,8 +830,8 @@ function nextYearYear() {
 					c35.9,1.6,59.7-2.9,70.8-13.6c8.9-8.6,11.1-22.9,13.5-39.6c6.3-42,14.8-99.4,141.4-99.4h41L333,166c-12.6,16-45.4,68.2-31.2,96.2	
 					c9.2,18.3,41.5,25.6,91.2,24.2l1.1,39.8C390.5,326.2,387.1,326.3,383.8,326.3z" /></g>
 					</svg>
-					<div class="joinBox-Head">
-						<h3 style='font-weight: bolder; font-size: 30px'>일정 추가</h3>
+					<div class="modalHead">
+						<h3 style='font-weight: bolder; font-size: 30px; color: white'>일정 추가</h3>
 						<p>일정을 추가하고 멤버들과 공유하세요.</p>
 					</div>
 				</div>			
@@ -856,7 +856,7 @@ function nextYearYear() {
 						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 						<input type="hidden" name="mNum" id="mNum" value="${userData.mNum}">
 						<input type="hidden" name="wNum" id="wNum" value="${userData.wNum}">
-						<div>
+						<div class="firstRow">
 							<div class="titleDiv">
 								<h4>일정</h4>
 								<input type="text" name="title" class="modalTitle" id="title">
@@ -874,21 +874,23 @@ function nextYearYear() {
 								<input type="color" name="color" id="addColor" value="#ffffff">
 							</div>
 						</div>
-						<div class="dateDiv">
-							<h4>기간</h4>
-							<div><input type="text" name="startDate" id="startDate" class="datepicker"></div>
-							<span>~</span>
-							<div><input type="text" name="endDate" id="endDate" class="datepicker"></div>
+						<div class="middleRow">
+							<div class="dateDiv">
+								<h4>기간</h4>
+								<div><input type="text" name="startDate" id="startDate" class="datepicker"></div>
+								<span>~</span>
+								<div><input type="text" name="endDate" id="endDate" class="datepicker"></div>
+							</div>
+							<div class="checkboxDiv">
+								<input type="checkbox" name="yearCalendar" id="addYearCalendar" value="yearCalendar">
+								<label class="checkboxbtn" for="addYearCalendar">연간 달력</label> 	
+								<input type="checkbox" name="annually" id="addAnnually" value="annually">
+								<label class="checkboxbtn" for="addAnnually">매년 반복</label>				
+								<input type="checkbox" name="monthly" id="addMonthly" value="monthly">
+								<label class="checkboxbtn" for="addMonthly">매월 반복</label>
+							</div>
 						</div>
-						<div class="checkboxDiv">
-							<input type="checkbox" name="yearCalendar" id="addYearCalendar" value="yearCalendar">
-							<label class="checkboxbtn" for="addYearCalendar">연간 달력</label> 	
-							<input type="checkbox" name="annually" id="addAnnually" value="annually">
-							<label class="checkboxbtn" for="addAnnually">매년 반복</label>				
-							<input type="checkbox" name="monthly" id="addMonthly" value="monthly">
-							<label class="checkboxbtn" for="addMonthly">매월 반복</label>
-						</div>
-						<div>
+						<div class="lastRow">
 							<h4>내용</h4>
 							<textarea rows="3" cols="21" name="content" class="modalContent" id="content"></textarea>
 						</div>
@@ -913,7 +915,7 @@ function nextYearYear() {
 					c9.2,18.3,41.5,25.6,91.2,24.2l1.1,39.8C390.5,326.2,387.1,326.3,383.8,326.3z" /></g>
 					</svg>
 					<div class="joinBox-Head">
-						<h3 style='font-weight: bolder; font-size: 30px'>일정 상세</h3>
+						<h3 style='font-weight: bolder; font-size: 30px; color: white'>일정 상세</h3>
 						<p>일정을 자세하게 보여드릴게요.</p>
 					</div>
 				</div>			
@@ -932,15 +934,13 @@ function nextYearYear() {
 					</svg>
 				</div><!--파도 end-->
 			</div><!--header end-->
-			
-			
 			<div class="modalBody">
 				<form class="detailModal">
 					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"> 
 					<input type="hidden" name="cNum" id="detailCNum">
 					<input type="hidden" name="mNum" id="mNum" value="${userData.mNum}">
 					<input type="hidden" name="wNum" id="wNum" value="${userData.wNum}">
-					<div>
+					<div class="firstRow">
 						<div class="titleDiv">						
 							<h4>일정</h4>
 							<p class="modalTitle" id="detailTitle"></p>
@@ -950,28 +950,29 @@ function nextYearYear() {
 							<p id="detailType"></p>
 						</div>
 					</div>
-					<div class="dateDiv">
-						<h4>기간</h4>
-						<p>
-							<span id="detailStartDate"></span>
-							<span>~</span>
-							<span id="detailEndDate"></span>
-						</p>
-					</div>
-					<div class="checkboxDiv">
-						<input type="checkbox" name="yearCalendar" id="detailYearCalendar" value="yearCalendar" onclick="return false;">
-						<label class="checkboxbtn" for="detailYearCalendar">연간 달력</label> 	
-						<input type="checkbox" name="annually" id="detailAnnually" value="annually" onclick="return false;">
-						<label class="checkboxbtn" for="detailAnnually">매년 반복</label>				
-						<input type="checkbox" name="monthly" id="detailMonthly" value="monthly" onclick="return false;">
-						<label class="checkboxbtn" for="detailMonthly">매월 반복</label>
-					</div>						
-					<div>
+					<div class="middleRow">
+						<div class="dateDiv">
+							<h4>기간</h4>
+							<p id="detailDate">
+								<span id="detailStartDate"></span>
+								<span>~</span>
+								<span id="detailEndDate"></span>
+							</p>
+						</div>
+						<div class="checkboxDiv">
+							<input type="checkbox" name="yearCalendar" id="detailYearCalendar" value="yearCalendar" onclick="return false;">
+							<label class="checkboxbtn" for="detailYearCalendar">연간 달력</label> 	
+							<input type="checkbox" name="annually" id="detailAnnually" value="annually" onclick="return false;">
+							<label class="checkboxbtn" for="detailAnnually">매년 반복</label>				
+							<input type="checkbox" name="monthly" id="detailMonthly" value="monthly" onclick="return false;">
+							<label class="checkboxbtn" for="detailMonthly">매월 반복</label>
+						</div>	
+					</div>					
+					<div class="lastRow">
 						<h4>내용</h4>
 						<p class="modalContent" id="detailContent"></p>
 					</div>
-					<div id="innerBtnDetail">			
-					</div>
+					<div id="innerBtnDetail"></div>
 				</form>
 			</div>
 		</div>
@@ -988,7 +989,7 @@ function nextYearYear() {
 					c9.2,18.3,41.5,25.6,91.2,24.2l1.1,39.8C390.5,326.2,387.1,326.3,383.8,326.3z" /></g>
 					</svg>
 					<div class="joinBox-Head">
-						<h3 style='font-weight: bolder; font-size: 30px'>일정 수정</h3>
+						<h3 style='font-weight: bolder; font-size: 30px; color: white'>일정 수정</h3>
 						<p>일정을 조금 바꿔볼까요?</p>
 					</div>
 				</div>			
@@ -1013,13 +1014,13 @@ function nextYearYear() {
 		 			<input type="hidden" name="cNum" id="modifyCNum">
 					<input type="hidden" name="mNum" id="mNum" value="${userData.mNum}">
 					<input type="hidden" name="wNum" id="wNum" value="${userData.wNum}">
-					<div>
+					<div class="firstRow">
 						<div class="titleDiv">						
 							<h4>일정</h4>
 							<input type="text" name="title" class="modalTitle" id="modifyTitle">
 						</div>
 						<div class="selectDiv">
-							<h4>타입</h4>
+							<h4>종류</h4>
 							<select name="type" id="modifyType">
 								<option value="vacation">휴가</option>
 								<option value="event">행사</option>
@@ -1031,22 +1032,23 @@ function nextYearYear() {
 							<input type="color" name="color" id="modifyColor" value="#ffffff">
 						</div>
 					</div>
-					
-					<div class="dateDiv">
-						<h4>기간</h4>
-						<div><input type="text" name="startDate" id="modifyStartDate" class="datepicker"></div>
-						<span>~</span>
-						<div><input type="text" name="endDate" id="modifyEndDate" class="datepicker"></div>
+					<div class="middleRow">
+						<div class="dateDiv">
+							<h4>기간</h4>
+							<div><input type="text" name="startDate" id="modifyStartDate" class="datepicker"></div>
+							<span>~</span>
+							<div><input type="text" name="endDate" id="modifyEndDate" class="datepicker"></div>
+						</div>
+						<div class="checkboxDiv">
+							<input type="checkbox" name="yearCalendar" id="modifyYearCalendar" value="yearCalendar">
+							<label class="checkboxbtn" for="modifyYearCalendar">연간 달력</label> 	
+							<input type="checkbox" name="annually" id="modifyAnnually" value="annually">
+							<label class="checkboxbtn" for="modifyAnnually">매년 반복</label>				
+							<input type="checkbox" name="monthly" id="modifyMonthly" value="monthly">
+							<label class="checkboxbtn" for="modifyMonthly">매월 반복</label>
+						</div>
 					</div>
-					<div class="checkboxDiv">
-						<input type="checkbox" name="yearCalendar" id="modifyYearCalendar" value="yearCalendar">
-						<label class="checkboxbtn" for="modifyYearCalendar">연간 달력</label> 	
-						<input type="checkbox" name="annually" id="modifyAnnually" value="annually">
-						<label class="checkboxbtn" for="modifyAnnually">매년 반복</label>				
-						<input type="checkbox" name="monthly" id="modifyMonthly" value="monthly">
-						<label class="checkboxbtn" for="modifyMonthly">매월 반복</label>
-					</div>
-					<div>
+					<div class="lastRow">
 						<h4>내용</h4>
 						<textarea rows="3" cols="21" name="content" class="modalContent" id="modifyContent"></textarea>
 					</div>

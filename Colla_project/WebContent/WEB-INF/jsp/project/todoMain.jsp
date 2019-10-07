@@ -107,7 +107,7 @@
 						</div>
 						<ul class="oneMemberTodoList">
 						<c:forEach items="${onePm.oneMemberTdList}" var="td" varStatus="s">
-						<li class="todo" id="${s.index}">
+						<li class="todo" id="${td.tdNum}">
 						<div class="isComplete" data-tdNum="${td.tdNum}" data-isComplete="${td.isComplete}"onclick="checkComplete(${td.tdNum});">
 							<input type="hidden" value="${td.isComplete}">
 						</div>

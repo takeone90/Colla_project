@@ -956,8 +956,8 @@ var staticMap = null;
 								<div class="modalBody">
 									<form class="addModal">
 										<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
-										<input type="hidden" name="mNum" id="mNum" value="${userData.mNum}">
-										<input type="hidden" name="wNum" id="wNum" value="${userData.wNum}">
+										<input type="hidden" name="mNum" id="mNum" value="${sessionScope.user.num}">
+										<input type="hidden" name="wNum" id="wNum" value="${wNum}">
 										<div class="titleDiv schedule-row">
 											<h4>일정 이름</h4>
 											<input type="text" name="title" class="modalTitle" id="title">

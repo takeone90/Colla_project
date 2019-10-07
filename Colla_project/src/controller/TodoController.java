@@ -170,12 +170,17 @@ public class TodoController {
 	@ResponseBody
 	@RequestMapping("/resortingTodo")
 	public void resortingTodo(@RequestParam(value="priorityArray[]")List<Integer> priorityArray,@RequestParam("pNum")int pNum,@RequestParam("mNum")int mNum){
-		System.out.println(priorityArray);
 		List<Todo> todoList = tService.getAllTodoByMnumPnum(mNum, pNum);
+		System.out.println("사용자가 변경한 순서  : " + priorityArray);
 		for(int i=0;i<todoList.size();i++) {
 			Todo todo = todoList.get(i);
-			todo.setPriority(priorityArray.get(i));
+			System.out.println();
+			int tdNum = todo.getTdNum();
+			int tdindex = priorityArray.indexOf(tdNum);
+			todo.setPriority(tdindex);
 			tService.modifyTodo(todo);
+		
+			
 		}
 	}
 }
