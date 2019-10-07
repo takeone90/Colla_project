@@ -428,19 +428,55 @@ function putContentIntoTd(a) {
 	$("#modifyMonthly").prop("checked", changeToBoolean(a.monthly));
 	$("#detailColor").css("backgroundColor", a.color);
 	$("#modifyColor").val(a.color);
-	makeButton(a.type);
+	makeButton(a.type, a.cNum, a.mNum);
 }
-function makeButton(type) {
+function makeButton(type, cNum, mNum) {
 	var innerBtn = $("#innerBtnDetail");
 	innerBtn.empty();
 	if(type == "project") {
-		var btn = $("<a >To do List</a> <a onclick='detailFormClose()'>닫기</a>");
-		innerBtn.append(btn);
+		if(isMyProject(cNum)) {
+			var btn = $("<a onclick='moveTodo("+cNum+")'>To do List</a> <a onclick='detailFormClose()'>닫기</a>");
+			innerBtn.append(btn);
+		} else {			
+			var btn = $("<a onclick='detailFormClose()'>닫기</a>");
+			innerBtn.append(btn);
+		}
 	} else {
 		var btn = $("<a onclick='modifyFormOpen()'>수정</a> <a onclick='deleteSchedule()'>삭제</a> <a onclick='detailFormClose()'>닫기</a>");
 		innerBtn.append(btn);
 	}
 }
+function moveTodo(cNum) {
+	$.ajax({
+		url: "getPnum",
+		data: {"cNum":cNum},
+		type: "post",
+		dataType: "json",
+		success: function(pNum) {
+			if(pNum) {
+				location.href = "${contextPath}/todoMain?pNum="+pNum;
+			} else {
+				alert("실패");
+			}
+		}
+	});
+	return false;	
+}
+function isMyProject(cNum) {
+	var tmp = true;
+	$.ajax({
+		url: "isMyProject",
+		async: false,
+		data: {"cNum":cNum},
+		type: "post",
+		dataType: "json",
+		success: function(result) {
+			tmp = result;
+		}
+	});	
+	return tmp;
+}
+
 function detailFormClose() {
 	$("#detailForm").fadeOut(1);
 }
@@ -756,6 +792,7 @@ function nextYearYear() {
 	showYearSchedule(today);
 	markingOnDateYear(formatChange(realToday).substring(0, 6));
 }
+
 </script>
 </head>
 <body>

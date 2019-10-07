@@ -172,5 +172,9 @@ public class ProjectService {
         }
         return color;
    }
+	//혜선 추가
+	public int getPnumByCnum(int calNum){
+		return pDao.selecPNumByCalNum(calNum);
+	}
 }
 
