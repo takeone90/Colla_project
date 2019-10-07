@@ -769,7 +769,7 @@ var staticMap = null;
 
 	function showLoginNow(num, bool){
 		if(bool){
-			$("#navMList").find("div[data-num='"+num+"']").css({borderColor : "#E5675A"});
+			$("#navMList").find("div[data-num='"+num+"']").css({borderColor : "#00FF1E"});
 		} else {
 			$("#navMList").find("div[data-num='"+num+"']").css({borderColor : "#fff"});
 		}
