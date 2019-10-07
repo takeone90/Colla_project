@@ -69,6 +69,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="selectMember" parameterType="int" resultMap="memberMap">
 		select * from member where m_num=#{num}
 	</select>
+	<select id="selectAllMebmerByPnum" resultMap="memberMap">
+		select * from member m,project_member pm where m.m_num=pm.m_num and pm.p_num=#{pNum}
+	</select>
 	<insert id="insertProfileImg">
 		update member 
 		set m_profileImg = #{profileImg, jdbcType=VARCHAR} 
@@ -86,6 +89,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="m_email" property="email"/>
 		<result column="m_name" property="name"/>
 		<result column="m_pw" property="pw"/>
+		<result column="p_num" property="pNum"/>
 		<result column="m_reg_date" property="regDate"/>
 		<result column="m_phone" property="phone"/>
 		<result column="m_profileimg" property="profileImg"/>

@@ -8,23 +8,19 @@
 <title>Todo List</title>
 <script>
 	$(function(){
-		$("#todoList").disableSelection();
-		$("#todoList").sortable({
-				update: function(event, ui) {
-	            var result = $(this).sortable('toArray');
-	            var pNum = $("#pNum").val();
-		            $.ajax({
-		            	url : "${contextPath}/resortingTodo",
-		            	data : {"priorityArray":result,"pNum":pNum},
-		            	success : function(){
-// 		            		alert("데이터보내기 성공");
-		            	},
-		            	error : function(){
-// 		            		alert("정렬 에러발생");
-		            	}
-		            });
-	            }
-		});
+// 		$("#todoList").disableSelection();
+// 		$("#todoList").sortable({
+// 				update: function(event, ui) {
+// 	            var result = $(this).sortable('toArray');
+// 	            var pNum = $("#pNum").val();
+// 		            $.ajax({
+// 		            	url : "${contextPath}/resortingTodo",
+// 		            	data : {"priorityArray":result,"pNum":pNum},
+// 		            	success : function(){
+// 		            	}
+// 		            });
+// 	            }
+// 		});
 		
 		$(".isComplete[data-isComplete=1]").attr("style","background-color:#E5675A");
 		$(".isComplete[data-isComplete=0]").attr("style","background-color:#e0e0e0");
@@ -90,60 +86,77 @@
 		<div id="wsBodyContainer"> 
 		<h2 style="display:inline-block;">${pName} </h2><h3 style="display:inline-block;margin-left:14px;">Todo List</h3>
 		<button id="backToProjectMain" onclick="location.href='projectMain?wNum=${sessionScope.currWnum}'">프로젝트 메인</button>
-		<button id="addTodo">할 일 추가</button>
+<!-- 		<button id="addTodo">할 일 추가</button> -->
 		<div id="todoArea">
 			<div id="currProjectProgress" align="left">
 				진행률  <progress id="progressBar" value="${progress}" max="100" style="width:71%;"></progress>
 			</div>
-			
+			<button id="addTodo">할 일 추가</button>
 			<ul id="todoList">
 				<!-- 아래는 반복적으로 생긴다 -->
 				<c:if test="${empty tList}">
 					<li style="text-align: center; margin-top: 136px; color: #9c9998;">할 일 추가 버튼으로 Todo를 추가하세요.</li>
 				</c:if>
-				<c:forEach items="${tList}" var="td" varStatus="s">
-					<li class="todo" id="${s.index}">
-					<div class="isComplete" data-tdNum="${td.tdNum}" data-isComplete="${td.isComplete}"onclick="checkComplete(${td.tdNum});">
-						<input type="hidden" value="${td.isComplete}">
-					</div>
-					<div class="tdDate">
-						<p>
-						<fmt:formatDate value="${td.tdStartDate}" pattern="yyyy.MM.dd" />
-				        <fmt:formatDate value="${td.tdStartDate}" pattern="E"/>요일 
-						</p>&nbsp;&nbsp;&nbsp;~&nbsp;&nbsp;&nbsp;
-						
-						<p>
-						<fmt:formatDate value="${td.tdEndDate}" pattern="yyyy.MM.dd" />
-				        <fmt:formatDate value="${td.tdEndDate}" pattern="E"/>요일 
-						</p>
-					</div>
-					<div class="tdInfo">
-						
+				
+				<c:forEach items="${thisProjectTdList}" var="onePm">
+					<li class="onePmMember">
 						<div class="tdMemberInfo">
-							<div class='profileImg' align="center">
-								<img alt='프로필사진' src='${contextPath}/showProfileImg?num=${td.mNumTo}'>
+								<div class='profileImg' align="center">
+									<img alt='프로필사진' src='${contextPath}/showProfileImg?num=${onePm.mNum}'>
+								</div>
+<%-- 								<p style="text-align:center;">${td.mName}</p> --%>
+						</div>
+						<ul class="oneMemberTodoList">
+						<c:forEach items="${onePm.oneMemberTdList}" var="td" varStatus="s">
+						<li class="todo" id="${s.index}">
+						<div class="isComplete" data-tdNum="${td.tdNum}" data-isComplete="${td.isComplete}"onclick="checkComplete(${td.tdNum});">
+							<input type="hidden" value="${td.isComplete}">
+						</div>
+						<div class="tdDate">
+							<p>
+							<fmt:formatDate value="${td.tdStartDate}" pattern="yyyy.MM.dd" />
+					        <fmt:formatDate value="${td.tdStartDate}" pattern="E"/>요일 
+							</p>&nbsp;&nbsp;&nbsp;~&nbsp;&nbsp;&nbsp;
+							
+							<p>
+							<fmt:formatDate value="${td.tdEndDate}" pattern="yyyy.MM.dd" />
+					        <fmt:formatDate value="${td.tdEndDate}" pattern="E"/>요일 
+							</p>
+						</div>
+						<div class="tdInfo">
+							<div class="tdInfo-titleContent">
+								<h4>${td.tdTitle}</h4>
+								<p>${td.tdContent}</p>
 							</div>
-							<p style="text-align:center;">${td.mName}</p>
 						</div>
-						<div class="tdInfo-titleContent">
-							<h4>${td.tdTitle}</h4>
-							<p>${td.tdContent}</p>
+	<!-- 					<div class="tdPriority"> -->
+	<!-- 					</div> -->
+						
+						<div class="todoInnerBtn" align="right">
+							<button class="modifyTodoModalOpen" data-tdNum="${td.tdNum}">수정</button>
+							<button onclick="location.href='removeTodo?tdNum=${td.tdNum}'">삭제</button>
 						</div>
-					</div>
-<!-- 					<div class="tdPriority"> -->
-<!-- 					</div> -->
-					
-					<div class="todoInnerBtn" align="right">
-						<button class="modifyTodoModalOpen" data-tdNum="${td.tdNum}">수정</button>
-						<button onclick="location.href='removeTodo?tdNum=${td.tdNum}'">삭제</button>
-					</div>
-					</li><%--end todo --%>
+						</li><%--end todo --%>
+						</c:forEach>
+						</ul>
+					</li><%-- end onePmMember --%>
 				</c:forEach>
 			
-			
-			
-			</ul>
-			
+			</ul><%-- end todoList --%>
+			<script>
+	 		$(".oneMemberTodoList").sortable({
+				update: function(event, ui) {
+	            var result = $(this).sortable('toArray');
+	            var pNum = $("#pNum").val();
+		            $.ajax({
+		            	url : "${contextPath}/resortingTodo",
+		            	data : {"priorityArray":result,"pNum":pNum},
+		            	success : function(){
+		            	}
+		            });
+	            }
+			});
+			</script>
 			
 		</div>
 		</div><!-- end wsBodyContainer -->

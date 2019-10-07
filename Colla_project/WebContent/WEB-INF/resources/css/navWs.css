@@ -49,52 +49,67 @@
     text-align: center;
     color:#fff;
 }
+
+
 #boardDiv a,#calendarDiv a,#projectDiv a{
 	color : white;
 }
-#boardDiv a[class=currPointer],#calendarDiv a[class=currPointer]{
+#boardDiv a[class=currPointer],#calendarDiv a[class=currPointer],#myChatList a[class=currPointer],#projectDiv a[class=currPointer]{
 	color: #E5675A;
 }
-#myChatList{
-	margin: 30px 0 6px;
-    FONT-VARIANT: JIS04;
-    text-align: right;
-}
+
 .chatList,#projectList{
 	display: none;
 }
-#boardDiv,#calendarDiv,#projectDiv{
+#boardDiv,#calendarDiv,#myChatList{
 	margin: 0px 0;
-    padding: 6px 0px 6px 0px;
-    text-align: right;
+    padding: 0px 0px 13px 0px;
+    text-align: left;
+/*     border-bottom: 1px solid #1a4863; */
 }
-#myChatList h3:hover,#projectDiv h3:hover{
+#projectDiv{
+	margin: 0px 0;
+    padding: 36px 0px 17px 0px;
+    text-align: left;
+/*     border-bottom: 1px solid #1a4863; */
+}
+#projectDiv h3 svg, #myChatList h3 svg{
+	float: right;
+    margin-right: 5px;
+    font-size: 18px;
+}
+#myChatList h3 svg:hover,#projectDiv h3 svg:hover{
 	cursor: pointer;
+	color :	#E5675A; 
+}
+#myChatList h3 a{
+	color : white;
+}
+#myChatList h3 a:hover, #projectDiv h3 a:hover{
 	color :	#E5675A; 
 }
 #boardDiv a:hover,#calendarDiv a:hover{
 	color: #E5675A;
 }
 #myChatList h3{
-	display : inline-block;
 	font-size : 20px;
 	font-weight : bolder;
+	margin-left: 11px;
 	padding:0 8px 5px 0px;
 }
 #boardDiv h3,#calendarDiv h3{
 	font-size : 20px;
 	font-weight : bolder;
 	padding:0 25px 5px 0px;
+	margin-left: 11px;
 }
 #projectDiv h3{
 	font-size : 20px;
 	font-weight : bolder;
     padding: 0 8px 5px 0px;
+    margin-left: 11px;
 }
-/* #projectDiv ul #projectMainLI{ */
-/* 	color: #E5675A; */
-/*     font-weight: 600; */
-/* } */
+
 #mainDiv{
     text-align: right;
     position: absolute;
@@ -108,17 +123,13 @@
 #mainDiv a:hover{
 	color : #E5675A;
 }
-#myChatList h3 svg, #projectDiv h3 svg{
-	font-size : 15px;
-}
-
-#myChatList ul,#projectDiv h3{
+#myChatList ul,#projectDiv ul{
     padding-top: 5px;
 }
 #myChatList ul li,#projectDiv ul li{
 	transition:color 0.2s;
 	color:#CCCBCA;
-	padding:10px 20px 10px 10px;
+	padding:10px 0px 10px 20px;
 	font-size:14px;
 }
 #myChatList ul li.currChat, #projectDiv ul li.currProject{

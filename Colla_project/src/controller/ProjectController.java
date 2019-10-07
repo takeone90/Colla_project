@@ -99,6 +99,7 @@ public class ProjectController {
 				Member inviteMember = mService.getMember(num);
 				alarmTargetMemberList.add(inviteMember);
 				pmService.addProjectMember(pNum, num); //프로젝트에 초대 멤버들 추가 
+				
 				crmService.addChatRoomMember(pService.getProject(pNum).getCrNum(), num, wNum); //채팅방에 초대 멤버들 추가
 			}
 		}
