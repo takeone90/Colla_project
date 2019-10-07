@@ -172,18 +172,20 @@ function checkPw(){
 								<!-- 네이버 -->
 								<button class="naverLoginButton">네이버<span id="naverIdLogin"></span></button>
 								<!-- 카카오 -->
-								<button id="kakaoLoginButton">카카오<span id="kakao-login-btn"></span><span href="http://developers.kakao.com/logout"></span></button>
+								<button id="kakaoLoginButton">카카오<span id="kakao-login-btn"></span></button>
 							</div>
 						</div>
 					</div><!--Content ends-->
+					
+					<span href="http://developers.kakao.com/logout"></span>
 				</div>
 			</section>
 		</div>
 	</div> 	
 	<form method="post" id="apiForm" action="login">
-		<input type="hidden" name="m_email" id="emailOfApiForm">
-		<input type="hidden" name="m_name" id="nameOfApiForm">
-		<input type="hidden" name="m_pw" id="pwOfApiForm">
+		<input type="email" name="m_email" id="emailOfApiForm">
+		<input type="text" name="m_name" id="nameOfApiForm">
+		<input type="password" name="m_pw" id="pwOfApiForm">
 	</form>
 </body>
 </html>
