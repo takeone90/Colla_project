@@ -337,14 +337,15 @@
 .myPageContent .myPageModule:hover {
 	background-color: #DADCE0;
 }
-.myPageModule .title, .content {
-	margin: 20px 15px 0px;
-}
-.myPageModule .title {
-	font-size: 20px;
-}
 .myPageModule .title, .myPageModule .content {
 	margin: 20px 15px 0px;
+}
+.myPageModule .content {
+	background-color: inherit;
+    text-align: left;
+    width: 500px;
+    height: 30px;
+}
 }
 .checkPass {
 	width: 422px;
