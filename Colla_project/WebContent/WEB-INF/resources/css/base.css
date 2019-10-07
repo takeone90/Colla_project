@@ -81,9 +81,9 @@ body .btn:hover{
 	margin-top: 15px;
 }
 
-
-
-
+.attachModal .header{
+	cursor:move;
+}
 
 /* wave 코드 여기서 부터*/
 @import url(//fonts.googleapis.com/css?family=Lato:300:400);

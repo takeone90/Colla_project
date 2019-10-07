@@ -724,7 +724,7 @@ input[type=radio]{
 	color : #f74d3e;
 }
 #inviteWsmBtn{
-    margin-top: 10px;
+    margin-top: 30px;
 }
 #inviteWsmBtn:hover{
 	background-color : #E5675A;
@@ -759,11 +759,10 @@ input[type=radio]{
 	overflow-x: hidden;
 }
 .listUL-wrap ul li{
-	padding : 8px;
-	padding-left : 15px;
+	float:left;
+	width: 42%;
+	margin:2%;
 	margin-bottom : 3px;
-	border : 1px solid #d4cbcb;
-	border-radius: 5px;
 }
 .listUL-wrap ul li:last-child{
 	margin-bottom:0;

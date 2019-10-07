@@ -46,26 +46,26 @@ function duplicateConnect(){
 				$("#chatArea").scrollTop($("#chatArea")[0].scrollHeight);
 		});
 		
-		//파일메세지 구독
-		stompClient.subscribe("/category/file/"+crNum, function(cm) {
-				msgInfo = JSON.parse(cm.body);
-				addMsg(msgInfo);
-				$("#chatArea").scrollTop($("#chatArea")[0].scrollHeight);
-		});
+// 		//파일메세지 구독
+// 		stompClient.subscribe("/category/file/"+crNum, function(cm) {
+// 				msgInfo = JSON.parse(cm.body);
+// 				addMsg(msgInfo);
+// 				$("#chatArea").scrollTop($("#chatArea")[0].scrollHeight);
+// 		});
 		
-		//코드메시지 구독
-		stompClient.subscribe("/category/code/"+crNum, function(cm){
-				msgInfo = JSON.parse(cm.body);
-				addMsg(msgInfo);
-				$("#chatArea").scrollTop($("#chatArea")[0].scrollHeight);
-		});
+// 		//코드메시지 구독
+// 		stompClient.subscribe("/category/code/"+crNum, function(cm){
+// 				msgInfo = JSON.parse(cm.body);
+// 				addMsg(msgInfo);
+// 				$("#chatArea").scrollTop($("#chatArea")[0].scrollHeight);
+// 		});
 		
-		//map메시지 구독
-		stompClient.subscribe("/category/map/"+crNum, function(cm){
-				msgInfo = JSON.parse(cm.body);
-				addMsg(msgInfo);
-				$("#chatArea").scrollTop($("#chatArea")[0].scrollHeight);
-		});
+// 		//map메시지 구독
+// 		stompClient.subscribe("/category/map/"+crNum, function(cm){
+// 				msgInfo = JSON.parse(cm.body);
+// 				addMsg(msgInfo);
+// 				$("#chatArea").scrollTop($("#chatArea")[0].scrollHeight);
+// 		});
 		//알림구독
 		var userNum = ${sessionScope.user.num};
 		$.ajax({
