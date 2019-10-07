@@ -58,12 +58,19 @@ var clickedOverlay = null;
 var mapContainer = null;
 var staticMap = null;
 
+var chatTop = 0;	// chatArea 맨위로 스크롤 >> 과거메시지 로드
+
 	$(function(){
 		loadChatFromDB();
 		favoriteArea = $("#favoriteArea");
 		chatNavContent = $("#chatNavContent");
 
-
+		$("#chatArea").scroll(function(){
+			if( $(this).scrollTop() == 0 ){
+				loadMoreChat();
+			}
+		})
+		
 		searchListDiv = $("#searchContent");
 		showFavoriteList();
 		showMemberList();
@@ -294,7 +301,24 @@ var staticMap = null;
 	   
 	}//end favoirte()
 
-	
+	function loadMoreChat(){
+		crNum = $("#crNum").val();
+		var addedScroll = 0;
+		$.ajax({
+			url: "${contextPath}/loadMoreChat",
+			type: "post",
+			data: {"crNum": crNum, "count" : chatTop++ },
+			success : function(d){
+				$.each(d, function(idx,item){
+					addedScroll += addMsg(item, "prepend");
+				});
+				$("#chatArea").scrollTop( addedScroll > 5? addedScroll-5: 0 );
+			},
+			error : function(){
+				alert("loadMoreChat Ajax 오류");
+			}
+		});
+	}
 	
 	//과거메세지 불러오기
 	function loadChatFromDB(){
@@ -396,6 +420,8 @@ var staticMap = null;
 				chatNavContent.children("#nav--favorite").append(chatMsg[0]);				
 			}else if(area=="search"){
 				searchListDiv.append(chatMsg[0]);	
+			}else if("prepend"){	//이전 메시지 불러오기
+				chatArea.prepend(chatMsg);
 			}
 		}
 
@@ -461,6 +487,7 @@ var staticMap = null;
 			staticMap = new kakao.maps.StaticMap(staticMapContainer, staticMapOption);
 		}
 		
+		return chatMsg.outerHeight();
 		
 	}/////////////////////////////////////////////////////////////addMsg end////////////////////////////////////////////////////
 	

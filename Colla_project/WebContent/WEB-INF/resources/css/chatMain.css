@@ -830,6 +830,9 @@ input[type=radio]{
 #nav--schedule .schedule-row.dateDiv input {
 	width:131.5px;
 }
+#nav--schedule .schedule-row .colorDiv img{
+	display:none;
+}
 #nav--schedule .schedule-row .colorDiv input {
 	width:67px;
 }
@@ -872,20 +875,4 @@ input[type=radio]{
 	border-radius:5px;
 	border : 1px solid #D1D1D1;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
