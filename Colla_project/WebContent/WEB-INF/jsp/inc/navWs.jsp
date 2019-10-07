@@ -151,27 +151,28 @@
 			    location.href= this.value;
 			});
 			$(function(){
-				$("#projectDiv h3:last").on("click",function(){
-					$("#projectList").toggle();
-				});
-				$("#myChatList h3:last").on("click",function(){
-					$(".chatList").toggle();
+				$(".navListDiv h3 .arrowBtn").on("click",function(){
+					$(this).parent().next("ul").toggle();
 				});
 				
 			});
 		</script>
-		<div id="projectDiv">
+		<div id="projectDiv" class="navListDiv">
 			<h3>
-			<a href="${contextPath}/projectMain?wNum=${sessionScope.currWnum}">Project</a>
-			<i class="fas fa-angle-down"></i>
+				<a href="${contextPath}/projectMain?wNum=${sessionScope.currWnum}">Project</a>
+				<a href="#" class="arrowBtn">
+					<i class="fas fa-angle-down"></i>
+				</a>
 			</h3>
 			<ul id="projectList">
 			</ul>
 		</div>
-		<div id="myChatList">
+		<div id="myChatList" class="navListDiv">
 			<h3>
-			<a href="${contextPath}/defaultChatMain?wNum=${sessionScope.currWnum}">Chat</a>
-			<i class="fas fa-angle-down"></i>
+				<a href="${contextPath}/defaultChatMain?wNum=${sessionScope.currWnum}">Chat</a>
+				<a href="#" class="arrowBtn">
+					<i class="fas fa-angle-down"></i>
+				</a>
 			</h3>
 			<ul class="chatList">
 			</ul>
