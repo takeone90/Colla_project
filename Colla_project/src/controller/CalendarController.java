@@ -52,7 +52,7 @@ public class CalendarController {
 	}
 	@ResponseBody
 	@RequestMapping(value="/showAllCalendar", method=RequestMethod.GET)
-	public List<Calendar> showAllCalendar(HttpSession session, boolean type1, boolean type2, boolean type3, String today) {
+	public List<Calendar> showAllCalendar(HttpSession session, boolean type1, boolean type2, boolean type3, boolean type4, String today) {
 		int wNum = (int)session.getAttribute("currWnum");
 		List<Calendar> cList = calendarService.getAllCalendarByMonth(wNum, today);
 		List<Calendar> filteredCList = new ArrayList<Calendar>();
@@ -75,12 +75,18 @@ public class CalendarController {
 					filteredCList.add(cList.get(i));
 				}
 			}
+			if(type4) {
+				String typeTmp = cList.get(i).getType();
+				if(typeTmp.equals("etc")) {
+					filteredCList.add(cList.get(i));
+				}
+			}
 		}
 		return filteredCList;
 	}
 	@ResponseBody
 	@RequestMapping(value="/showYearCheckedCalendar", method=RequestMethod.GET)
-	public List<Calendar> showYearCheckedCalendar(HttpSession session, boolean type1, boolean type2, boolean type3) {
+	public List<Calendar> showYearCheckedCalendar(HttpSession session, boolean type1, boolean type2, boolean type3, boolean type4) {
 		int wNum = (int)session.getAttribute("currWnum");
 		List<Calendar> tmp = calendarService.getAllCalendar(wNum);
 		List<Calendar> yearCheckedCalendarList = new ArrayList<Calendar>();
@@ -107,6 +113,12 @@ public class CalendarController {
 			if(type3) {
 				String typeTmp = yearCheckedCalendarList.get(i).getType();
 				if(typeTmp.equals("event")) {
+					tmpList.add(yearCheckedCalendarList.get(i));
+				}
+			}
+			if(type4) {
+				String typeTmp = yearCheckedCalendarList.get(i).getType();
+				if(typeTmp.equals("etc")) {
 					tmpList.add(yearCheckedCalendarList.get(i));
 				}
 			}

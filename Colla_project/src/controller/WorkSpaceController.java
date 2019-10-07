@@ -29,6 +29,8 @@ import service.AlarmService;
 import service.ChatRoomMemberService;
 import service.ChatRoomService;
 import service.MemberService;
+import service.ProjectMemberService;
+import service.ProjectService;
 import service.SetAlarmService;
 import service.WorkspaceInviteService;
 import service.WorkspaceService;
@@ -54,6 +56,10 @@ public class WorkSpaceController {
 	private AlarmService aService;
 	@Autowired
 	private SetAlarmService saService;
+	@Autowired
+	private ProjectService pService;
+	@Autowired
+	private ProjectMemberService pmService;
 	@RequestMapping("/workspace")
 	public String showWsMain(Principal principal,HttpSession session,Model model) {
 		//Ws메인이 보여질때 시큐리티가 갖고있는 principal 정보의 userid 를 가져와서
@@ -71,6 +77,7 @@ public class WorkSpaceController {
 			Map<String, Object> wsMap = new HashMap<String, Object>();
 			ChatRoom defaultChatRoom = crService.getDefaultChatRoomByWnum(wNum);
 			wsMap.put("wsInfo", wsList.get(i));
+			wsMap.put("pjList",pService.getAllProjectByMnumWnum(user.getNum(), wNum));
 			wsMap.put("crList", crService.getAllChatRoomByWnumMnum(wNum, user.getNum()));
 			wsMap.put("mList", mService.getAllMemberByWnum(wNum));
 			wsMap.put("defaultCrNum",defaultChatRoom.getCrNum());
@@ -221,6 +228,16 @@ public class WorkSpaceController {
 		//mNum과 wNum을 이용해서 모든 chatRoomMember값을 지운다
 		crmService.removeChatRoomMemberByWnumMnum(wNum, member.getNum());
 		//exit 한사람이 chatroom의 생성자일지라도 그 chatroom 은 지워지지 않는다.
+		
+		List<WsMember> wsmList = wsmService.getAllWsMemberByWnum(wNum);
+		if(wsmList.isEmpty()) {
+			//사람없는 ws면 ws랑 cr,crm,p,pm,td 지우기 실행
+			crService.removeAllChatRoomByWnum(wNum);
+			crmService.removeChatRoomMemberByWnumMnum(wNum, member.getNum());
+			pService.removeAllProjectByWnum(wNum);
+			/////////////////////////////////////////하는중/////////////////////////////////////////////
+		}
+		
 	}
 		
 	public class inner implements Runnable {

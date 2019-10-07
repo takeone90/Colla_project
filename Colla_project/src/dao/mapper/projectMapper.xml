@@ -7,8 +7,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<selectKey resultType="int" keyProperty="pNum" order="BEFORE">
 			select p_seq.nextval from dual
 		</selectKey>
-		insert into project(p_num,p_name,w_num,p_detail,p_startdate,p_enddate,cr_num,m_num)
-		values(#{pNum},#{pName},#{wNum},#{pDetail},#{pStartDate},#{pEndDate},#{crNum},#{mNum})
+		insert into project(p_num,p_name,w_num,p_detail,p_startdate,p_enddate,cr_num,m_num,cal_num)
+		values(#{pNum},#{pName},#{wNum},#{pDetail},#{pStartDate},#{pEndDate},#{crNum},#{mNum},#{calNum})
 	</insert>
 	<update id="updateChatRoomPnum" parameterType="int">
 		update chatroom set p_num=#{pNum} where cr_num=#{crNum}
@@ -16,6 +16,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<delete id="deleteProject" parameterType="int">
 		delete project where p_num=#{pNum}
+	</delete>
+	<delete id="deleteEmptyProject">
+		delete from project p where (
+		select count(*) from project_member pm where pm.p_num=p.p_num)=0
 	</delete>
 	<update id="updateProject" parameterType="project">
 		update project set p_name=#{pName},p_detail=#{pDetail},p_progress=#{progress},p_startdate=#{pStartDate},p_enddate=#{pEndDate},m_num=#{mNum}
@@ -51,5 +55,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="p_enddate" property="pEndDate"/>
 		<result column="cr_num" property="crNum"/>
 		<result column="m_num" property="mNum"/>
+		<result column="cal_num" property="calNum"/>
 	</resultMap>
 </mapper>

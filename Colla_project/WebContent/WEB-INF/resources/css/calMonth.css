@@ -58,7 +58,7 @@ td {
 	position: relative;
 }
 .drawMonthCalendarLowerForClick {
-	height: 120px;
+	height: 100%;
 	width: 100%;
 	position: absolute;
 	border-collapse: collapse;
@@ -128,17 +128,20 @@ td {
 	border: 1px;
 }
 .complete {
-/* 	border-radius: 10px; */
 	font-size: 12px;
     padding-left: 3px;
+    margin-left: 10px;
+    margin-right: 10px;
 }
 .left {
-	border-bottom-left-radius: 10px; 
-	border-top-left-radius: 10px;
+	font-size: 12px;
+    padding-left: 3px;
+    margin-left: 10px;
 }
 .right {
-	border-bottom-right-radius: 10px; 
-	border-top-right-radius: 10px; 
+	font-size: 12px;
+    padding-left: 3px;
+    margin-right: 10px;
 }
 .full {
 }
@@ -149,9 +152,9 @@ td {
 
 /* -------------------- 연 달력 -------------------- */
 #yearCalendar {
-	width: 90%;
+	width: 100%;
     margin: 0 auto;
-    max-width: 1028px;
+    max-width: 1400px;
 }
 #yearCalendar .dateDisplay {
     text-align: center;
@@ -169,15 +172,14 @@ td {
 	color: #6b635c;
 	margin: 0px 20px;
 }
-
 .drawYearCalendarForClick {
-	height: 120px;
+	height: 200px;
 	width: 100%;
 	position: absolute;
 	border-collapse: collapse;
 	border: 0px;
-	
-} /* table1(클릭) */
+} 
+/* table1(클릭) */
 .drawYearCalendarForClick td {
 	height: 20px;
 	width: 150px;
@@ -187,7 +189,7 @@ td {
 }
 
 .drawYearCalendar {
-	height: 120px;
+	height: 200px;
 	width: 100%;
 	position: relative;
 	border-collapse: collapse;
@@ -236,6 +238,7 @@ td {
 	border: 0px solid #ccc;
 	border-radius: 4px;
 	box-sizing: border-box;
+	font-size: 13px;
 	background-color: #57504a;
 	color: white;
 }
@@ -290,24 +293,24 @@ td {
 	width: 500px;
 	background-color: white;
 	border-radius: 10px;
-	padding: 30px;
 	z-index: 10;
 	box-shadow: 2px 2px 5px 0.5px rgba(33, 33, 33, 0.2);
 }
-.modalHead {
+.header {
 	text-align: center;
-	padding-bottom: 30px;
+	margin-bottom: 30px;
 }
-.modalHead h3 {
+.header h3 {
 	font-size: 20pt;
 	padding: 15px;
 }
-.modalHead p {
+.header p {
 	font-size: 10pt;
 	color: #c4c4c4;
 }
 .modalBody {
 	text-align: left;
+	padding: 10px;
 }
 .modalBody h4{
 	color: #403C39;
@@ -356,6 +359,7 @@ td {
 .checkboxDiv label {
     margin-left: 2px;
     padding: 0px 4px;
+    font-size: 12px;
 }
 .checkboxbtn {
     font-size: 1rem;
@@ -408,11 +412,13 @@ td {
 .modalContent {
 	width: 100%;
 }
-#innerBtn {
+#innerBtn,
+#innerBtnDetail {
 	margin-top: 25px;
 	text-align: center;
 }
-#innerBtn a {
+#innerBtn a,
+#innerBtnDetail a {
 	display: inline-block;
 	position: relative;
 	width: 30%;
@@ -422,7 +428,8 @@ td {
 	text-align: center;
 	border-radius: 5px;
 }
-#innerBtn a:hover {
+#innerBtn a:hover,
+#innerBtnDetail a:hover {
 	background-color: #E5675A;
 	transition:background-color .5s;
 }

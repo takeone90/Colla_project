@@ -14,23 +14,26 @@ input {
 }
 #wsBody .attachModal h3{
 	font-size: 23px;
+	color: white;
 }
 .attachModal p{
 	margin-top : 17px;
 	font-weight: 300;
     font-size: 14px;
 }
+#addWsModal #modalBtnDiv button{
+	width : 21%;
+}
 #wsBody .attachModal input[type='text']{
-	width : calc(100% - 100px);
-	margin : 5px;
-	margin-bottom: 10px;
-	
+	width: calc(100% - 100px);
+    margin: 3px;
+    margin-bottom: 2px;
 }
 #wsBodyContainer h2{
-	color : #403C39;
+	color : #5b6178;
 	font-size: 2.5em;
 	font-weight: bolder;
-	margin-bottom: 30px;
+	margin-bottom: 43px;
 }
 
 .row{
@@ -55,7 +58,7 @@ display : none;
     padding: 30px 20px 15px 30px;
     margin-bottom: 5px;
     background-color: white;
-    border: 1.3px solid #dedede;
+    border: 1.3px solid #dbd7d5;
 }
 #wsBodyContainer .ws h3{
 	display: contents;
@@ -65,30 +68,39 @@ display : none;
     font-weight: 500;
     font-size: 16px;
     margin-bottom: 23px;
-    padding-right: 9px;
+    padding-right: 20px;
 }
 #wsBodyContainer .ws .subService a{
-	font-size: 12px;
+	border: 1px solid #d4d4d4;
+    border-radius: 4px;
+    font-size: 12px;
     font-weight: normal;
     color: #979899;
-    padding-right: 6px;
-}
-#wsBodyContainer .openedWs.ws .subService a{
-	color : white;
+    padding: 3px 11px 3px 11px;
 }
 #wsBodyContainer .ws .subService a:hover{
-	color : #fa8a6e;
-}
-/* .ws li{ */
-/* 	display: inline-block; */
-/* 	padding : 10px; */
-/* } */
-.wsDetail p{
+	border-color: transparent;
+	background-color: #bdb5aa;
 	color : white;
+}
+#wsBodyContainer .openedWs.ws .subService a{
+	background-color: white;
+    color: #9c9797;
+    border-radius: 5px;
+    padding: 3px 11px 3px 9px;
+    border: 1px solid #dbdbdb;
+}
+#wsBodyContainer .openedWs .subService a:hover{
+	background-color: #f08678;
+    color: white;
+    border-color: transparent;
+}
+.wsDetail p{
+	color: #686b6e;
 	font-weight: bolder;
 }
 .openedWs .showWsDetail{
-	color : white;
+	color : #686B6E;
 }
 .showWsDetail{
 	font-size : 19px;
@@ -117,22 +129,27 @@ display : none;
 .exitWs{
 	font-size : 17px;
 }
-.wsChatList ul {
+.wsChatList{
+	margin-top: 41px;
+}
+.wsChatList ul, .wsPjList ul{
 	margin-top : 24px;
 	margin-bottom : 24px;
 }
-.wsChatList li{
+.wsChatList li, .wsPjList li{
 	display: inline-block;
 }
-.wsChatList li a{
-	padding : 8px 12px 8px 12px;
-	margin-right : 6px;
-	background-color : #10344a;
-	color : white;
-	border-radius: 30px;
+.wsChatList li a, .wsPjList li a{
+	padding: 8px 12px 8px 12px;
+    margin-right: 6px;
+    font-size: 14px;
+    background-color: #d4d2d2;
+    color: #5e5654;
+    border-radius: 30px;
 }
-.wsChatList li a:hover{
+.wsChatList li a:hover, .wsPjList li a:hover{
 	background-color : #E5675A;
+	color : white;
 }
 .wsMember{
 	margin-top : 45px;
@@ -157,11 +174,12 @@ display : none;
 }
 .wsMember ul li p{
 	margin-top : 5px;
+	font-size: 13px;
 	font-weight: normal;
 }
 .wsDetail ul .openChatModal{
-	background-color: white;
-	color : #10344A;
+	background-color: #686b6e;
+    color: white;
 	margin-right: 10px;
 	margin-bottom : 10px;
 	width:10px;
@@ -177,14 +195,14 @@ display : none;
 	color : white;
 }
 .wsDetail ul .openAddMemberModal{
-	display : block;
-	vertical-align: middle;
-	background-color: white;
-	border-radius: 50%;
-	font-weight: bolder;
-	font-size: 25px;
-	color : #10344A;
-	line-height:60px;
+	display: block;
+    vertical-align: middle;
+    border-radius: 50%;
+    font-weight: bolder;
+    font-size: 25px;
+    line-height: 60px;
+    background-color: #686b6e;
+    color: white;
 }
 .wsDetail ul .openAddMemberModal:hover{
 	background-color: #E5675A;
@@ -203,26 +221,28 @@ display : none;
 	margin-top : 25px;
 }
 #openWsModal{
-	background-color: #D3D1D2;
-	color : #403C39;
-	font-weight : bolder;
-	padding : 3px 10px 3px 10px;
-	border-radius: 50%;
+	background-color: white;
+    color: #5c5351;
+    font-weight: bolder;
+    padding: 3px 10px 3px 10px;
+    border-radius: 50%;
+    border: 1px solid #D3D1D2;
 }
 #openWsModal:hover{
 	background-color: #E5675A;
 	color : white;
+	border-color : transparent;
 }
 
 .openedWs{
-	background-color: #5d829e;
+	background-color: #f5f3f2;
 	border-radius: 6px;
 }
 .openedWs .exitWs{
 	margin-top:0px;
 }
 .openedWs .exitWs a{
-	color: white;
+	color: #f07151;
 }
 .openedWs .exitWs a:hover{
 	color: #f2452e;
@@ -232,25 +252,24 @@ display : none;
 }
 #wsBodyContainer .openedWs h3 a{
 	font-size : 22px;
-	color : white;
+	color : #10344a;
 }
 #wsBodyContainer .openedWs h3 a:hover, #wsBodyContainer h3 a:hover{
 	color : #fa8a6e;
 }
-
-a[class="addInviteInput"]{
-	background-color: #D3D1D2;
-    color: #403C39;
-    padding: 0px 7px 0px 7px;
-    border-radius: 50%;
+.inviteRoundBox{
+	margin-top: 8px;
+}
+a[class="addInviteInput"],a[class="removeInviteInput"]{
+	background-color: white;
+    border: 1px solid #d9d9d9;
+    color: #3b3939;
+    padding: 3px 10px 3px 10px;
+    border-radius: 3px;
+    font-size: 12px;
     height: 100%;
     vertical-align: middle;
 }
-
-.addInviteRoundBox{
-	width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    margin: 0 auto;
+a[class="addInviteInput"]:hover,a[class="removeInviteInput"]:hover{
+	background-color: #f5f5f5;
 }
-    

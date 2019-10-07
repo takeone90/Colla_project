@@ -37,7 +37,7 @@
 		
 		//WS추가 모달
 		$("#openWsModal").on("click",function(){
-			$(".addInviteMemberDiv").empty();
+// 			$(".addInviteMemberDiv").empty();
 			$("#addWsModal").fadeIn(300);
 		});
 		$("#closeWsModal").on("click",function(){
@@ -59,7 +59,7 @@
 		});
 		//WS Member추가 모달
 		$(".openAddMemberModal").on("click",function(){
-			$(".addInviteMemberDiv").empty();
+// 			$(".addInviteMemberDiv").empty();
 			wNum = $(this).attr("data-wnum");
 			$(".addWnum").val(wNum); //멤버 추가모달에 숨어있는 addWnum 부분에 wNum담기
 			$("#addMemberModal").fadeIn(300);
@@ -101,6 +101,11 @@
 			var addInviteMemberDiv = $(".addInviteMemberDiv");
 			var inputTag = $("<input type='text' placeholder='초대할멤버 이메일' name='targetUserList'>");
 			addInviteMemberDiv.append(inputTag);
+		});
+		$(".removeInviteInput").on("click",function(){
+			var addInviteMemberDiv = $(".addInviteMemberDiv");
+			var lastInputTag = addInviteMemberDiv.find("input:last");
+			lastInputTag.remove();
 		});
 		
 	});// onload.function end
@@ -148,11 +153,26 @@
 					<div class="wsDetail">
 						<input type="hidden" value="${ws.num}" id="wNum">
 						
+						<div class="wsPjList">
+							<p>프로젝트</p>
+							<ul>
+							<c:forEach items="${ws.pjList}" var="pj">
+									<li><a href="todoMain?pNum=${pj.pNum}">${pj.pName}</a></li>
+							</c:forEach>
+							</ul>
+						</div>
+						
 						<div class="wsChatList">
 							<p>채팅리스트</p>
 							<ul>
 							<c:forEach items="${ws.crList}" var="cr">
+								<c:if test="${cr.pNum ne 0}">
+									<li><a href="chatMain?crNum=${cr.crNum}"><i class="fab fa-product-hunt"></i> ${cr.crName}</a></li>
+								</c:if>
+								<c:if test="${cr.pNum eq 0}">
 									<li><a href="chatMain?crNum=${cr.crNum}">${cr.crName}</a></li>
+								</c:if>
+									
 							</c:forEach>
 								<a href="#" class="openChatModal" data-wnum="${ws.wsInfo.num}">+</a>
 							</ul>
@@ -201,11 +221,45 @@
 
 		<%------------------------------------워크스페이스 추가 모달  ---------------------------------------%>
 		<div id="addWsModal" class="attachModal ui-widget-content">
-			<div class="modalHead">
-				<h3>Workspace 만들기</h3>
-			</div>
+<!-- 			<div class="modalHead"> -->
+<!-- 				<h3>Workspace 만들기</h3> -->
+<!-- 				<p>Workspace를 만들고 멤버를 초대하세요</p> -->
+<!-- 			</div> -->
+			
+			<div class="header">
+						<!--파도 위 내용-->
+						<div class="inner-header flex">
+							<g><path fill="#fff"
+							d="M250.4,0.8C112.7,0.8,1,112.4,1,250.2c0,137.7,111.7,249.4,249.4,249.4c137.7,0,249.4-111.7,249.4-249.4
+							C499.8,112.4,388.1,0.8,250.4,0.8z M383.8,326.3c-62,0-101.4-14.1-117.6-46.3c-17.1-34.1-2.3-75.4,13.2-104.1
+							c-22.4,3-38.4,9.2-47.8,18.3c-11.2,10.9-13.6,26.7-16.3,45c-3.1,20.8-6.6,44.4-25.3,62.4c-19.8,19.1-51.6,26.9-100.2,24.6l1.8-39.7		
+							c35.9,1.6,59.7-2.9,70.8-13.6c8.9-8.6,11.1-22.9,13.5-39.6c6.3-42,14.8-99.4,141.4-99.4h41L333,166c-12.6,16-45.4,68.2-31.2,96.2	
+							c9.2,18.3,41.5,25.6,91.2,24.2l1.1,39.8C390.5,326.2,387.1,326.3,383.8,326.3z" /></g>
+							</svg>
+							<div class="loginBox-Head">
+								<h3 style='font-weight: bolder; font-size: 30px'>Workspace 만들기</h3>
+								<p>Workspace를 만들고 멤버를 초대하세요.</p>
+							</div>
+						</div>
+						<!--파도 시작-->
+						<div>
+							<svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+							viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+							<defs>
+							<path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+							</defs>
+								<g class="parallax">
+								<use xlink:href="#gentle-wave" x="48" y="0" fill="rgba(255,255,255,0.7" />
+								<use xlink:href="#gentle-wave" x="48" y="3" fill="rgba(255,255,255,0.5)" />
+								<use xlink:href="#gentle-wave" x="48" y="7" fill="#fff" />
+								</g>
+							</svg>
+						</div><!--파도 end-->
+			</div><!--header end-->
+			
+			
 			<div class="modalBody">
-				<p>Workspace를 만들고 멤버를 초대하세요</p>
+				
 				<form action="addWs" method="post">
 					<input type="hidden" value="${_csrf.token}" name="${_csrf.parameterName}">
 					<div class="addWsInputWrap">
@@ -220,14 +274,15 @@
 							<div class="addInviteMemberDiv">
 								<input type="text" placeholder="초대할멤버 이메일" name="targetUserList">
 							</div>
-							<div class="addInviteRoundBox" align="center">
-								<a href="#" class="addInviteInput">+</a>
+							<div class="inviteRoundBox" align="center">
+								<a href="#" class="addInviteInput">추가</a>
+								<a href="#" class="removeInviteInput">삭제</a>
 							</div>
 						</div>
 					</div> <!-- end addWsInputWrap -->
 
 					<div id="modalBtnDiv">
-						<button type="submit">workspace만들기</button>
+						<button type="submit">생성</button>
 						<button id="closeWsModal">닫기</button>
 					</div>
 				</form>
@@ -236,11 +291,41 @@
 		
 		<%------------------------------------채팅방 추가 모달  ---------------------------------------%>
 		<div id="addChatModal" class="attachModal ui-widget-content">
-			<div class="modalHead">
-				<h3>채팅방 만들기</h3>
-			</div>
+<!-- 			<div class="modalHead"> -->
+<!-- 				<h3>채팅방 만들기</h3> -->
+<!-- 				<p>채팅방을 만들고 멤버를 초대하세요</p> -->
+<!-- 			</div> -->
+			<div class="header">
+						<!--파도 위 내용-->
+						<div class="inner-header flex">
+							<g><path fill="#fff"
+							d="M250.4,0.8C112.7,0.8,1,112.4,1,250.2c0,137.7,111.7,249.4,249.4,249.4c137.7,0,249.4-111.7,249.4-249.4
+							C499.8,112.4,388.1,0.8,250.4,0.8z M383.8,326.3c-62,0-101.4-14.1-117.6-46.3c-17.1-34.1-2.3-75.4,13.2-104.1
+							c-22.4,3-38.4,9.2-47.8,18.3c-11.2,10.9-13.6,26.7-16.3,45c-3.1,20.8-6.6,44.4-25.3,62.4c-19.8,19.1-51.6,26.9-100.2,24.6l1.8-39.7		
+							c35.9,1.6,59.7-2.9,70.8-13.6c8.9-8.6,11.1-22.9,13.5-39.6c6.3-42,14.8-99.4,141.4-99.4h41L333,166c-12.6,16-45.4,68.2-31.2,96.2	
+							c9.2,18.3,41.5,25.6,91.2,24.2l1.1,39.8C390.5,326.2,387.1,326.3,383.8,326.3z" /></g>
+							</svg>
+							<div class="loginBox-Head">
+								<h3 style='font-weight: bolder; font-size: 30px'>채팅방 만들기</h3>
+								<p>채팅방을 만들고 멤버를 초대하세요.</p>
+							</div>
+						</div>
+						<!--파도 시작-->
+						<div>
+							<svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+							viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+							<defs>
+							<path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+							</defs>
+								<g class="parallax">
+								<use xlink:href="#gentle-wave" x="48" y="0" fill="rgba(255,255,255,0.7" />
+								<use xlink:href="#gentle-wave" x="48" y="3" fill="rgba(255,255,255,0.5)" />
+								<use xlink:href="#gentle-wave" x="48" y="7" fill="#fff" />
+								</g>
+							</svg>
+						</div><!--파도 end-->
+			</div><!--header end-->
 			<div class="modalBody">
-				<p>채팅방을 만들고 멤버를 초대하세요</p>
 				<form action="addChat" method="post">
 					<input type="hidden" class="addWnum" name="wNum">
 					<input type="hidden" value="${_csrf.token}" name="${_csrf.parameterName}">
@@ -268,11 +353,43 @@
 		
 		<%------------------------------------멤버 추가 모달  ---------------------------------------%>
 		<div id="addMemberModal" class="attachModal ui-widget-content">
-			<div class="modalHead">
-				<h3>Workspace 멤버 추가</h3>
-			</div>
+<!-- 			<div class="modalHead"> -->
+<!-- 				<h3>Workspace 멤버 추가</h3> -->
+<!-- 				<p>Workspace에 멤버를 초대하세요</p> -->
+<!-- 			</div> -->
+			
+			<div class="header">
+						<!--파도 위 내용-->
+						<div class="inner-header flex">
+							<g><path fill="#fff"
+							d="M250.4,0.8C112.7,0.8,1,112.4,1,250.2c0,137.7,111.7,249.4,249.4,249.4c137.7,0,249.4-111.7,249.4-249.4
+							C499.8,112.4,388.1,0.8,250.4,0.8z M383.8,326.3c-62,0-101.4-14.1-117.6-46.3c-17.1-34.1-2.3-75.4,13.2-104.1
+							c-22.4,3-38.4,9.2-47.8,18.3c-11.2,10.9-13.6,26.7-16.3,45c-3.1,20.8-6.6,44.4-25.3,62.4c-19.8,19.1-51.6,26.9-100.2,24.6l1.8-39.7		
+							c35.9,1.6,59.7-2.9,70.8-13.6c8.9-8.6,11.1-22.9,13.5-39.6c6.3-42,14.8-99.4,141.4-99.4h41L333,166c-12.6,16-45.4,68.2-31.2,96.2	
+							c9.2,18.3,41.5,25.6,91.2,24.2l1.1,39.8C390.5,326.2,387.1,326.3,383.8,326.3z" /></g>
+							</svg>
+							<div class="loginBox-Head">
+								<h3 style='font-weight: bolder; font-size: 30px'>Workspace 멤버 추가</h3>
+								<p>Workspace에 멤버를 초대하세요</p>
+							</div>
+						</div>
+						<!--파도 시작-->
+						<div>
+							<svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+							viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+							<defs>
+							<path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+							</defs>
+								<g class="parallax">
+								<use xlink:href="#gentle-wave" x="48" y="0" fill="rgba(255,255,255,0.7" />
+								<use xlink:href="#gentle-wave" x="48" y="3" fill="rgba(255,255,255,0.5)" />
+								<use xlink:href="#gentle-wave" x="48" y="7" fill="#fff" />
+								</g>
+							</svg>
+						</div><!--파도 end-->
+			</div><!--header end-->
+			
 			<div class="modalBody">
-				<p>Workspace에 멤버를 초대하세요</p>
 				<form action="inviteMember" method="post">
 					<input type="hidden" class="addWnum" name="wNum">
 					<input type="hidden" value="${_csrf.token}" name="${_csrf.parameterName}">
@@ -282,8 +399,9 @@
 							<div class="addInviteMemberDiv">
 								<input type="text" placeholder="초대할멤버 이메일" name="targetUserList">
 							</div>
-							<div class="addInviteRoundBox" align="center">
-								<a href="#" class="addInviteInput">+</a>
+							<div class="inviteRoundBox" align="center">
+								<a href="#" class="addInviteInput">추가</a>
+								<a href="#" class="removeInviteInput">삭제</a>
 							</div>
 						</div>
 					</div> <!-- end addMemberInputWrap -->

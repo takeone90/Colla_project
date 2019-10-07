@@ -64,7 +64,7 @@
 }
 
 #main-cover .head-title {
-	font-size: 120px;
+	font-size: 106px;
 	margin-top: 0px;
 }
 
@@ -833,7 +833,7 @@ div {
 
 #aboutUs-history .head-body {
 	width: 1250px;
-	height: 500px;
+	height: 400px;
 	margin: 0 auto;
 }
 
@@ -847,18 +847,18 @@ div {
 }
 
 #aboutUs-history .head-body ul {
-	background-image: url("../img/history_line.png");
-	background-repeat: no-repeat;
-	background-size: 22.25px 450px;
-	background-position: 40px 25px;
-	background-color: white;
-	width: 45%;
-	height: 100%;
+	background-image: url(../img/history_line.png);
+    background-repeat: no-repeat;
+    background-size: auto 365px;
+    background-position: 40px 20px;
+    background-color: white;
+    width: 45%;
+    height: 100%;
 }
 
 #aboutUs-history .head-body ul li {
-	line-height: 61.5px;
-	padding-left: 60px;
+	line-height: 49.5px;
+    padding-left: 34px;
 }
 
 #aboutUs-history .head-body ul li p {

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/jsp/inc/head.jsp" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
 <title>라이선스관리</title>
 <link rel="stylesheet" type="text/css" href="css/headerWs.css"/>
@@ -34,18 +35,22 @@
 										<table>
 											<tr>
 												<td>주문번호</td>
-												<td>상품명</td>
+												<td>주문일</td>
+												<td>라이선스</td>
 												<td>시작일</td>
 												<td>종료일</td>
-												<td>결제 일시</td>
 												<td>결제 금액</td>
 												<td>결제 수단</td>
 											</tr>
-											<c:forEach items="${licenseList }" var="license">
+											<c:forEach items="${licenseList }" var="licenseList">
 												<tr>
-													<td>${license.type }</td>
-													<td>${license.startDate }</td>
-													<td>${license.endDate }</td>
+													<td>${licenseList.ORDERID }</td>
+													<td><fmt:formatDate value="${licenseList.PAYDATE }" pattern="yyyy-MM-dd"/></td>
+													<td>${licenseList.TYPE }</td>
+													<td><fmt:formatDate value="${licenseList.STARTDATE }" pattern="yyyy-MM-dd"/></td>
+													<td><fmt:formatDate value="${licenseList.ENDDATE }" pattern="yyyy-MM-dd"/></td>
+													<td>${licenseList.AMOUNT }</td>
+													<td>${licenseList.PAYMETHOD }</td>
 												</tr>
 											</c:forEach>
 										</table>

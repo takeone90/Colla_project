@@ -16,7 +16,7 @@ public class SetAlarmService {
 	SetAlarmDao setAlarmDao;
 	
 	public boolean addSetAlarm(SetAlarm setAlarm) {
-		if(setAlarmDao.insertSetAlarm(setAlarm)>0) {
+		if(setAlarmDao.insertSetAlarm(setAlarm.getNum())>0) {
 			return true;
 		}
 		return false;

@@ -7,11 +7,24 @@
 <link rel="stylesheet" type="text/css" href="css/navWs.css"/>
 <link rel="stylesheet" type="text/css" href="css/calMonth.css"/>
 <script type="text/javascript">
-	$(function() {
-		var type1 = $("#calType1").prop("checked");
-		var type2 = $("#calType2").prop("checked");
-		var type3 = $("#calType3").prop("checked");
+$(function() {
+	var type1 = $("#calType1").prop("checked");
+	var type2 = $("#calType2").prop("checked");
+	var type3 = $("#calType3").prop("checked");
+	
+	$("#calType1").on("change", function() {
+		thisMonthCalendar(today);
+		showSchedule(today);
 	});
+	$("#calType2").on("change", function() {
+		thisMonthCalendar(today);
+		showSchedule(today);
+	});
+	$("#calType3").on("change", function() {
+		thisMonthCalendar(today);
+		showSchedule(today);
+	});
+});
 </script>
 </head>
 <body>

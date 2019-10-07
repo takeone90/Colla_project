@@ -63,10 +63,7 @@ public class MemberService {
 		member.setPw(bcryptPassword);
 		if(dao.insertMember(member)>0) {
 			dao.insertAuthority(member.getNum()); //권한 추가
-			SetAlarm setAlarm = new SetAlarm();
-			setAlarm.setNum(member.getNum());
-//			System.out.println("setAlarm : " + setAlarm);
-			if(setAlarmDao.insertSetAlarm(setAlarm)>0) {
+			if(setAlarmDao.insertSetAlarm(member.getNum())>0) {
 				return true;
 			}
 		}

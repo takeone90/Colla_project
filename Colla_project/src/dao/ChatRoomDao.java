@@ -11,7 +11,8 @@ public interface ChatRoomDao {
 	public int insertChatRoom(ChatRoom chatRoom);
 	public int updateChatRoom(ChatRoom chatRoom);//채팅방 이름만 바뀌게
 	public int deleteChatRoom(int crNum);
-//	public int deleteEmptyChatRoom();//비어있는 채팅방 삭제
+	public int deleteEmptyChatRoom();//비어있는 채팅방 삭제
+	public int deleteAllChatRoomByWnum(int wNum);
 	public ChatRoom selectChatRoom(int crNum);//채팅방번호로 조회
 	public ChatRoom selectChatRoomByMnum(int mNum); //채팅방생성자 번호로 조회
 	public ChatRoom selectDefaultChatRoomByWnum(int wNum); //wNum을 받아서 그 workspace의 기본채팅방을 조회

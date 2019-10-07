@@ -13,6 +13,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<delete id="deleteTodo" parameterType="int">
 		delete todo where td_num=#{tdNum}
 	</delete>
+	<delete id="deleteAllTodoByPnum">
+		delete todo where p_num=#{pNum}
+	</delete>
 	<update id="updateTodo" parameterType="todo">
 		update todo set td_content=#{tdContent},
 						td_title=#{tdTitle},

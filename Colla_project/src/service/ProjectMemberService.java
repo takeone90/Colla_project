@@ -21,7 +21,8 @@ public class ProjectMemberService {
 	private ProjectMemberDao pmDao;
 	@Autowired
 	private ChatRoomMemberDao crmDao;
-	
+	@Autowired
+	private ChatRoomDao crDao;
 	public boolean addProjectMember(int pNum, int mNum) {
 		boolean result = false;
 		ProjectMember pm = new ProjectMember();
@@ -33,18 +34,13 @@ public class ProjectMemberService {
 		return result;
 	}
 	public boolean removeProjectMember(int pNum, int mNum) {
-		boolean result1 = false;
+		boolean result = false;
 		if(pmDao.deleteProjectMember(pNum, mNum)>0) {
-			result1 = true;
+			result = true;
+			crDao.deleteEmptyChatRoom();
 		}
-		boolean result2 = false;
-		if(crmDao.deleteChatRoomMemberByCrNumMnum(pDao.selectProject(pNum).getCrNum(), pDao.selectProject(pNum).getmNum())>0) {
-			result2 = true;
-		}
-		if(result1 && result2) {
-			return true;
-		}
-		return false;
+		
+		return result;
 	}
 	public ProjectMember getProjectMember(int pNum,int mNum) {
 		return pmDao.selectProjectMember(pNum, mNum);

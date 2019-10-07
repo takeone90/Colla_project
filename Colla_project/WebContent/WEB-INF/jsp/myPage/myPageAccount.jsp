@@ -71,7 +71,6 @@ function removeMember(){
 						</div>
 					</div>
 					<div class="myPageAccountRow">
-						
 						<div class="row btns btnR">
 							<a href="myPageMainForm" class="btn"><i class="fa fa-arrow-left" aria-hidden="true"></i> 이전</a>
 						</div>
