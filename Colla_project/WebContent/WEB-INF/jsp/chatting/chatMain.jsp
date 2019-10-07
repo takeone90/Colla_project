@@ -889,7 +889,7 @@ var staticMap = null;
 						<li class="navInnerBtn"><a href="#" class="btn active"
 							data-content="memberManagement">멤버관리</a></li>
 						<li class="navInnerBtn"><a href="#" class="btn"
-							data-content="canvas">일정관리</a></li>
+							data-content="schedule">일정관리</a></li>
 						<li class="navInnerBtn"><a href="#" class="btn"
 							data-content="favorite">즐겨찾기</a></li>
 						<li class="navInnerBtn"><a href="#" class="btn"
@@ -937,8 +937,8 @@ var staticMap = null;
 							<div id="searchContent" class="collaScroll"></div>
 							<!-- 							<div id="pageNav"></div> -->
 						</div>
-						<div id="nav--canvas" class="navContent-wrap">
-							<div id="addForm" class="ui-widget-content">
+						<div id="nav--schedule" class="navContent-wrap">
+							<div id="addForm">
 								<div class="modalHead">
 									<h3>일정 추가</h3>
 									<p>
@@ -947,31 +947,29 @@ var staticMap = null;
 								</div>
 								<div class="modalBody">
 									<form class="addModal">
-										<input type="hidden" name="${_csrf.parameterName}"
-											value="${_csrf.token}"> <input type="hidden"
-											name="mNum" id="mNum" value="${userData.mNum}"> <input
-											type="hidden" name="wNum" id="wNum" value="${userData.wNum}">
-										<div>
-											<div class="titleDiv">
-												<h4>일정 이름</h4>
-												<input type="text" name="title" class="modalTitle"
-													id="title">
-											</div>
-											<div class="selectDiv">
+										<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+										<input type="hidden" name="mNum" id="mNum" value="${userData.mNum}">
+										<input type="hidden" name="wNum" id="wNum" value="${userData.wNum}">
+										<div class="titleDiv schedule-row">
+											<h4>일정 이름</h4>
+											<input type="text" name="title" class="modalTitle" id="title">
+										</div>
+										<div class="schedule-row clearFix">
+											<div class="selectDiv half">
 												<h4>종류</h4>
 												<select name="type">
-													<option value="project">프로젝트</option>
 													<option value="vacation">휴가</option>
 													<option value="event">행사</option>
+													<option value="etc">기타</option>
 												</select>
 											</div>
-											<div class="colorDiv">
+											<div class="colorDiv half">
 												<h4>색</h4>
 												<input type="color" name="color" id="addColor"
 													value="#ffffff">
 											</div>
 										</div>
-										<div class="dateDiv">
+										<div class="dateDiv schedule-row">
 											<h4>기간</h4>
 											<div>
 												<p>
@@ -987,30 +985,25 @@ var staticMap = null;
 												</p>
 											</div>
 										</div>
-
-										<div class="checkboxDiv btn-group-toggle"
-											data-toggle="buttons">
-											<label for="checkbox-1" class="checkboxbtn"> <input
-												type="checkbox" name="yearCalendar" id="checkbox-1"
-												value="yearCalendar" class="tmp">연간 달력 표시
-											</label> <label for="checkbox-2" class="checkboxbtn"> <input
-												type="checkbox" name="annually" id="checkbox-2"
-												value="annually" class="tmp">매년 반복
-											</label> <label for="checkbox-3" class="checkboxbtn"> <input
-												type="checkbox" name="monthly" id="checkbox-3"
-												value="monthly" class="tmp">매월 반복
+										<div class="checkboxDiv btn-group-toggle schedule-row" data-toggle="buttons">
+											<label for="checkbox-1" class="checkboxbtn">
+												<input type="checkbox" name="yearCalendar" id="checkbox-1" value="yearCalendar" class="tmp">연간 달력 표시
+											</label> 
+											<label for="checkbox-2" class="checkboxbtn">
+												<input type="checkbox" name="annually" id="checkbox-2" value="annually" class="tmp">매년 반복
+											</label>
+											<label for="checkbox-3" class="checkboxbtn">
+												<input type="checkbox" name="monthly" id="checkbox-3" value="monthly" class="tmp">매월 반복
 											</label>
 										</div>
-
-										<!-- 					//name="checkbox-1" id="checkbox-1" -->
-										<div>
+										<div class="schedule-row">
 											<h4>내용</h4>
 											<textarea rows="3" cols="21" name="content"
 												class="modalContent" id="content"></textarea>
 										</div>
-										<div id="innerBtn">
+										<div id="innerBtn" class="schedule-row">
 											<a href="#" id="addSchedule">추가</a>
-											<button type="reset" class="btn" id="formReset">리셋</button>
+											<button type="reset" class="btn" id="formReset">초기화</button>
 										</div>
 									</form>
 								</div>
@@ -1022,16 +1015,14 @@ var staticMap = null;
 									var data = $(".addModal").serialize();
 									console.log(data);
 									$.ajax({
-										url: "addSchedule",
+										url: "/addSchedule",
 										data: data,
 										type: "post",
 										dataType: "json",
 										success: function(result) {
 											if(result) {
 												alert("일정 추가했습니다.");
-												$(".addModal").each(function() {
-													this.reset();
-												});
+												$(".addModal")[0].reset();
 											} else {
 												alert("일정 추가 실패했습니다.");
 											}
