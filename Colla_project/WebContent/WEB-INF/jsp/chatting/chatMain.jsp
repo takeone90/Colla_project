@@ -1,29 +1,43 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ include file="/WEB-INF/jsp/inc/head.jsp" %>
+	pageEncoding="UTF-8"%>
+<%@ include file="/WEB-INF/jsp/inc/head.jsp"%>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>채팅 메인</title>
-<link rel="stylesheet" type="text/css" href="${contextPath}/css/headerWs.css"/>
-<link rel="stylesheet" type="text/css" href="${contextPath}/css/navWs.css"/>
-<link rel="stylesheet" type="text/css" href="${contextPath}/css/chatMain.css"/>
-<link rel="stylesheet" type="text/css" href="${contextPath}/css/animate.css"/>
-<link rel="stylesheet" type="text/css" href="${contextPath}/css/animationCheatSheet.css"/>
-<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=38b5346cba2a9103101abc2c542a2d86&libraries=services"></script>
+<link rel="stylesheet" type="text/css"
+	href="${contextPath}/css/headerWs.css" />
+<link rel="stylesheet" type="text/css"
+	href="${contextPath}/css/navWs.css" />
+<link rel="stylesheet" type="text/css"
+	href="${contextPath}/css/chatMain.css" />
+<link rel="stylesheet" type="text/css"
+	href="${contextPath}/css/animate.css" />
+<link rel="stylesheet" type="text/css"
+	href="${contextPath}/css/animationCheatSheet.css" />
+<link rel="stylesheet"
+	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script type="text/javascript"
+	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=38b5346cba2a9103101abc2c542a2d86&libraries=services"></script>
 
 <script type="text/javascript" src="lib/codemirror/lib/codemirror.js"></script>
-<link rel="stylesheet" type="text/css" href="lib/codemirror/lib/codemirror.css"/>
-<link rel="stylesheet" type="text/css" href="lib/codemirror/theme/gruvbox-dark.css"/>
-<script type="text/javascript" src="lib/codemirror/addon/edit/closetag.js"></script>
-<script type="text/javascript" src="lib/codemirror/addon/hint/show-hint.js"></script>
-<script type="text/javascript" src="lib/codemirror/addon/hint/css-hint.js"></script>
-<script type="text/javascript" src="lib/codemirror/mode/javascript/javascript.js"></script>
+<link rel="stylesheet" type="text/css"
+	href="lib/codemirror/lib/codemirror.css" />
+<link rel="stylesheet" type="text/css"
+	href="lib/codemirror/theme/gruvbox-dark.css" />
+<script type="text/javascript"
+	src="lib/codemirror/addon/edit/closetag.js"></script>
+<script type="text/javascript"
+	src="lib/codemirror/addon/hint/show-hint.js"></script>
+<script type="text/javascript"
+	src="lib/codemirror/addon/hint/css-hint.js"></script>
+<script type="text/javascript"
+	src="lib/codemirror/mode/javascript/javascript.js"></script>
 <script type="text/javascript" src="lib/codemirror/mode/css/css.js"></script>
 <script type="text/javascript" src="lib/codemirror/mode/clike/clike.js"></script>
 <script type="text/javascript" src="lib/codemirror/mode/xml/xml.js"></script>
 <script type="text/javascript" src="lib/codemirror/mode/sql/sql.js"></script>
 <script type="text/javascript" src="lib/codemirror/mode/php/php.js"></script>
-<script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script> <!-- font awsome -->
+<script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
+<!-- font awsome -->
 <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.32.0/codemirror.min.js"></script> -->
 <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.32.0/codemirror.min.css" /> -->
 
@@ -846,31 +860,40 @@ var staticMap = null;
 	}
 </script>
 
-<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.5.0/styles/androidstudio.min.css">
-<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.5.0/highlight.min.js"></script>
+<link rel="stylesheet"
+	href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.5.0/styles/androidstudio.min.css">
+<script
+	src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.5.0/highlight.min.js"></script>
 <script>hljs.initHighlightingOnLoad();</script>
 </head>
 <body>
-<%@ include file="/WEB-INF/jsp/inc/headerWs.jsp" %>
-<%@ include file="/WEB-INF/jsp/inc/navWs.jsp" %>
+	<%@ include file="/WEB-INF/jsp/inc/headerWs.jsp"%>
+	<%@ include file="/WEB-INF/jsp/inc/navWs.jsp"%>
 	<div id="wsBody">
-		<input type="hidden" value="chatroom" id="pageType">
-		<input type="hidden" value="${chatRoom.crIsDefault}" id="isDefault">
-		<input type="hidden" value="${chatRoom.crName}" id="crName">
-		<input type="hidden" value="${sessionScope.user.name}" id="userName">
+		<input type="hidden" value="chatroom" id="pageType"> <input
+			type="hidden" value="${chatRoom.crIsDefault}" id="isDefault">
+		<input type="hidden" value="${chatRoom.crName}" id="crName"> <input
+			type="hidden" value="${sessionScope.user.name}" id="userName">
 		<input type="hidden" value="${sessionScope.user.email}" id="userEmail">
-		<input type="hidden" value="${chatRoom.crNum}" id="crNum">
-		<input type="hidden" value="${wNum}" name="wNum" id="wNum">
+		<input type="hidden" value="${chatRoom.crNum}" id="crNum"> <input
+			type="hidden" value="${wNum}" name="wNum" id="wNum">
 		<div class="chatArea">
-			
+
 			<div id="chatNavBox">
-				<div id="openChatNavBox" class="animated bounceInRight"><i class="fas fa-angle-double-left"></i></div><!-- 슬라이드 메뉴 열 수 있는 띠 -->
+				<div id="openChatNavBox" class="animated bounceInRight">
+					<i class="fas fa-angle-double-left"></i>
+				</div>
+				<!-- 슬라이드 메뉴 열 수 있는 띠 -->
 				<div id="chatNav" align="center">
 					<ul id="InnerBtns" class="clearFix">
-						<li class="navInnerBtn"><a href="#" class="btn active" data-content="memberManagement">멤버관리</a></li>
-						<li class="navInnerBtn"><a href="#" class="btn" data-content="canvas">일정관리</a></li>
-						<li class="navInnerBtn"><a href="#" class="btn" data-content="favorite">즐겨찾기</a></li>
-						<li class="navInnerBtn"><a href="#" class="btn" data-content="search">채팅검색</a></li>
+						<li class="navInnerBtn"><a href="#" class="btn active"
+							data-content="memberManagement">멤버관리</a></li>
+						<li class="navInnerBtn"><a href="#" class="btn"
+							data-content="canvas">일정관리</a></li>
+						<li class="navInnerBtn"><a href="#" class="btn"
+							data-content="favorite">즐겨찾기</a></li>
+						<li class="navInnerBtn"><a href="#" class="btn"
+							data-content="search">채팅검색</a></li>
 					</ul>
 					<div id="chatNavContent" align="left">
 						<div id="nav--favorite" class="navContent-wrap collaScroll">
@@ -878,53 +901,61 @@ var staticMap = null;
 						<div id="nav--memberManagement" class="navContent-wrap">
 							<form action="inviteChatMember" id="inviteForm">
 								<div id="navMList">
-									<input type="hidden" class="addCrNum" name="crNum" value="${chatRoom.crNum }" />
-									<input type="hidden" id="wNum" name="wNum" value="${wNum }" />
+									<input type="hidden" class="addCrNum" name="crNum"
+										value="${chatRoom.crNum }" /> <input type="hidden" id="wNum"
+										name="wNum" value="${wNum }" />
 									<h4>채팅방 참여자</h4>
 									<div id="crmListUL-wrap" class="listUL-wrap collaScroll">
 										<ul id='crmListUL' class='isntDefault'></ul>
 									</div>
-<!-- 									<p class="navInfoMsg">워크스페이스의 멤버를 채팅방에 추가할 수 있습니다.</p> -->
-									<h4>초대 가능한 워크스페이스 멤버<span id="emptyInvite"></span></h4>
-									<div id="wsmListUl-wrap" class="listUL-wrap collaScroll" style="${chatRoom.crIsDefault==1?'display:none':''}">
+									<!-- 									<p class="navInfoMsg">워크스페이스의 멤버를 채팅방에 추가할 수 있습니다.</p> -->
+									<h4>
+										초대 가능한 워크스페이스 멤버<span id="emptyInvite"></span>
+									</h4>
+									<div id="wsmListUl-wrap" class="listUL-wrap collaScroll"
+										style="${chatRoom.crIsDefault==1?'display:none':''}">
 										<ul id='wsmListUL'></ul>
 									</div>
 									<div align='center'>
-										<button type='submit' class="btn" id='inviteWsmBtn'>선택한 멤버 초대하기</button>
+										<button type='submit' class="btn" id='inviteWsmBtn'>선택한
+											멤버 초대하기</button>
 									</div>
 								</div>
-							</form>							
+							</form>
 						</div>
-						
+
 						<div id="nav--search" class="navContent-wrap">
 							<div id="searchInput" align="center">
 								<form onsubmit="searchChatAndDraw(); return false;">
 									<select name="keywordType" id="keywordType">
 										<option value="1">내용</option>
 										<option value="2">작성자</option>
-									</select>
-									<input type="text" id="keyword" placeholder="검색어를 입력해주세요">
+									</select> <input type="text" id="keyword" placeholder="검색어를 입력해주세요">
 									<button class="btn">검색</button>
 								</form>
 							</div>
 							<div id="searchContent" class="collaScroll"></div>
-<!-- 							<div id="pageNav"></div> -->
+							<!-- 							<div id="pageNav"></div> -->
 						</div>
 						<div id="nav--canvas" class="navContent-wrap">
 							<div id="addForm" class="ui-widget-content">
 								<div class="modalHead">
 									<h3>일정 추가</h3>
-									<p>채팅방에서 일정을 추가하실 수 있습니다.<br/>추가한 일정은 Calendar에서 확인 가능합니다.</p>
+									<p>
+										채팅방에서 일정을 추가하실 수 있습니다.<br />추가한 일정은 Calendar에서 확인 가능합니다.
+									</p>
 								</div>
 								<div class="modalBody">
 									<form class="addModal">
-										<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
-										<input type="hidden" name="mNum" id="mNum" value="${userData.mNum}">
-										<input type="hidden" name="wNum" id="wNum" value="${userData.wNum}">
+										<input type="hidden" name="${_csrf.parameterName}"
+											value="${_csrf.token}"> <input type="hidden"
+											name="mNum" id="mNum" value="${userData.mNum}"> <input
+											type="hidden" name="wNum" id="wNum" value="${userData.wNum}">
 										<div>
 											<div class="titleDiv">
 												<h4>일정 이름</h4>
-												<input type="text" name="title" class="modalTitle" id="title">
+												<input type="text" name="title" class="modalTitle"
+													id="title">
 											</div>
 											<div class="selectDiv">
 												<h4>종류</h4>
@@ -936,32 +967,46 @@ var staticMap = null;
 											</div>
 											<div class="colorDiv">
 												<h4>색</h4>
-												<input type="color" name="color" id="addColor" value="#ffffff">
+												<input type="color" name="color" id="addColor"
+													value="#ffffff">
 											</div>
 										</div>
 										<div class="dateDiv">
 											<h4>기간</h4>
-											<div><p><input type="text" name="startDate" id="startDate" class="datepicker"></p></div>
+											<div>
+												<p>
+													<input type="text" name="startDate" id="startDate"
+														class="datepicker">
+												</p>
+											</div>
 											<span>~</span>
-											<div><p><input type="text" name="endDate" id="endDate" class="datepicker"></p></div>
+											<div>
+												<p>
+													<input type="text" name="endDate" id="endDate"
+														class="datepicker">
+												</p>
+											</div>
 										</div>
-					
-										<div class="checkboxDiv btn-group-toggle" data-toggle="buttons">
-											<label for="checkbox-1" class="checkboxbtn">
-												<input type="checkbox" name="yearCalendar" id="checkbox-1" value="yearCalendar" class="tmp">연간 달력 표시
-											</label> 
-											<label for="checkbox-2" class="checkboxbtn">
-												<input type="checkbox" name="annually" id="checkbox-2" value="annually" class="tmp">매년 반복
-											</label>
-											<label for="checkbox-3" class="checkboxbtn">
-												<input type="checkbox" name="monthly" id="checkbox-3" value="monthly" class="tmp">매월 반복
+
+										<div class="checkboxDiv btn-group-toggle"
+											data-toggle="buttons">
+											<label for="checkbox-1" class="checkboxbtn"> <input
+												type="checkbox" name="yearCalendar" id="checkbox-1"
+												value="yearCalendar" class="tmp">연간 달력 표시
+											</label> <label for="checkbox-2" class="checkboxbtn"> <input
+												type="checkbox" name="annually" id="checkbox-2"
+												value="annually" class="tmp">매년 반복
+											</label> <label for="checkbox-3" class="checkboxbtn"> <input
+												type="checkbox" name="monthly" id="checkbox-3"
+												value="monthly" class="tmp">매월 반복
 											</label>
 										</div>
-										
-					<!-- 					//name="checkbox-1" id="checkbox-1" -->
+
+										<!-- 					//name="checkbox-1" id="checkbox-1" -->
 										<div>
 											<h4>내용</h4>
-											<textarea rows="3" cols="21" name="content" class="modalContent" id="content"></textarea>
+											<textarea rows="3" cols="21" name="content"
+												class="modalContent" id="content"></textarea>
 										</div>
 										<div id="innerBtn">
 											<a href="#" id="addSchedule">추가</a>
@@ -971,7 +1016,7 @@ var staticMap = null;
 								</div>
 							</div>
 						</div>
- 						<script type="text/javascript"><!-- 191002 혜선 추가 -->
+						<script type="text/javascript"><!-- 191002 혜선 추가 -->
 							$(function() {
 								$("#addSchedule").on("click", function() {
 									var data = $(".addModal").serialize();
@@ -1002,145 +1047,177 @@ var staticMap = null;
 							});									
 						</script>
 					</div>
-	
+
 					<c:if test="${chatRoom.crIsDefault eq 0}">
-					<div id="etcBox"><a href="exitChatRoom?crNum=${chatRoom.crNum}" id="exitChatRoom">채팅방 나가기</a></div>
+						<div id="etcBox">
+							<a href="exitChatRoom?crNum=${chatRoom.crNum}" id="exitChatRoom">채팅방
+								나가기</a>
+						</div>
 					</c:if>
 				</div>
 			</div>
-			<div class="chat collaScroll" id="chatArea">
-			</div>
+			<div class="chat collaScroll" id="chatArea"></div>
 			<div class="attachDetail">
-				<div class="attach"><a href="#" class="openFileUploadModal">파일첨부</a></div>
-				<div class="attach"><a href="#" class="openCodeModal">코드첨부</a></div>
-				<div class="attach"><a href="#" class="openLocationModal">지도첨부</a></div>
+				<div class="attach">
+					<a href="#" class="openFileUploadModal">파일첨부</a>
+				</div>
+				<div class="attach">
+					<a href="#" class="openCodeModal">코드첨부</a>
+				</div>
+				<div class="attach">
+					<a href="#" class="openLocationModal">지도첨부</a>
+				</div>
 			</div>
 			<div id="inputBox">
 				<div id="chatInputInstance">
-				<a href="#" id="attachBtn">첨부파일</a>
-				<textarea id="chatInput" placeholder="메세지 작성부분"></textarea>
-				<a id="sendChat" href="#">전송</a>
-				</div><!-- chatInputInstance end -->
-			</div><!-- inputBox end -->
+					<a href="#" id="attachBtn">첨부파일</a>
+					<textarea id="chatInput" placeholder="메세지 작성부분"></textarea>
+					<a id="sendChat" href="#">전송</a>
+				</div>
+				<!-- chatInputInstance end -->
+			</div>
+			<!-- inputBox end -->
 		</div>
-		
-		
+
+
 		<%---------------------------------------------파일첨부 모달 ----------------------------------------------------%>
 		<div id="addFileModal" class="attachModal ui-widget-content">
-<!-- 			<div class="modalHead"> -->
-<!-- 				<h3 style="font-weight: bolder; font-size: 30px">파일 업로드</h3> -->
-<!-- 				<p>업로드 할 파일을 선택하세요</p> -->
-<!-- 			</div> -->
-			
+			<!-- 			<div class="modalHead"> -->
+			<!-- 				<h3 style="font-weight: bolder; font-size: 30px">파일 업로드</h3> -->
+			<!-- 				<p>업로드 할 파일을 선택하세요</p> -->
+			<!-- 			</div> -->
+
 			<div class="header">
-						<!--파도 위 내용-->
-						<div class="inner-header flex">
-							<g><path fill="#fff"
-							d="M250.4,0.8C112.7,0.8,1,112.4,1,250.2c0,137.7,111.7,249.4,249.4,249.4c137.7,0,249.4-111.7,249.4-249.4
+				<!--파도 위 내용-->
+				<div class="inner-header flex">
+					<g>
+					<path fill="#fff"
+						d="M250.4,0.8C112.7,0.8,1,112.4,1,250.2c0,137.7,111.7,249.4,249.4,249.4c137.7,0,249.4-111.7,249.4-249.4
 							C499.8,112.4,388.1,0.8,250.4,0.8z M383.8,326.3c-62,0-101.4-14.1-117.6-46.3c-17.1-34.1-2.3-75.4,13.2-104.1
 							c-22.4,3-38.4,9.2-47.8,18.3c-11.2,10.9-13.6,26.7-16.3,45c-3.1,20.8-6.6,44.4-25.3,62.4c-19.8,19.1-51.6,26.9-100.2,24.6l1.8-39.7		
 							c35.9,1.6,59.7-2.9,70.8-13.6c8.9-8.6,11.1-22.9,13.5-39.6c6.3-42,14.8-99.4,141.4-99.4h41L333,166c-12.6,16-45.4,68.2-31.2,96.2	
 							c9.2,18.3,41.5,25.6,91.2,24.2l1.1,39.8C390.5,326.2,387.1,326.3,383.8,326.3z" /></g>
-							</svg>
-							<div class="loginBox-Head">
-								<h3 style="color: white;font-weight: bolder;font-size: 30px;margin-bottom: 10px;">파일 업로드</h3>
-								<p>업로드 할 파일을 선택하세요</p>
-							</div>
-						</div>
-						<!--파도 시작-->
-						<div>
-							<svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-							viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+					</svg>
+					<div class="loginBox-Head">
+						<h3
+							style="color: white; font-weight: bolder; font-size: 30px; margin-bottom: 10px;">파일
+							업로드</h3>
+						<p>업로드 할 파일을 선택하세요</p>
+					</div>
+				</div>
+				<!--파도 시작-->
+				<div>
+					<svg class="waves" xmlns="http://www.w3.org/2000/svg"
+						xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28"
+						preserveAspectRatio="none" shape-rendering="auto">
 							<defs>
-							<path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+							<path id="gentle-wave"
+							d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
 							</defs>
 								<g class="parallax">
-								<use xlink:href="#gentle-wave" x="48" y="0" fill="rgba(255,255,255,0.7" />
-								<use xlink:href="#gentle-wave" x="48" y="3" fill="rgba(255,255,255,0.5)" />
+								<use xlink:href="#gentle-wave" x="48" y="0"
+							fill="rgba(255,255,255,0.7" />
+								<use xlink:href="#gentle-wave" x="48" y="3"
+							fill="rgba(255,255,255,0.5)" />
 								<use xlink:href="#gentle-wave" x="48" y="7" fill="#fff" />
 								</g>
 							</svg>
-						</div><!--파도 end-->
-			</div><!--header end-->
-			
+				</div>
+				<!--파도 end-->
+			</div>
+			<!--header end-->
+
 			<div class="modalBody">
 				<form id="addFileForm" method="post" enctype="multipart/form-data">
-					<input type="hidden" class="addCrNum" name="crNum" value="${chatRoom.crNum}">
-					<input type="hidden" value="${wNum}" name="wNum">
-					<input type="hidden" value="${sessionScope.user.num}" name="mNum">
-					<input type="hidden" value="${_csrf.token}" name="${_csrf.parameterName}">
-					<br><br>
+					<input type="hidden" class="addCrNum" name="crNum"
+						value="${chatRoom.crNum}"> <input type="hidden"
+						value="${wNum}" name="wNum"> <input type="hidden"
+						value="${sessionScope.user.num}" name="mNum"> <input
+						type="hidden" value="${_csrf.token}" name="${_csrf.parameterName}">
+					<br>
+					<br>
 					<div class="addFileInputWrap">
 						<div class="row">
-							<input type="file" class="btnFile" name="chatFile" value="파일 선택" accept="image/*" multiple>
+							<input type="file" class="btnFile" name="chatFile" value="파일 선택"
+								accept="image/*" multiple>
 						</div>
-					</div> <!-- end addFileInputWrap -->
+					</div>
+					<!-- end addFileInputWrap -->
 
 					<div id="innerBtn">
-						<a href="#" class="fileUploadBtn">업로드</a>
-						<a href="#" class="closeFileModal">닫기</a>
+						<a href="#" class="fileUploadBtn">업로드</a> <a href="#"
+							class="closeFileModal">닫기</a>
 					</div>
 				</form>
-			</div> <!-- end modalBody -->
-		</div><!-- end addFileModal -->
-		
-		
+			</div>
+			<!-- end modalBody -->
+		</div>
+		<!-- end addFileModal -->
+
+
 		<%---------------------------------------------코드첨부 모달 ----------------------------------------------------%>
 		<div id="addCodeModal" class="attachModal ui-widget-content">
-<!-- 			<div class="modalHead" align="center"> -->
-<!-- 				<h3 style="font-weight: bolder; font-size: 30px">코드 업로드</h3> -->
-<!-- 			</div> -->
-			
+			<!-- 			<div class="modalHead" align="center"> -->
+			<!-- 				<h3 style="font-weight: bolder; font-size: 30px">코드 업로드</h3> -->
+			<!-- 			</div> -->
+
 			<div class="header">
-						<!--파도 위 내용-->
-						<div class="inner-header flex">
-							<g><path fill="#fff"
-							d="M250.4,0.8C112.7,0.8,1,112.4,1,250.2c0,137.7,111.7,249.4,249.4,249.4c137.7,0,249.4-111.7,249.4-249.4
+				<!--파도 위 내용-->
+				<div class="inner-header flex">
+					<g>
+					<path fill="#fff"
+						d="M250.4,0.8C112.7,0.8,1,112.4,1,250.2c0,137.7,111.7,249.4,249.4,249.4c137.7,0,249.4-111.7,249.4-249.4
 							C499.8,112.4,388.1,0.8,250.4,0.8z M383.8,326.3c-62,0-101.4-14.1-117.6-46.3c-17.1-34.1-2.3-75.4,13.2-104.1
 							c-22.4,3-38.4,9.2-47.8,18.3c-11.2,10.9-13.6,26.7-16.3,45c-3.1,20.8-6.6,44.4-25.3,62.4c-19.8,19.1-51.6,26.9-100.2,24.6l1.8-39.7		
 							c35.9,1.6,59.7-2.9,70.8-13.6c8.9-8.6,11.1-22.9,13.5-39.6c6.3-42,14.8-99.4,141.4-99.4h41L333,166c-12.6,16-45.4,68.2-31.2,96.2	
 							c9.2,18.3,41.5,25.6,91.2,24.2l1.1,39.8C390.5,326.2,387.1,326.3,383.8,326.3z" /></g>
-							</svg>
-							<div class="loginBox-Head">
-								<h3 style="font-weight: bolder; font-size: 30px">코드 업로드</h3>
-							</div>
-						</div>
-						<!--파도 시작-->
-						<div>
-							<svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-							viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+					</svg>
+					<div class="loginBox-Head">
+						<h3 style="font-weight: bolder; font-size: 30px">코드 업로드</h3>
+					</div>
+				</div>
+				<!--파도 시작-->
+				<div>
+					<svg class="waves" xmlns="http://www.w3.org/2000/svg"
+						xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28"
+						preserveAspectRatio="none" shape-rendering="auto">
 							<defs>
-							<path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+							<path id="gentle-wave"
+							d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
 							</defs>
 								<g class="parallax">
-								<use xlink:href="#gentle-wave" x="48" y="0" fill="rgba(255,255,255,0.7" />
-								<use xlink:href="#gentle-wave" x="48" y="3" fill="rgba(255,255,255,0.5)" />
+								<use xlink:href="#gentle-wave" x="48" y="0"
+							fill="rgba(255,255,255,0.7" />
+								<use xlink:href="#gentle-wave" x="48" y="3"
+							fill="rgba(255,255,255,0.5)" />
 								<use xlink:href="#gentle-wave" x="48" y="7" fill="#fff" />
 								</g>
 							</svg>
-						</div><!--파도 end-->
-			</div><!--header end-->
-			
+				</div>
+				<!--파도 end-->
+			</div>
+			<!--header end-->
+
 			<div class="modalBody" style="padding: 17px;">
-					<div class="row">
-						<select name="codeType" id="codeType">
-							<option value="text/x-java">java</option>
-							<option value="javascript">javascript</option>
-							<option value="css">css</option>
-							<option value="xml">xml</option>
-							<option value="sql">sql</option>
-							<option value="php">php</option>
-						</select>
-<!-- 						<div id="selectCodeType"> -->
-<!-- 							<input type="radio" class="radioType" name="codeType" value="text/x-java" checked/>JAVA -->
-<!-- 							<input type="radio" class="radioType" name="codeType" value="javascript"/> JAVA Script -->
-<!-- 							<input type="radio" class="radioType" name="codeType" value="css"/>CSS -->
-<!-- 							<input type="radio" class="radioType" name="codeType" value="xml"/>XML -->
-<!-- 							<input type="radio" class="radioType" name="codeType" value="sql"/>SQL -->
-<!-- 							<input type="radio" class="radioType" name="codeType" value="php"/>PHP -->
-<!-- 						</div> -->
-						<textarea id="editor"></textarea>
-						<script>
+				<div class="row">
+					<select name="codeType" id="codeType">
+						<option value="text/x-java">java</option>
+						<option value="javascript">javascript</option>
+						<option value="css">css</option>
+						<option value="xml">xml</option>
+						<option value="sql">sql</option>
+						<option value="php">php</option>
+					</select>
+					<!-- 						<div id="selectCodeType"> -->
+					<!-- 							<input type="radio" class="radioType" name="codeType" value="text/x-java" checked/>JAVA -->
+					<!-- 							<input type="radio" class="radioType" name="codeType" value="javascript"/> JAVA Script -->
+					<!-- 							<input type="radio" class="radioType" name="codeType" value="css"/>CSS -->
+					<!-- 							<input type="radio" class="radioType" name="codeType" value="xml"/>XML -->
+					<!-- 							<input type="radio" class="radioType" name="codeType" value="sql"/>SQL -->
+					<!-- 							<input type="radio" class="radioType" name="codeType" value="php"/>PHP -->
+					<!-- 						</div> -->
+					<textarea id="editor"></textarea>
+					<script>
 							var type = $("#codeType option:selected").val();
 // 							var type;
 // 							$(function(){
@@ -1167,55 +1244,67 @@ var staticMap = null;
 							});
 							editor.setSize("446", "300");
 						</script>
-					</div>
-					<div id="innerBtn"  align="center">
-					<a href="#" class="codeUpload">업로드</a>
-					<a href="#" class="closeCodeModal">닫기</a>
-					</div>
-			</div> <!-- end modalBody -->
-		</div><!-- end addCodeModal -->
-		
-		
+				</div>
+				<div id="innerBtn" align="center">
+					<a href="#" class="codeUpload">업로드</a> <a href="#"
+						class="closeCodeModal">닫기</a>
+				</div>
+			</div>
+			<!-- end modalBody -->
+		</div>
+		<!-- end addCodeModal -->
+
+
 		<%---------------------------------------------지도첨부 모달 ----------------------------------------------------%>
 		<div id="addLocationModal" class="attachModal ui-widget-content">
-<!-- 			<div class="modalHead"> -->
-<!-- 				<h3 style="font-weight: bolder; font-size: 30px">지도 업로드</h3> -->
-<!-- 				<p>멤버들과 위치를 공유할 수 있습니다</p> -->
-<!-- 			</div> -->
-			
+			<!-- 			<div class="modalHead"> -->
+			<!-- 				<h3 style="font-weight: bolder; font-size: 30px">지도 업로드</h3> -->
+			<!-- 				<p>멤버들과 위치를 공유할 수 있습니다</p> -->
+			<!-- 			</div> -->
+
 			<div class="header">
-						<!--파도 위 내용-->
-						<div class="inner-header flex">
-							<g><path fill="#fff"
-							d="M250.4,0.8C112.7,0.8,1,112.4,1,250.2c0,137.7,111.7,249.4,249.4,249.4c137.7,0,249.4-111.7,249.4-249.4
+				<!--파도 위 내용-->
+				<div class="inner-header flex">
+					<g>
+					<path fill="#fff"
+						d="M250.4,0.8C112.7,0.8,1,112.4,1,250.2c0,137.7,111.7,249.4,249.4,249.4c137.7,0,249.4-111.7,249.4-249.4
 							C499.8,112.4,388.1,0.8,250.4,0.8z M383.8,326.3c-62,0-101.4-14.1-117.6-46.3c-17.1-34.1-2.3-75.4,13.2-104.1
 							c-22.4,3-38.4,9.2-47.8,18.3c-11.2,10.9-13.6,26.7-16.3,45c-3.1,20.8-6.6,44.4-25.3,62.4c-19.8,19.1-51.6,26.9-100.2,24.6l1.8-39.7		
 							c35.9,1.6,59.7-2.9,70.8-13.6c8.9-8.6,11.1-22.9,13.5-39.6c6.3-42,14.8-99.4,141.4-99.4h41L333,166c-12.6,16-45.4,68.2-31.2,96.2	
 							c9.2,18.3,41.5,25.6,91.2,24.2l1.1,39.8C390.5,326.2,387.1,326.3,383.8,326.3z" /></g>
-							</svg>
-							<div class="loginBox-Head">
-								<h3 style="font-weight: bolder;font-size: 30px;margin-bottom: 11px;">지도 업로드</h3>
-								<p>멤버들과 위치를 공유할 수 있습니다</p>
-							</div>
-						</div>
-						<!--파도 시작-->
-						<div>
-							<svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-							viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+					</svg>
+					<div class="loginBox-Head">
+						<h3
+							style="font-weight: bolder; font-size: 30px; margin-bottom: 11px;">지도
+							업로드</h3>
+						<p>멤버들과 위치를 공유할 수 있습니다</p>
+					</div>
+				</div>
+				<!--파도 시작-->
+				<div>
+					<svg class="waves" xmlns="http://www.w3.org/2000/svg"
+						xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28"
+						preserveAspectRatio="none" shape-rendering="auto">
 							<defs>
-							<path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+							<path id="gentle-wave"
+							d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
 							</defs>
 								<g class="parallax">
-								<use xlink:href="#gentle-wave" x="48" y="0" fill="rgba(255,255,255,0.7" />
-								<use xlink:href="#gentle-wave" x="48" y="3" fill="rgba(255,255,255,0.5)" />
+								<use xlink:href="#gentle-wave" x="48" y="0"
+							fill="rgba(255,255,255,0.7" />
+								<use xlink:href="#gentle-wave" x="48" y="3"
+							fill="rgba(255,255,255,0.5)" />
 								<use xlink:href="#gentle-wave" x="48" y="7" fill="#fff" />
 								</g>
 							</svg>
-						</div><!--파도 end-->
-			</div><!--header end-->
-			
-			
-			<br><br>
+				</div>
+				<!--파도 end-->
+			</div>
+			<!--header end-->
+
+
+			<br>
+			<br>
 			<div class="modalBody">
 				<div class="map_wrap">
 					<div id="map"></div>
@@ -1223,8 +1312,9 @@ var staticMap = null;
 						<div class="option">
 							<div>
 								<form onsubmit="searchPlaces(); return false;">
-									키워드 : <input type="text" id="mapKeyword" size="15">
-									<button type="submit">검색하기</button>
+									<input type="text" id="mapKeyword" size="25"
+										placeholder=" 키워드를 입력해주세요">
+									<button type="submit" class="searchPlaceBtn">검색</button>
 								</form>
 							</div>
 						</div>
@@ -1234,13 +1324,16 @@ var staticMap = null;
 					</div>
 				</div>
 				<div id="innerBtn">
-						<a href="#" class="closeLocationModal">닫기</a>
+					<a href="#" class="closeLocationModal">닫기</a>
 				</div>
-			</div> <!-- end modalBody -->
-		</div><!-- end addLocationModal -->
-		
-	</div><!-- end wsBody -->
-	
+			</div>
+			<!-- end modalBody -->
+		</div>
+		<!-- end addLocationModal -->
+
+	</div>
+	<!-- end wsBody -->
+
 </body>
 
 </html>
