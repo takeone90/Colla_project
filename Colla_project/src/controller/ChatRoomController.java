@@ -237,7 +237,7 @@ public class ChatRoomController {
 		return cm;
 	}
 	// 코드메세지 받고 보내기
-	@SendTo("/category/code/{var2}")
+	@SendTo("/category/msg/{var2}")
 	@MessageMapping("/sendCode/{var1}/{var2}/{var3}")
 	public ChatMessage sendCode(String code,
 			@DestinationVariable(value="var1")String userEmail,
@@ -254,7 +254,7 @@ public class ChatRoomController {
 		return cm;
 	}
 	// 파일메세지 받고 보내기
-	@SendTo("/category/file/{var2}")
+	@SendTo("/category/msg/{var2}")
 	@MessageMapping("/sendFile/{var1}/{var2}/{var3}/{var4}")
 	public ChatMessage sendFileMsg(String fileName,
 			@DestinationVariable(value = "var1") String userEmail,
@@ -265,7 +265,7 @@ public class ChatRoomController {
 		return cm;
 	}
 	// Map메세지 받고 보내기
-		@SendTo("/category/map/{var2}")
+		@SendTo("/category/msg/{var2}")
 		@MessageMapping("/sendMap/{var1}/{var2}")
 		public ChatMessage sendMap(String addressId,
 				@DestinationVariable(value = "var1") String userEmail,

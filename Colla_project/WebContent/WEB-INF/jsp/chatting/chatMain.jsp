@@ -476,8 +476,12 @@ var staticMap = null;
 			dataType :"json",
 			success : function(messageList){
 				$("#nav--favorite").empty();
-				for(var i=0; i<messageList.length; i++){
-					addMsg(messageList[i], "favorite");
+				if(messageList.length>0){
+					for(var i=0; i<messageList.length; i++){
+						addMsg(messageList[i], "favorite");
+					}
+				} else {
+					$("#nav--favorite").append("<h4 style='text-align:center; margin-top:30px;'>현재 채팅방에서 즐겨찾기된 메시지가 없습니다.</h4>");
 				}
 			},
 			error : function(){
@@ -793,7 +797,7 @@ var staticMap = null;
 					crmLi += "<div class='memberNameInSlideMenu'>"+crmItem.name+"</div></li>";
 					crmListUL.append(crmLi);
 				});
-				
+				console.log(wsmList);
 				if(wsmList.length <= 0){
 					$("#emptyInvite").text("가 없습니다.");
 					$("#inviteWsmBtn").remove();
@@ -848,9 +852,13 @@ var staticMap = null;
 			data : {"crNum":crNum,"keywordType":keywordType,"keyword":keyword},
 			success : function(cm){
 				var searchedInfo = cm.searchedCmList;
-				$.each(searchedInfo,function(idx,item){
-					addMsg(item,"search");
-				});
+				if(searchedInfo <= 0){
+					$("#searchContent").append("<p style='text-align:center;margin-top:30px;'>검색 결과가 없습니다.</p>");				
+				} else {
+					$.each(searchedInfo,function(idx,item){
+						addMsg(item,"search");
+					});
+				}
 			},
 			error : function(){
 				alert("페이징처리 에러발생");
