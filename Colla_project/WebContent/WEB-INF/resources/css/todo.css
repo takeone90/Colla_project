@@ -22,8 +22,8 @@
     margin-top:0px;
 }
 #addTodo{
+	position: absolute;
 	display: inline-block;
-    position: absolute;
     top: 172px;
     left: calc(100% - 172px);
     width: 97px;
@@ -38,12 +38,13 @@
 	background-color: #E5675A;
 }
 .todo{
+	display: inline-block;
 	background-color: white;
     border: 1px solid #d1d1d1;
-    border-radius: 8px;
+    border-radius: 4px;
     padding: 10px;
-    margin-bottom: 5px;
-	height : 111px;
+    width: 309px;
+    height: 84px;
 }
 .todo:hover{
 	background-color: #f5f5f5;
@@ -55,8 +56,8 @@
 .tdDate{
     display: inline-block;
     position: relative;
-    font-size: 13px;
-    left: 36%;
+    font-size: 11px;
+    left: 13%;
 }
 .tdDate p{
 	display: inline-block;
@@ -87,17 +88,16 @@
 }
 .tdInfo-titleContent{
 	display: inline-block;
-    margin-left: 16px;
+    margin-left: 0px;
     color: #454241;
     vertical-align: top;
-    margin-top: 13px;
+    margin-top: 5px;
 }
 .todoInnerBtn{
 	display: inline-block;
     position: relative;
-    left: calc(100% - 123px);
-    bottom: 27px;
-
+    left: calc(100% - 117px);
+    bottom: 16px;
 }
     
 .todoInnerBtn button{
@@ -187,3 +187,15 @@ progress::-webkit-progress-bar {
   border-radius: 4px;
   border:1px solid #cf8e82;
 }
+
+.onePmMember{
+	float: left;
+	height: 618px;
+	display: inline-block;
+    width: 330px;
+    margin-left: 5px;
+    padding: 10px;
+    border: 1px solid #d4cece;
+    border-radius: 4px;
+}
+

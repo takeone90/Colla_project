@@ -2,6 +2,7 @@ package dao;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import model.Todo;
 
 public interface TodoDao {
@@ -12,4 +13,5 @@ public interface TodoDao {
 	public Todo selectTodo(int tdNum);
 	public List<Todo> selectAllTodoByPnum(int pNum);
 	public List<Todo> selectAllTodoByMnum(int mNum);
+	public List<Todo> selectAllTodoByMnumPnum(@Param("mNumTo")int mNum,@Param("pNum")int pNum);
 }

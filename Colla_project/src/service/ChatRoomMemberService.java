@@ -15,7 +15,7 @@ public class ChatRoomMemberService {
 	private ChatRoomMemberDao crmDao;
 	@Autowired
 	private ChatRoomDao crDao;
-	public boolean addChatRoomMember(int crNum,int mNum,int wNum) {//workspace만들었을때, chatroom만들었을때, chatroom 초대됐을때 
+	public boolean addChatRoomMember(int crNum,int mNum,int wNum) {//workspace만들었을때, chatroom만들었을때, chatroom 초대됐을때, 프로젝트초대됐을때
 		boolean result = false;
 		ChatRoomMember crm = new ChatRoomMember();
 		crm.setCrNum(crNum);

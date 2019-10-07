@@ -33,7 +33,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select td.*,m.m_name from todo td,member m where p_num=#{pNum} and m.m_num=td.m_num_to order by td_priority asc
 	</select>
 	<select id="selectAllTodoByMnum" parameterType="int" resultMap="tdMap">
-		select td.*,m.m_name from todo td,member m where m_num=#{mNum} and m.m_num=td.m_num_to order by td_priority asc
+		select td.*,m.m_name from todo td,member m where m_num=#{mNumTo} and m.m_num=td.m_num_to order by td_priority asc
+	</select>
+	<select id="selectAllTodoByMnumPnum" resultMap="tdMap">
+		select td.*,m.m_name
+		from todo td,project_member pm,member m
+		where m.m_num=#{mNumTo} and pm.p_num=#{pNum} and pm.m_num=m.m_num and pm.m_num=td.m_num_to 
+		order by td.td_priority asc
 	</select>
 	<resultMap type="todo" id="tdMap">
 		<result column="td_num" property="tdNum"/>

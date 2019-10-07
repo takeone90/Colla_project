@@ -24,6 +24,7 @@ import model.Project;
 import model.ProjectMember;
 import model.Todo;
 import service.AlarmService;
+import service.MemberService;
 import service.ProjectMemberService;
 import service.ProjectService;
 import service.SetAlarmService;
@@ -43,15 +44,26 @@ public class TodoController {
 	private AlarmService aService;
 	@Autowired
 	private SetAlarmService saService;
-	
+	@Autowired
+	private MemberService mService;
 	@RequestMapping("/todoMain") //todoMain으로 이동
 	public String showTodoMain(HttpSession session, int pNum, Model model) {
 		List<Todo> tList = tService.getAllTodoByPnum(pNum);
 		List<ProjectMember> pmList =  pmService.getAllProjectMemberByPnum(pNum);
+		List<Map<String, Object>> thisProjectTdList = new ArrayList<Map<String,Object>>();
+		for(int i=0;i<pmList.size();i++) {
+			Map<String, Object> todoMap = new HashMap<String, Object>();
+			List<Todo> oneMemberTdList = tService.getAllTodoByMnumPnum(pmList.get(i).getmNum(), pNum);
+			todoMap.put("oneMemberTdList", oneMemberTdList);
+			todoMap.put("mNum",pmList.get(i).getmNum());
+//			todoMap.put(key, value)
+			thisProjectTdList.add(todoMap);
+		}
 		Project project = pService.getProject(pNum);
 		model.addAttribute("pName", project.getpName());
 		model.addAttribute("tList", tList); //todo 리스트 입니다...
 		model.addAttribute("pmList", pmList);
+		model.addAttribute("thisProjectTdList",thisProjectTdList);
 		model.addAttribute("pNum", pNum);
 		session.setAttribute("pNum", pNum);
 		model.addAttribute("progress", pService.getProject(pNum).getProgress());

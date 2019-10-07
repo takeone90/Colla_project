@@ -59,4 +59,7 @@ public class TodoService {
 	public List<Todo> getAllTodoByMnum(int mNum){
 		return tdDao.selectAllTodoByMnum(mNum);
 	}
+	public List<Todo> getAllTodoByMnumPnum(int mNum,int pNum){
+		return tdDao.selectAllTodoByMnumPnum(mNum, pNum);
+	}
 }

@@ -11,7 +11,14 @@ public class Member {
 	private String phone;
 	private String profileImg;
 	private int crNum;
+	private int pNum;
 	
+	public int getpNum() {
+		return pNum;
+	}
+	public void setpNum(int pNum) {
+		this.pNum = pNum;
+	}
 	public int getCrNum() {
 		return crNum;
 	}

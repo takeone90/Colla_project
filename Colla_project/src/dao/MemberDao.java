@@ -21,6 +21,7 @@ public interface MemberDao {
 	public List<Member> selectAllMemberByWnum(int wNum);
 	public List<Member> selectAllMemberByCrNum(int crNum);
 	public List<Member> selectAllNotMemberByWnumCrNum(@Param("wNum")int wNum,@Param("crNum")int crNum);
+	public List<Member> selectAllMebmerByPnum(int pNum);
 	public int insertEmailVerify(EmailVerify emailVerify);
 	public int updateEmailVerify(EmailVerify emailVerify);
 	public EmailVerify selectEmailVerify(String email);
