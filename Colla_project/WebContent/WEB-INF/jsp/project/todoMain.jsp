@@ -108,7 +108,7 @@
 						</div>
 						<ul class="oneMemberTodoList">
 						<c:forEach items="${onePm.oneMemberTdList}" var="td" varStatus="s">
-						<li class="todo" id="${s.index}">
+						<li class="todo" id="${td.tdNum}">
 						<div class="isComplete" data-tdNum="${td.tdNum}" data-isComplete="${td.isComplete}"onclick="checkComplete(${td.tdNum});">
 							<input type="hidden" value="${td.isComplete}">
 						</div>
@@ -150,8 +150,9 @@
 	            var pNum = $("#pNum").val();
 		            $.ajax({
 		            	url : "${contextPath}/resortingTodo",
-		            	data : {"priorityArray":result,"pNum":pNum},
-		            	success : function(){
+		            	data : {"priorityArray":result,"pNum":pNum,"mNum":${pm.mNum}},
+		            	success : function(data){
+		            		result = data; 
 		            	}
 		            });
 	            }
