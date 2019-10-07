@@ -909,8 +909,8 @@ var staticMap = null;
 						<div id="nav--canvas" class="navContent-wrap">
 							<div id="addForm" class="ui-widget-content">
 								<div class="modalHead">
-									<h3 style='font-weight: bolder; font-size: 30px'>일정 추가</h3>
-									<p>일정을 추가하고 멤버들과 공유하세요.</p>
+									<h3>일정 추가</h3>
+									<p>채팅방에서 일정을 추가하실 수 있습니다.<br/>추가한 일정은 Calendar에서 확인 가능합니다.</p>
 								</div>
 								<div class="modalBody">
 									<form class="addModal">
@@ -919,11 +919,11 @@ var staticMap = null;
 										<input type="hidden" name="wNum" id="wNum" value="${userData.wNum}">
 										<div>
 											<div class="titleDiv">
-												<h4>일정</h4>
+												<h4>일정 이름</h4>
 												<input type="text" name="title" class="modalTitle" id="title">
 											</div>
 											<div class="selectDiv">
-												<h4>타입</h4>
+												<h4>종류</h4>
 												<select name="type">
 													<option value="project">프로젝트</option>
 													<option value="vacation">휴가</option>
@@ -944,7 +944,7 @@ var staticMap = null;
 					
 										<div class="checkboxDiv btn-group-toggle" data-toggle="buttons">
 											<label for="checkbox-1" class="checkboxbtn">
-												<input type="checkbox" name="yearCalendar" id="checkbox-1" value="yearCalendar" class="tmp">연간 달력
+												<input type="checkbox" name="yearCalendar" id="checkbox-1" value="yearCalendar" class="tmp">연간 달력 표시
 											</label> 
 											<label for="checkbox-2" class="checkboxbtn">
 												<input type="checkbox" name="annually" id="checkbox-2" value="annually" class="tmp">매년 반복
@@ -961,7 +961,7 @@ var staticMap = null;
 										</div>
 										<div id="innerBtn">
 											<a href="#" id="addSchedule">추가</a>
-											<a href="#" id="addFormClose">닫기</a><br>
+											<button type="reset" class="btn" id="formReset">리셋</button>
 										</div>
 									</form>
 								</div>
