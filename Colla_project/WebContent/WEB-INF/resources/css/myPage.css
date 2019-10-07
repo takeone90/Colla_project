@@ -405,6 +405,7 @@
 	border: 1px solid #CCCCCC;
 	border-radius: 15px;
 	MARGIN-TOP: 9px;
+	cursor: pointer;
 }
 
 .toggleFG {
