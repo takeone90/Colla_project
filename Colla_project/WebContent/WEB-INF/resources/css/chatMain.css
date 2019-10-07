@@ -756,3 +756,21 @@ input[type=radio]{
     border-radius: 6px;
     padding: 4px;
 }
+
+/*************************** 일정 추가 *****************************/
+#addForm{
+	padding: 20px;
+	width: calc(100% - 40px);
+	height: calc(100% - 40px);
+}
+#addForm .modalHead h3 { 
+	font-size:25px ;
+	text-align:center; 
+	font-weight:500;
+	margin-bottom:20px;
+}
+#addForm .modalHead p {
+	line-height:20px;
+	width:300px;
+	margin:0 auto;
+}
