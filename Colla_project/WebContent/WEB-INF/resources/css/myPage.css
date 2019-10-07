@@ -355,33 +355,42 @@
 
 
 /*profileImgModify.jsp 이미지 크롭 모달*/
-#CropImgModal{
-	height: 635px;
+#cropImgModal{
+	height: 615px;
 }
-#CropImgModal > .modalBody div{
-	width : 500px;
-	height: 500px;
+#cropImgModal .modalBody{
+	padding: 17px;
 }
-#CropImgModal .modalBody{
+#cropImgModal #cropImgArea{
+	width : 100%;
+	height: 400px;
+	
+}
+#cropImgModal .modalBody{
 	margin-top: 10px;
 }
 
-#CropImgModal > .modalBody img{
+#cropImgModal > .modalBody img{
 	height: 100%;
 }
-#CropImgModal #innerBtn{
-    margin-top: 25px;
-    text-align: center;
+#innerBtn{
+	margin-top: 10px;
+	margin-bottom: 14px;
 }
-#CropImgModal #innerBtn a{
-	display: inline-block;
+#cropImgModal #innerBtn a {
+    display: inline-block;
     position: relative;
-    width: 30%;
-    padding: 10px 0px;
-    background-color: #403C39;
-    color: white;
+    width: calc(100% - 384px);
+    padding: 7px;
+    font-weight: 300;
+    font-size: 14px;
+    margin-bottom: 0px;
+    background-color: white;
+    color: #454443;
+    border: 1px solid #bab8b6;
     text-align: center;
-    border-radius: 5px;
+    margin-right: 5px;
+    border-radius: 3px;
 }
 /*크롭영역을 라운드로 보이게!*/
 .cropper-crop-box, .cropper-view-box {
