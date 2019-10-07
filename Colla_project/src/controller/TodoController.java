@@ -56,6 +56,7 @@ public class TodoController {
 			List<Todo> oneMemberTdList = tService.getAllTodoByMnumPnum(pmList.get(i).getmNum(), pNum);
 			todoMap.put("oneMemberTdList", oneMemberTdList);
 			todoMap.put("mNum",pmList.get(i).getmNum());
+			todoMap.put("mName",pmList.get(i).getmName());
 //			todoMap.put(key, value)
 			thisProjectTdList.add(todoMap);
 		}
@@ -168,9 +169,9 @@ public class TodoController {
 	}
 	@ResponseBody
 	@RequestMapping("/resortingTodo")
-	public void resortingTodo(@RequestParam(value="priorityArray[]")List<Integer> priorityArray,@RequestParam("pNum")int pNum){
-//		System.out.println(priorityArray);
-		List<Todo> todoList = tService.getAllTodoByPnum(pNum);
+	public void resortingTodo(@RequestParam(value="priorityArray[]")List<Integer> priorityArray,@RequestParam("pNum")int pNum,@RequestParam("mNum")int mNum){
+		System.out.println(priorityArray);
+		List<Todo> todoList = tService.getAllTodoByMnumPnum(mNum, pNum);
 		for(int i=0;i<todoList.size();i++) {
 			Todo todo = todoList.get(i);
 			todo.setPriority(priorityArray.get(i));

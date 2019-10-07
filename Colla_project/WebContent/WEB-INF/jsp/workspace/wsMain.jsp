@@ -237,7 +237,7 @@
 							c9.2,18.3,41.5,25.6,91.2,24.2l1.1,39.8C390.5,326.2,387.1,326.3,383.8,326.3z" /></g>
 							</svg>
 							<div class="loginBox-Head">
-								<h3 style='font-weight: bolder; font-size: 30px'>Workspace 만들기</h3>
+								<h3 style='font-weight: bolder; font-size: 24px'>Workspace 만들기</h3>
 								<p>Workspace를 만들고 멤버를 초대하세요.</p>
 							</div>
 						</div>
@@ -306,7 +306,7 @@
 							c9.2,18.3,41.5,25.6,91.2,24.2l1.1,39.8C390.5,326.2,387.1,326.3,383.8,326.3z" /></g>
 							</svg>
 							<div class="loginBox-Head">
-								<h3 style='font-weight: bolder; font-size: 30px'>채팅방 만들기</h3>
+								<h3 style='font-weight: bolder; font-size: 24px'>채팅방 만들기</h3>
 								<p>채팅방을 만들고 멤버를 초대하세요.</p>
 							</div>
 						</div>
@@ -369,7 +369,7 @@
 							c9.2,18.3,41.5,25.6,91.2,24.2l1.1,39.8C390.5,326.2,387.1,326.3,383.8,326.3z" /></g>
 							</svg>
 							<div class="loginBox-Head">
-								<h3 style='font-weight: bolder; font-size: 30px'>Workspace 멤버 추가</h3>
+								<h3 style='font-weight: bolder; font-size: 24px'>Workspace 멤버 추가</h3>
 								<p>Workspace에 멤버를 초대하세요</p>
 							</div>
 						</div>

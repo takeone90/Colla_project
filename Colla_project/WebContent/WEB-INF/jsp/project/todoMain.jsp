@@ -85,12 +85,11 @@
 		<input type="hidden" value="${sessionScope.currWnum}" id="currWnum">
 		<div id="wsBodyContainer"> 
 		<h2 style="display:inline-block;">${pName} </h2><h3 style="display:inline-block;margin-left:14px;">Todo List</h3>
-		<button id="backToProjectMain" onclick="location.href='projectMain?wNum=${sessionScope.currWnum}'">프로젝트 메인</button>
-<!-- 		<button id="addTodo">할 일 추가</button> -->
 		<div id="todoArea">
 			<div id="currProjectProgress" align="left">
-				진행률  <progress id="progressBar" value="${progress}" max="100" style="width:71%;"></progress>
+				진행률  <progress id="progressBar" value="${progress}" max="100"></progress>
 			</div>
+			<button id="backToProjectMain" onclick="location.href='projectMain?wNum=${sessionScope.currWnum}'">프로젝트 메인</button>
 			<button id="addTodo">할 일 추가</button>
 			<ul id="todoList">
 				<!-- 아래는 반복적으로 생긴다 -->
@@ -99,12 +98,12 @@
 				</c:if>
 				
 				<c:forEach items="${thisProjectTdList}" var="onePm">
-					<li class="onePmMember">
+					<li class="onePmMember" data-mNum="${onePm.mNum}">
 						<div class="tdMemberInfo">
 								<div class='profileImg' align="center">
 									<img alt='프로필사진' src='${contextPath}/showProfileImg?num=${onePm.mNum}'>
 								</div>
-<%-- 								<p style="text-align:center;">${td.mName}</p> --%>
+								<p style="text-align:center;">${onePm.mName}</p>
 						</div>
 						<ul class="oneMemberTodoList">
 						<c:forEach items="${onePm.oneMemberTdList}" var="td" varStatus="s">
@@ -129,9 +128,6 @@
 								<p>${td.tdContent}</p>
 							</div>
 						</div>
-	<!-- 					<div class="tdPriority"> -->
-	<!-- 					</div> -->
-						
 						<div class="todoInnerBtn" align="right">
 							<button class="modifyTodoModalOpen" data-tdNum="${td.tdNum}">수정</button>
 							<button onclick="location.href='removeTodo?tdNum=${td.tdNum}'">삭제</button>
@@ -148,9 +144,10 @@
 				update: function(event, ui) {
 	            var result = $(this).sortable('toArray');
 	            var pNum = $("#pNum").val();
+	            var mNum = $(this).parent().attr("data-mNum");
 		            $.ajax({
 		            	url : "${contextPath}/resortingTodo",
-		            	data : {"priorityArray":result,"pNum":pNum},
+		            	data : {"priorityArray":result,"pNum":pNum,"mNum":mNum},
 		            	success : function(){
 		            	}
 		            });
@@ -177,7 +174,7 @@
 							c9.2,18.3,41.5,25.6,91.2,24.2l1.1,39.8C390.5,326.2,387.1,326.3,383.8,326.3z" /></g>
 							</svg>
 							<div class="loginBox-Head">
-								<h3>할 일 추가</h3>
+								<h3 style="font-size:24px;">할 일 추가</h3>
 								<p style="margin-top:16px;font-size:13px;">Todo를 만들고 프로젝트 일정을 세분화 하세요</p>
 							</div>
 						</div>
@@ -266,7 +263,7 @@
 							c9.2,18.3,41.5,25.6,91.2,24.2l1.1,39.8C390.5,326.2,387.1,326.3,383.8,326.3z" /></g>
 							</svg>
 							<div class="loginBox-Head">
-								<h3>일정 수정하기</h3>
+								<h3 style="font-size:24px;">일정 수정하기</h3>
 								<p style="margin-top:16px;font-size:13px;">일정을 수정합니다</p>
 							</div>
 						</div>

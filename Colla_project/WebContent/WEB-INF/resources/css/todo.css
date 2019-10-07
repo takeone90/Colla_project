@@ -25,7 +25,7 @@
 	position: absolute;
 	display: inline-block;
     top: 172px;
-    left: calc(100% - 172px);
+    left: calc(100% - 230px);
     width: 97px;
     padding: 6px;
     background-color: #403C39;
@@ -43,8 +43,9 @@
     border: 1px solid #d1d1d1;
     border-radius: 4px;
     padding: 10px;
-    width: 309px;
+    width: 294px;
     height: 84px;
+    margin-bottom: 3px;
 }
 .todo:hover{
 	background-color: #f5f5f5;
@@ -54,10 +55,11 @@
 	margin-bottom: 20px;
 }
 .tdDate{
-    display: inline-block;
+	display: inline-block;
     position: relative;
-    font-size: 11px;
-    left: 13%;
+    font-size: 10px;
+    vertical-align: super;
+    left: 15%;
 }
 .tdDate p{
 	display: inline-block;
@@ -73,12 +75,14 @@
 	margin-bottom:10px;
 }
 .tdMemberInfo{
-	display:inline-block; 
-	
+	margin-bottom: 5px;
 }
 .tdMemberInfo p{
-	margin-top: 3px;
-    text-align: center;
+	display: inline-block;
+    vertical-align: super;
+    position: absolute;
+    margin-top: 14px;
+    margin-left: 9px;
     font-size: 13px;
     font-weight: 500;
     color: #544f4d;
@@ -86,25 +90,29 @@
 #wsBodyContainer .tdInfo-titleContent h4{
 	color : #454241;
 }
+#wsBodyContainer .tdInfo-titleContent p{
+	font-weight: 300;
+    font-size: 13px;
+}
 .tdInfo-titleContent{
 	display: inline-block;
     margin-left: 0px;
     color: #454241;
     vertical-align: top;
-    margin-top: 5px;
 }
 .todoInnerBtn{
 	display: inline-block;
     position: relative;
-    left: calc(100% - 117px);
-    bottom: 16px;
+    left: calc(100% - 100px);
+    bottom: 8px;
 }
     
 .todoInnerBtn button{
-    width: 60px;
-    padding: 6px;
+    width: 51px;
+    font-size: 12px;
+    padding: 4px;
     background-color: #fafafa;
-    border-radius: 4px;
+    border-radius: 2px;
     border: 0.5px solid #d4d4d4;
     cursor: pointer;
 }
@@ -122,7 +130,7 @@
 	display: inline-block;
     position: absolute;
     top: 172px;
-    left: calc(100% - 296px);
+    left: calc(100% - 356px);
     width: 120px;
     padding: 6px;
     background-color: white;
@@ -170,11 +178,15 @@
 	font-size: 12px;
 	margin-top:5px;
 }
+#modalBtnDiv button{
+	margin-top:15px;
+}
 progress {
   border: none;
   height: 20px;
   background: white;
   border-radius: 4px;
+  width: calc(100% - 362px);
 }
 
 progress::-webkit-progress-value {
@@ -190,12 +202,15 @@ progress::-webkit-progress-bar {
 
 .onePmMember{
 	float: left;
-	height: 618px;
-	display: inline-block;
-    width: 330px;
+    max-height: 600px;
+    display: inline-block;
+    width: 316px;
     margin-left: 5px;
-    padding: 10px;
-    border: 1px solid #d4cece;
+    background-color: #f3f3f3;
+    padding: 8px 7px 3px 7px;
+    margin-bottom: 5px;
     border-radius: 4px;
 }
-
+.onePmMember .profileImg{
+	display: inline-block;
+}
