@@ -890,7 +890,7 @@ var staticMap = null;
 										<ul id='wsmListUL'></ul>
 									</div>
 									<div align='center'>
-										<button type='submit' id='inviteWsmBtn'>선택한 멤버 초대하기</button>
+										<button type='submit' class="btn" id='inviteWsmBtn'>선택한 멤버 초대하기</button>
 									</div>
 								</div>
 							</form>							
