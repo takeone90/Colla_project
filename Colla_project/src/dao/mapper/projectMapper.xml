@@ -17,6 +17,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<delete id="deleteProject" parameterType="int">
 		delete project where p_num=#{pNum}
 	</delete>
+	<delete id="deleteAllProjectByWnum" parameterType="int">
+		delete project where w_num=#{wNum}
+	</delete>
 	<delete id="deleteEmptyProject">
 		delete from project p where (
 		select count(*) from project_member pm where pm.p_num=p.p_num)=0

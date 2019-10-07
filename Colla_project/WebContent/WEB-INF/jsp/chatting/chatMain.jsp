@@ -1099,7 +1099,7 @@ var staticMap = null;
 					</svg>
 					<div class="loginBox-Head">
 						<h3
-							style="color: white; font-weight: bolder; font-size: 30px; margin-bottom: 10px;">파일
+							style="color: white; font-weight: bolder; font-size: 24px; margin-bottom: 10px;">파일
 							업로드</h3>
 						<p>업로드 할 파일을 선택하세요</p>
 					</div>
@@ -1172,7 +1172,7 @@ var staticMap = null;
 							c9.2,18.3,41.5,25.6,91.2,24.2l1.1,39.8C390.5,326.2,387.1,326.3,383.8,326.3z" /></g>
 					</svg>
 					<div class="loginBox-Head">
-						<h3 style="font-weight: bolder; font-size: 30px">코드 업로드</h3>
+						<h3 style="font-weight: bolder; font-size: 24px">코드 업로드</h3>
 					</div>
 				</div>
 				<!--파도 시작-->
@@ -1274,7 +1274,7 @@ var staticMap = null;
 					</svg>
 					<div class="loginBox-Head">
 						<h3
-							style="font-weight: bolder; font-size: 30px; margin-bottom: 11px;">지도
+							style="font-weight: bolder; font-size: 24px; margin-bottom: 11px;">지도
 							업로드</h3>
 						<p>멤버들과 위치를 공유할 수 있습니다</p>
 					</div>

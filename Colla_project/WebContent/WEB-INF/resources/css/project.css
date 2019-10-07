@@ -71,13 +71,16 @@
 .progress {
 	display: inline-block;
 	vertical-align: top;
+	font-size: 12px;
 }
 
 .projectMember {
-	margin-left: 35px;
+	height: 100%;
+    margin-left: 35px;
     padding: 5px;
     display: inline-block;
     position: relative;
+    border-left: 1px solid #e6e6e6;
 }
 .projectMember p{
 	font-size: 12px;

@@ -211,7 +211,7 @@
 							c9.2,18.3,41.5,25.6,91.2,24.2l1.1,39.8C390.5,326.2,387.1,326.3,383.8,326.3z" /></g>
 							</svg>
 							<div class="loginBox-Head">
-								<h3 style='font-weight: bolder; font-size: 30px'>회원정보</h3>
+								<h3 style='font-weight: bolder; font-size: 24px'>회원정보</h3>
 							</div>
 						</div>
 						<!--파도 시작-->

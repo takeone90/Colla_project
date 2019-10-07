@@ -98,7 +98,7 @@
 							</div>
 						<div class="projectDetail">${pl.pInfo.pDetail}</div>
 						
-						<div class="progress-member"><div class="progress">진행률  <progress id="progressBar" value="${pl.pInfo.progress}" max="100" style="width:300px;"></progress></div>
+						<div class="progress-member"><div class="progress">진행률  <progress id="progressBar" value="${pl.pInfo.progress}" max="100" style="width:504px;"></progress></div>
 							<div class="projectMember">
 								<ul>
 									<c:forEach items="${pl.pmList}" var="pm">
@@ -132,7 +132,7 @@
 							c9.2,18.3,41.5,25.6,91.2,24.2l1.1,39.8C390.5,326.2,387.1,326.3,383.8,326.3z" /></g>
 							</svg>
 							<div class="loginBox-Head">
-								<h3 style='font-weight: bolder; font-size: 30px'>프로젝트 만들기</h3>
+								<h3 style='font-weight: bolder; font-size: 24px'>프로젝트 만들기</h3>
 								<p style="margin-bottom: 26px;">프로젝트를 만들고 멤버를 초대하세요</p>
 							</div>
 						</div>
@@ -234,7 +234,7 @@
 							c9.2,18.3,41.5,25.6,91.2,24.2l1.1,39.8C390.5,326.2,387.1,326.3,383.8,326.3z" /></g>
 							</svg>
 							<div class="loginBox-Head">
-								<h3 style='font-weight: bolder; font-size: 30px'>프로젝트 수정하기</h3>
+								<h3 style='font-weight: bolder; font-size: 24px'>프로젝트 수정하기</h3>
 								<p style="margin-bottom: 26px;">프로젝트를 수정합니다</p>
 							</div>
 						</div>
@@ -309,7 +309,7 @@
 							c9.2,18.3,41.5,25.6,91.2,24.2l1.1,39.8C390.5,326.2,387.1,326.3,383.8,326.3z" /></g>
 							</svg>
 							<div class="loginBox-Head">
-								<h3 style='font-weight: bolder; font-size: 30px'>프로젝트 멤버 추가</h3>
+								<h3 style='font-weight: bolder; font-size: 24px'>프로젝트 멤버 추가</h3>
 								<p style="margin-bottom: 26px;">프로젝트에 멤버를 초대하세요</p>
 							</div>
 						</div>
