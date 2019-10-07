@@ -700,12 +700,6 @@ input[type=radio]{
 	color : #f74d3e;
 }
 #inviteWsmBtn{
-	padding : 7px;
-	background-color : #403C39;
-	color : white;
-	border-radius : 7px;
-    border: none;
-    cursor: pointer;
     margin-top: 10px;
 }
 #inviteWsmBtn:hover{

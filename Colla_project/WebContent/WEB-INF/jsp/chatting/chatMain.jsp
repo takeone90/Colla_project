@@ -890,7 +890,7 @@ var staticMap = null;
 										<ul id='wsmListUL'></ul>
 									</div>
 									<div align='center'>
-										<button type='submit' id='inviteWsmBtn'>선택한 멤버 초대하기</button>
+										<button type='submit' class="btn" id='inviteWsmBtn'>선택한 멤버 초대하기</button>
 									</div>
 								</div>
 							</form>							
@@ -970,33 +970,6 @@ var staticMap = null;
 									</form>
 								</div>
 							</div>
-											
-						</div>
-					
-										<div class="checkboxDiv btn-group-toggle" data-toggle="buttons">
-											<label for="checkbox-1" class="checkboxbtn">
-												<input type="checkbox" name="yearCalendar" id="checkbox-1" value="yearCalendar" class="tmp">연간 달력
-											</label> 
-											<label for="checkbox-2" class="checkboxbtn">
-												<input type="checkbox" name="annually" id="checkbox-2" value="annually" class="tmp">매년 반복
-											</label>
-											<label for="checkbox-3" class="checkboxbtn">
-												<input type="checkbox" name="monthly" id="checkbox-3" value="monthly" class="tmp">매월 반복
-											</label>
-										</div>
-										
-					<!-- 					//name="checkbox-1" id="checkbox-1" -->
-										<div>
-											<h4>내용</h4>
-											<textarea rows="3" cols="21" name="content" class="modalContent" id="content"></textarea>
-										</div>
-										<div id="innerBtn">
-											<a href="#" id="addSchedule">추가</a>
-											<a href="#" id="addFormClose">닫기</a><br>
-										</div>
-									</form>
-								</div>
-							</div>			
 						</div>
  						<script type="text/javascript"><!-- 191002 혜선 추가 -->
 							$(function() {
