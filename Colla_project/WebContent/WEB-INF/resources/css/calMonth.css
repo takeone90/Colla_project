@@ -7,9 +7,6 @@
 	-khtml-user-select: none; 
 	user-select:none;
 }
-#wsBody h4{
-	color: #403C39;
-}
 #wsBodyContainer.calendarContainer {
 	width: 100%;
 	padding: 0;
@@ -86,7 +83,6 @@ td {
 	position: relative;
 	border-collapse: collapse;
 	border: 0px;
-/* 	pointer-events: none; */
 } 
 /* table2(날짜) */
 .drawMonthCalendarLowerDate {
@@ -104,12 +100,7 @@ td {
     color: #294557;
     font-weight: 300;
 }
-/* .frontVacantTd, */
-/* .backVacantTd { */
-/* 	pointer-events: none; */
-/* } */
-
-.drawMonthCalendarLower td:hover { /* 수정?? */
+.drawMonthCalendarLower td:hover {
 	background-color: rgba(230, 226, 225, 0.5);
 }
 .scheduleTr {
@@ -143,8 +134,6 @@ td {
     padding-left: 3px;
     margin-right: 10px;
 }
-.full {
-}
 .backVacantTd {
 	margin-bottom: 1pt;
 	margin-top: 1pt;
@@ -160,9 +149,6 @@ td {
     text-align: center;
     padding: 10px;
     padding-top: 30px
-}
-#calYearBody {
-/* 	margin-top: 35px; */
 }
 .drawYearCalDiv {
 	position: relative;
@@ -187,14 +173,14 @@ td {
 	padding: 0px;
 	border: 1px solid #bbb;
 }
-
 .drawYearCalendar {
 	height: 200px;
 	width: 100%;
 	position: relative;
 	border-collapse: collapse;
 	border: 0px;
-} /* table2(날짜) */
+} 
+/* table2(날짜) */
 .drawYearCalendarDate {
 	height: 15px;
 	padding: 0px;
@@ -203,7 +189,6 @@ td {
 .drawYearCalendar tr {
 	position: relative;
 }
-
 .drawYearCalendar th {
 	height: 25px;
 	position: relative;
@@ -219,15 +204,12 @@ td {
     line-height: 20px;
 }
 
-/* 모달 */
-/* .addModal{display: none; width: 300px; height: 300px; top: 10%; left: 10%; position: absolute; background-color: #a37f82;} */
-/* .detailModal{display: none; width: 300px; height: 300px; top: 10%; left: 10%; position: absolute; background-color: #a37f82;}  */
-/* .modifyModal{display: none; width: 300px; height: 300px; top: 10%; left: 10%; position: absolute; background-color: #a37f82;} */
-/* .detailModalYear{display: none; width: 300px; height: 300px; top: 10%; left: 10%; position: absolute; background-color: #a37f82;} */
-#wsBodyContainer select, #wsBodyContainer input {
+/* 공통 */
+
+#wsBodyContainer select, 
+#wsBodyContainer input {
 	box-sizing: border-box;
 }
-
 .calHeader {
 	background-color: #f5f5f5;
 	padding: 10px 20px;
@@ -284,6 +266,25 @@ td {
 .dateDisplayInput input{
 	margin-left: 11px;
 }
+.headerCheckboxDiv {
+	padding: 0px 10px;
+}
+.headerCheckboxDiv input {
+	width: 20px;
+	margin-right: 0px; 
+}
+.headerCheckboxDiv label {
+	padding-right: 5px;
+}
+
+/* 모달 */
+
+#wsBody h4{
+	color: #403C39;
+	font-size: 14px;
+    font-weight: 400;
+    margin-right: 5px;
+}
 .attachModal {
 	display: none;
 	position: fixed;
@@ -298,25 +299,25 @@ td {
 }
 .header {
 	text-align: center;
-	margin-bottom: 30px;
+	margin-bottom: 20px;
 }
 .header h3 {
 	font-size: 20pt;
 	padding: 15px;
+	color: white;
 }
 .header p {
 	font-size: 10pt;
-	color: #c4c4c4;
+}
+.modalHead h3 {
+	color: white;
 }
 .modalBody {
 	text-align: left;
-	padding: 10px;
+	padding: 0px 20px 20px 20px;
 }
 .modalBody h4{
 	color: #403C39;
-}
-.modalBody div {
-/* 	padding: 5px; */
 }
 .modalBody input, 
 .modalBody textarea, 
@@ -327,6 +328,15 @@ td {
 	border-radius: 4px;
 	box-sizing: border-box;
 }
+.firstRow {
+	margin-bottom: 15px;
+}
+.middleRow {
+	margin-bottom: 20px;
+}
+.lastRow h4 {
+	vertical-align: top;
+}
 .titleDiv,
 .selectDiv,
 .colorDiv,
@@ -334,23 +344,22 @@ td {
 .dateDiv div {
 	display: inline-block;
 }
+.selectDiv {
+	width: 105px;
+	margin-right: 10px;
+}
+.colorDiv {
+	width: 70px;
+}
 .dateDiv {
 	display: inline-block;
-    width: 55%;
+    width: 263px;
+}
+.dateDiv h4 {
+	margin-right: 5px;
 }
 .checkboxDiv {
-	width: 44%;
 	text-align: center;
-}
-.headerCheckboxDiv {
-	padding: 0px 10px;
-}
-.headerCheckboxDiv input {
-	width: 20px;
-	margin-right: 0px; 
-}
-.headerCheckboxDiv label {
-	padding-right: 5px;
 }
 .checkboxDiv input {
 	display: none;
@@ -360,6 +369,11 @@ td {
     margin-left: 2px;
     padding: 0px 4px;
     font-size: 12px;
+    border: 1px solid #bab8b6;
+}
+.checkboxDiv label:hover {
+	background-color: #EC6D63;
+	color: white;
 }
 .checkboxbtn {
     font-size: 1rem;
@@ -368,35 +382,47 @@ td {
     vertical-align: middle;
     display: inline-block;
     line-height: 30px;
-    color: #fff;
-    border-radius: 5px;
-    background-color: #655B5A;
+    background-color: white;
+    color: #454443;
+    border-radius: 3px;
     transition: background-color 0.2s;
     border: 0 none;
     cursor: pointer;
 }
 .checkboxDiv input:checked + label {
 	background-color: #EC6D63;
+	color: white;
 }
 .titleDiv {
-    width: 60%;
-    margin-right: 20px;
+    width: 55%;
+    margin-right: 10px;
 }
-.selectDiv {
-	margin-right: 20px;
+.titleDiv input {
+	width: 200px;
 }
 #detailForm .selectDiv, 
 #detailFormYear .selectDiv {	
-	width: 100px;
+	width: 150px;
 } 
-.dateDiv div {
-    width: 44%;
+.detailModal .dateDiv {
+	width: 262px;
+    display: inline-block;
+}
+#detailDate {
+	width: 215px;
+	display: inline-block;
+	font-size: 13px;
+}
+#detailContent {
+	width: 417px;
+	display: inline-block;
 }
 .dateDiv input {
-	width: 100%;
+	width: 95px;
+	height: 32px;
 }
 .dateDiv span {
-	margin: 7px;
+	margin: 5px;
     font-weight: 500;
 }
 .colorDiv img {
@@ -409,12 +435,20 @@ td {
 .modalTitle {
 	width: 100%;
 }
+#detailTitle {
+	display: inline-block;
+    width: 200px;
+}
+#detailType {
+	display: inline-block;
+    width: 100px;
+}
 .modalContent {
-	width: 100%;
+	width: 417px;
 }
 #innerBtn,
 #innerBtnDetail {
-	margin-top: 25px;
+	margin-top: 15px;
 	text-align: center;
 }
 #innerBtn a,
@@ -422,18 +456,24 @@ td {
 	display: inline-block;
 	position: relative;
 	width: 30%;
-    padding: 10px 0px;
-	background-color: #403C39;
-	color: white;
-	text-align: center;
-	border-radius: 5px;
+    width: calc(100% - 384px);
+    padding: 7px;
+    font-weight: 300;
+    font-size: 14px;
+    margin-bottom: 0px;
+    background-color: white;
+    color: #454443;
+    border: 1px solid #bab8b6;
+    text-align: center;
+    margin-right: 5px;
+    border-radius: 3px;
 }
 #innerBtn a:hover,
 #innerBtnDetail a:hover {
 	background-color: #E5675A;
-	transition:background-color .5s;
+	transition: background-color .5s;
+	color: white;
 }
-/* 190918 TK */
 #wsBodyContainer select {
 	height: 30px;
 	border-radius: 5px;
