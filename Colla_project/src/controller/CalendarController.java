@@ -20,15 +20,22 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import dao.ProjectDao;
 import model.Calendar;
 import model.Member;
 import service.CalendarService;
 import service.MemberService;
+import service.ProjectMemberService;
+import service.ProjectService;
 
 @Controller
 public class CalendarController {
 	@Autowired
 	private CalendarService calendarService;
+	@Autowired
+	private ProjectService pService;
+	@Autowired
+	private ProjectMemberService pmService;
 	
 	@RequestMapping(value="/calMonth", method = RequestMethod.GET)
 	public String showCalMonth(HttpSession session, Model model, int wNum) {
@@ -84,6 +91,7 @@ public class CalendarController {
 		}
 		return filteredCList;
 	}
+	
 	@ResponseBody
 	@RequestMapping(value="/showYearCheckedCalendar", method=RequestMethod.GET)
 	public List<Calendar> showYearCheckedCalendar(HttpSession session, boolean type1, boolean type2, boolean type3, boolean type4) {
@@ -209,5 +217,21 @@ public class CalendarController {
 		session.setAttribute("calInfo", tmp);
 		session.setAttribute("currWnum", wNum);
 		return "/calendar/calSearchList";
-	}			
+	}
+	@ResponseBody
+	@RequestMapping(value="/getPnum")
+	public int getPnum(int cNum) {
+		return pService.getPnumByCnum(cNum);
+	}
+	@ResponseBody
+	@RequestMapping(value="/isMyProject")
+	public boolean isMyProject(int cNum, HttpSession session) {
+		int mNum = ((Member)session.getAttribute("user")).getNum();
+		int pNum = pService.getPnumByCnum(cNum); 
+		if(pmService.getProjectMember(pNum, mNum)==null) {
+			return false;
+		} else {			
+			return true;
+		}
+	}
 }

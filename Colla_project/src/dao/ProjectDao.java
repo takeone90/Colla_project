@@ -19,4 +19,5 @@ public interface ProjectDao {
 	public List<Project> selectAllProjectByWnum(int wNum);
 	public List<Project> selectAllProjectByMnumWnum(@Param("mNum")int mNum,@Param("wNum")int wNum);
 	public List<Project> selectAllProject();
+	public int selecPNumByCalNum(int calNum);
 }

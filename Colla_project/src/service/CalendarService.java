@@ -2,6 +2,7 @@ package service;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -11,12 +12,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import dao.CalendarDao;
+import dao.ProjectDao;
 import model.Calendar;
 
 @Service
 public class CalendarService {
 	@Autowired
 	private CalendarDao calendarDao;
+	private ProjectDao pDao;
 	
 	private static final int NUM_PER_PAGE = 10; //한 페이지 당 몇 개의 일정?
 	private static final int NUM_OF_NAVI_PAGE = 10; 
@@ -53,8 +56,13 @@ public class CalendarService {
 		param.put("wNum", wNum);
 		param.put("startDate", year+"/"+month+"/"+date);
 		param.put("endDate", year+"/"+month+"/"+01);
-		List<Calendar> tmp = calendarDao.selectAllCalendarByMonth(param);
-		return tmp;
+		List<Calendar> cListByMonth = calendarDao.selectAllCalendarByMonth(param);
+//		List<Calendar> tmp = new ArrayList<Calendar>();
+//		for(int i=0; i<cListByMonth.size(); i++) {
+//			tmp.get(i).getcNum();
+//			pDao.
+//		}
+		return cListByMonth;
 	}
 	public boolean addCalendarAnnually(Calendar calendar) {
 		int result=0;
