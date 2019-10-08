@@ -197,55 +197,55 @@
 	opacity: 0;
 }
 /* 네이버 버튼 */
-/* .naverLoginButton { */
-/* 	position: relative; */
-/* 	background-color: white; */
-/* 	border: 1px solid #03CF5D; */
-/* 	color: #03CF5D; */
-/* 	transition:background-color .5s; */
-/* } */
-/* .naverLoginButton:hover { */
-/* 	background-color: #03CF5D; */
-/* 	color: white; */
-/* } */
-/* #naverIdLogin { */
-/* 	background-color: black; */
-/* 	width: 400px; */
-/* 	height: 400px; */
-/* } */
-/* #naverIdLogin > a { */
-/* 	display: block; */
-/* 	opacity: 0; */
-/* 	position: absolute; */
-/* 	top: 0; */
-/* 	left: 0; */
-/* 	width: 100%; */
-/* } */
-/* #naverIdLogin_loginButton > img { */
-/* 	visibility: hidden; */
-/* } */
+.naverLoginButton {
+	position: relative;
+	background-color: white;
+	border: 1px solid #03CF5D;
+	color: #03CF5D;
+	transition:background-color .5s;
+}
+.naverLoginButton:hover {
+	background-color: #03CF5D;
+	color: white;
+}
+#naverIdLogin {
+	background-color: black;
+	width: 400px;
+	height: 400px;
+}
+#naverIdLogin > a {
+	display: block;
+	opacity: 0;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+}
+#naverIdLogin_loginButton > img {
+	visibility: hidden;
+}
 /* 카카오 버튼 */
-/* #kakaoLoginButton { */
-/* 	float: right; */
-/* 	background-color: white; */
-/* 	position: relative; */
-/* 	border: 1px solid #FCCE00; */
-/* 	color: #FCCE00; */
-/* 	transition:background-color .5s; */
-/* } */
-/* #kakaoLoginButton:hover { */
-/* 	background-color: #FCCE00; */
-/* 	color: white; */
-/* } */
-/* #kakaoLoginButton > span { */
-/* 	position: absolute; */
-/* 	visibility: hidden; */
-/* 	top: 0; */
-/* 	left: 0; */
-/* 	width: 100%;	 */
-/* 	opacity: 0; */
-/* } */
-/* #kakao-login-btn > img { */
-/* 	width: 100%; */
-/* 	visibility: hidden;	 */
-/* } */
+#kakaoLoginButton {
+	float: right;
+	background-color: white;
+	position: relative;
+	border: 1px solid #FCCE00;
+	color: #FCCE00;
+	transition:background-color .5s;
+}
+#kakaoLoginButton:hover {
+	background-color: #FCCE00;
+	color: white;
+}
+#kakaoLoginButton > span {
+	position: absolute;
+	visibility: hidden;
+	top: 0;
+	left: 0;
+	width: 100%;	
+	opacity: 0;
+}
+#kakao-login-btn > img {
+	width: 100%;
+	visibility: hidden;	
+}

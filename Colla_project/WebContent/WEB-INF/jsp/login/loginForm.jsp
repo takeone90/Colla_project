@@ -39,6 +39,10 @@ $(function(){
 		loginButton: {color: "green", type: 2, height: 30, width: 90} /* 로그인 버튼의 타입을 지정 */
 	});
 	naverLogin.init(); /* 설정정보를 초기화하고 연동을 준비 */
+	
+	$("#kakaoLoginButton").on("click", function() {
+		$("#kakao-login-btn").trigger("click");
+	});
 });//end onload
 /* 구글 로그인 */
 // function onSignIn(googleUser) {
@@ -143,11 +147,12 @@ function checkPw(){
 							</form>
 							<div id="innerBtn">
 								<!-- 구글 -->
-<!-- 								<button id="googleLoginButton">구글<span class="g-signin2" data-width="90" data-height="30" data-onsuccess="onSignIn"></span></button> -->
+								<button id="googleLoginButton">구글<span class="g-signin2" data-width="90" data-height="30" data-onsuccess="onSignIn"></span></button>
 								<!-- 네이버 -->
 								<button class="naverLoginButton">네이버<span id="naverIdLogin"></span></button>
 								<!-- 카카오 -->
-								<a id="kakao-login-btn"></a>
+								<button id="kakaoLoginButton">카카오</button>
+								<span id="kakao-login-btn"></span>
 							    <script type='text/javascript'>
 								    Kakao.init('1f6b481e9aa9a7ae0b621fee3692c041');
 								    Kakao.Auth.createLoginButton({
