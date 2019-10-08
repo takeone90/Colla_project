@@ -160,9 +160,6 @@ public class WorkSpaceController {
 		//ws초대 여부를 db에 담는다
 		response.setContentType("text/html; charset=UTF-8");
 		Member user = (Member)session.getAttribute("user");
-		List<Member> targetUserList = new ArrayList<Member>();
-		List<WsMember> wsmList = wsmService.getAllWsMemberByWnum(wNum);
-		List<Member> existingMemberList = new ArrayList<Member>();
 		String[] targetUserArray = request.getParameterValues("targetUserList");
 		for(int i=0;i<targetUserArray.length;i++) {
 			if(targetUserArray[i].length()==0) {
@@ -173,6 +170,16 @@ public class WorkSpaceController {
 			}
 		}
 		
+		
+
+		List<Member> targetUserList = new ArrayList<Member>();
+		List<WsMember> wsmList = wsmService.getAllWsMemberByWnum(wNum);
+		List<Member> existingMemberList = new ArrayList<Member>();
+		//원래 그 워크스페이스에 있는 멤버..
+		for(WsMember wsm : wsmList) {
+			Member existMember = mService.getMember(wsm.getmNum());
+			existingMemberList.add(existMember);
+		}
 		//받아온 targetUserArray만큼 돌면서
 		for(String targetUser:targetUserArray) {
 			//targetUser한명당 existMember한명이랑 비교해서
