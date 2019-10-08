@@ -255,14 +255,6 @@ public class WorkSpaceController {
 		
 		
 	}
-	/*
-	public void sendSystemMsg(int wNum, Member member) { 
-		ChatRoom cr = wsmService.getDefaultChatRoomByWnum(wNum); // 기본 채팅방 번호를 알아내고?
-		int cmNum = cmService.addChatMessage(cr.getCrNum(), -1, member.getName() + " 님이 채팅에 참여하셨습니다.", "systemMsg");
-		ChatMessage cm = cmService.getSystemMessageByCmNum(cmNum);
-		smt.convertAndSend("/category/systemMsg/"+ cr.getCrNum(), cm);
-		return;
-	}*/
 	
 	@ResponseBody
 	@RequestMapping("/exitWs")
@@ -288,16 +280,7 @@ public class WorkSpaceController {
 			wService.removeWorkspace(wNum);
 			/////////////////////////////////////////하는중/////////////////////////////////////////////
 		}
-		
 	}
-	/* 미경
-	public void sendMsgExitChatRoom(int crNum, Member member) {
-		int cmNum = cmService.addChatMessage(crNum, -1, member.getName() + " 님이 채팅에서 나가셨습니다.", "systemMsg");
-		ChatMessage cm = cmService.getSystemMessageByCmNum(cmNum);
-		smt.convertAndSend("/category/systemMsg/"+ crNum, cm);
-		return;
-	}
-	*/
 		
 	public class inner implements Runnable {
 		String emailAddress;

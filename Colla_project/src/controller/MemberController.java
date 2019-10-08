@@ -211,15 +211,6 @@ public class MemberController {
 			return "/join/joinStep3"; //실패 시 어디로 갈지는 정의 필요
 		}
 	}
-	/* 미경
-	public void sendSystemMsg(int wNum, Member member) { 
-		ChatRoom cr = wsmService.getDefaultChatRoomByWnum(wNum);
-		int cmNum = cmService.addChatMessage(cr.getCrNum(), -1, member.getName() + " 님이 채팅에 참여하셨습니다.", "systemMsg");
-		ChatMessage cm = cmService.getSystemMessageByCmNum(cmNum);
-		smt.convertAndSend("/category/systemMsg/"+ cr.getCrNum(), cm);
-		return;
-	}
-	*/
 	
 	@RequestMapping(value="/loginDuplication", method = RequestMethod.GET)
 	public String loginDuplication() {
@@ -373,14 +364,6 @@ public class MemberController {
 		
 		return "redirect:/";
 	}
-	/* 미경
-	public void sendMsgExitChatRoom(int crNum, Member member) {
-		int cmNum = cmService.addChatMessage(crNum, -1, member.getName() + " 님이 채팅에서 나가셨습니다.", "systemMsg");
-		ChatMessage cm = cmService.getSystemMessageByCmNum(cmNum);
-		smt.convertAndSend("/category/systemMsg/"+ crNum, cm);
-		return;
-	}
-	*/
 
 	@RequestMapping("/dropSession") //로그아웃 성공 후, 처리
 	public String dropSession(HttpSession session,String userEmail) {

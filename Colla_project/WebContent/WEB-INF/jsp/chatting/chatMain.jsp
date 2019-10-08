@@ -509,8 +509,8 @@ var chatTop = 0;	// chatArea 맨위로 스크롤 >> 과거메시지 로드
 		
 	}/////////////////////////////////////////////////////////////addMsg end////////////////////////////////////////////////////
 	//시스템 메시지 화면에 추가 : 미경
-	function addSystemMsg(memberName){
-		var systemMsg = $("<div class='systemMsg' align='center'>"+memberName);
+	function addSystemMsg(msgInfo){
+		var systemMsg = $("<div class='systemMsg' align='center'>"+msgInfo.cmContent+"<div>");
 		chatArea.append(systemMsg);		
 	}
 	
