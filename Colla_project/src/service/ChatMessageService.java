@@ -66,6 +66,9 @@ public class ChatMessageService {
 	public ChatMessage getChatMessageByCmNum(int cmNum) {
 		return cmDao.selectChatMessageByCmNum(cmNum);
 	}
+	public ChatMessage getSystemMessageByCmNum(int cmNum) {
+		return cmDao.selectSystemMessageByCmNum(cmNum);
+	}
 	public List<ChatMessage> getAllChatMessageByCrNum(int crNum,int mNum){
 		List<ChatMessage> chatMessageList = cmDao.selectAllChatMessageByCrNum(crNum,mNum); 
 		

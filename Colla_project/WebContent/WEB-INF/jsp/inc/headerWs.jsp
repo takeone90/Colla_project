@@ -113,8 +113,10 @@ function duplicateConnect(){
 	    });// end subcribe
 	    
 	  	//system 문구 출력
-		stompClient.subscribe("/category/systemMsg/"+crNum,function(data){
-			alert("안녕하세요!");
+		stompClient.subscribe("/category/systemMsg/"+crNum,function(cm){
+			msgInfo = JSON.parse(cm.body);
+			addSystemMsg(msgInfo);
+			$("#chatArea").scrollTop($("#chatArea")[0].scrollHeight);
 	    });// end subcribe
 		
 	}); //end connect

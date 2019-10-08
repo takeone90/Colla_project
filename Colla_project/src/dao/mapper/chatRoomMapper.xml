@@ -39,6 +39,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="selectAllByWnum" parameterType="int" resultMap="chatRoomMap">
 		select * from chatroom where w_num=#{wNum}
 	</select>
+	<select id="selectAllChatRoomByMnum" parameterType="int" resultMap="chatRoomMap">
+		select * from chatroom where m_num=#{mNum}
+	</select>
 	<select id="selectAllChatRoomByWnumMnum" resultMap="chatRoomMap">
 		select cr.w_num,cr.cr_num,cr.m_num,cr.cr_name,cr.cr_regdate,cr.cr_isdefault,cr.p_num
 		from chatroom cr,chatroom_member crm,member m
