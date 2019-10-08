@@ -1,6 +1,5 @@
 package service;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.HashMap;
@@ -15,7 +14,6 @@ import javax.servlet.http.Part;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import dao.ChatMessageDao;
@@ -24,7 +22,7 @@ import model.Member;
 
 @Service
 public class ChatMessageService {
-	private static final String PATH = "c:\\temp\\";
+	
 	@Autowired
 	private ChatMessageDao cmDao;
 	public int addChatMessage(int crNum,int mNum,String cmContent,String cmType) {
@@ -73,7 +71,16 @@ public class ChatMessageService {
 		
 		return chatMessageList;
 	}
-	
+	public List<ChatMessage> getRecentChatMessageByCrNum(int crNum,int mNum){
+		List<ChatMessage> chatMessageList = cmDao.selectRecentChatMessageByCrNum(crNum,mNum); 
+		
+		return chatMessageList;
+	}
+	public List<ChatMessage> getMoreMessage(int crNum, int mNum, int count){
+		List<ChatMessage> chatMessageList = cmDao.selectMoreChatMessageByCrNum(crNum,mNum,count); 
+		
+		return chatMessageList;
+	}
 	public int modifyChatFavorite(int favoriteResult, int mNum, int cmNum) {
 		if(favoriteResult==1) {
 			return cmDao.insertFavorite(mNum, cmNum);

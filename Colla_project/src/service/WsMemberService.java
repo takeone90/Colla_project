@@ -1,6 +1,5 @@
 package service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +10,6 @@ import dao.ChatRoomMemberDao;
 import dao.WsMemberDao;
 import model.ChatRoom;
 import model.ChatRoomMember;
-import model.Workspace;
 import model.WsMember;
 
 @Service
@@ -73,6 +71,9 @@ public class WsMemberService {
 	}
 	public List<WsMember> getAllWsMemberByWnum(int wNum){
 		return dao.selectAllWsMemberByWnum(wNum);
+	}
+	public ChatRoom getDefaultChatRoomByWnum(int wNum) {
+		return crDao.selectDefaultChatRoomByWnum(wNum);
 	}
 	
 }

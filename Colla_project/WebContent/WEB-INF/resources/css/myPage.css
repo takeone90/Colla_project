@@ -58,7 +58,7 @@
 	padding: 8px 24px;
 }
 .modifyRow:hover {
-	background-color: #DADCE0;
+	background-color: #f1f1f1;
 	cursor: pointer;
 }
 .myPageContentRow > *{
@@ -78,6 +78,8 @@
 	padding: 20.5px 16px;
 }
 .myPageAccount .myPageContent:first-child .myPageTitle+.myPageContentRow p+p{
+	    font-size: 13px;
+    font-weight: 200;
 	padding: 20.5px 0px 20.5px 16px;
 }
 
@@ -314,8 +316,8 @@
 
 .myPageContent>p+p {
 	text-align: center;
-	font-size: 15px;
-	margin: 15px;
+    font-size: 13px;
+    margin: 23px;
 }
 .myPageContent .myPageModule {
 	border: 1px solid #DADCE0;
@@ -335,7 +337,12 @@
 }
 
 .myPageContent .myPageModule:hover {
-	background-color: #DADCE0;
+	background-color: #f3f3f3;
+}
+.myPageModule .title{
+	color: #5d5c77;
+	font-size: 17px;
+    font-weight: 500;
 }
 .myPageModule .title, .myPageModule .content {
 	margin: 20px 15px 0px;
@@ -345,6 +352,8 @@
     text-align: left;
     width: 500px;
     height: 30px;
+    font-size: 13px;
+    font-weight: 300;
 }
 }
 .checkPass {
@@ -405,6 +414,7 @@
 	border: 1px solid #CCCCCC;
 	border-radius: 15px;
 	MARGIN-TOP: 9px;
+	cursor: pointer;
 }
 
 .toggleFG {

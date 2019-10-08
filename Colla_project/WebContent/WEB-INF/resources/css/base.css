@@ -70,15 +70,15 @@ body .btn:hover{
 	margin:0 auto;
 }
 #wsBodyContainer h3{
-	color: #403C39;
-	font-size: 40px;
+	color: #10344a;
+	font-size: 1.7em;
 	font-weight:900;
 }
 #wsBodyContainer h4{
 	color: #E5675A;
-	font-size: 20px;
+	font-size: 16px;
 	font-weight: 700;
-	margin-top: 15px;
+	margin-top: 8px;
 }
 
 .attachModal .header{
@@ -92,8 +92,8 @@ body .btn:hover{
   text-align:center;
   background: linear-gradient(60deg, rgba(236, 109, 99,1) 0%, rgba(236, 109, 99,1) 100%); /* 파도 색깔 */
   color:white;
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
 }
 .inner-header {
   height:100px;

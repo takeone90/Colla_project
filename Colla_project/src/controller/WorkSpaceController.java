@@ -108,29 +108,38 @@ public class WorkSpaceController {
 		//현재 로그인된 생성자를 워크스페이스에 담으면서 생성
 		String[] targetUserArray = request.getParameterValues("targetUserList");
 		List<Member> targetUserList = new ArrayList<Member>();
-		
-		String userEmail = (String)session.getAttribute("userEmail");
-		Member member = mService.getMemberByEmail(userEmail);
+		Member member = (Member)session.getAttribute("user");
 		int wNum = wService.addWorkspace(member.getNum(), wsName);
-		if(targetUserList!=null) {
-			for(String targetUser:targetUserArray) {
-				Member tu = mService.getMemberByEmail(targetUser);
-				targetUserList.add(tu);
-				//targetUser들에게 초대메일 보내기 해야함
-				wiService.addWorkspaceInvite(targetUser, wNum);
-				Thread innerTest = new Thread(new inner(targetUser,wNum));
-				innerTest.start();	
-			}
-			//메일 보낸 targetUser들에게 알림보내기
-			for(Member m : targetUserList) {
-				if(m.getNum()!=member.getNum()) {
-					//나한텐 알림X
-					int aNum = aService.addAlarm(wNum, m.getNum(), member.getNum(), "wInvite", 0);
-					smt.convertAndSend("/category/alarm/"+m.getNum(),aService.getAlarm(aNum));								
+		for(int i=0;i<targetUserArray.length;i++) {
+//			System.out.println(targetUserArray[i].length());
+			if(targetUserArray[i].length()!=0) {
+				String targetUser = targetUserArray[i];
+				if(mService.getMemberByEmail(targetUser)!=null) {
+					//기존 유저면
+					Member tu = mService.getMemberByEmail(targetUser);
+					targetUserList.add(tu);
+					wiService.addWorkspaceInvite(targetUser, wNum);
+					Thread innerTest = new Thread(new inner(targetUser,wNum));
+					innerTest.start();
+					
+					
+					if(tu.getNum()!=member.getNum()) {
+						//나한텐 알림X
+						int aNum = aService.addAlarm(wNum, tu.getNum(), member.getNum(), "wInvite", 0);
+						smt.convertAndSend("/category/alarm/"+tu.getNum(),aService.getAlarm(aNum));								
+					}
+					
+					
+				}else {
+					//기존유저가 아니면
+					wiService.addWorkspaceInvite(targetUser, wNum);
+					Thread innerTest = new Thread(new inner(targetUser,wNum));
+					innerTest.start();
 				}
+				
+				
 			}
 		}
-		
 		return "redirect:workspace";
 	}
 	
@@ -189,18 +198,20 @@ public class WorkSpaceController {
 	//워크스페이스 초대에 수락하는부분
 	@RequestMapping("/addMember")
 	public String addMember(String id,int wNum,HttpSession session) {
-		Member currUser= (Member)session.getAttribute("user");
+		Member user= (Member)session.getAttribute("user");
 		String userEmail = id;
 		//targetUser랑 wNum으로 ws 초대정보를 불러와야한다.
 		List<WorkspaceInvite> wiList = wiService.getWorkspaceInviteByTargetUser(userEmail,wNum);
 		WorkspaceInvite wi = wiList.get(0);
 		if(wi!=null) {
+			System.out.println("여기 진입");
 			if(mService.getMemberByEmail(userEmail)!=null) {
 				//회원이다.
 				Member member = mService.getMemberByEmail(userEmail);
 				wsmService.addWsMember(wNum, member.getNum());
+				//sendSystemMsg(wNum, member);//미경 추가
 				wiService.removeWorkspaceInvite(userEmail, wNum);
-				if(currUser.getEmail().equals(userEmail)) {
+				if(user!=null && user.getEmail().equals(userEmail)) {
 					//회원이고 현재 사용자면
 					return "redirect:workspace";
 				}else {
@@ -208,6 +219,7 @@ public class WorkSpaceController {
 				}
 			}else {
 				//비회원이다
+				System.out.println("여기 진입");
 				session.setAttribute("inviteUserEmail", userEmail);
 				session.setAttribute("inviteWnum", wNum);
 				wiService.removeWorkspaceInvite(userEmail, wNum);
@@ -219,6 +231,17 @@ public class WorkSpaceController {
 		
 		
 	}
+	/*
+	public void sendSystemMsg(int wNum, Member member) {
+		System.out.println("sendSystemMsg 진입!");
+		ChatRoom cr = wsmService.getDefaultChatRoomByWnum(wNum);
+		//smt.convertAndSend("/category/systemMsg/" + cr.getCrNum(),member.getName());
+		smt.convertAndSend("/category/systemMsg/" + cr.getCrNum(), "안녕");
+		System.out.println("[memberController] cr.getCrNum() : " + cr.getCrNum());
+		System.out.println("[memberController] member.getName() : " + member.getName());
+		return;
+	}
+	*/
 	
 	@ResponseBody
 	@RequestMapping("/exitWs")
@@ -235,6 +258,7 @@ public class WorkSpaceController {
 			crService.removeAllChatRoomByWnum(wNum);
 			crmService.removeChatRoomMemberByWnumMnum(wNum, member.getNum());
 			pService.removeAllProjectByWnum(wNum);
+			wService.removeWorkspace(wNum);
 			/////////////////////////////////////////하는중/////////////////////////////////////////////
 		}
 		
@@ -265,7 +289,7 @@ public class WorkSpaceController {
 					"				워크스페이스 초대를 수락하려면 아래 버튼을 누르세요 </p>\r\n" + 
 					"				<div>\r\n" + 
 					"					<div style=\"background-color: rgba(255, 255, 255,0.2);width: 120px;border-radius: 10px;margin: 10px auto;text-align:center;\">\r\n" + 
-					"						<a  style='color: #EB6C62;font-size: 18px;font-weight: bolder; line-height: 40.5px; text-decoration:none; display: block;' href='http://localhost:8081/Colla_project/addMember?id="+emailAddress+"&wNum="+wNum+"'> 초대 수락</a>\r\n" + 
+					"						<a  style='color: #EB6C62;font-size: 18px;font-weight: bolder; line-height: 40.5px; text-decoration:none; display: block;' href='http://localhost:8081/addMember?id="+emailAddress+"&wNum="+wNum+"'> 초대 수락</a>\r\n" + 
 					"					</div>\r\n" + 
 					"				</div> \r\n" + 
 					"		</div>\r\n" + 

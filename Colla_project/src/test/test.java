@@ -8,6 +8,7 @@ import java.util.List;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -23,12 +24,12 @@ public class test {
 	private ChatMessageService cmService;
 	@Autowired
 	private TodoService tdService;
+	
 	@Test
 	public void serviceTest() {
-		int a=2;
-		int b=3;
-		double c = ((double)a/b*100);
+		BCryptPasswordEncoder scpwd = new BCryptPasswordEncoder();
 		
-		System.out.println(Math.round(c*10)/10.0);
+		String password = scpwd.encode("123");
+		System.out.println(password);
 	}
 }
