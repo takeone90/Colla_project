@@ -43,12 +43,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="selectMoreChatMessageByCrNum" resultMap="cmMap"> 
 		select cm_num, cr_num, m_num, cm_content, cm_write_date, m_name, cm_type, m_profileimg, f_num
 		from (select rn, a.cm_num,a.cr_num,a.m_num,a.cm_content,a.cm_write_date,a.m_name,a.cm_type,a.m_profileimg, f.f_num
-				from (select /*+ INDEX (cm SYS_C005239 ) */ rownum rn, cm.cm_num  ,cm.cr_num,cm.m_num,cm.cm_content,cm.cm_write_date,m.m_name,cm.cm_type,m.m_profileimg
+				from (select /*+ INDEX_DESC(cm SYS_C005239 ) */ rownum rn, cm.cm_num  ,cm.cr_num,cm.m_num,cm.cm_content,cm.cm_write_date,m.m_name,cm.cm_type,m.m_profileimg
 		        		from chat_message cm, member m 
 		        		where cm.m_num = m.m_num and cm.cr_num=#{param1}) a left outer join favorite f
 				on f.cm_num = a.cm_num and f.m_num=#{param2}
                 order by rn)
-		where rn &gt;= 30+( 10*${param3} +1 ) and rn &lt;= 30 + ( 10*(${param3}+1))
+		where rn &gt;= 30 + ( 10*${param3} +1 ) and rn &lt;= 30 + ( 10*(${param3}+1))
 	</select>
 	
 	<!-- 검색과 페이징을 위한.. -->
