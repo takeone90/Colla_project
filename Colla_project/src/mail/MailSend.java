@@ -13,7 +13,7 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
  
 public class MailSend {
-    public void MailSend(String emailAddress, String code,String type) {
+    public void MailSend(String emailAddress, String code, String type) {
         Properties prop = System.getProperties();
         prop.put("mail.smtp.starttls.enable", "true");
         prop.put("mail.smtp.host", "smtp.gmail.com");
@@ -25,7 +25,9 @@ public class MailSend {
         String mailTitle = null;
         if(type.equals("verifyCode")) {
         	mailTitle = "[COLLA] 회원가입 인증코드 메일입니다";
-        }else {
+        } else if(type.equals("resetCode")) {
+        	mailTitle = "[COLLA] 비밀번호 재설정 인증코드 메일입니다";
+        } else {
         	mailTitle = "[COLLA] 워크스페이스 초대 메일입니다";
         }
         try {

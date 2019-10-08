@@ -8,18 +8,18 @@
 <link rel="stylesheet" type="text/css" href="css/join.css"/>
 <script type="text/javascript">
 $(function() {
-	$("#verifyCodeForm").on("submit", function() {
+	$("#resetForm").on("submit", function() {
 		var data = $(this).serialize(); 
 		$.ajax({
-			url: "checkVerifyCode",
+			url: "checkEmailDuplicationPwReset",
 			data: data,
 			type: "post",
 			dataType: "json",
 			success: function(result) {
 				if(result) {
-					location.href="${contextPath}/joinStep3";
+					location.href="sendResetMail";
 				} else {
-					$("#checkSentence").text("인증 코드가 일치하지 않습니다.");
+					$("#checkSentence").text("가입된 이메일이 아닙니다.");
 				}
 			}
 		}); //end ajax 
@@ -48,7 +48,7 @@ $(function() {
 							<div class="joinBox-Head">			
 								<h3 style='font-weight: bolder; font-size: 30px'>비밀번호 재설정</h3>
 									<p>
-										가입하신 이메일로 새로운 비밀번호가 전송됩니다.
+										인증코드를 입력해주세요.
 									</p>
 							</div>
 						</div>			
@@ -73,13 +73,13 @@ $(function() {
 							<form action="" method="post" id="resetForm">
 								<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 								<div>
-									<h4>이메일 입력</h4>
-									<input type="text" name="inputVerifyCode" placeholder="가입하신 이메일을 입력해주세요.">
+									<h4>코드 입력</h4>
+									<input type="text" name="emailAddress" placeholder="인증코드를 입력해주세요.">
 									<span id="checkSentence" class="checkSentenceRed"></span>
 								</div>
 								<div>
-									<input type="button" onclick="location.href='sendResetMail'" value="비밀번호 전송" class="joinFormButton">
-									<input type="submit" value="다음단계" class="joinFormButton">
+<!-- 									<input type="button" onclick="location.href='sendResetMail'" value="비밀번호 전송" class="joinFormButton"> -->
+									<input type="submit" value="비밀번호 전송" class="joinFormButton">
 								</div>
 							</form>
 						</div>			
