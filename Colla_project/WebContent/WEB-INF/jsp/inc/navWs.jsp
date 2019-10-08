@@ -16,7 +16,7 @@
 					var memberProfileInfoDiv = $(".memberProfileInfo");
 					memberProfileImgDiv.empty();
 					memberProfileInfoDiv.empty();
-					var modalProfileInfoTag = $("<h4>이름</h4><p>"+member.name+"</p><br><h4>이메일</h4><p>"+member.email+"</p><br><h4>연락처</h4><p>"+member.phone+"</p>");
+					var modalProfileInfoTag = $("<h4>이름</h4><p>"+member.name+"</p><br><h4>이메일</h4><p>"+member.email+"</p><br><h4>연락처</h4><p>" + (!member.phone? '없습니다.' : member.phone) + "</p>");
 					memberProfileImgDiv.append(imgTag);
 					memberProfileInfoDiv.append(modalProfileInfoTag);
 				},
