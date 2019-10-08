@@ -9,6 +9,7 @@ public interface TodoDao {
 	public int insertTodo(Todo todo);
 	public int deleteTodo(int tdNum);
 	public int deleteAllTodoByPnum(int pNum);
+	public int deleteAllTodoByPnumMnum(@Param("mNumTo")int mNum,@Param("pNum")int pNum);
 	public int updateTodo(Todo todo);
 	public Todo selectTodo(int tdNum);
 	public List<Todo> selectAllTodoByPnum(int pNum);

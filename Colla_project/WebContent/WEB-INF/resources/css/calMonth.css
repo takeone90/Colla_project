@@ -374,6 +374,7 @@ td {
 .checkboxDiv label:hover {
 	background-color: #EC6D63;
 	color: white;
+	border-color: transparent;
 }
 .checkboxbtn {
     font-size: 1rem;
@@ -391,7 +392,8 @@ td {
 }
 .checkboxDiv input:checked + label {
 	background-color: #EC6D63;
-	color: white;
+    color: white;
+    border-color: transparent;
 }
 .titleDiv {
     width: 55%;
@@ -453,6 +455,7 @@ td {
 }
 #innerBtn a,
 #innerBtnDetail a {
+	cursor: pointer;
 	display: inline-block;
 	position: relative;
 	width: 30%;
@@ -472,6 +475,7 @@ td {
 #innerBtnDetail a:hover {
 	background-color: #E5675A;
 	transition: background-color .5s;
+	border-color: transparent;
 	color: white;
 }
 #wsBodyContainer select {
