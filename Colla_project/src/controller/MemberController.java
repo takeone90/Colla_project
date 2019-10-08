@@ -102,6 +102,7 @@ public class MemberController {
 	public String showLoginForm() {
 		return "/login/loginForm";
 	}
+	//----------비밀번호 재설정----------
 	@RequestMapping(value="/pwReset1", method = RequestMethod.GET)
 	public String showPwReset() {
 		return "/login/pwReset1";
@@ -117,6 +118,24 @@ public class MemberController {
 		innerTest.start();
 		return "redirect:pwReset2";
 	}
+	@ResponseBody
+	@RequestMapping(value="/checkResetCode")
+	public String checkResetCode(String inputVerifyCode, HttpSession session) {
+		String emailAddress = (String)session.getAttribute("emailAddress");
+		String verifyCode = (String)session.getAttribute("verifyCode");
+		String pw = "";
+		session.setAttribute("inputVerifyCode", inputVerifyCode);
+		if(verifyCode.equals(inputVerifyCode)) {
+			pw = setCode();
+			memberService.modifyMemberPw(pw, emailAddress);
+			return pw;
+		}else {
+			//false면 joinStep2 페이지 보여주는 요청생성
+			return "";
+		}	
+	}
+	//----------비밀번호 재설정----------
+	
 	@RequestMapping(value="/callBackJoin", method = RequestMethod.GET) // 네이버 API 회원가입
 	public String showCallBackJoin() {
 		return "/join/callBackJoin";
