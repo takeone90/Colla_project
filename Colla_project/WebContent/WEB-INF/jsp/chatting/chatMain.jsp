@@ -374,10 +374,23 @@ var chatTop = 0;	// chatArea 맨위로 스크롤 >> 과거메시지 로드
 		var favorite = "<div class='"+isFavoriteClass+"' onclick='chatFavorite(this)' value = '"+ msgInfo.cmNum +"'></div>"; //즐겨찾기 아이콘
 		var originName = getOriginName(msgInfo.cmContent);
 		var date = new Date(msgInfo.cmWriteDate);
-		if(area=="favorite"){
-		var writeTime = date.getFullYear()+"년 "+(Number(date.getMonth())+Number(1))+"월 "+date.getDate()+"일 "+date.getHours()+"시 "+date.getMinutes()+"분";			
+		var today = new Date();
+		var hour = date.getHours();
+		if(hour>12){
+			hour = "오후 "+(Number(hour)-Number(12));
+		}else if(hour==12){
+			hour = "오후 12";
 		}else{
-		var writeTime = date.getHours()+"시 "+date.getMinutes()+"분";			
+			hour = "오전 "+hour;
+		}
+		if(area=="favorite"){
+			var writeTime = date.getFullYear()+"년 "+(Number(date.getMonth())+Number(1))+"월 "+date.getDate()+"일 "+hour+"시 "+date.getMinutes()+"분";			
+		}else{
+			if(Number(date.getMonth())+Number(1)==Number(today.getMonth())+Number(1) && date.getDate()==today.getDate()){
+				var writeTime = hour+"시 "+date.getMinutes()+"분";							
+			}else{
+				var writeTime = date.getFullYear()+"년 "+(Number(date.getMonth())+Number(1))+"월 "+date.getDate()+"일 "+hour+"시 "+date.getMinutes()+"분";
+			}
 		}
 		var contentStr;
 		var codeType;
