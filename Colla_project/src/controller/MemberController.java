@@ -181,6 +181,7 @@ public class MemberController {
 	}
 	
 	public void sendSystemMsg(int wNum, Member member) {
+		System.out.println("sendSystemMsg 진입!");
 		ChatRoom cr = wsmService.getDefaultChatRoomByWnum(wNum);
 		smt.convertAndSend("/category/systemMsg/" + cr.getCrNum(),member.getName());
 		System.out.println("[memberController] cr.getCrNum() : " + cr.getCrNum());
@@ -329,6 +330,7 @@ public class MemberController {
 		wsmService.removeAllWsMemberByMnum(member.getNum()); //workspace_member 테이블에서 해당 멤버가 들어간 튜플 모두 제거
 		cmService.removeFavoriteByMnum(member.getNum()); //favorite 테이블에서 해당멤버가 즐겨찾기한 튜플 모두 제거
 		saService.removeSetAlarm(member.getNum());
+		session.invalidate();
 		return "redirect:/";
 	}
 

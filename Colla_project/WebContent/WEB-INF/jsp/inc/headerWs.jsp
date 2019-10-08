@@ -114,7 +114,7 @@ function duplicateConnect(){
 	    
 	  	//system 문구 출력
 		stompClient.subscribe("/category/systemMsg/"+crNum,function(data){
-			alert("data.body : " + data.body);
+			alert("안녕하세요!");
 	    });// end subcribe
 		
 	}); //end connect
