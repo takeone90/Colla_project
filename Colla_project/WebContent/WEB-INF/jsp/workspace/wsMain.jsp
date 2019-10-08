@@ -152,7 +152,7 @@
 					<%---------------------------상세보기 버튼 클릭 시 펼쳐질 wsDetail--------------------%>
 					<div class="wsDetail">
 						<input type="hidden" value="${ws.num}" id="wNum">
-						
+						<div class="test1">
 						<div class="wsPjList">
 							<p>프로젝트</p>
 							<ul>
@@ -177,8 +177,8 @@
 								<a href="#" class="openChatModal" data-wnum="${ws.wsInfo.num}">+</a>
 							</ul>
 						</div>
-						
-						
+						</div>
+						<div class="test2">
 						<div class="wsMember">
 						<p>참여자 목록</p>
 						<ul>
@@ -203,7 +203,7 @@
 						</ul>
 						</div>
 					</div><!-- wsDetail end -->
-					
+					</div>
 					
 					<div class="exitWs">
 <%-- 						<a href="exitWs?wNum=${ws.wsInfo.num}"><i class="fas fa-sign-out-alt"></i></a> --%>

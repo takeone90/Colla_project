@@ -34,24 +34,45 @@ $(function(){
 	/* 네이버 로그인 API */
 	var naverLogin = new naver.LoginWithNaverId({
 		clientId: "kIhjMaimMjKNR7gcR2nf",
-		callbackUrl: "http://localhost:8081/callBackLogin",
+		callbackUrl: "${contextPath}/callBackLogin",
 		isPopup: false, /* 팝업을 통한 연동처리 여부 */
 		loginButton: {color: "green", type: 2, height: 30, width: 90} /* 로그인 버튼의 타입을 지정 */
 	});
 	naverLogin.init(); /* 설정정보를 초기화하고 연동을 준비 */
-	
+	/* 카카오 회원가입 API */
+	Kakao.init('1f6b481e9aa9a7ae0b621fee3692c041'); 
+	Kakao.Auth.createLoginButton({ // 카카오 로그인 버튼을 생성합니다.
+		container : '#kakao-login-btn',
+		success : function(authObj) {
+			Kakao.API.request({
+				url : '/v1/user/me',
+				success : function(res) {
+					$("#emailOfApiForm").val(res.kaccount_email);
+					$("#nameOfApiForm").val(res.properties.nickname);
+					$("#pwOfApiForm").val("kakaoapipw");
+					calls();
+				},
+				fail : function(error) {
+					alert(JSON.stringify(error));
+				}
+			});
+		},
+		fail : function(err) {
+			alert(JSON.stringify(err));
+		}
+	});
 	$("#kakaoLoginButton").on("click", function() {
 		$("#kakao-login-btn").trigger("click");
 	});
 });//end onload
 /* 구글 로그인 */
-// function onSignIn(googleUser) {
-// 	var profile = googleUser.getBasicProfile();
-// 	$("#emailOfApiForm").val(profile.getEmail());
-// 	$("#nameOfApiForm").val(profile.getName());
-// 	$("#pwOfApiForm").val("googleapipw");
-// 	calls();
-// }
+function onSignIn(googleUser) {
+	var profile = googleUser.getBasicProfile();
+	$("#emailOfApiForm").val(profile.getEmail());
+	$("#nameOfApiForm").val(profile.getName());
+	$("#pwOfApiForm").val("googleapipw");
+	calls();
+}
 function calls() {
 	$("#apiForm").submit();
 }
@@ -125,22 +146,19 @@ function checkPw(){
 									<input type="text" name="m_email" placeholder="이메일을 입력해주세요." id="email">
 									<span id="checkEmailText"></span>
 								</div>
-								<div class="pwDiv">
+								<div>
 									<h4>PASSWORD</h4>
 									<input type="password" name="m_pw" placeholder="비밀번호를 입력해주세요." id="pw">
 									<span id="checkPwText"></span>
-									<a class="pwForget" href='${contextPath}/pwReset'>비밀번호를 잊어버리셨나요?</a>
 								</div>
-								<div>
-									<span id="loginResultText">
-										<c:if test='${param.login eq "false"}'>
-											로그인 후 이용하세요.
-										</c:if>
-										<c:if test='${param.login eq "fail"}'>
-											아이디 또는 비밀번호를 다시 확인해주세요.
-										</c:if>
-									</span>
-								</div>
+								<span id="loginResultText">
+									<c:if test='${param.login eq "false"}'>
+										로그인 후 이용하세요.
+									</c:if>
+									<c:if test='${param.login eq "fail"}'>
+										아이디 또는 비밀번호를 다시 확인해주세요.
+									</c:if>
+								</span>
 								<div>
 									<input type="submit" value="로그인" class="loginFormButton">
 								</div>
@@ -150,47 +168,24 @@ function checkPw(){
 							</form>
 							<div id="innerBtn">
 								<!-- 구글 -->
-								<button id="googleLoginButton">구글 로그인<span class="g-signin2" data-width="90" data-height="30" data-onsuccess="onSignIn"></span></button>
+								<button id="googleLoginButton">구글<span class="g-signin2" data-width="90" data-height="30" data-onsuccess="onSignIn"></span></button>
 								<!-- 네이버 -->
-								<button class="naverLoginButton">네이버 로그인<span id="naverIdLogin"></span></button>
+								<button class="naverLoginButton">네이버<span id="naverIdLogin"></span></button>
 								<!-- 카카오 -->
-								<button id="kakaoLoginButton">카카오 로그인</button>
-								<span id="kakao-login-btn"></span>
-							    <script type='text/javascript'>
-								    Kakao.init('1f6b481e9aa9a7ae0b621fee3692c041');
-								    Kakao.Auth.createLoginButton({
-								      container: '#kakao-login-btn',
-								      success: function(authObj) {
-								        Kakao.API.request({
-								          url: '/v2/user/me',
-								          success: function(res) {
-								        	$("#emailOfApiForm").val(res.kakao_account.email);
-											$("#nameOfApiForm").val(res.properties.nickname);
-											$("#pwOfApiForm").val("kakaoapipw");
-											calls();
-								          },
-								          fail: function(error) {
-								            alert(JSON.stringify(error));
-								          }
-								        });
-								      },
-								      fail: function(err) {
-								        alert(JSON.stringify(err));
-								      }
-								    });
-								  </script>								
+								<button id="kakaoLoginButton">카카오<span id="kakao-login-btn"></span></button>
 							</div>
 						</div>
 					</div><!--Content ends-->
+					
 					<span href="http://developers.kakao.com/logout"></span>
 				</div>
 			</section>
 		</div>
 	</div> 	
 	<form method="post" id="apiForm" action="login">
-		<input type="hidden" name="m_email" id="emailOfApiForm">
-		<input type="hidden" name="m_name" id="nameOfApiForm">
-		<input type="hidden" name="m_pw" id="pwOfApiForm">
+		<input type="email" name="m_email" id="emailOfApiForm">
+		<input type="text" name="m_name" id="nameOfApiForm">
+		<input type="password" name="m_pw" id="pwOfApiForm">
 	</form>
 </body>
 </html>

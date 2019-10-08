@@ -5,15 +5,30 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>NaverLoginSDK</title>
+	<style>
+		#loadingImg{
+			margin:0 auto;
+			width: 300px;
+			position: fixed;
+			top:35%;
+			left:50%;
+			margin-left:-150px;
+			margin-top:-225px;
+		}
+		img{
+			display:block; 
+			width:100%;
+		}
+	</style>
 	<!-- (1) LoginWithNaverId Javscript SDK -->
-	<script type="text/javascript" src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.0.js" charset="utf-8"></script>
-	
+	<script type="text/javascript" src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.0.js" charset="utf-8">
+	</script>
 	<!-- (2) LoginWithNaverId Javscript 설정 정보 및 초기화 -->
 	<script>
 		var naverLogin = new naver.LoginWithNaverId(
 			{
 				clientId: "{kIhjMaimMjKNR7gcR2nf}",
-				callbackUrl: "{${contextPath}/callBackJoin}",
+				callbackUrl: "{http://localhost:8081/callBackJoin}",
 				isPopup: false,
 				callbackHandle: true
 				/* callback 페이지가 분리되었을 경우에 callback 페이지에서는 callback처리를 해줄수 있도록 설정합니다. */
@@ -48,11 +63,13 @@
 	</script>
 </head>
 <body>
-	callback 처리중입니다. 이 페이지에서는 callback을 처리하고 바로 redirect하기때문에 이 메시지가 보이면 안됩니다.
+<!-- 	<div id="loadingImg"> -->
+<!-- 		<img src="/img/loading.gif" alt="로딩이미지"> -->
+<!-- 	</div> -->
 	<form method="post" id="thisForm" action="joinMemberAPI">
-		<input type="text" name="email" id="email">
-		<input type="text" name="name" id="name">
-		<input type="text" name="pw" id="pw">
+		<input type="hidden" name="email" id="email">
+		<input type="hidden" name="name" id="name">
+		<input type="hidden" name="pw" id="pw">
 	</form>
 </body>
 </html>
