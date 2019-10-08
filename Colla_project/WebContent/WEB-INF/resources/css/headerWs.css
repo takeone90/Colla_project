@@ -127,14 +127,14 @@ a.member-btn:hover{
 	border-radius: 50%;
 }
 #memberInfoBody a{
-	display: block;
+	display: inline-block;
     background-color: white;
     color: #4e4c4c;
     border: 1px solid #d2d2d2;
     padding: 8px;
     border-radius: 4px;
     width: calc(100% - 300px);
-    margin-bottom: 20px;
+    margin:10px 5px 20px;
 }
 #memberInfoBody a:hover{
 	color : white;

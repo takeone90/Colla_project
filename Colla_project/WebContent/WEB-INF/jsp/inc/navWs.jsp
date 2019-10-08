@@ -17,6 +17,12 @@
 					memberProfileImgDiv.empty();
 					memberProfileInfoDiv.empty();
 					var modalProfileInfoTag = $("<h4>이름</h4><p>"+member.name+"</p><br><h4>이메일</h4><p>"+member.email+"</p><br><h4>연락처</h4><p>" + (!member.phone? '없습니다.' : member.phone) + "</p>");
+					if( mNum != ${sessionScope.user.num}){
+						var oneOnOneChat = $("<a href='#' id='oneOnOne'>1:1 채팅</a>");
+						$(".closeMemberInfo").before(oneOnOneChat);
+					} else {
+						$("#memberInfoBody #oneOnOne").remove();
+					}
 					memberProfileImgDiv.append(imgTag);
 					memberProfileInfoDiv.append(modalProfileInfoTag);
 				},
@@ -234,7 +240,9 @@
 			<div class="modalBody" id="memberInfoBody" align="center">
 					<div class="memberProfileImg"></div>
 					<div class="memberProfileInfo"></div>
-					<a href="#" class="closeMemberInfo">닫기</a>
+					<div class="btns">
+						<a href="#" class="closeMemberInfo">닫기</a>
+					</div>
 			</div> <!-- end modalBody -->
 		</div><!-- end memberInfoModal -->
 </div>
