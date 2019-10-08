@@ -37,6 +37,7 @@ import service.ChatMessageService;
 import service.ChatRoomMemberService;
 import service.ChatRoomService;
 import service.MemberService;
+import service.SystemMsgService;
 import service.WorkspaceService;
 import service.WsMemberService;
 
@@ -58,6 +59,8 @@ public class ChatRoomController {
 	private SimpMessagingTemplate smt;
 	@Autowired
 	private AlarmService aService;
+	@Autowired
+	private SystemMsgService smService;
 	
 	@Resource(name = "connectorList")
 	private Map<Object,Object> connectorList;
@@ -169,11 +172,22 @@ public class ChatRoomController {
 		for (String mNum : request.getParameterValues("wsmList")) {
 			Member member = mService.getMember(Integer.parseInt(mNum));
 			crmService.addChatRoomMember(crNum, member.getNum(), wNum);
+			ChatMessage cm = smService.joinChatRoom(crNum, member);
+			smt.convertAndSend("/category/systemMsg/"+ crNum, cm);
 			int aNum = aService.addAlarm(wNum, member.getNum(), user.getNum(), "cInvite", crNum);
 			smt.convertAndSend("/category/alarm/"+member.getNum(),aService.getAlarm(aNum));
 		}
 		return "redirect:chatMain?crNum=" + crNum;
 	}
+	/*미경
+	public void sendSystemMsg(int crNum, Member member, int wNum) { 
+		wsmService.getDefaultChatRoomByWnum(wNum);
+		int cmNum = cmService.addChatMessage(crNum, -1, member.getName() + " 님이 채팅에 참여하셨습니다.", "systemMsg");
+		ChatMessage cm = cmService.getSystemMessageByCmNum(cmNum);
+		smt.convertAndSend("/category/systemMsg/"+ crNum, cm);
+		return;
+	}
+	*/
 	
 	@ResponseBody
 	@RequestMapping("/showMemberListInChatRoom")
@@ -222,7 +236,7 @@ public class ChatRoomController {
 		int mNum = member.getNum();
 //		List<ChatMessage> cmList = cmService.getAllChatMessageByCrNum(crNum,mNum);
 		List<ChatMessage> cmList = cmService.getRecentChatMessageByCrNum(crNum, mNum);
-		
+		System.out.println("cmList : " + cmList);
 		return cmList;
 	}
 	// 일반메세지 받고 보내기
@@ -315,10 +329,17 @@ public class ChatRoomController {
 	public String exitChatRoom(int crNum,HttpSession session){
 		Member user = (Member)session.getAttribute("user");
 		crmService.removeChatRoomMemberByCrNumMnum(crNum, user.getNum());
-		
-		
+		ChatMessage cm = smService.exitChatRoom(crNum, user);
+		smt.convertAndSend("/category/systemMsg/"+ crNum, cm);
 		return "redirect:workspace";
 	}
-
+	/*미경
+	public void sendMsgExitChatRoom(int crNum, Member member) {
+		int cmNum = cmService.addChatMessage(crNum, -1, member.getName() + " 님이 채팅에서 나가셨습니다.", "systemMsg");
+		ChatMessage cm = cmService.getSystemMessageByCmNum(cmNum);
+		smt.convertAndSend("/category/systemMsg/"+ crNum, cm);
+		return;
+	}
+	*/
 	
 }

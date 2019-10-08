@@ -39,8 +39,10 @@ import model.EmailVerify;
 import model.Member;
 import service.ChatMessageService;
 import service.ChatRoomMemberService;
+import service.ChatRoomService;
 import service.MemberService;
 import service.SetAlarmService;
+import service.SystemMsgService;
 import service.WsMemberService; 
 
 @Controller
@@ -72,6 +74,11 @@ public class MemberController {
 	private ChatMessageService cmService;
 	@Autowired
 	private SetAlarmService saService;
+	@Autowired
+	private ChatRoomService crService;
+	@Autowired
+	private SystemMsgService smService;
+
 
 	@Resource(name = "connectorList")
 	private Map<Object,Object> connectorList;//빈으로 등록된 접속자명단(email, session)
@@ -178,7 +185,10 @@ public class MemberController {
 				//이게 차있다면 초대받은 사람임
 				//wsmember로 추가
 				wsmService.addWsMember(inviteWnum, member.getNum());
-				sendSystemMsg(inviteWnum,member);//
+				int crNum = (wsmService.getDefaultChatRoomByWnum(inviteWnum)).getCrNum();
+				ChatMessage cm = smService.joinChatRoom(crNum, member);
+				smt.convertAndSend("/category/systemMsg/"+ crNum, cm);
+//				System.out.println("초대받은사람이네요 inviteUserEmail : "+inviteUserEmail+", 초대받은wNum : "+inviteWnum);
 			}
 			session.removeAttribute("InviteUserEmail");
 			session.removeAttribute("inviteWnum");
@@ -189,15 +199,15 @@ public class MemberController {
 			return "/join/joinStep3"; //실패 시 어디로 갈지는 정의 필요
 		}
 	}
-	
-	public void sendSystemMsg(int wNum, Member member) {
-		System.out.println("sendSystemMsg 진입!");
+	/* 미경
+	public void sendSystemMsg(int wNum, Member member) { 
 		ChatRoom cr = wsmService.getDefaultChatRoomByWnum(wNum);
-		smt.convertAndSend("/category/systemMsg/" + cr.getCrNum(),member.getName());
-		System.out.println("[memberController] cr.getCrNum() : " + cr.getCrNum());
-		System.out.println("[memberController] member.getName() : " + member.getName());
+		int cmNum = cmService.addChatMessage(cr.getCrNum(), -1, member.getName() + " 님이 채팅에 참여하셨습니다.", "systemMsg");
+		ChatMessage cm = cmService.getSystemMessageByCmNum(cmNum);
+		smt.convertAndSend("/category/systemMsg/"+ cr.getCrNum(), cm);
 		return;
 	}
+	*/
 	
 	@RequestMapping(value="/loginDuplication", method = RequestMethod.GET)
 	public String loginDuplication() {
@@ -339,9 +349,24 @@ public class MemberController {
 		wsmService.removeAllWsMemberByMnum(member.getNum()); //workspace_member 테이블에서 해당 멤버가 들어간 튜플 모두 제거
 		cmService.removeFavoriteByMnum(member.getNum()); //favorite 테이블에서 해당멤버가 즐겨찾기한 튜플 모두 제거
 		saService.removeSetAlarm(member.getNum());
+		List<ChatRoom> crList = crService.getAllChatRoomByMnum(member.getNum());
+		for(int i=0;i<crList.size();i++) {
+			int crNum = crList.get(i).getCrNum();
+			ChatMessage cm = smService.exitChatRoom(crNum,member);
+			smt.convertAndSend("/category/systemMsg/"+ crNum, cm);
+		}
 		session.invalidate();
+		
 		return "redirect:/";
 	}
+	/* 미경
+	public void sendMsgExitChatRoom(int crNum, Member member) {
+		int cmNum = cmService.addChatMessage(crNum, -1, member.getName() + " 님이 채팅에서 나가셨습니다.", "systemMsg");
+		ChatMessage cm = cmService.getSystemMessageByCmNum(cmNum);
+		smt.convertAndSend("/category/systemMsg/"+ crNum, cm);
+		return;
+	}
+	*/
 
 	@RequestMapping("/dropSession") //로그아웃 성공 후, 처리
 	public String dropSession(HttpSession session,String userEmail) {

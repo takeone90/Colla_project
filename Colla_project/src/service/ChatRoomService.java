@@ -76,6 +76,9 @@ public class ChatRoomService {
 	public List<ChatRoom> getAllChatRoomByWnum(int wNum){
 		return crDao.selectAllByWnum(wNum);
 	}
+	public List<ChatRoom> getAllChatRoomByMnum(int mNum){
+		return crDao.selectAllChatRoomByMnum(mNum);
+	}
 	public List<ChatRoom> getAllChatRoomByWnumMnum(int wNum,int mNum){
 		return crDao.selectAllChatRoomByWnumMnum(wNum, mNum);
 	}

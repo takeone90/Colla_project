@@ -356,9 +356,9 @@ var chatTop = 0;	// chatArea 맨위로 스크롤 >> 과거메시지 로드
 		var isFavoriteClass=(msgInfo.isFavorite == 0)?"chatFavorite":"chatFavorite on";
 		
 		//내가 쓴건지, 다른사람이 쓴건지 체크
-		if(msgInfo.mName == $("#userName").val()){
+		if(msgInfo.mNum == ${sessionScope.user.num}){
 			msgType="myMsg";
-		} else {
+		}else {
 			msgType = "chatMsg";
 		}
 		
@@ -397,15 +397,20 @@ var chatTop = 0;	// chatArea 맨위로 스크롤 >> 과거메시지 로드
 								"</div>"+
 							 "</div>";
 		}
+		
 		var profileImgDiv = $("<div class='profileImg'></div>");
 		profileImgDiv.append(imgTag);
-		
-		chatMsg.append(profileImgDiv);
-		chatMsg.append("<div class='onlyMsgBox'><div class='name'><p>"+msgInfo.mName
-				+"<span class='date'>"+writeTime
-				+"</span></p></div>"+favorite+"<br><p class='content'>"
-				+ contentStr
-				+"</p></div>");
+		if(msgInfo.cmType !='systemMsg'){
+			chatMsg.append(profileImgDiv);
+			chatMsg.append("<div class='onlyMsgBox'><div class='name'><p>"+msgInfo.mName
+					+"<span class='date'>"+writeTime
+					+"</span></p></div>"+favorite+"<br><p class='content'>"
+					+ contentStr
+					+"</p></div>");
+						
+		}else{
+			chatMsg.append("<div class='systemMsg' align='center'>"+msgInfo.cmContent+"</div>");
+		}
 		
 		//전역변수인 currDate 와 만들려는 chatMessage의 date가 같지 않으면 날짜 띠를 생성한다
 		if(currDate!=date.getDate() && currDate!=0 && !area){
@@ -490,7 +495,11 @@ var chatTop = 0;	// chatArea 맨위로 스크롤 >> 과거메시지 로드
 		return chatMsg.outerHeight();
 		
 	}/////////////////////////////////////////////////////////////addMsg end////////////////////////////////////////////////////
-	
+	//시스템 메시지 화면에 추가 : 미경
+	function addSystemMsg(memberName){
+		var systemMsg = $("<div class='systemMsg' align='center'>"+memberName);
+		chatArea.append(systemMsg);		
+	}
 	
 	
 	//즐겨찾기 리스트 그리기

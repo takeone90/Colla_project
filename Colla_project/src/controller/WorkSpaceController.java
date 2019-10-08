@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import controller.MemberController.inner;
 import mail.MailSend;
+import model.ChatMessage;
 import model.ChatRoom;
 import model.Member;
 import model.SetAlarm;
@@ -26,12 +27,14 @@ import model.Workspace;
 import model.WorkspaceInvite;
 import model.WsMember;
 import service.AlarmService;
+import service.ChatMessageService;
 import service.ChatRoomMemberService;
 import service.ChatRoomService;
 import service.MemberService;
 import service.ProjectMemberService;
 import service.ProjectService;
 import service.SetAlarmService;
+import service.SystemMsgService;
 import service.WorkspaceInviteService;
 import service.WorkspaceService;
 import service.WsMemberService;
@@ -60,6 +63,10 @@ public class WorkSpaceController {
 	private ProjectService pService;
 	@Autowired
 	private ProjectMemberService pmService;
+	@Autowired
+	private ChatMessageService cmService;
+	@Autowired
+	private SystemMsgService smService;
 	@RequestMapping("/workspace")
 	public String showWsMain(Principal principal,HttpSession session,Model model) {
 		//Ws메인이 보여질때 시큐리티가 갖고있는 principal 정보의 userid 를 가져와서
@@ -208,8 +215,10 @@ public class WorkSpaceController {
 			if(mService.getMemberByEmail(userEmail)!=null) {
 				//회원이다.
 				Member member = mService.getMemberByEmail(userEmail);
-				wsmService.addWsMember(wNum, member.getNum());
-				//sendSystemMsg(wNum, member);//미경 추가
+				wsmService.addWsMember(wNum, member.getNum()); 
+				int crNum = (wsmService.getDefaultChatRoomByWnum(wNum)).getCrNum(); //기본채팅방 번호 하나 생성
+				ChatMessage cm = smService.joinChatRoom(crNum, member);
+				smt.convertAndSend("/category/systemMsg/"+ crNum, cm);
 				wiService.removeWorkspaceInvite(userEmail, wNum);
 				if(user!=null && user.getEmail().equals(userEmail)) {
 					//회원이고 현재 사용자면
@@ -232,16 +241,13 @@ public class WorkSpaceController {
 		
 	}
 	/*
-	public void sendSystemMsg(int wNum, Member member) {
-		System.out.println("sendSystemMsg 진입!");
-		ChatRoom cr = wsmService.getDefaultChatRoomByWnum(wNum);
-		//smt.convertAndSend("/category/systemMsg/" + cr.getCrNum(),member.getName());
-		smt.convertAndSend("/category/systemMsg/" + cr.getCrNum(), "안녕");
-		System.out.println("[memberController] cr.getCrNum() : " + cr.getCrNum());
-		System.out.println("[memberController] member.getName() : " + member.getName());
+	public void sendSystemMsg(int wNum, Member member) { 
+		ChatRoom cr = wsmService.getDefaultChatRoomByWnum(wNum); // 기본 채팅방 번호를 알아내고?
+		int cmNum = cmService.addChatMessage(cr.getCrNum(), -1, member.getName() + " 님이 채팅에 참여하셨습니다.", "systemMsg");
+		ChatMessage cm = cmService.getSystemMessageByCmNum(cmNum);
+		smt.convertAndSend("/category/systemMsg/"+ cr.getCrNum(), cm);
 		return;
-	}
-	*/
+	}*/
 	
 	@ResponseBody
 	@RequestMapping("/exitWs")
@@ -253,6 +259,12 @@ public class WorkSpaceController {
 		//exit 한사람이 chatroom의 생성자일지라도 그 chatroom 은 지워지지 않는다.
 		
 		List<WsMember> wsmList = wsmService.getAllWsMemberByWnum(wNum);
+		List<ChatRoom> crList = crService.getAllChatRoomByWnum(wNum);
+		for(int i=0;i<crList.size();i++) {
+			int crNum = crList.get(i).getCrNum();
+			ChatMessage cm = smService.exitChatRoom(crNum, member);
+			smt.convertAndSend("/category/systemMsg/"+ crNum, cm);
+		}
 		if(wsmList.isEmpty()) {
 			//사람없는 ws면 ws랑 cr,crm,p,pm,td 지우기 실행
 			crService.removeAllChatRoomByWnum(wNum);
@@ -263,6 +275,14 @@ public class WorkSpaceController {
 		}
 		
 	}
+	/* 미경
+	public void sendMsgExitChatRoom(int crNum, Member member) {
+		int cmNum = cmService.addChatMessage(crNum, -1, member.getName() + " 님이 채팅에서 나가셨습니다.", "systemMsg");
+		ChatMessage cm = cmService.getSystemMessageByCmNum(cmNum);
+		smt.convertAndSend("/category/systemMsg/"+ crNum, cm);
+		return;
+	}
+	*/
 		
 	public class inner implements Runnable {
 		String emailAddress;
