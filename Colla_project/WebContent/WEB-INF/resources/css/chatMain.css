@@ -70,13 +70,16 @@
 }
 
 .name>p {
-	font-weight: bolder;
+	color: #3b3e56;
+    font-size: 13px;
+    font-weight: bolder;
 }
 
 .date {
-	margin-left : 10px;
-	font-weight: normal;
-	font-size: 5px;
+	margin-left: 10px;
+    font-weight: 300;
+    font-size: 12px;
+    color: #888585;
 }
 
 .profileImg {
@@ -505,6 +508,12 @@ pre .CodeMirror-line{
 	position: absolute;
 	top: 150px;
 }
+.staticMapInfo p{
+	font-size: 12px;
+}
+.staticMapInfo .placeAddr{
+	font-size: 12px;
+}
 .placeName{
 	font-size: 13px;
 	padding: 8px;
@@ -583,6 +592,7 @@ pre .CodeMirror-line{
 }
 .onlyMsgBox p{
 	text-align: left;
+	font-size: 14px;
 }
 .navInnerBtn{
 	width : 122px;
@@ -782,19 +792,22 @@ input[type=radio]{
 #addForm .modalHead h3 { 
 	font-size:25px ;
 	text-align:center; 
-	font-weight:500;
-	margin-bottom:20px;
+	font-weight: 600;
+    color: #10344a;
+    margin-bottom: 20px;
 }
 #addForm .modalHead p {
-	line-height:20px;
-	width:300px;
-	margin:0 auto;
-	text-align:center;
+	line-height: 20px;
+    font-size: 13px;
+    font-weight: 300;
+    width: 300px;
+    margin: 0 auto;
+    text-align: center;
 }
 
 #nav--schedule .modalHead {
 	margin-bottom:30px;
-	padding-top:30px;
+	padding-top:8px;
 }
 #nav--schedule .schedule-row{
 	margin-bottom: 20px;
@@ -812,9 +825,11 @@ input[type=radio]{
 }
 #nav--schedule .schedule-row h4 {
 	width: 60px;
-	margin-right:20px;
-	text-align:right;
-	padding:0;
+    font-weight: 400;
+    font-size: 13px;
+    margin-right: 11px;
+    text-align: right;
+    padding: 0;
 }
 #nav--schedule .schedule-row #title {
 	width: 300px
