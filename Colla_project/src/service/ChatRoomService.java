@@ -4,11 +4,15 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import dao.AlarmDao;
 import dao.ChatRoomDao;
 import dao.ChatRoomMemberDao;
+import model.Alarm;
 import model.ChatRoom;
 import model.ChatRoomMember;
+import model.Member;
 
 @Service
 public class ChatRoomService {
@@ -16,6 +20,30 @@ public class ChatRoomService {
 	private ChatRoomDao crDao;
 	@Autowired
 	private ChatRoomMemberDao crmDao;
+	@Autowired
+	private AlarmDao aDao;
+	
+	//1:1채팅 생성 및 초대
+	@Transactional
+	public Alarm addOneOnOne(int wNum, Member I, Member you) {
+		int crNum = addChatRoom(wNum, I.getNum(), I.getName()+"-"+you.getName());
+		ChatRoomMember crm = new ChatRoomMember();
+		Alarm alarm = null;
+		
+		crm.setCrNum(crNum);
+		crm.setmNum(you.getNum());
+		crm.setwNum(wNum);
+		if(crmDao.insertChatRoomMember(crm)>0) {
+			alarm = new Alarm();
+			alarm.setaDnum(crNum);
+			alarm.setaType("cInvite");
+			alarm.setmNumTo(you.getNum());
+			alarm.setmNumFrom(I.getNum());
+			alarm.setwNum(wNum);
+			aDao.insertAlarm(alarm);
+		}
+		return alarm;
+	}
 	public int addChatRoom(int wNum,int mNum,String crName) {
 //		boolean result = false;
 		ChatRoom chatRoom = new ChatRoom();

@@ -4,7 +4,22 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:set var="contextPath" value="<%=request.getContextPath() %>"/>
 <script>
-	
+	function chatWith(mNum){	//1:1채팅
+		$.ajax({
+			url: "${contextPath}/addOneOnOne",
+			data: {"mNum": mNum},
+			success : function(result){
+				if( result > 0 ){
+					window.location.href="/chatMain?crNum="+result;
+				} else {
+					alert("1:1 채팅 실패");
+				}
+			},
+			error : function(){
+				alert("chatWith Ajax 오류");
+			}
+		});
+	}
 	function showProfileInfoModal(mNum){
 			$.ajax({
 				url : "${contextPath}/getMemberInfoForProfileImg",
@@ -17,11 +32,10 @@
 					memberProfileImgDiv.empty();
 					memberProfileInfoDiv.empty();
 					var modalProfileInfoTag = $("<h4>이름</h4><p>"+member.name+"</p><br><h4>이메일</h4><p>"+member.email+"</p><br><h4>연락처</h4><p>" + (!member.phone? '없습니다.' : member.phone) + "</p>");
+					$("#memberInfoBody #oneOnOne").remove();
 					if( mNum != ${sessionScope.user.num}){
-						var oneOnOneChat = $("<a href='#' id='oneOnOne'>1:1 채팅</a>");
-						$(".closeMemberInfo").before(oneOnOneChat);
-					} else {
-						$("#memberInfoBody #oneOnOne").remove();
+						var oneOnOne = $("<a href='#' id='oneOnOne' onclick='chatWith("+mNum+")'>1:1 채팅</a>");
+						$(".closeMemberInfo").before(oneOnOne);
 					}
 					memberProfileImgDiv.append(imgTag);
 					memberProfileInfoDiv.append(modalProfileInfoTag);
