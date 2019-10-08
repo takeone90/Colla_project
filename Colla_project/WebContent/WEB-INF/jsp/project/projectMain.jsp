@@ -66,7 +66,7 @@
 		<input type="hidden" value="project" id="pageType">
 		<input type="hidden" value="${sessionScope.user.num}" id="mNum">
 		<div id="wsBodyContainer"> 
-		<h2>Project List</h2>
+		<h2>프로젝트 목록</h2>
 		<div id="addProjectDiv" align="center">프로젝트 추가</div>
 <!-- 		<button id="addProjectBtn">프로젝트 추가</button> -->
 			<div id="projectArea">

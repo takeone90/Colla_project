@@ -2,6 +2,7 @@
 a:visited, a:link, a:focus, a:hover, a:active{
 	color:#5d829e;
 	text-decoration:none;
+	transition : color 0.3s;
 }
 #wsBodyContainer h4{
 	color : #403C39;
@@ -82,6 +83,7 @@ display : none;
 	border-color: transparent;
 	background-color: #bdb5aa;
 	color : white;
+	transition : background-color 0.3s;
 }
 #wsBodyContainer .openedWs.ws .subService a{
 	background-color: white;
@@ -109,6 +111,7 @@ display : none;
 	margin-right : 24px;
 }
 .showWsDetail:hover{
+	transition : color 0.3s;
 	color: #f2452e;
 	font-weight: bolder;
 }
@@ -133,18 +136,20 @@ display : none;
 	margin-top: 41px;
 }
 .wsChatList ul, .wsPjList ul{
-	margin-top : 24px;
+	margin-top : 13px;
 	margin-bottom : 24px;
 }
 .wsChatList li, .wsPjList li{
-	display: inline-block;
+	margin-right: 1px;
+    margin-bottom: 4px;
+    display: inline-block;
 }
 .wsChatList li a, .wsPjList li a{
 	padding: 8px 12px 8px 12px;
-    margin-right: 6px;
-    font-size: 14px;
+    font-size: 13px;
     background-color: white;
     color: #5e5654;
+	display: block;
     border-radius: 6px;
     border: 1px solid #e4e2e2;
 }
@@ -211,6 +216,7 @@ display : none;
 .wsDetail ul .openAddMemberModal:hover{
 	background-color: #E5675A;
 	color : white;
+	transition : background-color 0.3s;
 }
 .wsDetail ul .addWsmBtnLi{
 	vertical-align: top;
@@ -234,6 +240,7 @@ display : none;
 }
 #openWsModal:hover{
 	background-color: #E5675A;
+	transition : background-color 0.3s;
 	color : white;
 	border-color : transparent;
 }
@@ -246,10 +253,11 @@ display : none;
 	margin-top:0px;
 }
 .openedWs .exitWs a{
-	color: #f07151;
+	color: #949494;
 }
 .openedWs .exitWs a:hover{
 	color: #f2452e;
+	transition : color 0.3s;
 }
 .exitWs a {
 	color: #a3a6a8;
@@ -259,7 +267,8 @@ display : none;
 	color : #10344a;
 }
 #wsBodyContainer .openedWs h3 a:hover, #wsBodyContainer h3 a:hover{
-	color : #fa8a6e;
+	transition : color 0.3s;
+	color : #f74b39;
 }
 .inviteRoundBox{
 	margin-top: 8px;
@@ -275,6 +284,7 @@ a[class="addInviteInput"],a[class="removeInviteInput"]{
     vertical-align: middle;
 }
 a[class="addInviteInput"]:hover,a[class="removeInviteInput"]:hover{
+	transition : background-color 0.3s;
 	background-color: #f5f5f5;
 }
 .test1, .test2{

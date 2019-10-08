@@ -23,19 +23,20 @@
 }
 #addTodo{
 	position: absolute;
-	display: inline-block;
-    top: 172px;
+    display: inline-block;
+    top: 159px;
     left: calc(100% - 230px);
     width: 97px;
     padding: 6px;
-    background-color: #403C39;
-    color: white;
+    background-color: white;
+    color: #f2452e;
     border-radius: 4px;
-    border: none;
+    border: 1px solid #f99f9f;
     cursor: pointer;
 }
 #addTodo:hover{
-	background-color: #E5675A;
+	background-color: #fff7f7;
+    border-color: #f19d9d;
 }
 .todo{
 	position: relative;
@@ -143,18 +144,18 @@
 #backToProjectMain{
 	display: inline-block;
     position: absolute;
-    top: 172px;
+    top: 159px;
     left: calc(100% - 356px);
     width: 120px;
     padding: 6px;
     background-color: white;
-    color: black;
+    color: #797070;
     border-radius: 4px;
     border: 1px solid #dddd;
     cursor: pointer;
 }
 #backToProjectMain:hover{
-	background-color: #eee;
+	background-color: #f9f8f8;
 }
 .tdInfo .profileImg img{
 	width: 60px;
