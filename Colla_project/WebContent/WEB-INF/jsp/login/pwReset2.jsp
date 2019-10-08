@@ -11,15 +11,17 @@ $(function() {
 	$("#resetForm").on("submit", function() {
 		var data = $(this).serialize(); 
 		$.ajax({
-			url: "checkEmailDuplicationPwReset",
+			url: "checkVerifyCode",
 			data: data,
 			type: "post",
 			dataType: "json",
 			success: function(result) {
 				if(result) {
-					location.href="sendResetMail";
+					console.log("성공");
+// 					location.href="sendResetMail";
 				} else {
-					$("#checkSentence").text("가입된 이메일이 아닙니다 .");
+					console.log("실패");
+// 					$("#checkSentence").text("가입된 이메일이 아닙니다 .");
 				}
 			}
 		}); //end ajax 
@@ -74,12 +76,12 @@ $(function() {
 								<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 								<div>
 									<h4>코드 입력</h4>
-									<input type="text" name="emailAddress" placeholder="인증코드를 입력해주세요.">
+									<input type="text" name="inputVerifyCode" placeholder="인증코드를 입력해주세요.">
 									<span id="checkSentence" class="checkSentenceRed"></span>
 								</div>
 								<div>
 <!-- 									<input type="button" onclick="location.href='sendResetMail'" value="비밀번호 전송" class="joinFormButton"> -->
-									<input type="submit" value="비밀번호 전송" class="joinFormButton">
+									<input type="button" value="인증코드 확인" id="resetFormButton" class="joinFormButton">
 								</div>
 							</form>
 						</div>			
