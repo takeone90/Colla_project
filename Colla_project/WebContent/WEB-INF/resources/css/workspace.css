@@ -292,7 +292,8 @@ a[class="addInviteInput"]:hover,a[class="removeInviteInput"]:hover{
 	display: inline-block;
 }
 .test1{
-	width: 46%;
+	padding-right: 16px;
+    width: 46%;
     border-right: 1px solid #cfd3d8;
     margin-right: 40px;
 }
