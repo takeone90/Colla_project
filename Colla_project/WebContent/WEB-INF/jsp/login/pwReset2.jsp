@@ -19,7 +19,7 @@ $(function() {
 				if(result) {
 					location.href="sendResetMail";
 				} else {
-					$("#checkSentence").text("가입된 이메일이 아닙니다.");
+					$("#checkSentence").text("가입된 이메일이 아닙니다 .");
 				}
 			}
 		}); //end ajax 

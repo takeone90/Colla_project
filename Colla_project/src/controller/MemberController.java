@@ -110,7 +110,6 @@ public class MemberController {
 	}
 	@RequestMapping(value="/callBackJoin", method = RequestMethod.GET) // 네이버 API 회원가입
 	public String showCallBackJoin() {
-		
 		return "/join/callBackJoin";
 	}
 	@RequestMapping(value="/joinMemberAPI", method = RequestMethod.POST) // API 회원가입

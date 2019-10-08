@@ -24,11 +24,11 @@ public class MailSend {
         MimeMessage msg = new MimeMessage(session);
         String mailTitle = null;
         if(type.equals("verifyCode")) {
-        	mailTitle = "[COLLA] 회원가입 인증코드 메일입니다";
+        	mailTitle = "[COLLA] 회원가입 인증코드 메일입니다.";
         } else if(type.equals("resetCode")) {
-        	mailTitle = "[COLLA] 비밀번호 재설정 인증코드 메일입니다";
+        	mailTitle = "[COLLA] 비밀번호 재설정 인증코드 메일입니다.";
         } else {
-        	mailTitle = "[COLLA] 워크스페이스 초대 메일입니다";
+        	mailTitle = "[COLLA] 워크스페이스 초대 메일입니다.";
         }
         try {
             msg.setSentDate(new Date());
