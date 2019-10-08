@@ -1,5 +1,7 @@
 package controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -7,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -153,10 +156,22 @@ public class WorkSpaceController {
 	
 	//워크스페이스에 멤버 초대하는부분
 	@RequestMapping("/inviteMember")
-	public String inviteMember(int wNum,HttpSession session,HttpServletRequest request) {
+	public String inviteMember(int wNum,HttpSession session,HttpServletRequest request,HttpServletResponse response) throws IOException {
 		//ws초대 여부를 db에 담는다
+		response.setContentType("text/html; charset=UTF-8");
 		Member user = (Member)session.getAttribute("user");
 		String[] targetUserArray = request.getParameterValues("targetUserList");
+		for(int i=0;i<targetUserArray.length;i++) {
+			if(targetUserArray[i].length()==0) {
+				PrintWriter out = response.getWriter();
+				out.println("<script>alert('초대할 유저의 이메일을 입력하세요');</script>");
+				out.flush();
+				return "/workspace/wsMain";	
+			}
+		}
+		
+		
+
 		List<Member> targetUserList = new ArrayList<Member>();
 		List<WsMember> wsmList = wsmService.getAllWsMemberByWnum(wNum);
 		List<Member> existingMemberList = new ArrayList<Member>();

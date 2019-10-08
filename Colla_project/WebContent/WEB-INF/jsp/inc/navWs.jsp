@@ -4,7 +4,22 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:set var="contextPath" value="<%=request.getContextPath() %>"/>
 <script>
-	
+	function chatWith(mNum){	//1:1채팅
+		$.ajax({
+			url: "${contextPath}/addOneOnOne",
+			data: {"mNum": mNum},
+			success : function(result){
+				if( result > 0 ){
+					window.location.href="/chatMain?crNum="+result;
+				} else {
+					alert("1:1 채팅 실패");
+				}
+			},
+			error : function(){
+				alert("chatWith Ajax 오류");
+			}
+		});
+	}
 	function showProfileInfoModal(mNum){
 			$.ajax({
 				url : "${contextPath}/getMemberInfoForProfileImg",
@@ -16,7 +31,12 @@
 					var memberProfileInfoDiv = $(".memberProfileInfo");
 					memberProfileImgDiv.empty();
 					memberProfileInfoDiv.empty();
-					var modalProfileInfoTag = $("<h4>이름</h4><p>"+member.name+"</p><br><h4>이메일</h4><p>"+member.email+"</p><br><h4>연락처</h4><p>"+member.phone+"</p>");
+					var modalProfileInfoTag = $("<h4>이름</h4><p>"+member.name+"</p><br><h4>이메일</h4><p>"+member.email+"</p><br><h4>연락처</h4><p>" + (!member.phone? '없습니다.' : member.phone) + "</p>");
+					$("#memberInfoBody #oneOnOne").remove();
+					if( mNum != ${sessionScope.user.num}){
+						var oneOnOne = $("<a href='#' id='oneOnOne' onclick='chatWith("+mNum+")'>1:1 채팅</a>");
+						$(".closeMemberInfo").before(oneOnOne);
+					}
 					memberProfileImgDiv.append(imgTag);
 					memberProfileInfoDiv.append(modalProfileInfoTag);
 				},
@@ -144,6 +164,7 @@
 			</form>
 		</div>
 		<select name="currWorkspace" id="workspaceSelector">
+			<option value="" selected disabled hidden>워크스페이스를 선택하세요</option>
 		<c:forEach items="${sessionScope.workspaceList}" var="ws">
 			<option class="wsSelectOption" value="${contextPath}/defaultChatMain?wNum=${ws.wsInfo.num}" ${sessionScope.currWnum eq ws.wsInfo.num?'selected':''}>${ws.wsInfo.name}</option>
 		</c:forEach>
@@ -192,7 +213,7 @@
 		</div>
 		<div id="mainDiv">
 			<h3>
-			<a href="${contextPath}/"><i class="fas fa-angle-left"></i> Main</a>
+			<a href="${contextPath}/"><i class="fas fa-angle-left"></i> 메인화면</a>
 			</h3>
 		</div>
 		
@@ -237,7 +258,9 @@
 			<div class="modalBody" id="memberInfoBody" align="center">
 					<div class="memberProfileImg"></div>
 					<div class="memberProfileInfo"></div>
-					<a href="#" class="closeMemberInfo">닫기</a>
+					<div class="btns">
+						<a href="#" class="closeMemberInfo">닫기</a>
+					</div>
 			</div> <!-- end modalBody -->
 		</div><!-- end memberInfoModal -->
 </div>

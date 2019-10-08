@@ -140,14 +140,14 @@
 		<input type="hidden" value="workspace" id="pageType">
 		<input type="hidden" value="${sessionScope.user.num}" id="mNum">
 		<div id="wsBodyContainer"> 
-		<h2>Workspace List</h2>
+		<h2>워크스페이스 목록</h2>
 		<ul>
 			<c:forEach items="${workspaceList}" var="ws">
 				<li class="ws">
 					<h3><a href="chatMain?crNum=${ws.defaultCrNum}">${ws.wsInfo.name}</a></h3>
-					<h3 class="subService"><a href="projectMain?wNum=${ws.wsInfo.num}">Project</a></h3>
-					<h3 class="subService"><a href="board/list?wNum=${ws.wsInfo.num}">Board</a></h3>
-					<h3 class="subService"><a href="calMonth?wNum=${ws.wsInfo.num}">Calendar</a></h3>
+					<h3 class="subService"><a href="projectMain?wNum=${ws.wsInfo.num}">프로젝트</a></h3>
+					<h3 class="subService"><a href="board/list?wNum=${ws.wsInfo.num}">게시판</a></h3>
+					<h3 class="subService"><a href="calMonth?wNum=${ws.wsInfo.num}">일정관리</a></h3>
 					<a href="#" class="showWsDetail"><i class="fas fa-angle-down"></i></a>
 					<%---------------------------상세보기 버튼 클릭 시 펼쳐질 wsDetail--------------------%>
 					<div class="wsDetail">
