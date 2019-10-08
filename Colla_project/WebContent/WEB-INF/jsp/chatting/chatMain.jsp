@@ -402,7 +402,7 @@ var chatTop = 0;	// chatArea 맨위로 스크롤 >> 과거메시지 로드
 		profileImgDiv.append(imgTag);
 		if(msgInfo.cmType !='systemMsg'){
 			chatMsg.append(profileImgDiv);
-			chatMsg.append("<div class='onlyMsgBox'><div class='name'><p>"+msgInfo.mName
+			chatMsg.append("<div class='onlyMsgBox'><div class='name'><p>"+ (!msgInfo.mName? "(알 수 없음)": msgInfo.mName)
 					+"<span class='date'>"+writeTime
 					+"</span></p></div>"+favorite+"<br><p class='content'>"
 					+ contentStr
