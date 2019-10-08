@@ -422,7 +422,7 @@ var chatTop = 0;	// chatArea 맨위로 스크롤 >> 과거메시지 로드
 					+"</p></div>");
 						
 		}else{
-			chatMsg.append("<div class='systemMsg' align='center'>"+msgInfo.cmContent+"</div>");
+			chatMsg.append("<div class='systemMsg chatMsg' align='center'>"+msgInfo.cmContent+"</div>");
 		}
 		
 		//전역변수인 currDate 와 만들려는 chatMessage의 date가 같지 않으면 날짜 띠를 생성한다
