@@ -187,17 +187,17 @@ public class MemberService {
 	}
 
 	//파일을 해당 경로에 저장
-	public String writeFile(MultipartFile[] profileImg,Member member) {
+	public String writeFile(MultipartFile[] profileImg, Member member) {
 		String path = UPLOAD_PATH + member.getEmail();
 		String fullName = null;
-		UUID uuid = UUID.randomUUID();	
+		UUID uuid = UUID.randomUUID();
 		File folder = new File(path);
-		if(!folder.exists()) {//해당 폴더가 존재하지 않는 경우
-			folder.mkdir();//폴더를 생성한다
+		if (!folder.exists()) {// 해당 폴더가 존재하지 않는 경우
+			folder.mkdir();// 폴더를 생성한다
 		}
-		for(MultipartFile multipartFile : profileImg) {
+		for (MultipartFile multipartFile : profileImg) {
 			fullName = uuid.toString() + "_" + multipartFile.getOriginalFilename();
-			File saveFile = new File(path,fullName);
+			File saveFile = new File(path, fullName);
 			try {
 				multipartFile.transferTo(saveFile);
 			} catch (IllegalStateException | IOException e) {
@@ -207,32 +207,43 @@ public class MemberService {
 		}
 		return fullName;
 	}
-	public byte[] getProfileImg(Member member,HttpServletRequest request) {
-		String path = UPLOAD_PATH + member.getEmail();
-		String profileImgName = member.getProfileImg();
-		File file = new File(path + "/" + profileImgName);
-		if(!file.exists()) {
+
+	public byte[] getProfileImg(Member member, HttpServletRequest request) {
+		String path;
+		String profileImgName;
+		File file;
+		if (member != null) {
+			path = UPLOAD_PATH + member.getEmail();
+			profileImgName = member.getProfileImg();
+			file = new File(path + "/" + profileImgName);
+			if (!file.exists()) {
+				profileImgName = "profileImage.png";
+				path = request.getSession().getServletContext().getRealPath("/WEB-INF/resources/img");
+				file = new File(path + "/" + profileImgName);
+			}
+			
+		}else {
 			profileImgName = "profileImage.png";
 			path = request.getSession().getServletContext().getRealPath("/WEB-INF/resources/img");
-			file = new File(path+"/"+profileImgName);	
+			file = new File(path + "/" + profileImgName);
 		}
-      InputStream in = null;
-      try {
-         in = new FileInputStream(file);
-         return IOUtils.toByteArray(in);
-      } catch (FileNotFoundException e) {
-         e.printStackTrace();
-      } catch (IOException e) {
-         e.printStackTrace();
-      } finally {
-         try {
-            if(in != null) {
-               in.close();
-            }
-         } catch (IOException e) {
-            e.printStackTrace();
-         }
-      }
-      return null;
-   }
+		InputStream in = null;
+		try {
+			in = new FileInputStream(file);
+			return IOUtils.toByteArray(in);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (in != null) {
+					in.close();
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		return null;
+	}
 }
