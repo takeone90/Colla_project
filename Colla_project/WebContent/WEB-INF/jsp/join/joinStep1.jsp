@@ -48,14 +48,11 @@
 			return false;
 		})
 		$("#emailAddress").on("blur", function() {
-
 			var emailAddress = $("#emailAddress").val();
 			if (emailAddress == "") {
 				$("#checkSentence").attr("class","checkSentenceRed");
 				$("#checkSentence").text("이메일을 입력해주세요.");
 			} else {
-// 				var data = $(this).parent().serialize();
-				console.log("2 ajax실행");
 				$.ajax({
 					url : "checkEmailDuplication",
 					data : {"emailAddress":emailAddress},
@@ -71,10 +68,6 @@
 						}
 					},
 					error : function(request, status, error) {
-						alert("blur");
-// 						alert("request:" + request + "\n" + "status:"
-// 								+ status + "\n" + "error:" + error
-// 								+ "\n");
 					}
 				}); //end ajax
 			}
@@ -83,7 +76,7 @@
 		/* 네이버 회원가입 API */
 		var naverLogin = new naver.LoginWithNaverId({
 			clientId : "kIhjMaimMjKNR7gcR2nf",
-			callbackUrl : "${contextPath}/callBackJoin",
+			callbackUrl : "http://localhost:8081/callBackJoin",
 			isPopup : false, /* 팝업을 통한 연동처리 여부 */
 			loginButton : {color: "white", type: 1, height: 35} /* 로그인 버튼의 타입을 지정 */
 		});
@@ -91,27 +84,6 @@
 		naverLogin.init();
 
 		/* 카카오 회원가입 API */
-		Kakao.init('1f6b481e9aa9a7ae0b621fee3692c041'); 
-		Kakao.Auth.createLoginButton({ // 카카오 로그인 버튼을 생성합니다.
-			container : '#kakao-login-btn',
-			success : function(authObj) {
-				Kakao.API.request({
-					url : '/v1/user/me',
-					success : function(res) {
-						$("#email").val(res.kaccount_email);
-						$("#name").val(res.properties.nickname);
-						$("#pw").val("kakaoapipw");
-						calls();
-					},
-					fail : function(error) {
-						alert(JSON.stringify(error));
-					}
-				});
-			},
-			fail : function(err) {
-				alert(JSON.stringify(err));
-			}
-		});
 		$("#kakaoLoginButton").on("click", function() {
 			$("#kakao-login-btn").trigger("click");
 		});
@@ -172,7 +144,7 @@
 						</div><!--파도 end-->
 					</div><!--header end-->		
 					<!--파도 아래 내용-->	
-					<div class="content flex">			
+					<div class="content box1 flex">			
 						<div class="joinBox-Body">
 							<form method="post" id="emailForm">
 								<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"> 
@@ -191,7 +163,31 @@
 								<!-- 네이버 -->
 								<button class="naverLoginButton">네이버<span id="naverIdLogin"></span></button>
 								<!-- 카카오 -->
-								<button id="kakaoLoginButton">카카오<span id="kakao-login-btn"></span><span href="http://developers.kakao.com/logout"></span></button>
+								<button id="kakaoLoginButton">카카오</button>
+								<span id="kakao-login-btn"></span>
+								<script type='text/javascript'>
+								    Kakao.init('1f6b481e9aa9a7ae0b621fee3692c041');
+								    Kakao.Auth.createLoginButton({
+								      container: '#kakao-login-btn',
+								      success: function(authObj) {
+								        Kakao.API.request({
+								          url: '/v2/user/me',
+								          success: function(res) {
+								        	$("#email").val(res.kakao_account.email);
+											$("#name").val(res.properties.nickname);
+											$("#pw").val("kakaoapipw");
+											calls();
+								          },
+								          fail: function(error) {
+								            alert(JSON.stringify(error));
+								          }
+								        });
+								      },
+								      fail: function(err) {
+								        alert(JSON.stringify(err));
+								      }
+								    });
+								</script>	
 							</div>
 						</div>			
 					</div><!--Content ends-->

@@ -89,32 +89,44 @@ public class MemberController {
 	public String showJoinStep1() {
 		return "/join/joinStep1";
 	}
-	
 	@RequestMapping(value="/joinStep2", method = RequestMethod.GET)
 	public String showJoinStep2() {
 		return "/join/joinStep2";
 	}
-	
 	@RequestMapping(value="/joinStep3", method = RequestMethod.GET)
 	public String showJoinStep3() {
 		return "/join/joinStep3";
 	}
-	
 	@RequestMapping(value="/loginForm")
 	public String showLoginForm() {
 		return "/login/loginForm";
 	}
-	
-
-	@RequestMapping(value="/callBackJoin", method = RequestMethod.GET) // 네이버 API 회원가입
-	public String showCallBackJoin() {
-		return "/join/callBackJoin";
+	@RequestMapping(value="/pwReset", method = RequestMethod.GET)
+	public String showPwReset() {
+		return "/login/pwReset";
+	}
+	@RequestMapping(value="/sendResetMail", method = RequestMethod.GET)
+	public String sendResetMail(HttpSession session) {
+		String emailAddress = (String)session.getAttribute("emailAddress");
+		Thread innerTest = new Thread(new inner(emailAddress, session));
+		innerTest.start();
+		return "redirect:joinStep2";
 	}
 	
+	
+	@RequestMapping(value="/callBackJoin", method = RequestMethod.GET) // 네이버 API 회원가입
+	public String showCallBackJoin() {
+		
+		return "/join/callBackJoin";
+	}
 	@RequestMapping(value="/joinMemberAPI", method = RequestMethod.POST) // API 회원가입
 	public String joinMemberAPI(Member member) {
-		memberService.addMember(member);
-		return "redirect:/";
+		if(memberService.getMemberByEmail(member.getEmail()) == null) { //중복 검사
+			memberService.addMember(member);
+			return "redirect:/";
+		} else {
+			return "redirect:/loading?info=duplicatedJoin";
+		}
 	}
 	
 	@RequestMapping(value="/callBackLogin", method = RequestMethod.GET) // 네이버 API 로그인	
@@ -164,14 +176,13 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value="/joinMember", method = RequestMethod.POST)
-	public String joinMember(Member member,HttpSession session) {
+	public String joinMember(Member member, HttpSession session) {
 		boolean result = memberService.addMember(member);
 		String inviteUserEmail = (String)session.getAttribute("inviteUserEmail");
-//		System.out.println("inviteUserEmail : " + inviteUserEmail);
 		if(inviteUserEmail!=null) {
 			int inviteWnum = (Integer)session.getAttribute("inviteWnum");
 			if(member.getEmail().equals(inviteUserEmail) && session.getAttribute("inviteWnum")!=null) {
-				//이게 차있다면 초대받은사람임
+				//이게 차있다면 초대받은 사람임
 				//wsmember로 추가
 				wsmService.addWsMember(inviteWnum, member.getNum());
 				int crNum = (wsmService.getDefaultChatRoomByWnum(inviteWnum)).getCrNum();
@@ -261,7 +272,6 @@ public class MemberController {
 			) {
 //		System.out.println("중복아이디 로그아웃 메시지 전송");
 		smt.convertAndSend("/category/loginMsg/"+mNum,"duplicated");
-		
 		return "return_duplicated";
 	}
 //	private HttpSession deleteSessionFromConList(String email) {

@@ -27,9 +27,12 @@
 		$("#memberInfoModal").fadeIn(100);
 	}
 	$(function(){
-		if($("#pageType").val()!="workspace"){
+		if($("#currWnum").val()!="" && $("#pageType").val()!="workspace"){
 			loadChatList();
 			loadProjectList();	
+		}
+		if($("#currWnum").val()==""){
+			$(".navListDiv").hide();
 		}
 		
 		var pageType = $("#pageType").val();
@@ -177,12 +180,12 @@
 			<ul class="chatList">
 			</ul>
 		</div>
-		<div id="boardDiv">
+		<div id="boardDiv" class="navListDiv">
 			<h3>
 			<a href="${contextPath}/board/list?wNum=${sessionScope.currWnum}">Board</a>
 			</h3>
 		</div>
-		<div id="calendarDiv">
+		<div id="calendarDiv" class="navListDiv">
 			<h3>
 			<a href="${contextPath}/calMonth?wNum=${sessionScope.currWnum}">Calendar</a>
 			</h3>

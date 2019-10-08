@@ -5,13 +5,13 @@
     color: white;
 }
 #wsBodyContainer h2{
-	color : #403C39;
-	font-size: 2.5em;
+	color : #424c73;
+	font-size: 1.7em;
 	font-weight: bolder;
 	margin-bottom: 30px;
 }
 #wsBodyContainer h3{
-	color: #403C39;
+	color: #424c73;
     font-size: 21px;
     font-weight: 500;
 }
@@ -38,6 +38,7 @@
 	background-color: #E5675A;
 }
 .todo{
+	position: relative;
 	display: inline-block;
 	background-color: white;
     border: 1px solid #d1d1d1;
@@ -48,7 +49,7 @@
     margin-bottom: 3px;
 }
 .todo:hover{
-	background-color: #f5f5f5;
+	box-shadow: 0px 0px 6px 1px rgba(33, 33, 33, 0.1);
 }
 #currProjectProgress{
 	margin-top : 10px;
@@ -59,7 +60,9 @@
     position: relative;
     font-size: 10px;
     vertical-align: super;
-    left: 15%;
+    left: 2%;
+    top: 7px;
+   	color: #717488;
 }
 .tdDate p{
 	display: inline-block;
@@ -67,9 +70,11 @@
 
 
 .tdInfo{
-	margin-left: 20px;
-    margin-top: 5px;
+	margin-left: 6px;
+    margin-top: 8px;
+    margin-right: 0px;
     margin-bottom: 8px;
+    width: 63%;
 }
 .tdInfo h4{
 	margin-bottom:10px;
@@ -102,15 +107,31 @@
 }
 .todoInnerBtn{
 	display: inline-block;
-    position: relative;
-    left: calc(100% - 100px);
-    bottom: 8px;
+    position: absolute;
+    bottom: 4px;
+    right: 4px;
+    width: 84px;
 }
-    
-.todoInnerBtn button{
-    width: 51px;
-    font-size: 12px;
+.isComplete{
+	
+	color: #bdc3c3;
+	text-align: center;
+    width: 75px;
+    height: 15px;
+    font-size: 11px;
+    margin-bottom: 4px;
+    padding-top: 6px;
     padding: 4px;
+    background-color: #fafafa;
+    border-radius: 2px;
+    border: 0.5px solid #d4d4d4;
+    cursor: pointer;
+}
+.todoInnerBtn button{
+	color: #504c4c;
+    width: 40px;
+    font-size: 11px;
+    padding: 3px;
     background-color: #fafafa;
     border-radius: 2px;
     border: 0.5px solid #d4d4d4;
@@ -118,13 +139,6 @@
 }
 .todoInnerBtn button:hover{
 	background-color: #e6e6e6;
-}
-.isComplete{
-	cursor: pointer;
-    width: 15px;
-    height: 15px;
-    border-radius: 50%;
-    display: inline-block;
 }
 #backToProjectMain{
 	display: inline-block;

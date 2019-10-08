@@ -10,8 +10,8 @@
     margin-bottom: 12px;
 }
 #wsBodyContainer h2 {
-	color: #5b6178;
-	font-size: 2.5em;
+	color: #424c73;
+	font-size: 1.7em;
 	font-weight: bolder;
 	margin-bottom: 30px;
 }
@@ -20,9 +20,11 @@
 	color: #4f5361;
 	font-size: 23px;
 	font-weight: 800;
+	margin-left: 13px;
 }
 
 .project {
+	margin-bottom : 21px;
 	width: calc(100% - 58px);
 	border-bottom: 1px solid #dedede;
 	padding: 15px 21px 15px 21px;
@@ -33,13 +35,16 @@
 }
 
 .projectDetail {
-	margin-top: 13px;
-	margin-bottom: 8px;
+	margin-bottom: 18px;
+    margin-top: 2px;
+    margin-left: 5px;
+
 }
 
 .projectInnerBtnBox {
 	display: inline-block;
     float: right;
+    margin-top: 11px;
 }
 
 .projectInnerBtnBox a {
@@ -62,21 +67,26 @@
 .projectInnerBtnBox a:hover{
 	background-color: #eee;
 }
+.progress-detail{
+	display: inline-block;
+    height: 61px;
+}
 .progress-member {
+	margin-top : 10px;
 	border: 1px solid #eee;
 	padding: 10px;
-	margin-bottom: 5px;
+	border-radius: 4px;
 }
 
 .progress {
-	display: inline-block;
-	vertical-align: top;
-	font-size: 12px;
+	margin-left: 4px;
+    display: inline-block;
+    font-size: 12px;
 }
 
 .projectMember {
 	height: 100%;
-    margin-left: 35px;
+    margin-left: 24px;
     padding: 5px;
     display: inline-block;
     position: relative;
@@ -118,7 +128,10 @@
 }
 
 .projectDate{
-	margin-top:5px;
+	display: inline-block;
+    margin-top: 5px;
+    margin-left: 12px;
+    color: #87817c;
 }
 .projectDate p {
 	display: inline-block;

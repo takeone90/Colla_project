@@ -88,7 +88,7 @@
 	<input type="hidden" value="mypage" id="pageType">
 		<div id="wsBodyContainer">
 			<h3>마이페이지</h3>
-			<h4>회원정보 관리</h4>
+			<h4>맞춤 설정</h4>
 			<div class="myPageInner">
 				<div class="myPageContent">
 					<div class="myPageTitle">

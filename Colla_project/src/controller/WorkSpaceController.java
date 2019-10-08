@@ -220,7 +220,7 @@ public class WorkSpaceController {
 				ChatMessage cm = smService.joinChatRoom(crNum, member);
 				smt.convertAndSend("/category/systemMsg/"+ crNum, cm);
 				wiService.removeWorkspaceInvite(userEmail, wNum);
-				if(user.getEmail().equals(userEmail)) {
+				if(user!=null && user.getEmail().equals(userEmail)) {
 					//회원이고 현재 사용자면
 					return "redirect:workspace";
 				}else {

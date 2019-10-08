@@ -14,7 +14,7 @@
 	<div id="wsBody">
 	<input type="hidden" value="mypage" id="pageType">
 		<div id="wsBodyContainer">
-			<h3>라이선스</h3>
+			<h3>마이페이지</h3>
 			<h4>라이선스 관리</h4>
 			<div class="myPageInner">
 				<div class ="myPageAccount">

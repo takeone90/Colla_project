@@ -61,6 +61,8 @@ public class TodoController {
 			thisProjectTdList.add(todoMap);
 		}
 		Project project = pService.getProject(pNum);
+		int wNum = project.getwNum();
+		session.setAttribute("currWnum",wNum);
 		model.addAttribute("pName", project.getpName());
 		model.addAttribute("tList", tList); //todo 리스트 입니다...
 		model.addAttribute("pmList", pmList);
