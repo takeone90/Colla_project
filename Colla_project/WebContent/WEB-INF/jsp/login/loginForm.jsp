@@ -129,7 +129,7 @@ function checkPw(){
 									<h4>PASSWORD</h4>
 									<input type="password" name="m_pw" placeholder="비밀번호를 입력해주세요." id="pw">
 									<span id="checkPwText"></span>
-									<a class="pwForget" href='${contextPath}/pwReset'>비밀번호를 잊어버리셨나요?</a>
+									<a class="pwForget" href='${contextPath}/pwReset1'>비밀번호를 잊어버리셨나요?</a>
 								</div>
 								<div>
 									<span id="loginResultText">

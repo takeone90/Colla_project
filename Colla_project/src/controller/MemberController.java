@@ -102,22 +102,23 @@ public class MemberController {
 	public String showLoginForm() {
 		return "/login/loginForm";
 	}
-	@RequestMapping(value="/pwReset", method = RequestMethod.GET)
+	@RequestMapping(value="/pwReset1", method = RequestMethod.GET)
 	public String showPwReset() {
-		return "/login/pwReset";
+		return "/login/pwReset1";
+	}
+	@RequestMapping(value="/pwReset2", method = RequestMethod.GET)
+	public String showPwReset2() {
+		return "/login/pwReset2";
 	}
 	@RequestMapping(value="/sendResetMail", method = RequestMethod.GET)
 	public String sendResetMail(HttpSession session) {
 		String emailAddress = (String)session.getAttribute("emailAddress");
-		Thread innerTest = new Thread(new inner(emailAddress, session));
+		Thread innerTest = new Thread(new inner(emailAddress, session, "resetCode"));
 		innerTest.start();
-		return "redirect:joinStep2";
+		return "redirect:pwReset2";
 	}
-	
-	
 	@RequestMapping(value="/callBackJoin", method = RequestMethod.GET) // 네이버 API 회원가입
 	public String showCallBackJoin() {
-		
 		return "/join/callBackJoin";
 	}
 	@RequestMapping(value="/joinMemberAPI", method = RequestMethod.POST) // API 회원가입
@@ -145,11 +146,21 @@ public class MemberController {
 			return false; //중복X
 		}
 	}
+	@ResponseBody
+	@RequestMapping(value="/checkEmailDuplicationPwReset", method = RequestMethod.POST)
+	public boolean checkEmailDuplicationPwReset(String emailAddress, HttpSession session) {		
+		if(memberService.getMemberByEmail(emailAddress) != null) {
+			session.setAttribute("emailAddress", emailAddress);
+			return true; //중복O
+		} else {
+			return false; //중복X
+		}
+	}
 
 	@RequestMapping(value="/sendVerifyMail", method = RequestMethod.GET)
 	public String sendVerifyMail(HttpSession session) {
 		String emailAddress = (String)session.getAttribute("emailAddress");
-		Thread innerTest = new Thread(new inner(emailAddress, session));
+		Thread innerTest = new Thread(new inner(emailAddress, session, "verifyCode"));
 		innerTest.start();
 		return "redirect:joinStep2";
 	}
@@ -157,7 +168,7 @@ public class MemberController {
 	@RequestMapping(value="/resendVerifyMail", method = RequestMethod.GET)
 	public String resendVerifyMail(HttpSession session) {
 		String emailAddress = (String)session.getAttribute("emailAddress");
-		Thread innerTest = new Thread(new inner(emailAddress, session));
+		Thread innerTest = new Thread(new inner(emailAddress, session, "verifyCode"));
 		innerTest.start();
 		return "redirect:joinStep2";
 	}
@@ -231,10 +242,12 @@ public class MemberController {
 	//메일발송과 화면전환 처리를 위한 스레드 
 	public class inner implements Runnable {
 		String emailAddress;
+		String type;
 		HttpSession session;
 		HttpServletRequest request;
-		public inner(String emailAddress, HttpSession session) {
+		public inner(String emailAddress, HttpSession session, String type) {
 			this.emailAddress = emailAddress;
+			this.type = type;
 			this.session = session;
 			this.request = request;
 		}
@@ -270,7 +283,7 @@ public class MemberController {
 			"				<p style=\"font-size: 14px; font-weight: 300; letter-spacing: 0.025em; line-height: 1.75; color: #767676; display: inline-block;\">© 2019 NeverLose systems inc. All rights reserved.</p>\r\n" + 
 			"			</div>\r\n" + 
 			"		</div>\r\n" + 
-			"	</div>","verifyCode");
+			"	</div>", type);
 			if(tmpCode != null) {
 				session.setAttribute("verifyCode", tmpCode);
 			}
