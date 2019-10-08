@@ -22,11 +22,16 @@
 <body>
 	<script>
 		var info = "${param.info}";
+		console.log(info);
 		$(function(){
 			if(info == "duplicatedLogin"){
 				window.alert("동일한 아이디로 로그인되어 로그아웃합니다.");
 				window.location.href="/loginForm";
+			} else if(info == "duplicatedJoin") {
+				window.alert("이미 회원가입된 아이디입니다.");
+				window.location.href="/loginForm";
 			} else {
+				window.alert("메인으로 이동합니다.");
 				window.location.href="/";
 			}
 		});

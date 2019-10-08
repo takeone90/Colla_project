@@ -60,7 +60,7 @@
   position:relative;
   text-align:center;
   background-color: white;
-  height: 440px;
+  height: 375px;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
 }
@@ -120,6 +120,9 @@
 	padding: 5px;
 	margin: 0px 10px 5px 10px;
 }
+.pwDiv {
+	margin-bottom: 15px;
+}
 .loginBox-Body input:not(.loginFormButton) {
 	padding: 5px;
 	margin: 8px 0px 5px 0px;
@@ -152,23 +155,30 @@
 #checkPwText,
 #loginResultText {
 	text-align: right;
-	font-size: 13px;
+	font-size: 12px;
 	color: red;
 }
 #loginResultText {
-	margin-left: 15px;
+/* 	margin-left: 15px; */
+/* 	display: inline-flex; */
+}
+.pwForget {
+	float: right;
+    font-size: 12px;
 }
 /* 로그인 버튼 */
 #innerBtn {
 	margin: 10px 10px 0px 10px;
     text-align: center;
+    height: 50px;
 }
 #innerBtn button {
 	width: 32%;
     border-radius: 5px;
     height: 35px;
-    font-weight: 800;
-    cursor:pointer;
+    font-weight: 200;
+    font-size: 12px;
+    cursor: pointer;
 }
 /* 구글 버튼 */
 #googleLoginButton {
@@ -247,5 +257,6 @@
 }
 #kakao-login-btn > img {
 	width: 100%;
-	visibility: hidden;	
+	display: none;
+	
 }
