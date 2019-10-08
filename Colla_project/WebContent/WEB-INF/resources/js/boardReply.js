@@ -115,7 +115,7 @@ function loadReply(){
 				$.each(list, function(index,item){
 					let date = new Date(item.regdate);
 					let li = '<li class="clearFix">';
-					li += '<div class="replyImg profileImg" onclick="showProfileInfoModal('+item.mNum+')"><img src="${contextPath}/showProfileImg?num='+item.mNum+'"></div>';
+					li += '<div class="replyImg profileImg" onclick="showProfileInfoModal('+item.mNum+')"><img src="/showProfileImg?num='+item.mNum+'"></div>';
 					li += '<div class="replyDetail">';
 					li += '<p class="replyAuthor" data-rNum="'+item.rNum+'">';
 					li += '<span class="replyName">'+item.mName+'</span> ';
