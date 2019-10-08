@@ -83,7 +83,7 @@
 		/* 네이버 회원가입 API */
 		var naverLogin = new naver.LoginWithNaverId({
 			clientId : "kIhjMaimMjKNR7gcR2nf",
-			callbackUrl : "${contextPath}/callBackJoin",
+			callbackUrl : "http://localhost:8081/callBackJoin",
 			isPopup : false, /* 팝업을 통한 연동처리 여부 */
 			loginButton : {color: "white", type: 1, height: 35} /* 로그인 버튼의 타입을 지정 */
 		});
@@ -91,30 +91,30 @@
 		naverLogin.init();
 
 		/* 카카오 회원가입 API */
-		Kakao.init('1f6b481e9aa9a7ae0b621fee3692c041'); 
-		Kakao.Auth.createLoginButton({ // 카카오 로그인 버튼을 생성합니다.
-			container : '#kakao-login-btn',
-			success : function(authObj) {
-				Kakao.API.request({
-					url : '/v1/user/me',
-					success : function(res) {
-						$("#email").val(res.kaccount_email);
-						$("#name").val(res.properties.nickname);
-						$("#pw").val("kakaoapipw");
-						calls();
-					},
-					fail : function(error) {
-						alert(JSON.stringify(error));
-					}
-				});
-			},
-			fail : function(err) {
-				alert(JSON.stringify(err));
-			}
-		});
-		$("#kakaoLoginButton").on("click", function() {
-			$("#kakao-login-btn").trigger("click");
-		});
+// 		Kakao.init('1f6b481e9aa9a7ae0b621fee3692c041'); 
+// 		Kakao.Auth.createLoginButton({ // 카카오 로그인 버튼을 생성합니다.
+// 			container : '#kakao-login-btn',
+// 			success : function(authObj) {
+// 				Kakao.API.request({
+// 					url : '/v1/user/me',
+// 					success : function(res) {
+// 						$("#email").val(res.kaccount_email);
+// 						$("#name").val(res.properties.nickname);
+// 						$("#pw").val("kakaoapipw");
+// 						calls();
+// 					},
+// 					fail : function(error) {
+// 						alert(JSON.stringify(error));
+// 					}
+// 				});
+// 			},
+// 			fail : function(err) {
+// 				alert(JSON.stringify(err));
+// 			}
+// 		});
+// 		$("#kakaoLoginButton").on("click", function() {
+// 			$("#kakao-login-btn").trigger("click");
+// 		});
 	}); //end onload
 	/* 구글 회원가입 API */
 
