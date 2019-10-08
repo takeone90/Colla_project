@@ -167,6 +167,7 @@
 #boardInner #boardDetail #content{
 	min-height: 120px;
 	padding: 20px 30px;
+	line-height:1rem;
 }
 #boardInner #boardDetail .btns{
 	text-align:right;
