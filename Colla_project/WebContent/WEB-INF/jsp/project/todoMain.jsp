@@ -8,24 +8,6 @@
 <title>Todo List</title>
 <script>
 	$(function(){
-// 		$("#todoList").disableSelection();
-// 		$("#todoList").sortable({
-// 				update: function(event, ui) {
-// 	            var result = $(this).sortable('toArray');
-// 	            var pNum = $("#pNum").val();
-// 		            $.ajax({
-// 		            	url : "${contextPath}/resortingTodo",
-// 		            	data : {"priorityArray":result,"pNum":pNum},
-// 		            	success : function(){
-// 		            	}
-// 		            });
-// 	            }
-// 		});
-		
-		$(".isComplete[data-isComplete=1]").attr("style","background-color:#E5675A");
-		$(".isComplete[data-isComplete=0]").attr("style","background-color:#e0e0e0");
-		
-		
 		$("#addTodo").on("click",function(){
 			$("#addTodoModal").fadeIn(300);
 		});
@@ -53,25 +35,10 @@
 			return false;
 		});
 	});<%--onload function end--%>
-	
-	function checkComplete(tdNum){
-		var isCompleteDiv = $(".isComplete[data-tdNum="+tdNum+"]");
-		$.ajax({
-			url : "${contextPath}/toggleComplete",
-			data : {"tdNum":tdNum},
-			dataType : "json",
-			success : function(completeAndProgress){
-				var isComplete = completeAndProgress.isComplete;
-				var progress = completeAndProgress.progress;
-				if(isComplete==1){
-					isCompleteDiv.css("backgroundColor","#E5675A");//눌러서 바뀐색깔임. 완료한 경우
-					
-				}else{
-					isCompleteDiv.css("backgroundColor","#ebebeb");
-				}
-				$("#progressBar").val(progress);
-			}
-		});
+	function removeTodo(tdNum){
+		if(confirm("할일을 삭제하시겠습니까?")==true){
+			location.href="removeTodo?tdNum="+tdNum;
+		}
 	}
 </script>
 </head>
@@ -84,7 +51,7 @@
 		<input type="hidden" value="${pNum}" id="pNum">
 		<input type="hidden" value="${sessionScope.currWnum}" id="currWnum">
 		<div id="wsBodyContainer"> 
-		<h2 style="display:inline-block;">${pName} </h2><h3 style="display:inline-block;margin-left:14px;">Todo List</h3>
+		<h2 style="display:inline-block;">${pName} </h2><h3 style="display:inline-block;margin-left:14px;"></h3>
 		<div id="todoArea">
 			<div id="currProjectProgress" align="left">
 				진행률  <progress id="progressBar" value="${progress}" max="100"></progress>
@@ -97,6 +64,7 @@
 					<li style="text-align: center; margin-top: 136px; color: #9c9998;">할 일 추가 버튼으로 Todo를 추가하세요.</li>
 				</c:if>
 				
+				<c:if test="${!empty tList}">
 				<c:forEach items="${thisProjectTdList}" var="onePm">
 					<li class="onePmMember" data-mNum="${onePm.mNum}">
 						<div class="tdMemberInfo">
@@ -108,9 +76,44 @@
 						<ul class="oneMemberTodoList">
 						<c:forEach items="${onePm.oneMemberTdList}" var="td" varStatus="s">
 						<li class="todo" id="${td.tdNum}">
-						<div class="isComplete" data-tdNum="${td.tdNum}" data-isComplete="${td.isComplete}"onclick="checkComplete(${td.tdNum});">
-							<input type="hidden" value="${td.isComplete}">
-						</div>
+						<script>
+						$(function(){
+							$(".isComplete[data-isComplete=1]").css({
+								color:"#31b377",
+								borderColor:"#31b377"
+							});
+							$(".isComplete[data-isComplete=0]").css({
+								color:"#bdc3c3",
+								borderColor:"#bdc3c3"
+							});
+						});
+							function checkComplete(tdNum){
+								var isCompleteDiv = $(".isComplete[data-tdNum="+tdNum+"]");
+								$.ajax({
+									url : "${contextPath}/toggleComplete",
+									data : {"tdNum":tdNum},
+									dataType : "json",
+									success : function(completeAndProgress){
+										var isComplete = completeAndProgress.isComplete;
+										var progress = completeAndProgress.progress;
+										if(isComplete==1){
+											isCompleteDiv.css({
+												color:"#31b377",
+												borderColor:"#31b377"
+											});//눌러서 바뀐색깔임. 완료한 경우
+											
+										}else{
+											isCompleteDiv.css({
+												color:"#bdc3c3",
+												borderColor:"#bdc3c3"
+											});
+										}
+										$("#progressBar").val(progress);
+									}
+								});
+							}
+						</script>
+						
 						<div class="tdDate">
 							<p>
 							<fmt:formatDate value="${td.tdStartDate}" pattern="yyyy.MM.dd" />
@@ -129,15 +132,19 @@
 							</div>
 						</div>
 						<div class="todoInnerBtn" align="right">
+							<div class="isComplete" data-tdNum="${td.tdNum}" data-isComplete="${td.isComplete}"onclick="checkComplete(${td.tdNum});">
+							<input type="hidden" value="${td.isComplete}">
+							<i class="fas fa-check"></i>&nbsp;Complete
+							</div>
 							<button class="modifyTodoModalOpen" data-tdNum="${td.tdNum}">수정</button>
-							<button onclick="location.href='removeTodo?tdNum=${td.tdNum}'">삭제</button>
+							<button onclick="removeTodo(${td.tdNum});">삭제</button>
 						</div>
 						</li><%--end todo --%>
 						</c:forEach>
 						</ul>
 					</li><%-- end onePmMember --%>
 				</c:forEach>
-			
+			</c:if>
 			</ul><%-- end todoList --%>
 			<script>
 	 		$(".oneMemberTodoList").sortable({

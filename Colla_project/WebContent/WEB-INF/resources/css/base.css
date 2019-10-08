@@ -70,15 +70,15 @@ body .btn:hover{
 	margin:0 auto;
 }
 #wsBodyContainer h3{
-	color: #403C39;
-	font-size: 40px;
+	color: #10344a;
+	font-size: 1.7em;
 	font-weight:900;
 }
 #wsBodyContainer h4{
 	color: #E5675A;
-	font-size: 20px;
+	font-size: 16px;
 	font-weight: 700;
-	margin-top: 15px;
+	margin-top: 8px;
 }
 
 .attachModal .header{

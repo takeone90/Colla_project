@@ -81,7 +81,7 @@ $(function() {
 								<div class="answer">
 									<div class="a">A</div>
 									<div class="answer-detail" style="width: 478px;">
-									채팅방 오른쪽에 있는 슬라이드 메뉴를 열어서 즐겨찾기,멤버관리, 검색 등 다양한 기능을 사용하실 수 있습니다.
+									마이페이지의 라이선스 관리 메뉴를 이용하여 라이선스를 구매하실 수 있습니다.
 									</div>
 								</div> <!-- 내용 -->
 							</div>
@@ -92,7 +92,7 @@ $(function() {
 								<div class="answer">
 									<div class="a">A</div>
 									<div class="answer-detail" style="width: 478px;">
-									채팅방 오른쪽에 있는 슬라이드 메뉴를 열어서 즐겨찾기,멤버관리, 검색 등 다양한 기능을 사용하실 수 있습니다.
+									글쓰기 상단에 게시글 타입을 설정하여 공지글과 익명글, 일반글 로 분류할 수 있습니다.
 									</div>
 								</div> <!-- 내용 -->
 							</div>
@@ -103,7 +103,7 @@ $(function() {
 								<div class="answer">
 									<div class="a">A</div>
 									<div class="answer-detail" style="width: 478px;">
-									채팅방 오른쪽에 있는 슬라이드 메뉴를 열어서 즐겨찾기,멤버관리, 검색 등 다양한 기능을 사용하실 수 있습니다.
+									캘린더 화면의 일정추가 버튼은 물론이고, 달력의 빈곳을 클릭하거나 드래그하여 일정을 추가할 수 있습니다.
 									</div>
 								</div> <!-- 내용 -->
 							</div>
@@ -114,7 +114,7 @@ $(function() {
 								<div class="answer">
 									<div class="a">A</div>
 									<div class="answer-detail" style="width: 478px;">
-									채팅방 오른쪽에 있는 슬라이드 메뉴를 열어서 즐겨찾기,멤버관리, 검색 등 다양한 기능을 사용하실 수 있습니다.
+									모든 OS에서 구동할 수 있습니다.
 									</div>
 								</div> <!-- 내용 -->
 							</div>
@@ -125,7 +125,7 @@ $(function() {
 								<div class="answer">
 									<div class="a">A</div>
 									<div class="answer-detail" style="width: 478px;">
-									채팅방 오른쪽에 있는 슬라이드 메뉴를 열어서 즐겨찾기,멤버관리, 검색 등 다양한 기능을 사용하실 수 있습니다.
+									마이페이지의 개인정보 보호 탭으로 이동하여 탈퇴하기 버튼을 누르시면 됩니다.
 									</div>
 								</div> <!-- 내용 -->
 							</div>
@@ -138,7 +138,7 @@ $(function() {
 								<div class="answer">
 									<div class="a">A</div>
 									<div class="answer-detail" style="width: 478px;">
-									채팅방 오른쪽에 있는 슬라이드 메뉴를 열어서 즐겨찾기,멤버관리, 검색 등 다양한 기능을 사용하실 수 있습니다.
+									채팅방 오른쪽의 슬라이드 메뉴를 열어서 즐겨찾기 탭을 선택하시면 됩니다.
 									</div>
 								</div> 
 							</div>
@@ -149,7 +149,7 @@ $(function() {
 								<div class="answer">
 									<div class="a">A</div>
 									<div class="answer-detail" style="width: 478px;">
-									채팅방 오른쪽에 있는 슬라이드 메뉴를 열어서 즐겨찾기,멤버관리, 검색 등 다양한 기능을 사용하실 수 있습니다.
+									라이선스를 구매한 당일은 100% 환불이 가능하며, 이후 사용일과 잔여일에 따라 삭감 환불이 진행됩니다.
 									</div>
 								</div> 
 							</div>
@@ -160,7 +160,7 @@ $(function() {
 								<div class="answer">
 									<div class="a">A</div>
 									<div class="answer-detail" style="width: 478px;">
-									채팅방 오른쪽에 있는 슬라이드 메뉴를 열어서 즐겨찾기,멤버관리, 검색 등 다양한 기능을 사용하실 수 있습니다.
+									라이선스를 취소하면 환불절차가 진행됩니다. 라이선스를 구매한 당일은 100% 환불이 가능하며, 이후 사용일과 잔여일에 따라 삭감 환불이 진행됩니다.
 									</div>
 								</div> 
 							</div>
@@ -171,7 +171,7 @@ $(function() {
 								<div class="answer">
 									<div class="a">A</div>
 									<div class="answer-detail" style="width: 478px;">
-									채팅방 오른쪽에 있는 슬라이드 메뉴를 열어서 즐겨찾기,멤버관리, 검색 등 다양한 기능을 사용하실 수 있습니다.
+									COLLA는 중복로그인을 방지하여 하나의 계정은 한 PC에서만 이용 가능합니다.
 									</div>
 								</div> 
 							</div>
@@ -182,7 +182,7 @@ $(function() {
 								<div class="answer">
 									<div class="a">A</div>
 									<div class="answer-detail" style="width: 478px;">
-									채팅방 오른쪽에 있는 슬라이드 메뉴를 열어서 즐겨찾기,멤버관리, 검색 등 다양한 기능을 사용하실 수 있습니다.
+									워크스페이스 메인화면의 회원초대 기능을 이용하여 초대메일을 발송할 수 있습니다.
 									</div>
 								</div> 
 							</div>
