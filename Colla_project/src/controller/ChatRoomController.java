@@ -179,15 +179,6 @@ public class ChatRoomController {
 		}
 		return "redirect:chatMain?crNum=" + crNum;
 	}
-	/*미경
-	public void sendSystemMsg(int crNum, Member member, int wNum) { 
-		wsmService.getDefaultChatRoomByWnum(wNum);
-		int cmNum = cmService.addChatMessage(crNum, -1, member.getName() + " 님이 채팅에 참여하셨습니다.", "systemMsg");
-		ChatMessage cm = cmService.getSystemMessageByCmNum(cmNum);
-		smt.convertAndSend("/category/systemMsg/"+ crNum, cm);
-		return;
-	}
-	*/
 	
 	@ResponseBody
 	@RequestMapping("/showMemberListInChatRoom")
@@ -333,13 +324,5 @@ public class ChatRoomController {
 		smt.convertAndSend("/category/systemMsg/"+ crNum, cm);
 		return "redirect:workspace";
 	}
-	/*미경
-	public void sendMsgExitChatRoom(int crNum, Member member) {
-		int cmNum = cmService.addChatMessage(crNum, -1, member.getName() + " 님이 채팅에서 나가셨습니다.", "systemMsg");
-		ChatMessage cm = cmService.getSystemMessageByCmNum(cmNum);
-		smt.convertAndSend("/category/systemMsg/"+ crNum, cm);
-		return;
-	}
-	*/
-	
+
 }
