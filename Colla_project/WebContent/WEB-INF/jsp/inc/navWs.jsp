@@ -144,6 +144,7 @@
 			</form>
 		</div>
 		<select name="currWorkspace" id="workspaceSelector">
+			<option value="" selected disabled hidden>워크스페이스를 선택하세요</option>
 		<c:forEach items="${sessionScope.workspaceList}" var="ws">
 			<option class="wsSelectOption" value="${contextPath}/defaultChatMain?wNum=${ws.wsInfo.num}" ${sessionScope.currWnum eq ws.wsInfo.num?'selected':''}>${ws.wsInfo.name}</option>
 		</c:forEach>
@@ -192,7 +193,7 @@
 		</div>
 		<div id="mainDiv">
 			<h3>
-			<a href="${contextPath}/"><i class="fas fa-angle-left"></i> Main</a>
+			<a href="${contextPath}/"><i class="fas fa-angle-left"></i> 메인화면</a>
 			</h3>
 		</div>
 		

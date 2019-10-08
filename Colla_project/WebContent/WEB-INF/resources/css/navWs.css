@@ -92,20 +92,20 @@
 	color: #E5675A;
 }
 #myChatList h3{
-	font-size : 20px;
-	font-weight : bolder;
+	font-size: 16px;
+    font-weight: 500;
 	margin-left: 11px;
 	padding:0 8px 5px 0px;
 }
 #boardDiv h3,#calendarDiv h3{
-	font-size : 20px;
-	font-weight : bolder;
-	padding:0 25px 5px 0px;
-	margin-left: 11px;
+	font-size: 16px;
+    font-weight: 500;
+    padding: 0 25px 6px 0px;
+    margin-left: 11px;
 }
 #projectDiv h3{
-	font-size : 20px;
-	font-weight : bolder;
+	font-size: 16px;
+    font-weight: 500;
     padding: 0 8px 5px 0px;
     margin-left: 11px;
 }
@@ -117,7 +117,7 @@
     left: 28px;
 }
 #mainDiv a{
-	font-size: 16px;
+	font-size: 14px;
     color: #769dad;
 }
 #mainDiv a:hover{
@@ -127,14 +127,14 @@
     padding-top: 5px;
 }
 #myChatList ul li,#projectDiv ul li{
-	transition:color 0.2s;
-	color:#CCCBCA;
-	padding:10px 0px 10px 20px;
-	font-size:14px;
+    color: #cfd4e4;
+    padding: 10px 0px 10px 20px;
+    font-weight: 200;
+    font-size: 13px;
 }
 #myChatList ul li.currChat, #projectDiv ul li.currProject{
 	background-color:#E5675A;
-	font-weight: bolder;
+	font-weight: 500;
 	color:#fff;
 }
 #myChatList ul li:hover,#projectDiv ul li:hover{
@@ -154,10 +154,10 @@
 	width: 90%;
     padding: 7px;
     flex-flow: wrap-reverse;
-    font-size: 13px;
+    font-size: 11px;
     font-weight: 300;
     color: white;
-    background-color: #5D829E;
+    background-color: #5b8cb154;
     border: none;
     border-radius: 3px;
     margin-top: 23px;
