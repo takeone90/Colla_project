@@ -125,19 +125,22 @@ function checkPw(){
 									<input type="text" name="m_email" placeholder="이메일을 입력해주세요." id="email">
 									<span id="checkEmailText"></span>
 								</div>
-								<div>
+								<div class="pwDiv">
 									<h4>PASSWORD</h4>
 									<input type="password" name="m_pw" placeholder="비밀번호를 입력해주세요." id="pw">
 									<span id="checkPwText"></span>
+									<a class="pwForget" href='${contextPath}/pwReset'>비밀번호를 잊어버리셨나요?</a>
 								</div>
-								<span id="loginResultText">
-									<c:if test='${param.login eq "false"}'>
-										로그인 후 이용하세요.
-									</c:if>
-									<c:if test='${param.login eq "fail"}'>
-										아이디 또는 비밀번호를 다시 확인해주세요.
-									</c:if>
-								</span>
+								<div>
+									<span id="loginResultText">
+										<c:if test='${param.login eq "false"}'>
+											로그인 후 이용하세요.
+										</c:if>
+										<c:if test='${param.login eq "fail"}'>
+											아이디 또는 비밀번호를 다시 확인해주세요.
+										</c:if>
+									</span>
+								</div>
 								<div>
 									<input type="submit" value="로그인" class="loginFormButton">
 								</div>
@@ -147,11 +150,11 @@ function checkPw(){
 							</form>
 							<div id="innerBtn">
 								<!-- 구글 -->
-								<button id="googleLoginButton">구글<span class="g-signin2" data-width="90" data-height="30" data-onsuccess="onSignIn"></span></button>
+								<button id="googleLoginButton">구글 로그인<span class="g-signin2" data-width="90" data-height="30" data-onsuccess="onSignIn"></span></button>
 								<!-- 네이버 -->
-								<button class="naverLoginButton">네이버<span id="naverIdLogin"></span></button>
+								<button class="naverLoginButton">네이버 로그인<span id="naverIdLogin"></span></button>
 								<!-- 카카오 -->
-								<button id="kakaoLoginButton">카카오</button>
+								<button id="kakaoLoginButton">카카오 로그인</button>
 								<span id="kakao-login-btn"></span>
 							    <script type='text/javascript'>
 								    Kakao.init('1f6b481e9aa9a7ae0b621fee3692c041');
@@ -179,7 +182,6 @@ function checkPw(){
 							</div>
 						</div>
 					</div><!--Content ends-->
-					
 					<span href="http://developers.kakao.com/logout"></span>
 				</div>
 			</section>

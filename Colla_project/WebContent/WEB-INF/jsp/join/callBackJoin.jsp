@@ -5,24 +5,24 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>NaverLoginSDK</title>
-<style>
-	#loadingImg{
-		margin:0 auto;
-		width: 300px;
-		position: fixed;
-		top:35%;
-		left:50%;
-		margin-left:-150px;
-		margin-top:-225px;
-	}
-	img{
-		display:block; 
-		width:100%;
-	}
-</style>
+	<style>
+		#loadingImg{
+			margin:0 auto;
+			width: 300px;
+			position: fixed;
+			top:35%;
+			left:50%;
+			margin-left:-150px;
+			margin-top:-225px;
+		}
+		img{
+			display:block; 
+			width:100%;
+		}
+	</style>
 	<!-- (1) LoginWithNaverId Javscript SDK -->
-	<script type="text/javascript" src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.0.js" charset="utf-8"></script>
-	
+	<script type="text/javascript" src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.0.js" charset="utf-8">
+	</script>
 	<!-- (2) LoginWithNaverId Javscript 설정 정보 및 초기화 -->
 	<script>
 		var naverLogin = new naver.LoginWithNaverId(
@@ -63,9 +63,9 @@
 	</script>
 </head>
 <body>
-	<div id="loadingImg">
-		<img src="/img/loading.gif" alt="로딩이미지">
-	</div>
+<!-- 	<div id="loadingImg"> -->
+<!-- 		<img src="/img/loading.gif" alt="로딩이미지"> -->
+<!-- 	</div> -->
 	<form method="post" id="thisForm" action="joinMemberAPI">
 		<input type="hidden" name="email" id="email">
 		<input type="hidden" name="name" id="name">

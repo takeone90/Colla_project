@@ -113,7 +113,7 @@
 					</div>
 					<!--header end-->
 					<!--파도 아래 내용-->
-					<div class="content flex">
+					<div class="content box3 flex">
 						<div class="joinBox-Body">
 							<form action="joinMember" method="post" id="joinMemberForm">
 								<input type="hidden" name="${_csrf.parameterName}"

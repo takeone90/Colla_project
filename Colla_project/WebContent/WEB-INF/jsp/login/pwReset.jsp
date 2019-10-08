@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/jsp/inc/head.jsp" %>
 
-<title>joinStep2</title>
+<title>pwReset</title>
 <link rel="stylesheet" type="text/css" href="css/headerMain.css"/>
 <link rel="stylesheet" type="text/css" href="css/animate.css"/>
 <link rel="stylesheet" type="text/css" href="css/join.css"/>
@@ -47,11 +47,9 @@ $(function() {
 							c9.2,18.3,41.5,25.6,91.2,24.2l1.1,39.8C390.5,326.2,387.1,326.3,383.8,326.3z" /></g>
 							</svg>
 							<div class="joinBox-Head">			
-								<h3 style='font-weight: bolder; font-size: 30px'>회원가입</h3>
+								<h3 style='font-weight: bolder; font-size: 30px'>비밀번호 재설정</h3>
 									<p>
-										<i class="fas fa-circle" style="color: #DDB4AB"></i>&nbsp;&nbsp;
-										<i class="fas fa-circle" style="color: #DA574E"></i>&nbsp;&nbsp;
-										<i class="fas fa-circle" style="color: #DDB4AB"></i>
+										가입하신 이메일로 새로운 비밀번호가 전송됩니다.
 									</p>
 							</div>
 						</div>			
@@ -76,23 +74,15 @@ $(function() {
 							<form action="" method="post" id="verifyCodeForm">
 								<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 								<div>
-									<h4>인증 코드 입력</h4>
-									<input type="text" name="inputVerifyCode" placeholder="인증 코드를 입력해주세요.">
+									<h4>이메일 입력</h4>
+									<input type="text" name="inputVerifyCode" placeholder="가입하신 이메일을 입력해주세요.">
 									<span id="checkSentence" class="checkSentenceRed"></span>
 								</div>
-								<%-- <input type="hidden" name="emailAddress" value="${param.emailAddress}"> --%>
 								<div>
-									<input type="button" onclick="location.href='resendVerifyMail'" value="인증 코드 재발송" class="joinFormButton">
+									<input type="button" onclick="location.href='resendVerifyMail'" value="비밀번호 전송" class="joinFormButton">
 									<input type="submit" value="다음단계" class="joinFormButton">
 								</div>
 							</form>
-<%-- 							<div>
-								<span id="verifyResultText" class="checkSentenceRed">
-									<c:if test='${param.joinStep2 eq "false"}'>
-										인증 코드가 일치하지 않습니다.
-									</c:if>
-								</span>
-							</div> --%>
 						</div>			
 					</div><!--Content ends-->
 				</div>				
