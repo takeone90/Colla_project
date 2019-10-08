@@ -209,6 +209,7 @@ public class WorkSpaceController {
 				//회원이다.
 				Member member = mService.getMemberByEmail(userEmail);
 				wsmService.addWsMember(wNum, member.getNum());
+				//sendSystemMsg(wNum, member);//미경 추가
 				wiService.removeWorkspaceInvite(userEmail, wNum);
 				if(user.getEmail().equals(userEmail)) {
 					//회원이고 현재 사용자면
@@ -230,6 +231,17 @@ public class WorkSpaceController {
 		
 		
 	}
+	/*
+	public void sendSystemMsg(int wNum, Member member) {
+		System.out.println("sendSystemMsg 진입!");
+		ChatRoom cr = wsmService.getDefaultChatRoomByWnum(wNum);
+		//smt.convertAndSend("/category/systemMsg/" + cr.getCrNum(),member.getName());
+		smt.convertAndSend("/category/systemMsg/" + cr.getCrNum(), "안녕");
+		System.out.println("[memberController] cr.getCrNum() : " + cr.getCrNum());
+		System.out.println("[memberController] member.getName() : " + member.getName());
+		return;
+	}
+	*/
 	
 	@ResponseBody
 	@RequestMapping("/exitWs")
