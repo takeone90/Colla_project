@@ -276,7 +276,7 @@ function showSchedule(today) {
 	var type3 = $("#calType3").prop("checked");
 	var type4 = $("#calType4").prop("checked");
 	$.ajax({ 
-		url:"showAllCalendar",
+		url:"/showAllCalendar",
 		data: {"type1":type1, "type2":type2, "type3":type3, "type4":type4, "today":formatChange(new Date(today.getFullYear(), today.getMonth()+1, 0))},
 		type:"get",
 		dataType:"json",

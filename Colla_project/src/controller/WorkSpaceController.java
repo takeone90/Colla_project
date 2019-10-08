@@ -307,7 +307,7 @@ public class WorkSpaceController {
 					"				워크스페이스 초대를 수락하려면 아래 버튼을 누르세요 </p>\r\n" + 
 					"				<div>\r\n" + 
 					"					<div style=\"background-color: rgba(255, 255, 255,0.2);width: 120px;border-radius: 10px;margin: 10px auto;text-align:center;\">\r\n" + 
-					"						<a  style='color: #EB6C62;font-size: 18px;font-weight: bolder; line-height: 40.5px; text-decoration:none; display: block;' href='http://localhost:8081/addMember?id="+emailAddress+"&wNum="+wNum+"'> 초대 수락</a>\r\n" + 
+					"						<a  style='color: #EB6C62;font-size: 18px;font-weight: bolder; line-height: 40.5px; text-decoration:none; display: block;' href='/addMember?id="+emailAddress+"&wNum="+wNum+"'> 초대 수락</a>\r\n" + 
 					"					</div>\r\n" + 
 					"				</div> \r\n" + 
 					"		</div>\r\n" + 
