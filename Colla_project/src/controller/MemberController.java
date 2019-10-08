@@ -97,6 +97,15 @@ public class MemberController {
 	public String showPwReset() {
 		return "/login/pwReset";
 	}
+	@RequestMapping(value="/sendResetMail", method = RequestMethod.GET)
+	public String sendResetMail(HttpSession session) {
+		String emailAddress = (String)session.getAttribute("emailAddress");
+		Thread innerTest = new Thread(new inner(emailAddress, session));
+		innerTest.start();
+		return "redirect:joinStep2";
+	}
+	
+	
 	@RequestMapping(value="/callBackJoin", method = RequestMethod.GET) // 네이버 API 회원가입
 	public String showCallBackJoin() {
 		

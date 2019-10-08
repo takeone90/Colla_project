@@ -17,7 +17,6 @@ $(function() {
 			dataType: "json",
 			success: function(result) {
 				if(result) {
-					//joinStep3 으로 이동하는 동작이 여기서 발생해야된다.
 					location.href="${contextPath}/joinStep3";
 				} else {
 					$("#checkSentence").text("인증 코드가 일치하지 않습니다.");
@@ -71,7 +70,7 @@ $(function() {
 					<!--파도 아래 내용-->	
 					<div class="content box2 flex">				
 						<div class="joinBox-Body">
-							<form action="" method="post" id="verifyCodeForm">
+							<form action="" method="post" id="resetForm">
 								<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 								<div>
 									<h4>이메일 입력</h4>
@@ -79,7 +78,7 @@ $(function() {
 									<span id="checkSentence" class="checkSentenceRed"></span>
 								</div>
 								<div>
-									<input type="button" onclick="location.href='resendVerifyMail'" value="비밀번호 전송" class="joinFormButton">
+									<input type="button" onclick="location.href='sendResetMail'" value="비밀번호 전송" class="joinFormButton">
 									<input type="submit" value="다음단계" class="joinFormButton">
 								</div>
 							</form>
