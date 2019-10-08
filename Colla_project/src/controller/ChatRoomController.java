@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import model.Alarm;
 import model.ChatMessage;
 import model.ChatRoom;
 import model.ChatRoomMember;
@@ -143,9 +144,22 @@ public class ChatRoomController {
 		List<ChatRoom> crList = crService.getAllChatRoomByWnumMnum(currWnum, user.getNum());
 		return crList;
 	}
-
 	
-
+	@ResponseBody
+	@RequestMapping("/addOneOnOne")
+	public int addOneOnOne(int mNum, HttpSession session) {	//1:1채팅방 생성 후 초대
+		Member I = (Member)session.getAttribute("user"); //나
+		Member you = mService.getMember(mNum); //타겟
+		int wNum = (int)session.getAttribute("currWnum");
+		Alarm alarm;
+		if( (alarm = crService.addOneOnOne(wNum, I, you)) != null ) {
+			smt.convertAndSend("/category/alarm/"+you.getNum(), aService.getAlarm(alarm.getaDnum()));
+			return alarm.getaDnum();
+		}else {
+			return -1;
+		}
+	}
+	
 	@RequestMapping("/addChat")
 	public String addChatRoom(int wNum, String crName, HttpSession session, HttpServletRequest request) {
 		// 현재 로그인하고 채팅방만드는 사람을 chatroom member로 넣어준다
@@ -158,7 +172,7 @@ public class ChatRoomController {
 				int num = Integer.parseInt(stringMnum);
 				crmService.addChatRoomMember(crNum, num, wNum);
 				int aNum = aService.addAlarm(wNum, num, member.getNum(), "cInvite", crNum);
-				smt.convertAndSend("/category/alarm/"+member.getNum(),aService.getAlarm(aNum));
+				smt.convertAndSend("/category/alarm/"+num, aService.getAlarm(aNum));
 			}
 		}
 		return "redirect:chatMain?crNum="+crNum;

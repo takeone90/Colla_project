@@ -12,6 +12,7 @@ import model.Alarm;
 public class AlarmService {
 	@Autowired
 	private AlarmDao aDao;
+	
 	public int addAlarm(int wNum,int mNumTo,int mNumFrom,String aType,int aDnum) {
 		Alarm alarm = new Alarm();
 		alarm.setaDnum(aDnum);
