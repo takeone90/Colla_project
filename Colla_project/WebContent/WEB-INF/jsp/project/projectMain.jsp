@@ -96,16 +96,21 @@
 					        <fmt:formatDate value="${pl.pInfo.pEndDate}" pattern="E"/>요일 
 							</p>
 							</div>
-						<div class="projectDetail">${pl.pInfo.pDetail}</div>
 						
-						<div class="progress-member"><div class="progress">진행률  <progress id="progressBar" value="${pl.pInfo.progress}" max="100" style="width:504px;"></progress></div>
+						<div class="progress-member">
+							<div class="progress-detail">
+							<div class="projectDetail">${pl.pInfo.pDetail}</div>
+							<div class="progress">
+								진행률  <progress id="progressBar" value="${pl.pInfo.progress}" max="100" style="width:504px;"></progress>
+							</div>
+							</div>
 							<div class="projectMember">
-								<ul>
-									<c:forEach items="${pl.pmList}" var="pm">
-										<li><div class='profileImg' align="center"><img alt='프로필사진' src='${contextPath}/showProfileImg?num=${pm.mNum}' onclick="showProfileInfoModal(${pm.mNum})"></div>
-										<p style="text-align:center;">${pm.mName}</p></li>
-									</c:forEach>	
-								</ul>
+									<ul>
+										<c:forEach items="${pl.pmList}" var="pm">
+											<li><div class='profileImg' align="center"><img alt='프로필사진' src='${contextPath}/showProfileImg?num=${pm.mNum}' onclick="showProfileInfoModal(${pm.mNum})"></div>
+											<p style="text-align:center;">${pm.mName}</p></li>
+										</c:forEach>	
+									</ul>
 							</div>
 						</div>
 					</div>
