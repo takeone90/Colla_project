@@ -211,7 +211,7 @@ public class WorkSpaceController {
 				wsmService.addWsMember(wNum, member.getNum());
 				//sendSystemMsg(wNum, member);//미경 추가
 				wiService.removeWorkspaceInvite(userEmail, wNum);
-				if(user.getEmail().equals(userEmail)) {
+				if(user!=null && user.getEmail().equals(userEmail)) {
 					//회원이고 현재 사용자면
 					return "redirect:workspace";
 				}else {
