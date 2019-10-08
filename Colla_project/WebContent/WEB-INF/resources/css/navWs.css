@@ -56,6 +56,7 @@
 }
 #boardDiv a[class=currPointer],#calendarDiv a[class=currPointer],#myChatList a[class=currPointer],#projectDiv a[class=currPointer]{
 	color: #E5675A;
+	font-weight: 600;
 }
 
 .chatList,#projectList{
