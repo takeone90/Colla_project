@@ -16,7 +16,7 @@
 				$(".toggleBG:eq(" + i + ")").css('background', '#CCCCCC');
 			} else { //설정 ON
 				$(".toggleFG:eq(" + i + ")").css('left', 40);
-				$(".toggleBG:eq(" + i + ")").css('background', '#61C3AF');
+				$(".toggleBG:eq(" + i + ")").css('background', '#5897C3');
 			}
 		};		
 
@@ -33,7 +33,7 @@
 						result = 0;
 						setAlarm(type,result);
 					} else if (left == '0px') { //설정 ON
-						$(".toggleBG:eq(" + i + ")").css('background', '#61C3AF');
+						$(".toggleBG:eq(" + i + ")").css('background', '#5897C3');
 						toggleActionStart($(".toggleFG:eq(" + i + ")"), 'TO_RIGHT');
 						result = 1;
 						setAlarm(type,result);
@@ -88,7 +88,7 @@
 	<input type="hidden" value="mypage" id="pageType">
 		<div id="wsBodyContainer">
 			<h3>마이페이지</h3>
-			<h4>회원정보 관리</h4>
+			<h4>맞춤 설정</h4>
 			<div class="myPageInner">
 				<div class="myPageContent">
 					<div class="myPageTitle">
@@ -118,6 +118,7 @@
 							<button id='replySetAlarm' class='toggleFG replyAlarm'></button>
 						</div>
 					</div>
+					<div class="contentLine"></div>
 					<div class="myPageContentRow myPageAlarmRow clearFix">
 						<p class="title">프로젝트 초대 알림</p>
 						<p class="content">프로젝트 초대 알림을 설정해주세요</p>
@@ -125,6 +126,7 @@
 							<button class='toggleFG replyAlarm'></button>
 						</div>
 					</div>
+					<div class="contentLine"></div>
 					<div class="myPageContentRow myPageAlarmRow clearFix">
 						<p class="title">todo 알림</p>
 						<p class="content">todo 알림을 설정해주세요</p>

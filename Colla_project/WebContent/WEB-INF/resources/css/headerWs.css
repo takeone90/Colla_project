@@ -9,11 +9,14 @@
     text-align: center;
 	background-color: white;
     z-index: 2;
-    border-radius: 10px;
+    border-radius: 4px;
     padding: 0px;
     box-shadow: 2px 2px 5px 0.5px rgba(33, 33, 33, 0.2);
 }
-
+.attachModal #memberInfoBody p{
+    font-weight: 300;
+    font-size: 14px;
+}
 #wsMainHeader{
     position: fixed;
     width: calc(100% - 200px);
@@ -128,14 +131,17 @@ a.member-btn:hover{
 }
 #memberInfoBody a{
 	display: block;
-    background-color: #403C39;
-    color: white;
-    padding: 10px;
-    border-radius: 5px;
+    background-color: white;
+    color: #4e4c4c;
+    border: 1px solid #d2d2d2;
+    padding: 8px;
+    border-radius: 4px;
     width: calc(100% - 300px);
     margin-bottom: 20px;
 }
 #memberInfoBody a:hover{
+	color : white;
+	border-color : transparent;
 	background-color: #E5675A;
 }
 .memberProfileInfo{
@@ -275,6 +281,7 @@ a.member-btn:hover{
     font-weight: 700;
 }
 #modalBtnDiv{
+	margin-top: 15px;
 	margin-bottom: 16px;
 }
 #modalBtnDiv input{
@@ -291,21 +298,24 @@ a.member-btn:hover{
 }
 #modalBtnDiv button{
 	display: inline-block;
-	vertical-align: middle;
+    vertical-align: middle;
     margin-top: 6px;
-    width: 28%;
+    width: 25%;
     padding: 6px;
-    background-color: #403C39;
-    color: white;
+    background-color: white;
+    color: #454443;
     border-radius: 4px;
-    border: none;
+    border: 1px solid #dad5d5;
     cursor: pointer;
+    
 }
 #inviteAcceptModal #modalBtnDiv button{
 	width : 21%;
 }
 #modalBtnDiv button:hover,#modalBtnDiv input:hover{
 	background-color : #E5675A;
+	color : white;
+	border-color: transparent;
 }
 .mLi{
 	display: inline-block;

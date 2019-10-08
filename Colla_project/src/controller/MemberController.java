@@ -34,6 +34,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import mail.MailSend;
 import model.ChatMessage;
+import model.ChatRoom;
 import model.EmailVerify;
 import model.Member;
 import service.ChatMessageService;
@@ -188,6 +189,7 @@ public class MemberController {
 				//이게 차있다면 초대받은 사람임
 				//wsmember로 추가
 				wsmService.addWsMember(inviteWnum, member.getNum());
+				sendSystemMsg(inviteWnum,member);//
 			}
 			session.removeAttribute("InviteUserEmail");
 			session.removeAttribute("inviteWnum");
@@ -197,6 +199,15 @@ public class MemberController {
 		} else {
 			return "/join/joinStep3"; //실패 시 어디로 갈지는 정의 필요
 		}
+	}
+	
+	public void sendSystemMsg(int wNum, Member member) {
+		System.out.println("sendSystemMsg 진입!");
+		ChatRoom cr = wsmService.getDefaultChatRoomByWnum(wNum);
+		smt.convertAndSend("/category/systemMsg/" + cr.getCrNum(),member.getName());
+		System.out.println("[memberController] cr.getCrNum() : " + cr.getCrNum());
+		System.out.println("[memberController] member.getName() : " + member.getName());
+		return;
 	}
 	
 	@RequestMapping(value="/loginDuplication", method = RequestMethod.GET)
@@ -341,6 +352,7 @@ public class MemberController {
 		wsmService.removeAllWsMemberByMnum(member.getNum()); //workspace_member 테이블에서 해당 멤버가 들어간 튜플 모두 제거
 		cmService.removeFavoriteByMnum(member.getNum()); //favorite 테이블에서 해당멤버가 즐겨찾기한 튜플 모두 제거
 		saService.removeSetAlarm(member.getNum());
+		session.invalidate();
 		return "redirect:/";
 	}
 

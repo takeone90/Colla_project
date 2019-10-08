@@ -9,6 +9,7 @@ import dao.ChatRoomDao;
 import dao.ChatRoomMemberDao;
 import dao.ProjectDao;
 import dao.ProjectMemberDao;
+import dao.TodoDao;
 import model.ChatRoomMember;
 import model.Project;
 import model.ProjectMember;
@@ -21,6 +22,8 @@ public class ProjectMemberService {
 	private ProjectMemberDao pmDao;
 	@Autowired
 	private ChatRoomMemberDao crmDao;
+	@Autowired
+	private TodoDao tdDao;
 	@Autowired
 	private ChatRoomDao crDao;
 	public boolean addProjectMember(int pNum, int mNum) {
@@ -39,7 +42,7 @@ public class ProjectMemberService {
 			result = true;
 			crDao.deleteEmptyChatRoom();
 		}
-		
+		tdDao.deleteAllTodoByPnumMnum(mNum, pNum);
 		return result;
 	}
 	public ProjectMember getProjectMember(int pNum,int mNum) {

@@ -256,9 +256,11 @@
 .head-title p:first-child {
 	color: #EC6D63;
 }
-
+#collaInfoAll .head-body{
+	margin-top: 29px;
+}
 .head-body {
-	font-size: 30px;
+	font-size: 16px;
 	font-weight: 400;
 	line-height: 1.4;
 	padding: 0px 15px;
@@ -267,11 +269,11 @@
 }
 
 .head-caption {
-	padding: 15px;
-	font-size: 20px;
-	margin-bottom: 55px;
-	color: #4C4A4B;
-	line-height: 25px;
+	padding: 4px;
+    font-size: 16px;
+    margin-bottom: 55px;
+    color: #4C4A4B;
+    line-height: 25px;
 }
 
 .head-arrow {

@@ -152,7 +152,7 @@
 					<%---------------------------상세보기 버튼 클릭 시 펼쳐질 wsDetail--------------------%>
 					<div class="wsDetail">
 						<input type="hidden" value="${ws.num}" id="wNum">
-						
+						<div class="test1">
 						<div class="wsPjList">
 							<p>프로젝트</p>
 							<ul>
@@ -177,8 +177,8 @@
 								<a href="#" class="openChatModal" data-wnum="${ws.wsInfo.num}">+</a>
 							</ul>
 						</div>
-						
-						
+						</div>
+						<div class="test2">
 						<div class="wsMember">
 						<p>참여자 목록</p>
 						<ul>
@@ -203,7 +203,7 @@
 						</ul>
 						</div>
 					</div><!-- wsDetail end -->
-					
+					</div>
 					
 					<div class="exitWs">
 <%-- 						<a href="exitWs?wNum=${ws.wsInfo.num}"><i class="fas fa-sign-out-alt"></i></a> --%>
@@ -237,7 +237,7 @@
 							c9.2,18.3,41.5,25.6,91.2,24.2l1.1,39.8C390.5,326.2,387.1,326.3,383.8,326.3z" /></g>
 							</svg>
 							<div class="loginBox-Head">
-								<h3 style='font-weight: bolder; font-size: 30px'>Workspace 만들기</h3>
+								<h3 style='font-weight: bolder; font-size: 24px'>Workspace 만들기</h3>
 								<p>Workspace를 만들고 멤버를 초대하세요.</p>
 							</div>
 						</div>
@@ -306,7 +306,7 @@
 							c9.2,18.3,41.5,25.6,91.2,24.2l1.1,39.8C390.5,326.2,387.1,326.3,383.8,326.3z" /></g>
 							</svg>
 							<div class="loginBox-Head">
-								<h3 style='font-weight: bolder; font-size: 30px'>채팅방 만들기</h3>
+								<h3 style='font-weight: bolder; font-size: 24px'>채팅방 만들기</h3>
 								<p>채팅방을 만들고 멤버를 초대하세요.</p>
 							</div>
 						</div>
@@ -369,7 +369,7 @@
 							c9.2,18.3,41.5,25.6,91.2,24.2l1.1,39.8C390.5,326.2,387.1,326.3,383.8,326.3z" /></g>
 							</svg>
 							<div class="loginBox-Head">
-								<h3 style='font-weight: bolder; font-size: 30px'>Workspace 멤버 추가</h3>
+								<h3 style='font-weight: bolder; font-size: 24px'>Workspace 멤버 추가</h3>
 								<p>Workspace에 멤버를 초대하세요</p>
 							</div>
 						</div>

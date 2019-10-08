@@ -1,9 +1,7 @@
 package controller;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -14,7 +12,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
@@ -22,7 +19,6 @@ import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -30,8 +26,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-import mail.MailSend;
-import model.Alarm;
 import model.ChatMessage;
 import model.ChatRoom;
 import model.ChatRoomMember;
@@ -209,15 +203,25 @@ public class ChatRoomController {
 		listMap.put("conList", conList);
 		return listMap;
 	}
-	
-	
 
+	@ResponseBody
+	@RequestMapping("/loadMoreChat")
+	public List<ChatMessage> loadMoreChat(@RequestParam("crNum") int crNum, @RequestParam("count") int count, HttpSession session){
+		Member member = (Member)session.getAttribute("user");
+		int mNum = member.getNum();
+		System.out.println("scrollCount : " + count);
+		List<ChatMessage> cmList = cmService.getMoreMessage(crNum, mNum, count);
+		System.out.println(cmList);
+		return cmList;
+	}
+	
 	@ResponseBody
 	@RequestMapping("/loadPastMsg")
 	public List<ChatMessage> loadPastMsg(@RequestParam("crNum") int crNum,HttpSession session) {
 		Member member = (Member)session.getAttribute("user");
 		int mNum = member.getNum();
-		List<ChatMessage> cmList = cmService.getAllChatMessageByCrNum(crNum,mNum);
+//		List<ChatMessage> cmList = cmService.getAllChatMessageByCrNum(crNum,mNum);
+		List<ChatMessage> cmList = cmService.getRecentChatMessageByCrNum(crNum, mNum);
 		
 		return cmList;
 	}
@@ -229,8 +233,6 @@ public class ChatRoomController {
 			@DestinationVariable(value = "var2") String crNum) {
 		Member member = mService.getMemberByEmail(userEmail);
 		msg = cmService.hyperlinkTransfer(msg);
-		System.out.println("링크변환 : "+ msg);
-		
 		int cmNum = cmService.addChatMessage(Integer.parseInt(crNum), member.getNum(), msg, "message");
 		ChatMessage cm = cmService.getChatMessageByCmNum(cmNum);
 		
