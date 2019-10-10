@@ -16,9 +16,9 @@
 	padding:15px 2%;
 }
 #logo{
-	width:150px;
-	height:40px;
-	float:left;
+	width: 128px;
+    height: 40px;
+    float: left;
 }
 #logo a {
 	display:block;

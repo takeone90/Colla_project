@@ -144,7 +144,7 @@ function checkPw(){
 								<div>
 									<input type="submit" value="로그인" class="loginFormButton">
 								</div>
-								<div>
+								<div id="joinBtnInLoginForm">
 									<input type="button" value="회원가입" class="loginFormButton" onclick="location.href='${contextPath}/joinStep1'">
 								</div>
 							</form>

@@ -17,7 +17,7 @@
 
 /******************************** boardList.jsp *****************************************/
 #boardInner #boardList {
-	margin-bottom:20px;
+	margin-bottom:15px;
 }
 #boardInner #boardList li{
 	line-height : 30px;
@@ -114,13 +114,14 @@
 	background-color: #e7e7e7;
 }
 #boardInner #writeBtn{
-	display:block;
-	padding: 10px 20px;
-	float:right;
-	border-radius:5px;
-	background-color: #403C39;
-	color:#fff;
-	transition:background-color .5s;
+	display: block;
+    padding: 10px 20px;
+    float: right;
+    border-radius: 3px;
+    background-color: #403C39;
+    color: #fff;
+    font-size: 13px;
+    transition: background-color .5s;
 }
 #boardInner #writeBtn:hover{
 	background-color: #E5675A;
@@ -130,12 +131,12 @@
 	font-size: 14px;
 }
 #boardInner #boardSearchForm > *{
-	vertical-align:middle;
-	height: 35px;
-	box-sizing: border-box; 
-	padding:0;
-	border: 1px solid #e0e0e0;
-	border-radius: 5px;
+	vertical-align: middle;
+    height: 35px;
+    box-sizing: border-box;
+    padding: 0;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
 }
 #boardInner #boardSearchForm select {
 }
@@ -143,6 +144,7 @@
 	padding: 0 10px;
 }
 #boardInner #boardSearchForm button {
+	margin-left: 2px;
 	width:60px;
 	background-color: #403C39;
 	color:#fff;
@@ -151,6 +153,7 @@
 #boardInner #boardSearchForm button:hover{
 	background-color: #E5675A;
 	cursor:pointer;
+	border-color: transparent;
 }
 #boardInner .noBoard{
 	text-align: center;

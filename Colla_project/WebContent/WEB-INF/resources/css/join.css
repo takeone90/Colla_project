@@ -117,18 +117,20 @@
 	color: white;
 }
 .joinBox-Head p {
-	font-size: 5pt;
-	color: white; 
-	text-align: center;
-	padding-bottom: 2px;
+	font-size: 9pt;
+    color: white;
+    font-weight: 200;
+    text-align: center;
+    padding-bottom: 2px;
 }
 .joinBox-Body {
 	text-align: left;
 	width: 355px;
 }
 .joinBox-Body h4 {
-	font-size: 17px;
+	font-size: 14px;
     font-weight: 600;
+    color: #504848;
 }
 .joinBox-Body div:not(.joinCheckbox) {
 	padding: 5px;
@@ -160,6 +162,7 @@
 }
 .joinFormButton:hover {
 	background-color: rgba(236, 109, 99, 0.5);
+	cursor: pointer;
 }
 .joinCheckbox, 
 #verifyResultTex,
@@ -267,4 +270,7 @@
 #kakao-login-btn > img {
 	width: 100%;
 	visibility: hidden;	
+}
+#pwResetFormBody{
+	height: 194px;
 }

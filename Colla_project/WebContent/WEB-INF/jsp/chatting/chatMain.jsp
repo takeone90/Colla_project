@@ -1112,7 +1112,7 @@ var chatTop = 0;	// chatArea 맨위로 스크롤 >> 과거메시지 로드
 				<div class="attach">
 					<a href="#" class="openCodeModal">코드첨부</a>
 				</div>
-				<div class="attach">
+				<div class="attach lastAttach">
 					<a href="#" class="openLocationModal">지도첨부</a>
 				</div>
 			</div>
@@ -1366,7 +1366,6 @@ var chatTop = 0;	// chatArea 맨위로 스크롤 >> 과거메시지 로드
 								</form>
 							</div>
 						</div>
-						<hr>
 						<ul id="placesList"></ul>
 						<div id="pagination"></div>
 					</div>
