@@ -141,6 +141,9 @@
 		<input type="hidden" value="${sessionScope.user.num}" id="mNum">
 		<div id="wsBodyContainer"> 
 		<h2>워크스페이스 목록</h2>
+		<c:if test="${empty workspaceList}">
+			<p class="emptyMsg">워크스페이스가 없습니다</p>
+		</c:if>
 		<ul>
 			<c:forEach items="${workspaceList}" var="ws">
 				<li class="ws">
@@ -156,6 +159,9 @@
 						<div class="wsPjList">
 							<p>프로젝트</p>
 							<ul>
+							<c:if test="${empty ws.pjList}">
+								<p class="emptyMsg">프로젝트가 없습니다</p>
+							</c:if>
 							<c:forEach items="${ws.pjList}" var="pj">
 									<li><a href="todoMain?pNum=${pj.pNum}">${pj.pName}</a></li>
 							</c:forEach>
