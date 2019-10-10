@@ -178,7 +178,10 @@
 .joinCheckbox #checkbox{
 	height: 15px;	
 }
-
+.noticePwDiv {
+	text-align: center;
+    padding-bottom: 25px;
+}
 /* 로그인 버튼 */
 #innerBtn {
 	margin: 10px 10px 0px 10px;

@@ -121,17 +121,19 @@ public class MemberController {
 	@ResponseBody
 	@RequestMapping(value="/checkResetCode")
 	public String checkResetCode(String inputVerifyCode, HttpSession session) {
+		System.out.println("checkResetCode");
 		String emailAddress = (String)session.getAttribute("emailAddress");
 		String verifyCode = (String)session.getAttribute("verifyCode");
 		String pw = "";
-		session.setAttribute("inputVerifyCode", inputVerifyCode);
+		System.out.println(emailAddress+" "+verifyCode+" "+inputVerifyCode);
+//		session.setAttribute("inputVerifyCode", inputVerifyCode);
 		if(verifyCode.equals(inputVerifyCode)) {
 			pw = setCode();
+			System.out.println("pw"+pw);
 			memberService.modifyMemberPw(pw, emailAddress);
 			return pw;
-		}else {
-			//false면 joinStep2 페이지 보여주는 요청생성
-			return "";
+		} else {
+			return "false";
 		}	
 	}
 	//----------비밀번호 재설정----------
