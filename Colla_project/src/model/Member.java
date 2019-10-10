@@ -12,6 +12,7 @@ public class Member {
 	private String profileImg;
 	private int crNum;
 	private int pNum;
+	private String mType;
 	
 	public int getpNum() {
 		return pNum;
@@ -67,11 +68,16 @@ public class Member {
 	public void setProfileImg(String profileImg) {
 		this.profileImg = profileImg;
 	}
+	public String getmType() {
+		return mType;
+	}
+	public void setmType(String mType) {
+		this.mType = mType;
+	}
 	@Override
 	public String toString() {
 		return "Member [num=" + num + ", email=" + email + ", name=" + name + ", pw=" + pw + ", regDate=" + regDate
-				+ ", phone=" + phone + ", profileImg="+profileImg+"]";
-
+				+ ", phone=" + phone + ", profileImg=" + profileImg + ", crNum=" + crNum + ", pNum=" + pNum + ", mType="
+				+ mType + "]";
 	}
-	
 }
