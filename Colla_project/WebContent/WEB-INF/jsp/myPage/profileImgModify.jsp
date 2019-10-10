@@ -75,7 +75,10 @@
 			profileImgType = $("#profileImgType").val();
 			var formData = new FormData();
 			if(profileImgType == "profileImgType"){
-				cropper.getCroppedCanvas().toBlob(function (blob) {
+				cropper.getCroppedCanvas({
+					width : 180,
+					height: 180
+				}).toBlob(function (blob) {
 					  formData.append('croppedImage', blob);
 					  formData.append('profileImgType', profileImgType);
 					  // Use `jQuery.ajax` method for example
