@@ -16,14 +16,18 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 public class test {
 	
 	@Test
-	public void serviceTest() throws ParseException {
+	public void serviceTest() {
 		String startDate = "2019-10-01";
 		String endDate = "2019-10-10";
 		SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd");
-		Date encStartDate = dt.parse(startDate);
-		Date encEndDate = dt.parse(endDate);
-		System.out.println("encStartDate : " + encStartDate);
-		System.out.println("encEndDate : " + encEndDate);
-		
+		try {
+			Date encStartDate = dt.parse(startDate);
+			Date encEndDate = dt.parse(endDate);
+			int onlyStartDate = encStartDate.getDate();
+			int onlyEndDate = encEndDate.getDate();
+			System.out.println("날짜 차이 : "+(onlyEndDate-onlyStartDate));
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
 	}
 }

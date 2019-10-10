@@ -155,6 +155,7 @@
 	height : 13px;
 }
 .addInviteMemberUL li, .addMemberUL li{
+	width: 50px;
 	padding-top: 7px;
     padding-bottom: 7px;
     margin-right: 4px;
@@ -178,6 +179,9 @@
 	display: none;
 }
 #addProjectModal .addInviteMemberUL p,#addMemberModal .addMemberUL p{
+	text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
 	    font-size: 12px;
 	margin-top:5px;
 }

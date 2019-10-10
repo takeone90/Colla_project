@@ -184,6 +184,9 @@ display : none;
     border-radius: 50%;
 }
 .wsMember ul li p{
+	text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
 	margin-top: 2px;
     font-size: 12px;
     font-weight: normal;
