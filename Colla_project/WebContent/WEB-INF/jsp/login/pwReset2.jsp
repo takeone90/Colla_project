@@ -14,13 +14,11 @@ $(function() {
 			url: "checkResetCode",
 			data: data,
 			type: "post",
-			dataType: "json",
 			success: function(result) {
-				if(result != null) {
-					console.log(result);
-					$("#noticePw").text("비밀번호가 "+result+"로 수정되었습니다.");
-				} else {
+				if(result == "false") {
 					$("#noticePw").text("인증코드가 일치하지 않습니다.");
+				} else {
+					$("#noticePw").text("비밀번호가 "+result+"로 수정되었습니다.");
 				}
 			}
 		}); //end ajax 
@@ -73,7 +71,7 @@ $(function() {
 						<div class="joinBox-Body">
 							<form action="" method="post" id="resetForm">
 								<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
-								<span id="noticePw"></span>
+								<div class="noticePwDiv"><span id="noticePw"></span></div>
 								<div>
 									<h4>코드 입력</h4>
 									<input type="text" name="inputVerifyCode" placeholder="인증코드를 입력해주세요.">
