@@ -199,7 +199,7 @@ a.member-btn:hover{
 }
 .alarmInfoDiv{
 	position: relative;
-    padding: 13px;
+    padding: 13px 13px 8px 13px;
     border-bottom: 1px solid #eee;
 }
 .alarmInfoDiv:hover{
@@ -207,7 +207,6 @@ a.member-btn:hover{
 }
 .alarmInfoDiv .profileImg{
 	display: inline-block;
-	border : 1px solid gray;
 	border-radius:50%;
 	width : 50px;
 	height : 50px;

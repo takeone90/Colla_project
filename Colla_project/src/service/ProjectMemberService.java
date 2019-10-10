@@ -41,8 +41,17 @@ public class ProjectMemberService {
 		if(pmDao.deleteProjectMember(pNum, mNum)>0) {
 			result = true;
 			crDao.deleteEmptyChatRoom();
+			pDao.deleteEmptyProject();
 		}
 		tdDao.deleteAllTodoByPnumMnum(mNum, pNum);
+		return result;
+	}
+	public boolean removeAllProjectMemberByMnum(int mNum) {
+		boolean result = false;
+		if(pmDao.deleteAllProjectMemberByMnum(mNum)>0) {
+			result = true;
+			pDao.deleteEmptyProject();
+		}
 		return result;
 	}
 	public ProjectMember getProjectMember(int pNum,int mNum) {

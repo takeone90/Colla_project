@@ -1,5 +1,6 @@
 package controller;
 
+import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -93,6 +94,11 @@ public class ProjectController {
 		SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd");
 		Date encStartDate = dt.parse(startDate);
 		Date encEndDate = dt.parse(endDate);
+//		Timestamp tsStartDate = (Timestamp) encStartDate;
+//		Timestamp tsEndDate = (Timestamp) encEndDate;
+//		if((tsStartDate - tsEndDate)>0) {
+//			
+//		}
 		int pNum = pService.addProject(pName, wNum, pDetail, encStartDate, encEndDate, mNum); //프로젝트 추가 & 채팅방 추가
 		String[] mNumListForInvitePj = request.getParameterValues("mNumListForInvitePj");
 		List<Member> alarmTargetMemberList = new ArrayList<Member>();

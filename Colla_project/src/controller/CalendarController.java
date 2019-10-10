@@ -27,6 +27,7 @@ import service.CalendarService;
 import service.MemberService;
 import service.ProjectMemberService;
 import service.ProjectService;
+import service.WorkspaceService;
 
 @Controller
 public class CalendarController {
@@ -36,6 +37,8 @@ public class CalendarController {
 	private ProjectService pService;
 	@Autowired
 	private ProjectMemberService pmService;
+	@Autowired
+	private WorkspaceService wService;
 	
 	@RequestMapping(value="/calMonth", method = RequestMethod.GET)
 	public String showCalMonth(HttpSession session, Model model, int wNum) {
@@ -45,6 +48,7 @@ public class CalendarController {
 		param.put("mNum", mNum);
 		model.addAttribute("userData", param);
 		session.setAttribute("currWnum", wNum);
+		session.setAttribute("currWname", wService.getWorkspace(wNum).getName());
 		return "/calendar/calMonth";
 	}
 	@RequestMapping(value="/calTest", method = RequestMethod.GET)
@@ -136,6 +140,7 @@ public class CalendarController {
 	@ResponseBody
 	@RequestMapping(value="/addSchedule", method = RequestMethod.POST)
 	public boolean addSchedule(Calendar calendar) throws ParseException {
+		System.out.println("enddate : "+calendar.getEndDate());
 		if(calendar.getYearCalendar()!=null && calendar.getYearCalendar().equals("yearCalendar")) {
 			calendar.setYearCalendar("1");
 		} else {
