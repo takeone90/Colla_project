@@ -140,6 +140,7 @@ public class CalendarController {
 	@ResponseBody
 	@RequestMapping(value="/addSchedule", method = RequestMethod.POST)
 	public boolean addSchedule(Calendar calendar) throws ParseException {
+		System.out.println("enddate : "+calendar.getEndDate());
 		if(calendar.getYearCalendar()!=null && calendar.getYearCalendar().equals("yearCalendar")) {
 			calendar.setYearCalendar("1");
 		} else {

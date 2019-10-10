@@ -95,6 +95,8 @@ public class ProjectService {
 	public boolean removeEmptyProject(){
 		boolean result = false;
 		if(pDao.deleteEmptyProject()>0) {
+			
+			
 			result = true;
 		}
 		return result;
