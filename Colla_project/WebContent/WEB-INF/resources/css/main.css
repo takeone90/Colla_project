@@ -894,14 +894,20 @@ div {
 #aboutUs-member .memberInfo+.memberInfo {
 	margin-left: 93.3px;
 }
-
+#aboutUs-member .memberInfo .front>div {
+	width: 250px;
+	height: 313px;
+	
+}
 #aboutUs-member .memberInfo .front img {
-	width: 100%;
+	width: auto;
+    height: 100%;
 }
 
-#aboutUs-member .memberInfo .front img+p {
+#aboutUs-member .memberInfo .front div+p {
 	font-size: 15px;
 	color: #EC6D63;
+	margin-top: 13px;
 }
 
 #aboutUs-member .memberInfo .front p+p {

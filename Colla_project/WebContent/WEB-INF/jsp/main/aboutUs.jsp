@@ -148,17 +148,19 @@ $(function() {
 								<div class="memberInfo">
 									<div class="aboutUs-card">
 										<div class="front card">
-									 		<img src="${contextPath }/img/memberTK.png" />
+											<div>
+												<img src="${contextPath }/img/memberTK.jpg" />
+											</div>
 											<p>CEO</p>
 											<p>이태권</p>
 										 </div>
 										<div class="back card">
 											<ul>
-												<li class="memberMenu"><i class="far fa-newspaper"></i> board</li>
-												<li><i class="far fa-newspaper"></i> menu</li>
-												<li><i class="far fa-newspaper"></i> menu</li>
-												<li><i class="far fa-newspaper"></i> menu</li>
-												<li><i class="far fa-newspaper"></i> menu</li>
+												<li>Main</li>
+												<li>Board</li>
+												<li>Chat</li>
+												<li>Pay</li>
+												<li>Server</li>
 											</ul>
 										</div>
 									</div>
@@ -167,17 +169,19 @@ $(function() {
 								<div class="memberInfo">
 									<div class="aboutUs-card">
 										<div class="front card">
-									 		<img src="${contextPath }/img/memberTK.png" />
+									 		<div>
+												<img src="${contextPath }/img/memberMK.jpg" />
+											</div>
 											<p>Software Engineer</p>
 											<p>김미경</p>
 										 </div>
 										<div class="back card">
 											<ul>
-												<li><i class="far fa-newspaper"></i> board</li>
-												<li><i class="far fa-newspaper"></i> menu</li>
-												<li><i class="far fa-newspaper"></i> menu</li>
-												<li><i class="far fa-newspaper"></i> menu</li>
-												<li><i class="far fa-newspaper"></i> menu</li>
+												<li>My Page</li>
+												<li>Chat</li>
+												<li>Project</li>
+												<li>Login</li>
+												<li>Join</li>
 											</ul>
 										</div>
 									</div>
@@ -186,17 +190,19 @@ $(function() {
 								<div class="memberInfo">
 									<div class="aboutUs-card">
 										<div class="front card">
-									 		<img src="${contextPath }/img/memberTK.png" />
+									 		<div>
+												<img src="${contextPath }/img/memberSB.jpg" />
+											</div>
 											<p>Software Engineer</p>
 											<p>김수빈</p>
 										 </div>
 										<div class="back card">
 											<ul>
-												<li><i class="far fa-newspaper"></i> board</li>
-												<li><i class="far fa-newspaper"></i> menu</li>
-												<li><i class="far fa-newspaper"></i> menu</li>
-												<li><i class="far fa-newspaper"></i> menu</li>
-												<li><i class="far fa-newspaper"></i> menu</li>
+												<li>Chat</li>
+												<li>Workspace</li>
+												<li>Project</li>
+												<li>Alarm</li>
+												<li>Design</li>
 											</ul>
 										</div>
 									</div>
@@ -204,17 +210,19 @@ $(function() {
 								<div class="memberInfo">
 									<div class="aboutUs-card">
 										<div class="front card">
-									 		<img src="${contextPath }/img/memberTK.png" />
+									 		<div>
+												<img src="${contextPath }/img/memberHS.jpg" />
+											</div>
 											<p>Software Engineer</p>
 											<p>박혜선</p>
 										 </div>
 										<div class="back card">
 											<ul>
-												<li><i class="far fa-newspaper"></i> board</li>
-												<li><i class="far fa-newspaper"></i> menu</li>
-												<li><i class="far fa-newspaper"></i> menu</li>
-												<li><i class="far fa-newspaper"></i> menu</li>
-												<li><i class="far fa-newspaper"></i> menu</li>
+												<li>Main</li>
+												<li>Calendar</li>
+												<li>Project</li>
+												<li>Login</li>
+												<li>Join</li>
 											</ul>
 										</div>
 									</div>
