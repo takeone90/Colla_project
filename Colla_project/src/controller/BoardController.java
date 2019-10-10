@@ -32,11 +32,13 @@ import model.Board;
 import model.BoardFile;
 import model.Member;
 import model.SetAlarm;
+import model.Workspace;
 import service.AlarmService;
 import service.BoardService;
 import service.FileService;
 import service.MemberService;
 import service.SetAlarmService;
+import service.WorkspaceService;
 
 @Controller
 @RequestMapping("/board")
@@ -53,6 +55,9 @@ public class BoardController {
 	
 	@Autowired
 	private MemberService mService;
+	
+	@Autowired
+	private WorkspaceService wService;
 	
 	@Autowired
 	private SimpMessagingTemplate smt;
@@ -113,9 +118,11 @@ public class BoardController {
 		param.put("page", page);
 		param.put("type",type);
 		param.put("keyword",keyword);
-		
+		Workspace currWs = wService.getWorkspace(wNum);
 		List<Board> bList = bService.getBoardListPage(param);
 		model.addAttribute("bList", bList);
+		session.setAttribute("currWnum", wNum);
+		session.setAttribute("currWname", currWs.getName());
 		session.setAttribute("listInf", param);
 		return "/board/boardList";
 	}

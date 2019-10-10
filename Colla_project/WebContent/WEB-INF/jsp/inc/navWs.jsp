@@ -47,6 +47,13 @@
 		$("#memberInfoModal").fadeIn(100);
 	}
 	$(function(){
+		
+		$(document.body).keydown(function(key){
+			if(key.keyCode==27){
+				$(".attachModal").fadeOut(100);
+			}
+		});
+		
 		if($("#currWnum").val()!="" && $("#pageType").val()!="workspace"){
 			loadChatList();
 			loadProjectList();	
