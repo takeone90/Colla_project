@@ -77,9 +77,9 @@
 .myPageAccount .myPageContent:first-child .myPageTitle+.myPageContentRow p:nth-child(1){
 	padding: 20.5px 16px;
 }
-.myPageAccount .myPageContent:first-child .myPageTitle+.myPageContentRow p+p{
-	    font-size: 13px;
-    font-weight: 200;
+.content.msg{
+	font-size: 13px;
+    font-weight: 300;
 	padding: 20.5px 0px 20.5px 16px;
 }
 

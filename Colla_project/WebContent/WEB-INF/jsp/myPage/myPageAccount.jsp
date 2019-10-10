@@ -35,7 +35,7 @@ function removeMember(){
 						</div>
 						<div class="myPageContentRow clearFix modifyRow" onclick="location.href='${contextPath}/profileImgModifyForm'">
 							<p class="title">사진</p>
-							<p class="content">사진을 추가하여 계정을 맞춤 설정합니다.</p>
+							<p class="content msg">사진을 추가하여 계정을 맞춤 설정합니다.</p>
 							<div id="profileImg">
 								<img alt="나의 프로필 사진" src="${contextPath }/showProfileImg" />
 							</div>
@@ -47,12 +47,24 @@ function removeMember(){
 							<p><i class="fas fa-chevron-right"></i></p>
 						</div>
 						<div class="contentLine"></div>
-						<div class="myPageContentRow clearFix modifyRow" onclick="location.href='${contextPath}/checkPassForm'">
-							<div></div>
-							<p class="title">비밀번호</p>
-							<p class="content">******</p>
-							<p><i class="fas fa-chevron-right"></i></p>
-						</div>
+						<c:choose>
+							<c:when test="${requestScope.member.mType eq 'snsJoinMember' }">
+								<div class="myPageContentRow clearFix">
+									<p class="title">비밀번호</p>
+									<p class="content msg">sns 가입 멤버는 비밀번호 수정이 불가합니다.</p>
+								</div>
+							</c:when>
+							<c:otherwise>
+								<div class="myPageContentRow clearFix modifyRow"
+									onclick="location.href='${contextPath}/checkPassForm'">
+									<p class="title">비밀번호</p>
+									<p class="content">******</p>
+									<p>
+										<i class="fas fa-chevron-right"></i>
+									</p>
+								</div>
+							</c:otherwise>
+						</c:choose>
 					</div>
 					<div class="myPageContent">
 						<div class="myPageTitle">
