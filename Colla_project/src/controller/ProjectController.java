@@ -111,12 +111,8 @@ public class ProjectController {
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
-		
 		if((onlyEndDate-onlyStartDate)<0) {
-			PrintWriter out = response.getWriter();
-			out.println("<script>alert('종료날짜는 시작날짜 이후로 설정해주세요');</script>");
-			out.flush();
-			return "/project/projectMain?wNum="+wNum;	
+			return "redirect:loading?info=dateError";
 		}else {
 			int pNum = pService.addProject(pName, wNum, pDetail, encStartDate, encEndDate, mNum); //프로젝트 추가 & 채팅방 추가
 			String[] mNumListForInvitePj = request.getParameterValues("mNumListForInvitePj");
@@ -138,11 +134,8 @@ public class ProjectController {
 					smt.convertAndSend("/category/alarm/"+m.getNum(),aService.getAlarm(aNum));								
 				}
 			}
-			return "redirect:projectMain?wNum="+wNum;
-			
-			
 		}
-		
+		return "redirect:projectMain?wNum="+wNum;
 	}
 	
 	@RequestMapping(value="/inviteProject",method=RequestMethod.POST)

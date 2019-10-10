@@ -27,7 +27,10 @@
 			if(info == "duplicatedLogin"){
 				window.alert("동일한 아이디로 로그인되어 로그아웃합니다.");
 				window.location.href="/loginForm";
-			} else if(info == "duplicatedJoin") {
+			} else if(info == "dateError") {
+				window.alert("날짜 잘못 함");
+				window.location.href="/projectMain?wNum=${sessionScope.currWnum}";
+			}  else if(info == "duplicatedJoin") {
 				window.alert("이미 회원가입된 아이디입니다.");
 				window.location.href="/loginForm";
 			} else {
