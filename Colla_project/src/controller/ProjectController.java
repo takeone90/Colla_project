@@ -26,6 +26,7 @@ import model.ProjectMember;
 import model.Workspace;
 import model.WsMember;
 import service.AlarmService;
+import service.CalendarService;
 import service.ChatRoomMemberService;
 import service.ChatRoomService;
 import service.MemberService;
@@ -60,6 +61,8 @@ public class ProjectController {
 	private MemberService mService;
 	@Autowired
 	private TodoService tService;
+	@Autowired
+	private CalendarService cService;
 	@RequestMapping("/projectMain") //projectMain으로 이동
 	public String showProjectMain(HttpSession session, int wNum, Model model) {
 		List<Project> pList = pService.getAllProjectByWnum(wNum); //프로젝트 리스트를 가져온다..
@@ -146,6 +149,7 @@ public class ProjectController {
 			System.out.println("해당 프로젝트에 멤버가 없는게 확인됐으므로 모든 td리스트 지웁니다");
 			tService.removeAllTodoByPnum(pNum);
 		}
+		cService.removeCalendar(pService.getProject(pNum).getCalNum()); //일정 삭제
 		pService.removeEmptyProject();
 		return result;
 	}
