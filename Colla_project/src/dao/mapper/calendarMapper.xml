@@ -8,11 +8,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			select cal_seq.nextval from dual
 		</selectKey>
 		insert into calendar(cal_num, m_num, w_num, cal_type, cal_start_date, cal_end_date, cal_title, cal_content, cal_regDate, cal_annually, cal_monthly, cal_yearCalendar, cal_color) 
-		values(#{cNum}, #{mNum}, #{wNum}, #{type}, TO_DATE(#{startDate},'YYYY-MM-DD'),TO_DATE(#{endDate},'YYYY-MM-DD'), #{title}, #{content}, sysdate, #{annually}, #{monthly}, #{yearCalendar}, #{color})
+		values(#{cNum}, #{mNum}, #{wNum}, #{type}, TO_DATE(#{startDate},'RRRR-MM-DD'), TO_DATE(#{endDate},'RRRR-MM-DD'), #{title}, #{content}, sysdate, #{annually}, #{monthly}, #{yearCalendar}, #{color})
 	</insert>
 	<update id="updateCalendar" parameterType="calendar">
 		update calendar
-		set m_num=#{mNum}, w_num=#{wNum}, cal_type=#{type}, cal_start_date=#{startDate}, cal_end_date=#{endDate}, cal_title=#{title}, cal_content=#{content}, cal_annually=#{annually}, cal_monthly=#{monthly}, cal_yearCalendar=#{yearCalendar}, cal_color=#{color} 
+		set m_num=#{mNum}, w_num=#{wNum}, cal_type=#{type}, cal_start_date=TO_DATE(#{startDate},'RRRR-MM-DD'), cal_end_date=TO_DATE(#{endDate},'RRRR-MM-DD'), cal_title=#{title}, cal_content=#{content}, cal_annually=#{annually}, cal_monthly=#{monthly}, cal_yearCalendar=#{yearCalendar}, cal_color=#{color} 
 		where cal_num=#{cNum}
 	</update>
 	<delete id="deleteCalendar" parameterType="int">
@@ -27,8 +27,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	<select id="selectAllCalendarByMonth" parameterType="map" resultMap="calendarMap">
 		select * from calendar where w_num=#{wNum}
-		and cal_start_date <![CDATA[<=]]> TO_DATE(#{startDate},'YYYY-MM-DD')
-		and cal_end_date <![CDATA[>=]]> TO_DATE(#{endDate},'YYYY-MM-DD')
+		and cal_start_date <![CDATA[<=]]> TO_DATE(#{startDate},'RRRR-MM-DD')
+		and cal_end_date <![CDATA[>=]]> TO_DATE(#{endDate},'RRRR-MM-DD')
 	</select>
 	<select id="selectAllCalendarSearched" parameterType="map" resultMap="calendarMap">
 		select rownum, cal_title, cal_content, m_name, cal_start_date, cal_end_date
