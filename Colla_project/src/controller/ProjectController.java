@@ -1,5 +1,7 @@
 package controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -10,6 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -88,38 +91,58 @@ public class ProjectController {
 	//-------------------------------------------------------------------------------CRUD 
 	
 	@RequestMapping(value="/addProject", method = RequestMethod.POST)
-	public String addProject(String pName, int wNum, String pDetail, String startDate, String endDate, HttpSession session, HttpServletRequest request) throws ParseException {
+	public String addProject(String pName, int wNum, String pDetail, String startDate, String endDate, 
+			HttpSession session, 
+			HttpServletRequest request,
+			HttpServletResponse response) throws ParseException, IOException {
+		response.setContentType("text/html; charset=UTF-8");
 		Member member = (Member)session.getAttribute("user");
 		int mNum = member.getNum();
 		SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd");
-		Date encStartDate = dt.parse(startDate);
-		Date encEndDate = dt.parse(endDate);
-//		Timestamp tsStartDate = (Timestamp) encStartDate;
-//		Timestamp tsEndDate = (Timestamp) encEndDate;
-//		if((tsStartDate - tsEndDate)>0) {
-//			
-//		}
-		int pNum = pService.addProject(pName, wNum, pDetail, encStartDate, encEndDate, mNum); //프로젝트 추가 & 채팅방 추가
-		String[] mNumListForInvitePj = request.getParameterValues("mNumListForInvitePj");
-		List<Member> alarmTargetMemberList = new ArrayList<Member>();
-		if(mNumListForInvitePj != null) { //프로젝트 초대 멤버 추가
-			for(String stringMnum : mNumListForInvitePj) {
-				int num = Integer.parseInt(stringMnum);
-				Member inviteMember = mService.getMember(num);
-				alarmTargetMemberList.add(inviteMember);
-				pmService.addProjectMember(pNum, num); //프로젝트에 초대 멤버들 추가 
-				
-				crmService.addChatRoomMember(pService.getProject(pNum).getCrNum(), num, wNum); //채팅방에 초대 멤버들 추가
-			}
+		Date encStartDate = null;
+		Date encEndDate = null;
+		int onlyStartDate = 0;
+		int onlyEndDate = 0;
+		try {
+			encStartDate = dt.parse(startDate);
+			encEndDate = dt.parse(endDate);
+			onlyStartDate = encStartDate.getDate();
+			onlyEndDate = encEndDate.getDate();
+		} catch (ParseException e) {
+			e.printStackTrace();
 		}
-		for(Member m : alarmTargetMemberList) {
-			if(m.getNum()!=member.getNum()) {
-				//나한텐 알림X
-				int aNum = aService.addAlarm(wNum, m.getNum(), member.getNum(), "pInvite", wNum);
-				smt.convertAndSend("/category/alarm/"+m.getNum(),aService.getAlarm(aNum));								
+		
+		if((onlyEndDate-onlyStartDate)<0) {
+			PrintWriter out = response.getWriter();
+			out.println("<script>alert('종료날짜는 시작날짜 이후로 설정해주세요');</script>");
+			out.flush();
+			return "/project/projectMain?wNum="+wNum;	
+		}else {
+			int pNum = pService.addProject(pName, wNum, pDetail, encStartDate, encEndDate, mNum); //프로젝트 추가 & 채팅방 추가
+			String[] mNumListForInvitePj = request.getParameterValues("mNumListForInvitePj");
+			List<Member> alarmTargetMemberList = new ArrayList<Member>();
+			if(mNumListForInvitePj != null) { //프로젝트 초대 멤버 추가
+				for(String stringMnum : mNumListForInvitePj) {
+					int num = Integer.parseInt(stringMnum);
+					Member inviteMember = mService.getMember(num);
+					alarmTargetMemberList.add(inviteMember);
+					pmService.addProjectMember(pNum, num); //프로젝트에 초대 멤버들 추가 
+					
+					crmService.addChatRoomMember(pService.getProject(pNum).getCrNum(), num, wNum); //채팅방에 초대 멤버들 추가
+				}
 			}
+			for(Member m : alarmTargetMemberList) {
+				if(m.getNum()!=member.getNum()) {
+					//나한텐 알림X
+					int aNum = aService.addAlarm(wNum, m.getNum(), member.getNum(), "pInvite", wNum);
+					smt.convertAndSend("/category/alarm/"+m.getNum(),aService.getAlarm(aNum));								
+				}
+			}
+			return "redirect:projectMain?wNum="+wNum;
+			
+			
 		}
-		return "redirect:projectMain?wNum="+wNum;
+		
 	}
 	
 	@RequestMapping(value="/inviteProject",method=RequestMethod.POST)

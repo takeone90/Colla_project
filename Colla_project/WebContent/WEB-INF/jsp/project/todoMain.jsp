@@ -104,7 +104,7 @@
 					<li class="onePmMember" data-mNum="${onePm.mNum}">
 						<div class="tdMemberInfo">
 								<div class='profileImg' align="center">
-									<img alt='프로필사진' src='${contextPath}/showProfileImg?num=${onePm.mNum}'>
+									<img alt='프로필사진' src='${contextPath}/showProfileImg?num=${onePm.mNum}' onclick="showProfileInfoModal(${onePm.mNum});">
 								</div>
 								<p style="text-align:center;">${onePm.mName}</p>
 						</div>

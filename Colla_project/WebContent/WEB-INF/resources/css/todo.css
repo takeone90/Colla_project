@@ -171,6 +171,7 @@
 }
 
 .selectTodoMemberUL li{
+	width : 50px;
 	padding-top: 7px;
     padding-bottom: 7px;
 	display: inline-block;
@@ -190,6 +191,9 @@
 	display: none;
 }
 #addTodoModal .selectTodoMemberUL p,#modifyTodoModal .selectTodoMemberUL p{
+	text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
 	font-size: 12px;
 	margin-top:5px;
 }
