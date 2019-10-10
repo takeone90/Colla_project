@@ -1,35 +1,29 @@
 package test;
 
 
-import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import model.ChatMessage;
-import model.Todo;
-import service.ChatMessageService;
-import service.TodoService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("file:WebContent/WEB-INF/spring/root-context.xml")
 public class test {
-	@Autowired
-	private ChatMessageService cmService;
-	@Autowired
-	private TodoService tdService;
 	
 	@Test
-	public void serviceTest() {
-		BCryptPasswordEncoder scpwd = new BCryptPasswordEncoder();
+	public void serviceTest() throws ParseException {
+		String startDate = "2019-10-01";
+		String endDate = "2019-10-10";
+		SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd");
+		Date encStartDate = dt.parse(startDate);
+		Date encEndDate = dt.parse(endDate);
+		System.out.println("encStartDate : " + encStartDate);
+		System.out.println("encEndDate : " + encEndDate);
 		
-		String password = scpwd.encode("123");
-		System.out.println(password);
 	}
 }

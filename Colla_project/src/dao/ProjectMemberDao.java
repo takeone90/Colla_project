@@ -9,6 +9,7 @@ import model.ProjectMember;
 public interface ProjectMemberDao {
 	public int insertProjectMember(ProjectMember pm);
 	public int deleteProjectMember(@Param("pNum")int pNum,@Param("mNum")int mNum);
+	public int deleteAllProjectMemberByMnum(int mNum);
 	public ProjectMember selectProjectMember(@Param("pNum")int pNum,@Param("mNum")int mNum);
 	public List<ProjectMember> selectAllProjectMemberByPnum(int pNum);
 }

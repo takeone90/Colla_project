@@ -346,7 +346,7 @@ $(function(){
 			<i class="fas fa-bell"></i>
 		</div>
 	</div>
-	<div id="alarmInfoArea">
+	<div id="alarmInfoArea" class="collaScroll">
 		
 	</div>
 	
