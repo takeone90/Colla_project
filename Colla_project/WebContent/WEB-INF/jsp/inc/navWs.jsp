@@ -39,12 +39,12 @@
 					}
 					memberProfileImgDiv.append(imgTag);
 					memberProfileInfoDiv.append(modalProfileInfoTag);
+					$("#memberInfoModal").fadeIn(100);
 				},
 				error : function(){
 					alert("프로필사진 정보 불러오기 에러발생");
 				}
 			});
-		$("#memberInfoModal").fadeIn(100);
 	}
 	$(function(){
 		

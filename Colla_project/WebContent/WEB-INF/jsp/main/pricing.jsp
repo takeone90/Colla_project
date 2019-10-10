@@ -86,7 +86,7 @@
 								</div>
 							</div>
 							<div>
-								<button class="price-start-button" onclick="showPaymentPage('Personal')">무료 평가판 시작</button>							
+								<button class="price-start-button" onclick="showPaymentPage('Personal')">Personal 시작</button>							
 							</div>
 						</div>
 
@@ -138,7 +138,7 @@
 								</div>
 							</div>
 							<div>
-								<button class="price-start-button" onclick="showPaymentPage('Business')">무료 평가판 시작</button>
+								<button class="price-start-button" onclick="showPaymentPage('Business')">Business 시작</button>
 							</div>
 						</div>
 
@@ -190,7 +190,7 @@
 								</div>
 							</div>
 							<div>
-								<button class="price-start-button" onclick="showPaymentPage('Enterprise')">무료 평가판 시작</button>
+								<button class="price-start-button" onclick="showPaymentPage('Enterprise')">Enterprise 시작</button>
 							</div>
 						</div>
 					</div>
