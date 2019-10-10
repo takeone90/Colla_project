@@ -99,7 +99,7 @@ display : none;
 }
 .wsDetail p{
 	color: #686b6e;
-	font-weight: bolder;
+	font-weight: 700;
 }
 .openedWs .showWsDetail{
 	color : #686B6E;
@@ -300,4 +300,10 @@ a[class="addInviteInput"]:hover,a[class="removeInviteInput"]:hover{
 .test2{
 	width: 39%;
 	position : absolute;
+}
+.wsDetail .emptyMsg{
+	font-weight: 400;
+    margin-left: 2px;
+    font-size: 14px;
+    color: #a79a9a;
 }
