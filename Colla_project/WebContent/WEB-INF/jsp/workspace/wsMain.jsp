@@ -78,6 +78,11 @@
 			$("#addChatModal").fadeOut(300);
 			if(!$("#addMemberModal").is(e.target) && $("#addMemberModal").has(e.target).length===0)
 			$("#addMemberModal").fadeOut(300);
+			if(!$("#alarmInfoArea").is(e.target) && $("#alarmInfoArea").has(e.target).length===0){
+				$("#alarmInfoArea").slideUp();
+				alarmToggleVal = 0;	
+				$("#deleteAllAlarm").remove();
+			}
 			return false;
 		});
 		

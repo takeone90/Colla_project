@@ -10,7 +10,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<delete id="deleteProjectMember" parameterType="int">
 		delete project_member where p_num=#{pNum} and m_num=#{mNum}
 	</delete>
-	
+	<delete id="deleteAllProjectMemberByMnum" parameterType="int">
+		delete project_member where m_num=#{mNum}
+	</delete>
 	<select id="selectProjectMember" parameterType="int" resultMap="pmMap">
 		select * from project_member where p_num=#{pNum} and m_num=#{mNum}
 	</select>
