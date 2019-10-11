@@ -709,38 +709,53 @@ function showYearSchedule(today) {
 				(function(ii) {
 					var title = allYearSchedule[ii].title;
 					
+					
 					var startDateStr = allYearSchedule[ii].startDate; //String 형식 
-					var startDateYear = startDateStr.substring(0, 4); //
-					var startDateMonth = startDateStr.substring(5, 7);	
+					var startDateYear = startDateStr.substring(0, 4); //2019
+					var startDateMonth = startDateStr.substring(5, 7); //10
 					
-					var endDateStr = allYearSchedule[ii].endDate;
-					var endDateYear = endDateStr.substring(0, 4);
-					var endDateMonth = endDateStr.substring(5, 7);
+					var endDateStr = allYearSchedule[ii].endDate; 
+					var endDateYear = endDateStr.substring(0, 4); //2019
+					var endDateMonth = endDateStr.substring(5, 7); //11
 					
-					var sMonthRow = monthChangeYear(startDateMonth); 
-					var eMonthRow = monthChangeYear(endDateMonth);
+					var todayYear = startDateStr.substring(0, 4);
+					
+					var sMonthRow = monthChangeYear(startDateMonth); //0, 1, 2
+					var eMonthRow = monthChangeYear(endDateMonth); //0, 1, 2
 					var color = allYearSchedule[ii].color;
 					
-					if(sMonthRow == eMonthRow) {
+					if(sMonthRow == eMonthRow) { //시작일의 줄과 종료일의 줄이 같은 경우 
 						var dateNumber = startDateYear+"-"+sMonthRow;
 						var tr = trMakerFullLineYear(startDateMonth, (endDateMonth-startDateMonth)+1, title, color, 1);
 						$("#"+dateNumber).after(tr);
-						tr.children('.middleTdYear').on("click", function() {
-							putContentIntoTdYear(allYearSchedule[ii]);
-						})
-					} else {
+						tr.children('.middleTdYear').on("click", function() { putContentIntoTdYear(allYearSchedule[ii]); });
+						
+						
+						
+					} else { //시작일의 줄과 종료일의 줄이 다른 경우
+						console.log("첫줄");
 						var sDateNumber = startDateYear+"-"+sMonthRow; //첫줄
-						var tr = trMakerFullLineYear(startDateMonth, (endDateMonth-startDateMonth), title, color, 2);
+						
+// 						trMakerLeftLineYear(month, title, color)
+						var tr = trMakerLeftLineYear(startDateMonth, title, color);
 						$("#"+sDateNumber).after(tr);
-						tr.children('.middleTdYear').on("click", function() {
-							putContentIntoTdYear(allYearSchedule[ii]);
-						})
+						tr.children('.middleTdYear').on("click", function() { putContentIntoTdYear(allYearSchedule[ii]); });
+						
+						//중간줄..
+						if((eMonthRow-sMonthRow)>1) {
+							console.log("중간줄");
+							var dateNumber = todayYear+"-"+1;
+							var tr = trMakerFullLineYear(5, 4, title, color, 4);	
+							$("#"+dateNumber).after(tr);
+							tr.children('.middleTdYear').on("click", function() { putContentIntoTdYear(allYearSchedule[ii]); });
+						}
+						
+						console.log("마지막줄");
 						var eDateNumber = endDateYear+"-"+eMonthRow; //막줄
-						var tr = trMakerFullLineYear(endDateMonth, (endDateMonth-startDateMonth), title, color, 3);
+// 						trMakerRightLineYear(month, title, color)
+						var tr = trMakerRightLineYear(endDateMonth, title, color);
 						$("#"+eDateNumber).after(tr);
-						tr.children('.middleTdYear').on("click", function() {
-							putContentIntoTdYear(allYearSchedule[ii]);
-						})		
+						tr.children('.middleTdYear').on("click", function() { putContentIntoTdYear(allYearSchedule[ii]); });
 					}
 				})(i)
 			}
@@ -753,32 +768,65 @@ function trMakerFullLineYear(month, gap, title, color, type) { //앞,중간,뒤
 	if(tmp == -1) {	
 		tmp = 3; 
 	} //0, 1, 2, 3
-	for(var l=0; l<tmp; l++) { //빈 칸
+	for(var l=0; l<tmp; l++) { //앞 빈 칸
 		let tdEtc = $("<td colspan='1'; style='margin-bottom: 1pt; margin-top: 1pt;'></td>");
 		tr.append(tdEtc);
 	}
 	var td = "";
 	if(type == 1) {
 		td = $("<td class='middleTdYear' colspan="+gap+"><div class='middleDivYear complete' style=\"background-color: "+color+"\">"+"&nbsp;&nbsp;"+title+"</div></td>");
-	} else if(type == 2) {
-		td = $("<td class='middleTdYear' colspan="+gap+"><div class='middleDivYear left' style=\"background-color: "+color+"\">"+"&nbsp;&nbsp;"+title+"</div></td>");
-	} else if(type == 3) {
-		td = $("<td class='middleTdYear' colspan="+gap+"><div class='middleDivYear right' style=\"background-color: "+color+"\">"+"&nbsp;&nbsp;"+title+"</div></td>");
 	} else if(type == 4) {
 		td = $("<td class='middleTdYear' colspan="+gap+"><div class='middleDivYear full' style=\"background-color: "+color+"\">"+"&nbsp;&nbsp;"+title+"</div></td>");
 	}
 	tr.append(td);
 	var numberOfTdEtc = 4-tmp-gap;
-	for(var l=0; l<numberOfTdEtc; l++) {
+	for(var l=0; l<numberOfTdEtc; l++) { //뒤 빈 칸
 		let tdEtc = $("<td colspan='1'; style='margin-bottom: 1pt; margin-top: 1pt;'></td>");
 		tr.append(tdEtc);
 	}
 	return tr;
 }
+function trMakerLeftLineYear(month, title, color) {
+	var tr = $("<tr style='border: 0px white;' height='20'>");
+	var lastMonth = Number(monthChangeYear(month)+1)*4;
+	var gap = lastMonth-month+1;
+	var tmp = ((month%4)-1); //앞 빈 칸 몇 번 반복?
+	if(tmp == -1) {	
+		tmp = 3; 
+	}
+	for(var l=0; l<tmp; l++) { //앞 빈 칸
+		let tdEtc = $("<td colspan='1'; style='margin-bottom: 1pt; margin-top: 1pt;'></td>");
+		tr.append(tdEtc);
+	}
+	var td = "";
+	td = $("<td class='middleTdYear' colspan="+gap+"><div class='middleDivYear left' style=\"background-color: "+color+"\">"+"&nbsp;&nbsp;"+title+"</div></td>");
+	tr.append(td);
+	return tr;
+}
+function trMakerRightLineYear(month, title, color) {
+	var tr = $("<tr style='border: 0px white;' height='20'>");
+	var lastMonth = Number(monthChangeYear(month))*4; 
+	var gap = month-lastMonth;	
+	var tmp = ((month%4)-1); //뒤 빈 칸 몇 번 반복?
+	if(tmp == -1) {	
+		tmp = 3; 
+	}
+	var td = "";
+	td = $("<td class='middleTdYear' colspan="+gap+"><div class='middleDivYear right' style=\"background-color: "+color+"\">"+"&nbsp;&nbsp;"+title+"</div></td>");
+	tr.append(td);
+	var numberOfTdEtc = 4-tmp-gap;
+	for(var l=0; l<numberOfTdEtc; l++) { //뒤 빈 칸
+		let tdEtc = $("<td colspan='1'; style='margin-bottom: 1pt; margin-top: 1pt;'></td>");
+		tr.append(tdEtc);
+	}
+	return tr;
+}
+
+
 function markingOnDateYear(dateOrigin) {
 	$("#"+dateOrigin).css({"background-color": "#E6E2E1"});
 }
-function monthChangeYear(monthTmp) {
+function monthChangeYear(monthTmp) { //몇번째 줄?
 	var rowNum = 0; 
 	if(monthTmp >=1 && monthTmp <= 4) {
 		rowNum = 0;
@@ -787,7 +835,7 @@ function monthChangeYear(monthTmp) {
 	} else if(monthTmp >=9 && monthTmp <= 12) {
 		rowNum = 2;
 	}
-	return rowNum;
+	return rowNum; //0, 1, 2
 }
 function putContentIntoTdYear(a) {
 	$("#detailFormYear").fadeIn(300);

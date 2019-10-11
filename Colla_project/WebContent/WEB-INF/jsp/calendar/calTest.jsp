@@ -257,7 +257,7 @@ function getNumOfWeekRow(today) {
 	var lastDate = new Date(today.getFullYear(), today.getMonth()+1, 0); //해당 월의 막날
 	var lastDay = lastDate.getDate(); //해당 월의 막날 일자(lastDayDate - lastDay)
 	var numOfWeekRow = Math.ceil((lastDay+firstDayOW)/7);
-	return numOfWeekRow;
+	return numOfWeekRow; //(1~6)
 }
 function getRealStartDate(today) {
 	var firstDate = new Date(today.getFullYear(), today.getMonth(), 1); //해당 월의 첫날
@@ -266,7 +266,7 @@ function getRealStartDate(today) {
 	var lastDayPreMonth = lastDatePreMonth.getDate(); //이전 월의 막날 일자	
 	var realStartDay = lastDayPreMonth - (firstDayOW-1); //진짜 시작 일자
 	var realStartDate = new Date(today.getFullYear(), today.getMonth()-1, realStartDay); //진짜 시작 날짜
-	return realStartDate; //Date 타입
+	return realStartDate;	
 }
 function getRealLastDate(today) {
 	var lastDate = new Date(today.getFullYear(), today.getMonth()+1, 0); //해당 월의 막날	
@@ -282,7 +282,7 @@ function showSchedule(today) {
 	var type3 = $("#calType3").prop("checked");
 	var type4 = $("#calType4").prop("checked");
 	$.ajax({ 
-		url:"showAllCalendar",
+		url:"/showAllCalendar",
 		data: {"type1":type1, "type2":type2, "type3":type3, "type4":type4, "today":formatChange(new Date(today.getFullYear(), today.getMonth()+1, 0))},
 		type:"get",
 		dataType:"json",
@@ -308,25 +308,21 @@ function showSchedule(today) {
 					var endDateMonth = endDateStr.substring(5, 7); //09
 					var endDateYearMonth = endDateStr.substring(0, 7); //2019-09
 					var endDateDay = endDateStr.substring(8, 10); //25
+					//오늘 날짜 기준
+					var todayYearMonth = formatChangeHyphen(today).substring(0, 7);
 					
-					var weekCountOfFirstDate = whichWeek(startDateStr); //시작일이 몇 번째 주인지 구하기(0~5)
-					if(startDateStrDate.getMonth() != today.getMonth()) { weekCountOfFirstDate = 0; } //시작일이 이전달이면 0으로
-					
-					var weekCountOfLastDate = whichWeek(endDateStr); //종료일이 몇 번째 주인지 구하기(0~5)
-					if(endDateStrDate.getMonth() != today.getMonth()) {	weekCountOfLastDate = getNumOfWeekRow(today); } //종료일이 다음달이면 마지막주로 
-					
-					var weekCountOfFirstDate = whichWeek(startDateStr); //시작일이 몇 번째 주인지 구하기(0~5)
-					if(startDateStrDate < getRealStartDate(today)) {
+					var weekCountOfFirstDate = whichWeek(startDateStrDate); //시작일이 몇 번째 주인지 구하기(0~5)
+					if(startDateStrDate < getRealStartDate(today)) { //일정시작일이 진짜시작일보다 전일 경우
 						weekCountOfFirstDate = 0; 
-					} //시작일이 진짜시작일 전이면 0번째 주로 설정
+					} //일정시작일이 진짜시작일 전이면 0번째 주로 설정
 					
-					var weekCountOfLastDate = whichWeek(endDateStr); //종료일이 몇 번째 주인지 구하기(0~5)
+					var weekCountOfLastDate = whichWeek(endDateStrDate); //종료일이 몇 번째 주인지 구하기(0~5)
 					if(endDateStrDate > getRealLastDate(today)) {
-						weekCountOfLastDate = getNumOfWeekRow(today); 
-					} //종료일이 진짜종료일 후면 마지막주로 
+						weekCountOfLastDate = getNumOfWeekRow(today)-1;
+					} //일정종료일이 진짜종료일 후면 마지막 주로 설정
 					
-					var trClassWhereIWantToAppend = startDateYearMonth+"-"+(Number(weekCountOfFirstDate)-1); //tr 클래스 //첫번째 줄
-					var trClassWhereIWantToAppendLast = endDateYearMonth+"-"+(Number(weekCountOfLastDate)-1); //tr 클래스 //마지막 줄
+					var trClassWhereIWantToAppend = todayYearMonth+"-"+weekCountOfFirstDate; //tr 클래스 //첫번째 줄		
+					var trClassWhereIWantToAppendLast = todayYearMonth+"-"+weekCountOfLastDate; //tr 클래스 //마지막 줄
 				
 					var startDateOfThisSchedule = new Date(startDateYear, startDateMonth-1, startDateDay); //해당 일정 시작 날짜 구하기
 					var startDayOfThisSchedule = startDateOfThisSchedule.getDay(); //해당 일정 시작 요일 구하기(0~6)
@@ -337,8 +333,8 @@ function showSchedule(today) {
 					var color = allCalendar[ii].color;
 
 					if(getRealStartDate(today) <= startDateStrDate && getRealLastDate(today) >= endDateStrDate) { //월 안 넘어가는 경우
-						var dateDiff = Math.abs(weekCountOfLastDate-weekCountOfFirstDate); //첫날 주와 막날 주 간의 주 차이
-						if(dateDiff == 0) { //1줄 //시작일부터 종료일까지 기간
+						var dateDiff = weekCountOfLastDate-weekCountOfFirstDate; //첫날 주와 막날 주 간의 주 차이
+						if(dateDiff <= 0) { //1줄 //시작일부터 종료일까지 기간
 							var gap = Number(endDateStrDate.getTime()-startDateStrDate.getTime()) / (1000*60*60*24)+Number(1); 
 							var tr = trMaker(startDateStrDate, endDateStrDate, startDayOfThisSchedule, 6-endDayOfThisSchedule, 1, gap, title, color); //앞빈칸 뒷빈칸 링크 전부 포함 
 							$("#"+trClassWhereIWantToAppend).after(tr);
@@ -349,9 +345,9 @@ function showSchedule(today) {
 							$("#"+trClassWhereIWantToAppend).after(tr);
 							tr.children('.middleTd').on("click", function() { putContentIntoTd(allCalendar[ii]); });	
 							if(dateDiff>1) { //중간 줄
-								for(var i=weekCountOfFirstDate; i<weekCountOfLastDate-1; i++) {
+								for(var i=weekCountOfFirstDate+1; i<weekCountOfLastDate; i++) {
 									var tr = trMaker(startDateStrDate, endDateStrDate, 0, 0, 4, 7, title, color);
-									$("#"+startDateYearMonth+"-"+i).after(tr);
+									$("#"+todayYearMonth+"-"+i).after(tr);
 									tr.children('.middleTd').on("click", function() { putContentIntoTd(allCalendar[ii]); });
 								}
 							}
@@ -360,28 +356,49 @@ function showSchedule(today) {
 							$("#"+trClassWhereIWantToAppendLast).after(tr);
 							tr.children('.middleTd').on("click", function() { putContentIntoTd(allCalendar[ii]); });
 						}
-					} else { //월 넘어가는 경우											
-						var repeatGapFirstRow = Number(7)-Number(startDayOfThisSchedule); //첫 줄
-						var tr = trMaker(startDateStrDate, endDateStrDate, startDayOfThisSchedule, 0, 2, repeatGapFirstRow, title, color);
-						$("#"+trClassWhereIWantToAppend).after(tr);
-						tr.children('.middleTd').on("click", function() { putContentIntoTd(allCalendar[ii]); }); 	
-
-						for(var i=weekCountOfFirstDate; i<=findOutNumOfWeekRow(startDateStrDate); i++) {
-							var tr = trMaker(startDateStrDate, endDateStrDate, 0, 0, 4, 7, title, color);
-							var tmpid = startDateYearMonth+"-"+i;
-							$("#"+tmpid).after(tr);							
-							tr.children('.middleTd').on("click", function() { putContentIntoTd(allCalendar[ii]); });
-						}	
-						for(var i=0; i<weekCountOfLastDate-1; i++) {
-							var tr = trMaker(startDateStrDate, endDateStrDate, 0, 0, 4, 7, title, color);
-							$("#"+endDateYearMonth+"-"+i).after(tr);							
-							tr.children('.middleTd').on("click", function() { putContentIntoTd(allCalendar[ii]); });
-						}	
-						
-						var repeatGapLastRow = (Number(endDayOfThisSchedule)+Number(1)); //마지막 줄
-						var tr = trMaker(startDateStrDate, endDateStrDate, 0, 6-endDayOfThisSchedule, 3, repeatGapLastRow, title, color);
-						$("#"+trClassWhereIWantToAppendLast).after(tr);
-						tr.children('.middleTd').on("click", function() { putContentIntoTd(allCalendar[ii]); });
+					} else { //월 넘어가는 경우
+						var dateDiff = Math.abs(weekCountOfLastDate-weekCountOfFirstDate); //첫날 주와 막날 주 간의 주 차이
+						if(dateDiff <= 0) {
+							if(getRealStartDate(today) > startDateStrDate) { //이전달과 걸침
+								var repeatGapLastRow = (Number(endDayOfThisSchedule)+Number(1)); //마지막 줄
+								var tr = trMaker(startDateStrDate, endDateStrDate, 0, 6-endDayOfThisSchedule, 3, repeatGapLastRow, title, color);
+								$("#"+trClassWhereIWantToAppendLast).after(tr);
+								tr.children('.middleTd').on("click", function() { putContentIntoTd(allCalendar[ii]); });
+							} else if(getRealLastDate(today) < endDateStrDate) { //이후달과 걸침
+								var repeatGapFirstRow = Number(7)-Number(startDayOfThisSchedule); //첫 줄
+								var tr = trMaker(startDateStrDate, endDateStrDate, startDayOfThisSchedule, 0, 2, repeatGapFirstRow, title, color);
+								$("#"+trClassWhereIWantToAppend).after(tr);
+								tr.children('.middleTd').on("click", function() { putContentIntoTd(allCalendar[ii]); });
+							}
+						} else if(dateDiff >= 1) {
+							if(getRealStartDate(today) > startDateStrDate && getRealLastDate(today) >= endDateStrDate) { //이전달~이번달
+								for(var i=weekCountOfFirstDate; i<weekCountOfLastDate; i++) {
+									var tr = trMaker(startDateStrDate, endDateStrDate, 0, 0, 4, 7, title, color);
+									$("#"+todayYearMonth+"-"+i).after(tr);
+									tr.children('.middleTd').on("click", function() { putContentIntoTd(allCalendar[ii]); });
+								}
+								var repeatGapLastRow = (Number(endDayOfThisSchedule)+Number(1)); //마지막 줄
+								var tr = trMaker(startDateStrDate, endDateStrDate, 0, 6-endDayOfThisSchedule, 3, repeatGapLastRow, title, color);
+								$("#"+trClassWhereIWantToAppendLast).after(tr);
+								tr.children('.middleTd').on("click", function() { putContentIntoTd(allCalendar[ii]); });
+							} else if(getRealStartDate(today) <= startDateStrDate && getRealLastDate(today) < endDateStrDate) { //이번달~이후달
+								var repeatGapFirstRow = Number(7)-Number(startDayOfThisSchedule); //첫 줄
+								var tr = trMaker(startDateStrDate, endDateStrDate, startDayOfThisSchedule, 0, 2, repeatGapFirstRow, title, color);
+								$("#"+trClassWhereIWantToAppend).after(tr);
+								tr.children('.middleTd').on("click", function() { putContentIntoTd(allCalendar[ii]); });
+								for(var i=weekCountOfFirstDate+1; i<weekCountOfLastDate+1; i++) {
+									var tr = trMaker(startDateStrDate, endDateStrDate, 0, 0, 4, 7, title, color);
+									$("#"+todayYearMonth+"-"+i).after(tr);
+									tr.children('.middleTd').on("click", function() { putContentIntoTd(allCalendar[ii]); });
+								}
+							} else if(getRealStartDate(today) > startDateStrDate && getRealLastDate(today) < endDateStrDate) { //이전달~이후달
+								for(var i=weekCountOfFirstDate; i<weekCountOfLastDate+1; i++) {
+									var tr = trMaker(startDateStrDate, endDateStrDate, 0, 0, 4, 7, title, color);
+									$("#"+todayYearMonth+"-"+i).after(tr);
+									tr.children('.middleTd').on("click", function() { putContentIntoTd(allCalendar[ii]); });
+								}
+							}
+						}
 					}					
 				})(i)
 			}
@@ -531,17 +548,10 @@ function putContentIntoVacantTd(startDate, endDate) { //2019-09-26
 	$("#startDate").val(formatChangeSimple(startDate));
 	$("#endDate").val(formatChangeSimple(endDate));	
 }
-function whichWeek(dateStr) { //달(1~12) //달이 다를 경우..
-	var dateStrDate = new Date(dateStr);
-	var dateYMD = dateStr.substring(0, 10);
-	var dateYear = dateStr.substring(0, 4);
-	var dateMonth = dateStr.substring(5, 7);
-	var dateDate = dateStr.substring(8, 10);
-	var firstDateOfDate = new Date(dateYear, dateMonth-1, 1); //종료일이 있는 월의 첫날 구하기
-	var firstDayOfDate = firstDateOfDate.getDay(); //종료일 첫날 요일 구하기 
-	//종료일이 몇 번째 주인지 구하기
-	var weekCount = Math.ceil((Number(firstDayOfDate)+Number(dateDate))/7); 
-	return weekCount;
+function whichWeek(date) { //몇번째 주?
+	var gap = (date.getTime() - getRealStartDate(today).getTime())/1000/60/60/24;
+	var weekNumber = parseInt(gap/7); 
+	return weekNumber;
 }
 function findOutNumOfWeekRow(thisDay) {
 	var firstDay = new Date(thisDay.getFullYear(), thisDay.getMonth(), 1);
@@ -612,7 +622,7 @@ function nextYear() {
 	today = new Date(today.getFullYear()+1, today.getMonth(), 1);
 	moveMonth(today);
 }
-//----------------------------------------------------------------------------연간 달력
+//----------------------------------------------------------------------------연간 달력----------------------------------------------------------------------------
 $(function() {
 	thisYearCalendar(today);
 	showYearSchedule(today);
@@ -691,16 +701,16 @@ function showYearSchedule(today) {
 	var type4 = $("#calType4").prop("checked");
 	$.ajax({
 		url:"showYearCheckedCalendar",
-		data: {"type1":type1, "type2":type2, "type3":type3, "type4":type4},
+		data: {"type1":type1, "type2":type2, "type3":type3, "type4":type4, "today":formatChange(new Date(today.getFullYear(), today.getMonth()+1, 0))},
 		type:"get",
 		dataType:"json",
-		success: function(allYearSchedule) {	
+		success: function(allYearSchedule) { //리스트 반환	
 			for(var i in allYearSchedule) {
 				(function(ii) {
 					var title = allYearSchedule[ii].title;
 					
-					var startDateStr = allYearSchedule[ii].startDate;
-					var startDateYear = startDateStr.substring(0, 4);
+					var startDateStr = allYearSchedule[ii].startDate; //String 형식 
+					var startDateYear = startDateStr.substring(0, 4); //
 					var startDateMonth = startDateStr.substring(5, 7);	
 					
 					var endDateStr = allYearSchedule[ii].endDate;
@@ -1123,18 +1133,44 @@ function nextYearYear() {
 		<div id="calYearBody"></div>
 		<!-- 일정 상세 모달 --> 
 		<div id="detailFormYear" class="attachModal ui-widget-content">
-			<div class="modalHead">
-				<h3 style='font-weight: bolder; font-size: 30px'>일정 상세</h3>
-				<p>일정을 자세하게 보여드릴게요.</p>
-			</div>
+			<div class="header">
+				<!--파도 위 내용-->
+				<div class="inner-header flex">
+					<g><path fill="#fff"
+					d="M250.4,0.8C112.7,0.8,1,112.4,1,250.2c0,137.7,111.7,249.4,249.4,249.4c137.7,0,249.4-111.7,249.4-249.4
+					C499.8,112.4,388.1,0.8,250.4,0.8z M383.8,326.3c-62,0-101.4-14.1-117.6-46.3c-17.1-34.1-2.3-75.4,13.2-104.1
+					c-22.4,3-38.4,9.2-47.8,18.3c-11.2,10.9-13.6,26.7-16.3,45c-3.1,20.8-6.6,44.4-25.3,62.4c-19.8,19.1-51.6,26.9-100.2,24.6l1.8-39.7		
+					c35.9,1.6,59.7-2.9,70.8-13.6c8.9-8.6,11.1-22.9,13.5-39.6c6.3-42,14.8-99.4,141.4-99.4h41L333,166c-12.6,16-45.4,68.2-31.2,96.2	
+					c9.2,18.3,41.5,25.6,91.2,24.2l1.1,39.8C390.5,326.2,387.1,326.3,383.8,326.3z" /></g>
+					</svg>
+					<div class="joinBox-Head">
+						<h3 style='font-weight: bolder; font-size: 30px; color: white'>일정 상세</h3>
+						<p>일정을 자세하게 보여드릴게요.</p>
+					</div>
+				</div>			
+				<!--파도 시작-->
+				<div>
+					<svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+					viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+					<defs>
+					<path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+					</defs>
+						<g class="parallax">
+						<use xlink:href="#gentle-wave" x="48" y="0" fill="rgba(255,255,255,0.7" />
+						<use xlink:href="#gentle-wave" x="48" y="3" fill="rgba(255,255,255,0.5)" />
+						<use xlink:href="#gentle-wave" x="48" y="7" fill="#fff" />
+						</g>
+					</svg>
+				</div><!--파도 end-->
+			</div><!--header end-->
 			<div class="modalBody">
-				<form class="detailModalYear">
-					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
-					<input type="hidden" name="cNum" id="detailCNumYear">
+				<form class="detailModal">
+					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"> 
+					<input type="hidden" name="cNum" id="detailCNum">
 					<input type="hidden" name="mNum" id="mNum" value="${userData.mNum}">
 					<input type="hidden" name="wNum" id="wNum" value="${userData.wNum}">
-					<div>
-						<div class="titleDiv">
+					<div class="firstRow">
+						<div class="titleDiv">						
 							<h4>일정</h4>
 							<p class="modalTitle" id="detailTitleYear"></p>
 						</div>
@@ -1143,30 +1179,32 @@ function nextYearYear() {
 							<p id="detailTypeYear"></p>
 						</div>
 					</div>
-					<div class="dateDiv">
-						<h4>기간</h4>
-						<p>
-							<span id="detailStartDateYear"></span>
-							<span>~</span>
-							<span id="detailEndDateYear"></span>
-						</p>
-					</div>
-					<div class="checkboxDiv">
-						<input type="checkbox" name="yearCalendar" id="detailYearCalendarYear" value="yearCalendar" onclick="return false;">
-						<label class="checkboxbtn" for="detailYearCalendarYear">연간 달력</label>
-						<input type="checkbox" name="annually" id="detailAnnuallyYear" value="annually" onclick="return false;">
-						<label class="checkboxbtn" for="detailAnnuallyYear">매년 반복</label>
-						<input type="checkbox" name="monthly" id="detailMonthlyYear" value="monthly" onclick="return false;">
-						<label class="checkboxbtn" for="detailMonthlyYear">매월 반복</label>
-					</div>
-					<div>
+					<div class="middleRow">
+						<div class="dateDiv">
+							<h4>기간</h4>
+							<p id="detailDate">
+								<span id="detailStartDateYear"></span>
+								<span>~</span>
+								<span id="detailEndDateYear"></span>
+							</p>
+						</div>
+						<div class="checkboxDiv">
+							<input type="checkbox" name="yearCalendar" id="detailYearCalendarYear" value="yearCalendar" onclick="return false;">
+							<label class="checkboxbtn" for="detailYearCalendar">연간 달력</label> 	
+							<input type="checkbox" name="annually" id="detailAnnuallyYear" value="annually" onclick="return false;">
+							<label class="checkboxbtn" for="detailAnnually">매년 반복</label>				
+							<input type="checkbox" name="monthly" id="detailMonthlyYear" value="monthly" onclick="return false;">
+							<label class="checkboxbtn" for="detailMonthly">매월 반복</label>
+						</div>	
+					</div>					
+					<div class="lastRow">
 						<h4>내용</h4>
 						<p class="modalContent" id="detailContentYear"></p>
 					</div>
 					<div id="innerBtn">
 						<a href="#" id="detailFormYearClose">닫기</a>
 					</div>
-				</form>				
+				</form>
 			</div>
 		</div>
 	</div>	
