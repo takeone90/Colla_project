@@ -704,13 +704,13 @@ function showYearSchedule(today) {
 		data: {"type1":type1, "type2":type2, "type3":type3, "type4":type4, "today":formatChange(new Date(today.getFullYear(), today.getMonth()+1, 0))},
 		type:"get",
 		dataType:"json",
-		success: function(allYearSchedule) {	
+		success: function(allYearSchedule) { //리스트 반환	
 			for(var i in allYearSchedule) {
 				(function(ii) {
 					var title = allYearSchedule[ii].title;
 					
-					var startDateStr = allYearSchedule[ii].startDate;
-					var startDateYear = startDateStr.substring(0, 4);
+					var startDateStr = allYearSchedule[ii].startDate; //String 형식 
+					var startDateYear = startDateStr.substring(0, 4); //
 					var startDateMonth = startDateStr.substring(5, 7);	
 					
 					var endDateStr = allYearSchedule[ii].endDate;
@@ -1133,18 +1133,44 @@ function nextYearYear() {
 		<div id="calYearBody"></div>
 		<!-- 일정 상세 모달 --> 
 		<div id="detailFormYear" class="attachModal ui-widget-content">
-			<div class="modalHead">
-				<h3 style='font-weight: bolder; font-size: 30px'>일정 상세</h3>
-				<p>일정을 자세하게 보여드릴게요.</p>
-			</div>
+			<div class="header">
+				<!--파도 위 내용-->
+				<div class="inner-header flex">
+					<g><path fill="#fff"
+					d="M250.4,0.8C112.7,0.8,1,112.4,1,250.2c0,137.7,111.7,249.4,249.4,249.4c137.7,0,249.4-111.7,249.4-249.4
+					C499.8,112.4,388.1,0.8,250.4,0.8z M383.8,326.3c-62,0-101.4-14.1-117.6-46.3c-17.1-34.1-2.3-75.4,13.2-104.1
+					c-22.4,3-38.4,9.2-47.8,18.3c-11.2,10.9-13.6,26.7-16.3,45c-3.1,20.8-6.6,44.4-25.3,62.4c-19.8,19.1-51.6,26.9-100.2,24.6l1.8-39.7		
+					c35.9,1.6,59.7-2.9,70.8-13.6c8.9-8.6,11.1-22.9,13.5-39.6c6.3-42,14.8-99.4,141.4-99.4h41L333,166c-12.6,16-45.4,68.2-31.2,96.2	
+					c9.2,18.3,41.5,25.6,91.2,24.2l1.1,39.8C390.5,326.2,387.1,326.3,383.8,326.3z" /></g>
+					</svg>
+					<div class="joinBox-Head">
+						<h3 style='font-weight: bolder; font-size: 30px; color: white'>일정 상세</h3>
+						<p>일정을 자세하게 보여드릴게요.</p>
+					</div>
+				</div>			
+				<!--파도 시작-->
+				<div>
+					<svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+					viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+					<defs>
+					<path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+					</defs>
+						<g class="parallax">
+						<use xlink:href="#gentle-wave" x="48" y="0" fill="rgba(255,255,255,0.7" />
+						<use xlink:href="#gentle-wave" x="48" y="3" fill="rgba(255,255,255,0.5)" />
+						<use xlink:href="#gentle-wave" x="48" y="7" fill="#fff" />
+						</g>
+					</svg>
+				</div><!--파도 end-->
+			</div><!--header end-->
 			<div class="modalBody">
-				<form class="detailModalYear">
-					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
-					<input type="hidden" name="cNum" id="detailCNumYear">
+				<form class="detailModal">
+					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"> 
+					<input type="hidden" name="cNum" id="detailCNum">
 					<input type="hidden" name="mNum" id="mNum" value="${userData.mNum}">
 					<input type="hidden" name="wNum" id="wNum" value="${userData.wNum}">
-					<div>
-						<div class="titleDiv">
+					<div class="firstRow">
+						<div class="titleDiv">						
 							<h4>일정</h4>
 							<p class="modalTitle" id="detailTitleYear"></p>
 						</div>
@@ -1153,30 +1179,32 @@ function nextYearYear() {
 							<p id="detailTypeYear"></p>
 						</div>
 					</div>
-					<div class="dateDiv">
-						<h4>기간</h4>
-						<p>
-							<span id="detailStartDateYear"></span>
-							<span>~</span>
-							<span id="detailEndDateYear"></span>
-						</p>
-					</div>
-					<div class="checkboxDiv">
-						<input type="checkbox" name="yearCalendar" id="detailYearCalendarYear" value="yearCalendar" onclick="return false;">
-						<label class="checkboxbtn" for="detailYearCalendarYear">연간 달력</label>
-						<input type="checkbox" name="annually" id="detailAnnuallyYear" value="annually" onclick="return false;">
-						<label class="checkboxbtn" for="detailAnnuallyYear">매년 반복</label>
-						<input type="checkbox" name="monthly" id="detailMonthlyYear" value="monthly" onclick="return false;">
-						<label class="checkboxbtn" for="detailMonthlyYear">매월 반복</label>
-					</div>
-					<div>
+					<div class="middleRow">
+						<div class="dateDiv">
+							<h4>기간</h4>
+							<p id="detailDate">
+								<span id="detailStartDateYear"></span>
+								<span>~</span>
+								<span id="detailEndDateYear"></span>
+							</p>
+						</div>
+						<div class="checkboxDiv">
+							<input type="checkbox" name="yearCalendar" id="detailYearCalendarYear" value="yearCalendar" onclick="return false;">
+							<label class="checkboxbtn" for="detailYearCalendar">연간 달력</label> 	
+							<input type="checkbox" name="annually" id="detailAnnuallyYear" value="annually" onclick="return false;">
+							<label class="checkboxbtn" for="detailAnnually">매년 반복</label>				
+							<input type="checkbox" name="monthly" id="detailMonthlyYear" value="monthly" onclick="return false;">
+							<label class="checkboxbtn" for="detailMonthly">매월 반복</label>
+						</div>	
+					</div>					
+					<div class="lastRow">
 						<h4>내용</h4>
 						<p class="modalContent" id="detailContentYear"></p>
 					</div>
 					<div id="innerBtn">
 						<a href="#" id="detailFormYearClose">닫기</a>
 					</div>
-				</form>				
+				</form>
 			</div>
 		</div>
 	</div>	
