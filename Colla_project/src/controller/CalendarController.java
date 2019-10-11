@@ -98,49 +98,48 @@ public class CalendarController {
 	
 	@ResponseBody
 	@RequestMapping(value="/showYearCheckedCalendar", method=RequestMethod.GET)
-	public List<Calendar> showYearCheckedCalendar(HttpSession session, boolean type1, boolean type2, boolean type3, boolean type4) {
+	public List<Calendar> showYearCheckedCalendar(HttpSession session, boolean type1, boolean type2, boolean type3, boolean type4, String today) {
 		int wNum = (int)session.getAttribute("currWnum");
-		List<Calendar> tmp = calendarService.getAllCalendar(wNum);
+		List<Calendar> cList = calendarService.getAllCalendarByYear(wNum, today);
 		List<Calendar> yearCheckedCalendarList = new ArrayList<Calendar>();
-		for(int i=0; i<tmp.size(); i++) {
-			String yearChecked = tmp.get(i).getYearCalendar();
+		for(int i=0; i<cList.size(); i++) {
+			String yearChecked = cList.get(i).getYearCalendar();
 			if(yearChecked.equals("1")) {
-				yearCheckedCalendarList.add(tmp.get(i));
+				yearCheckedCalendarList.add(cList.get(i));
 			}
 		}
-		List<Calendar> tmpList = new ArrayList<Calendar>();
+		List<Calendar> filteredCList = new ArrayList<Calendar>();
 		for(int i=0; i<yearCheckedCalendarList.size(); i++) {
 			if(type1) {
 				String typeTmp = yearCheckedCalendarList.get(i).getType();
 				if(typeTmp.equals("project")) {
-					tmpList.add(yearCheckedCalendarList.get(i));
+					filteredCList.add(yearCheckedCalendarList.get(i));
 				}
 			}
 			if(type2) {
 				String typeTmp = yearCheckedCalendarList.get(i).getType();
 				if(typeTmp.equals("vacation")) {
-					tmpList.add(yearCheckedCalendarList.get(i));
+					filteredCList.add(yearCheckedCalendarList.get(i));
 				}
 			}
 			if(type3) {
 				String typeTmp = yearCheckedCalendarList.get(i).getType();
 				if(typeTmp.equals("event")) {
-					tmpList.add(yearCheckedCalendarList.get(i));
+					filteredCList.add(yearCheckedCalendarList.get(i));
 				}
 			}
 			if(type4) {
 				String typeTmp = yearCheckedCalendarList.get(i).getType();
 				if(typeTmp.equals("etc")) {
-					tmpList.add(yearCheckedCalendarList.get(i));
+					filteredCList.add(yearCheckedCalendarList.get(i));
 				}
 			}
 		}
-		return tmpList;
+		return filteredCList;
 	}
 	@ResponseBody
 	@RequestMapping(value="/addSchedule", method = RequestMethod.POST)
 	public boolean addSchedule(Calendar calendar) throws ParseException {
-		System.out.println("enddate : "+calendar.getEndDate());
 		if(calendar.getYearCalendar()!=null && calendar.getYearCalendar().equals("yearCalendar")) {
 			calendar.setYearCalendar("1");
 		} else {

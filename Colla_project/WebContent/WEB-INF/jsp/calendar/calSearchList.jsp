@@ -48,12 +48,14 @@ $(function() {
 					</form>
 				</div>
 				<div class="headerCheckboxDiv">
-					<input type="checkbox" name="calType" id="calType1" value="project" checked="checked">
-					<label for="calType1">프로젝트</label>		
-					<input type="checkbox" name="calType" id="calType2" value="vacation" checked="checked">
-					<label for="calType2">휴가</label>		
-					<input type="checkbox" name="calType" id="calType3" value="event" checked="checked">
-					<label for="calType3">행사</label>
+<!-- 					<input type="checkbox" name="calType" id="calType1" value="project" checked="checked"> -->
+<!-- 					<label for="calType1">프로젝트</label>		 -->
+<!-- 					<input type="checkbox" name="calType" id="calType2" value="vacation" checked="checked"> -->
+<!-- 					<label for="calType2">휴가</label>		 -->
+<!-- 					<input type="checkbox" name="calType" id="calType3" value="event" checked="checked"> -->
+<!-- 					<label for="calType3">행사</label> -->
+<!-- 					<input type="checkbox" name="calType" id="calType4" value="etc" checked="checked"> -->
+<!-- 					<label for="calType4">기타</label> -->
 				</div>
 				<div class="headerChangeCal">
 					<button onclick="location.href='${contextPath}/calMonth?wNum=${sessionScope.currWnum}'" class="btn">달력 전체보기</button>

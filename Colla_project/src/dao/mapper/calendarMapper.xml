@@ -27,8 +27,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	<select id="selectAllCalendarByMonth" parameterType="map" resultMap="calendarMap">
 		select * from calendar where w_num=#{wNum}
-		and cal_start_date &lt;= TO_DATE(#{startDate},'RRRR-MM-DD')
-		and cal_end_date &gt;= TO_DATE(#{endDate},'RRRR-MM-DD')
+		and cal_start_date &gt;= TO_DATE(#{startDate},'RRRR-MM-DD')
+		and cal_end_date &lt;= TO_DATE(#{endDate},'RRRR-MM-DD')
+	</select>
+	<select id="selectAllCalendarByYear" parameterType="map" resultMap="calendarMap">
+		select * from calendar where w_num=#{wNum}
+		and cal_start_date &gt;= TO_DATE(#{startDate},'RRRR-MM-DD')
+		and cal_end_date &lt;= TO_DATE(#{endDate},'RRRR-MM-DD')
 	</select>
 	<select id="selectAllCalendarSearched" parameterType="map" resultMap="calendarMap">
 		select rownum, cal_title, cal_content, m_name, cal_start_date, cal_end_date
