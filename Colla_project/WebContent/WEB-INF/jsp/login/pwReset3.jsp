@@ -7,25 +7,7 @@
 <link rel="stylesheet" type="text/css" href="css/animate.css"/>
 <link rel="stylesheet" type="text/css" href="css/join.css"/>
 <script type="text/javascript">
-$(function() {
-	$("#resetForm").on("submit", function() {
-		var data = $(this).serialize(); 
-		$.ajax({
-			url: "checkResetCode",
-			data: data,
-			type: "post",
-			success: function(result) {
-				if(result == "false") {
-					$("#checkSentence").text("인증코드가 일치하지 않습니다.");
-				} else {
-					//$("#checkSentence").text("비밀번호가 "+result+"로 수정되었습니다.");
-					location.href="${contextPath}/pwReset3?rePw="+result;
-				}
-			}
-		}); //end ajax 
-		return false;
-	})
-}); //end onload
+
 </script>
 </head>
 <body>
@@ -48,7 +30,7 @@ $(function() {
 							<div class="joinBox-Head">			
 								<h3 style='font-weight: bolder; font-size: 30px'>비밀번호 재설정</h3>
 									<p>
-										인증코드를 입력해주세요.
+										본인 인증이 완료되었습니다. 
 									</p>
 							</div>
 						</div>			
@@ -72,13 +54,13 @@ $(function() {
 						<div class="joinBox-Body">
 							<form action="" method="post" id="resetForm">
 								<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+								<div class="noticePwDiv"><span id="noticePw"></span></div>
 								<div>
-									<h4>코드 입력</h4>
-									<input type="text" name="inputVerifyCode" placeholder="인증코드를 입력해주세요.">
-									<span id="checkSentence" class="checkSentenceRed"></span>
+									<h4>아래 비밀번호로 로그인 해주세요.</h4>
+									<p id="rePw">${rePw }</p>
 								</div>
-								<div>
-									<input type="submit" value="인증코드 확인" id="resetFormButton" class="joinFormButton">
+								<div id="joinBtnInLoginForm">
+									<input type="button" value="로그인" class="loginFormButton" onclick="location.href='${contextPath}/loginForm'">
 								</div>
 							</form>
 						</div>			
