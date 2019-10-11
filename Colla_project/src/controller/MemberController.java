@@ -124,6 +124,12 @@ public class MemberController {
 	public String showPwReset2() {
 		return "/login/pwReset2";
 	}
+	
+	@RequestMapping(value = "/pwReset3", method = RequestMethod.GET)
+	public String showPwReset3(String rePw, Model model) {
+		model.addAttribute("rePw",rePw);
+		return "/login/pwReset3";
+	}
 
 	@RequestMapping(value = "/sendResetMail", method = RequestMethod.GET)
 	public String sendResetMail(HttpSession session) {
@@ -142,6 +148,8 @@ public class MemberController {
 		String pw = "";
 		System.out.println(emailAddress + " " + verifyCode + " " + inputVerifyCode);
 //		session.setAttribute("inputVerifyCode", inputVerifyCode);
+		System.out.println("verifyCode : " + verifyCode);
+		System.out.println("inputVerifyCode : " + inputVerifyCode);
 		if (verifyCode.equals(inputVerifyCode)) {
 			pw = setCode();
 			System.out.println("pw" + pw);
