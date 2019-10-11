@@ -30,15 +30,15 @@ $(function() {
 	drag();
 	
 	//모달 바깥 클릭 시 모달 닫기
-// 	$("#wsBody").on("mousedown", function(e) {
-// 		if(!$("#addForm").is(e.target) && $("#addForm").has(e.target).length===0)
-// 			$("#addForm").fadeOut(1);
-// 		if(!$("#detailForm").is(e.target) && $("#detailForm").has(e.target).length===0)
-// 			$("#detailForm").fadeOut(1);
-// 		if(!$("#modifyForm").is(e.target) && $("#modifyForm").has(e.target).length===0)
-// 			$("#modifyForm").fadeOut(1);
+	$("#wsBody").on("mousedown", function(e) {
+		if(!$("#addForm").is(e.target) && $("#addForm").has(e.target).length===0)
+			$("#addForm").fadeOut(1);
+		if(!$("#detailForm").is(e.target) && $("#detailForm").has(e.target).length===0)
+			$("#detailForm").fadeOut(1);
+		if(!$("#modifyForm").is(e.target) && $("#modifyForm").has(e.target).length===0)
+			$("#modifyForm").fadeOut(1);
 // 		return false;
-// 	});
+	});
 	
 	//추가 모달 열기
 	$("#addFormOpen").on("click", function() {
