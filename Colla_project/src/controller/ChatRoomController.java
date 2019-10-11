@@ -230,7 +230,6 @@ public class ChatRoomController {
 		int mNum = member.getNum();
 		System.out.println("scrollCount : " + count);
 		List<ChatMessage> cmList = cmService.getMoreMessage(crNum, mNum, count);
-		System.out.println(cmList);
 		return cmList;
 	}
 	
@@ -241,7 +240,6 @@ public class ChatRoomController {
 		int mNum = member.getNum();
 //		List<ChatMessage> cmList = cmService.getAllChatMessageByCrNum(crNum,mNum);
 		List<ChatMessage> cmList = cmService.getRecentChatMessageByCrNum(crNum, mNum);
-		System.out.println("cmList : " + cmList);
 		return cmList;
 	}
 	// 일반메세지 받고 보내기
