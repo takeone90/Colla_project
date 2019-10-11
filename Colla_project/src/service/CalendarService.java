@@ -54,15 +54,19 @@ public class CalendarService {
 		String date = today.substring(6, 8);
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("wNum", wNum);
-		param.put("startDate", year+"/"+month+"/"+date);
-		param.put("endDate", year+"/"+month+"/"+01);
+		param.put("startDate", year+"/"+month+"/"+01);
+		param.put("endDate", year+"/"+month+"/"+date);
 		List<Calendar> cListByMonth = calendarDao.selectAllCalendarByMonth(param);
-//		List<Calendar> tmp = new ArrayList<Calendar>();
-//		for(int i=0; i<cListByMonth.size(); i++) {
-//			tmp.get(i).getcNum();
-//			pDao.
-//		}
 		return cListByMonth;
+	}
+	public List<Calendar> getAllCalendarByYear(int wNum, String today) {
+		String year = today.substring(2, 4);
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("wNum", wNum);
+		param.put("startDate", year+"/"+01+"/"+01);
+		param.put("endDate", year+"/"+12+"/"+31);
+		List<Calendar> cListByYear = calendarDao.selectAllCalendarByYear(param);
+		return cListByYear;
 	}
 	public boolean addCalendarAnnually(Calendar calendar) {
 		int result=0;

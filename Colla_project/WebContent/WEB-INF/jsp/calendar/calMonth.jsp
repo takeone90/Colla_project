@@ -622,7 +622,7 @@ function nextYear() {
 	today = new Date(today.getFullYear()+1, today.getMonth(), 1);
 	moveMonth(today);
 }
-//----------------------------------------------------------------------------연간 달력
+//----------------------------------------------------------------------------연간 달력----------------------------------------------------------------------------
 $(function() {
 	thisYearCalendar(today);
 	showYearSchedule(today);
@@ -701,7 +701,7 @@ function showYearSchedule(today) {
 	var type4 = $("#calType4").prop("checked");
 	$.ajax({
 		url:"showYearCheckedCalendar",
-		data: {"type1":type1, "type2":type2, "type3":type3, "type4":type4},
+		data: {"type1":type1, "type2":type2, "type3":type3, "type4":type4, "today":formatChange(new Date(today.getFullYear(), today.getMonth()+1, 0))},
 		type:"get",
 		dataType:"json",
 		success: function(allYearSchedule) {	
