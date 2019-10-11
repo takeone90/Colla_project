@@ -709,7 +709,6 @@ function showYearSchedule(today) {
 				(function(ii) {
 					var title = allYearSchedule[ii].title;
 					
-					
 					var startDateStr = allYearSchedule[ii].startDate; //String 형식 
 					var startDateYear = startDateStr.substring(0, 4); //2019
 					var startDateMonth = startDateStr.substring(5, 7); //10
@@ -722,37 +721,26 @@ function showYearSchedule(today) {
 					
 					var sMonthRow = monthChangeYear(startDateMonth); //0, 1, 2
 					var eMonthRow = monthChangeYear(endDateMonth); //0, 1, 2
+					
 					var color = allYearSchedule[ii].color;
 					
 					if(sMonthRow == eMonthRow) { //시작일의 줄과 종료일의 줄이 같은 경우 
 						var dateNumber = startDateYear+"-"+sMonthRow;
 						var tr = trMakerFullLineYear(startDateMonth, (endDateMonth-startDateMonth)+1, title, color, 1);
 						$("#"+dateNumber).after(tr);
-						tr.children('.middleTdYear').on("click", function() { putContentIntoTdYear(allYearSchedule[ii]); });
-						
-						
-						
+						tr.children('.middleTdYear').on("click", function() { putContentIntoTdYear(allYearSchedule[ii]); });			
 					} else { //시작일의 줄과 종료일의 줄이 다른 경우
-						console.log("첫줄");
-						var sDateNumber = startDateYear+"-"+sMonthRow; //첫줄
-						
-// 						trMakerLeftLineYear(month, title, color)
+						var sDateNumber = startDateYear+"-"+sMonthRow;
 						var tr = trMakerLeftLineYear(startDateMonth, title, color);
 						$("#"+sDateNumber).after(tr);
 						tr.children('.middleTdYear').on("click", function() { putContentIntoTdYear(allYearSchedule[ii]); });
-						
-						//중간줄..
 						if((eMonthRow-sMonthRow)>1) {
-							console.log("중간줄");
 							var dateNumber = todayYear+"-"+1;
 							var tr = trMakerFullLineYear(5, 4, title, color, 4);	
 							$("#"+dateNumber).after(tr);
 							tr.children('.middleTdYear').on("click", function() { putContentIntoTdYear(allYearSchedule[ii]); });
 						}
-						
-						console.log("마지막줄");
-						var eDateNumber = endDateYear+"-"+eMonthRow; //막줄
-// 						trMakerRightLineYear(month, title, color)
+						var eDateNumber = endDateYear+"-"+eMonthRow;
 						var tr = trMakerRightLineYear(endDateMonth, title, color);
 						$("#"+eDateNumber).after(tr);
 						tr.children('.middleTdYear').on("click", function() { putContentIntoTdYear(allYearSchedule[ii]); });
@@ -821,8 +809,6 @@ function trMakerRightLineYear(month, title, color) {
 	}
 	return tr;
 }
-
-
 function markingOnDateYear(dateOrigin) {
 	$("#"+dateOrigin).css({"background-color": "#E6E2E1"});
 }
