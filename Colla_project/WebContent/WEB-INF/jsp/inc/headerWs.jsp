@@ -119,11 +119,8 @@ function socketConnect(){
 			$("#chatArea").scrollTop($("#chatArea")[0].scrollHeight);
 	    });// end subcribe
 		
-	},{},{},function(){
-		//closeEventCallback ( function(CloseEvent) ) - 연결 닫힘 시 발생
-		alert("Stomp 끊김");
 	}); //end connect
-}
+}// end socketConnect
 
 
 var hasNewAlarm;
