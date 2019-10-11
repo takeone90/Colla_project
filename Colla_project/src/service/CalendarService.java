@@ -54,8 +54,8 @@ public class CalendarService {
 		String date = today.substring(6, 8);
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("wNum", wNum);
-		param.put("startDate", year+"/"+month+"/"+01);
-		param.put("endDate", year+"/"+month+"/"+date);
+		param.put("startDate", year+"/"+month+"/"+date);
+		param.put("endDate", year+"/"+month+"/"+01);
 		List<Calendar> cListByMonth = calendarDao.selectAllCalendarByMonth(param);
 		return cListByMonth;
 	}

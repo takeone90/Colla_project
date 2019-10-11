@@ -202,8 +202,7 @@ td {
 	width: 257px;
 }
 .middleTdYear {
-	border: 1px; 
-	height: 100%;
+	border: 1px;
     cursor: pointer;
     line-height: 20px;
 }
@@ -419,7 +418,8 @@ td {
 	display: inline-block;
 	font-size: 13px;
 }
-#detailContent {
+#detailContent,
+#detailContentYear {
 	width: 417px;
 	display: inline-block;
 }
@@ -441,11 +441,13 @@ td {
 .modalTitle {
 	width: 100%;
 }
-#detailTitle {
+#detailTitle,
+#detailTitleYear {
 	display: inline-block;
     width: 200px;
 }
-#detailType {
+#detailType,
+#detailTypeYear {
 	display: inline-block;
     width: 100px;
 }
