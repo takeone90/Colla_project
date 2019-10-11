@@ -293,7 +293,8 @@
 .loginFormButton:hover {
 	background-color: rgba(236, 109, 99, 0.5);
 }
-#rePw{
+/* 비밀번호 재설정 */
+#rePw {
 	text-align: center;
     color: #504848;
     font-weight: 600;
@@ -302,4 +303,9 @@
     width: 100px;
     padding: 10px;
     border-radius: 5px;
+}
+
+.pwDiv h4 {
+	text-align: center;
+	margin-bottom: 10px;
 }

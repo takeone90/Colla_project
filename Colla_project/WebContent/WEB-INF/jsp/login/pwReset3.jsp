@@ -55,7 +55,7 @@
 							<form action="" method="post" id="resetForm">
 								<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 								<div class="noticePwDiv"><span id="noticePw"></span></div>
-								<div>
+								<div class="pwDiv">
 									<h4>아래 비밀번호로 로그인 해주세요.</h4>
 									<p id="rePw">${rePw }</p>
 								</div>
