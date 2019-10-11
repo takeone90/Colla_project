@@ -24,7 +24,7 @@ var msgInfo;
 // 	});
 // }
 
-function duplicateConnect(){
+function socketConnect(){
 	sock = new SockJS("${contextPath}/chat");
 	stompClient = Stomp.over(sock);
 	stompClient.connect({},function(){
@@ -119,8 +119,11 @@ function duplicateConnect(){
 			$("#chatArea").scrollTop($("#chatArea")[0].scrollHeight);
 	    });// end subcribe
 		
+	},{},{},function(){
+		//closeEventCallback ( function(CloseEvent) ) - 연결 닫힘 시 발생
+		alert("Stomp 끊김");
 	}); //end connect
-}// end duplicateConnect
+}
 
 
 var hasNewAlarm;
@@ -245,7 +248,7 @@ function deleteAllAlarm(mNum){
 	});
 }
 $(function(){
-	duplicateConnect();
+	socketConnect();
 	$("#denyInvite").on("click",function(){
 		var aNum = $("#iAnum").val();
 		deleteThisAlarm(aNum);
