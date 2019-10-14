@@ -119,18 +119,30 @@ public class MemberController {
 	public String showPwReset() {
 		return "/login/pwReset1";
 	}
-
 	@RequestMapping(value = "/pwReset2", method = RequestMethod.GET)
 	public String showPwReset2() {
 		return "/login/pwReset2";
 	}
-	
 	@RequestMapping(value = "/pwReset3", method = RequestMethod.GET)
 	public String showPwReset3(String rePw, Model model) {
 		model.addAttribute("rePw",rePw);
 		return "/login/pwReset3";
 	}
-
+	@ResponseBody
+	@RequestMapping(value = "/checkEmailDuplicationPwReset", method = RequestMethod.POST)
+	public String checkEmailDuplicationPwReset(String emailAddress, HttpSession session) {
+		Member memberTmp = memberService.getMemberByEmail(emailAddress);
+		if(memberTmp != null) {
+			if(memberTmp.getmType() == null) {				
+				session.setAttribute("emailAddress", emailAddress);
+				return "ok"; //가입한 이메일 && SNS로 가입하지 않음
+			} else {
+				return "sns"; //SNS로 가입함
+			}
+		} else {
+			return "none"; //가입한 이메일이 아님
+		}
+	}
 	@RequestMapping(value = "/sendResetMail", method = RequestMethod.GET)
 	public String sendResetMail(HttpSession session) {
 		String emailAddress = (String) session.getAttribute("emailAddress");
@@ -138,7 +150,6 @@ public class MemberController {
 		innerTest.start();
 		return "redirect:pwReset2";
 	}
-
 	@ResponseBody
 	@RequestMapping(value = "/checkResetCode")
 	public String checkResetCode(String inputVerifyCode, HttpSession session) {
@@ -159,7 +170,7 @@ public class MemberController {
 			return "false";
 		}
 	}
-	// ----------비밀번호 재설정----------
+	// ----------비밀번호 재설정 끝----------
 
 	@RequestMapping(value = "/callBackJoin", method = RequestMethod.GET) // 네이버 API 회원가입
 	public String showCallBackJoin() {
@@ -193,16 +204,7 @@ public class MemberController {
 		}
 	}
 
-	@ResponseBody
-	@RequestMapping(value = "/checkEmailDuplicationPwReset", method = RequestMethod.POST)
-	public boolean checkEmailDuplicationPwReset(String emailAddress, HttpSession session) {
-		if (memberService.getMemberByEmail(emailAddress) != null) {
-			session.setAttribute("emailAddress", emailAddress);
-			return true; // 중복O
-		} else {
-			return false; // 중복X
-		}
-	}
+
 
 	@RequestMapping(value = "/sendVerifyMail", method = RequestMethod.GET)
 	public String sendVerifyMail(HttpSession session) {
