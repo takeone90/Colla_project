@@ -1,4 +1,4 @@
-@charset "UTF-8";
+\@charset "UTF-8";
 
 #wrap {
 	height: 100%;
@@ -195,6 +195,7 @@
     height: 35px;
     font-weight: 200;
     font-size: 12px;
+    cursor:pointer;
 }
 /* 구글 버튼 */
 #googleLoginButton {

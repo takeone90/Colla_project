@@ -195,22 +195,21 @@ public class WorkSpaceController {
 			if(isExist) {
 				continue;
 			}else {
-				Member tu = mService.getMemberByEmail(targetUser);
+				Member tu;
+				if((tu = mService.getMemberByEmail(targetUser)) != null) {
+					//메일 보낸 targetUserList 사람들에게 알림도 보내기
+					if(tu.getNum()!=user.getNum()) {
+						//나한텐 알림X
+						SetAlarm setAlarm = saService.getSetAlarm(tu.getNum());
+						if(setAlarm.getWorkspace()==1) {
+							int aNum = aService.addAlarm(wNum, tu.getNum(), user.getNum(), "wInvite", 0);
+							smt.convertAndSend("/category/alarm/"+tu.getNum(),aService.getAlarm(aNum));
+						}
+					}
+				}
 				wiService.addWorkspaceInvite(targetUser, wNum);
 				Thread innerTest = new Thread(new inner(targetUser,wNum));
 				innerTest.start();
-				targetUserList.add(tu);	
-			}
-		}
-		//메일 보낸 targetUserList 사람들에게 알림도 보내기
-		for(Member m : targetUserList) {
-			if(m.getNum()!=user.getNum()) {
-				//나한텐 알림X
-				SetAlarm setAlarm = saService.getSetAlarm(m.getNum());
-				if(setAlarm.getWorkspace()==1) {
-					int aNum = aService.addAlarm(wNum, m.getNum(), user.getNum(), "wInvite", 0);
-					smt.convertAndSend("/category/alarm/"+m.getNum(),aService.getAlarm(aNum));
-				}
 			}
 		}
 		return "redirect:workspace";
