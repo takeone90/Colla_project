@@ -214,31 +214,28 @@ function startDateCheck(){
 						<ul>
 							<li>멤버 1명</li>
 							<li>워크스페이스 1개</li>
+							<li>프로젝트 1개</li>
 							<li>채팅방 1개</li>
-							<li> 또 뭐가 있지</li>
-							<li> 또 뭐가 있지</li>
 						</ul>
 					</div>
 					<div class="licenseInfo businessInfo" class="clearFix">
 						<h5>Business</h5>
 						<h5>50,000</h5>
 						<ul>
-							<li>멤버 1명</li>
-							<li>워크스페이스 1개</li>
-							<li>채팅방 1개</li>
-							<li> 또 뭐가 있지</li>
-							<li> 또 뭐가 있지</li>
+							<li>멤버 10명</li>
+							<li>워크스페이스 10개</li>
+							<li>프로젝트 10개</li>
+							<li>채팅방 10개</li>
 						</ul>
 					</div>
 					<div class="licenseInfo enterpriseInfo" class="clearFix">
 						<h5>Enterprise</h5>
 						<h5>100,000</h5>
 						<ul>
-							<li>멤버 1명</li>
-							<li>워크스페이스 1개</li>
-							<li>채팅방 1개</li>
-							<li> 또 뭐가 있지</li>
-							<li> 또 뭐가 있지</li>
+							<li>멤버 무제한</li>
+							<li>워크스페이스 무제한</li>
+							<li>프로젝트 무제한</li>
+							<li>채팅방 무제한</li>
 						</ul>
 					</div>
 						
