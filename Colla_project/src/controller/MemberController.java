@@ -186,7 +186,7 @@ public class MemberController {
 			return false; // 중복X
 		}
 	}
-	@RequestMapping(value = "/sendVerifyMail", method = RequestMethod.POST)
+	@RequestMapping(value = "/sendVerifyMail", method = RequestMethod.GET)
 	public String sendVerifyMail(HttpSession session) {
 		String emailAddress = (String) session.getAttribute("emailAddress");
 		System.out.println("보낼 이메일 : "+emailAddress);
@@ -195,7 +195,7 @@ public class MemberController {
 		return "redirect:joinStep2";
 	}
 
-	@RequestMapping(value = "/resendVerifyMail", method = RequestMethod.POST)
+	@RequestMapping(value = "/resendVerifyMail", method = RequestMethod.GET)
 	public String resendVerifyMail(HttpSession session) {
 		String emailAddress = (String) session.getAttribute("emailAddress");
 		Thread innerTest = new Thread(new inner(emailAddress, session, "verifyCode"));
