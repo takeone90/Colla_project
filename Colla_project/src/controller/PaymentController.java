@@ -2,6 +2,7 @@
 package controller;
 
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -72,9 +73,12 @@ public class PaymentController {
 	public String kakaoPaySuccess(@RequestParam("pg_token") String pg_token, Model model) {
 		System.out.println("kakaoPay Success, pg_token : " + pg_token);
 		KakaoPayApprovalVO payInfo = pService.kakaoPayInfo(pg_token,license);
+		Date tmpDate = payInfo.getApproved_at();
+		int hours = tmpDate.getHours()-9;
+		tmpDate.setHours(hours);
 		Payment payment = new Payment();
 		payment.setAmount(payInfo.getAmount().getTotal());
-		payment.setDate(payInfo.getApproved_at());
+		payment.setDate(tmpDate);
 		payment.setItem(payInfo.getItem_name());
 		payment.setName(member.getName());
 		payment.setOrderId(payInfo.getPartner_order_id());	
