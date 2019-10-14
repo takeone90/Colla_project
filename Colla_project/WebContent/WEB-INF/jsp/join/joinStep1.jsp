@@ -159,11 +159,11 @@
 							</form>
 							<div id="innerBtn">
 								<!-- 구글 -->
-								<button id="googleLoginButton">구글<span class="g-signin2" data-width="90" data-height="30" data-onsuccess="onSignIn"></span></button>
+								<button id="googleLoginButton">구글 회원가입<span class="g-signin2" data-width="90" data-height="30" data-onsuccess="onSignIn"></span></button>
 								<!-- 네이버 -->
-								<button class="naverLoginButton">네이버<span id="naverIdLogin"></span></button>
+								<button class="naverLoginButton">네이버 회원가입<span id="naverIdLogin"></span></button>
 								<!-- 카카오 -->
-								<button id="kakaoLoginButton">카카오</button>
+								<button id="kakaoLoginButton">카카오 회원가입</button>
 								<span id="kakao-login-btn"></span>
 								<script type='text/javascript'>
 								    Kakao.init('1f6b481e9aa9a7ae0b621fee3692c041');

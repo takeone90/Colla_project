@@ -50,7 +50,7 @@
 						</div><!--파도 end-->
 					</div><!--header end-->		
 					<!--파도 아래 내용-->	
-					<div class="content box2 flex">				
+					<div class="content box2 flex" id="pwResetFormBody">				
 						<div class="joinBox-Body">
 							<form action="" method="post" id="resetForm">
 								<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
@@ -60,7 +60,7 @@
 									<p id="rePw">${rePw }</p>
 								</div>
 								<div id="joinBtnInLoginForm">
-									<input type="button" value="로그인" class="loginFormButton" onclick="location.href='${contextPath}/loginForm'">
+									<input type="button" value="로그인" class="joinFormButton" onclick="location.href='${contextPath}/loginForm'">
 								</div>
 							</form>
 						</div>			

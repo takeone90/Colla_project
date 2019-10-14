@@ -68,12 +68,12 @@ $(function() {
 						</div><!--파도 end-->
 					</div><!--header end-->		
 					<!--파도 아래 내용-->	
-					<div class="content box2 flex">				
+					<div class="content box2 flex" id="pwResetFormBody">				
 						<div class="joinBox-Body">
 							<form action="" method="post" id="resetForm">
 								<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 								<div>
-									<h4>코드 입력</h4>
+									<h4>인증코드 입력</h4>
 									<input type="text" name="inputVerifyCode" placeholder="인증코드를 입력해주세요.">
 									<span id="checkSentence" class="checkSentenceRed"></span>
 								</div>
