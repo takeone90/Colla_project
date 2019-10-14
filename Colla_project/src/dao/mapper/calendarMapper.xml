@@ -36,11 +36,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		and cal_end_date &lt;= TO_DATE(#{endDate},'RRRR-MM-DD')
 	</select>
 	<select id="selectAllCalendarSearched" parameterType="map" resultMap="calendarMap">
-		select rownum, cal_title, cal_content, m_name, cal_start_date, cal_end_date
+		select rownum, cal_type, cal_title, cal_content, m_name, cal_start_date, cal_end_date
 		from
-		(select rownum as rnum, cal_title, cal_content, m_name, cal_start_date, cal_end_date
+		(select rownum as rnum, cal_type, cal_title, cal_content, m_name, cal_start_date, cal_end_date
 		from 
-		(select rownum, c.cal_title, c.cal_content, m.m_name, c.cal_start_date, c.cal_end_date
+		(select rownum, c.cal_type, c.cal_title, c.cal_content, m.m_name, c.cal_start_date, c.cal_end_date
 		from calendar c, member m 
 		where c.m_num = m.m_num
 		and c.w_num=#{wNum}) 

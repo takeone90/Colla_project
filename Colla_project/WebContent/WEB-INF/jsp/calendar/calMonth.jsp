@@ -41,6 +41,7 @@ $(function() {
 		$("#addForm").fadeIn(300);
 		$("#startDate").val(formatChangeHyphen(new Date())); //오늘 날짜로 고정
 		$("#endDate").val(formatChangeHyphen(new Date())); //오늘 날짜로 고정
+// 		drag();
 	});
 	//추가 모달 닫기
 	$("#addFormClose").on("click", function() {
@@ -177,19 +178,33 @@ function dateCalcul(date) {
 }
 //드래그로 추가 모달 열기
 function drag() {
-	var startDate = 0;
-	$(".drawMonthCalendarLower th, .drawMonthCalendarLower td:not(.middleTd)").on("mousedown", function(e) { 
-		if(e.which === 1) { //마우스 왼쪽 클릭			
-			startDate = $(this).attr("class");
-		}
-	});
-	$(".drawMonthCalendarLower th, .drawMonthCalendarLower td:not(.middleTd)").on("mouseup", function(e) {
-		if(e.which === 1) {				
+	console.log("? : "+$("#addForm").css("display"));
+	var tmp = $("#addForm").css("display");
+	if($("#addForm").css("display") == "none") {
+		var startDate = 0;
+		$(".drawMonthCalendarLower th, .drawMonthCalendarLower td:not(.middleTd)").on("mousedown", function(e) { 
+			if(e.which === 1) { //마우스 왼쪽 클릭			
+				startDate = $(this).attr("class");
+				console.log("startDate ? "+startDate);
+				if(startDate != null) {
+				}
+			}
+		});
+		$(".drawMonthCalendarLower th, .drawMonthCalendarLower td:not(.middleTd)").on("mouseup", function(e) {
+			if(e.which === 1) {				
 			$("#addForm").fadeIn(300);
 			$("#startDate").val(startDate);	
 			$("#endDate").val($(this).attr("class"));
-		}
-	});	
+			console.log($(this).attr("class"));
+			}		
+		});	
+		console.log("과연 ? "+tmp);
+		return false;
+	}else {
+		console.log("false");
+		return false;
+	}
+	return false;
 }
 function thisMonthCalendar(today) {
 	console.log(formatChangeHyphen(today)+" 월 달력을 그렸습니다.");
@@ -432,6 +447,7 @@ function clickOnDate(dateOrigin) { //날짜 클릭 시 추가 모달 열기
 	$("#addForm").fadeIn(300);
 	$("#startDate").val(formatChangeSimple(dateOrigin));	
 	$("#endDate").val(formatChangeSimple(dateOrigin));	
+// 	drag();
 }
 function putContentIntoTd(a) {
 	$("#detailForm").fadeIn(300);
@@ -520,14 +536,14 @@ function deleteSchedule() {
 		dataType: "json",
 		success: function(result) {
 			if(result) {
-				alert("삭제 성공");
+				alert("삭제 성공했습니다.");
 				$("#detailForm").fadeOut(1);
 				thisMonthCalendar(today);
 				showSchedule(today);
 				thisYearCalendar(today);
 				showYearSchedule(today);
 			} else {
-				alert("삭제 실패");
+				alert("삭제 실패했습니다.");
 			}
 		},
 		error: function(request, status, error) {

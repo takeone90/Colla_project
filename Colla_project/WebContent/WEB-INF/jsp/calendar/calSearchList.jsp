@@ -67,6 +67,7 @@ $(function() {
 				<div class="searchList">
 					<ul>
 						<li class="searchListHead">
+							<div>종류</div>
 							<div>제목</div>
 							<div>내용</div>
 							<div>시작일</div>
@@ -75,6 +76,7 @@ $(function() {
 						</li>
 					<c:forEach items="${searchedCalendarList}" var="schedule">
 						<li class="searchListInner">
+							<div>${schedule.type}</div>
 							<div>${schedule.title}</div>
 							<div>${schedule.content}</div>
 							<div>${schedule.startDate}</div>
