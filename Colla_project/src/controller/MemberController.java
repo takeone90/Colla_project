@@ -238,6 +238,7 @@ public class MemberController {
 
 	@RequestMapping(value = "/joinMember", method = RequestMethod.POST)
 	public String joinMember(Member member, HttpSession session) {
+		System.out.println("member : " + member);
 		boolean result = memberService.addMember(member);
 		String inviteUserEmail = (String) session.getAttribute("inviteUserEmail");
 		if (inviteUserEmail != null) {
