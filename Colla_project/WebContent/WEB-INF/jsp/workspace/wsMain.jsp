@@ -162,7 +162,7 @@
 						<input type="hidden" value="${ws.num}" id="wNum">
 						<div class="test1">
 						<div class="wsPjList">
-							<p>프로젝트</p>
+							<p>프로젝트 리스트</p>
 							<ul>
 							<c:if test="${empty ws.pjList}">
 								<p class="emptyMsg">프로젝트가 없습니다</p>
@@ -174,7 +174,7 @@
 						</div>
 						
 						<div class="wsChatList">
-							<p>채팅리스트</p>
+							<p>채팅 리스트</p>
 							<ul>
 							<c:forEach items="${ws.crList}" var="cr">
 								<c:if test="${cr.pNum ne 0}">
@@ -191,7 +191,7 @@
 						</div>
 						<div class="test2">
 						<div class="wsMember">
-						<p>참여자 목록</p>
+						<p>참여자 리스트</p>
 						<ul>
 						<c:forEach items="${ws.mList}" var="m"><!-- workspacemember 테이블 만들고 그 테이블리스트를 여기 넣는다 -->
 							<c:forEach items="${ws.mlList}" var="ml">

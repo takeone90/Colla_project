@@ -611,6 +611,7 @@ pre .CodeMirror-line{
 }
 #chatNavContent h4{
 /* 	margin-top : 20px; */
+	color : #484141;
 	margin-left : 20px;
 	font-weight: 600;
 	padding:15px 0 5px;
@@ -705,7 +706,7 @@ input[type=radio]{
 }
 #searchInput{
 	width:98%;
-	margin:20px 1% 10px;
+	margin:10px 1% 10px;
 }
 #searchInput * {
 	vertical-align:middle;
@@ -714,7 +715,7 @@ input[type=radio]{
 	width : 98%;
 	border-radius : 5px;
 	margin-left : 1%;
-	height : calc(100% - 80px);
+	height : calc(100% - 61px);
 	background-color: #f7f3f0;
 	align-self: center;
 	border: 1px solid #d4cbcb;
@@ -737,7 +738,7 @@ input[type=radio]{
     height: 30px;
 }
 #keyword{
-	width : 60%;
+	width : 64%;
 	margin-left : 5px;
 	margin-right : 5px;
 	border-radius: 5px;
@@ -767,6 +768,9 @@ input[type=radio]{
 }
 #inviteWsmBtn{
     margin-top: 30px;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 10px;
 }
 #inviteWsmBtn:hover{
 	background-color : #E5675A;
@@ -783,7 +787,7 @@ input[type=radio]{
 	font-style : italic;
 }
 #nav--memberManagement .profileImg{
-	border: 3px solid #fff;
+	border: 3px solid transparent;
 }
 #inviteForm{
 	height: calc(100% - 30px);
@@ -791,7 +795,7 @@ input[type=radio]{
 #navMList{
 	width: calc(100% - 20px);
     height: calc(100% - 15px);
-    padding:0 10px;
+    padding: 18px 10px 0px 10px;
 }
 #crmListUL-wrap{
 	margin-bottom:30px;
@@ -801,6 +805,7 @@ input[type=radio]{
 	overflow-x: hidden;
 }
 .listUL-wrap ul li{
+	border-radius: 10px;
 	float:left;
 	width: 42%;
 	margin:2%;
@@ -924,3 +929,8 @@ input[type=radio]{
 	border : 1px solid #D1D1D1;
 }
 
+.systemMsg{
+	    color: #e5675a;
+    font-size: 12px;
+    font-weight: 500;
+}
