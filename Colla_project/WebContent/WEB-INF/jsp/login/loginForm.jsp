@@ -34,7 +34,7 @@ $(function(){
 	/* 네이버 로그인 API */
 	var naverLogin = new naver.LoginWithNaverId({
 		clientId: "kIhjMaimMjKNR7gcR2nf",
-		callbackUrl: "http://localhost:8081/callBackLogin",
+		callbackUrl: "http://c0lla.com/callBackLogin",
 		isPopup: false, /* 팝업을 통한 연동처리 여부 */
 		loginButton: {color: "green", type: 2, height: 30, width: 90} /* 로그인 버튼의 타입을 지정 */
 	});

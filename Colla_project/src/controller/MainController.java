@@ -9,9 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.View;
 
-import controller.MemberController.inner;
 import mail.MailReceive;
-import mail.MailSend;
 import model.License;
 import model.Member;
 import service.FileService;

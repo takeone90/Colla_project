@@ -24,7 +24,7 @@
 				<div class ="myPageModify">
 					<p>새로운 비밀번호를 입력해주세요</p>
 					<form action="modifyPw" class="modifyPw" method="post">
-						<input type="password" name="pw" placeholder="새비밀번호 재입력" class="content">
+						<input type="password" name="pw" placeholder="새비밀번호 입력" class="content">
 						<div class="row btns">
 							<button class="btn">저장</button>
 							<a href="myPageAccountForm" class="btn">취소</a>

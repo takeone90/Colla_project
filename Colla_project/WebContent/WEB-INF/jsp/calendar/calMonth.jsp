@@ -22,6 +22,9 @@ $(function() {
 var today = new Date();
 var date = new Date();
 var numOfWeekRow = 0;
+var isMonthAjaxRun = false;
+var isYearAjaxRun = false;
+
 $(function() {
 	thisMonthCalendar(today);
 	showSchedule(today);
@@ -136,22 +139,12 @@ $(function() {
 		});
 		return false;
 	});
-	//타입 지정
-	$("#calType1").on("change", function() {
+	//타입 변경
+	$(".headerCheckboxDiv input").on("change", function() {
 		thisMonthCalendar(today);
 		showSchedule(today);
-	});
-	$("#calType2").on("change", function() {
-		thisMonthCalendar(today);
-		showSchedule(today);
-	});
-	$("#calType3").on("change", function() {
-		thisMonthCalendar(today);
-		showSchedule(today);
-	});
-	$("#calType4").on("change", function() {
-		thisMonthCalendar(today);
-		showSchedule(today);
+		thisYearCalendar(today);
+		showYearSchedule(today);
 	});
 	//원하는 날짜로 달력 이동 - 월 달력
 	$("#wantedCalendarButton").on("click", function() {
@@ -269,6 +262,11 @@ function getRealLastDate(today) {
 	return realLastDate;	
 }
 function showSchedule(today) {
+	if(isMonthAjaxRun){
+		return false;
+	}
+	isMonthAjaxRun = true;
+	
 	console.log(formatChangeHyphen(today)+" 월 달력 일정을 그렸습니다.");
 	
 	var type1 = $("#calType1").prop("checked");
@@ -281,6 +279,7 @@ function showSchedule(today) {
 		type:"get",
 		dataType:"json",
 		success: function(allCalendar) { //모든 스케쥴을 가져옴
+			isMonthAjaxRun = false;
 			for(var i in allCalendar) {
 				(function(ii) {
 					var title = allCalendar[ii].title;
@@ -626,23 +625,6 @@ $(function() {
 	$("#detailFormYearClose").on("click", function() {
 		$("#detailFormYear").fadeOut(1);
 	});
-	//타입 변경
-	$("#calType1").on("change", function() {
-		thisYearCalendar(today);
-		showYearSchedule(today);
-	});
-	$("#calType2").on("change", function() {
-		thisYearCalendar(today);
-		showYearSchedule(today);
-	});
-	$("#calType3").on("change", function() {
-		thisYearCalendar(today);
-		showYearSchedule(today);
-	});
-	$("#calType4").on("change", function() {
-		thisYearCalendar(today);
-		showYearSchedule(today);
-	});
 });
 function thisYearCalendar(today) {
 	console.log(formatChangeHyphen(today)+" 연 달력을 그렸습니다.");
@@ -689,6 +671,10 @@ function thisYearCalendar(today) {
 	calYearBody.html(calendar);
 } //for문 끝
 function showYearSchedule(today) {
+	if(isYearAjaxRun){
+		return false;
+	}
+	isYearAjaxRun = true;
 	console.log(formatChangeHyphen(today)+" 연 달력 일정을 그렸습니다.");
 	var type1 = $("#calType1").prop("checked");
 	var type2 = $("#calType2").prop("checked");
@@ -700,6 +686,7 @@ function showYearSchedule(today) {
 		type:"get",
 		dataType:"json",
 		success: function(allYearSchedule) { //리스트 반환	
+			isYearAjaxRun = false;
 			for(var i in allYearSchedule) {
 				(function(ii) {
 					var title = allYearSchedule[ii].title;

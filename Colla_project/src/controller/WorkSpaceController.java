@@ -195,22 +195,21 @@ public class WorkSpaceController {
 			if(isExist) {
 				continue;
 			}else {
-				Member tu = mService.getMemberByEmail(targetUser);
+				Member tu;
+				if((tu = mService.getMemberByEmail(targetUser)) != null) {
+					//메일 보낸 targetUserList 사람들에게 알림도 보내기
+					if(tu.getNum()!=user.getNum()) {
+						//나한텐 알림X
+						SetAlarm setAlarm = saService.getSetAlarm(tu.getNum());
+						if(setAlarm.getWorkspace()==1) {
+							int aNum = aService.addAlarm(wNum, tu.getNum(), user.getNum(), "wInvite", 0);
+							smt.convertAndSend("/category/alarm/"+tu.getNum(),aService.getAlarm(aNum));
+						}
+					}
+				}
 				wiService.addWorkspaceInvite(targetUser, wNum);
 				Thread innerTest = new Thread(new inner(targetUser,wNum));
 				innerTest.start();
-				targetUserList.add(tu);	
-			}
-		}
-		//메일 보낸 targetUserList 사람들에게 알림도 보내기
-		for(Member m : targetUserList) {
-			if(m.getNum()!=user.getNum()) {
-				//나한텐 알림X
-				SetAlarm setAlarm = saService.getSetAlarm(m.getNum());
-				if(setAlarm.getWorkspace()==1) {
-					int aNum = aService.addAlarm(wNum, m.getNum(), user.getNum(), "wInvite", 0);
-					smt.convertAndSend("/category/alarm/"+m.getNum(),aService.getAlarm(aNum));
-				}
 			}
 		}
 		return "redirect:workspace";
@@ -296,7 +295,7 @@ public class WorkSpaceController {
 					"<body>\r\n" + 
 					"	<div style='background-color: #4D4B4C; width: 760px; margin: 50px auto'>\r\n" + 
 					"		<h1 style='background-color: white'>\r\n" + 
-					"			<a href=\"#\"><img style='width: 150px' src='http://www.c0lla.com/img/COLLA_LOGO_200px.png' /></a>\r\n" + 
+					"			<a href=\"http://www.c0lla.com\"><img style='width: 150px' src='http://www.c0lla.com/img/COLLA_LOGO_200px.png' /></a>\r\n" + 
 					"		</h1>\r\n" + 
 					"		<div>\r\n" + 
 					"			<img style='width: 100%'src='http://www.c0lla.com/img/COLLA_WAVE_PNG.png'>\r\n" + 
@@ -307,7 +306,7 @@ public class WorkSpaceController {
 					"				워크스페이스 초대를 수락하려면 아래 버튼을 누르세요 </p>\r\n" + 
 					"				<div>\r\n" + 
 					"					<div style=\"background-color: rgba(255, 255, 255,0.2);width: 120px;border-radius: 10px;margin: 10px auto;text-align:center;\">\r\n" + 
-					"						<a  style='color: #EB6C62;font-size: 18px;font-weight: bolder; line-height: 40.5px; text-decoration:none; display: block;' href='/addMember?id="+emailAddress+"&wNum="+wNum+"'> 초대 수락</a>\r\n" + 
+					"						<a  style='color: #EB6C62;font-size: 18px;font-weight: bolder; line-height: 40.5px; text-decoration:none; display: block;' href='http://www.c0lla.com/addMember?id="+emailAddress+"&wNum="+wNum+"'> 초대 수락</a>\r\n" + 
 					"					</div>\r\n" + 
 					"				</div> \r\n" + 
 					"		</div>\r\n" + 
