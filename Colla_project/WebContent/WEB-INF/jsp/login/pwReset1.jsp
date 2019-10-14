@@ -14,12 +14,13 @@ $(function() {
 			url: "checkEmailDuplicationPwReset",
 			data: data,
 			type: "post",
-			dataType: "json",
 			success: function(result) {
-				if(result) {
+				if(result=="ok") {
 					location.href="sendResetMail";
-				} else {
-					$("#checkSentence").text("가입된 이메일이 아닙니다 .");
+				} else if(result=="sns") {
+					$("#checkSentence").text("SNS 가입 멤버는 비밀번호 재설정이 불가합니다.");
+				} else if(result=="none") {
+					$("#checkSentence").text("가입된 이메일이 아닙니다.");
 				}
 			}
 		}); //end ajax 
