@@ -28,7 +28,7 @@
 		var naverLogin = new naver.LoginWithNaverId(
 			{
 				clientId: "{kIhjMaimMjKNR7gcR2nf}",
-				callbackUrl: "{http://localhost:8081/callBackJoin}",
+				callbackUrl: "{http://c0lla.com/callBackJoin}",
 				isPopup: false,
 				callbackHandle: true
 				/* callback 페이지가 분리되었을 경우에 callback 페이지에서는 callback처리를 해줄수 있도록 설정합니다. */

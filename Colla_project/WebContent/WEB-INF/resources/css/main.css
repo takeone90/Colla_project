@@ -794,6 +794,7 @@ div {
 	width: 1250px;
 	height: 400px;
 	margin: 0 auto;
+	padding: 34px 0 0 55px;
 }
 
 #aboutUs-history .head-body>* {
@@ -803,6 +804,7 @@ div {
 #aboutUs-history .head-body>img {
 	width: 55%;
 	height: 100%;
+	border-radius: 5px;
 }
 
 #aboutUs-history .head-body ul {
@@ -810,20 +812,20 @@ div {
     background-repeat: no-repeat;
     background-size: auto 365px;
     background-position: 40px 20px;
-    background-color: white;
     width: 45%;
     height: 100%;
 }
 
 #aboutUs-history .head-body ul li {
-	line-height: 49.5px;
+	line-height: 40px;
     padding-left: 34px;
 }
 
 #aboutUs-history .head-body ul li p {
 	display: inline-block;
-	font-size: 20px;
+	font-size: 17px;
 	text-align: left;
+	padding-top: 15.5px;
 }
 
 #aboutUs-history .head-body ul li p:first-child {
@@ -1040,6 +1042,7 @@ div {
 
 .licenseInfo ul {
 	border-top: 1px dotted black;
+	padding-top: 13px;
 	width: 100%
 }
 

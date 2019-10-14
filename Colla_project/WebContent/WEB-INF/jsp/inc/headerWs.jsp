@@ -24,7 +24,7 @@ var msgInfo;
 // 	});
 // }
 
-function duplicateConnect(){
+function socketConnect(){
 	sock = new SockJS("${contextPath}/chat");
 	stompClient = Stomp.over(sock);
 	stompClient.connect({},function(){
@@ -120,7 +120,7 @@ function duplicateConnect(){
 	    });// end subcribe
 		
 	}); //end connect
-}// end duplicateConnect
+}// end socketConnect
 
 
 var hasNewAlarm;
@@ -245,7 +245,7 @@ function deleteAllAlarm(mNum){
 	});
 }
 $(function(){
-	duplicateConnect();
+	socketConnect();
 	$("#denyInvite").on("click",function(){
 		var aNum = $("#iAnum").val();
 		deleteThisAlarm(aNum);
