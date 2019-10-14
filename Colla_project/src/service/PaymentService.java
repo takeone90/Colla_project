@@ -32,7 +32,7 @@ public class PaymentService {
 	private PaymentDao paymentDao;
 
 	private static final String HOST = "https://kapi.kakao.com";
-	private static final String COLLAPATH = "http://localhost:8081";
+	private static final String COLLAPATH = "http://c0lla.com";
 
 	private KakaoPayReadyVO kakaoPayReadyVO;
 	private KakaoPayApprovalVO kakaoPayApprovalVO;
