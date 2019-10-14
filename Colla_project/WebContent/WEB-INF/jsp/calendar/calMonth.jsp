@@ -29,8 +29,6 @@ $(function() {
 	thisMonthCalendar(today);
 	showSchedule(today);
 	markingOnDate(formatChange(today));
-	drag();
-	
 	//모달 바깥 클릭 시 모달 닫기
 	$("#wsBody").on("mousedown", function(e) {
 		if(!$("#addForm").is(e.target) && $("#addForm").has(e.target).length===0)
@@ -39,7 +37,6 @@ $(function() {
 			$("#detailForm").fadeOut(1);
 		if(!$("#modifyForm").is(e.target) && $("#modifyForm").has(e.target).length===0)
 			$("#modifyForm").fadeOut(1);
-// 		return false;
 	});
 	
 	//추가 모달 열기
@@ -81,7 +78,7 @@ $(function() {
 			dataType: "json",
 			success: function(result) {
 				if(result) {
-					alert("추가 성공");
+					alert("추가 성공했습니다.");
 					$("#addForm").fadeOut(1);
 					thisMonthCalendar(today);
 					showSchedule(today);
@@ -89,7 +86,7 @@ $(function() {
 					showYearSchedule(today);
 					$(".addModal")[0].reset();
 				} else {
-					alert("추가 실패");
+					alert("추가 실패했습니다.");
 				}
 			}
 		});
@@ -128,7 +125,7 @@ $(function() {
 			dataType: "json",
 			success: function(result) {
 				if(result) {
-					alert("수정 성공");
+					alert("수정 성공했습니다.");
 					$("#modifyForm").fadeOut(1);
 					thisMonthCalendar(today);
 					showSchedule(today);
@@ -136,7 +133,7 @@ $(function() {
 					showYearSchedule(today);
 					$(".modifyModal")[0].reset();
 				} else {
-					alert("수정 실패");
+					alert("수정 실패했습니다.");
 				}
 			}
 		});
@@ -174,18 +171,16 @@ function dateCalcul(date) {
 //드래그로 추가 모달 열기
 function drag() {
 	var startDate = 0;
-	$(".drawMonthCalendarLower th, .drawMonthCalendarLower td").on("mousedown", function(e) { 
-		if(e.which === 1) {			
-			startDate = $(this).attr("id");
-			console.log(startDate);
+	$(".drawMonthCalendarLower th, .drawMonthCalendarLower td:not(.middleTd)").on("mousedown", function(e) { 
+		if(e.which === 1) { //마우스 왼쪽 클릭			
+			startDate = $(this).attr("class");
 		}
 	});
-	$(".drawMonthCalendarLower th, .drawMonthCalendarLower td").on("mouseup", function(e) {
+	$(".drawMonthCalendarLower th, .drawMonthCalendarLower td:not(.middleTd)").on("mouseup", function(e) {
 		if(e.which === 1) {				
 			$("#addForm").fadeIn(300);
 			$("#startDate").val(startDate);	
-			$("#endDate").val($(this).attr("id"));	
-			console.log($(this).attr("id"));
+			$("#endDate").val($(this).attr("class"));
 		}
 	});	
 }
@@ -218,10 +213,10 @@ function thisMonthCalendar(today) {
 		calendar += "<tr class='drawMonthCalendarLowerDate' id="+today.getFullYear()+"-"+month+"-"+i+">";
 		for(var j=0; j<7; j++) { //날짜 칸
 			if(today.getMonth() != realStartDate.getMonth()) { //월 일치X
-				calendar += "<th onclick='clickOnDate("+formatChange(realStartDate)+")' id="+formatChangeHyphen(realStartDate)+" class='inactivation'>"+realStartDate.getDate()+"</th>";
+				calendar += "<th onclick='clickOnDate("+formatChange(realStartDate)+")' class="+formatChangeHyphen(realStartDate)+" id='inactivation'>"+realStartDate.getDate()+"</th>";
 				realStartDate.setDate(realStartDate.getDate()+1);
 			} else if(today.getMonth() == realStartDate.getMonth()) { //월 일치O
-				calendar += "<th onclick='clickOnDate("+formatChange(realStartDate)+")' id="+formatChangeHyphen(realStartDate)+">"+realStartDate.getDate()+"</th>";
+				calendar += "<th onclick='clickOnDate("+formatChange(realStartDate)+")' class="+formatChangeHyphen(realStartDate)+">"+realStartDate.getDate()+"</th>";
 				realStartDate.setDate(realStartDate.getDate()+1);	
 			}
 		}
@@ -229,10 +224,10 @@ function thisMonthCalendar(today) {
 		calendar += "</tr><tr>";
 		for(var j=0; j<7; j++) { //아래 칸
 			if(today.getMonth() != realStartDate.getMonth()) { //월 일치X
-				calendar += "<td onclick='clickOnDate("+formatChange(realStartDate)+")' id="+formatChangeHyphen(realStartDate)+"></td>";
+				calendar += "<td onclick='clickOnDate("+formatChange(realStartDate)+")' class="+formatChangeHyphen(realStartDate)+"></td>";
 				realStartDate.setDate(realStartDate.getDate()+1);
 			} else if(today.getMonth() == realStartDate.getMonth()) { //월 일치O
-				calendar += "<td onclick='clickOnDate("+formatChange(realStartDate)+")' id="+formatChangeHyphen(realStartDate)+"></td>";
+				calendar += "<td onclick='clickOnDate("+formatChange(realStartDate)+")' class="+formatChangeHyphen(realStartDate)+"></td>";
 				realStartDate.setDate(realStartDate.getDate()+1);
 			}
 		}
@@ -273,7 +268,7 @@ function showSchedule(today) {
 	isMonthAjaxRun = true;
 	
 	console.log(formatChangeHyphen(today)+" 월 달력 일정을 그렸습니다.");
-	drag();
+	
 	var type1 = $("#calType1").prop("checked");
 	var type2 = $("#calType2").prop("checked");
 	var type3 = $("#calType3").prop("checked");
@@ -400,6 +395,7 @@ function showSchedule(today) {
 					}					
 				})(i)
 			}
+			drag();
 		}
 	});
 }
@@ -563,7 +559,7 @@ function trMaker(startDate, endDate, front, back, type, gap, title, color) { //�
 	var tr = $("<tr class='scheduleTr'>");
 	startDate.setDate(startDate.getDate()-startDate.getDay());
 	for(var l=0; l<front; l++) { 
-		let tdEtc = $("<td class='frontVacantTd' onclick='putContentIntoVacantTd("+formatChange(startDate)+", "+formatChange(startDate)+")' id="+formatChangeHyphen(startDate)+"></td>");
+		let tdEtc = $("<td class='"+formatChangeHyphen(startDate)+"' onclick='putContentIntoVacantTd("+formatChange(startDate)+", "+formatChange(startDate)+")'></td>");
 		tr.append(tdEtc);
 		startDate.setDate(startDate.getDate()+1);
 	}	
@@ -579,7 +575,7 @@ function trMaker(startDate, endDate, front, back, type, gap, title, color) { //�
 	tr.append(td);
 	for(var l=0; l<back; l++) {
 		endDate.setDate(endDate.getDate()+1);
-		let tdEtc = $("<td class='backVacantTd' onclick='putContentIntoVacantTd("+formatChange(endDate)+", "+formatChange(endDate)+")' id="+formatChangeHyphen(endDate)+"></td>");
+		let tdEtc = $("<td class='"+formatChangeHyphen(endDate)+"' onclick='putContentIntoVacantTd("+formatChange(endDate)+", "+formatChange(endDate)+")'></td>");
 		tr.append(tdEtc);
 	}
 	return tr;

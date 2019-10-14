@@ -172,12 +172,10 @@ public class MemberController {
 			return "redirect:/loading?info=duplicatedJoin";
 		}
 	}
-
 	@RequestMapping(value = "/callBackLogin", method = RequestMethod.GET) // 네이버 API 로그인
 	public String showCallBackLogin() {
 		return "/login/callBackLogin";
 	}
-
 	@ResponseBody
 	@RequestMapping(value = "/checkEmailDuplication", method = RequestMethod.POST)
 	public boolean checkEmailDuplication(String emailAddress, HttpSession session) {
@@ -188,9 +186,6 @@ public class MemberController {
 			return false; // 중복X
 		}
 	}
-
-
-
 	@RequestMapping(value = "/sendVerifyMail", method = RequestMethod.GET)
 	public String sendVerifyMail(HttpSession session) {
 		String emailAddress = (String) session.getAttribute("emailAddress");

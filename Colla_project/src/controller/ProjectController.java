@@ -114,7 +114,7 @@ public class ProjectController {
 		if((onlyEndDate-onlyStartDate)<0) {
 			return "redirect:loading?info=dateError";
 		}else {
-			int pNum = pService.addProject(pName, wNum, pDetail, encStartDate, encEndDate, mNum); //프로젝트 추가 & 채팅방 추가
+			int pNum = pService.addProject(pName, wNum, pDetail, encStartDate, encEndDate, mNum); //프로젝트 추가 & 채팅방 추가 & 일정 추가
 			String[] mNumListForInvitePj = request.getParameterValues("mNumListForInvitePj");
 			List<Member> alarmTargetMemberList = new ArrayList<Member>();
 			if(mNumListForInvitePj != null) { //프로젝트 초대 멤버 추가
