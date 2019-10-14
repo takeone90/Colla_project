@@ -164,7 +164,7 @@
 								<button class="naverLoginButton">네이버 회원가입<span id="naverIdLogin"></span></button>
 								<!-- 카카오 -->
 								<button id="kakaoLoginButton">카카오 회원가입</button>
-								<span id="kakao-login-btn"></span>
+								<span id="kakao-login-btn" style="display:none"></span>
 								<script type='text/javascript'>
 								    Kakao.init('1f6b481e9aa9a7ae0b621fee3692c041');
 								    Kakao.Auth.createLoginButton({
