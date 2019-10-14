@@ -74,7 +74,7 @@ td {
 .drawMonthCalendarLowerForClick th:hover {
 	background-color: red;
 }
-.inactivation {
+#inactivation {
 	color: grey;
 	background-color: rgba(117, 154, 189, 0.1)
 } 
@@ -296,7 +296,7 @@ td {
 	margin-left: -212.5px;
 	width: 500px;
 	background-color: white;
-	border-radius: 10px;
+	border-radius: 5px;
 	z-index: 10;
 	box-shadow: 2px 2px 5px 0.5px rgba(33, 33, 33, 0.2);
 }
