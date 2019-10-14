@@ -1,11 +1,8 @@
 package controller;
 
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.request;
 
 import java.io.IOException;
 import java.math.BigDecimal;
-import java.security.Principal;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -14,19 +11,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.aspectj.apache.bcel.classfile.InnerClass;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.messaging.converter.StringMessageConverter;
 import org.springframework.messaging.handler.annotation.DestinationVariable;
-import org.springframework.messaging.handler.annotation.MessageMapping;
-import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
-import org.springframework.messaging.simp.annotation.SubscribeMapping;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -35,14 +24,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import mail.MailSend;
 import model.ChatMessage;
 import model.ChatRoom;
-import model.EmailVerify;
 import model.Member;
 import service.ChatMessageService;
 import service.ChatRoomMemberService;
 import service.ChatRoomService;
 import service.MemberService;
 import service.ProjectMemberService;
-import service.ProjectService;
 import service.SetAlarmService;
 import service.SystemMsgService;
 import service.WsMemberService;
@@ -84,8 +71,6 @@ public class MemberController {
 	private ChatRoomService crService;
 	@Autowired
 	private SystemMsgService smService;
-	@Autowired
-	private ProjectService pService;
 	@Autowired
 	private ProjectMemberService pmService;
 
@@ -225,7 +210,7 @@ public class MemberController {
 	@ResponseBody
 	@RequestMapping(value = "/checkVerifyCode")
 	public boolean checkVerifyCode(String inputVerifyCode, HttpSession session) {
-		String emailAddress = (String) session.getAttribute("emailAddress");
+//		String emailAddress = (String) session.getAttribute("emailAddress");
 		String verifyCode = (String) session.getAttribute("verifyCode");
 		session.setAttribute("inputVerifyCode", inputVerifyCode);
 		if (verifyCode.equals(inputVerifyCode)) {
@@ -290,7 +275,6 @@ public class MemberController {
 			this.emailAddress = emailAddress;
 			this.type = type;
 			this.session = session;
-			this.request = request;
 		}
 
 		@Override
@@ -300,7 +284,7 @@ public class MemberController {
 			ms.MailSend(emailAddress, "<body>\r\n"
 					+ "	<div style='background-color: #4D4B4C; width: 760px; margin: 50px auto'>\r\n"
 					+ "		<h1 style='background-color: white'>\r\n"
-					+ "			<a href=\"#\"><img style='width: 150px' src='http://www.c0lla.com/img/COLLA_LOGO_200px.png' /></a>\r\n"
+					+ "			<a href=\"http://www.c0lla.com\"><img style='width: 150px' src='http://www.c0lla.com/img/COLLA_LOGO_200px.png' /></a>\r\n"
 					+ "		</h1>\r\n" + "		<div>\r\n"
 					+ "			<img style='width: 100%'src='http://www.c0lla.com/img/COLLA_WAVE_PNG.png'>\r\n"
 					+ "		</div>\r\n" + "		<div\r\n"
