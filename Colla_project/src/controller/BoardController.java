@@ -103,22 +103,30 @@ public class BoardController {
 			@RequestParam(value="page", defaultValue="1") int page,
 			@RequestParam(value="keywordType", defaultValue = "0") int type,
 			@RequestParam(value="keyword", required = false) String keyword,
-			@RequestParam(value="wNum", required = false)int wNum
+			@RequestParam(value="wNum", required = false)String wNum
 			) {
-//		if(session.getAttribute("currWnum")!=null) {
-//			System.out.println("세션이 물고있음 : "+(int)session.getAttribute("currWnum"));
-//			wNum = (String)session.getAttribute("currWnum");
-//		}
-//		int intWnum = Integer.parseInt(wNum);
+		int wNum2 = 0;
+		if( wNum == null) {
+			if( session.getAttribute("currWnum")!= null ) {
+				wNum2 = Integer.parseInt((String)session.getAttribute("currWnum"));
+			}
+		} else {
+			session.setAttribute("currWnum", wNum);
+			wNum2 = Integer.parseInt(wNum);
+		}
+		
+		if(wNum2 == 0) {
+			return "/workspace";
+		}
 		Map<String, Object> param = new HashMap<String, Object>();
 		if(page<=0) {
 			page=1;
 		}
-		param.put("wNum", wNum);
+		param.put("wNum", wNum2);
 		param.put("page", page);
 		param.put("type",type);
 		param.put("keyword",keyword);
-		Workspace currWs = wService.getWorkspace(wNum);
+		Workspace currWs = wService.getWorkspace(wNum2);
 		List<Board> bList = bService.getBoardListPage(param);
 		model.addAttribute("bList", bList);
 		session.setAttribute("currWnum", wNum);
