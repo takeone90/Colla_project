@@ -728,14 +728,14 @@ div {
 /*회사소개*/
 #aboutUsAll .head-title {
 	font-size: 56px;
-	color: #665A5A;
+	color: #3e505a;
 	margin-bottom: 50px;
 	margin-top: 80px;
 	padding: 15px;
 }
 
 #aboutUsAll p {
-	color: #665A5A;
+	color: #3e505a;
 	line-height: 27px;
 }
 
@@ -924,7 +924,7 @@ div {
 }
 
 #paymentAll * {
-	color: #665A5A;
+	color: #3e505a;
 }
 
 #paymentAll #container {
@@ -1099,7 +1099,7 @@ div {
     line-height: 35px;
 }
 #paymentResult * {
-	color: #665A5A;
+	color: #3e505a;
 }
 #paymentResult #container {
 	width: 538px;
