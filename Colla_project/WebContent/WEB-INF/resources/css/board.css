@@ -3,7 +3,8 @@
 /* board 공통 */
 #boardInner {
 	position:relative;
-    width: 1280px;
+	width:100%;
+    max-width: 1280px;
     margin: 35px auto 20px;
 }
 #boardInner .row {
@@ -50,23 +51,30 @@
 	height:100%;
 	float:left;
 	text-align:center;
+	padding: 0 5px;
 }
 #boardInner #boardList div:nth-child(1){
 	font-size:13px;
-	width:10%;
+	width:100px;
 }
 #boardInner #boardList div:nth-child(2){
-	width:60%;
+	width: calc(100% - 450px);
 	text-align:left;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
 }
 #boardInner #boardList div:nth-child(3){
-	width:10%;
+	width:100px;
 }
 #boardInner #boardList div:nth-child(4){
-	width:10%;
+	width:100px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
 }
 #boardInner #boardList div:nth-child(5){
-	width:10%;
+	width:100px;
 }
 #boardInner .replyCount{
 	color:#E5675A;

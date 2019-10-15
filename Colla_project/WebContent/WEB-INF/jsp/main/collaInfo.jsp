@@ -122,7 +122,7 @@ $(function() {
 				<div id="container">
 					<div class="collaInfo-functions">
 						<div id="collaInfo-function1-stable">
-							<div>그림1</div>
+							<div><img src="${contextPath }/img/mac_wsMain.png"></div>
 						</div>
 						<div id="collaInfo-function1-ani">
 							<div class="function-title">Workspace</div>
@@ -148,7 +148,7 @@ $(function() {
 							</div>
 						</div>
 						<div id="collaInfo-function2-stable">
-							<div>그림2</div>
+							<div><img src="${contextPath }/img/mac_pjMain.png"></div>
 						</div>
 					</div>
 				</div>
@@ -158,7 +158,7 @@ $(function() {
 				<div id="container">
 					<div class="collaInfo-functions">
 						<div id="collaInfo-function3-stable">
-							<div>그림3</div>
+							<div><img src="${contextPath }/img/mac_chatMain.png"></div>
 						</div>
 						<div id="collaInfo-function3-ani">
 							<div class="function-title">Chatting</div>
@@ -184,7 +184,7 @@ $(function() {
 							</div>
 						</div>
 						<div id="collaInfo-function4-stable">
-							<div>그림4</div>
+							<div><img src="${contextPath }/img/mac_boardMain.png"></div>
 						</div>
 					</div>
 				</div>
@@ -194,7 +194,7 @@ $(function() {
 				<div id="container">
 					<div class="collaInfo-functions">
 						<div id="collaInfo-function5-stable">
-							<div>그림5</div>
+							<div><img src="${contextPath }/img/mac_calMain.png"></div>
 						</div>
 						<div id="collaInfo-function5-ani">
 							<div class="function-title">Calendar</div>

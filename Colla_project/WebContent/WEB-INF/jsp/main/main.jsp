@@ -102,6 +102,7 @@ $(function() {
 		<div id="welcome">
 			<section id="main-cover" class="box">
 				<div class="container">
+
 					<div class="text">
 						<div class="head-body-up animated fadeInUp">.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.</div>
 						<div class="head-body-down animated fadeInUp">가볍고 실속있는 협업 솔루션</div>

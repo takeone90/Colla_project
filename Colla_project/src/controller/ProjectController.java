@@ -170,8 +170,8 @@ public class ProjectController {
 		if(pmService.getAllProjectMemberByPnum(pNum).isEmpty()) {
 			System.out.println("해당 프로젝트에 멤버가 없는게 확인됐으므로 모든 td리스트 지웁니다");
 			tService.removeAllTodoByPnum(pNum);
+			cService.removeCalendar(pService.getProject(pNum).getCalNum()); //일정 삭제
 		}
-		cService.removeCalendar(pService.getProject(pNum).getCalNum()); //일정 삭제
 		pService.removeEmptyProject();
 		return result;
 	}
