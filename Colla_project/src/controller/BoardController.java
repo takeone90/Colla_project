@@ -111,7 +111,6 @@ public class BoardController {
 				wNum2 = Integer.parseInt((String)session.getAttribute("currWnum"));
 			}
 		} else {
-			session.setAttribute("currWnum", wNum);
 			wNum2 = Integer.parseInt(wNum);
 		}
 		

@@ -119,6 +119,8 @@
 	// 					})
 					</script>
 					<form action="list" id="boardSearchForm">
+							<input type="hidden" name="wNum" value="${sessionScope.currWnum}">
+						
 						<select name="keywordType" id="keywordType">
 							<option value="1" ${empty listInf.keyword || listInf.type eq 1?'selected':'' }>제목</option>
 							<option value="2" ${not empty listInf.keyword && listInf.type eq 2?'selected':'' }>내용</option>
