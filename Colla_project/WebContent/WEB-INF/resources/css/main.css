@@ -59,6 +59,8 @@
 #main-cover .head-title {
 	font-size: 106px;
 	margin-top: 0px;
+	letter-spacing : 7px;
+	font-weight: 700;
 }
 #main-cover .head-caption {
 	margin-top: 0px;

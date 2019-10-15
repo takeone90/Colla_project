@@ -104,7 +104,7 @@ $(function() {
 				<div class="container">
 					<div class="head-body-up animated fadeInUp">.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.</div>
 					<div class="head-body-down animated fadeInUp">가볍고 실속있는 협업 솔루션</div>
-					<div class="head-title"><p class="animated fadeInUp">COLLA</p></div>
+					<div class="head-title"><p lang="en" class="animated fadeInUp">COLLA</p></div>
 					<div class="head-caption animated fadeInUp">COLLA는 프로젝트를 중심으로<br>외부인들과 빠른 협업을 돕습니다.</div>
 				</div>
 			</section>
