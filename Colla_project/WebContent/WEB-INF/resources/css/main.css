@@ -169,6 +169,9 @@
 #wrap {
 	height: 100%;
 }
+.boration {
+	font-size: 45px;
+}
 #collaInfoAll {
 	height: 100%;
 }
@@ -482,7 +485,7 @@
 .question>div {
 	font-size: 20px;
 	font-weight: 999;
-	color: burlywood;
+	color: #96a8b3;
 	margin-right: 16px;
 	display: inline-block;
 }
@@ -531,7 +534,7 @@
 	height: 445px;
 	border-radius: 10px;
 	border: 0px solid;
-	background-color: #EFEEEE;
+	background-color: transparent;
 	margin: 0 auto;
 	margin-bottom: 55px;
 	padding-top: 10px;
