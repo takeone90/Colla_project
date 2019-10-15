@@ -530,7 +530,7 @@ var chatTop = 0;	// chatArea 맨위로 스크롤 >> 과거메시지 로드
 						addMsg(messageList[i], "favorite");
 					}
 				} else {
-					$("#nav--favorite").append("<h4 style='text-align:center; margin-top:30px;'>현재 채팅방에서 즐겨찾기된 메시지가 없습니다.</h4>");
+					$("#nav--favorite").append("<h4 style='text-align:center; margin-top:30px;font-weight: 300;'>현재 채팅방에서 즐겨찾기된 메시지가 없습니다.</h4>");
 				}
 			},
 			error : function(){
@@ -822,7 +822,7 @@ var chatTop = 0;	// chatArea 맨위로 스크롤 >> 과거메시지 로드
 
 	function showLoginNow(num, bool){
 		if(bool){
-			$("#navMList").find("div[data-num='"+num+"']").css({borderColor : "#00FF1E"});
+			$("#navMList").find("div[data-num='"+num+"']").css({borderColor : "#60de6f"});
 		} else {
 			$("#navMList").find("div[data-num='"+num+"']").css({borderColor : "#fff"});
 		}

@@ -165,7 +165,7 @@
 		</div>
 		<!-- 로그아웃버튼 -->
 		<div>
-			<form action="logout" method="post">
+			<form action="/logout" method="post">
 				<input type="hidden" value="${_csrf.token}" name="${_csrf.parameterName}">
 				<input type="submit" value="로그아웃" id="logoutBtn">
 			</form>
