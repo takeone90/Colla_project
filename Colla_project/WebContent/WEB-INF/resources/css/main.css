@@ -40,7 +40,7 @@
 	visibility: hidden;
 }
 #main-cover {
-	background-image: url("../img/Main_background.jpg");
+	background-image: url("../img/Main_background.png");
 	background-size: cover;
 }
 #main-cover .head-body-up {

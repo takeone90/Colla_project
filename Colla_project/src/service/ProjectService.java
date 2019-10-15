@@ -167,10 +167,10 @@ public class ProjectService {
 		return calcProgress;
 	}
 	public static String getRandomColor() {
-        String[] letters = {"C","D","E","F"};
+        String[] letters = {"A","B","C","D","E","F"};
         String color = "#C";
         for (int i = 0; i < 5; i++ ) {
-           color += letters[(int) Math.round(Math.random() * 3)];
+           color += letters[(int) Math.round(Math.random() * 5)];
         }
         return color;
    }
