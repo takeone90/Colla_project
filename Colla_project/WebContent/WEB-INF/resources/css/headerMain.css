@@ -2,7 +2,7 @@
 
 #header{
 	width:100%;
-	height:120px;
+	height:90px;
 	background-color: #fff; /* 임시로 색깔 바꿈 */
 	background:url("../img/COLLA_header_wave.png") no-repeat 0 0/100% 100%;
 	position: fixed;
@@ -36,7 +36,7 @@
 	float:left;
 }
 #header nav ul { 
-	width:750px;
+	width:460px;
 	position:absolute;
 	bottom:0;
 }
@@ -48,7 +48,7 @@
 
 #header nav li a{
 	font-weight: 500;
-    font-size: 16px;
+    font-size: 15px;
     color: #665A5A;
     transition: color .5s;
 }
