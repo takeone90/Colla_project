@@ -110,7 +110,7 @@ $(function() {
 			<section id="collaInfo-cover" class="box">
 				<div id="container">
 					<div id="collaInfo-cover-ani" class="animated zoomIn">
-						<div class="head-title"><p>COLLA</p><p>boration</p></div>
+						<div class="head-title" lang="en"><p>COLLA</p><p class="boration">boration</p></div>
 						<div class="head-body">이제 쉽게 공유하고 협업할 수 있습니다.</div>
 						<div class="head-caption">COLLA에 어떤 기능들이 있는지 살펴볼까요?</div>
 						<div class="head-arrow"><i class="fas fa-angle-double-down"></i></div>
@@ -125,7 +125,7 @@ $(function() {
 							<div><img src="${contextPath }/img/mac_wsMain.png"></div>
 						</div>
 						<div id="collaInfo-function1-ani">
-							<div class="function-title">Workspace</div>
+							<div class="function-title" lang="en">Workspace</div>
 							<div class="function-body">쉽고 빠르게 워크스페이스 생성</div>
 							<div class="function-caption">워크스페이스는 COLLA에서 정의하는 프로젝트 단위입니다.<br>
 								워크스페이스는 사용에 따라 조직이 될 수도 있고,<br> 개별 프로젝트가 될 수도 있습니다.<br>
@@ -140,7 +140,7 @@ $(function() {
 				<div id="container">
 					<div class="collaInfo-functions">
 						<div id="collaInfo-function2-ani">
-							<div class="function-title">Project</div>
+							<div class="function-title" lang="en">Project</div>
 							<div class="function-body">멤버들과의 실시간 채팅</div>
 							<div class="function-caption">COLLA는 워크스페이스 멤버들과의 실시간 채팅 서비스를 제공합니다.<br>
 								파일, 코드, 지도를 첨부할 수 있는 제공합니다.<br>채팅방은 사용 목적에 따라 부서별, 계열사별 등 다양한<br>
@@ -161,7 +161,7 @@ $(function() {
 							<div><img src="${contextPath }/img/mac_chatMain.png"></div>
 						</div>
 						<div id="collaInfo-function3-ani">
-							<div class="function-title">Chatting</div>
+							<div class="function-title" lang="en">Chatting</div>
 							<div class="function-body">멤버들과 일정을 공유하고 관리</div>
 							<div class="function-caption">COLLA는 워크스페이스 멤버들과 함께 공유하고 관리할 수 있는<br>
 								공유 캘린더 기능을 제공합니다.<br>어느 채팅방에 있건 같은 워크스페이스 멤버라면<br>
@@ -176,7 +176,7 @@ $(function() {
 				<div id="container">
 					<div class="collaInfo-functions">
 						<div id="collaInfo-function4-ani">
-							<div class="function-title">Board</div>
+							<div class="function-title" lang="en">Board</div>
 							<div class="function-body">멤버들과 자유롭게 소통하는 게시판</div>
 							<div class="function-caption">COLLA는 워크스페이스 멤버들 모두가 자유롭게 소통할 수 있는 게시판을 제공합니다.<br>
 								주요사항을 공지로 상단에 띄을 수 있고,<br>파일 첨부는 물론<br>
@@ -197,7 +197,7 @@ $(function() {
 							<div><img src="${contextPath }/img/mac_calMain.png"></div>
 						</div>
 						<div id="collaInfo-function5-ani">
-							<div class="function-title">Calendar</div>
+							<div class="function-title" lang="en">Calendar</div>
 							<div class="function-body">멤버들과 일정을 공유하고 관리</div>
 							<div class="function-caption">COLLA는 워크스페이스 멤버들과 함께 공유하고 관리할 수 있는<br>
 								공유 캘린더 기능을 제공합니다.<br>어느 채팅방에 있건 같은 워크스페이스 멤버라면<br>

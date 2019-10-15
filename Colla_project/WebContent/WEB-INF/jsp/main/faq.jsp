@@ -12,7 +12,7 @@ $(function() {
 	$(".FAQ-box").click(function() {
 		if($(this).children(".answer").css("display")=="none") { //열기
 			$(this).children(".answer").css({display : 'block', color : 'blue'}); //해당 답변창 열기
-			$(this).css({height : 'auto', 'background-color' : '#4C4A4B'}); //박스 크기 늘리기
+			$(this).css({height : 'auto', 'background-color' : '#10344a'}); //박스 크기 늘리기
 			$(this).children(".question").css({color : 'white'}); //질문 글씨색 바꾸기
 			$(this).children(".question").children(".icon").css({transform:'rotate(180deg)',transition:'all 0.4s'}); //화살표 회전
 			
@@ -69,7 +69,7 @@ $(function() {
 		<div id="faqAll">
 			<section id="">
 				<div id="container">
-					<div class="head-title"> FAQ </div>
+					<div class="head-title" lang="en"> FAQ </div>
 					<div class="head-body"> Frequently Asked Questions <br></div>
 					<div class="head-caption"> 궁금하신 게 있으신가요? 친절하게 알려드릴게요. </div>
 					<div class="FAQs">
@@ -192,7 +192,7 @@ $(function() {
 			</section>
 			<section id="ask">
 				<div id="container">
-					<div class="head-title"> QnA </div>
+					<div class="head-title" lang="en"> Q&A </div>
 <!-- 					<div class="head-body"> Ask By Email <br></div> -->
 					<div class="head-caption"> 궁금증이 해결되시지 않으셨나요? 이메일로 답변해드리겠습니다. </div>
 					<div class="FAQ-email">

@@ -69,7 +69,7 @@ $(function() {
 			<section id="aboutUs-cover" class="box">
 				<div id="container">
 					<div id="aboutUs-cover-ani">
-						<div class="head-title"> Share Your Thinking </div>
+						<div class="head-title" lang="en"> Share Your Thinking </div>
 						<div class="head-body">
 							<div>
 								<p class="aboutUs-content-title animated fadeIn">한 모금의 시원한 콜라같은 협업도구</p>
