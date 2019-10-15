@@ -29,33 +29,33 @@
 			<ul class="gnbUl">
 				<li>
 					<h2>
-						<a href="${contextPath}/collaInfo"> COLLA? </a>
+						<a lang="en" href="${contextPath}/collaInfo"> COLLA? </a>
 					</h2>
 				</li><!-- 
 			 --><li>
 					<h2>
-						<a href="${contextPath}/pricing"> PRICING </a>
+						<a lang="en" href="${contextPath}/pricing"> PRICING </a>
 					</h2>
 				</li><!-- 
 			 --><li>
 					<h2>
-						<a href="${contextPath}/faq"> FAQ </a>
+						<a lang="en" href="${contextPath}/faq"> FAQ </a>
 					</h2>
 				</li><!-- 
 			 --><li>
 					<h2>
-						<a href="${contextPath}/aboutUs"> ABOUT US </a>
+						<a lang="en" href="${contextPath}/aboutUs"> ABOUT US </a>
 					</h2>
 				</li>
 				<li class="memberBtn">
 					<c:choose>
 						<c:when test="${sessionScope.user != null }">
-							<a href="${contextPath}/workspace" class="btn">Workspace</a>
-							<a href="${contextPath}/logout" class="btn">Logout</a>
+							<a lang="en" href="${contextPath}/workspace" class="btn">Workspace</a>
+							<a lang="en" href="${contextPath}/logout" class="btn">Logout</a>
 						</c:when>
 						<c:otherwise>
-							<a href="${contextPath}/loginForm" class="btn">Login</a>
-							<a href="${contextPath}/joinStep1" class="btn">Join us</a>
+							<a lang="en" href="${contextPath}/loginForm" class="btn">Login</a>
+							<a lang="en" href="${contextPath}/joinStep1" class="btn">Join us</a>
 						</c:otherwise>
 					</c:choose>
 				</li>
@@ -65,22 +65,22 @@
 			<ul>
 				<li>
 					<h2>
-						<a href="${contextPath}/collaInfo"> COLLA? </a>
+						<a lang="en" href="${contextPath}/collaInfo"> COLLA? </a>
 					</h2>
 				</li><!-- 
 			 --><li>
 					<h2>
-						<a href="${contextPath}/pricing"> PRICING </a>
+						<a lang="en" href="${contextPath}/pricing"> PRICING </a>
 					</h2>
 				</li><!-- 
 			 --><li>
 					<h2>
-						<a href="${contextPath}/faq"> FAQ </a>
+						<a lang="en" href="${contextPath}/faq"> FAQ </a>
 					</h2>
 				</li><!-- 
 			 --><li>
 					<h2>
-						<a href="${contextPath}/aboutUs"> ABOUT US </a>
+						<a lang="en" href="${contextPath}/aboutUs"> ABOUT US </a>
 					</h2>
 				</li>
 			</ul>
@@ -89,12 +89,12 @@
 			<ul>
 			<c:choose>
 				<c:when test="${sessionScope.user != null }">
-					<li><a href="${contextPath}/workspace" class="btn">Workspace</a></li>
-					<li><a href="${contextPath}/logout" class="btn">Logout</a></li>
+					<li><a lang="en" href="${contextPath}/workspace" class="btn">Workspace</a></li>
+					<li><a lang="en" href="${contextPath}/logout" class="btn">Logout</a></li>
 				</c:when>
 				<c:otherwise>
-					<li><a href="${contextPath}/loginForm" class="btn">Login</a></li>
-					<li><a href="${contextPath}/joinStep1" class="btn">Join us</a></li>
+					<li><a lang="en" href="${contextPath}/loginForm" class="btn">Login</a></li>
+					<li><a lang="en" href="${contextPath}/joinStep1" class="btn">Join us</a></li>
 				</c:otherwise>
 			</c:choose>
 			</ul>
