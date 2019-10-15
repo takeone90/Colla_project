@@ -13,6 +13,11 @@ a:visited, a:link, a:focus, a:hover, a:active{
 	color: #423d3d;
 	text-decoration:none;
 }
+
+#wrap{
+	height: 100%;
+    background-color: #F5F5F5;
+}
 .clearFix:after{content:""; display:block; clear:both;}
 .container {max-width:100%; margin:0 auto; overflow:hidden; position:relative;}
 .floatleft {display:block; float:left;}
