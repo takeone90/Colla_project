@@ -7,7 +7,7 @@
 	margin-bottom: 10px;
 	padding: 15px;
 	margin-top: 220px;
-	color: #4C4A4B;
+	color: #3e505a;
 }
 
 /* -------------------- main -------------------- */
@@ -19,7 +19,8 @@
 	background-color: #ffffff;
 	height: 100%;
 }
-#main-cover, #main-intro {
+#main-cover, 
+#main-intro {
 	position: relative;
 	display: block;
 	overflow: hidden;
@@ -40,11 +41,13 @@
 	visibility: hidden;
 }
 #main-cover {
-	background-image: url("../img/Main_background.png");
+	background-image: url("../img/Main_background.jpg");
 	background-size: cover;
 }
+.text {
+	margin-top: 250px;
+}	
 #main-cover .head-body-up {
-	margin-top: 165px;
 	display: inline-block;
 	color: #EC6D63;
 	margin-right: 101px;
@@ -67,7 +70,7 @@
 	color: #DEDCDD;
 }
 #main-intro {
-	background-color: #F5F5F5;
+	background-color: #ebf2f5;
 }
 #main-intro .head-body {
 	margin-top: 5%;
@@ -96,14 +99,14 @@
 .main-function-text {
 	font-weight: 300;
 	font-size: 35px;
-	color: #4C4A4B;
+	color: #3e505a;
 }
 .main-function-image > img {
 	margin-top:30px;
 	height: calc(100% - 30px);
 }
 .main-function-image {
-	background-color: #F5F5F5;
+	background-color: #ebf2f5;
 	position: relative;
 	z-index: 2;
 }
@@ -116,7 +119,7 @@
 .main-function-details > div {
 	width: 220px;
 	height: 220px;
-	background-color: #4D4B4C;
+	background-color: #3e505a;
 	display: table;
 	margin: 0px 10px;
 	border-radius: 50%;
@@ -141,15 +144,15 @@
 	font-weight: 500;
 }
 #main-partners {
-	background-color: #F5F5F5;
+	background-color: #ebf2f5;
 }
 #main-partners .head-body {
 	margin-top: 90px;
 	margin-bottom: 0px;
-	color: #4C4A4B;
+	color: #3e505a;
 }
 #main-partners .head-caption {
-	color: #4C4A4B;
+	color: #3e505a;
 	font-weight: 100;
 }
 .partners-list {
@@ -178,12 +181,12 @@
 #collaInfo-cover, 
 #collaInfo-function2, 
 #collaInfo-function4 {
-	background-color: #F5F5F5;
+	background-color: #ebf2f5;
 }
 #collaInfo-function1, 
 #collaInfo-function3,
 #collaInfo-function5 {
-	background-color: #F5F5F5;
+	background-color: #ebf2f5;
 }
 .collaInfo-functions {
 	margin-top: 12%;
@@ -225,7 +228,7 @@
 	margin-bottom: 10px;
 	padding: 15px;
 	margin-top: 220px;
-	color: #4C4A4B;
+	color: #3e505a;
 }
 .head-title p {
 	display: inline-block;
@@ -242,13 +245,13 @@
 	line-height: 1.4;
 	padding: 0px 15px;
 	margin-bottom: 30px;
-	color: #4C4A4B;
+	color: #3e505a;
 }
 .head-caption {
 	padding: 4px;
     font-size: 16px;
     margin-bottom: 55px;
-    color: #4C4A4B;
+    color: #3e505a;
     line-height: 25px;
 }
 .head-arrow {
@@ -261,7 +264,7 @@
 	margin-bottom: 10px;
 	padding: 15px;
 	margin-top: 70px;
-	color: #4C4A4B;
+	color: #3e505a;
 }
 .function-body {
 	font-size: 30px;
@@ -269,13 +272,13 @@
 	line-height: 1.4;
 	padding: 0px 15px;
 	margin-bottom: 30px;
-	color: #4C4A4B;
+	color: #3e505a;
 }
 .function-caption {
 	padding: 15px;
 	font-size: 20px;
 	margin-bottom: 55px;
-	color: #4C4A4B;
+	color: #3e505a;
 	line-height: 25px;
 }
 
@@ -283,16 +286,16 @@
 
 #pricingAll .head-title {
 	margin-top: 80px;
-	color: #4C4A4B;
+	color: #3e505a;
 }
 
 #pricingAll .head-body {
 	margin-bottom: 0px;
-	color: #4C4A4B;
+	color: #3e505a;
 }
 
 #pricingAll .head-caption {
-	color: #4C4A4B;
+	color: #3e505a;
 }
 
 #pricingAll section {
@@ -302,7 +305,7 @@
 	height: 890px;
 	text-align: center;
 	padding: 80px 15px 100px 15px;
-	background-color: #F5F5F5;
+	background-color: #ebf2f5;
 }
 
 .price-box-inside {
@@ -373,7 +376,7 @@
 .price-detail {
 	margin-top: 20px;
 	margin-bottom: 10px;
-	background-color: #F5F5F5;
+	background-color: #ebf2f5;
 	padding: 15px;
 	line-height: 30px;
 	border-radius: 10px;
@@ -418,21 +421,21 @@
 	height: 740px;
 	text-align: center;
 	padding: 80px 15px 100px 15px;
-	background-color: #F5F5F5;
+	background-color: #ebf2f5;
 }
 
 #faqAll .head-title {
 	margin-top: 80px;
-	color: #4C4A4B;
+	color: #3e505a;
 }
 
 #faqAll .head-body {
 	margin-bottom: 0px;
-	color: #4C4A4B;
+	color: #3e505a;
 }
 
 #faqAll .head-caption {
-	color: #4C4A4B;
+	color: #3e505a;
 }
 
 .FAQs {
@@ -662,7 +665,7 @@ div {
 	height: 100%;
 	text-align: center;
 	padding: 80px 15px 100px 15px;
-	background-color: #F5F5F5;
+	background-color: #ebf2f5;
 }
 
 /* 카드 뒤집기 */
@@ -834,7 +837,7 @@ div {
 }
 
 #aboutUs-history .head-body ul li p:nth-child(2) {
-	color: #4D4B4C;
+	color: #3e505a;
 	width: 300px;
 }
 /*멤버 소개*/
@@ -872,7 +875,7 @@ div {
 #aboutUs-member .memberInfo .front p+p {
 	font-size: 22px;
 	font-weight: bold;
-	color: #4D4B4C;
+	color: #3e505a;
 }
 
 #aboutUs-member .back {
@@ -905,7 +908,7 @@ div {
 	overflow: hidden;
 	height: 890px;
 	padding: 80px 15px 100px 15px;
-	background-color: #F5F5F5;
+	background-color: #ebf2f5;
 	background-color: #d6d6d6;
 }
 
