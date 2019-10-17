@@ -1021,9 +1021,9 @@ var chatTop = 0;	// chatArea 맨위로 스크롤 >> 과거메시지 로드
 												</select>
 											</div>
 											<div class="colorDiv half">
-												<h4>색</h4>
+												<h4 style="margin-left: 32px;">색</h4>
 												<input type="color" name="color" id="addColor"
-													value="#ffffff">
+													value="#ffffff" style="padding: 0px;">
 											</div>
 										</div>
 										<div class="dateDiv schedule-row">
@@ -1069,23 +1069,29 @@ var chatTop = 0;	// chatArea 맨위로 스크롤 >> 과거메시지 로드
 						<script type="text/javascript"><!-- 191002 혜선 추가 -->
 							$(function() {
 								$("#addSchedule").on("click", function() {
-									var data = $(".addModal").serialize();
-									console.log(data);
-									$.ajax({
-										url: "/addSchedule",
-										data: data,
-										type: "post",
-										dataType: "json",
-										success: function(result) {
-											if(result) {
-												alert("일정 추가했습니다.");
-												$(".addModal")[0].reset();
-											} else {
-												alert("일정 추가 실패했습니다.");
+									var sDate = $("#startDate").val();
+									var eDate = $("#endDate").val();
+									if(sDate > eDate) {
+										alert("종료일이 시작일보다 빠를 수 없습니다.");
+									} else {										
+										var data = $(".addModal").serialize();
+										console.log(data);
+										$.ajax({
+											url: "/addSchedule",
+											data: data,
+											type: "post",
+											dataType: "json",
+											success: function(result) {
+												if(result) {
+													alert("일정 추가했습니다.");
+													$(".addModal")[0].reset();
+												} else {
+													alert("일정 추가 실패했습니다.");
+												}
 											}
-										}
-									});
-									return false;
+										});
+										return false;
+									}
 								});	
 							    $( ".datepicker" ).datepicker({
 							    	dateFormat: 'yy-mm-dd',
