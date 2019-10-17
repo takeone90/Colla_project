@@ -93,11 +93,29 @@ $(function() {
 		$(".main-function-details > div").removeClass('on');
 		$(this).addClass('on');
 	});
+	$("#portfolioModal a").click(function(){
+		$("#portfolioModal-wrap").addClass("off");
+	});
+	
 });
 </script>
 </head>
 <body>
 	<div id="wrap">
+		<div id="portfolioModal-wrap">
+			<div id="portfolioModal">
+				<p>
+					<span>본 사이트는 상업적 목적이 아닌</span>
+					<span>포트폴리오 용도로 제작되었으며,</span>
+					<span>홈페이지의 일부 내용과 기타 이미지 등은</span>
+					<span>그 출처가 따로 있음을 밝힙니다.</span>
+				</p>
+				<div id="btns">
+					<a href="#" class="btn">닫기</a>
+				</div>
+			</div>
+		</div>
+		
 		<%@ include file="/WEB-INF/jsp/inc/headerMain.jsp" %>
 		<div id="welcome">
 			<section id="main-cover" class="box">

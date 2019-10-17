@@ -24,6 +24,7 @@ function topFunction() {
 			<div id="co-location">
 				<p><span>(주)질수없조</span><span>명예이사 : 임창목</span><span>사업자등록번호 : 1990-09-17</span></p>
 				<p><span>Republic of Korea</span><span>459, Gangnam-daero, Seocho-gu, Seoul</span></p>
+				<address>팀 프로젝트 포트폴리오</address>
 			</div>
 		</div>
 		<div id="f2">
