@@ -19,7 +19,7 @@
 			}
 		}else{
 			if(userLicense){
-				alert("사용중인 라이선스가 있어 구매가 불가능합니다.");
+				alert("사용 중인 라이선스가 있어 구매가 불가능합니다.");
 			}else{
 				location.href="${contextPath}/payment/kakaoPay?type="+type;				
 			}
@@ -93,7 +93,7 @@
 						<div class="price-each-col">
 							<div class="price-title">Business</div>
 							<div class="price-desc">
-								소규모 기업에게 추천합니다. <br>더 큰 성과를 낼 수 있을 거예요!
+								중소기업에게 추천합니다.<br>더 큰 성과를 낼 수 있을 거예요!
 							</div>
 							<div class="price-amount-view">
 								<div class="price-value">50,000</div>
@@ -125,7 +125,7 @@
 										<path d="M-4-6h24v24H-4z"></path>
 										<path fill="#0052E2"
 											d="M14.505 0L16 1.44 5.038 12 0 7.147l1.495-1.44L5.038 9.12z"></path></g></svg>
-									<div class="price-detail-content">채팅방 10개</div>
+									<div class="price-detail-content">프로젝트 10개</div>
 								</div>
 								<div>
 									<svg class="price-check" xmlns="http://www.w3.org/2000/svg"
@@ -145,8 +145,7 @@
 						<div class="price-each-col">
 							<div class="price-title">Enterprise</div>
 							<div class="price-desc">
-								대기업에게 추천합니다.<br> 
-								여러 조직과의 협업에 도움이 될거예요!
+								대기업에게 추천합니다.<br>여러 조직과의 협업에 도움이 될 거예요!
 							</div>
 							<div class="price-amount-view">
 								<div class="price-value">100,000</div>
