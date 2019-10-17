@@ -146,7 +146,7 @@
 							<div class="price-title">Enterprise</div>
 							<div class="price-desc">
 								대기업에게 추천합니다.<br> 
-								다양한 파트너와의 협업에 도움이 될거예요!
+								여러 조직과의 협업에 도움이 될거예요!
 							</div>
 							<div class="price-amount-view">
 								<div class="price-value">100,000</div>
