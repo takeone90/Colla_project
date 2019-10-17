@@ -112,7 +112,7 @@ public class BoardController {
 			session.setAttribute("currWnum", wNum);
 			wNum2 = Integer.parseInt(wNum);
 		}
-		
+		session.setAttribute("currWnum", wNum);
 		if(wNum2 == 0) {
 			return "/workspace";
 		}
