@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/jsp/inc/head.jsp" %>
 <c:set var="contextPath" value="<%=request.getContextPath() %>"/>
-<title>에러화면</title>
+<title>ERROR!</title>
 </head>
 <body>
 	<div>
