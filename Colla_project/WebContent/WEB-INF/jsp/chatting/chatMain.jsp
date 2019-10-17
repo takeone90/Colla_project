@@ -947,11 +947,11 @@ var chatTop = 0;	// chatArea 맨위로 스크롤 >> 과거메시지 로드
 						<li class="navInnerBtn"><a href="#" class="btn active"
 							data-content="memberManagement">멤버관리</a></li>
 						<li class="navInnerBtn"><a href="#" class="btn"
-							data-content="schedule">일정관리</a></li>
-						<li class="navInnerBtn"><a href="#" class="btn"
 							data-content="favorite">즐겨찾기</a></li>
 						<li class="navInnerBtn"><a href="#" class="btn"
 							data-content="search">채팅검색</a></li>
+						<li class="navInnerBtn"><a href="#" class="btn"
+						data-content="schedule">일정관리</a></li>
 					</ul>
 					<div id="chatNavContent" align="left">
 						<div id="nav--favorite" class="navContent-wrap collaScroll">
@@ -1057,7 +1057,7 @@ var chatTop = 0;	// chatArea 맨위로 스크롤 >> 과거메시지 로드
 										<div class="schedule-row">
 											<h4>내용</h4>
 											<textarea rows="3" cols="21" name="content"
-												class="modalContent" id="content"></textarea>
+												class="modalContent" id="content" style="height:186px"></textarea>
 										</div>
 										<div id="innerBtn" class="schedule-row">
 											<a href="#" id="addSchedule">추가</a>
