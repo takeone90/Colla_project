@@ -173,7 +173,7 @@
 							</svg>
 							<div class="loginBox-Head">
 								<h3 style='font-weight: bolder; font-size: 24px'>프로젝트 만들기</h3>
-								<p style="margin-bottom: 26px;">프로젝트를 만들고 멤버를 초대하세요</p>
+								<p style="margin-bottom: 26px;">프로젝트를 만들고 멤버를 초대하세요.</p>
 							</div>
 						</div>
 						<!--파도 시작-->
@@ -200,13 +200,13 @@
 							<h4>프로젝트 이름</h4>
 							<div>
 								<input type="hidden" value="${sessionScope.currWnum}" name="wNum">
-								<input type="text" placeholder="project이름" name="pName" style="width:409px">
+								<input type="text" placeholder="프로젝트 이름" name="pName" style="width:409px">
 							</div>
 						</div>
 						<div class="row">
 							<h4>프로젝트 내용</h4>
 							<div>								
-								<input type="text" placeholder="어떤 project인가요?" name="pDetail" style="width:409px">
+								<input type="text" placeholder="어떤 프로젝트인가요?" name="pDetail" style="width:409px">
 							</div>
 						</div>
 						<div class="row">
