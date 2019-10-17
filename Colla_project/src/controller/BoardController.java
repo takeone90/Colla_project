@@ -106,11 +106,12 @@ public class BoardController {
 			@RequestParam(value="wNum", required = false)String wNum
 			) {
 		int wNum2 = 0;
-		if( wNum == null) {
+		if( wNum == null || wNum.equals("")) {
 			if( session.getAttribute("currWnum")!= null ) {
 				wNum2 = Integer.parseInt((String)session.getAttribute("currWnum"));
-			}
+			}			
 		} else {
+			session.setAttribute("currWnum", wNum);
 			wNum2 = Integer.parseInt(wNum);
 		}
 		
