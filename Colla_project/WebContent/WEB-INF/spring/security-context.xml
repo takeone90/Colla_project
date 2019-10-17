@@ -25,6 +25,24 @@
          login-page="/loginForm"/>
       <security:logout invalidate-session="false" delete-cookies="JSESSIONID" success-handler-ref="logoutSuccessHandler"/>
 <!-- 			<security:logout invalidate-session="true" logout-url="/logout"/> -->
+      
+      <security:intercept-url pattern="/workspace" access="hasRole('ROLE_USER')"/>
+      <security:intercept-url pattern="/myPageMainForm" access="hasRole('ROLE_USER')"/>
+      <security:intercept-url pattern="/myPageAccountForm" access="hasRole('ROLE_USER')"/>
+      <security:intercept-url pattern="/profileImgModifyForm" access="hasRole('ROLE_USER')"/>
+      <security:intercept-url pattern="/nameModifyForm" access="hasRole('ROLE_USER')"/>
+      <security:intercept-url pattern="/checkPassForm" access="hasRole('ROLE_USER')"/>
+      <security:intercept-url pattern="/pwModifyForm" access="hasRole('ROLE_USER')"/>
+      <security:intercept-url pattern="/phoneModifyForm" access="hasRole('ROLE_USER')"/>
+      <security:intercept-url pattern="/myPageAlarmForm" access="hasRole('ROLE_USER')"/>
+      <security:intercept-url pattern="/projectMain" access="hasRole('ROLE_USER')"/>
+      <security:intercept-url pattern="/todoMain" access="hasRole('ROLE_USER')"/>
+      <security:intercept-url pattern="/defaultChatMain" access="hasRole('ROLE_USER')"/>
+      <security:intercept-url pattern="/chatMain" access="hasRole('ROLE_USER')"/>
+      <security:intercept-url pattern="/board/*" access="hasRole('ROLE_USER')"/>
+      <security:intercept-url pattern="/calMonth" access="hasRole('ROLE_USER')"/>
+      
+      <security:access-denied-handler error-page="/error"/>
    </security:http>
 	<security:authentication-manager>
 		<security:authentication-provider
