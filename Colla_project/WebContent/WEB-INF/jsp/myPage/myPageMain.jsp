@@ -20,7 +20,7 @@
 						<p>개인정보 보호 및 설정을 관리하여 나에게 맞는 방식으로 c0lla를 사용할 수 있습니다.</p>
 						<div class="myPageModule" onclick="location.href='${contextPath}/myPageAccountForm'">
 							<img class="YPzqGd" src="${contextPath }/img/mypage_content1.png"/>
-							<p class="title">개인정보 보호</p>
+							<p class="title">개인정보 관리</p>
 							<p class="content">COLLA 계정에 저장된 데이터를 확인, 수정할 수 있습니다.</p>
 							
 						</div>

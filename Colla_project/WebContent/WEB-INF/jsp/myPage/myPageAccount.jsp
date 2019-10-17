@@ -25,7 +25,7 @@ function removeMember(){
 	<input type="hidden" value="mypage" id="pageType">
 		<div id="wsBodyContainer">
 			<h3>마이페이지</h3>
-			<h4>개인정보 보호</h4>
+			<h4>개인정보 관리</h4>
 			<div class="myPageInner">
 				<div class ="myPageAccount">
 					<div class="myPageContent">
