@@ -5,6 +5,7 @@
 <link rel="stylesheet" type="text/css" href="${contextPath}/css/headerWs.css"/>
 <link rel="stylesheet" type="text/css" href="${contextPath}/css/navWs.css"/>
 <link rel="stylesheet" type="text/css" href="${contextPath}/css/todo.css"/>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <title>Todo List</title>
 <script>
 	$(function(){
@@ -69,6 +70,12 @@
 			$("#modifyTodoModal").fadeOut(300);
 			return false;
 		});
+		<%--datepicker--%>
+	    $( ".datepicker" ).datepicker({
+	    	dateFormat: 'yy-mm-dd',
+	        changeMonth: true,
+	        changeYear: true
+	    });
 	});<%--onload function end--%>
 	function removeTodo(tdNum){
 		if(confirm("할일을 삭제하시겠습니까?")==true){
@@ -217,7 +224,7 @@
 							</svg>
 							<div class="loginBox-Head">
 								<h3 style="font-size:24px;">할 일 추가</h3>
-								<p style="margin-top:16px;font-size:13px;">Todo를 만들고 프로젝트 일정을 세분화 하세요</p>
+								<p style="margin-top:16px;font-size:13px;">Todo를 만들고 프로젝트 일정을 세분화하세요.</p>
 							</div>
 						</div>
 						<!--파도 시작-->
@@ -279,8 +286,8 @@
 						<div class="row">
 							<h4>할 일 기간</h4>
 							<div id="addTodo-Date">
-								<input type="date" name="startDate" placeholder="시작일을 입력하세요"> ~ 
-								<input type="date" name="endDate" placeholder="종료일을 입력하세요">
+								<input type="text" name="startDate" placeholder="시작일을 입력해주세요." class="datepicker"> ~ 
+								<input type="text" name="endDate" placeholder="종료일을 입력해주세요." class="datepicker">
 							</div>
 						</div>
 					</div> <!-- end addWsInputWrap -->
@@ -292,7 +299,7 @@
 				</form>
 			</div> <!-- end modalBody -->
 		</div><!-- end addTodoModal -->
-		<%------------------------------------프로젝트 수정 모달  ---------------------------------------%>
+		<%------------------------------------todo 수정 모달  ---------------------------------------%>
 		<div id="modifyTodoModal" class="attachModal ui-widget-content">
 			<div class="header">
 						<!--파도 위 내용-->
@@ -305,8 +312,8 @@
 							c9.2,18.3,41.5,25.6,91.2,24.2l1.1,39.8C390.5,326.2,387.1,326.3,383.8,326.3z" /></g>
 							</svg>
 							<div class="loginBox-Head">
-								<h3 style="font-size:24px;">일정 수정하기</h3>
-								<p style="margin-top:16px;font-size:13px;">일정을 수정합니다</p>
+								<h3 style="font-size:24px;">할 일 수정하기</h3>
+								<p style="margin-top:16px;font-size:13px;">할 일을 수정합니다.</p>
 							</div>
 						</div>
 						<!--파도 시작-->
@@ -345,8 +352,8 @@
 						<div class="row">
 							<h4>할 일 기간</h4>
 							<div id="modifyTodo-Date">
-								<input type="date" name="startDate" placeholder="시작일을 입력하세요" id="tdStartDate"> ~ 
-								<input type="date" name="endDate" placeholder="종료일을 입력하세요" id="tdEndDate">
+								<input type="text" name="startDate" placeholder="시작일을 입력해주세요." id="tdStartDate" class="datepicker"> ~ 
+								<input type="text" name="endDate" placeholder="종료일을 입력해주세요." id="tdEndDate" class="datepicker">
 							</div>
 						</div>
 							<div class="row">
