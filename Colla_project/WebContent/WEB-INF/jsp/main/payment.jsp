@@ -27,7 +27,7 @@
 			var tmpDate = new Date(changeDate).setHours(0,0,0,0);//비교할 데이터값 셋팅
 
 			if(tmpDate < tmpToday){
-				$("#checkDateText").text("시작일을 오늘 이후로 설정해주세요");
+				$("#checkDateText").text("시작일을 오늘 이후로 설정해주세요.");
 			}else{
 				$("#checkDateText").text("");
 			}
@@ -187,7 +187,7 @@ function startDateCheck(){
 							<option value="Business" <c:if test="${type eq 'Business'}">selected="selected"</c:if>>Business</option>
 							<option value="Enterprise" <c:if test="${type eq 'Enterprise'}">selected="selected"</c:if>>Enterprise</option>
 						</select>
-						<p>라이센스 이용기간을 설정해주세요<span> (시작일 기준으로 30일  자동 설정됩니다)</span></p>
+						<p>라이선스 이용기간<span> (시작일 기준으로 30일  자동 설정됩니다.)</span></p>
 						<input type="text" id="startDate" name="startDate" class="datepicker"> ~ <input type="text" id="endDate" name="endDate" class="datepicker">
 						<br><span id="checkDateText" class="checkText"></span>
 						<h4>주문자 정보</h4>
