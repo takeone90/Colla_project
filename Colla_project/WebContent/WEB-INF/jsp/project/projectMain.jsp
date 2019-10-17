@@ -5,6 +5,7 @@
 <link rel="stylesheet" type="text/css" href="${contextPath}/css/headerWs.css"/>
 <link rel="stylesheet" type="text/css" href="${contextPath}/css/navWs.css"/>
 <link rel="stylesheet" type="text/css" href="${contextPath}/css/project.css"/>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <title>프로젝트 메인</title>
 <script>
 	$(function(){
@@ -90,6 +91,12 @@
 				return false;
 			}
 		});
+		<%--datepicker--%>
+	    $( ".datepicker" ).datepicker({
+	    	dateFormat: 'yy-mm-dd',
+	        changeMonth: true,
+	        changeYear: true
+	    });
 	});<%--onload-function end--%>
 </script>
 </head>
@@ -212,8 +219,8 @@
 						<div class="row">
 							<h4>프로젝트 기간</h4>
 							<div id="addPj-Date">
-								<input type="date" name="startDate" placeholder="시작일을 입력하세요"> ~ 
-								<input type="date" name="endDate" placeholder="종료일을 입력하세요">
+								<input type="text" name="startDate" placeholder="시작일을 입력해주세요." class="datepicker"> ~ 
+								<input type="text" name="endDate" placeholder="종료일을 입력해주세요." class="datepicker">
 							</div>
 						</div>
 						<div class="row">
@@ -275,7 +282,7 @@
 							</svg>
 							<div class="loginBox-Head">
 								<h3 style='font-weight: bolder; font-size: 24px'>프로젝트 수정하기</h3>
-								<p style="margin-bottom: 26px;">프로젝트를 수정합니다</p>
+								<p style="margin-bottom: 26px;">프로젝트를 수정합니다.</p>
 							</div>
 						</div>
 						<!--파도 시작-->
@@ -316,8 +323,8 @@
 						<div class="row">
 							<h4>프로젝트 기간</h4>
 							<div id="modifyPj-Date">
-								<input type="date" name="startDate" id="pjStartDate" placeholder="시작일을 입력하세요"> ~ 
-								<input type="date" name="endDate" id="pjEndDate" placeholder="종료일을 입력하세요">
+								<input type="text" name="startDate" id="pjStartDate" placeholder="시작일을 입력해주세요." class="datepicker"> ~ 
+								<input type="text" name="endDate" id="pjEndDate" placeholder="종료일을 입력해주세요." class="datepicker">
 							</div>
 						</div>
 					</div> <!-- end addWsInputWrap -->
