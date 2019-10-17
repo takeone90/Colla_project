@@ -106,10 +106,10 @@ public class BoardController {
 		int wNum2 = 0;
 		if( wNum == null || wNum.equals("")) {
 			if( session.getAttribute("currWnum")!= null ) {
-				wNum2 = Integer.parseInt((String)session.getAttribute("currWnum"));
+				wNum2 = (int)session.getAttribute("currWnum");
 			}			
 		} else {
-			session.setAttribute("currWnum", wNum);
+			session.setAttribute("currWnum", Integer.parseInt(wNum));
 			wNum2 = Integer.parseInt(wNum);
 		}
 		session.setAttribute("currWnum", wNum);
@@ -252,7 +252,7 @@ public class BoardController {
 			String content,
 			MultipartHttpServletRequest multifileReq
 			) {
-		int wNum = (int)session.getAttribute("currWnum");
+		int wNum = Integer.parseInt((String)session.getAttribute("currWnum"));
 		if(boardType.equals("anonymous") || boardType.equals("default") || boardType.equals("notice")) {
 			String usermail = principal.getName();
 			int mNum = mService.getMemberByEmail(usermail).getNum();
