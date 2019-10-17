@@ -138,6 +138,7 @@
 	font-weight: 100;
 	font-size: 21px;
 	vertical-align:middle;
+	line-height: 32px;
 }
 .main-function-details > div:hover:not(.on) {
 	background-color: #D8D8D8;

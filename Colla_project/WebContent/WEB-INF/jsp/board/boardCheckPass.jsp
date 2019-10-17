@@ -26,7 +26,7 @@
 			<div id="boardInner" class="checkPassInner">
 				<form id="passForm" action="checkPass" method="post">
 					<label for="pw">게시글 비밀번호</label>
-					<input type="password" name="pw" id="pw" placeholder="비밀번호를 입력해주세요">
+					<input type="password" name="pw" id="pw" placeholder="비밀번호를 입력해주세요.">
 					<input type="hidden" name="bNum" value="${updateMap.bNum }">
 					<input type="hidden" name="mode" value="${updateMap.mode }">
 					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">

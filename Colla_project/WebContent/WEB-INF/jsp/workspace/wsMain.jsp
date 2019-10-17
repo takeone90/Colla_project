@@ -104,7 +104,7 @@
 		//멤버 추가버튼의 + 눌렀을때
 		$(".addInviteInput").on("click",function(){
 			var addInviteMemberDiv = $(".addInviteMemberDiv");
-			var inputTag = $("<input type='text' placeholder='초대할멤버 이메일' name='targetUserList'>");
+			var inputTag = $("<input type='text' placeholder='초대할 멤버 이메일' name='targetUserList'>");
 			addInviteMemberDiv.append(inputTag);
 		});
 		$(".removeInviteInput").on("click",function(){
@@ -277,13 +277,13 @@
 						<div class="row">
 							<h4>Workspace 이름</h4>
 							<div>
-								<input type="text" placeholder="workspace이름" name="wsName">
+								<input type="text" placeholder="Workspace 이름" name="wsName">
 							</div>
 						</div>
 						<div class="row">
 							<h4>멤버 초대</h4>
 							<div class="addInviteMemberDiv">
-								<input type="text" placeholder="초대할멤버 이메일" name="targetUserList">
+								<input type="text" placeholder="초대할 멤버 이메일" name="targetUserList">
 							</div>
 							<div class="inviteRoundBox" align="center">
 								<a href="#" class="addInviteInput">추가</a>
@@ -381,7 +381,7 @@
 							</svg>
 							<div class="loginBox-Head">
 								<h3 style='font-weight: bolder; font-size: 24px'>Workspace 멤버 추가</h3>
-								<p>Workspace에 멤버를 초대하세요</p>
+								<p>Workspace에 멤버를 초대하세요.</p>
 							</div>
 						</div>
 						<!--파도 시작-->
@@ -408,7 +408,7 @@
 						<div class="row">
 							<h4>멤버 초대</h4>
 							<div class="addInviteMemberDiv">
-								<input type="text" placeholder="초대할멤버 이메일" name="targetUserList">
+								<input type="text" placeholder="초대할 멤버 이메일" name="targetUserList">
 							</div>
 							<div class="inviteRoundBox" align="center">
 								<a href="#" class="addInviteInput">추가</a>
