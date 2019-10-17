@@ -36,6 +36,9 @@
 	text-align: center;
 	padding: 80px 15px 100px 15px;
 }
+#main-partners img{
+	width: 680px;
+}
 #main-intro-ani, 
 #main-partners-ani {
 	visibility: hidden;
@@ -150,13 +153,13 @@
 	background-color: #ebf2f5;
 }
 #main-partners .head-body {
-	margin-top: 90px;
-	margin-bottom: 0px;
-	color: #3e505a;
-}
-#main-partners .head-caption {
-	color: #3e505a;
-	font-weight: 100;
+    margin-top: 73px;
+    margin-bottom: 0px;
+    color: #3e505a;
+    padding-bottom: 60px;
+    font-weight: 300;
+    font-size: 35px;
+    color: #3e505a;
 }
 .partners-list {
 	margin: 0 auto;
