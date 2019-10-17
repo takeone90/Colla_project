@@ -279,13 +279,13 @@ public class MemberController {
 			MailSend ms = new MailSend();
 			String tmpCode = setCode();
 			ms.MailSend(emailAddress, "<body>\r\n"
-					+ "	<div style='background-color: #4D4B4C; width: 760px; margin: 50px auto'>\r\n"
+					+ "	<div style='width: 760px; margin: 50px auto'>\r\n"
 					+ "		<h1 style='background-color: white'>\r\n"
 					+ "			<a href=\"http://www.c0lla.com\"><img style='width: 150px' src='http://www.c0lla.com/img/COLLA_LOGO_200px.png' /></a>\r\n"
 					+ "		</h1>\r\n" + "		<div>\r\n"
 					+ "			<img style='width: 100%'src='http://www.c0lla.com/img/COLLA_WAVE_PNG.png'>\r\n"
 					+ "		</div>\r\n" + "		<div\r\n"
-					+ "			style='background-color: #4D4B4C; width: 100%; height: 500px; background-image: url(\"http://www.c0lla.com/img/Main_background.jpg\"); background-size: cover;'>\r\n"
+					+ "			style='width: 100%; height: 500px; background-image: url(\"http://www.c0lla.com/img/Main_background.jpg\"); background-size: cover;margin-top: -25px;'>\r\n"
 					+ "			<p style='font-size: 15px;color: white;text-align: center;width: 100%;padding-top: 180px;'>\r\n"
 					+ "				고객님의 이메일 인증 번호입니다 </p>\r\n" + "				<div>\r\n"
 					+ "					<div style=\"background-color: rgba(255, 255, 255,0.2);width: 180px;border-radius: 10px;margin: 10px auto;text-align:center;padding: 7px; \">\r\n"
