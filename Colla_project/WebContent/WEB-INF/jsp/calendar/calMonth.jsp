@@ -71,27 +71,33 @@ $(function() {
 	});
 	//추가
 	$("#addSchedule").on("click", function() {
-		var data = $(".addModal").serialize();
-		$.ajax({
-			url: "addSchedule",
-			data: data,
-			type: "post",
-			dataType: "json",
-			success: function(result) {
-				if(result) {
-					alert("추가 성공했습니다.");
-					$("#addForm").fadeOut(1);
-					thisMonthCalendar(today);
-					showSchedule(today);
-					thisYearCalendar(today);
-					showYearSchedule(today);
-					$(".addModal")[0].reset();
-				} else {
-					alert("추가 실패했습니다.");
+		var sDate = $("#startDate").val();
+		var eDate = $("#endDate").val();
+		if(sDate > eDate) {
+			alert("종료일이 시작일보다 빠를 수 없습니다.");
+		} else {
+			var data = $(".addModal").serialize();
+			$.ajax({
+				url: "addSchedule",
+				data: data,
+				type: "post",
+				dataType: "json",
+				success: function(result) {
+					if(result) {
+						alert("일정 추가했습니다.");
+						$("#addForm").fadeOut(1);
+						thisMonthCalendar(today);
+						showSchedule(today);
+						thisYearCalendar(today);
+						showYearSchedule(today);
+						$(".addModal")[0].reset();
+					} else {
+						alert("일정 추가 실패했습니다.");
+					}
 				}
-			}
-		});
-		return false;
+			});
+			return false;
+		}
 	});
 	//수정 모달 닫기
 	$("#modifyFormClose").on("click", function() {
@@ -118,27 +124,33 @@ $(function() {
 	});
 	//수정
 	$("#modifySchedule").on("click", function() {
-		var data = $(".modifyModal").serialize();
-		$.ajax({
-			url: "modifySchedule",
-			data: data,
-			type: "post",
-			dataType: "json",
-			success: function(result) {
-				if(result) {
-					alert("수정 성공했습니다.");
-					$("#modifyForm").fadeOut(1);
-					thisMonthCalendar(today);
-					showSchedule(today);
-					thisYearCalendar(today);
-					showYearSchedule(today);
-					$(".modifyModal")[0].reset();
-				} else {
-					alert("수정 실패했습니다.");
+		var sDate = $("#modifyStartDate").val();
+		var eDate = $("#modifyEndDate").val();
+		if(sDate > eDate) {
+			alert("종료일이 시작일보다 빠를 수 없습니다.");
+		} else {			
+			var data = $(".modifyModal").serialize();
+			$.ajax({
+				url: "modifySchedule",
+				data: data,
+				type: "post",
+				dataType: "json",
+				success: function(result) {
+					if(result) {
+						alert("일정 수정했습니다.");
+						$("#modifyForm").fadeOut(1);
+						thisMonthCalendar(today);
+						showSchedule(today);
+						thisYearCalendar(today);
+						showYearSchedule(today);
+						$(".modifyModal")[0].reset();
+					} else {
+						alert("일정 수정 실패했습니다.");
+					}
 				}
-			}
-		});
-		return false;
+			});
+			return false;
+		}
 	});
 	//타입 변경
 	$(".headerCheckboxDiv input").on("change", function() {
@@ -535,14 +547,14 @@ function deleteSchedule() {
 		dataType: "json",
 		success: function(result) {
 			if(result) {
-				alert("삭제 성공했습니다.");
+				alert("일정 삭제했습니다.");
 				$("#detailForm").fadeOut(1);
 				thisMonthCalendar(today);
 				showSchedule(today);
 				thisYearCalendar(today);
 				showYearSchedule(today);
 			} else {
-				alert("삭제 실패했습니다.");
+				alert("일정 삭제 실패했습니다.");
 			}
 		},
 		error: function(request, status, error) {
