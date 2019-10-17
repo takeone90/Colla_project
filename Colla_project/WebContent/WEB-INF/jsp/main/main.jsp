@@ -145,7 +145,7 @@ $(function() {
 									
 								<div class="floatleft">
 									<p>
-										멤버들과 <span class="bold">일정</span>을<br>공유하고 관리
+										멤버들과 일정을<br><span class="bold">공유하고 관리</span>
 									</p>
 								</div>
 							</div>
@@ -157,12 +157,8 @@ $(function() {
 				<div id="container">
 					<div id="main-partners-ani">
 						<div class="head-body">COLLA와 함께하는 협력사</div>
-						<div class="head-caption">Partners</div>
 						<div class="partners-list">
-							<div class="partner-logo">맡겨주</div>
-							<div class="partner-logo">화랑</div>
-							<div class="partner-logo">인삼</div>
-							<div class="partner-logo">WeAre</div>
+							<img src="${contextPath }/img/hyuburyucksa.png" alt="삼성전자, SK hynix, LG CNS, LS엠트론, 한화"> 
 						</div>
 					</div>
 				</div>
