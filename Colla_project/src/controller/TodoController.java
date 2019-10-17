@@ -3,6 +3,7 @@ package controller;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -54,12 +55,27 @@ public class TodoController {
 		for(int i=0;i<pmList.size();i++) {
 			Map<String, Object> todoMap = new HashMap<String, Object>();
 			List<Todo> oneMemberTdList = tService.getAllTodoByMnumPnum(pmList.get(i).getmNum(), pNum);
+//			System.out.println(oneMemberTdList);
 			todoMap.put("oneMemberTdList", oneMemberTdList);
 			todoMap.put("mNum",pmList.get(i).getmNum());
 			todoMap.put("mName",pmList.get(i).getmName());
 //			todoMap.put(key, value)
 			thisProjectTdList.add(todoMap);
 		}
+		thisProjectTdList.sort(new Comparator<Map<String, Object>>() {
+
+			@Override
+			public int compare(Map<String, Object> o1, Map<String, Object> o2) {
+				int o1Size = ((List<Todo>)o1.get("oneMemberTdList")).size();
+				int o2Size = ((List<Todo>)o2.get("oneMemberTdList")).size();
+//				Map<String, Object> result;
+				int result = o1Size < o2Size ? 1 : -1; 
+				return result;
+			}
+		});
+		
+		
+		
 		Project project = pService.getProject(pNum);
 		int wNum = project.getwNum();
 		session.setAttribute("currWnum",wNum);

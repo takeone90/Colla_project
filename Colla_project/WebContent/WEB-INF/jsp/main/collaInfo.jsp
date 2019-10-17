@@ -146,7 +146,7 @@ $(function() {
 							<div class="function-body">쉽고 빠르게 워크스페이스 생성</div>
 							<div class="function-caption">워크스페이스는 COLLA에서 정의하는 프로젝트 단위입니다.<br>
 								워크스페이스는 사용에 따라 조직이 될 수도 있고,<br> 개별 프로젝트가 될 수도 있습니다.<br>
-								이렇게 만들어진 워크스페이스마다<br> 채팅, 게시판, 일정을 따로 관리할 수 있습니다.
+								이렇게 만들어진 워크스페이스마다<br> 프로젝트, 채팅, 게시판, 일정을 따로 관리할 수 있습니다.
 							</div>
 						</div>
 					</div>
@@ -158,10 +158,10 @@ $(function() {
 					<div class="collaInfo-functions">
 						<div id="collaInfo-function2-ani">
 							<div class="function-title" lang="en">Project</div>
-							<div class="function-body">멤버들과의 실시간 채팅</div>
-							<div class="function-caption">COLLA는 워크스페이스 멤버들과의 실시간 채팅 서비스를 제공합니다.<br>
-								파일, 코드, 지도를 첨부할 수 있는 제공합니다.<br>채팅방은 사용 목적에 따라 부서별, 계열사별 등 다양한<br>
-								소그룹을 묶어내고 소통할 수 있는 편리함을 제공합니다.
+							<div class="function-body">프로젝트 진행상황을 공유</div>
+							<div class="function-caption">워크스페이스에서 다양한 프로젝트를 생성하세요.<br>
+								프로젝트 참여자들을 한눈에 확인하고<br>멤버에게 각각 할일을 부여할 수 있습니다.<br>
+								프로젝트 진척률을 확인하며 업무 효율을 증진시킬 수 있습니다.
 							</div>
 						</div>
 						<div id="collaInfo-function2-stable">
@@ -179,10 +179,10 @@ $(function() {
 						</div>
 						<div id="collaInfo-function3-ani">
 							<div class="function-title" lang="en">Chatting</div>
-							<div class="function-body">멤버들과 일정을 공유하고 관리</div>
-							<div class="function-caption">COLLA는 워크스페이스 멤버들과 함께 공유하고 관리할 수 있는<br>
-								공유 캘린더 기능을 제공합니다.<br>어느 채팅방에 있건 같은 워크스페이스 멤버라면<br>
-								누구든지 공유 캘린더를 이용하고 일정을 추가, 삭제, 수정할 수 있습니다.
+							<div class="function-body">멤버들과 실시간 채팅</div>
+							<div class="function-caption">COLLA는 워크스페이스 멤버들과의 실시간 채팅 서비스를 제공합니다.<br>
+								파일, 코드, 지도를 첨부할 수 있는 제공합니다.<br>채팅방은 사용 목적에 따라 부서별, 계열사별 등 다양한<br>
+								소그룹을 묶어내고 소통할 수 있는 편리함을 제공합니다.
 							</div>
 						</div>
 					</div>

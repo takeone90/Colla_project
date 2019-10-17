@@ -165,14 +165,17 @@ public class ProjectController {
 	@RequestMapping(value="/exitProject")
 	public boolean exitProject(int pNum, HttpSession session) {
 		Member member = (Member)session.getAttribute("user");
+		int calNum = pService.getProject(pNum).getCalNum();
+		int crNum = pService.getProject(pNum).getCrNum();
 		boolean result = pmService.removeProjectMember(pNum, member.getNum()); //프로젝트에서 나감 
-		crmService.removeChatRoomMemberByCrNumMnum(pService.getProject(pNum).getCrNum(), member.getNum()); //채팅방에서 나감
 		if(pmService.getAllProjectMemberByPnum(pNum).isEmpty()) {
 			System.out.println("해당 프로젝트에 멤버가 없는게 확인됐으므로 모든 td리스트 지웁니다");
 			tService.removeAllTodoByPnum(pNum);
-			cService.removeCalendar(pService.getProject(pNum).getCalNum()); //일정 삭제
+			cService.removeCalendar(calNum); //일정 삭제
+			crmService.removeChatRoomMemberByCrNumMnum(crNum, member.getNum());//채팅방에서 나감
 		}
 		pService.removeEmptyProject();
+		crService.removeEmptyChatRoom();
 		return result;
 	}
 	@RequestMapping(value="/modifyProject", method = RequestMethod.POST)
