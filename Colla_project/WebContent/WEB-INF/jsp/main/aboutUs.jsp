@@ -32,7 +32,7 @@ $(function() {
 				delta = event.wheelDelta / 120;
 			} else if(event.detail) {
 				delta = -event.detail/3;
-			}
+			} 
 			var moveTop = null;
 			if(delta < 0) { //위에서 아래로
 				if($(this).next() != undefined) {
