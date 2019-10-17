@@ -118,11 +118,11 @@ $(function() {
 						<div class="main-function">
 							<div class="main-function-images">
 								<div class="main-function-image">
-									<p class="main-function-text">간단하게 프로젝트를 생성하고 그룹을 만드세요.</p>
+									<p class="main-function-text">빠르고 쉽게 워크스페이스를 생성하세요.</p>
 									<img alt="1번 기능" src="img/mainSection_1.png">
 								</div>
 								<div class="main-function-image">
-									<p class="main-function-text">그룹에 맞는 채팅방을 만들고 소통하며 협업하세요.</p>
+									<p class="main-function-text">원하는 멤버들과 채팅방을 만들고 소통하며 협업하세요.</p>
 									<img alt="2번 기능" src="img/mainSection_2.png">
 								</div>
 								<div class="main-function-image">
@@ -133,13 +133,13 @@ $(function() {
 							<div class="main-function-details clearFix">
 								<div  class="floatleft on">
 									<p>
-										가볍게<br><span class="bold">프로젝트</span> 생성
+										<span class="bold">빠르고 쉬운</span> <br>워크스페이스 생성
 									</p>
 								</div>
 
 								<div class="floatleft">
 									<p>
-										프로젝트<span class="bold">채팅방</span>으로<br>원하는 멤버들과 채팅
+										<span class="bold">원하는 멤버들</span>과 <br>실시간 채팅
 									</p>
 								</div>
 									
