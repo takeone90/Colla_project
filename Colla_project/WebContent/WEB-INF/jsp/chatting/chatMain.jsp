@@ -1228,7 +1228,7 @@ var chatTop = 0;	// chatArea 맨위로 스크롤 >> 과거메시지 로드
 							c9.2,18.3,41.5,25.6,91.2,24.2l1.1,39.8C390.5,326.2,387.1,326.3,383.8,326.3z" /></g>
 					</svg>
 					<div class="loginBox-Head">
-						<h3 style="font-weight: bolder; font-size: 24px">코드 업로드</h3>
+						<h3 style="font-weight: bolder;font-size: 24px;margin-bottom: 12px;">코드 업로드</h3>
 						<p>업로드 할 코드를 입력해주세요.</p>
 					</div>
 				</div>
