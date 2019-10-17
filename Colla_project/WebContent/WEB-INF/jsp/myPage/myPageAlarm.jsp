@@ -93,19 +93,19 @@
 				<div class="myPageContent">
 					<div class="myPageTitle">
 						<p class="title">데이터 및 맞춤 설정</p>
-						<p class="content">Colla 서비스를 더욱 유용하게 만드는데 도움을 주는 환경설정</p>
+						<p class="content">COLLA 서비스를 더욱 유용하게 만드는데 도움을 주는 환경설정</p>
 					</div>
 					<div class="myPageContentRow myPageAlarmRow clearFix">
 						<p class="title">워크스페이스 초대 알림</p>
-						<p class="content">워크스페이스 초대 알림을 설정해주세요</p>
+						<p class="content">워크스페이스 초대 알림을 설정해주세요.</p>
 						<div class='toggleBG' id="wsBG">
 							<button id='wsSetAlarm' class='toggleFG wsAlarm'></button>
 						</div>
 					</div>
 					<div class="contentLine"></div>
 					<div class="myPageContentRow myPageAlarmRow clearFix">
-						<p class="title">공지알람</p>
-						<p class="content">공지 알림을 설정해주세요</p>
+						<p class="title">공지 알림</p>
+						<p class="content">공지 알림을 설정해주세요.</p>
 						<div class='toggleBG' id="boardBG">
 							<button id='boardSetAlarm' class='toggleFG boardAlarm'></button>
 						</div>
@@ -113,7 +113,7 @@
 					<div class="contentLine"></div>
 					<div class="myPageContentRow myPageAlarmRow clearFix">
 						<p class="title">게시글 댓글 알림</p>
-						<p class="content">댓글 알림을 설정해주세요</p>
+						<p class="content">댓글 알림을 설정해주세요.</p>
 						<div class='toggleBG' id="replyBG">
 							<button id='replySetAlarm' class='toggleFG replyAlarm'></button>
 						</div>
@@ -121,15 +121,15 @@
 					<div class="contentLine"></div>
 					<div class="myPageContentRow myPageAlarmRow clearFix">
 						<p class="title">프로젝트 초대 알림</p>
-						<p class="content">프로젝트 초대 알림을 설정해주세요</p>
+						<p class="content">프로젝트 초대 알림을 설정해주세요.</p>
 						<div class='toggleBG' id="replyBG">
 							<button class='toggleFG replyAlarm'></button>
 						</div>
 					</div>
 					<div class="contentLine"></div>
 					<div class="myPageContentRow myPageAlarmRow clearFix">
-						<p class="title">todo 알림</p>
-						<p class="content">todo 알림을 설정해주세요</p>
+						<p class="title">Todo 알림</p>
+						<p class="content">Todo 알림을 설정해주세요.</p>
 						<div class='toggleBG' id="replyBG">
 							<button class='toggleFG replyAlarm'></button>
 						</div>

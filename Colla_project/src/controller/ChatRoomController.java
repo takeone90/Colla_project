@@ -164,6 +164,7 @@ public class ChatRoomController {
 	public String addChatRoom(int wNum, String crName, HttpSession session, HttpServletRequest request) {
 		// 현재 로그인하고 채팅방만드는 사람을 chatroom member로 넣어준다
 		Member member = (Member) session.getAttribute("user");
+		Member inviteMember = null;
 		int mNum = member.getNum();
 		int crNum = crService.addChatRoom(wNum, mNum, crName);
 		String[] mNumList = request.getParameterValues("mNumList");
@@ -172,9 +173,12 @@ public class ChatRoomController {
 				int num = Integer.parseInt(stringMnum);
 				crmService.addChatRoomMember(crNum, num, wNum);
 				int aNum = aService.addAlarm(wNum, num, member.getNum(), "cInvite", crNum);
+				inviteMember = mService.getMember(num);
+				smService.joinChatRoom(crNum, inviteMember);
 				smt.convertAndSend("/category/alarm/"+num, aService.getAlarm(aNum));
 			}
 		}
+
 		return "redirect:chatMain?crNum="+crNum;
 	}
 	@RequestMapping("/inviteChatMember")

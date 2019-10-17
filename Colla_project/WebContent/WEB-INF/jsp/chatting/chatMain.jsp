@@ -510,7 +510,8 @@ var chatTop = 0;	// chatArea 맨위로 스크롤 >> 과거메시지 로드
 	}/////////////////////////////////////////////////////////////addMsg end////////////////////////////////////////////////////
 	//시스템 메시지 화면에 추가 : 미경
 	function addSystemMsg(msgInfo){
-		var systemMsg = $("<div class='systemMsg' align='center'>"+msgInfo.cmContent+"<div>");
+		var chatMsg = $("<div class='chatMsg'></div>");
+		var systemMsg = chatMsg.append("<div class='systemMsg' align='center'>"+msgInfo.cmContent+"</div>");
 		chatArea.append(systemMsg);		
 	}
 	
@@ -891,7 +892,7 @@ var chatTop = 0;	// chatArea 맨위로 스크롤 >> 과거메시지 로드
 		var keyword = $("#keyword").val().trim();
 		if(!keyword){
 			$("#keyword").val("");
-			alert("검색어를 입력해주세요");
+			alert("검색어를 입력해주세요.");
 			return false;
 		}
 		var crNum = $("#crNum").val();
@@ -987,7 +988,7 @@ var chatTop = 0;	// chatArea 맨위로 스크롤 >> 과거메시지 로드
 									<select name="keywordType" id="keywordType">
 										<option value="1">내용</option>
 										<option value="2">작성자</option>
-									</select> <input type="text" id="keyword" placeholder="검색어를 입력해주세요">
+									</select> <input type="text" id="keyword" placeholder="검색어를 입력해주세요.">
 									<button class="btn">검색</button>
 								</form>
 							</div>
@@ -1150,7 +1151,7 @@ var chatTop = 0;	// chatArea 맨위로 스크롤 >> 과거메시지 로드
 						<h3
 							style="color: white; font-weight: bolder; font-size: 24px; margin-bottom: 10px;">파일
 							업로드</h3>
-						<p>업로드 할 파일을 선택하세요</p>
+						<p>업로드 할 파일을 선택해주세요.</p>
 					</div>
 				</div>
 				<!--파도 시작-->
@@ -1222,6 +1223,7 @@ var chatTop = 0;	// chatArea 맨위로 스크롤 >> 과거메시지 로드
 					</svg>
 					<div class="loginBox-Head">
 						<h3 style="font-weight: bolder; font-size: 24px">코드 업로드</h3>
+						<p>업로드 할 코드를 입력해주세요.</p>
 					</div>
 				</div>
 				<!--파도 시작-->
@@ -1325,7 +1327,7 @@ var chatTop = 0;	// chatArea 맨위로 스크롤 >> 과거메시지 로드
 						<h3
 							style="font-weight: bolder; font-size: 24px; margin-bottom: 11px;">지도
 							업로드</h3>
-						<p>멤버들과 위치를 공유할 수 있습니다</p>
+						<p>멤버들과 위치를 공유할 수 있습니다.</p>
 					</div>
 				</div>
 				<!--파도 시작-->

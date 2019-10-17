@@ -98,10 +98,27 @@ $(function() {
 				duration: 800, complete: function () {
 				}
 			});
+			
 		})
 	})
 });
 </script>
+<style>
+.head-arrow{
+	animation-duration:0.5s;
+	animation-name:jump;
+	animation-iteration-count: infinite;
+	animation-direction: alternate;
+}
+@keyframes jump{
+	from{
+		padding-top:30px;
+	}
+	to{
+		padding-top:0px;
+	}
+}
+</style>
 </head>
 <body>
 	<div id="wrap">
@@ -178,9 +195,8 @@ $(function() {
 						<div id="collaInfo-function4-ani">
 							<div class="function-title" lang="en">Board</div>
 							<div class="function-body">멤버들과 자유롭게 소통하는 게시판</div>
-							<div class="function-caption">COLLA는 워크스페이스 멤버들 모두가 자유롭게 소통할 수 있는 게시판을 제공합니다.<br>
-								주요사항을 공지로 상단에 띄을 수 있고,<br>파일 첨부는 물론<br>
-								동영상 스트리밍 기능 또한 제공합니다.
+							<div class="function-caption">COLLA는 워크스페이스 멤버들 모두가<br>자유롭게 소통할 수 있는 게시판을 제공합니다.<br>
+								공지 게시글은 상단에 노출되고 익명 게시글도 작성할 수 있으며,<br>파일 첨부는 물론 동영상 스트리밍 기능 또한 제공합니다.
 							</div>
 						</div>
 						<div id="collaInfo-function4-stable">
@@ -198,11 +214,10 @@ $(function() {
 						</div>
 						<div id="collaInfo-function5-ani">
 							<div class="function-title" lang="en">Calendar</div>
-							<div class="function-body">멤버들과 일정을 공유하고 관리</div>
-							<div class="function-caption">COLLA는 워크스페이스 멤버들과 함께<br>
-								공유하고 관리할 수 있는 공유 캘린더 기능을 제공합니다.<br>
-								어느 채팅방에 있건 같은 워크스페이스 멤버라면<br>
-								누구든지 공유 캘린더를 이용하고 일정을 추가, 삭제, 수정할 수 있습니다.
+							<div class="function-body">모든 일정을 간편하게 관리</div>
+							<div class="function-caption">
+								COLLA는 워크스페이스 멤버들과 공유하는 일정 관리 기능을 제공합니다.<br>
+								워크스페이스 멤버라면 누구든지 일정을 확인, 추가, 수정, 삭제할 수 있습니다.
 							</div>
 						</div>
 					</div>

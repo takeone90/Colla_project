@@ -21,18 +21,18 @@
 						<div class="myPageModule" onclick="location.href='${contextPath}/myPageAccountForm'">
 							<img class="YPzqGd" src="${contextPath }/img/mypage_content1.png"/>
 							<p class="title">개인정보 보호</p>
-							<p class="content">c0lla 계정에 저장된 데이터를 확인할 수 있습니다.</p>
+							<p class="content">COLLA 계정에 저장된 데이터를 확인, 수정할 수 있습니다.</p>
 							
 						</div>
 						<div class="myPageModule" onclick="location.href='${contextPath}/myPageAlarmForm'">
 							<img class="YPzqGd" src="${contextPath }/img/mypage_content2.png"/>
 							<p class="title">맞춤 설정</p>
-							<p class="content">c0lla 사용 환경을 맞춤설정 하기 위해 어떤 활동을 저장할지 선택합니다.</p>
+							<p class="content">COLLA 사용 시 실시간으로 알림이 필요한 설정을 선택합니다.</p>
 						</div>
 						<div class="myPageModule" onclick="location.href='${contextPath}/myPageLicenseForm'">
 							<img class="YPzqGd" src="${contextPath }/img/mypage_content3.png"/>
 							<p class="title">라이선스 관리</p>
-							<p class="content">c0lla 라이선스 구매내역을 확인할 수 있습니다.</p>
+							<p class="content">COLLA 라이선스 구매내역을 확인할 수 있습니다.</p>
 						</div>
 					</div>
 				</div>
