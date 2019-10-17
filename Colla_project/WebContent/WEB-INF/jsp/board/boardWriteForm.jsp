@@ -37,7 +37,7 @@
 					$("#cke_content iframe").contents().find("body").focus().val("");
 					return false;
 				} else if(contentByteLength>4000){
-					alert("내용을 4000byte 이하로 입력해주세요");
+					alert("내용을 4000byte 이하로 입력해주세요.");
 					$("#cke_content iframe").contents().find("body").focus().val("");
 					return false;
 				}
@@ -72,13 +72,13 @@
 							
 							<label class="floatleft">
 								<span>글 비밀번호</span>
-								<input id="pw" type="password" name="pw" placeholder="글 비밀번호를 입력해주세요">
+								<input id="pw" type="password" name="pw" placeholder="글 비밀번호를 입력해주세요.">
 							</label>
 						</div>
 						<div class="row clearFix">
 							<label class="floatleft">
 								<span>제목</span>
-								<input id="title" type="text" name="title" placeholder="제목을 입력해주세요">
+								<input id="title" type="text" name="title" placeholder="제목을 입력해주세요.">
 							</label>
 							<label class="floatleft" id="writer">
 								<span>작성자</span>
