@@ -102,8 +102,8 @@ $(function() {
 </head>
 <body>
 	<div id="wrap">
-		<div id="portfolioModal-wrap">
-			<div id="portfolioModal" class="off">
+		<div id="portfolioModal-wrap" class="off">
+			<div id="portfolioModal">
 				<p>
 					<span>본 사이트는 상업적 목적이 아닌</span>
 					<span>포트폴리오 용도로 제작되었으며,</span>
