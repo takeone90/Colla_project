@@ -135,6 +135,7 @@
 	background-color: #E5675A;
 }
 #boardInner #boardSearchForm{
+	margin-right: 98px;
 	text-align:center;
 	font-size: 14px;
 }
