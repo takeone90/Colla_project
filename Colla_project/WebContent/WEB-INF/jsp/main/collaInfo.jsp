@@ -98,10 +98,27 @@ $(function() {
 				duration: 800, complete: function () {
 				}
 			});
+			
 		})
 	})
 });
 </script>
+<style>
+.head-arrow{
+	animation-duration:0.5s;
+	animation-name:jump;
+	animation-iteration-count: infinite;
+	animation-direction: alternate;
+}
+@keyframes jump{
+	from{
+		padding-top:30px;
+	}
+	to{
+		padding-top:0px;
+	}
+}
+</style>
 </head>
 <body>
 	<div id="wrap">
@@ -178,9 +195,8 @@ $(function() {
 						<div id="collaInfo-function4-ani">
 							<div class="function-title" lang="en">Board</div>
 							<div class="function-body">멤버들과 자유롭게 소통하는 게시판</div>
-							<div class="function-caption">COLLA는 워크스페이스 멤버들 모두가 자유롭게 소통할 수 있는 게시판을 제공합니다.<br>
-								주요사항을 공지로 상단에 띄을 수 있고,<br>파일 첨부는 물론<br>
-								동영상 스트리밍 기능 또한 제공합니다.
+							<div class="function-caption">COLLA는 워크스페이스 멤버들 모두가<br>자유롭게 소통할 수 있는 게시판을 제공합니다.<br>
+								공지 게시글은 상단에 노출되고 익명 게시글도 작성할 수 있으며,<br>파일 첨부는 물론 동영상 스트리밍 기능 또한 제공합니다.
 							</div>
 						</div>
 						<div id="collaInfo-function4-stable">
