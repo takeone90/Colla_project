@@ -108,47 +108,9 @@
 								</div>
 								<p style="text-align:center;">${onePm.mName}</p>
 						</div>
-						<ul class="oneMemberTodoList">
+					<ul class="oneMemberTodoList collaScroll">
 						<c:forEach items="${onePm.oneMemberTdList}" var="td" varStatus="s">
 						<li class="todo" id="${td.tdNum}">
-						<script>
-						$(function(){
-							$(".isComplete[data-isComplete=1]").css({
-								color:"#31b377",
-								borderColor:"#31b377"
-							});
-							$(".isComplete[data-isComplete=0]").css({
-								color:"#bdc3c3",
-								borderColor:"#bdc3c3"
-							});
-						});
-							function checkComplete(tdNum){
-								var isCompleteDiv = $(".isComplete[data-tdNum="+tdNum+"]");
-								$.ajax({
-									url : "${contextPath}/toggleComplete",
-									data : {"tdNum":tdNum},
-									dataType : "json",
-									success : function(completeAndProgress){
-										var isComplete = completeAndProgress.isComplete;
-										var progress = completeAndProgress.progress;
-										if(isComplete==1){
-											isCompleteDiv.css({
-												color:"#31b377",
-												borderColor:"#31b377"
-											});//눌러서 바뀐색깔임. 완료한 경우
-											
-										}else{
-											isCompleteDiv.css({
-												color:"#bdc3c3",
-												borderColor:"#bdc3c3"
-											});
-										}
-										$("#progressBar").val(progress);
-									}
-								});
-							}
-						</script>
-						
 						<div class="tdDate">
 							<p>
 							<fmt:formatDate value="${td.tdStartDate}" pattern="yyyy.MM.dd" />
@@ -196,7 +158,43 @@
 	            }
 			});
 			</script>
-			
+			<script>
+						$(function(){
+							$(".isComplete[data-isComplete=1]").css({
+								color:"#31b377",
+								borderColor:"#31b377"
+							});
+							$(".isComplete[data-isComplete=0]").css({
+								color:"#bdc3c3",
+								borderColor:"#bdc3c3"
+							});
+						});
+							function checkComplete(tdNum){
+								var isCompleteDiv = $(".isComplete[data-tdNum="+tdNum+"]");
+								$.ajax({
+									url : "${contextPath}/toggleComplete",
+									data : {"tdNum":tdNum},
+									dataType : "json",
+									success : function(completeAndProgress){
+										var isComplete = completeAndProgress.isComplete;
+										var progress = completeAndProgress.progress;
+										if(isComplete==1){
+											isCompleteDiv.css({
+												color:"#31b377",
+												borderColor:"#31b377"
+											});//눌러서 바뀐색깔임. 완료한 경우
+											
+										}else{
+											isCompleteDiv.css({
+												color:"#bdc3c3",
+												borderColor:"#bdc3c3"
+											});
+										}
+										$("#progressBar").val(progress);
+									}
+								});
+							}
+						</script>
 		</div>
 		</div><!-- end wsBodyContainer -->
 	</div><!-- end wsBody -->

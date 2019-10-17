@@ -40,8 +40,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	<select id="selectAllTodoByMnumPnum" resultMap="tdMap">
 		select td.*,m.m_name
-		from todo td,project_member pm,member m
-		where m.m_num=#{mNumTo} and pm.p_num=#{pNum} and pm.m_num=m.m_num and pm.m_num=td.m_num_to 
+		from todo td,project_member pm, member m
+		where td.m_num_to=#{mNumTo} and pm.p_num=#{pNum} and pm.m_num=m.m_num and pm.p_num=td.p_num and td.m_num_to=m.m_num
 		order by td.td_priority asc
 	</select>
 	<resultMap type="todo" id="tdMap">

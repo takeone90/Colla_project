@@ -69,7 +69,7 @@ $(function() {
 			<section id="aboutUs-cover" class="box">
 				<div id="container">
 					<div id="aboutUs-cover-ani">
-						<div class="head-title" lang="en"> Share Your Thinking </div>
+						<div class="head-title" lang="en"> &quot;Share Your Thinking&quot; </div>
 						<div class="head-body">
 							<div>
 								<p class="aboutUs-content-title animated fadeIn">한 모금의 시원한 콜라같은 협업도구</p>
@@ -81,11 +81,11 @@ $(function() {
 								</p>
 							</div>
 							<div>
-								<p class="aboutUs-content-title animated fadeIn">국내 최대규모의 DX 선두주자</p>
+								<p class="aboutUs-content-title animated fadeIn">국내 최대규모의 B2B솔루션 선두주자</p>
 								<p class="animated fadeInLeft">
 									COLLA는 2019년 4월 비트교육센터의 최종프로젝트로 시작되었던 프로젝트입니다.
 									두 가지 사훈을 내걸고 COLLA는 2019년 세계 100대 스타트업 기업 부문 업계 1위의 영예를 누렸습니다.<br>
-									<span>"나는 질 수 없다! 코드에"<br>"노력은 배신하지 않는다."</span><br>
+									<span>고객가치 중심의 IT솔루션을 제공하겠습니다.<br>접점을 확장하여 더 편리한세상을 만들겠습니다.</span><br>
 								</p>
 								<img class="animated fadeIn"  src="${contextPath }/img/etcMark.png" />
 							</div>

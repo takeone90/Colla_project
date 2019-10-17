@@ -2,7 +2,7 @@
 
 /* -------------------- 공통 -------------------- */
 .head-title {
-	font-size: 72px;
+	font-size: 58px;
 	font-weight: 500;
 	margin-bottom: 10px;
 	padding: 15px;
@@ -238,7 +238,7 @@
 	font-weight: 500;
 	margin-bottom: 10px;
 	padding: 15px;
-	margin-top: 220px;
+	margin-top: 298px;
 	color: #3e505a;
 }
 .head-title p {
@@ -255,7 +255,7 @@
 	font-weight: 400;
 	line-height: 1.4;
 	padding: 0px 15px;
-	margin-bottom: 30px;
+	margin-bottom: 11px;
 	color: #3e505a;
 }
 .head-caption {
@@ -267,7 +267,7 @@
 }
 .head-arrow {
 	font-size: 50px;
-	color: gray;
+	color: #1d4a66;
 }
 .function-title {
 	font-size: 72px;
@@ -287,16 +287,16 @@
 }
 .function-caption {
 	padding: 15px;
-	font-size: 20px;
-	margin-bottom: 55px;
-	color: #3e505a;
-	line-height: 25px;
+    font-size: 17px;
+    margin-bottom: 55px;
+    color: #3e505a;
+    line-height: 27px;
 }
 
 /* -------------------- pricing -------------------- */
 
 #pricingAll .head-title {
-	margin-top: 80px;
+	margin-top: 39px;
 	color: #3e505a;
 }
 
@@ -436,7 +436,7 @@
 }
 
 #faqAll .head-title {
-	margin-top: 80px;
+	margin-top: 46px;
 	color: #3e505a;
 }
 
@@ -730,7 +730,7 @@ div {
 	font-size: 56px;
 	color: #3e505a;
 	margin-bottom: 50px;
-	margin-top: 80px;
+	margin-top: 56px;
 	padding: 15px;
 }
 
@@ -741,10 +741,10 @@ div {
 
 #aboutUs-cover .aboutUs-content-title {
 	width: 100%;
-	font-size: 27px;
-	margin-bottom: 25px;
-	font-weight: 500;
-	text-align: left;
+    font-size: 25px;
+    margin-bottom: 25px;
+    font-weight: 600;
+    text-align: left;
 }
 
 #aboutUs-cover .head-body>div:first-child .aboutUs-content-title {
@@ -767,14 +767,14 @@ div {
 }
 
 #aboutUs-cover .head-body>div:first-child>img+p {
-	font-size: 16px;
+	font-size: 15px;
 	text-align: left;
 	width: 550px;
 	margin-left: 50px;
 }
 
 #aboutUs-cover .head-body>div+div>p+p {
-	font-size: 16px;
+	font-size: 15px;
 	text-align: left;
 	width: 450px;
 	margin-right: 50px;
@@ -782,11 +782,12 @@ div {
 
 #aboutUs-cover .head-body>div+div span {
 	display: inline-block;
-	width: 450px;
-	font-size: 18px;
-	font-weight: bold;
-	margin: 30px 0;
-	text-align: center;
+    width: 450px;
+    font-size: 15px;
+    line-height: 27px;
+    font-weight: bold;
+    margin: 20px 0;
+    text-align: center;
 }
 
 #aboutUs-cover .head-body>div:first-child>img {
