@@ -106,7 +106,7 @@ public class BoardController {
 		int wNum2 = 0;
 		if( wNum == null || wNum.equals("")) {
 			if( session.getAttribute("currWnum")!= null ) {
-				wNum2 = (int)session.getAttribute("currWnum");
+				wNum2 = Integer.parseInt((String)session.getAttribute("currWnum"));
 			}			
 		} else {
 			session.setAttribute("currWnum", Integer.parseInt(wNum));
