@@ -44,7 +44,6 @@ $(function() {
 		$("#addForm").fadeIn(300);
 		$("#startDate").val(formatChangeHyphen(new Date())); //오늘 날짜로 고정
 		$("#endDate").val(formatChangeHyphen(new Date())); //오늘 날짜로 고정
-// 		drag();
 	});
 	//추가 모달 닫기
 	$("#addFormClose").on("click", function() {
@@ -183,14 +182,12 @@ function dateCalcul(date) {
 }
 //드래그로 추가 모달 열기
 function drag() {
-	console.log("? : "+$("#addForm").css("display"));
 	var tmp = $("#addForm").css("display");
 	if($("#addForm").css("display") == "none") {
 		var startDate = 0;
 		$(".drawMonthCalendarLower th, .drawMonthCalendarLower td:not(.middleTd)").on("mousedown", function(e) { 
 			if(e.which === 1) { //마우스 왼쪽 클릭			
 				startDate = $(this).attr("class");
-				console.log("startDate ? "+startDate);
 				if(startDate != null) {
 				}
 			}
@@ -200,19 +197,16 @@ function drag() {
 			$("#addForm").fadeIn(300);
 			$("#startDate").val(startDate);	
 			$("#endDate").val($(this).attr("class"));
-			console.log($(this).attr("class"));
 			}		
 		});	
-		console.log("과연 ? "+tmp);
 		return false;
 	}else {
-		console.log("false");
 		return false;
 	}
 	return false;
 }
 function thisMonthCalendar(today) {
-	console.log(formatChangeHyphen(today)+" 월 달력을 그렸습니다.");
+	console.log(formatChangeHyphen(today)+" 달력");
 	//달력 상단 날짜 그리기
 	$("#YearTitle").html("<p style='font-size: 17px; margin-bottom: 6px;'>"+today.getFullYear()+"<p>");
 	$("#MonthTitle").html((today.getMonth()+1)+"월");
@@ -293,9 +287,7 @@ function showSchedule(today) {
 		return false;
 	}
 	isMonthAjaxRun = true;
-	
-	console.log(formatChangeHyphen(today)+" 월 달력 일정을 그렸습니다.");
-	
+	console.log(formatChangeHyphen(today)+" 일정");
 	var type1 = $("#calType1").prop("checked");
 	var type2 = $("#calType2").prop("checked");
 	var type3 = $("#calType3").prop("checked");
@@ -458,7 +450,6 @@ function clickOnDate(dateOrigin) { //날짜 클릭 시 추가 모달 열기
 	$("#addForm").fadeIn(300);
 	$("#startDate").val(formatChangeSimple(dateOrigin));	
 	$("#endDate").val(formatChangeSimple(dateOrigin));	
-// 	drag();
 }
 function putContentIntoTd(a) {
 	$("#detailForm").fadeIn(300);
@@ -619,7 +610,7 @@ function moveToWantedCalendar(wantedYear, wantedMonth, wantedDate) {
 function moveToWantedCalendarYear(wantedYear, wantedMonth, wantedDate) {
 	today = new Date(wantedYear, wantedMonth, wantedDate);
 	thisYearCalendar(today);
-	showSchedule(today);
+	showYearSchedule(today);
 	$("#monthCalendar").hide();
 	$("#yearCalendar").show();
 }
@@ -655,7 +646,7 @@ $(function() {
 	});
 });
 function thisYearCalendar(today) {
-	console.log(formatChangeHyphen(today)+" 연 달력을 그렸습니다.");
+	console.log(formatChangeHyphen(today)+" 연 달력");
 	//달력 상단 날짜 그리기
 	var year = today.getFullYear();
 	$("#calYearTitle").html(year+"년");
@@ -666,7 +657,6 @@ function thisYearCalendar(today) {
 	var calendar = "<div></div>";
 	for(var i=0; i<3; i++) { //줄
 		calendar += "<div class='drawYearCalDiv'>";
-		
 		//table1
 		calendar += "<table class='drawYearCalendarForClick'><tr>";
 		for(var j=0; j<4; j++) {
@@ -703,7 +693,7 @@ function showYearSchedule(today) {
 		return false;
 	}
 	isYearAjaxRun = true;
-	console.log(formatChangeHyphen(today)+" 연 달력 일정을 그렸습니다.");
+	console.log(formatChangeHyphen(today)+" 연 일정");
 	var type1 = $("#calType1").prop("checked");
 	var type2 = $("#calType2").prop("checked");
 	var type3 = $("#calType3").prop("checked");
