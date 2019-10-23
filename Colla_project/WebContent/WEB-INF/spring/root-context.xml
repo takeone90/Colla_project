@@ -16,7 +16,7 @@
 <!-- 		<property name="driverClassName" value="oracle.jdbc.OracleDriver"/> -->
 <!-- 		<property name="url" value="jdbc:oracle:thin:@colladb.crxlp3iv2we2.ap-northeast-1.rds.amazonaws.com:1521/ORCL"/> -->
 <!-- 		<property name="username" value="colla"/> -->
-<!-- 		<property name="password" value="wlftndjqtwh19"/> -->
+<!-- 		<property name="password" value=PASSWORD/> -->
 <!-- 	</bean> -->
 	<bean id = "bcryptPasswordEncoder" class ="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"></bean>
 	<bean id="uploadPath" class="java.lang.String">
@@ -29,15 +29,11 @@
 		<property name="driverClassName" value="oracle.jdbc.OracleDriver"/>
 		<property name="jdbcUrl" value="jdbc:oracle:thin:@colladb.crxlp3iv2we2.ap-northeast-1.rds.amazonaws.com:1521/ORCL"/>
 		<property name="username" value="colla"/>
-		<property name="password" value="wlftndjqtwh19"/>
+		<property name="password" value=PASSWORD/>
 		<property name="maximumPoolSize" value="5"/>
 		<property name="idleTimeout" value="300000"/> 
 	</bean>
 	<bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource" destroy-method="close">
-<!-- 		<property name="driverClassName" value="oracle.jdbc.OracleDriver"/> -->
-<!-- 		<property name="jdbcUrl" value="jdbc:oracle:thin:@colladb.crxlp3iv2we2.ap-northeast-1.rds.amazonaws.com:1521/ORCL"/> -->
-<!-- 		<property name="username" value="colla"/> -->
-<!-- 		<property name="password" value="wlftndjqtwh19"/> -->
 		<constructor-arg ref="hikariConfig"/>
 	</bean>
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
