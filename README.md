@@ -49,7 +49,7 @@ https://drive.google.com/open?id=1oVCxPbTy_ikDxnwbx2cCWJC2Zn6kd4sX
 
 ## 멤버 정보
 
-이태권 : benefitallhumankind@gmail.com
+이태권 : benefitallhumankind@gmail.com  
 김미경 : davinchi0928@gmail.com  
 김수빈 :  
 박혜선 : lightning350@naver.com  
