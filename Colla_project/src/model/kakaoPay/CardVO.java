@@ -1,7 +1,6 @@
 package model.kakaoPay;
 
 public class CardVO {
-    
     private String purchase_corp, purchase_corp_code;
     private String issuer_corp, issuer_corp_code;
     private String bin, card_type, install_month, approved_id, card_mid;
@@ -75,5 +74,4 @@ public class CardVO {
 	public String getCard_item_code() {
 		return card_item_code;
 	}
-
 }
