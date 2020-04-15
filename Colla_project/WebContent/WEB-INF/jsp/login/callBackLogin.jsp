@@ -51,7 +51,6 @@
 						return;
 					}
 					calls();
-// 					window.location.replace("http://" + window.location.hostname + ( (location.port==""||location.port==undefined)?"":":" + location.port) + "/Colla_project/workspace");
 				} else {
 					console.log("callback 처리에 실패하였습니다.");
 				}

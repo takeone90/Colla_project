@@ -44,14 +44,7 @@ $(function(){
 		$("#kakao-login-btn").trigger("click");
 	});
 });//end onload
-/* 구글 로그인 */
-// function onSignIn(googleUser) {
-// 	var profile = googleUser.getBasicProfile();
-// 	$("#emailOfApiForm").val(profile.getEmail());
-// 	$("#nameOfApiForm").val(profile.getName());
-// 	$("#pwOfApiForm").val("googleapipw");
-// 	calls();
-// }
+
 function calls() {
 	$("#apiForm").submit();
 }
