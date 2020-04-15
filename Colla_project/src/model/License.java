@@ -8,8 +8,9 @@ public class License {
 	String type;
 	Date startDate;
 	Date endDate;
-	int amount;//추가
+	int amount;
 	String orderId;
+	
 	public int getNum() {
 		return num;
 	}
