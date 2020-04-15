@@ -31,18 +31,18 @@
 					<h2>
 						<a lang="en" href="${contextPath}/collaInfo"> COLLA? </a>
 					</h2>
-				</li><!-- 
-			 --><li>
+				</li>
+			 <li>
 					<h2>
 						<a lang="en" href="${contextPath}/pricing"> PRICING </a>
 					</h2>
-				</li><!-- 
-			 --><li>
+				</li>
+				<li>
 					<h2>
 						<a lang="en" href="${contextPath}/faq"> FAQ </a>
 					</h2>
-				</li><!-- 
-			 --><li>
+				</li>
+			 	<li>
 					<h2>
 						<a lang="en" href="${contextPath}/aboutUs"> ABOUT US </a>
 					</h2>
@@ -67,18 +67,18 @@
 					<h2>
 						<a lang="en" href="${contextPath}/collaInfo"> COLLA? </a>
 					</h2>
-				</li><!-- 
-			 --><li>
+				</li>
+			 	<li>
 					<h2>
 						<a lang="en" href="${contextPath}/pricing"> PRICING </a>
 					</h2>
-				</li><!-- 
-			 --><li>
+				</li>
+			 	<li>
 					<h2>
 						<a lang="en" href="${contextPath}/faq"> FAQ </a>
 					</h2>
-				</li><!-- 
-			 --><li>
+				</li>
+				<li>
 					<h2>
 						<a lang="en" href="${contextPath}/aboutUs"> ABOUT US </a>
 					</h2>
