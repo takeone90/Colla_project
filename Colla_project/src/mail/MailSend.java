@@ -2,7 +2,7 @@ package mail;
 import java.io.UnsupportedEncodingException;
 import java.util.Date;
 import java.util.Properties;
- 
+
 import javax.mail.Authenticator;
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -33,26 +33,9 @@ public class MailSend {
         try {
             msg.setSentDate(new Date());
             msg.setFrom(new InternetAddress("collacolla19@gmail.com", "colla"));
-            /////////////////////////////////////////////////////
-//            if(emailAddress.contains("?")) {
-//            	//가입안되있고 workspace초대할 사람에게 보냄
-//            	int idx = emailAddress.indexOf("?");
-//            	//회원가입하고 workspace에 자동초대되게..
-//            	String encodedEmail = emailAddress.substring(0,idx);
-//            }else if(emailAddress.contains("*")){
-//            	//가입되있고 workspace초대할 사람에게 보냄
-//            	int idx = emailAddress.indexOf("*");
-//            	//로그인하고 workspace에 자동 초대되게..
-//            	String encodedEmail = emailAddress.substring(0,idx);
-//            }else {
-//            	//회원가입만 할사람에게 보냄
-//            	String encodedEmail = emailAddress;
-//            }
-            //////////////////////////////////////////////////
             InternetAddress to = new InternetAddress(emailAddress);         
             msg.setRecipient(Message.RecipientType.TO, to);            
             msg.setSubject(mailTitle, "UTF-8");
-//            msg.setText(code, "UTF-8"); 
             msg.setContent(code,"text/html;charset=UTF-8");
             Transport.send(msg);
         } catch(AddressException ae) {            
