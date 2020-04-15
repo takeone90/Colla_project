@@ -12,6 +12,7 @@ public class Payment {
 	String name;
 	String orderId;
 	String paymentMethod;
+	
 	public int getNum() {
 		return num;
 	}

@@ -1,10 +1,7 @@
-
 package service;
 
 import java.net.URI;
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.Random;
 
@@ -16,8 +13,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
-
-import com.fasterxml.jackson.core.format.DataFormatDetector;
 
 import dao.PaymentDao;
 import model.License;
@@ -66,7 +61,6 @@ public class PaymentService {
 
 			return kakaoPayReadyVO.getNext_redirect_pc_url();
 		} catch (Exception e) {
-			// TODO: handle exception
 			e.printStackTrace();
 		}
 		return "/WTF_ERROR";
@@ -119,5 +113,4 @@ public class PaymentService {
 		}
 		return String.valueOf(result);
 	}
-
 }

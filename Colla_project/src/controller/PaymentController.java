@@ -28,12 +28,6 @@ import service.PaymentService;
 @RequestMapping("/payment")
 public class PaymentController {
 
-//	
-//	@RequestMapping("/")
-//	public String showPaymentPage() {
-//		return "/main/payment";
-//	}
-	
 	@Autowired
 	private PaymentService pService;
 	@Autowired
