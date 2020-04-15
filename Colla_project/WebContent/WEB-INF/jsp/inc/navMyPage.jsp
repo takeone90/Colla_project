@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>navMyPage.jsp</title>
 </head>
 <body>
 <div id="mypageNav">
@@ -32,7 +32,6 @@
 			</ul>
 		</div>
 		<hr>
-		
 	</div>
 </div>
 </body>
