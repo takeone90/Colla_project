@@ -1,6 +1,5 @@
 package service;
 
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -14,6 +13,7 @@ import model.Todo;
 public class TodoService {
 	@Autowired
 	private TodoDao tdDao;
+	
 	public int addTodo(String tdTitle, String tdContent, int pNum, int mNumTo, int mNumFrom, Date tdStartDate, Date tdEndDate) {
 		int tdNum = 0;
 		Todo todo = new Todo();

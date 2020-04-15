@@ -47,6 +47,7 @@ public class TodoController {
 	private SetAlarmService saService;
 	@Autowired
 	private MemberService mService;
+	
 	@RequestMapping("/todoMain") //todoMain으로 이동
 	public String showTodoMain(HttpSession session, int pNum, Model model) {
 		List<Todo> tList = tService.getAllTodoByPnum(pNum);
@@ -55,26 +56,21 @@ public class TodoController {
 		for(int i=0;i<pmList.size();i++) {
 			Map<String, Object> todoMap = new HashMap<String, Object>();
 			List<Todo> oneMemberTdList = tService.getAllTodoByMnumPnum(pmList.get(i).getmNum(), pNum);
-//			System.out.println(oneMemberTdList);
 			todoMap.put("oneMemberTdList", oneMemberTdList);
 			todoMap.put("mNum",pmList.get(i).getmNum());
 			todoMap.put("mName",pmList.get(i).getmName());
-//			todoMap.put(key, value)
 			thisProjectTdList.add(todoMap);
 		}
+		
 		thisProjectTdList.sort(new Comparator<Map<String, Object>>() {
-
 			@Override
 			public int compare(Map<String, Object> o1, Map<String, Object> o2) {
 				int o1Size = ((List<Todo>)o1.get("oneMemberTdList")).size();
 				int o2Size = ((List<Todo>)o2.get("oneMemberTdList")).size();
-//				Map<String, Object> result;
 				int result = o1Size < o2Size ? 1 : -1; 
 				return result;
 			}
 		});
-		
-		
 		
 		Project project = pService.getProject(pNum);
 		int wNum = project.getwNum();
@@ -109,12 +105,14 @@ public class TodoController {
 		}
 		return "redirect:todoMain?pNum="+pNum;
 	}
+	
 	@RequestMapping(value="/removeTodo")
 	public String removeTodo(int tdNum, HttpSession session) {
 		tService.removeTodo(tdNum);
 		int pNum = (int)session.getAttribute("pNum");
 		return "redirect:todoMain?pNum="+pNum;
 	}
+	
 	@RequestMapping(value="/modifyTodo", method = RequestMethod.POST)
 	public String modifyTodo(int tdNum, String tdTitle, String tdContent, int mNum, String startDate, String endDate, HttpSession session) throws ParseException {
 		int pNum = (int)session.getAttribute("pNum");
@@ -137,18 +135,21 @@ public class TodoController {
 		}
 		return "redirect:todoMain?pNum="+pNum;
 	}
+	
 	@ResponseBody
 	@RequestMapping("/getTodo")
 	public Todo getTodo(@RequestParam("tdNum")int tdNum) {
 		Todo todo = tService.getTodo(tdNum);
 		return todo;
 	}
+	
 	@ResponseBody
 	@RequestMapping(value="/getAllTodoByPnum", method = RequestMethod.POST)
 	public List<Todo> getAllTodoByPnum(int pNum) {
 		List<Todo> todoList = tService.getAllTodoByPnum(pNum);
 		return todoList;
 	}
+	
 	@ResponseBody
 	@RequestMapping(value="/getAllTodoByMnum", method = RequestMethod.POST)
 	public List<Todo> getAllTodoByMnum(int mNum) {
