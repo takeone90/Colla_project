@@ -109,7 +109,6 @@
 		<div id="wsBodyContainer"> 
 		<h2>프로젝트 목록</h2>
 		<div id="addProjectDiv" align="center">프로젝트 추가</div>
-<!-- 		<button id="addProjectBtn">프로젝트 추가</button> -->
 			<div id="projectArea">
 				<c:forEach items="${projectList}" var="pl">
 					<!-- 반복 -->
@@ -120,7 +119,6 @@
 								<div class="projectInnerBtnBox">
 									<a href="todoMain?pNum=${pl.pInfo.pNum}" class="todoListATag">Todo리스트</a>
 									<a href="chatMain?crNum=${pl.pInfo.crNum}">채팅방</a>
-									<!-- todoMain?pNum=1 이런 요청으로 가야함 -->
 									<a href="#" class="modifyProject" data-pNum="${pl.pInfo.pNum}">수정하기</a>
 									<a href="#" class="addMemberBtn" data-pNum="${pl.pInfo.pNum}">초대하기</a>
 									<a href="#" class="exitProject" data-pNum="${pl.pInfo.pNum}">나가기</a>
@@ -163,11 +161,6 @@
 		
 		<%------------------------------------프로젝트 추가 모달  ---------------------------------------%>
 		<div id="addProjectModal" class="attachModal ui-widget-content">
-<!-- 			<div class="modalHead"> -->
-<!-- 				<h3>프로젝트 만들기</h3> -->
-<!-- 				<p style="margin-bottom: 26px;">프로젝트를 만들고 멤버를 초대하세요</p> -->
-<!-- 			</div> -->
-			
 			<div class="header">
 						<!--파도 위 내용-->
 						<div class="inner-header flex">
@@ -250,8 +243,6 @@
 								</script>
 								</c:if>
 							</c:forEach>
-							
-							
 							</ul>
 						</div>
 						
@@ -264,12 +255,7 @@
 			</div> <!-- end modalBody -->
 		</div><!-- end addProjectModal -->
 		<%------------------------------------프로젝트 수정 모달  ---------------------------------------%>
-		<div id="modifyProjectModal" class="attachModal ui-widget-content">
-<!-- 			<div class="modalHead"> -->
-<!-- 				<h3>프로젝트 수정하기</h3> -->
-<!-- 				<p>프로젝트를 수정합니다</p> -->
-<!-- 			</div> -->
-			
+		<div id="modifyProjectModal" class="attachModal ui-widget-content">			
 			<div class="header">
 						<!--파도 위 내용-->
 						<div class="inner-header flex">
@@ -340,11 +326,6 @@
 		
 		<%------------------------------------멤버 추가 모달  ---------------------------------------%>
 		<div id="addMemberModal" class="attachModal ui-widget-content">
-<!-- 			<div class="modalHead"> -->
-<!-- 				<h3>프로젝트 멤버 추가</h3> -->
-<!-- 				<p>프로젝트에 멤버를 초대하세요</p> -->
-<!-- 			</div> -->
-			
 			<div class="header">
 						<!--파도 위 내용-->
 						<div class="inner-header flex">
@@ -430,8 +411,6 @@
 				</form>
 			</div> <!-- end modalBody -->
 		</div><!-- end addMemberModal -->
-		
-		
 	</div><!-- end wsBody -->
 </body>
 </html>
