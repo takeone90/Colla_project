@@ -131,8 +131,6 @@
 	    return canvas;
 	}
 	
-	
-
 </script>
 </head>
 <body>

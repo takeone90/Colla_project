@@ -33,7 +33,6 @@
 				</div>
 			</div><!-- myPageInner -->
 		</div>
-
 	</div><!-- end wsBody -->
 </body>
 </html>
