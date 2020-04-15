@@ -5,6 +5,7 @@ public class ChatRoomMember {
 	private int crNum;
 	private int mNum;
 	private int wNum;
+	
 	public int getwNum() {
 		return wNum;
 	}
@@ -33,5 +34,4 @@ public class ChatRoomMember {
 	public String toString() {
 		return "채팅방회원정보 [채팅방+회원번호 : " + crmNum + ", 채팅방번호 : " + crNum + ", 회원번호 : " + mNum + ", 워크스페이스 번호 : "+wNum+"]";
 	}
-	
 }

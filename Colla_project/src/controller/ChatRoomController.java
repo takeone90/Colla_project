@@ -93,13 +93,13 @@ public class ChatRoomController {
 		session.setAttribute("sessionChatRoom", chatRoom);
 		return "/chatting/chatMain";
 	}
+	
 	@ResponseBody
 	@RequestMapping("/searchChatList")
 	public Map<String, Object> searchChatList(@RequestParam(required = false)String keyword,
 			@RequestParam(defaultValue = "0")int keywordType,
 			@RequestParam(defaultValue = "1")int page,
 			@RequestParam("crNum")int crNum){
-//		System.out.println("[검색내용 || keyword : "+keyword +", type : "+keywordType+", page : "+page+", crNum : "+crNum+"]");
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("keyword",keyword);
 		param.put("type",keywordType);
@@ -108,6 +108,7 @@ public class ChatRoomController {
 		Map<String, Object> result = cmService.getSearchChatMessageList(param);
 		return result;
 	}
+	
 	@RequestMapping("/defaultChatMain")
 	public String showDefaultChatMain(int wNum, Model model,HttpSession session) {
 		
@@ -136,6 +137,7 @@ public class ChatRoomController {
 		model.addAttribute("wNum", wNum);
 		return "/chatting/chatMain";
 	}
+	
 	// 채팅방 리스트 왼쪽 네비게이션에 출력
 	@ResponseBody
 	@RequestMapping("/getChatList")
@@ -178,15 +180,12 @@ public class ChatRoomController {
 				smt.convertAndSend("/category/alarm/"+num, aService.getAlarm(aNum));
 			}
 		}
-
 		return "redirect:chatMain?crNum="+crNum;
 	}
+	
 	@RequestMapping("/inviteChatMember")
 	public String inviteChatMember(int crNum, int wNum, HttpSession session, HttpServletRequest request) {
-		// onclick='sendAlarm(${sessionScope.currWnum},멤버들 번호,${sessionScope.user.num},'cInvite',채팅방번호);
 		Member user = (Member)session.getAttribute("user");
-		
-		System.out.println("요청받음 crNum : "+crNum+",wNum : "+wNum);
 		for (String mNum : request.getParameterValues("wsmList")) {
 			Member member = mService.getMember(Integer.parseInt(mNum));
 			crmService.addChatRoomMember(crNum, member.getNum(), wNum);
@@ -232,7 +231,6 @@ public class ChatRoomController {
 	public List<ChatMessage> loadMoreChat(@RequestParam("crNum") int crNum, @RequestParam("count") int count, HttpSession session){
 		Member member = (Member)session.getAttribute("user");
 		int mNum = member.getNum();
-		System.out.println("scrollCount : " + count);
 		List<ChatMessage> cmList = cmService.getMoreMessage(crNum, mNum, count);
 		return cmList;
 	}
@@ -242,10 +240,10 @@ public class ChatRoomController {
 	public List<ChatMessage> loadPastMsg(@RequestParam("crNum") int crNum,HttpSession session) {
 		Member member = (Member)session.getAttribute("user");
 		int mNum = member.getNum();
-//		List<ChatMessage> cmList = cmService.getAllChatMessageByCrNum(crNum,mNum);
 		List<ChatMessage> cmList = cmService.getRecentChatMessageByCrNum(crNum, mNum);
 		return cmList;
 	}
+	
 	// 일반메세지 받고 보내기
 	@SendTo("/category/msg/{var2}")
 	@MessageMapping("/send/{var1}/{var2}")
@@ -256,9 +254,9 @@ public class ChatRoomController {
 		msg = cmService.hyperlinkTransfer(msg);
 		int cmNum = cmService.addChatMessage(Integer.parseInt(crNum), member.getNum(), msg, "message");
 		ChatMessage cm = cmService.getChatMessageByCmNum(cmNum);
-		
 		return cm;
 	}
+	
 	// 코드메세지 받고 보내기
 	@SendTo("/category/msg/{var2}")
 	@MessageMapping("/sendCode/{var1}/{var2}/{var3}")
@@ -270,12 +268,11 @@ public class ChatRoomController {
 		if(type.equals("java")) {
 			type = "text/x-java";
 		}
-//		System.out.println("code : "+code+", type : "+type+", crNum : "+crNum+", mNum : "+member.getNum());
 		int cmNum = cmService.addChatMessage(Integer.parseInt(crNum), member.getNum(), code, "code_"+type);
 		ChatMessage cm = cmService.getChatMessageByCmNum(cmNum);
-		
 		return cm;
 	}
+	
 	// 파일메세지 받고 보내기
 	@SendTo("/category/msg/{var2}")
 	@MessageMapping("/sendFile/{var1}/{var2}/{var3}/{var4}")
@@ -287,17 +284,18 @@ public class ChatRoomController {
 		ChatMessage cm = cmService.getChatMessageByCmNum(cmNum);
 		return cm;
 	}
+	
 	// Map메세지 받고 보내기
-		@SendTo("/category/msg/{var2}")
-		@MessageMapping("/sendMap/{var1}/{var2}")
-		public ChatMessage sendMap(String addressId,
-				@DestinationVariable(value = "var1") String userEmail,
-				@DestinationVariable(value = "var2") String crNum) {
-			Member member = mService.getMemberByEmail(userEmail);
-			int cmNum = cmService.addChatMessage(Integer.parseInt(crNum), member.getNum(), addressId, "map");
-			ChatMessage cm = cmService.getChatMessageByCmNum(cmNum);
-			return cm;
-		}
+	@SendTo("/category/msg/{var2}")
+	@MessageMapping("/sendMap/{var1}/{var2}")
+	public ChatMessage sendMap(String addressId,
+			@DestinationVariable(value = "var1") String userEmail,
+			@DestinationVariable(value = "var2") String crNum) {
+		Member member = mService.getMemberByEmail(userEmail);
+		int cmNum = cmService.addChatMessage(Integer.parseInt(crNum), member.getNum(), addressId, "map");
+		ChatMessage cm = cmService.getChatMessageByCmNum(cmNum);
+		return cm;
+	}
 
 	//uploadFile ajax 요청을 받으면, db에 해당 메세지를 저장하고 c:\temp\에 파일 저장함
 	@ResponseBody
@@ -340,5 +338,4 @@ public class ChatRoomController {
 		smt.convertAndSend("/category/systemMsg/"+ crNum, cm);
 		return "redirect:workspace";
 	}
-
 }

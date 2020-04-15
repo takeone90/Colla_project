@@ -5,7 +5,6 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import model.ChatRoom;
-import model.Workspace;
 
 public interface ChatRoomDao {
 	public int insertChatRoom(ChatRoom chatRoom);
