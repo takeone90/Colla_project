@@ -9,7 +9,6 @@
 
 <script src="${contextPath}/lib/ckeditor4/ckeditor.js"></script>
 
-
 </head>
 <body>
 	<%@ include file="/WEB-INF/jsp/inc/headerWs.jsp" %>

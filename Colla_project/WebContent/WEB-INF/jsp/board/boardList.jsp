@@ -108,15 +108,6 @@
 				</c:if>
 				<div id="searchWrap">
 					<script>
-	// 					$(function(){
-	// 						$("#searchWrap form").submit(function(){
-	// 							let $keyword = $("input[name='keyword']").val().trim();
-	// 							if(!$keyword){
-	// 								alert("검색어를 입력해주세요.");
-	// 								return false;
-	// 							}
-	// 						});
-	// 					})
 					</script>
 					<form action="list" id="boardSearchForm">
 							<input type="hidden" name="wNum" value="${sessionScope.currWnum}">
@@ -131,7 +122,6 @@
 					</form>
 				</div>
 			</div>
-		
 		</div>	
 	</div>
 </body>
