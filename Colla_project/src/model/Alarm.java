@@ -64,5 +64,4 @@ public class Alarm {
 		return "Alarm [aNum : " + aNum + ", 받는사람 : " + mNumTo + " 보내는사람 : "+mNameFrom+", 알람 타입 : " + aType + ", 워크스페이스번호 : " + wNum + ", 알람파라미터 : " + aDnum
 				+ ", 알람생성일 : "+aRegDate+" ]";
 	}
-	
 }
