@@ -222,19 +222,16 @@ var chatTop = 0;	// chatArea 맨위로 스크롤 >> 과거메시지 로드
 		});
 	});
 	
-		searchListDiv = $("#searchContent");
-		$("#nav--memberManagement").show();	
-		//미경 : 동일한 이벤트가 들어가 있어서 삭제 함 / 혹시라도 문제 생기면 추가하세용!!==> $("#InnerBtns .navInnerBtn a.btn").click(function()
+	searchListDiv = $("#searchContent");
+	$("#nav--memberManagement").show();	
 	
 });<%--------------------------------------------onload function end----------------------------------------------------%>
 
-	
 	//code형태 메세지 보내기
 	function sendCode(){
 		var code = editor.getValue();
 		var codeByteLength = getByteLength(code);
 		if(codeByteLength<=4000){
-	 		//alert("userEmail :"+$("#userEmail").val()+", crNum : "+$("#crNum").val()+", code : "+code+", type : "+type);
 			if(type.includes('/')){
 				type = 'java';
 			}
@@ -265,7 +262,6 @@ var chatTop = 0;	// chatArea 맨위로 스크롤 >> 과거메시지 로드
 			$("#chatInput").val("");	
 		}else{
 			alert("4000byte 이하로 입력해주세요.");
-			//$("#chatInput").val("");
 		}
 	}
 	
@@ -297,8 +293,6 @@ var chatTop = 0;	// chatArea 맨위로 스크롤 >> 과거메시지 로드
 	    	  showFavoriteList();
 	      }
 	   });//end ajax
-	   
-	   
 	}//end favoirte()
 
 	function loadMoreChat(){
@@ -419,8 +413,7 @@ var chatTop = 0;	// chatArea 맨위로 스크롤 >> 과거메시지 로드
 					+"<span class='date'>"+writeTime
 					+"</span></p></div>"+favorite+"<br><p class='content'>"
 					+ contentStr
-					+"</p></div>");
-						
+					+"</p></div>");	
 		}else{
 			chatMsg.append("<div class='systemMsg' align='center'>"+msgInfo.cmContent+"</div>");
 		}
@@ -430,7 +423,6 @@ var chatTop = 0;	// chatArea 맨위로 스크롤 >> 과거메시지 로드
 			showDateMsg(date.getFullYear(),Number(date.getMonth())+Number(1),date.getDate());
 		}
 
-		
 		if(!area){
 			chatArea.append(chatMsg);
 		}else{
@@ -497,24 +489,21 @@ var chatTop = 0;	// chatArea 맨위로 스크롤 >> 과거메시지 로드
 				marker: staticMapmarker
 		    };
 			// 이미지 지도를 표시할 div와 옵션으로 이미지 지도를 생성합니다
-			//var staticMap = new kakao.maps.StaticMap(staticMapContainer, staticMapOption);
-			//"<div class='staticMapInfo'><p class='placeName'></p><p class='placeAddr'></p></div>"+
-			//"#placeAddr"+msgInfo.cmNum
+
 			$("#placeName"+msgInfo.cmNum).text(positionArr[2]);
 			$("#placeAddr"+msgInfo.cmNum).text(positionArr[3]);
 			staticMap = new kakao.maps.StaticMap(staticMapContainer, staticMapOption);
 		}
 		
 		return chatMsg.outerHeight();
-		
-	}/////////////////////////////////////////////////////////////addMsg end////////////////////////////////////////////////////
-	//시스템 메시지 화면에 추가 : 미경
+	}//addMsg end
+	
+	//시스템 메시지 화면에 추가
 	function addSystemMsg(msgInfo){
 		var chatMsg = $("<div class='chatMsg'></div>");
 		var systemMsg = chatMsg.append("<div class='systemMsg' align='center'>"+msgInfo.cmContent+"</div>");
 		chatArea.append(systemMsg);		
 	}
-	
 	
 	//즐겨찾기 리스트 그리기
 	function showFavoriteList(){
@@ -546,7 +535,6 @@ var chatTop = 0;	// chatArea 맨위로 스크롤 >> 과거메시지 로드
 		return originName;
 	}
 	
-	
 	//////////////////////////////////////////////////////////지도//////////////////////////////////////////////////////////////////
 	function showMap(){
 		mapContainer = document.getElementById('map'), // 지도를 표시할 div 
@@ -557,19 +545,9 @@ var chatTop = 0;	// chatArea 맨위로 스크롤 >> 과거메시지 로드
 
 		// 지도를 생성합니다    
 		map = new kakao.maps.Map(mapContainer, mapOption);
-		//map.setDraggable(false);
 
 		// 장소 검색 객체를 생성합니다
 		ps = new kakao.maps.services.Places();  
-
-		// 검색 결과 목록이나 마커를 클릭했을 때 장소명을 표출할 인포윈도우를 생성합니다  //인포윈도우 생성	
-/* 		infowindow = new kakao.maps.InfoWindow({
-			content : content,
-			removable : iwRemoveable,
-			zIndex:1
-			}); */
-
-		
 	}
 	// 키워드 검색을 요청하는 함수입니다
 	function searchPlaces() {
@@ -579,7 +557,7 @@ var chatTop = 0;	// chatArea 맨위로 스크롤 >> 과거메시지 로드
 	        alert('키워드를 입력해주세요!');
 	        return false;
 	    }
-
+	    
 	    // 장소검색 객체를 통해 키워드로 장소검색을 요청합니다
 	    ps.keywordSearch( keyword, placesSearchCB); 
 	}
@@ -756,21 +734,6 @@ var chatTop = 0;	// chatArea 맨위로 스크롤 >> 과거메시지 로드
 	    paginationEl.appendChild(fragment);
 	}
 
-	// 검색결과 목록 또는 마커를 클릭했을 때 호출되는 함수입니다
-	// 인포윈도우에 장소명을 표시합니다
-/* 	function displayInfowindow(marker, title) {
-	    var content = '<div style="padding:5px;z-index:1;">' + title + '</div>',iwRemoveable = true;;
-	    var iwContent = '<div style="padding:5px;z-index:1;">' + title + '</div>', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
-	    iwRemoveable = true; // removeable 속성을 ture 로 설정하면 인포윈도우를 닫을 수 있는 x버튼이 표시됩니다
-		
-	    infowindow = new kakao.maps.InfoWindow({
-	    	 content : iwContent,
-	    	 removable : iwRemoveable,
-	    	 zIndex:1
-			});
-	    infowindow.open(map, marker);
-	} */
-	
 	function displayOverlay(marker, places) {
 		var overlayContent = 
 			"<div class='overlayWrap'>" +
@@ -799,7 +762,6 @@ var chatTop = 0;	// chatArea 맨위로 스크롤 >> 과거메시지 로드
 			});
 	    overlay.setMap(map);
 	}
-	
 	
 	function closeOverlay() {
 	    overlay.setMap(null);     
@@ -966,7 +928,7 @@ var chatTop = 0;	// chatArea 맨위로 스크롤 >> 과거메시지 로드
 									<div id="crmListUL-wrap" class="listUL-wrap collaScroll">
 										<ul id='crmListUL' class='isntDefault'></ul>
 									</div>
-									<!-- 									<p class="navInfoMsg">워크스페이스의 멤버를 채팅방에 추가할 수 있습니다.</p> -->
+						
 									<h4>
 										초대 가능한 워크스페이스 멤버<span id="emptyInvite"></span>
 									</h4>
@@ -993,7 +955,6 @@ var chatTop = 0;	// chatArea 맨위로 스크롤 >> 과거메시지 로드
 								</form>
 							</div>
 							<div id="searchContent" class="collaScroll"></div>
-							<!-- 							<div id="pageNav"></div> -->
 						</div>
 						<div id="nav--schedule" class="navContent-wrap">
 							<div id="addForm">
@@ -1067,7 +1028,7 @@ var chatTop = 0;	// chatArea 맨위로 스크롤 >> 과거메시지 로드
 								</div>
 							</div>
 						</div>
-						<script type="text/javascript"><!-- 191002 혜선 추가 -->
+						<script type="text/javascript">
 							$(function() {
 								$("#addSchedule").on("click", function() {
 									var sDate = $("#startDate").val();
@@ -1137,10 +1098,6 @@ var chatTop = 0;	// chatArea 맨위로 스크롤 >> 과거메시지 로드
 
 		<%---------------------------------------------파일첨부 모달 ----------------------------------------------------%>
 		<div id="addFileModal" class="attachModal ui-widget-content">
-			<!-- 			<div class="modalHead"> -->
-			<!-- 				<h3 style="font-weight: bolder; font-size: 30px">파일 업로드</h3> -->
-			<!-- 				<p>업로드 할 파일을 선택하세요</p> -->
-			<!-- 			</div> -->
 
 			<div class="header">
 				<!--파도 위 내용-->
@@ -1212,9 +1169,6 @@ var chatTop = 0;	// chatArea 맨위로 스크롤 >> 과거메시지 로드
 
 		<%---------------------------------------------코드첨부 모달 ----------------------------------------------------%>
 		<div id="addCodeModal" class="attachModal ui-widget-content">
-			<!-- 			<div class="modalHead" align="center"> -->
-			<!-- 				<h3 style="font-weight: bolder; font-size: 30px">코드 업로드</h3> -->
-			<!-- 			</div> -->
 
 			<div class="header">
 				<!--파도 위 내용-->
@@ -1264,34 +1218,11 @@ var chatTop = 0;	// chatArea 맨위로 스크롤 >> 과거메시지 로드
 						<option value="sql">sql</option>
 						<option value="php">php</option>
 					</select>
-					<!-- 						<div id="selectCodeType"> -->
-					<!-- 							<input type="radio" class="radioType" name="codeType" value="text/x-java" checked/>JAVA -->
-					<!-- 							<input type="radio" class="radioType" name="codeType" value="javascript"/> JAVA Script -->
-					<!-- 							<input type="radio" class="radioType" name="codeType" value="css"/>CSS -->
-					<!-- 							<input type="radio" class="radioType" name="codeType" value="xml"/>XML -->
-					<!-- 							<input type="radio" class="radioType" name="codeType" value="sql"/>SQL -->
-					<!-- 							<input type="radio" class="radioType" name="codeType" value="php"/>PHP -->
-					<!-- 						</div> -->
+
 					<textarea id="editor"></textarea>
 					<script>
 							var type = $("#codeType option:selected").val();
-// 							var type;
-// 							$(function(){
-// 								type = $('input:radio[name="codeType"]:checked').val();	
-// 								$("input[name='codeType']").click(function(){
-// 									type = $('input:radio[name="codeType"]:checked').val();
-// 									editor.setOption("mode", type);
-// 									console.log(type);
-// 								});
-// 								editor = CodeMirror.fromTextArea($('#editor')[0],{
-// 									mode : type,
-// 									theme : "gruvbox-dark",
-// 									lineNumbers : true,
-// 									autoCloseTags : true
-// 								});
-// 								editor.setSize("500", "300");
-								
-// 							});
+
 							editor = CodeMirror.fromTextArea($('#editor')[0],{
 								mode : type,
 								theme : "gruvbox-dark",
@@ -1313,11 +1244,7 @@ var chatTop = 0;	// chatArea 맨위로 스크롤 >> 과거메시지 로드
 
 		<%---------------------------------------------지도첨부 모달 ----------------------------------------------------%>
 		<div id="addLocationModal" class="attachModal ui-widget-content">
-			<!-- 			<div class="modalHead"> -->
-			<!-- 				<h3 style="font-weight: bolder; font-size: 30px">지도 업로드</h3> -->
-			<!-- 				<p>멤버들과 위치를 공유할 수 있습니다</p> -->
-			<!-- 			</div> -->
-
+		
 			<div class="header">
 				<!--파도 위 내용-->
 				<div class="inner-header flex">
@@ -1357,7 +1284,6 @@ var chatTop = 0;	// chatArea 맨위로 스크롤 >> 과거메시지 로드
 				<!--파도 end-->
 			</div>
 			<!--header end-->
-
 
 			<br>
 			<br>
