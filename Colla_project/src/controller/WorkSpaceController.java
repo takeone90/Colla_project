@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import controller.MemberController.inner;
 import mail.MailSend;
 import model.ChatMessage;
 import model.ChatRoom;
@@ -70,6 +69,8 @@ public class WorkSpaceController {
 	private ChatMessageService cmService;
 	@Autowired
 	private SystemMsgService smService;
+	
+	
 	@RequestMapping("/workspace")
 	public String showWsMain(Principal principal,HttpSession session,Model model) {
 		//Ws메인이 보여질때 시큐리티가 갖고있는 principal 정보의 userid 를 가져와서
@@ -108,7 +109,6 @@ public class WorkSpaceController {
 			Member member = mService.getMember(wsm.getmNum());
 			wsMemberList.add(member);
 		}
-		
 		return wsMemberList;
 	}
 	
@@ -121,7 +121,6 @@ public class WorkSpaceController {
 		Member member = (Member)session.getAttribute("user");
 		int wNum = wService.addWorkspace(member.getNum(), wsName);
 		for(int i=0;i<targetUserArray.length;i++) {
-//			System.out.println(targetUserArray[i].length());
 			if(targetUserArray[i].length()!=0) {
 				String targetUser = targetUserArray[i];
 				if(mService.getMemberByEmail(targetUser)!=null) {
@@ -132,28 +131,22 @@ public class WorkSpaceController {
 					Thread innerTest = new Thread(new inner(targetUser,wNum));
 					innerTest.start();
 					
-					
 					if(tu.getNum()!=member.getNum()) {
 						//나한텐 알림X
 						int aNum = aService.addAlarm(wNum, tu.getNum(), member.getNum(), "wInvite", 0);
 						smt.convertAndSend("/category/alarm/"+tu.getNum(),aService.getAlarm(aNum));								
-					}
-					
-					
+					}	
 				}else {
 					//기존유저가 아니면
 					wiService.addWorkspaceInvite(targetUser, wNum);
 					Thread innerTest = new Thread(new inner(targetUser,wNum));
 					innerTest.start();
 				}
-				
-				
 			}
 		}
 		return "redirect:workspace";
 	}
-	
-	
+
 	//워크스페이스에 멤버 초대하는부분
 	@RequestMapping("/inviteMember")
 	public String inviteMember(int wNum,HttpSession session,HttpServletRequest request,HttpServletResponse response) throws IOException {
@@ -168,9 +161,7 @@ public class WorkSpaceController {
 				out.flush();
 				return "/workspace/wsMain";	
 			}
-		}
-		
-		
+		}	
 
 		List<Member> targetUserList = new ArrayList<Member>();
 		List<WsMember> wsmList = wsmService.getAllWsMemberByWnum(wNum);
@@ -215,7 +206,6 @@ public class WorkSpaceController {
 		return "redirect:workspace";
 	}
 	
-	
 	//워크스페이스 초대에 수락하는부분
 	@RequestMapping("/addMember")
 	public String addMember(String id,int wNum,HttpSession session) {
@@ -251,8 +241,6 @@ public class WorkSpaceController {
 		}else {
 			return "redirect:error";
 		}
-		
-		
 	}
 	
 	@ResponseBody
@@ -277,7 +265,6 @@ public class WorkSpaceController {
 			crmService.removeChatRoomMemberByWnumMnum(wNum, member.getNum());
 			pService.removeAllProjectByWnum(wNum);
 			wService.removeWorkspace(wNum);
-			/////////////////////////////////////////하는중/////////////////////////////////////////////
 		}
 	}
 		

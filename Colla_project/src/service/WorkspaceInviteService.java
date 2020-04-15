@@ -12,6 +12,7 @@ import model.WorkspaceInvite;
 public class WorkspaceInviteService {
 	@Autowired
 	private WorkspaceInviteDao wiDao;
+	
 	public boolean addWorkspaceInvite(String targetUser,int wNum) {
 		boolean result = false;
 		WorkspaceInvite wi = new WorkspaceInvite();
@@ -22,6 +23,7 @@ public class WorkspaceInviteService {
 		}
 		return result;
 	}
+	
 	public boolean removeWorkspaceInvite(String targetUser, int wNum) {
 		boolean result = false;
 		if(wiDao.deleteWorkspaceInvite(targetUser, wNum)>0) {
@@ -33,6 +35,7 @@ public class WorkspaceInviteService {
 	public List<WorkspaceInvite> getWorkspaceInviteByTargetUser(String targetUser,int wNum) {
 		return wiDao.selectWorkspaceInvite(targetUser,wNum);
 	}
+	
 	public List<WorkspaceInvite> getAllWiList(){
 		return wiDao.selectAllWorkspaceInvite();
 	}

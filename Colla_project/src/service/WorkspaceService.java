@@ -25,8 +25,8 @@ public class WorkspaceService {
 	private ChatRoomDao chatDao;
 	@Autowired
 	private ChatRoomMemberDao crmDao;
+	
 	public int addWorkspace(int mNum,String name) {
-//		boolean result = false;
 		int wNum = 0;
 		Workspace ws = new Workspace();
 		ws.setmNum(mNum);
@@ -53,11 +53,11 @@ public class WorkspaceService {
 			crm.setmNum(mNum);
 			crm.setwNum(ws.getNum());
 			crmDao.insertChatRoomMember(crm);//기본 채팅방 멤버한명 생성(워크스페이스 생성자)
-//			result = true;
 			wNum = ws.getNum();
 		}
 		return wNum;
 	}
+	
 	public boolean modifyWorkspace(Workspace ws) {
 		boolean result = false;
 		if(wDao.updateWorkspace(ws)>0) {
@@ -65,6 +65,7 @@ public class WorkspaceService {
 		}
 		return result;
 	}
+	
 	public boolean removeWorkspace(int num) {
 		boolean result = false;
 		if(wDao.deleteWorkspace(num)>0) {
@@ -72,12 +73,15 @@ public class WorkspaceService {
 		}
 		return result;
 	}
+	
 	public Workspace getWorkspace(int num) {
 		return wDao.selectWorkspace(num);
 	}
+	
 	public List<Workspace> getAllWorkspace(){
 		return wDao.selectAllWorkspace();
 	}
+	
 	//멤버가 가진 모든 workspace 리스트 반환
 	public List<Workspace> getWsListByMnum(int mNum){
 		List<Integer> wNumList = wmDao.selectAllWnumByMnum(mNum); //이 멤버가 가진 모든 workspace번호 리스트

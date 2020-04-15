@@ -7,6 +7,7 @@ public class Workspace {
 	private int mNum;
 	private String name;
 	private Date regDate;
+	
 	public int getNum() {
 		return num;
 	}
@@ -35,5 +36,4 @@ public class Workspace {
 	public String toString() {
 		return "Workspace [워크스페이스번호 : " + num + ", 멤버번호 : " + mNum + ", 워크스페이스 이름 : " + name + ", regDate=" + regDate + "]";
 	}
-	
 }

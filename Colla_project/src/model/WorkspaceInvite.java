@@ -5,6 +5,7 @@ public class WorkspaceInvite {
 	private String wiTargetUser;
 	private int wNum;
 	private int wasJoinedUs;
+	
 	public int getWiNum() {
 		return wiNum;
 	}
@@ -33,5 +34,4 @@ public class WorkspaceInvite {
 	public String toString() {
 		return "워크스페이스 초대정보 [wiNum : " + wiNum + ", 초대유저 : " + wiTargetUser + ", 초대워크스페이스번호 : " + wNum + ", 가입여부 : " + wasJoinedUs + "]";
 	}
-	
 }
