@@ -8,12 +8,7 @@ import java.util.Map;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.messaging.handler.annotation.DestinationVariable;
-import org.springframework.messaging.handler.annotation.MessageMapping;
-import org.springframework.messaging.handler.annotation.SendTo;
-import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -48,6 +43,7 @@ public class NotifyController {
 		List<Alarm> alarmList = aService.getAllAlarm(mNum);
 		return alarmList;
 	}
+	
 	@RequestMapping("/goToTargetURL")
 	public String goToTargetURL(int aNum,int wNum,String aType,int aDnum, HttpSession session) {
 		Alarm alarm = aService.getAlarm(aNum);
@@ -73,6 +69,7 @@ public class NotifyController {
 		aService.removeAlarm(aNum);			
 		return "redirect:"+targetURL;
 	}
+	
 	@ResponseBody
 	@RequestMapping("/deleteThisAlarm")
 	public List<Alarm> deleteThisAlarm(@RequestParam("aNum")int aNum,@RequestParam("mNum")int mNum) {
@@ -90,9 +87,7 @@ public class NotifyController {
 		}
 		return result;
 	}
-	
 
-	
 	@ResponseBody
 	@RequestMapping(value="/getWname")
 	public Map<String,Object> getWname(@RequestParam("wNum")int wNum) {
