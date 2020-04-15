@@ -9,7 +9,6 @@ import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import model.Board;
@@ -40,6 +39,7 @@ public class ReplyController {
 		List<Reply> rList = rService.getReplyByBnum(bNum);
 		return rList;
 	}
+	
 	@RequestMapping(value = "/remove/{rNum}", method = RequestMethod.POST, produces = "application/text;charset=UTF-8")
 	public String removeReply(@PathVariable int rNum, HttpSession session) {
 		String result = "DB 오류 발생";
@@ -48,6 +48,7 @@ public class ReplyController {
 		}
 		return result;
 	}
+	
 	@RequestMapping(value = "/modify/{rNum}", method = RequestMethod.POST, produces = "application/text;charset=UTF-8")
 	public String modifyReply(@PathVariable int rNum, HttpSession session, String rContent) {
 		String result = "DB 오류 발생";
@@ -59,6 +60,7 @@ public class ReplyController {
 		}
 		return result;
 	}
+	
 	@RequestMapping(value = "/add/{bNum}", method = RequestMethod.POST, produces = "application/text;charset=UTF-8")
 	public String addReply(@PathVariable int bNum, HttpSession session, String rContent) {
 		String result = "DB 오류 발생";
@@ -71,7 +73,6 @@ public class ReplyController {
 		r.setContent(rContent);
 		if(rService.addReply(r)) {
 			result = "댓글이 추가되었습니다.";
-			
 			if(board.getmNum()!=user.getNum()) {
 				//나한텐 알림X
 				SetAlarm setAlarm = saService.getSetAlarm(board.getmNum());

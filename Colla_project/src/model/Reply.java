@@ -53,5 +53,4 @@ public class Reply {
 	public void setRegdate(Timestamp regdate) {
 		this.regDate = regdate;
 	}
-	
 }

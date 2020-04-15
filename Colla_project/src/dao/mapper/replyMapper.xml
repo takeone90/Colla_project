@@ -10,7 +10,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where r.b_num = #{bNum} and m.m_num = r.m_num
 		order by r.r_regdate desc
 	</select>
-	
 	<insert id="insertReply" parameterType="reply">
 		insert into reply
 		values(
