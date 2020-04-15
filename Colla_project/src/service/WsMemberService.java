@@ -20,6 +20,7 @@ public class WsMemberService {
 	private ChatRoomMemberDao crmDao;
 	@Autowired
 	private ChatRoomDao crDao;
+	
 	public boolean addWsMember(int wNum,int mNum) {
 		boolean result = false;
 		WsMember wsMember = new WsMember();
@@ -75,5 +76,4 @@ public class WsMemberService {
 	public ChatRoom getDefaultChatRoomByWnum(int wNum) {
 		return crDao.selectDefaultChatRoomByWnum(wNum);
 	}
-	
 }
