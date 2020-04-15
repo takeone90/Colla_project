@@ -11,14 +11,12 @@
 	var wNum;
 	
 	$(function(){	
-		
-		
+	
 		$(".exitWs a").on("click",function(){
 			var thisWnum = $(this).attr("data-wnum");
 			var thisWname = $(this).attr("data-wname");
 			if(confirm(thisWname +" 워크스페이스를 나가시겠습니까?")==true){
 				$.ajax({
-// 					exitWs?wNum=${ws.wsInfo.num}
 					url : "${contextPath}/exitWs",
 					data : {"thisWnum" : thisWnum},
 					success : function(){
@@ -34,10 +32,8 @@
 			}
 		});
 		
-		
 		//WS추가 모달
 		$("#openWsModal").on("click",function(){
-// 			$(".addInviteMemberDiv").empty();
 			$("#addWsModal").fadeIn(300);
 		});
 		$("#closeWsModal").on("click",function(){
@@ -59,7 +55,6 @@
 		});
 		//WS Member추가 모달
 		$(".openAddMemberModal").on("click",function(){
-// 			$(".addInviteMemberDiv").empty();
 			wNum = $(this).attr("data-wnum");
 			$(".addWnum").val(wNum); //멤버 추가모달에 숨어있는 addWnum 부분에 wNum담기
 			$("#addMemberModal").fadeIn(300);
@@ -68,7 +63,6 @@
 			$("#addMemberModal").fadeOut(300);
 			return false;
 		});
-		
 		
 		//모달 바깥쪽이 클릭되거나 다른 모달이 클릭될때 현재 모달 숨기기
 		$("#wsBody").mouseup(function(e){
@@ -85,8 +79,6 @@
 			}
 			return false;
 		});
-		
-		
 		
 		//워크스페이스 하나 숨기고 닫기
 		$(".showWsDetail").on("click",function(){
@@ -112,29 +104,29 @@
 			var lastInputTag = addInviteMemberDiv.find("input:last");
 			lastInputTag.remove();
 		});
-		
 	});// onload.function end
+	
 	function thisWsMemberList(wNum){
-			var wsMemberList = $("#wsMemberList");
-			var mNum = $("#mNum").val();
-			$.ajax({
-				url : "${contextPath}/thisWsMemberList",
-				data : {"wNum":wNum},
-				dataType : "json",
-				success : function(d){
-					wsMemberList.empty();
-					$.each(d,function(idx,item){
-						if(item.num!=mNum){
-							var str='<label><li><input type="checkbox" value="'+item.num+'" name="mNumList">'+item.name+'</li></label>';
-							wsMemberList.append(str);	
-						}
-						
-					});
-				},
-				error : function(){
-					alert("wsMemberList 띄우기 에러발생");
-				}
-			});
+		var wsMemberList = $("#wsMemberList");
+		var mNum = $("#mNum").val();
+		$.ajax({
+			url : "${contextPath}/thisWsMemberList",
+			data : {"wNum":wNum},
+			dataType : "json",
+			success : function(d){
+				wsMemberList.empty();
+				$.each(d,function(idx,item){
+					if(item.num!=mNum){
+						var str='<label><li><input type="checkbox" value="'+item.num+'" name="mNumList">'+item.name+'</li></label>';
+						wsMemberList.append(str);	
+					}
+					
+				});
+			},
+			error : function(){
+				alert("wsMemberList 띄우기 에러발생");
+			}
+		});
 	}
 </script>
 </head>
@@ -217,7 +209,6 @@
 					</div>
 					
 					<div class="exitWs">
-<%-- 						<a href="exitWs?wNum=${ws.wsInfo.num}"><i class="fas fa-sign-out-alt"></i></a> --%>
 						<a href="#" data-wnum="${ws.wsInfo.num}" data-wname="${ws.wsInfo.name}"><i class="fas fa-sign-out-alt"></i></a>
 					</div>
 				</li>
@@ -228,49 +219,41 @@
 		<a href="#" id="openWsModal">+</a>
 		</div>
 		
-<!-- 		<a href="#" id="removeEmptyChatRoom">빈 채팅방 제거하기</a> -->
-
 		<%------------------------------------워크스페이스 추가 모달  ---------------------------------------%>
 		<div id="addWsModal" class="attachModal ui-widget-content">
-<!-- 			<div class="modalHead"> -->
-<!-- 				<h3>Workspace 만들기</h3> -->
-<!-- 				<p>Workspace를 만들고 멤버를 초대하세요</p> -->
-<!-- 			</div> -->
-			
+
 			<div class="header">
-						<!--파도 위 내용-->
-						<div class="inner-header flex">
-							<g><path fill="#fff"
-							d="M250.4,0.8C112.7,0.8,1,112.4,1,250.2c0,137.7,111.7,249.4,249.4,249.4c137.7,0,249.4-111.7,249.4-249.4
-							C499.8,112.4,388.1,0.8,250.4,0.8z M383.8,326.3c-62,0-101.4-14.1-117.6-46.3c-17.1-34.1-2.3-75.4,13.2-104.1
-							c-22.4,3-38.4,9.2-47.8,18.3c-11.2,10.9-13.6,26.7-16.3,45c-3.1,20.8-6.6,44.4-25.3,62.4c-19.8,19.1-51.6,26.9-100.2,24.6l1.8-39.7		
-							c35.9,1.6,59.7-2.9,70.8-13.6c8.9-8.6,11.1-22.9,13.5-39.6c6.3-42,14.8-99.4,141.4-99.4h41L333,166c-12.6,16-45.4,68.2-31.2,96.2	
-							c9.2,18.3,41.5,25.6,91.2,24.2l1.1,39.8C390.5,326.2,387.1,326.3,383.8,326.3z" /></g>
-							</svg>
-							<div class="loginBox-Head">
-								<h3 style='font-weight: bolder; font-size: 24px'>Workspace 만들기</h3>
-								<p>Workspace를 만들고 멤버를 초대하세요.</p>
-							</div>
-						</div>
-						<!--파도 시작-->
-						<div>
-							<svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-							viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
-							<defs>
-							<path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
-							</defs>
-								<g class="parallax">
-								<use xlink:href="#gentle-wave" x="48" y="0" fill="rgba(255,255,255,0.7" />
-								<use xlink:href="#gentle-wave" x="48" y="3" fill="rgba(255,255,255,0.5)" />
-								<use xlink:href="#gentle-wave" x="48" y="7" fill="#fff" />
-								</g>
-							</svg>
-						</div><!--파도 end-->
+				<!--파도 위 내용-->
+				<div class="inner-header flex">
+					<g><path fill="#fff"
+					d="M250.4,0.8C112.7,0.8,1,112.4,1,250.2c0,137.7,111.7,249.4,249.4,249.4c137.7,0,249.4-111.7,249.4-249.4
+					C499.8,112.4,388.1,0.8,250.4,0.8z M383.8,326.3c-62,0-101.4-14.1-117.6-46.3c-17.1-34.1-2.3-75.4,13.2-104.1
+					c-22.4,3-38.4,9.2-47.8,18.3c-11.2,10.9-13.6,26.7-16.3,45c-3.1,20.8-6.6,44.4-25.3,62.4c-19.8,19.1-51.6,26.9-100.2,24.6l1.8-39.7		
+					c35.9,1.6,59.7-2.9,70.8-13.6c8.9-8.6,11.1-22.9,13.5-39.6c6.3-42,14.8-99.4,141.4-99.4h41L333,166c-12.6,16-45.4,68.2-31.2,96.2	
+					c9.2,18.3,41.5,25.6,91.2,24.2l1.1,39.8C390.5,326.2,387.1,326.3,383.8,326.3z" /></g>
+					</svg>
+					<div class="loginBox-Head">
+						<h3 style='font-weight: bolder; font-size: 24px'>Workspace 만들기</h3>
+						<p>Workspace를 만들고 멤버를 초대하세요.</p>
+					</div>
+				</div>
+				<!--파도 시작-->
+				<div>
+					<svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+					viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+					<defs>
+					<path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+					</defs>
+						<g class="parallax">
+						<use xlink:href="#gentle-wave" x="48" y="0" fill="rgba(255,255,255,0.7" />
+						<use xlink:href="#gentle-wave" x="48" y="3" fill="rgba(255,255,255,0.5)" />
+						<use xlink:href="#gentle-wave" x="48" y="7" fill="#fff" />
+						</g>
+					</svg>
+				</div><!--파도 end-->
 			</div><!--header end-->
-			
-			
+					
 			<div class="modalBody">
-				
 				<form action="addWs" method="post">
 					<input type="hidden" value="${_csrf.token}" name="${_csrf.parameterName}">
 					<div class="addWsInputWrap">
@@ -302,39 +285,35 @@
 		
 		<%------------------------------------채팅방 추가 모달  ---------------------------------------%>
 		<div id="addChatModal" class="attachModal ui-widget-content">
-<!-- 			<div class="modalHead"> -->
-<!-- 				<h3>채팅방 만들기</h3> -->
-<!-- 				<p>채팅방을 만들고 멤버를 초대하세요</p> -->
-<!-- 			</div> -->
 			<div class="header">
-						<!--파도 위 내용-->
-						<div class="inner-header flex">
-							<g><path fill="#fff"
-							d="M250.4,0.8C112.7,0.8,1,112.4,1,250.2c0,137.7,111.7,249.4,249.4,249.4c137.7,0,249.4-111.7,249.4-249.4
-							C499.8,112.4,388.1,0.8,250.4,0.8z M383.8,326.3c-62,0-101.4-14.1-117.6-46.3c-17.1-34.1-2.3-75.4,13.2-104.1
-							c-22.4,3-38.4,9.2-47.8,18.3c-11.2,10.9-13.6,26.7-16.3,45c-3.1,20.8-6.6,44.4-25.3,62.4c-19.8,19.1-51.6,26.9-100.2,24.6l1.8-39.7		
-							c35.9,1.6,59.7-2.9,70.8-13.6c8.9-8.6,11.1-22.9,13.5-39.6c6.3-42,14.8-99.4,141.4-99.4h41L333,166c-12.6,16-45.4,68.2-31.2,96.2	
-							c9.2,18.3,41.5,25.6,91.2,24.2l1.1,39.8C390.5,326.2,387.1,326.3,383.8,326.3z" /></g>
-							</svg>
-							<div class="loginBox-Head">
-								<h3 style='font-weight: bolder; font-size: 24px'>채팅방 만들기</h3>
-								<p>채팅방을 만들고 멤버를 초대하세요.</p>
-							</div>
-						</div>
-						<!--파도 시작-->
-						<div>
-							<svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-							viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
-							<defs>
-							<path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
-							</defs>
-								<g class="parallax">
-								<use xlink:href="#gentle-wave" x="48" y="0" fill="rgba(255,255,255,0.7" />
-								<use xlink:href="#gentle-wave" x="48" y="3" fill="rgba(255,255,255,0.5)" />
-								<use xlink:href="#gentle-wave" x="48" y="7" fill="#fff" />
-								</g>
-							</svg>
-						</div><!--파도 end-->
+				<!--파도 위 내용-->
+				<div class="inner-header flex">
+					<g><path fill="#fff"
+					d="M250.4,0.8C112.7,0.8,1,112.4,1,250.2c0,137.7,111.7,249.4,249.4,249.4c137.7,0,249.4-111.7,249.4-249.4
+					C499.8,112.4,388.1,0.8,250.4,0.8z M383.8,326.3c-62,0-101.4-14.1-117.6-46.3c-17.1-34.1-2.3-75.4,13.2-104.1
+					c-22.4,3-38.4,9.2-47.8,18.3c-11.2,10.9-13.6,26.7-16.3,45c-3.1,20.8-6.6,44.4-25.3,62.4c-19.8,19.1-51.6,26.9-100.2,24.6l1.8-39.7		
+					c35.9,1.6,59.7-2.9,70.8-13.6c8.9-8.6,11.1-22.9,13.5-39.6c6.3-42,14.8-99.4,141.4-99.4h41L333,166c-12.6,16-45.4,68.2-31.2,96.2	
+					c9.2,18.3,41.5,25.6,91.2,24.2l1.1,39.8C390.5,326.2,387.1,326.3,383.8,326.3z" /></g>
+					</svg>
+					<div class="loginBox-Head">
+						<h3 style='font-weight: bolder; font-size: 24px'>채팅방 만들기</h3>
+						<p>채팅방을 만들고 멤버를 초대하세요.</p>
+					</div>
+				</div>
+				<!--파도 시작-->
+				<div>
+					<svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+					viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+					<defs>
+					<path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+					</defs>
+						<g class="parallax">
+						<use xlink:href="#gentle-wave" x="48" y="0" fill="rgba(255,255,255,0.7" />
+						<use xlink:href="#gentle-wave" x="48" y="3" fill="rgba(255,255,255,0.5)" />
+						<use xlink:href="#gentle-wave" x="48" y="7" fill="#fff" />
+						</g>
+					</svg>
+				</div><!--파도 end-->
 			</div><!--header end-->
 			<div class="modalBody">
 				<form action="addChat" method="post">
@@ -364,40 +343,35 @@
 		
 		<%------------------------------------멤버 추가 모달  ---------------------------------------%>
 		<div id="addMemberModal" class="attachModal ui-widget-content">
-<!-- 			<div class="modalHead"> -->
-<!-- 				<h3>Workspace 멤버 추가</h3> -->
-<!-- 				<p>Workspace에 멤버를 초대하세요</p> -->
-<!-- 			</div> -->
-			
 			<div class="header">
-						<!--파도 위 내용-->
-						<div class="inner-header flex">
-							<g><path fill="#fff"
-							d="M250.4,0.8C112.7,0.8,1,112.4,1,250.2c0,137.7,111.7,249.4,249.4,249.4c137.7,0,249.4-111.7,249.4-249.4
-							C499.8,112.4,388.1,0.8,250.4,0.8z M383.8,326.3c-62,0-101.4-14.1-117.6-46.3c-17.1-34.1-2.3-75.4,13.2-104.1
-							c-22.4,3-38.4,9.2-47.8,18.3c-11.2,10.9-13.6,26.7-16.3,45c-3.1,20.8-6.6,44.4-25.3,62.4c-19.8,19.1-51.6,26.9-100.2,24.6l1.8-39.7		
-							c35.9,1.6,59.7-2.9,70.8-13.6c8.9-8.6,11.1-22.9,13.5-39.6c6.3-42,14.8-99.4,141.4-99.4h41L333,166c-12.6,16-45.4,68.2-31.2,96.2	
-							c9.2,18.3,41.5,25.6,91.2,24.2l1.1,39.8C390.5,326.2,387.1,326.3,383.8,326.3z" /></g>
-							</svg>
-							<div class="loginBox-Head">
-								<h3 style='font-weight: bolder; font-size: 24px'>Workspace 멤버 추가</h3>
-								<p>Workspace에 멤버를 초대하세요.</p>
-							</div>
-						</div>
-						<!--파도 시작-->
-						<div>
-							<svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-							viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
-							<defs>
-							<path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
-							</defs>
-								<g class="parallax">
-								<use xlink:href="#gentle-wave" x="48" y="0" fill="rgba(255,255,255,0.7" />
-								<use xlink:href="#gentle-wave" x="48" y="3" fill="rgba(255,255,255,0.5)" />
-								<use xlink:href="#gentle-wave" x="48" y="7" fill="#fff" />
-								</g>
-							</svg>
-						</div><!--파도 end-->
+				<!--파도 위 내용-->
+				<div class="inner-header flex">
+					<g><path fill="#fff"
+					d="M250.4,0.8C112.7,0.8,1,112.4,1,250.2c0,137.7,111.7,249.4,249.4,249.4c137.7,0,249.4-111.7,249.4-249.4
+					C499.8,112.4,388.1,0.8,250.4,0.8z M383.8,326.3c-62,0-101.4-14.1-117.6-46.3c-17.1-34.1-2.3-75.4,13.2-104.1
+					c-22.4,3-38.4,9.2-47.8,18.3c-11.2,10.9-13.6,26.7-16.3,45c-3.1,20.8-6.6,44.4-25.3,62.4c-19.8,19.1-51.6,26.9-100.2,24.6l1.8-39.7		
+					c35.9,1.6,59.7-2.9,70.8-13.6c8.9-8.6,11.1-22.9,13.5-39.6c6.3-42,14.8-99.4,141.4-99.4h41L333,166c-12.6,16-45.4,68.2-31.2,96.2	
+					c9.2,18.3,41.5,25.6,91.2,24.2l1.1,39.8C390.5,326.2,387.1,326.3,383.8,326.3z" /></g>
+					</svg>
+					<div class="loginBox-Head">
+						<h3 style='font-weight: bolder; font-size: 24px'>Workspace 멤버 추가</h3>
+						<p>Workspace에 멤버를 초대하세요.</p>
+					</div>
+				</div>
+				<!--파도 시작-->
+				<div>
+					<svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+					viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+					<defs>
+					<path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+					</defs>
+						<g class="parallax">
+						<use xlink:href="#gentle-wave" x="48" y="0" fill="rgba(255,255,255,0.7" />
+						<use xlink:href="#gentle-wave" x="48" y="3" fill="rgba(255,255,255,0.5)" />
+						<use xlink:href="#gentle-wave" x="48" y="7" fill="#fff" />
+						</g>
+					</svg>
+				</div><!--파도 end-->
 			</div><!--header end-->
 			
 			<div class="modalBody">
@@ -423,10 +397,9 @@
 					</div>
 				</form>
 			</div> <!-- end modalBody -->
+			
 		</div><!-- end addMemberModal -->
-		
-		
-		
+
 		</div><!-- end wsBodyContainer -->
 	</div><!-- end wsBody -->
 </body>
