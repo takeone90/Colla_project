@@ -10,8 +10,6 @@ import dao.ChatRoomMemberDao;
 import dao.ProjectDao;
 import dao.ProjectMemberDao;
 import dao.TodoDao;
-import model.ChatRoomMember;
-import model.Project;
 import model.ProjectMember;
 
 @Service
@@ -26,6 +24,7 @@ public class ProjectMemberService {
 	private TodoDao tdDao;
 	@Autowired
 	private ChatRoomDao crDao;
+	
 	public boolean addProjectMember(int pNum, int mNum) {
 		boolean result = false;
 		ProjectMember pm = new ProjectMember();

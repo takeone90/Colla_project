@@ -1,10 +1,8 @@
 package service;
 
-import java.awt.Color;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -83,20 +81,11 @@ public class ProjectService {
 		if(pDao.deleteProject(pNum)>0) {
 			result1 = true;
 		}
-//		boolean result2 = false;
-//		if(crmDao.deleteChatRoomMemberByCrNumMnum(pDao.selectProject(pNum).getCrNum(), pDao.selectProject(pNum).getmNum())>0) {
-//			result2 = true;
-//		}
-//		if(result1 && result2) {
-//			return true;
-//		}
 		return result1;
 	}
 	public boolean removeEmptyProject(){
 		boolean result = false;
 		if(pDao.deleteEmptyProject()>0) {
-			
-			
 			result = true;
 		}
 		return result;
@@ -173,10 +162,8 @@ public class ProjectService {
            color += letters[(int) Math.round(Math.random() * 5)];
         }
         return color;
-   }
-	//혜선 추가
+	}
 	public int getPnumByCnum(int calNum){
 		return pDao.selecPNumByCalNum(calNum);
 	}
 }
-
