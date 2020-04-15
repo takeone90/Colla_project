@@ -1,7 +1,5 @@
 package model;
 
-import java.util.Date;
-
 public class ProjectMember {
 	private int pNum;
 	private int mNum;

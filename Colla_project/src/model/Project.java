@@ -33,7 +33,6 @@ public class Project {
 	public void setpName(String pName) {
 		this.pName = pName;
 	}
-	
 	public double getProgress() {
 		return progress;
 	}
@@ -58,7 +57,6 @@ public class Project {
 	public void setpDetail(String pDetail) {
 		this.pDetail = pDetail;
 	}
-	
 	public Date getpStartDate() {
 		return pStartDate;
 	}

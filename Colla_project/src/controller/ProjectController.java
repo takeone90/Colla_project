@@ -67,6 +67,7 @@ public class ProjectController {
 	private TodoService tService;
 	@Autowired
 	private CalendarService cService;
+	
 	@RequestMapping("/projectMain") //projectMain으로 이동
 	public String showProjectMain(HttpSession session, int wNum, Model model) {
 		List<Project> pList = pService.getAllProjectByWnum(wNum); //프로젝트 리스트를 가져온다..
@@ -178,6 +179,7 @@ public class ProjectController {
 		crService.removeEmptyChatRoom();
 		return result;
 	}
+	
 	@RequestMapping(value="/modifyProject", method = RequestMethod.POST)
 	public String modifyProject(int wNum, int pNum, String pName, String pDetail, String startDate, String endDate, HttpSession session) throws ParseException {
 		Member member = (Member)session.getAttribute("user");
@@ -188,18 +190,21 @@ public class ProjectController {
 		pService.modifyProject(pNum, pName, pDetail, encStartDate, encEndDate, mNum); //프로젝트 수정 & 채팅방 수정
 		return "redirect:projectMain?wNum="+wNum;
 	}
+	
 	@ResponseBody
 	@RequestMapping("/getProject")
 	public Project getProject(@RequestParam("pNum")int pNum) {
 		Project project = pService.getProject(pNum);
 		return project;
 	}
+	
 	@ResponseBody
 	@RequestMapping(value="/getProjectByCrNum", method = RequestMethod.POST)
 	public Project getProjectByCrNum(int crNum) {
 		Project projectTmp = pService.getProjectByCrNum(crNum);
 		return projectTmp;
 	}
+	
 	@ResponseBody
 	@RequestMapping(value="/getAllProjectByMnum", method = RequestMethod.POST)
 	public List<Project> getAllProjectByMnum(int mNum) {
@@ -212,12 +217,14 @@ public class ProjectController {
 	public List<Project> getAllProjectByWnum(@RequestParam("mNum")int mNum,@RequestParam("wNum")int wNum) {
 		return pService.getAllProjectByMnumWnum(mNum, wNum);
 	}
+	
 	@ResponseBody
 	@RequestMapping(value="/getAllProject", method = RequestMethod.POST)
 	public List<Project> getAllProject() {
 		List<Project> projectList = pService.getAllProject();
 		return projectList;
 	}
+	
 	@ResponseBody
 	@RequestMapping("/getPmList")
 	public List<WsMember> getPmList(@RequestParam("pNum")int pNum){
