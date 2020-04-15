@@ -27,20 +27,7 @@
     font-weight: 500;	
     color: #767676;	
 }
-#co-location p span:last-child {
 
-}
-/* #co-location p span:after { */
-/*     content: ''; */
-/*     display: block; */
-/*     width: 1px; */
-/*     height: 10px; */
-/*     position: absolute; */
-/*     right: 7px; */
-/*     top: 50%; */
-/*     margin-top: -5px; */
-/*     background: #767676; */
-/* } */
 #f2 p {
 	font-size: 14px;
     font-weight: 300;
@@ -52,8 +39,6 @@
 #co-sns {
 	padding-top: 5px;
 	font-size: 25px;
-/* 	display: inline-block; */
-/* 	float: right; */
 }
 #co-sns svg{
 	color: #767676;	
