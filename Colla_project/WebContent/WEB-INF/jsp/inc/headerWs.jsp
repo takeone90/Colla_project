@@ -7,28 +7,11 @@ var sock;
 var stompClient;
 var msgInfo;
 
-// window.onbeforeunload = function() {
-// 	$.ajax({
-// 		url : "/dropSession",
-// 		cache : "false", //캐시사용금지
-// 		method : "POST",
-// 		data : $("#frm").serialize(),
-// 		dataType: "html",
-// 		async : false, //동기화설정(비동기화사용안함)
-// 		success:function(args){   
-// 			//$("#result").html(args);      
-// 		},   
-// 		error:function(e){  
-// 			//alert(e.responseText);  
-// 		}
-// 	});
-// }
-
 function socketConnect(){
 	sock = new SockJS("${contextPath}/chat");
 	stompClient = Stomp.over(sock);
 	stompClient.connect({},function(){
-		<%----------------------------------------채팅메시지 구독부분----------------------------------------------%>
+<%----------------------------------------채팅메시지 구독부분----------------------------------------------%>
 		var crNum = $("#crNum").val();
 
 		if($("#pageType").val()=="chatroom"){
@@ -45,36 +28,14 @@ function socketConnect(){
 				addMsg(msgInfo);
 				$("#chatArea").scrollTop($("#chatArea")[0].scrollHeight);
 		});
-		
-// 		//파일메세지 구독
-// 		stompClient.subscribe("/category/file/"+crNum, function(cm) {
-// 				msgInfo = JSON.parse(cm.body);
-// 				addMsg(msgInfo);
-// 				$("#chatArea").scrollTop($("#chatArea")[0].scrollHeight);
-// 		});
-		
-// 		//코드메시지 구독
-// 		stompClient.subscribe("/category/code/"+crNum, function(cm){
-// 				msgInfo = JSON.parse(cm.body);
-// 				addMsg(msgInfo);
-// 				$("#chatArea").scrollTop($("#chatArea")[0].scrollHeight);
-// 		});
-		
-// 		//map메시지 구독
-// 		stompClient.subscribe("/category/map/"+crNum, function(cm){
-// 				msgInfo = JSON.parse(cm.body);
-// 				addMsg(msgInfo);
-// 				$("#chatArea").scrollTop($("#chatArea")[0].scrollHeight);
-// 		});
+
 		//알림구독
 		var userNum = ${sessionScope.user.num};
 		$.ajax({
 			url : "${contextPath}/getSetAlarmInfo",
 			data : {"mNum":userNum},
 			dataType : "json",
-			success : function(setAlarmInfo){
-// 				alert("워크스페이스 알림 : "+setAlarmInfo.workspace+", 공지알림 : "+setAlarmInfo.notice+", 댓글알림 : "+setAlarmInfo.reply);
-				
+			success : function(setAlarmInfo){	
 			},
 			error : function(){
 				alert("알림정보가져오기 에러발생");
@@ -103,7 +64,7 @@ function socketConnect(){
 					});
 				$("#alarmOn").show();
 		});
-		<%-----------------------------------------------------------------------------------------------------%>
+<%-----------------------------------------------------------------------------------------------------%>
 		
 		//중복로그인알림
 		stompClient.subscribe("/category/loginMsg/" + ${member.num},function(data){
@@ -117,11 +78,9 @@ function socketConnect(){
 			msgInfo = JSON.parse(cm.body);
 			addSystemMsg(msgInfo);
 			$("#chatArea").scrollTop($("#chatArea")[0].scrollHeight);
-	    });// end subcribe
-		
-	}); //end connect
-}// end socketConnect
-
+	    });
+	});
+}
 
 var hasNewAlarm;
 function drawAlarmList(alarm){
@@ -220,6 +179,7 @@ function deleteThisAlarm(aNum){
 		}
 	});
 }
+
 function deleteAllAlarm(mNum){
 	var alarmInfoArea = $("#alarmInfoArea");
 	
@@ -237,13 +197,13 @@ function deleteAllAlarm(mNum){
 			}else{
 				alert("삭제할 알림이 없습니다.")
 			}
-			
 		},
 		error : function(){
 			alert("전체 알림 삭제 에러발생");
 		}
 	});
 }
+
 $(function(){
 	socketConnect();
 	$("#denyInvite").on("click",function(){
@@ -297,9 +257,6 @@ $(function(){
 		}
 	});
 	
-	
-	
-	
 	var pageType = $("#pageType").val();
 	if(pageType=="chatroom"){
 		//헤더에 채팅방과 워크스페이스 정보 바꾸기
@@ -328,15 +285,10 @@ $(function(){
 	$(".header").on("mouseup",function(){
 		$(".attachModal").draggable("destroy");
 	});
-	
 }); //onload function end
-
 </script>
 
 <div id="wsMainHeader">
-	
-<%-- 	<input type="hidden" value="${chatRoom.crNum}" id="crNum"> --%>
-<%-- 	<input type="hidden" value="${chatRoom.crIsDefault}" id="crIsDefault"> --%>
 	<div class="container">
 		<div id="chatRoomInfo">
 			<p>페이지 이름</p>
@@ -347,14 +299,10 @@ $(function(){
 		</div>
 	</div>
 	<div id="alarmInfoArea" class="collaScroll">
-		
 	</div>
 	
-	<%-----------------------------------------------워크스페이스 초대 수락모달---------------------------------------------%>
+<%-----------------------------------------------워크스페이스 초대 수락모달---------------------------------------------%>
 	<div id="inviteAcceptModal" class="attachModal ui-widget-content">
-<!-- 			<div class="modalHead"> -->
-<!-- 				<h3 class="inviteWsName"></h3> -->
-<!-- 			</div> -->
 			<div class="header">
 						<!--파도 위 내용-->
 						<div class="inner-header flex">
@@ -384,7 +332,7 @@ $(function(){
 							</svg>
 						</div><!--파도 end-->
 			</div><!--header end-->
-<!-- 			aNum,wNum,aType,aDnum -->
+
 			<form action="goToTargetURL" id="inviteWsFormByModal">
 			<input type="hidden" id="iAnum" name="aNum">
 			<input type="hidden" id="iWnum" name="wNum">
@@ -393,8 +341,6 @@ $(function(){
 			<div class="modalBody">
 					<h4>워크스페이스 멤버</h4>
 					<ul class="inviteWsmList"></ul>
-				
-				
 			</div> <!-- end modalBody -->
 			<div id="modalBtnDiv">
 				<input type ="submit" id="acceptInvite" value="수락하기">
