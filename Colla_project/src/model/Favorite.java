@@ -4,6 +4,7 @@ public class Favorite {
 	int fNum;
 	int mNum;
 	int cmNum;
+	
 	public int getfNum() {
 		return fNum;
 	}
