@@ -2,7 +2,6 @@ package service;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -21,7 +20,7 @@ public class CalendarService {
 	private CalendarDao calendarDao;
 	private ProjectDao pDao;
 	
-	private static final int NUM_PER_PAGE = 10; //한 페이지 당 몇 개의 일정?
+	private static final int NUM_PER_PAGE = 10; //한 페이지 당 몇 개의 일정
 	private static final int NUM_OF_NAVI_PAGE = 10; 
 	
 	public boolean addCalendar(Calendar calendar) {

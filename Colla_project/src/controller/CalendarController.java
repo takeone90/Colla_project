@@ -1,17 +1,13 @@
 package controller;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.StringTokenizer;
 
 import javax.servlet.http.HttpSession;
 
-import org.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,11 +16,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import dao.ProjectDao;
 import model.Calendar;
 import model.Member;
 import service.CalendarService;
-import service.MemberService;
 import service.ProjectMemberService;
 import service.ProjectService;
 import service.WorkspaceService;
@@ -51,6 +45,7 @@ public class CalendarController {
 		session.setAttribute("currWname", wService.getWorkspace(wNum).getName());
 		return "/calendar/calMonth";
 	}
+	
 	@RequestMapping(value="/calTest", method = RequestMethod.GET)
 	public String showCalTest(HttpSession session, Model model) {
 		int wNum = (int)session.getAttribute("currWnum");
@@ -61,6 +56,7 @@ public class CalendarController {
 		model.addAttribute("userData", param);
 		return "/calendar/calTest";
 	}
+	
 	@ResponseBody
 	@RequestMapping(value="/showAllCalendar", method=RequestMethod.GET)
 	public List<Calendar> showAllCalendar(HttpSession session, boolean type1, boolean type2, boolean type3, boolean type4, String today) {
@@ -137,6 +133,7 @@ public class CalendarController {
 		}
 		return filteredCList;
 	}
+	
 	@ResponseBody
 	@RequestMapping(value="/addSchedule", method = RequestMethod.POST)
 	public boolean addSchedule(Calendar calendar) throws ParseException {
@@ -166,6 +163,7 @@ public class CalendarController {
 		}
 		return result;
 	}
+	
 	@ResponseBody
 	@RequestMapping(value="/modifySchedule", method = RequestMethod.POST)
 	public boolean modifySchedule(Calendar calendar) throws ParseException {
@@ -195,16 +193,19 @@ public class CalendarController {
 		}
 		return result;
 	}
+	
 	@ResponseBody
 	@RequestMapping(value="/removeSchedule", method = RequestMethod.POST)
 	public boolean removeSchedule(Calendar calendar) {
 		return calendarService.removeCalendar(calendar.getcNum());
 	}
+	
 	@ResponseBody
 	@RequestMapping(value="/selectSchedule", method = RequestMethod.POST)
 	public Calendar selectSchedule(Calendar calendar) {
 		return calendarService.getCalendar(calendar.getcNum());
 	}
+	
 	@RequestMapping(value="/calSearchList", method = RequestMethod.GET)
 	public String showCalSearchList(HttpSession session, Model model, 
 			@RequestParam(defaultValue="1")int page,
@@ -222,11 +223,13 @@ public class CalendarController {
 		session.setAttribute("currWnum", wNum);
 		return "/calendar/calSearchList";
 	}
+	
 	@ResponseBody
 	@RequestMapping(value="/getPnum")
 	public int getPnum(int cNum) {
 		return pService.getPnumByCnum(cNum);
 	}
+	
 	@ResponseBody
 	@RequestMapping(value="/isMyProject")
 	public boolean isMyProject(int cNum, HttpSession session) {
