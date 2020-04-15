@@ -15,6 +15,4 @@ public class KakaoPayReadyVO {
 	public Date getCreated_at() {
 		return created_at;
 	}
-	
-	
 }

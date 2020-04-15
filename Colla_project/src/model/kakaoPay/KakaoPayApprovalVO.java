@@ -1,10 +1,8 @@
 package model.kakaoPay;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class KakaoPayApprovalVO {
-    
     private String aid, tid, cid, sid;
     private String partner_order_id, partner_user_id, payment_method_type;
     private AmountVO amount;
