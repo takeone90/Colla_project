@@ -24,8 +24,7 @@
          login-processing-url="/login"
          login-page="/loginForm"/>
       <security:logout invalidate-session="false" delete-cookies="JSESSIONID" success-handler-ref="logoutSuccessHandler"/>
-<!-- 			<security:logout invalidate-session="true" logout-url="/logout"/> -->
-      
+     
       <security:intercept-url pattern="/workspace" access="hasRole('ROLE_USER')"/>
       <security:intercept-url pattern="/myPageMainForm" access="hasRole('ROLE_USER')"/>
       <security:intercept-url pattern="/myPageAccountForm" access="hasRole('ROLE_USER')"/>
