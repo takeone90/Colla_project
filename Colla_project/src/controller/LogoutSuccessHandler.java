@@ -27,11 +27,8 @@ public class LogoutSuccessHandler extends SimpleUrlLogoutSuccessHandler{
 		
 		HttpSession session = request.getSession();
 		Member user = (Member)session.getAttribute("user");
-//		System.out.println("logout user : " + user);
 		if(request.getParameter("type") != null) {
 			if(request.getParameter("type").equals("duplicated")) {
-//				System.out.println("중복로그인되어서 기존 접속을 로그아웃합니다.");
-//				System.out.println("로그아웃 후 접속 중인 멤버 : "+connectorList);
 				response.sendRedirect("/loading?info=duplicatedLogin");
 				return;
 			}
@@ -39,6 +36,5 @@ public class LogoutSuccessHandler extends SimpleUrlLogoutSuccessHandler{
 		connectorList.remove(session.getAttribute("userEmail"));
 		session.invalidate();
 		request.getRequestDispatcher("/logoutSomeone?mNum="+user.getNum()+"&isLogin="+false).forward(request, response);
-//		System.out.println("로그아웃 후 접속 중인 멤버 : "+connectorList);
 	}
 }
