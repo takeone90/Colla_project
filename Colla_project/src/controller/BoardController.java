@@ -140,7 +140,6 @@ public class BoardController {
 			) {
 		bService.readCntUp(num);
 		Board board = bService.getBoardByBnum(num);
-//		Board board = bService.getBoardByBnumWithFile(num);
 		List<BoardFile> fList = fService.getFilesByBnum(num);
 		model.addAttribute("board", board);
 		model.addAttribute("fList", fList);
@@ -282,7 +281,6 @@ public class BoardController {
 						}
 					}
 				}
-				
 				return "redirect:/board/view?num="+board.getbNum();
 			}
 			
@@ -293,14 +291,9 @@ public class BoardController {
 		return "redirect:/board/list?wNum="+wNum;
 	}
 	
-	
-	
-	
-	//190902 multifile upload -TK
 	private void fileSave(int bNum, List<MultipartFile> fList) {
 		for(MultipartFile mf : fList) {
 			if(mf.getSize() != 0) {
-//				System.out.println("파일 크기 : "+mf.getSize());
 				String originFileName = mf.getOriginalFilename();//원본파일명
 				UUID uuid = UUID.randomUUID();
 				
@@ -326,13 +319,4 @@ public class BoardController {
 			}			
 		}
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
 }

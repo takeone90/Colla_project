@@ -58,27 +58,24 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 								)*(#{page}-1))
 	</select>
 	<select id="selectCountAllByWnum" parameterType="map" resultType="int">
-<!-- 		select count(b_num) from board where w_num=#{wNum} -->
-
-						select count(b_num)
-		                from (select b.b_num, b.b_title, b.b_content, m.m_name 
-		                		from board b, member m 
-		                		where w_num = #{wNum}
-		                			and b.m_num = m.m_num)
-		                where 1=0
-		                 <if test="title != null">
-		                 	or upper(b_title) like ('%'||upper('${keyword}')||'%')		                 	
-		                 </if>
-		                 <if test="content != null">
-		                 	or upper(b_content) like ('%'||upper('${keyword}')||'%')	       
-		                 </if>
-		                 <if test="name != null">
-		                 	or upper(m_name) like ('%'||upper('${keyword}')||'%')
-		                 </if>
-		                 <if test="type == 0">
-		                 	or 1=1
-		                 </if>
-
+		select count(b_num)
+		from (select b.b_num, b.b_title, b.b_content, m.m_name 
+			from board b, member m 
+			where w_num = #{wNum}
+			and b.m_num = m.m_num)
+		where 1=0
+		<if test="title != null">
+			or upper(b_title) like ('%'||upper('${keyword}')||'%')		                 	
+		</if>
+		<if test="content != null">
+			or upper(b_content) like ('%'||upper('${keyword}')||'%')	       
+		</if>
+		<if test="name != null">
+			or upper(m_name) like ('%'||upper('${keyword}')||'%')
+		</if>
+		<if test="type == 0">
+			or 1=1
+		</if>
 	</select>
 	<select id="selectCountNoticeByWnum" parameterType="map" resultType="int">
 		select count(b_num)
@@ -93,21 +90,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	        group by b_num, m_name, w_num, b_title, b_regdate, b_readCnt, b_type
 			order by b_num desc
 	</select>
-	
 	<select id="selectBoardBybNum" parameterType="int" resultMap="boardMap">
 		select b.b_num, m.m_name, b.w_num, b.b_title, b.b_content, b.b_regdate, b.b_readCnt, b.b_pw, b.b_type, m.m_num
 		from board b, member m
 		where b.b_num = #{bNum} and m.m_num=b.m_num
 	</select>
-	
-<!-- 	<select id="selectBoardBybNumWithFile" parameterType="int" resultMap="boardMap"> -->
-<!-- 		select b.b_num, m.m_name, b.w_num, b.b_title, b.b_content, b.b_regdate, b.b_readCnt, b.b_pw, b.b_type, bf.bf_name -->
-<!-- 		from board b, member m, boardfile bf -->
-<!-- 		where b.b_num = #{bNum} -->
-<!-- 			  and m.m_num=b.m_num(+) -->
-<!-- 			  and b.b_num = bf.b_num(+) -->
-<!-- 	</select> -->
-	
 	<delete id="deleteBoard" parameterType="int">
 		delete from board where b_num = #{bNum}
 	</delete>
@@ -155,5 +142,4 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="r_cnt" property="replyCnt"/>
 		<result column="isnotice" property="isNotice"/>
 	</resultMap>
-	
 </mapper>

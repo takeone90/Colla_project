@@ -89,6 +89,4 @@ public class Board {
 	public void setbRegDate(Timestamp bRegDate) {
 		this.bRegDate = bRegDate;
 	}
-	
-	
 }
