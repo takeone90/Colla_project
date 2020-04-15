@@ -38,7 +38,6 @@ public class ChatMessageService {
 		return cmNum;
 	}
 	public String addFile(MultipartHttpServletRequest request,Member member) throws IOException, ServletException {
-		
 		String saveName = "";
 		Collection<Part> parts = request.getParts();
 		for(Part part : parts) {
@@ -49,7 +48,6 @@ public class ChatMessageService {
 				saveName = uuid.toString()+"_"+fileName;
 				if(part.getSize()>0) {
 					part.write("c:\\temp\\"+saveName);
-//					System.out.println("파일 저장 완료");
 				}
 			}
 			
@@ -121,11 +119,9 @@ public class ChatMessageService {
 		//ex) type=1이면 firstRow,endRow,crNum,name 을 담은 param을 보낸다
 		result = getPageData(param);
 		List<ChatMessage> searchedCmList = cmDao.searchChatMessage(param);
-//		System.out.println("[검색결과 || "+searchedCmList+"]");
 		result.put("searchedCmList", searchedCmList);
 		return result;
 	}
-	
 
 	// 페이지 번호 기준으로 게시글 목록 가져오기
 	public List<ChatMessage> getMessagePage(int pageNumber) {

@@ -56,7 +56,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where rn &gt;= 30 + ( 10*${param3} +1 ) and rn &lt;= 30 + ( 10*(${param3}+1))
 	</select>
 	
-	<!-- 검색과 페이징을 위한.. -->
+	<!-- 검색과 페이징 -->
 	<select id="selectChatMessage" resultMap="cmMap">
 		select * from (
 		select rownum as rnum,cm_num,cr_num,m_num,cm_content,cm_write_date,cm_type
@@ -98,9 +98,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		           order by cmm.cm_num asc))
 		     where rnum between #{firstRow} and #{endRow})
 	</select>
-	
-	
-	
+
 	<!-- 채팅방 즐겨찾기 추가/삭제/조회 -->
 	<insert id="insertFavorite">
 		insert into favorite

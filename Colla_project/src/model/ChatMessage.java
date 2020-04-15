@@ -13,7 +13,6 @@ public class ChatMessage {
 	private int isFavorite;
 	private String cmType;
 	
-	
 	public int getIsFavorite() {
 		return isFavorite;
 	}
@@ -74,5 +73,4 @@ public class ChatMessage {
 		return "채팅메세지 [메세지번호 : " + cmNum + ", 채팅방번호 : " + crNum + ", 작성자번호 : " + mNum + ", 작성자 : "+mName+", 메세지내용 : " + cmContent
 				+ ", 작성시간 : " + cmWriteDate + ", 메세지 타입 :"+cmType+", 프로필이미지 : "+profileImg+", 즐겨찾기? : "+isFavorite+"]";
 	}
-	
 }
