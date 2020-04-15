@@ -20,6 +20,7 @@ public class MainController {
 	
 	@Autowired
 	private FileService fService;
+	
 	@Autowired
 	private LicenseService licenseService;
 	
@@ -27,18 +28,22 @@ public class MainController {
 	public String main() {
 		return "/main/main";
 	}
+	
 	@RequestMapping("/loading")
 	public String showLoading() {
 		return "/main/loading";
 	}
+	
 	@RequestMapping("/error")
 	public String error() {
 		return "/error/error";
 	}
+	
 	@RequestMapping("/download")
 	public View download(String name) {
 		return fService.getDownload(name);
 	}
+	
 	@RequestMapping(value="/collaInfo")
 	public String showColla() {
 		return "/main/collaInfo";
@@ -55,23 +60,26 @@ public class MainController {
 		session.setAttribute("userLicense", useLicense);
 		return "/main/pricing";
 	}
+	
 	@RequestMapping(value="/faq")
 	public String showFaq() {
 		return "/main/faq";
 	}
+	
 	@RequestMapping(value="/aboutUs")
 	public String showAboutUs() {
 		return "/main/aboutUs";
 	}
+	
 	//FAQ 메일 전송
 	@ResponseBody
 	@RequestMapping(value="/sendFAQMail", method = RequestMethod.POST)
 	public boolean sendFAQMail(HttpSession session, String name, String email, String title, String content) {
-//		System.out.println(name+"이 메일을 보냈음");
 		Thread innerTest = new Thread(new inner(name, email, title, content, session));
 		innerTest.start();
 		return true;
 	}
+	
 	//메일 발송을 위한 스레드 
 	public class inner implements Runnable {
 		String name;
