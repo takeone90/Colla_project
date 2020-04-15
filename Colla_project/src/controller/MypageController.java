@@ -1,49 +1,24 @@
 package controller;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.security.Principal;
-import java.util.Iterator;
-import java.util.Map;
-
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import model.Member;
-import model.SetAlarm;
-import service.SetAlarmService;
 import service.LicenseService;
 import service.MemberService;
+import service.SetAlarmService;
 
 @Controller
 public class MypageController {
-	// myPageMainForm(Model model, Principal principal, HttpSession session):String
-	// > 마이페이지 메인화면 (로그인한 멤버 정보 출력)
-	// myPageCheckPassForm(String pw, HttpSession session):String > 비밀번호 입력 화면
-	// myPageModifyForm(Model model, HttpSession session, String checkPass):String >
-	// 회원정보관리 화면
-	// myPageLicenseForm(HttpSession session, Model model) : 라이선스 화면
-	// myPageAlarmForm(HttpSession session, Model model) : 알림 설정 화면
-	// modifysetAlarm(HttpSession session, int type,int result) : 알림 설정값 수정시 업데이트 로직
-	// myPageCheckPass(String pw, HttpSession session):String > 비밀번호 확인 로직
-	// modifyMember(Member member):String > 회원 정보 업데이트 로직
-	// updateProfileImg(MultipartFile[] profileImg, HttpSession session) : 프로필 이미지
 
 	@Autowired
 	private MemberService memberService;
@@ -155,10 +130,8 @@ public class MypageController {
 		String emailAddress = (String) session.getAttribute("userEmail");
 		boolean result = memberService.checkPass(emailAddress, pw);
 		if (result) { // 비밀번호 일치
-			// return "redirect:pwModifyForm";
 			return true;
 		} else { // 비밀번호 불일치
-			// return "redirect:checkPassForm?checkPass=fail";
 			return false;
 		}
 	}
