@@ -193,7 +193,6 @@ $(function() {
 			<section id="ask">
 				<div id="container">
 					<div class="head-title" lang="en"> Q&A </div>
-<!-- 					<div class="head-body"> Ask By Email <br></div> -->
 					<div class="head-caption"> 궁금증이 해결되시지 않으셨나요? 이메일로 답변해드리겠습니다. </div>
 					<div class="FAQ-email">
 						<form method="post" id="FAQ-email-Form">

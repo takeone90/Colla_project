@@ -6,7 +6,6 @@
 <link rel="stylesheet" type="text/css" href="css/footerMain.css"/>
 <link rel="stylesheet" type="text/css" href="css/main.css"/>
 <link rel="stylesheet" type="text/css" href="css/animate.css"/>
-<!-- <link rel="stylesheet" type="text/css" href="css/animationCheatSheet.css"/> -->
 <script>
 //두번째 섹션 animate
 $(window).scroll(function() { //(윈도우 객체)사용자가 스크롤함
