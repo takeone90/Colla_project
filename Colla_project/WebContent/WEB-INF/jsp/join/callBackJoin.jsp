@@ -63,9 +63,6 @@
 	</script>
 </head>
 <body>
-<!-- 	<div id="loadingImg"> -->
-<!-- 		<img src="/img/loading.gif" alt="로딩이미지"> -->
-<!-- 	</div> -->
 	<form method="post" id="thisForm" action="joinMemberAPI">
 		<input type="hidden" name="email" id="email">
 		<input type="hidden" name="name" id="name">

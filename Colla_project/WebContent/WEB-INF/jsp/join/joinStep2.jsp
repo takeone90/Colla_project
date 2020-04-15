@@ -80,19 +80,11 @@ $(function() {
 									<input type="text" name="inputVerifyCode" placeholder="인증 코드를 입력해주세요.">
 									<span id="checkSentence" class="checkSentenceRed"></span>
 								</div>
-								<%-- <input type="hidden" name="emailAddress" value="${param.emailAddress}"> --%>
 								<div>
 									<input type="button" onclick="location.href='resendVerifyMail'" value="인증 코드 재발송" class="joinFormButton">
 									<input type="submit" value="다음단계" class="joinFormButton">
 								</div>
 							</form>
-<%-- 							<div>
-								<span id="verifyResultText" class="checkSentenceRed">
-									<c:if test='${param.joinStep2 eq "false"}'>
-										인증 코드가 일치하지 않습니다.
-									</c:if>
-								</span>
-							</div> --%>
 						</div>			
 					</div><!--Content ends-->
 				</div>				
