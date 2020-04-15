@@ -37,24 +37,6 @@ import service.WsMemberService;
 @Controller
 public class MemberController {
 
-	// showJoinStep1():String > step1 화면 요청
-	// showJoinStep2():String > step2 화면 요청
-	// showJoinStep3():String > step3 화면 요청
-	// showLoginForm():String > 로그인 화면 요청
-
-	// checkEmailDuplication(String emailAddress, HttpSession session):boolean >
-	// step1에서 이메일 중복체크(ajax)
-	// sendVerifyMail(HttpSession session):String > 인증메일 전송과 동시에 joinStep2요청을
-	// redirect (step1에서 step2로 이동)
-	// resendVerifyMail(HttpSession session):String > 인증메일 재발송 (step2 화면에서 step2
-	// 리로딩)
-	// checkVerifyCode(String inputVerifyCode, HttpSession session):boolean > 인증코드
-	// 확인
-	// joinMember(Member member):String > 회원가입(멤버추가) 로직
-
-	// setCode():String > 인증메일의 코드를 생성
-	// class inner > 메일전송을 쓰레드로 생성하기 위해 만든 이너클래스
-
 	@Autowired
 	private MemberService memberService;
 	@Autowired
@@ -75,10 +57,8 @@ public class MemberController {
 	private ProjectMemberService pmService;
 
 	@Resource(name = "connectorList")
-	private Map<Object, Object> connectorList;// 빈으로 등록된 접속자명단(email, session)
-
-//	private static Map<String, Object> loginMember = new HashMap<>(); //로그인한 멤버를 담기위한 map	
-
+	private Map<Object, Object> connectorList;
+	
 	@RequestMapping(value = "/joinStep1", method = RequestMethod.GET)
 	public String showJoinStep1() {
 		return "/join/joinStep1";
@@ -128,6 +108,7 @@ public class MemberController {
 			return "none"; //가입한 이메일이 아님
 		}
 	}
+	
 	@RequestMapping(value = "/sendResetMail", method = RequestMethod.GET)
 	public String sendResetMail(HttpSession session) {
 		String emailAddress = (String) session.getAttribute("emailAddress");
@@ -135,6 +116,7 @@ public class MemberController {
 		innerTest.start();
 		return "redirect:pwReset2";
 	}
+	
 	@ResponseBody
 	@RequestMapping(value = "/checkResetCode")
 	public String checkResetCode(String inputVerifyCode, HttpSession session) {
@@ -143,7 +125,6 @@ public class MemberController {
 		String verifyCode = (String) session.getAttribute("verifyCode");
 		String pw = "";
 		System.out.println(emailAddress + " " + verifyCode + " " + inputVerifyCode);
-//		session.setAttribute("inputVerifyCode", inputVerifyCode);
 		System.out.println("verifyCode : " + verifyCode);
 		System.out.println("inputVerifyCode : " + inputVerifyCode);
 		if (verifyCode.equals(inputVerifyCode)) {
@@ -172,10 +153,12 @@ public class MemberController {
 			return "redirect:/loading?info=duplicatedJoin";
 		}
 	}
+	
 	@RequestMapping(value = "/callBackLogin", method = RequestMethod.GET) // 네이버 API 로그인
 	public String showCallBackLogin() {
 		return "/login/callBackLogin";
 	}
+	
 	@ResponseBody
 	@RequestMapping(value = "/checkEmailDuplication", method = RequestMethod.POST)
 	public boolean checkEmailDuplication(String emailAddress, HttpSession session) {
@@ -186,6 +169,7 @@ public class MemberController {
 			return false; // 중복X
 		}
 	}
+	
 	@RequestMapping(value = "/sendVerifyMail", method = RequestMethod.GET)
 	public String sendVerifyMail(HttpSession session) {
 		String emailAddress = (String) session.getAttribute("emailAddress");
@@ -206,13 +190,11 @@ public class MemberController {
 	@ResponseBody
 	@RequestMapping(value = "/checkVerifyCode")
 	public boolean checkVerifyCode(String inputVerifyCode, HttpSession session) {
-//		String emailAddress = (String) session.getAttribute("emailAddress");
 		String verifyCode = (String) session.getAttribute("verifyCode");
 		session.setAttribute("inputVerifyCode", inputVerifyCode);
 		if (verifyCode.equals(inputVerifyCode)) {
 			return true;
 		} else {
-			// false면 joinStep2 페이지 보여주는 요청생성
 			return false;
 		}
 	}
@@ -225,13 +207,10 @@ public class MemberController {
 		if (inviteUserEmail != null) {
 			int inviteWnum = (Integer) session.getAttribute("inviteWnum");
 			if (member.getEmail().equals(inviteUserEmail) && session.getAttribute("inviteWnum") != null) {
-				// 이게 차있다면 초대받은 사람임
-				// wsmember로 추가
 				wsmService.addWsMember(inviteWnum, member.getNum());
 				int crNum = (wsmService.getDefaultChatRoomByWnum(inviteWnum)).getCrNum();
 				ChatMessage cm = smService.joinChatRoom(crNum, member);
 				smt.convertAndSend("/category/systemMsg/" + crNum, cm);
-//				System.out.println("초대받은사람이네요 inviteUserEmail : "+inviteUserEmail+", 초대받은wNum : "+inviteWnum);
 			}
 			session.removeAttribute("InviteUserEmail");
 			session.removeAttribute("inviteWnum");
@@ -305,23 +284,15 @@ public class MemberController {
 	}
 
 	private String sendLoginDuplicatedMsg(@DestinationVariable(value = "mNum") int mNum) {
-//		System.out.println("중복아이디 로그아웃 메시지 전송");
 		smt.convertAndSend("/category/loginMsg/" + mNum, "duplicated");
 		return "return_duplicated";
 	}
-//	private HttpSession deleteSessionFromConList(String email) {
-//		HttpSession session = (HttpSession)getKey(connectorList, email);
-//		connectorList.remove(session);
-//		return session;
-//	}
 
 	@RequestMapping("/logoutSomeone")
 	public String sendLoginUser(int mNum, boolean isLogin) {
 		// mNum이 참여중인 workspace에 참여한 멤버들 중에 로그인 중인 멤버
 		// 로그인중인 멤버는 connectorList와 메일 비교,
 		List<Map<Object, Object>> uList = memberService.getWsMemberListbyMnum(mNum);
-		// Map<mnum,memail>
-//		System.out.println("실시간 로그인 상태확인 - uList : " + uList);
 		for (Map<Object, Object> user : uList) {
 			int userNum = ((BigDecimal) user.get("MNUM")).intValue();
 			String userEmail = (String) user.get("MEMAIL");
@@ -347,7 +318,6 @@ public class MemberController {
 		Member user = memberService.getMemberByEmail(userEmail);
 		int mNum = user.getNum();
 		boolean isDuplicate = false;
-//		System.out.println("중복체크 전 접속 중인 멤버 : "+connectorList);
 
 		if (connectorList.get(userEmail) != null) {
 			isDuplicate = true; // 중복으로 로그인
@@ -357,9 +327,7 @@ public class MemberController {
 			sendLoginUser(mNum, true);
 
 		} else { // 중복 로그인의 경우
-//			System.out.println("중복 로그인입니다.");
 			sendLoginDuplicatedMsg(mNum);
-//			deleteSessionFromConList(userEmail);
 		}
 		connectorList.put(userEmail, session); // 해당 email, session 추가 또는 교체
 
@@ -389,14 +357,10 @@ public class MemberController {
 
 	@RequestMapping("/dropSession") // 로그아웃 성공 후, 처리
 	public String dropSession(HttpSession session, String userEmail) {
-		// loginMember.remove(session.getAttribute("userEmail"));
 		session.invalidate();
 		return "redirect:/";
 	}
 
-	/*
-	 * public Map<String, Object> getLoginMemberList(){ return loginMember; }
-	 */
 	@ResponseBody
 	@RequestMapping("/getMemberInfoForProfileImg")
 	public Member getMemberInfoForProfileImg(@RequestParam("mNum") int mNum) {
@@ -414,5 +378,4 @@ public class MemberController {
 		}
 		return null;
 	}
-
 }

@@ -3,7 +3,6 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="dao.MemberDao">
-	
 	<select id="selectWsMemberListbyMnum" parameterType="int" resultType="map">
 		select distinct wm2.m_num as mNum, m.m_email as mEmail
 		from workspace_member wm1, workspace_member wm2, member m
@@ -12,7 +11,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		        and wm2.m_num = m.m_num
 		order by wm2.m_num
 	</select>
-
 	<insert id="insertMember" parameterType="member">
 		<selectKey resultType="int" keyProperty="num" order="BEFORE">
 			select member_seq.nextval from dual
@@ -98,7 +96,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</resultMap>
 	
 	<!-- 이메일 인증 코드 관련 --> 
-	
 	<insert id="insertEmailVerify" parameterType="emailVerify">
 		insert into emailVerify
 		values(v_seq.nextval, #{email}, #{verifyCode}, sysdate)

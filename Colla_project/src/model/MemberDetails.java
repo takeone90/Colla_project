@@ -95,8 +95,6 @@ public class MemberDetails implements UserDetails{
 		return isEnabled;
 	}
 	
-	
-
 	public String getEmail() {
 		return email;
 	}
@@ -137,5 +135,4 @@ public class MemberDetails implements UserDetails{
 	public void setPw(String pw) {
 		this.pw = pw;
 	}
-
 }
