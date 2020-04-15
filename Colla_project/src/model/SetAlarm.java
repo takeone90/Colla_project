@@ -7,6 +7,7 @@ public class SetAlarm {
 	int reply;
 	int projectInvite;
 	int todo;
+	
 	public int getNum() {
 		return num;
 	}
