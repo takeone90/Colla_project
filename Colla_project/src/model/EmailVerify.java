@@ -7,6 +7,7 @@ public class EmailVerify {
 	private String email;
 	private String verifyCode;
 	private Date regDate;
+	
 	public int getNum() {
 		return num;
 	}
