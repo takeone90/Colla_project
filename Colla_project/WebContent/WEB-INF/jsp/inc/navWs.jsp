@@ -4,7 +4,7 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:set var="contextPath" value="<%=request.getContextPath() %>"/>
 <script>
-	function chatWith(mNum){	//1:1채팅
+	function chatWith(mNum){
 		$.ajax({
 			url: "${contextPath}/addOneOnOne",
 			data: {"mNum": mNum},
@@ -127,8 +127,6 @@
 			dataType : "json",
 			success : function(pjList){
 				projectList.empty();
-// 				var defaultStr = $("<li id='projectMainLI' onclick='location.href=\"${contextPath}/projectMain?wNum="+currWnum+"\"'>프로젝트 메인</li>");
-// 				projectList.append(defaultStr);
 				$.each(pjList,function(idx,item){
 					if(pNum!=""){
 					var str='<li '+ ( pNum ==item.pNum?'class="currProject"':"")+' onclick="goToProject('+item.pNum+')">'+item.pName+'</li>';						
@@ -161,7 +159,6 @@
 				<img alt="나의 프로필 사진" src="${contextPath }/showProfileImg" />
 			</a>
 			<a href="${contextPath }/myPageMainForm"><p>${member.name}님</p></a>
-			<%-- <p>${member.name}님</p> --%>
 		</div>
 		<!-- 로그아웃버튼 -->
 		<div>
@@ -225,12 +222,8 @@
 		</div>
 		
 	</div>
-	<%---------------------------------------------회원정보 모달 ----------------------------------------------------%>
+<%---------------------------------------------회원정보 모달 ----------------------------------------------------%>
 		<div id="memberInfoModal" class="attachModal">
-<!-- 			<div class="modalHead"> -->
-<!-- 				<h3 style="font-weight: bolder; font-size: 30px">회원정보</h3> -->
-<!-- 			</div> -->
-			
 			<div class="header">
 						<!--파도 위 내용-->
 						<div class="inner-header flex">
