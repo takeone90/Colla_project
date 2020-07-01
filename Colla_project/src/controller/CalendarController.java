@@ -46,17 +46,6 @@ public class CalendarController {
 		return "/calendar/calMonth";
 	}
 	
-	@RequestMapping(value="/calTest", method = RequestMethod.GET)
-	public String showCalTest(HttpSession session, Model model) {
-		int wNum = (int)session.getAttribute("currWnum");
-		int mNum = ((Member)session.getAttribute("user")).getNum();
-		Map<String, Object> param = new HashMap<String, Object>();
-		param.put("wNum", wNum);
-		param.put("mNum", mNum);
-		model.addAttribute("userData", param);
-		return "/calendar/calTest";
-	}
-	
 	@ResponseBody
 	@RequestMapping(value="/showAllCalendar", method=RequestMethod.GET)
 	public List<Calendar> showAllCalendar(HttpSession session, boolean type1, boolean type2, boolean type3, boolean type4, String today) {
