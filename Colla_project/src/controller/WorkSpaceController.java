@@ -29,11 +29,9 @@ import model.Workspace;
 import model.WorkspaceInvite;
 import model.WsMember;
 import service.AlarmService;
-import service.ChatMessageService;
 import service.ChatRoomMemberService;
 import service.ChatRoomService;
 import service.MemberService;
-import service.ProjectMemberService;
 import service.ProjectService;
 import service.SetAlarmService;
 import service.SystemMsgService;
@@ -63,10 +61,6 @@ public class WorkSpaceController {
 	private SetAlarmService saService;
 	@Autowired
 	private ProjectService pService;
-	@Autowired
-	private ProjectMemberService pmService;
-	@Autowired
-	private ChatMessageService cmService;
 	@Autowired
 	private SystemMsgService smService;
 	
@@ -163,7 +157,7 @@ public class WorkSpaceController {
 			}
 		}	
 
-		List<Member> targetUserList = new ArrayList<Member>();
+//		List<Member> targetUserList = new ArrayList<Member>();
 		List<WsMember> wsmList = wsmService.getAllWsMemberByWnum(wNum);
 		List<Member> existingMemberList = new ArrayList<Member>();
 		//원래 그 워크스페이스에 있는 멤버..
@@ -308,7 +302,7 @@ public class WorkSpaceController {
 					"		</div>\r\n" + 
 					"	</div>\r\n" + 
 					"</body>";
-			ms.MailSend(emailAddress, tmpCode, "inviteWs");
+			ms.sendMail(emailAddress, tmpCode, "inviteWs");
 		}
 	}
 }
