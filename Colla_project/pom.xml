@@ -27,7 +27,7 @@
 		</plugins>
 	</build>
 	<properties>
-		<org.springframework-version>4.3.18.RELEASE</org.springframework-version>
+		<org.springframework-version>5.3.18</org.springframework-version>
 		<org.aspectj-version>1.9.2</org.aspectj-version>
 		<org.springframework.security-version>4.2.3.RELEASE</org.springframework.security-version>
 	</properties>
